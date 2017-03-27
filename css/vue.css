@@ -51,7 +51,8 @@ ul{list-style: none}
 	text-align: center;
 	border:none;
 	background: transparent;
-	
+	width:1rem;
+	float: left;
 }
 .style-spans span.num6-span{
 	border-right: 1px solid #d9d9d9;

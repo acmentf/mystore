@@ -25,21 +25,22 @@
 			<!-- 密码框 -->
 			<div class="passwordinput" style="position: relative;">
 				<!-- 样式层 -->
-				<div class="style-spans flex" style="position: relative;z-index: 1111;">
+				<div class="style-spans flex" style="position: relative;">
 					<span class="box-flex num1-span"></span>
 					<span v-for="n in 4" class="box-flex"></span>
 					<span class="box-flex num6-span"></span>
 				</div>
-				<div style="position: absolute;width:100%;top:0.30rem;background: transparent;">
-					<div class="style-inputs flex">
-						<input type="password" class="box-flex" v-for="(item, index) in 6" :name="'num'+(index+1)">
+				<div style="position: absolute;width:100%;top:0.30rem;z-index: 1111;">
+					<div class="style-inputs">
+						<input type="password"  v-for="(item, index) in inputContent" value="1" >
 					</div>
 				</div>
 			</div>
 			<!-- 软键盘 -->
 			<div class="passwordButtons ">
 				<ul class='clearfix'>
-					<li v-for="(item,index) in nums" class="buttonList" :class="buttonList+index">
+					<li v-for="(item,index) in nums" class="buttonList"
+					@click="sent(index)">
 						<p>{{item.n1}}</p>
 						<span>{{item.stand}}</span>
 						<img src="img/delete.png" v-if="item.img">
@@ -55,23 +56,42 @@
 		data(){
 			return {
 				nums:[
-					 {n1:1,stand:'',img:''},
-					 {n1:2,stand:'ABC',img:""},
-					 {n1:3,stand:'DEF',img:""},
-					 {n1:4,stand:'GHI',img:""},
-					 {n1:5,stand:'JLK',img:""},
-					 {n1:6,stand:'MNO',img:""},
-					 {n1:7,stand:'PQLS',img:""},
-					 {n1:8,stand:'TUV',img:""},
-					 {n1:9,stand:'WXYZ',img:""},
+					 {n1:'1',stand:'',img:''},
+					 {n1:'2',stand:'ABC',img:""},
+					 {n1:"3",stand:'DEF',img:""},
+					 {n1:"4",stand:'GHI',img:""},
+					 {n1:"5",stand:'JLK',img:""},
+					 {n1:"6",stand:'MNO',img:""},
+					 {n1:"7",stand:'PQLS',img:""},
+					 {n1:"8",stand:'TUV',img:""},
+					 {n1:"9",stand:'WXYZ',img:""},
 					 {n1:'',stand:'确认',img:""},
-					 {n1:11,stand:'',img:""},
+					 {n1:'0',stand:'',img:""},
 					 {n1:'',stand:'',img:"img/delete.png"}
 					],
+				inputContent:[],
+				str:1,
 				buttonList:['buttonList']
 			}
 		},
-		
+		methods:{
+			sent:function(index){
+				if(index==11){
+					this.inputContent.splice(this.inputContent.length-1,1);
+				}else if(index==9){
+					if(this.inputContent.length==6){
+						var resulte=this.inputContent.join(',');
+					}
+					alert(resulte)
+				}else{
+					var password = this.nums[index].n1;
+					if(this.inputContent.length<6&& password!=' '){
+							this.inputContent.push(password);
+						}
+				}
+				
+			}
+		}
 	})
 	var vm = new Vue({
 		el :"#app",
