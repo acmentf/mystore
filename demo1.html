@@ -2,20 +2,79 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<title>vue.js stude</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/vue.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
 </head>
 <body>
 	<div id="app">
-		{{message}}
+		<calculator></calculator>
 	</div>
+	<template id="tel">
+		<div class="box-warp">
+			<!-- 头部 -->
+			<div class="header-str">
+				<p>输入密码</p>
+			</div>
+			<!-- 密码框 -->
+			<div class="passwordinput" style="position: relative;">
+				<!-- 样式层 -->
+				<div class="style-spans flex" style="position: relative;z-index: 1111;">
+					<span class="box-flex num1-span"></span>
+					<span v-for="n in 4" class="box-flex"></span>
+					<span class="box-flex num6-span"></span>
+				</div>
+				<div style="position: absolute;width:100%;top:0.30rem;background: transparent;">
+					<div class="style-inputs flex">
+						<input type="password" class="box-flex" v-for="(item, index) in 6" :name="'num'+(index+1)">
+					</div>
+				</div>
+			</div>
+			<!-- 软键盘 -->
+			<div class="passwordButtons ">
+				<ul class='clearfix'>
+					<li v-for="(item,index) in nums" class="buttonList" :class="buttonList+index">
+						<p>{{item.n1}}</p>
+						<span>{{item.stand}}</span>
+						<img src="img/delete.png" v-if="item.img">
+					</li>
+				</ul>
+			</div>
+		</div>
+	</template>
 </body>
 <script type="text/javascript">
+	Vue.component('calculator',{
+		template :'#tel',
+		data(){
+			return {
+				nums:[
+					 {n1:1,stand:'',img:''},
+					 {n1:2,stand:'ABC',img:""},
+					 {n1:3,stand:'DEF',img:""},
+					 {n1:4,stand:'GHI',img:""},
+					 {n1:5,stand:'JLK',img:""},
+					 {n1:6,stand:'MNO',img:""},
+					 {n1:7,stand:'PQLS',img:""},
+					 {n1:8,stand:'TUV',img:""},
+					 {n1:9,stand:'WXYZ',img:""},
+					 {n1:'',stand:'确认',img:""},
+					 {n1:11,stand:'',img:""},
+					 {n1:'',stand:'',img:"img/delete.png"}
+					],
+				buttonList:['buttonList']
+			}
+		},
+		
+	})
 	var vm = new Vue({
-		el : '#app',
-		data :　{
-			message : "VUE学习"
-		}
+		el :"#app",
 	})
 </script>
 </html>
