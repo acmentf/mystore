@@ -41,6 +41,4 @@ Vue.component('calculator',{
 			}
 		}
 	})
-	var vm = new Vue({
-		el :"#app",
-	})
+	

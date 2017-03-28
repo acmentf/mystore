@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-render>
+			<span>小猪</span>
+			<p>vue 学习</p>
+		</my-render>
+	</div>
+</body>
+<script type="text/javascript">
+	Vue.component('my-render',{
+		data(){
+			return {
+				message : 'render函数学习'
+			}
+		},
+		render : function(creatElment){
+			return creatElment(
+				'h1',
+				{
+					class : 'toggle'
+				},
+				[
+					creatElment(
+						'a',
+						{
+						  attrs : {
+						  	href:'https://www.baidu.com'
+						  }
+						},
+						[
+							creatElment('span',this.$slots.default)
+						]
+						
+					)
+				]
+				
+			)
+		}
+	})
+	var vm = new Vue({
+		el : '#app'
+	})
+</script>
+</html>
