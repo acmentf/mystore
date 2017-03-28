@@ -29,8 +29,11 @@ Vue.component('calculator',{
 				}else if(index==9){
 					if(this.inputContent.length==6){
 						var resulte=this.inputContent.join(',');
+						alert(resulte)
+					}else{
+						return false;
 					}
-					alert(resulte)
+					
 				}else{
 					var password = this.nums[index].n1;
 					if(this.inputContent.length<6&& password!=' '){
