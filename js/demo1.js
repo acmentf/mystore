@@ -1,4 +1,5 @@
-Vue.component('calculator',{
+/*密码输入框*/
+Vue.component('password-field',{
 		template :'#tel',
 		data(){
 			return {
@@ -18,7 +19,6 @@ Vue.component('calculator',{
 					],
 				inputContent:[],
 				str:1,
-				buttonList:['buttonList']
 			}
 		},
 		/*点击事件*/
