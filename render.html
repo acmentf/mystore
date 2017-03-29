@@ -5,6 +5,8 @@
 	<title>vue.js stude</title>
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-pc.css">
+	<link rel="stylesheet" type="text/css" href="css/nav.css">
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
  	<!--引进本地vue文件-->
@@ -12,45 +14,57 @@
 </head>
 <body>
 	<div id="app">
-		<my-render>
-			<span>小猪</span>
-			<p>vue 学习</p>
-		</my-render>
+			<input type="text" name="" v-model="newTodoText" v-on:keyup.enter="add" v-on:keydown="strhide" class="form-control" placeholder="请输入并点击回车">
+			<span class="warning-str" v-if="show">请输入内容...</span>
+		<my-component :title="todos">
+			
+		</my-component>
 	</div>
+	<template id="tel">
+		<ul>
+			<li v-for="(item,index) in title" class="item">
+			{{item}}
+			<span @click="remove(index)">X</span>
+			</li>
+		</ul>
+	</template>
 </body>
 <script type="text/javascript">
-	Vue.component('my-render',{
-		data(){
-			return {
-				message : 'render函数学习'
+	Vue.component('my-component',{
+		template:'#tel',
+		props:['title'],
+		methods : {
+			remove:function(index){
+				this.title.splice(index,1)
 			}
-		},
-		render : function(creatElment){
-			return creatElment(
-				'h1',
-				{
-					class : 'toggle'
-				},
-				[
-					creatElment(
-						'a',
-						{
-						  attrs : {
-						  	href:'https://www.baidu.com'
-						  }
-						},
-						[
-							creatElment('span',this.$slots.default)
-						]
-						
-					)
-				]
-				
-			)
 		}
 	})
 	var vm = new Vue({
-		el : '#app'
+		el : '#app',
+		data : {
+			newTodoText: '',
+		    todos: [
+		      'JavaScript权威指南',
+		      '锋利的Jquery',
+		      '代码整洁之道'
+		    ],
+		    show:false
+		},
+		methods : {
+			add:function(){
+				if(this.newTodoText!=''){
+					this.todos.push(this.newTodoText);
+					this.show=false;
+				}else{
+					this.show=true;
+				}
+				this.newTodoText="";
+				
+			},
+			strhide:function(){
+				this.show=false;
+			}
+		}
 	})
 </script>
 </html>

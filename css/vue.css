@@ -1,26 +1,3 @@
-*{padding:0;margin:0;box-sizing: border-box;}
-body{font-size: 0.24rem;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #5e5e5e;
-    background: #f2f2f2;
-    min-width: 320px;
-    word-wrap: break-word;
-}
-p{margin-bottom: 0}
-ul{list-style: none}
-.clearfix:after{content:'';display:block;height:0px;clear:both;}
-.fl{float:left;}
-.fr{float:right;}
-.flex{display: flex;display: -webkit-box;-webkit-box-align:center;-webkit-box-pack:center;box-align:center;box-pack:center;}
-.box-flex
-{
-    display: block;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    flex: 1;
-    -webkit-flex-basis: 0;
-    flex-basis: 1px;
-}
 .box-warp{background: #fff}
 .box-warp .header-str p{
 	text-align: center;
