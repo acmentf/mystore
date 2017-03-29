@@ -1,0 +1,7 @@
+body{background: #f5f5f5}
+#app{width:500px;margin: 0 auto;padding:20px;}
+.warning-str{font-size:12px;color:#e92929;}
+.item{background: #e4d2f2;margin-top: 10px;text-align: center;height:40px;line-height: 40px;}
+.item:hover{background: #e4383c;color:#fff;}
+.item span{float: right;margin-right: 15px;cursor:pointer;}
+.item:hover span{color:#fff;}
