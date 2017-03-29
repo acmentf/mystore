@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-pc.css">
+	<link rel="stylesheet" type="text/css" href="css/nav.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app1">
+		<ul>
+			<!-- <li v-for="item in messageFormatting" class="fl">
+				{{item}}+' '
+			</li> 计算属性-->
+			<li v-for="item in formatting(message)" class="fl">
+				{{item}}--
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	function randomCount() {
+		var arrCount=[];
+		for(var i=1;i<20;i++){
+			var randomCounts=Math.floor(Math.random()*100);
+			arrCount.push(randomCounts);
+		}
+		return arrCount
+	}
+	var vm = new Vue({
+		el : '#app1',
+		data : {
+			message : randomCount()
+		},
+		/*
+		**
+			计算属性进行格式化
+		*/
+		/*computed:{
+			messageFormatting : function(){
+				return this.message.filter(function(number){
+					return number%2===0
+				})
+			}
+		}*/
+		/*
+		**
+			自定义事件格式
+		*/
+		methods : {
+			formatting : function(numbers){
+				return numbers.filter(function(number){
+					return number % 2===0
+				})
+			}
+		}
+
+	})
+</script>
+</html>
