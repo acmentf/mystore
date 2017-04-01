@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude(自定义指令)</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-pc.css">
+	<link rel="stylesheet" type="text/css" href="css/nav.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+		#app1{width:500px;margin: 0 auto}
+	</style>
+</head>
+<body>
+	<div id="app1">
+		<span v-focus:hello.a.b="message"></span>
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el : '#app1',
+		data:{message:'hello'},
+		directives : {
+			focus : {
+				bind: function (el, binding, vnode) {
+					   var s = JSON.stringify
+					   el.innerHTML =
+				      'name: '       + s(binding.name) + '<br>' +
+				      'value: '      + s(binding.value) + '<br>' +
+				      'expression: ' + s(binding.expression) + '<br>' +
+				      'argument: '   + s(binding.arg) + '<br>' +
+				      'modifiers: '  + s(binding.modifiers) + '<br>' +
+				      'vnode keys: ' + Object.keys(vnode).join(', ')
+			    }
+			}
+		}
+	})
+</script>
+</html>

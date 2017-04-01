@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude(路由)</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-pc.css">
+	<link rel="stylesheet" type="text/css" href="css/nav.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script src="https://cdn.bootcss.com/vue-router/2.3.1/vue-router.js"></script>
+	<style type="text/css">
+		#app1{width:600px;margin: 0 auto;}
+		.first-list{float:left;width:200px;}
+		.first-list a{font-size: 18px;color:#333;font-weight: bold;}
+	</style>
+</head>
+<body>
+	<div id="app1">
+		<ul class="clearfix">
+			<li class="first-list" @click="toggles">
+				<router-link :to="{name:'home'}">HOME</router-link>
+			</li>
+			<li class="first-list" @click="toggles">
+				<router-link :to="{name:'bar'}">BAR</router-link>
+			</li class="first-list" @click="toggles">
+			<li class="first-list">
+				<router-link :to="{name:'foo',params:{id:123}}">FOO</router-link>
+			</li>
+		</ul>
+		<router-view v-if="toggle"></router-view>
+	</div>
+	<template id="Home-template">
+		<div>
+			<ul>
+				<li v-for="(item,index) in datas"><router-link :to="item.name">{{item.txt}}</router-link></li>
+			</ul>
+			<router-view></router-view>
+		</div>
+	</template>
+</body>
+<script type="text/javascript">
+	// const Home = {template:"<div>This is Home</div>"};
+	Vue.component('Home',{
+		template:'#Home-template',
+		data (){
+			return {
+				datas:[
+					{txt:'javascript权威指南',name:{name:'Javascript'}},
+					{txt:'锋利的JQUERY',name:{name:'Jquery'}},
+					{txt:'Java SE 从入门到精通',name:{name:'Java'}}
+				]
+			}
+		}
+	})
+	const Home ={template:"<Home></Home>"}
+	const Bar = {template:"<div>This is Bar</div>"};
+	const Foo = {template:"<div>This is Foo</div>"};
+	const Javascript ={template:'<p>自1996年以来，JavaScript的：权威指南已为JavaScript圣经程序员，程序员指南和全面的参考，以核心语言和客户端JavaScript API的Web浏览器定义。第6版包括HTML5和ECMAScript 5，与jQuery和服务器端JavaScript新的篇章。这是推荐谁想要学习的Web编程语言经验的程序员，以及当前的JavaScript程序员谁想要掌握它。</p>'};
+	const Jquery={template:"<p>本书循序渐进地对jQuery的各种函数和方法调用进行了介绍，读者可以系统地掌握jQuery的DOM操作、事件监听和动画、表单操作、AJAX以及插件方面等知识点，并结合每个章节后面的案例演示进行练习，达到掌握核心知识点的目的。 为使读者更好地进行开发实践，本书的最后一章将前7章讲解的知识点和效果进行了整合，打造出一个非常有个性的网站，并从案例研究、网站材料、网站结构、网站样式和网站脚本等方面指导读者参与到项目建设中来。 本书适合Web开发人员阅读和参考。 </p>"};
+	const Java = {template:"<p>Java se是由Sun Microsystems公司于1995年5月推出的Java程序设计语言和Java平台的总称。用Java实现的HotJava浏览器（支持Java applet）显示了Java的魅力：跨平台、动态的Web、Internet计算。从此，Java被广泛接受并推动了Web的迅速发展，常用的浏览器现在均支持Java applet。</p>"};
+	const router = new VueRouter({
+		routes :[
+			{path : "/home",
+			 name:'home',
+			 component : Home,
+			 children :[
+			 	{path :"Javascript",name:'Javascript',component:Javascript},
+			 	{path :'Jquery',name:'Jquery',component:Jquery},
+			 	{path :'Java',name:'Java',component:Java}
+			 ]
+			},
+			{path : "/bar",name : 'bar',component : Bar},
+			{path : "/foo/:id", name : 'foo', component : Foo }
+		]
+	});
+	const app =new Vue({
+		el: '#app1',
+		router:router,
+		data:{
+			toggle:false,
+		},
+		methods:{
+			toggles:function(){
+				if( this.toggle==false) {
+					this.toggle=true
+				}
+			}
+		}
+		
+	})
+</script>
+</html>
