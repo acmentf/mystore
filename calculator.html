@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" name="" class="form-control" style="height:1rem;text-align: center;font-size: .3rem" v-model="sum">
+		<input type="text" name="" class="form-control" style="height:1rem;text-align: center;font-size: .3rem" v-model="sum" readonly="readonly">
 		<calculator-view v-on:clickbutton="incrementTotal" :message="sum"></calculator-view>
 	</div>
 	<template id="tel">
