@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+	<title>vue.js stude</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-mobile.css">
+	<link rel="stylesheet" type="text/css" href="css/vue.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+	<style type="text/css">
+		#app{padding:0.2rem;}
+		#app ul{text-align: center;margin-top: 0.5rem}
+		#app li{width:1.2rem;height:.6rem;line-height:.6rem;float: left;background:#000;margin: 0.2rem 0.4rem 0.2rem 0;border-radius: 0.05rem;color:#fff;font-weight: bold;}
+		#app li:nth-child(4n+0){margin-right:0;}
+		#app li.style1{background: #686868}
+		#app li.style2{background: #FF526C}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input type="text" name="" class="form-control" style="height:1rem;text-align: center;font-size: .3rem" v-model="sum">
+		<calculator-view v-on:clickbutton="incrementTotal" :message="sum"></calculator-view>
+	</div>
+	<template id="tel">
+		<div>
+			<ul class="clearfix">
+				<li v-for="(item,index) in items" :class="item.bg" @click="clickbutton(item.txt)">
+					{{item.txt}}
+				</li>
+			</ul>
+		</div>
+	</template>
+</body>
+<script type="text/javascript">
+	Vue.component('calculator-view',{
+		template : '#tel',
+		props:['message'],
+		data (){
+			return {
+				items:[
+					{txt:'mrc',bg:'style1'},
+					{txt:'m-',bg:'style1'},
+					{txt:'m+',bg:'style1'},
+					{txt:'/',bg:'style2'},
+					{txt:'7',bg:''},
+					{txt:'8',bg:''},
+					{txt:'9',bg:''},
+					{txt:'*',bg:'style2'},
+					{txt:'4',bg:''},
+					{txt:'5',bg:''},
+					{txt:'6',bg:''},
+					{txt:'-',bg:'style2'},
+					{txt:'1',bg:''},
+					{txt:'2',bg:''},
+					{txt:'3',bg:''},
+					{txt:'+',bg:'style2'},
+					{txt:'0',bg:''},
+					{txt:'.',bg:''},
+					{txt:'C',bg:''},
+					{txt:'=',bg:'style2'},
+				],
+				result:''
+			}
+		},
+		methods:{
+			clickbutton:function(obj){
+				if(obj=='mrc'||obj=="m-"||obj=="m+"){
+					this.result="hollo Vue";
+					setTimeout(function(){this.result= ' '},500);
+				}else if(obj=='='){
+					 try { 
+				 		this.result=eval(this.result);
+					 } 
+					 catch(e) { this.result='Error';}
+				}else if(obj=='C'){
+					this.result=' ';
+				}
+				else{
+					if(this.message=='hollo Vue'||this.message== 'Error'){
+						this.result=' ';
+					}
+					this.result+=obj;
+				}
+				this.$emit('clickbutton',this.result);
+			}
+		}
+	})
+	var vm = new Vue({
+		el : '#app',
+		data :{
+			sum:''
+		},
+		methods :{
+			incrementTotal:function(sum1){
+				this.sum=sum1;
+			}
+		}
+	})
+</script>
+</html>
