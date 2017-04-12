@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
+	
+ 	<!--引进本地vue文件-->
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="apps">
+		{{message | capitalize }}
+	</div>
+</body>
+<script  type="text/javascript" charset="utf-8">
+   var vm = new Vue({
+   		el:'#apps',
+   		data:{
+   			message:"abc"
+   		}
+   })
+</script>
+</html>

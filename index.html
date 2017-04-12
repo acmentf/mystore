@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>jQuery理财还款日历到期提醒代码</title>
+
+<link href="css/style.css" rel="stylesheet">
+<style>
+.row-fluid  .zAccountPlanRinner { position:relative;}
+.waveBox{ position:absolute; left:0; bottom:0; width:100%; height:61px;overflow:hidden;}
+.waveInner{position:absolute; left:0; bottom:0; width:1200px; height:61px; }
+.waveInner img{ float:left; display:block;}
+.zAccountPlanR .detail {
+	color: #fb653b;
+	position: relative;
+	z-index: 3;
+}
+.row-fluid .zAccountPlanR { background-image:none;}
+</style>
+	
+</head>
+<body>
+
+<div class="zAccountInner zAccount2 clearfix">
+	<div class="colorsBox clearfix">
+		<div><span class="yellow box"></span>预期到期</div>
+		<div><span class="blue box"></span>已到期</div>
+	</div>
+	<div class="zAccountPlanL span5 no-margin-left" style="position:absolute;left:0px;top:50px;width:450px;">
+		<div id="div1"></div> <input type="hidden" id="index_clander" />
+		<input type="hidden" id="d523_y">
+	</div>
+	<div class="span7" style="height: 320px;position:absolute;right:0;text-align:center;top:50px;width:290px;">
+		<div class="zAccount5 boxSize no-margin-left">
+			<div class="zAccountPlanRinner zAccountPlanR">
+				<div class="today">今天</div>
+				<div class="week" id="d523_w">星期三</div>
+				<div class="day" id="d523_d">27</div>
+				
+				 <p class="date">创新性低风险产品，安全靠谱</p>
+				<a href="" class="detail">查看明细</a>
+				<div class="waveBox">
+				  <div class="line_water waveInner">
+					   <img src="images/zz111.png">
+					   <img src="images/zz111.png">
+					</div>
+					<div class="line_water2 waveInner">
+					   <img src="images/zz222.png">
+					   <img src="images/zz222.png">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/DatePicker/extraDate.js"></script>
+<script>
+//运动的水波纹
+	function rollTwo(){
+	  $(".line_water").animate({marginLeft:"-297px"},5000,"linear",function(){
+		$(this).css({marginLeft:"0px"});
+		$(this).find("img:first").remove().clone(true).appendTo($(this));	
+	  })	
+	}
+	rollTwo()
+	var startRollTwo=setInterval(rollTwo,40);
+	
+	function rollOne(){
+	  $(".line_water2").animate({marginLeft:"-297px"},5000,"linear",function(){
+		$(this).css({marginLeft:"0px"});
+		$(this).find("img:first").remove().clone(true).appendTo($(this));	
+	  })	
+	}
+	rollOne()
+	var startRollTwo=setInterval(rollOne,20);
+</script>
+</body>
+</html>

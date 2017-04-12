@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js stude(路由)</title>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件-->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/public-pc.css">
+	<link rel="stylesheet" type="text/css" href="css/nav.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+ 	<!--引进本地vue文件-->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script src="https://cdn.bootcss.com/vue-router/2.3.1/vue-router.js"></script>
+	<style type="text/css">
+		.app1{width:600px;margin: 0 auto;}
+		.first-list{float:left;width:200px;}
+		.first-list a{font-size: 18px;color:#333;font-weight: bold;}
+		.checked{text-decoration:line-through;color:#ddd;}
+	</style>
+</head>
+<body>
+	<div class="app1">
+		<h4 class="text-center">任务输入框</h4>
+		<input type="text" name="inputBox" placeholder="请输入任务,例如javaScript" class="form-control" v-model="todoList" v-on:keyup.13="buildList">
+		<p v-show="list.length">已创建{{list.length}}个任务</p>
+		<ul class="list-group">
+			<li class="list-group-item animated" v-for="(item,index) in list" :class="{checked:item.isCheck,bounceOutLeft:item.removeAnimate,bounceInLeft:item.addAnimate}">
+			<input type="checkbox" name="selectbox" v-model="item.isCheck">
+			{{item.text}}
+			<span class="glyphicon glyphicon-remove fr" @click="removeList(index)"></span>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	var list = [
+		{text:'javascript权威指南',isCheck:false,removeAnimate:false,addAnimate:true},
+		{text:'锋利的Jquery',isCheck:false,removeAnimate:false,addAnimate:true},
+	]
+	var vm = new Vue({
+		el:'.app1',
+		data:{
+			list:list,
+			todoList:'',
+
+		},
+		methods:{
+			buildList:function(){
+				if(this.todoList){
+					this.list.push({text:this.todoList,isCheck:false,removeAnimate:false,addAnimate:true});
+				}
+				this.todoList="";	
+			},
+			removeList:function(index){
+				this.list[index].removeAnimate=true;
+				this.list.map(function(item){
+					item.addAnimate=false;
+				})
+				setTimeout(function(){this.list.splice(index,1)},500)
+				
+			}
+		}
+	})
+</script>
+</html>

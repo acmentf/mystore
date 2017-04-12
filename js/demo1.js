@@ -15,22 +15,30 @@ Vue.component('password-field',{
 					 {n1:"9",stand:'WXYZ',img:""},
 					 {n1:'',stand:'确认',img:""},
 					 {n1:'0',stand:'',img:""},
-					 {n1:'',stand:'',img:"img/delete.png"}
+					 {n1:'',stand:'',img:"images/delete.png"}
 					],
 				inputContent:[],
 				str:1,
+				errortext:false,
+				dialogShow:false,
+				content:''
 			}
 		},
 		/*点击事件*/
 		methods:{
 			sent:function(index){
+				
 				if(index==11){
 					this.inputContent.splice(this.inputContent.length-1,1);
 				}else if(index==9){
 					if(this.inputContent.length==6){
-						var resulte=this.inputContent.join(',');
-						alert(resulte)
+						var resulte=this.inputContent.join(' ');
+						this.errortext=false;
+						this.inputContent=[];
+						this.dialogShow=true;
+						this.content="输入的密码为："+resulte;
 					}else{
+						this.errortext=true
 						return false;
 					}
 					
@@ -42,6 +50,12 @@ Vue.component('password-field',{
 				}
 				
 			}
+		},
+		watch:{
+			dialogShow:function(){
+				var _this = this;
+				setTimeout(function(){_this.dialogShow=false},1500)
+			}
 		}
-	})
-	
+	});
+
