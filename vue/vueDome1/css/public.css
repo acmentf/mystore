@@ -1,0 +1,17 @@
+@charset "utf-8";
+/*reset默认样式*/
+*{-webkit-text-size-adjust:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;}
+body{font:12px microsoft yahei,Arial, Helvetica, sans-serif;color:#5e5e5e;min-width: 1200px;}
+ul,li,dl,dd,dt{list-style-type:none;}
+body,h1,h2,h3,h4,h5,h6,ul,li,dl,dd,dt,p,input,button{padding:0px;margin:0px;}
+a{text-decoration:none;}
+img{vertical-align:middle;border:none;}
+input,button{outline:none;font-family: microsoft yahei;}
+input[type="reset"]::-moz-focus-inner,input[type="button"]::-moz-focus-inner,input[type="submit"]::-moz-focus-inner,input[type="file"] > input[type="button"]::-moz-focus-inner{border:none;padding:0; }
+.clearfix:after{content:'';display:block;height:0px;clear:both;}
+.fl{float:left;}
+.fr{float:right;}
+.block{display:block!important;}
+.font_arial{font-family: arial;}
+.font_yahei{font-family: microsoft yahei;}
+.finished{text-decoration: line-through;color:#e5e5e5;}
