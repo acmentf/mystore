@@ -40,3 +40,33 @@ input[type="checkbox"]{margin-right: 30px;}
 .edit-input{position: absolute;top:0;width: 100%;height:100%;}
 .edit-input{display: none!important}
 .edit-input.show{display: block!important;}
+.warp{width:305px;margin:0 auto;background: #eee;padding:5px;border-radius: 20px}
+.search-section input[name="search"] {
+	background: #d9d9d9;
+	border-radius: 20px;
+	border:0;
+	height:30px;
+	width: 240px;
+	padding-left:20px;
+}
+.search-section input[name="submit"]{
+	background: #e4393c;
+	border: 0;
+	border-radius: 15px;
+	width:50px;
+	margin-left: 5px;
+	height:30px;
+	color:#333;
+	font-weight: bold;
+}
+.search-section input[name="submit"].s1{
+	background: blue;
+	color:#fff;
+}
+.search-section input[name="submit"].s2{
+	background: #0ea513;
+	color:#fff;
+}
+.options{margin-top: 10px}
+.options li{height:30px;color:#333;line-height: 30px;font-weight: bold;cursor: pointer;padding-left: 20px;}
+.options li:hover{background: #e4393c;border-radius: 15px}

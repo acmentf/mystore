@@ -22,7 +22,7 @@
 				<div class="todo-nav clearfix" v-show="list.length!=0">
 					<span class="fl residue-str">{{counts}}个任务未完成</span>
 					<div class="fr task-items">
-						<a href="#all" :class="{active:visibitily==='all'}">所有任务</a>
+						<a href="#all" :class="{active:visibitily==='all'||' '}">所有任务</a>
 						<a href="#uncomplie" :class="{active:visibitily==='uncomplie'}">未完成任务</a>
 						<a href="#complied" :class="{active:visibitily==='complied'}">完成任务</a>
 					</div>

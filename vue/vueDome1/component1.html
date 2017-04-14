@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue 学习</title>
+	<meta charset="utf-8">
+	<script src="./js/vue.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./css/public.css">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<style type="text/css">
+		body{background: #fff}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<!-- <section class="warp">
+			<div class="search-section clearfix">
+				<input type="text" name="search" class="fl">
+				<input type="button" name="submit" value="GO" class="fl">
+				<span></span>
+			</div>
+			<ul class="options">
+				<li>html+css</li>
+				<li>html+css</li>
+				<li>html+css</li>
+				<li>html+css</li>
+				<li>html+css</li>
+				<li>html+css</li>
+			</ul>
+		</section> -->
+		<section-box text="GO" color="s1" class="fl" :list="list1"></section-box>
+		<section-box text="Search" color="s2" class="fl" style="margin-left: 50px" :list="list2"></section-box>
+	</div>	
+</body>
+	<script src="./js/component.js"></script>
+</html>

@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*reset默认样式*/
 *{-webkit-text-size-adjust:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;}
-body{font:12px microsoft yahei,Arial, Helvetica, sans-serif;color:#5e5e5e;min-width: 1200px;}
+body{font:12px Helvetica, sans-serif;color:#5e5e5e;min-width: 1200px;}
 ul,li,dl,dd,dt{list-style-type:none;}
 body,h1,h2,h3,h4,h5,h6,ul,li,dl,dd,dt,p,input,button{padding:0px;margin:0px;}
 a{text-decoration:none;}
