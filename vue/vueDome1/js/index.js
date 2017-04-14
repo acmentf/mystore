@@ -77,7 +77,7 @@ var vm = new Vue({
 					})
 				}
 			}
-			return filter[this.visibitily](list)
+			return filter[this.visibitily]? filter[this.visibitily](list) : list
 		}
 		
 	},
