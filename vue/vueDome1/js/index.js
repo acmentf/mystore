@@ -94,7 +94,8 @@ var vm = new Vue({
 })
 /*hash映射*/
 function watchHashChange(){
-	var hash = window.location.hash.slice(1);
+	var hash = window.location.hash ? location.hash.slice(1) : "all";
+	console.log(hash)
 	vm.visibitily = hash;
 }
 watchHashChange();
