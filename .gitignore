@@ -4,6 +4,7 @@
 *.txt
 *.bak
 .project
+*.css.map
 src/app/test
 src/js/framework/define.js
 #忽略node_modules下大部分文件
