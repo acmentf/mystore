@@ -1,0 +1,17 @@
+.trackinfo .item input{
+	width: 77%;
+}
+.trackinfo .item .shootTime{
+	width: 50%;
+}
+.trackinfo .item .time{
+	width: 20%;
+}
+.trackinfo .save{
+	text-align: center;
+	margin: 0.4rem 0;
+}
+.trackinfo .addshootinfo{
+	text-align: center;
+	color: #0000FF;
+}

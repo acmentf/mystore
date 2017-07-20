@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>跟踪信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/trackinfo.css" />
+	</head>
+
+	<body class="trackinfo">
+		<div class="mui-content">
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse  mui-active">
+						<a class="mui-navigate-right" href="#">团信息</a>
+						<div class="mui-collapse-content">
+							<div class="group-info">
+								<div class="mui-input-group">
+									<div class="mui-input-row">
+										<label>团人数</label>
+										<input type="text" class="mui-input-clear" placeholder="请输入团人数">
+									</div>
+									<div class="mui-input-row">
+										<label>团性质</label>
+										<input type="text" class="mui-input-clear" placeholder="请输入团性质">
+									</div>
+									<div class="mui-input-row">
+										<label>导游</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>车牌号码</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>预留座位</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">行程信息</a>
+						<div class="mui-collapse-content">
+							<div class="group-info">
+								<div class="mui-input-group">
+									<div class="mui-input-row">
+										<label>行程天数</label>
+										<input type="text" class="mui-input-clear" placeholder="请输入行程天数">
+									</div>
+									<div class="mui-input-row">
+										<label>行程描述</label>
+										<textarea rows="5" class="mui-input-clear" placeholder="请输入行程描述"></textarea>
+									</div>
+									<div class="mui-input-row">
+										<label>取片时间</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>取片地点</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse  mui-active">
+						<a class="mui-navigate-right" href="#">拍摄信息</a>
+						<div class="mui-collapse-content">
+							<div class="group-info">
+								<div class="mui-input-group">	
+									<div class="mui-input-row">
+										<label>拍摄地点</label>
+										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>拍摄时间</label>
+										<input type="text"  class="mui-input-clear shootTime" placeholder="">
+										<input type="text"  class="mui-input-clear time" placeholder="">
+									</div>
+								</div>						
+								<div class="addshootinfo">
+									添加拍摄信息
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="save">
+					<button type="button" class="mui-btn mui-btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script type="text/javascript">
+			var vm = null
+			lf.ready(function() {
+				var a = lf.window.currentWebview().a
+				var b = lf.window.currentWebview().b
+				console.log(a)
+				console.log(b)
+				lf.event.fire(lf.window.currentWebview().opener(), 'test', {
+					a: 1,
+					b: 2
+				})
+				//				lf.window.closeCurrentWebview();
+			})
+		</script>
+	</body>
+
+</html>
