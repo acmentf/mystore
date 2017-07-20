@@ -4,6 +4,7 @@
 *.txt
 *.bak
 .project
+.sass-cache/
 *.css.map
 src/app/test
 src/js/framework/define.js

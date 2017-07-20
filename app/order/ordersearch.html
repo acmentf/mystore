@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/message/message.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
 		
 		<style>
 			html,
@@ -86,11 +86,6 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-			
-			
-			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {
-			    top: 78px;
-			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
@@ -98,23 +93,53 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">消息管理</h1>
+			<h1 class="mui-title">订单列表</h1>
 		</header>
-		<div id="app" class="mui-content message-content" >
-			<div class="mui-input-row mui-search">
-				<input type="search" v-model="searchText" class="search mui-input-clear" placeholder="">
-			</div>
+		<div id="app" class="mui-content orderlist-content" >
 			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-input-row search-div">
+					<input type="search" class="mui-input-clear" placeholder="">
+					<i class="mui-icon mui-icon-search"></i>
+				</div>
 				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell mui-media" v-for="data in msgList">
-							<a href="javascript:;">
-								<img class="mui-media-object mui-pull-left" :src="data.url">
-								<div class="mui-media-body">
-									{{data.title}}<span class="time" v-text="data.time"></span>
-									<p class='mui-ellipsis' v-text="data.desc"></p>
+					<ul class="order-ul">
+						<li class="order-li">
+							<div class="nr">
+								<div class="item">
+									订单编号: 111
 								</div>
-							</a>
+								<div class="item">
+									导游: 111
+								</div>
+								<div class="item">
+									团号: 111
+								</div>
+								<div class="item">
+									产品: 111
+								</div>
+								<div class="item">
+									采购方: 111
+								</div>
+							</div>
+						</li>
+						<li class="order-li">
+							<div class="nr">
+								<div class="item">
+									订单编号: 111
+								</div>
+								<div class="item">
+									导游: 111
+								</div>
+								<div class="item">
+									团号: 111
+								</div>
+								<div class="item">
+									产品: 111
+								</div>
+								<div class="item">
+									采购方: 111
+								</div>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -127,7 +152,7 @@
 		<script src="../../js/framework/styles.js"></script>
 		<script src="../../js/framework/lf.js"></script>
 		<script src="../../libs/vue.min.js"></script>
-		<script src="message.js"></script>
+		<script src="ordersearch.js"></script>
 	</body>
 
 </html>

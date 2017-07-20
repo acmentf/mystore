@@ -1,8 +1,64 @@
-html{
-    .test{
-        color: #000;
+.orderlist-content{
+    .order-ul{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        .order-li{
+            padding: 0 18px;
+            background: #fff;
+            list-style: none;
+            margin: 0 5px;
+            margin-top: 0.3rem;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #EEEEEE;
+            &:last-child{
+                margin-bottom: 0.3rem;
+            }
+            .title{
+                color: #4E4D50;
+                font-size: 0.32rem;
+                line-height: 1;
+                padding: 18px 0 15px 0;
+                border-bottom: 1px solid #EEEEEE;
+                .dsh{
+                    color: #5AAB67;
+                }
+                .ysh{
+                    color: #7AD7E7;
+                }
+            }
+            .nr{
+                padding: 15px 0 12px 0;
+                font-size: 0.3rem;
+                line-height: 1.8;
+                color: #8A8A8C;
+                .item{
+                    word-break: break-all;
+                    .error{
+                        color: #E9A19A;
+                    }
+                    .zc{
+                        color: #7AD7E7;
+                    }
+                }
+            }
+        }
     }
-    .test2{
-        color: red;
+    .search-div{
+        height: 35px;
+        input{
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .mui-icon-search{
+            position: absolute;
+            top: 7px;
+            right: 5px;
+        }
+        .mui-icon-clear{
+            top: 7px;
+            right: 20px;
+        }
     }
 }
