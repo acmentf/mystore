@@ -1,0 +1,16 @@
+﻿dist
+.idea
+.svn
+*.txt
+*.bak
+.project
+src/app/test
+src/js/framework/define.js
+#忽略node_modules下大部分文件
+node_modules/*
+!/node_modules/gulp-css-base64/
+!/node_modules/gulp-css-spriter/
+!/node_modules/gulp-md5-plus/
+
+
+
