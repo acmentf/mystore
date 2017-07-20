@@ -19,10 +19,12 @@
       line-height: 1;
       padding: 18px 0 15px 0;
       border-bottom: 1px solid #EEEEEE; }
-      .orderlist-content .order-ul .order-li .title .dsh {
-        color: #5AAB67; }
-      .orderlist-content .order-ul .order-li .title .ysh {
+      .orderlist-content .order-ul .order-li .title .dqr {
+        color: #0000FF; }
+      .orderlist-content .order-ul .order-li .title .ylr {
         color: #7AD7E7; }
+      .orderlist-content .order-ul .order-li .title .yqx {
+        color: #FF0000; }
     .orderlist-content .order-ul .order-li .nr {
       padding: 15px 0 12px 0;
       font-size: 0.3rem;
@@ -34,6 +36,10 @@
           color: #E9A19A; }
         .orderlist-content .order-ul .order-li .nr .item .zc {
           color: #7AD7E7; }
+    .orderlist-content .order-ul .order-li .btns {
+      border-top: 1px solid #EEEEEE;
+      text-align: right;
+      padding: 5px 0; }
 .orderlist-content .search-div {
   height: 35px; }
   .orderlist-content .search-div input {

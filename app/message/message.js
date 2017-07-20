@@ -22,6 +22,10 @@ var vm = new Vue({
 lf.ready(function() {
 	initPull();
 })
+
+document.getElementById('searchBtn').addEventListener('tap',function(){
+	console.log('search')
+})
 //			mui.init();
 //阻尼系数
 function initPull() {

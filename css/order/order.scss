@@ -21,11 +21,14 @@
                 line-height: 1;
                 padding: 18px 0 15px 0;
                 border-bottom: 1px solid #EEEEEE;
-                .dsh{
-                    color: #5AAB67;
+                .dqr{
+                    color: #0000FF;
                 }
-                .ysh{
+                .ylr{
                     color: #7AD7E7;
+                }
+                .yqx{
+                    color: #FF0000;
                 }
             }
             .nr{
@@ -42,6 +45,12 @@
                         color: #7AD7E7;
                     }
                 }
+            }
+            .btns{
+                border-top: 1px solid #EEEEEE;
+                text-align: right;
+                padding: 5px 0;
+                
             }
         }
     }
