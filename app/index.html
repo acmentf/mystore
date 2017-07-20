@@ -14,7 +14,15 @@
 			<h1 class="mui-title">首页</h1>
 		</header>
 		<div class="mui-content">
-			内容
+			<ul id="data">
+				<li><input type="checkbox" />岗位1</li>
+				<li><input type="checkbox" />岗位1</li>
+				<li><input type="checkbox" />岗位1</li>
+				
+				<li><input type="checkbox" />岗位1</li>
+				<li><input type="checkbox" />岗位1</li>
+				<li><input type="checkbox" />岗位1</li>
+			</ul>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
@@ -24,7 +32,14 @@
 		<script type="text/javascript">
 			var vm = null
 			lf.ready(function(){
-				vm = new Vue();
+				var a = lf.window.currentWebview().a
+				var b =lf.window.currentWebview().b
+				console.log(a)
+				console.log(b)
+				lf.event.fire(lf.window.currentWebview().opener(),'test',{
+					a:1,b:2
+				})
+//				lf.window.closeCurrentWebview();
 			})
 		</script>
 	</body>

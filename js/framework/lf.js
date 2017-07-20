@@ -197,12 +197,14 @@ var lf = (function(document, undefined) {
 	 * @returns {_L6.$}
 	 */
 	$.ready = function(callback) {
-		if (readyRE.test(document.readyState)) {
-			callback($);
-		} else {
-			document.addEventListener('DOMContentLoaded', function() {
+		if($.os.plus){
+			mui.plusReady(function(){
 				callback($);
-			}, false);
+			})
+		}else{
+			mui.ready(function(){
+				callback($);
+			})
 		}
 		return this;
 	};
