@@ -7,28 +7,53 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index/index.css" />
 	</head>
 
-	<body>
-		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">首页</h1>
+	<body class="app-index">
+		<header>
+			<div class="toolbar">
+				<span class="search"></span>
+				<span class="message"></span>
+			</div>
 		</header>
-		<div class="mui-content">
-			<ul id="data">
-				<li><input type="checkbox" />岗位1</li>
-				<li><input type="checkbox" />岗位1</li>
-				<li><input type="checkbox" />岗位1</li>
-				
-				<li><input type="checkbox" />岗位1</li>
-				<li><input type="checkbox" />岗位1</li>
-				<li><input type="checkbox" />岗位1</li>
-			</ul>
+		<div class="content">
+			<div class="mod pending">
+				<div class="info">
+					<span class="ico ico-pending"></span>
+					<span class="number">8</span>
+				</div>
+				<div class="title">待处理订单</div>
+			</div>
+			<div class="mod completed">
+				<div class="info">
+					<span class="ico ico-completed"></span>
+					<span class="number">8</span>
+				</div>
+				<div class="title">已完成订单</div>
+			</div>
+			<div class="mod cancled">
+				<div class="info">
+					<span class="ico ico-cancled"></span>
+					<span class="number">8</span>
+				</div>
+				<div class="title">已取消订单</div>
+			</div>
+			<div class="mod assigned">
+				<div class="info">
+					<span class="ico ico-assigned"></span>
+					<span class="number">8</span>
+				</div>
+				<div class="title">已分派订单</div>
+			</div>
 		</div>
+		
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
 		<script src="../js/framework/styles.js"></script>
 		<script src="../js/framework/lf.js"></script>
 		<script src="../libs/vue.min.js"></script>
+		<script src="../js/framework/common.js"></script>
 		<script type="text/javascript">
 			var vm = null
 			lf.ready(function(){
