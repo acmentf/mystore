@@ -1,11 +1,18 @@
 .trackinfo .item input{
 	width: 77%;
 }
-.trackinfo .item .shootTime{
-	width: 50%;
+.trackinfo  .shootTime{
+	border-bottom:1px solid #E3E2E5;
+	border-right:1px solid #E3E2E5;
+	width: 45%;
+	padding-left: 0.1rem;
 }
-.trackinfo .item .time{
+.trackinfo .time{
 	width: 20%;
+	border-bottom:1px solid #E3E2E5;
+	border-right:1px solid #E3E2E5;
+	text-align: center;
+	padding-right: 0;
 }
 .trackinfo .save{
 	text-align: center;
@@ -14,4 +21,5 @@
 .trackinfo .addshootinfo{
 	text-align: center;
 	color: #0000FF;
+	margin: 0.1rem 0;
 }

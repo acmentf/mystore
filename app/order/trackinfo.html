@@ -7,15 +7,16 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/order/trackinfo.css" />
 	</head>
 
 	<body class="trackinfo">
-		<div class="mui-content">
+		<div id="trackinfo" class="mui-content">
 			<div class="mui-card">
 				<ul class="mui-table-view">
-					<li class="mui-table-view-cell mui-collapse  mui-active">
+					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">团信息</a>
 						<div class="mui-collapse-content">
 							<div class="group-info">
@@ -44,7 +45,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-cell mui-collapse mui-active">
+					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">行程信息</a>
 						<div class="mui-collapse-content">
 							<div class="group-info">
@@ -53,9 +54,9 @@
 										<label>行程天数</label>
 										<input type="text" class="mui-input-clear" placeholder="请输入行程天数">
 									</div>
-									<div class="mui-input-row">
+									<div class="mui-input-row" style="height: auto;">
 										<label>行程描述</label>
-										<textarea rows="5" class="mui-input-clear" placeholder="请输入行程描述"></textarea>
+										<textarea rows="3" class="mui-input-clear" placeholder="请输入行程描述"></textarea>
 									</div>
 									<div class="mui-input-row">
 										<label>取片时间</label>
@@ -69,30 +70,34 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-cell mui-collapse  mui-active">
+					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">拍摄信息</a>
-						<div class="mui-collapse-content">
-							<div class="group-info">
-								<div class="mui-input-group">	
+						<div class="mui-collapse-content shoot-info">
+							<div class="group-info" >
+								<div class="mui-input-group" v-for='(item,index) in shootInfoForms'>	
 									<div class="mui-input-row">
 										<label>拍摄地点</label>
-										<input type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+										<input v-model='item.journeyName' type="text"  class="mui-input-clear" placeholder="">
 									</div>
 									<div class="mui-input-row">
 										<label>拍摄时间</label>
-										<input type="text" data-index="1" class="mui-input-clear shootTime" readonly="readonly" placeholder="">
-										<input type="text"  class="mui-input-clear time" placeholder="">
+										<input type="text" v-if='item.periodType == 0' :data-index="index" v-model='timeName0' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 1' :data-index="index" v-model='timeName1' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 2' :data-index="index" v-model='timeName2' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 3' :data-index="index" v-model='timeName3' class="time" placeholder="全天">
+										<input type="text" v-model='item.shootTime' :data-index="index" class="shootTime" readonly="readonly" placeholder="拍摄时间">
+										
 									</div>
 								</div>						
-								<div class="addshootinfo">
+							</div>
+							<div class="addshootinfo">
 									添加拍摄信息
-								</div>
 							</div>
 						</div>
 					</li>
 				</ul>
 				<div class="save">
-					<button type="button" class="mui-btn mui-btn-primary">保存</button>
+					<button type="button" class="mui-btn mui-btn-primary save-trackinfo">保存</button>
 				</div>
 			</div>
 		</div>
@@ -105,21 +110,59 @@
 		<script src="../../libs/vue.min.js"></script>
 		<script src="../../js/framework/common.js"></script>
 		<script type="text/javascript">
-			var vm = null;
+			var vm = new Vue({
+				el: '#trackinfo',
+				data: {
+					shootTime: '2014-01-01',
+					time: 0,
+					timeName0:'全天',
+					timeName1:'上午',
+					timeName2:'下午',
+					timeName3:'晚上',
+					shootInfoForms:[{journeyName:'',shootTime:'',periodType:0}],
+				}
+			})
 			var picke =null;
 			lf.ready(function() {
 //				initDateChoose()
 				//				lf.window.closeCurrentWebview();
 				var opts = {"type":"date"}
-				picker = new mui.DtPicker(opts);
+				picker = new mui.DtPicker(opts);//拍摄时间选择
+				userPicker = new mui.PopPicker();//具体时间选择 全天上午下午晚上
+				userPicker.setData([{
+						value: '0',
+						text: '全天'
+					}, {
+						value: '1',
+						text: '上午'
+					}, {
+						value: '2',
+						text: '下午'
+					}, {
+						value: '3',
+						text: '晚上'
+					}]);
 			})
 			mui('.group-info').on('tap','.shootTime',function(){
 				var index = this.getAttribute('data-index');
 				console.log('index:'+index)
 				initDateChoose(index);
+			})
+			mui('.shoot-info').on('tap','.addshootinfo',function(){
+				var obj={journeyName:'',shootTime:'',periodType:0};
+				vm.shootInfoForms.push(obj)
+			})
+			mui('.group-info').on('tap','.time',function(){
+				var index = this.getAttribute('data-index');
+				userPicker.show(function(items) {
+							console.log(JSON.stringify(items[0]));
+							
+							vm.shootInfoForms[index].periodType=items[0].value
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+				});
 				
 			})
-			
 			function initDateChoose(index){
 //					var optionsJson = this.getAttribute('data-options') || '{}';
 //					var options = JSON.parse(optionsJson);
@@ -141,6 +184,7 @@
 						 */
 						console.log(index)
 						console.log('选择结果: ' + rs.text)
+						vm.shootInfoForms[index].shootTime=rs.text
 						/* 
 						 * 返回 false 可以阻止选择框的关闭
 						 * return false;
