@@ -11,10 +11,10 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">首页</h1>
+			<h1 class="mui-title">登录</h1>
 		</header>
 		<div class="mui-content">
-			内容
+			<button id="test">test</button>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
@@ -25,6 +25,9 @@
 			var vm = null
 			lf.ready(function(){
 				vm = new Vue();
+			})
+			document.getElementById('test').addEventListener('tap',function(){
+				lf.window.openWindow('index','index.html')
 			})
 		</script>
 	</body>
