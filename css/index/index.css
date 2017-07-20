@@ -1,0 +1,83 @@
+.app-index {
+  background: url(../../images/index/bg.jpg) no-repeat center top;
+}
+
+.app-index .toolbar {
+  text-align: right;
+  padding: 0.2rem;
+}
+
+.app-index .toolbar .search, .app-index .toolbar .message {
+  background: url(../../images/index/u80.png) no-repeat;
+  width: 0.6rem;
+  height: 0.6rem;
+  display: inline-block;
+  margin: 0 0.1rem;
+}
+
+.app-index .toolbar .message {
+  background: url(../../images/index/message.png) no-repeat;
+}
+
+.app-index .content {
+  color: #fff;
+  font-size: 0.06rem;
+  overflow: hidden;
+  width: 5.6rem;
+  margin: 7rem auto 0;
+}
+
+.app-index .content .mod {
+  float: left;
+  padding: 0.1rem;
+  width: 2.5rem;
+  height: 1.6rem;
+  margin:0 0  0.4rem 0;
+  box-shadow:6px 6px 6px #333;
+}
+.app-index .content .mod .info {
+   margin-bottom: 0.4rem;
+}
+
+.app-index .content .mod .number {
+  font-size:0.6rem;
+  float: right;
+  margin: 0.1rem 0 0 0.3rem;
+}
+
+.app-index .content .mod .ico {
+  background: url(../../images/index/u771.png) no-repeat;
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
+  background-size: 100% 100%;
+}
+.app-index .content .mod .ico-completed {
+  background:url(../../images/index/u773.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .mod .ico-cancled {
+  background:url(../../images/index/u775.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .mod .ico-assigned {
+  background:url(../../images/index/u783.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .pending {
+  background: #578FFE;
+  margin-right: 0.4rem;
+}
+
+.app-index .content .completed {
+  background: #FF7EA2;
+}
+
+.app-index .content .cancled {
+  background: #8E9EFD;
+  margin-right: 0.4rem;
+}
+
+.app-index .content .assigned {
+  background: #FFBF44;
+}
