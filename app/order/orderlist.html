@@ -86,6 +86,20 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
+			
+			.mui-segmented-control .mui-control-item{
+				color: #A4A4A4 !important;	
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 2px solid #FB2C60 !important;
+				color: #FB2C60 !important;
+			}
+			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen{
+				top: 94px;
+			}
+			.mui-slider-indicator.mui-segmented-control{
+				background: #FFFFFF;
+			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
@@ -96,59 +110,309 @@
 			<h1 class="mui-title">订单管理</h1>
 		</header>
 		<div id="app" class="mui-content orderlist-content" >
+			<div class="mui-input-row search">
+				<div class="searchspan">搜索订单</div>
+				<span id="searchBtn" class="searchicon">搜索</span>
+			</div>
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-scroll">
-					<ul class="order-ul">
-						<li class="order-li" v-for="item in orderList">
-							<div class="mui-table title">
-								<div class="mui-table-cell mui-col-xs-8">
-									订单编号:<span v-text="item.orderNo"></span>
-								</div>
-								<!--//订单状态 1：待确认 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+						全部
+					</a>
+							<a class="mui-control-item" href="#item2mobile">
+						待处理
+					</a>
+							<a class="mui-control-item" href="#item3mobile">
+						已完成
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						已分派
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						已取消
+					</a>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in orderList">
+										<div class="mui-table title">
+											<div class="mui-table-cell mui-col-xs-8">
+												订单编号:<span v-text="item.orderNo"></span>
+											</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+										</div>
+										<div class="nr" :data-id="item.orderNo">
+											<div class="item">
+												导游: {{item.tourGuide}}
+											</div>
+											<div class="item">
+												团号: {{item.tourNo}}
+											</div>
+											<div class="item">
+												产品: {{item.productName}}
+											</div>
+											<div class="item">
+												采购方: {{item.purchaser}}
+											</div>
+											<div class="item">
+												金额: {{item.totalPrice}}
+											</div>
+										</div>
+										<div class="btns" v-show="item.status==1">
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												确认
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												取消
+											</button>
+										</div>
+			
+										<div class="btns" v-show="item.status==5">
+											<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
+												跟踪信息
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
+												执行结果
+											</button>
+										</div>
+									</li>
+								</ul>
 							</div>
-							<div class="nr" :data-id="item.orderNo">
-								<div class="item">
-									导游: {{item.tourGuide}}
-								</div>
-								<div class="item">
-									团号: {{item.tourNo}}
-								</div>
-								<div class="item">
-									产品: {{item.productName}}
-								</div>
-								<div class="item">
-									采购方: {{item.purchaser}}
-								</div>
-								<div class="item">
-									金额: {{item.totalPrice}}
-								</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in orderList">
+										<div class="mui-table title">
+											<div class="mui-table-cell mui-col-xs-8">
+												订单编号:<span v-text="item.orderNo"></span>
+											</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+										</div>
+										<div class="nr" :data-id="item.orderNo">
+											<div class="item">
+												导游: {{item.tourGuide}}
+											</div>
+											<div class="item">
+												团号: {{item.tourNo}}
+											</div>
+											<div class="item">
+												产品: {{item.productName}}
+											</div>
+											<div class="item">
+												采购方: {{item.purchaser}}
+											</div>
+											<div class="item">
+												金额: {{item.totalPrice}}
+											</div>
+										</div>
+										<div class="btns" v-show="item.status==1">
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												确认
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												取消
+											</button>
+										</div>
+			
+										<div class="btns" v-show="item.status==5">
+											<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
+												跟踪信息
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
+												执行结果
+											</button>
+										</div>
+									</li>
+								</ul>
 							</div>
-							<div class="btns" v-show="item.status==1">
-								<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
-									确认
-								</button>
-								<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
-									取消
-								</button>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in orderList">
+										<div class="mui-table title">
+											<div class="mui-table-cell mui-col-xs-8">
+												订单编号:<span v-text="item.orderNo"></span>
+											</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+										</div>
+										<div class="nr" :data-id="item.orderNo">
+											<div class="item">
+												导游: {{item.tourGuide}}
+											</div>
+											<div class="item">
+												团号: {{item.tourNo}}
+											</div>
+											<div class="item">
+												产品: {{item.productName}}
+											</div>
+											<div class="item">
+												采购方: {{item.purchaser}}
+											</div>
+											<div class="item">
+												金额: {{item.totalPrice}}
+											</div>
+										</div>
+										<div class="btns" v-show="item.status==1">
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												确认
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												取消
+											</button>
+										</div>
+			
+										<div class="btns" v-show="item.status==5">
+											<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
+												跟踪信息
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
+												执行结果
+											</button>
+										</div>
+									</li>
+								</ul>
 							</div>
-
-							<div class="btns" v-show="item.status==5">
-								<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
-									跟踪信息
-								</button>
-								<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
-									执行结果
-								</button>
+						</div>
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in orderList">
+										<div class="mui-table title">
+											<div class="mui-table-cell mui-col-xs-8">
+												订单编号:<span v-text="item.orderNo"></span>
+											</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+										</div>
+										<div class="nr" :data-id="item.orderNo">
+											<div class="item">
+												导游: {{item.tourGuide}}
+											</div>
+											<div class="item">
+												团号: {{item.tourNo}}
+											</div>
+											<div class="item">
+												产品: {{item.productName}}
+											</div>
+											<div class="item">
+												采购方: {{item.purchaser}}
+											</div>
+											<div class="item">
+												金额: {{item.totalPrice}}
+											</div>
+										</div>
+										<div class="btns" v-show="item.status==1">
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												确认
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												取消
+											</button>
+										</div>
+			
+										<div class="btns" v-show="item.status==5">
+											<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
+												跟踪信息
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
+												执行结果
+											</button>
+										</div>
+									</li>
+								</ul>
 							</div>
-						</li>
-					</ul>
+						</div>
+					</div>
+					<div id="item5mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in orderList">
+										<div class="mui-table title">
+											<div class="mui-table-cell mui-col-xs-8">
+												订单编号:<span v-text="item.orderNo"></span>
+											</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+										</div>
+										<div class="nr" :data-id="item.orderNo">
+											<div class="item">
+												导游: {{item.tourGuide}}
+											</div>
+											<div class="item">
+												团号: {{item.tourNo}}
+											</div>
+											<div class="item">
+												产品: {{item.productName}}
+											</div>
+											<div class="item">
+												采购方: {{item.purchaser}}
+											</div>
+											<div class="item">
+												金额: {{item.totalPrice}}
+											</div>
+										</div>
+										<div class="btns" v-show="item.status==1">
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												确认
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
+												取消
+											</button>
+										</div>
+			
+										<div class="btns" v-show="item.status==5">
+											<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
+												跟踪信息
+											</button>
+											<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
+												执行结果
+											</button>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
