@@ -15,17 +15,15 @@
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
     <h1 class="mui-title">摄影心得</h1>
 </header>
-<div class="mui-content summary-details">
-    <div class="mui-content-padded" id="app">
+<div class="mui-content summary-details" id="app">
+    <div class="mui-content-padded">
         <div class="title">我的代表作品 :</div>
         <div class="img-wrap">
             <img v-for="item in imgs" :src="item.path" class="pro" data-preview-src="" data-preview-group="1">
         </div>
-        <div class="summary flex-box">
-            <span class="lab">拍摄总结 :</span>
-            <div class="change">
-                <span class="text">{{summary}}</span>
-            </div>
+        <div class="title">拍摄总结 :</div>
+        <div class="summary">
+            <span class="text">{{summary}}</span>
         </div>
     </div>
 </div>
