@@ -51,7 +51,14 @@
 	
 	
 }
-.popup-mod  .mui-col-xs-6{
+.popup-mod ul{
+	overflow: hidden;
+	padding: 0;
+}
+.popup-mod  li{
+	width: 50%;
+	list-style: none;
+	float: left;
 	text-align: center;
 }
 .mask{

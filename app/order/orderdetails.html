@@ -204,37 +204,43 @@
 		</div>
 		<div v-show="maskShow" class="mask"></div>
 		<div v-show="popupShow" class="popup-mod">
-				<div>
-					<div class="mui-table title">
-						<div class="mui-table-cell mui-col-xs-6">
+				<ul>
+					<li>
+						<div v-if='currentRole==0||currentRole==1' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">指派</button>
 						</div>
-						<div class="mui-table-cell mui-col-xs-6">
+					</li>
+					<li>
+						<div v-if='currentRole==0||currentRole==3'>
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">分配</button>
 						</div>
-					</div>
-					<div class="mui-table title">
-						<div class="mui-table-cell mui-col-xs-6">
+					</li>
+					<li>
+						<div v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">跟踪信息</button>
 						</div>
-						<div class="mui-table-cell mui-col-xs-6">
+					</li>
+					<li>
+						<div v-if='currentRole==0||currentRole==1' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">取消</button>
 						</div>
-					</div>
-					<div class="mui-table title">
-						<div class="mui-table-cell mui-col-xs-6">
+					</li>
+					<li>
+						<div v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3||currentRole==4' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">执行信息</button>
 						</div>
-						<div class="mui-table-cell mui-col-xs-6">
+					</li>
+					<li>
+						<div v-if='currentRole==0||currentRole==4' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">心得</button>
 						</div>
-					</div>
+					</li>
 
 				</div>
 			</div>
@@ -254,7 +260,8 @@
 					maskShow: false,
 					popupShow: false,
 					resultInfo: [],
-					orderStatus:0
+					orderStatus:0 ,
+					currentRole: 0
 				}
 			})
 
