@@ -14,33 +14,33 @@
 		<div id="app">
 				<header>
 			<div class="toolbar">
-				<span class="search"></span>
-				<span class="message"></span>
+				<span class="search" id="searchBtn"></span>
+				<span class="message" id="messageBtn"></span>
 			</div>
 		</header>
 		<div class="content">
-			<div class="mod pending">
+			<div class="mod pending" data-status="1">
 				<div class="info">
 					<span class="ico ico-pending"></span>
 					<span class="number" v-text="pendingSum"></span>
 				</div>
 				<div class="title">待处理订单</div>
 			</div>
-			<div class="mod completed">
+			<div class="mod completed" data-status="2">
 				<div class="info">
 					<span class="ico ico-completed"></span>
 					<span class="number"  v-text="completedSum"></span>
 				</div>
 				<div class="title">已完成订单</div>
 			</div>
-			<div class="mod cancled">
+			<div class="mod cancled" data-status="3">
 				<div class="info">
 					<span class="ico ico-cancled"></span>
 					<span class="number" v-text="cancelSum"></span>
 				</div>
 				<div class="title">已取消订单</div>
 			</div>
-			<div class="mod assigned">
+			<div class="mod assigned" data-status="4">
 				<div class="info">
 					<span class="ico ico-assigned"></span>
 					<span class="number" v-text="assignmentSum"></span>

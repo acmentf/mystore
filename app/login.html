@@ -127,8 +127,10 @@
 			        lf.nativeUI.toast('请输入您的密码')
 					return
 				}
+				lf.window.openWindow('index','index.html')
+				return ;
                 var info = plus.push.getClientInfo();
-                outLine( "clientid: "+info.clientid );
+                console.log( "clientid: "+info.clientid );
                 var params = {
                     phone : vm.account,
                     password: vm.passWord,

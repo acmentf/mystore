@@ -113,7 +113,7 @@
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
 							</div>
-							<div class="nr">
+							<div class="nr" :data-id="item.orderNo">
 								<div class="item">
 									导游: {{item.tourGuide}}
 								</div>
@@ -131,19 +131,19 @@
 								</div>
 							</div>
 							<div class="btns" v-show="item.status==1">
-								<button type="button" class="mui-btn mui-btn-warning">
+								<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
 									确认
 								</button>
-								<button type="button" class="mui-btn mui-btn-warning">
+								<button type="button" class="mui-btn mui-btn-warning" :data-id="item.orderNo">
 									取消
 								</button>
 							</div>
 
 							<div class="btns" v-show="item.status==5">
-								<button type="button" class="mui-btn mui-btn-warning">
+								<button type="button" class="mui-btn mui-btn-warning gzxx" :data-id="item.orderNo">
 									跟踪信息
 								</button>
-								<button type="button" class="mui-btn mui-btn-warning">
+								<button type="button" class="mui-btn mui-btn-warning zxxx" :data-id="item.orderNo">
 									执行结果
 								</button>
 							</div>

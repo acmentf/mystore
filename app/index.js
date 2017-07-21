@@ -17,3 +17,17 @@ lf.ready(function() {
 	})*/
 
 })
+
+mui('.content').on('tap','.mod',function(){
+	var status = this.getAttribute('data-status')
+	lf.window.openWindow('order/orderlist.html','order/orderlist.html',{},{
+		status: status
+	})
+})
+
+document.getElementById('searchBtn').addEventListener('tap',function(){
+	lf.window.openWindow('order/ordersearch.html','order/ordersearch.html')
+})
+document.getElementById('messageBtn').addEventListener('tap',function(){
+	lf.window.openWindow('message/message.html','message/message.html')
+})

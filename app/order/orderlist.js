@@ -33,6 +33,28 @@ var vm = new Vue({
 })
 lf.ready(function() {
 	initPull();
+	var status = lf.window.currentWebview().status;
+	console.log('status:'+status)
+})
+
+mui('.order-ul').on('tap','.nr',function(){
+	var id = this.getAttribute('data-id');
+	lf.window.openWindow('orderdetails.html','orderdetails.html',{},{
+		orderNo: id
+	})
+})
+
+mui('.order-ul').on('tap','.gzxx',function(){
+	var id = this.getAttribute('data-id');
+	lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
+		orderNo: id
+	})
+})
+mui('.order-ul').on('tap','.zxxx',function(){
+	var id = this.getAttribute('data-id');
+	lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
+		orderNo: id
+	})
 })
 //			mui.init();
 //阻尼系数
