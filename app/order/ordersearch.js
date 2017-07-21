@@ -5,7 +5,7 @@ var vm = new Vue({
 		showAnswer:false,//是否显示搜索结果
 		orderList: [{
 				orderNo: 'dd1',//订单编号
-				status: '待确认',//订单状态
+				status: '5',//订单状态
 				tourGuide: '导游1号',//导游姓名
 				tourNo: '1',//团号
 				productName产品: '桂林山水文化',
@@ -14,7 +14,7 @@ var vm = new Vue({
 			},
 			{
 				orderNo: 'dd2',//订单编号
-				status: '已取消',//订单状态
+				status: '5',//订单状态
 				tourGuide: '导游2号',//导游姓名
 				tourNo: '2',//团号
 				productName产品: '桂林山水文化',
@@ -23,7 +23,7 @@ var vm = new Vue({
 			},
 			{
 				orderNo: 'dd3',//订单编号
-				status: '已录入',//订单状态
+				status: '5',//订单状态
 				tourGuide: '导游3号',//导游姓名
 				tourNo: '3',//团号
 				productName产品: '桂林山水文化',
@@ -34,8 +34,14 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
+//	mui('.searchicon').on('tap',function(){
+//		console.log(111)
+//		vm.showAnswer = true;
+//	})
+	document.getElementById('searchBtn').addEventListener('tap',function(){
+		console.log('search:'+ vm.searchText)
+		vm.showAnswer = true;
+	})
 })
+//
 
-document.getElementById('searchBtn').addEventListener('tap',function(){
-	console.log('search:'+ vm.searchText)
-})

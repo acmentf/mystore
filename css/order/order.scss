@@ -25,8 +25,25 @@
         .search-jilu-title{
             height: .8rem;
             padding: 10px;
+            div:first-child{
+                float: left;
+            }
             div:last-child{
                 float: right;
+            }
+        }
+        .search-jilu-neirong{
+            height: .8rem;
+            padding: 10px;
+            div{
+                float: left;
+                width: 2rem;
+                border: 1px solid #929292;
+                margin-right: 15px;
+                border-radius: 15px;
+                text-align: center;
+                color: #929292;
+                font-size: 16px;
             }
         }
     }
