@@ -1,5 +1,6 @@
 .app-index {
   background: url(../../images/index/bg.jpg) no-repeat center top;
+  background-size: 100% 100%;
 }
 
 .app-index .toolbar {
@@ -24,7 +25,7 @@
   font-size: 0.06rem;
   overflow: hidden;
   width: 5.6rem;
-  margin: 7rem auto 0;
+  margin: 50% auto 20%;
 }
 
 .app-index .content .mod {
