@@ -15,6 +15,12 @@
 	align-items: center;
 	font-weight: 700;
 }
+.login-header div{
+	background:url('../images/logo.png')no-repeat center;
+	background-size:cover ;
+	width:1rem;
+	height: 1rem;
+}
 .mui-input-row {
 	display: flex;
 	justify-content: center;
