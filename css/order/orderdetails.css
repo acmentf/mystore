@@ -3,11 +3,17 @@
 	height: 56px;
 	color: #fff;
 }
-.orderdetails .topbar .pending{
+.orderdetails .topbar .mod{
 	background: #66CCCC;
 	height: 100%;
 	line-height: 56px;
 	padding: 0 .4rem;
+}
+.orderdetails .topbar .cancled{
+	background: #FFCC33;
+}
+.orderdetails .topbar .completed{
+	background: #00CC66;
 }
 .orderdetails .topbar .ico{
 	background: url(../../images/order/u402.png) no-repeat; 
@@ -36,10 +42,6 @@
 	height: 100%;
 	display: block;
 }
-.popup-mod li{
-	width: 50%;
-	margin-bottom: 0.1rem;
-}
 .popup-mod .ico{
 	background: #FFCC00;
 	width: 1rem;
@@ -51,10 +53,6 @@
 }
 .popup-mod  .mui-col-xs-6{
 	text-align: center;
-}
-.popup-mod li{
-	list-style: none;
-	float: left;
 }
 .mask{
 	position: fixed;
@@ -68,10 +66,14 @@
 .popup-mod {
 	position: fixed;
     z-index: 999;
-    top: 20%;
+    top: 27%;
     left: 10%;
 	width: 80%;
 	background: #fff;
 	border-radius: 10px;
-	padding: 0.2rem 0;
+	padding: 0.4rem 0;
+}
+.popup-mod .mui-btn{
+	padding: 2px 4px;
+	font-size: 12px;
 }
