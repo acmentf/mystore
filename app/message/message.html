@@ -110,8 +110,10 @@
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell mui-media" v-for="data in msgList">
 							<a href="javascript:;">
-								<img class="mui-media-object mui-pull-left" v-show="data.type == 1" src="../../images/shuijiao.jpg">
-								<img class="mui-media-object mui-pull-left" v-show="data.type == 2" src="../../images/yuantiao.jpg">
+								<div class="message-img mui-media-object mui-pull-left">
+									<img class="" v-show="data.type == 1" src="../../images/shuijiao.jpg">
+									<img class="" v-show="data.type == 2" src="../../images/yuantiao.jpg">
+								</div>
 								<div class="mui-media-body">
 									{{data.title}}<span class="time" v-text="data.time"></span>
 									<p class='mui-ellipsis' v-text="data.descption"></p>

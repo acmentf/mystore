@@ -11,6 +11,7 @@
   position: absolute;
   top: 7px;
   right: 5px;
+  color: red;
 }
 
 .message-content .mui-input-row .mui-icon-clear {
@@ -21,7 +22,18 @@
 .message-content .mui-media .mui-media-object {
   line-height: 0.84rem !important;
   max-width: 0.84rem !important;
-  height: 0.84rem !important;
+}
+
+.message-content .mui-media .message-img {
+  width: 1.5rem;
+  height: 0.84rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message-content .mui-media .message-img img {
+  width: 100%;
+  height: 100%;
 }
 
 .message-content .mui-media .mui-media-body {
@@ -35,6 +47,6 @@
 }
 
 .message-content .mui-media .mui-media-body p {
-  font-size: 0.32rem;
+  font-size: 0.3rem;
   line-height: 1;
 }
