@@ -13,8 +13,11 @@
 	</head>
 
 	<body  class="orderdetails">
-		<div id="app" >		
-			<div  class="mui-content">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单详情</h1>
+		</header>
+		<div id="app"  class="mui-content">		
 			<div class="topbar">
 				<!--1：已支付 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
 				<div v-show='orderInfo.status == 1||orderInfo.status == 2||orderInfo.status == 4||orderInfo.status == 5||orderInfo.status == 6' class="mod pending">
@@ -205,45 +208,42 @@
 			<div class="operate">
 				<a class='button' href="#middlePopover">+</a>
 			</div>
-
-			
-
 		</div>
 		<div v-show="maskShow" class="mask"></div>
 		<div v-show="popupShow" class="popup-mod">
 				<ul>
 					<li>
-						<div v-if='currentRole==0||currentRole==1' >
+						<div class="mod assign" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">指派</button>
 						</div>
 					</li>
 					<li>
-						<div v-if='currentRole==0||currentRole==3'>
+						<div class="mod allot" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==3'>
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">分配</button>
 						</div>
 					</li>
 					<li>
-						<div v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
+						<div class="mod trackinfo" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">跟踪信息</button>
 						</div>
 					</li>
 					<li>
-						<div v-if='currentRole==0||currentRole==1' >
+						<div class="mod cancled" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">取消</button>
 						</div>
 					</li>
 					<li>
-						<div v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3||currentRole==4' >
+						<div class="mod excuteresult" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3||currentRole==4' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">执行信息</button>
 						</div>
 					</li>
 					<li>
-						<div v-if='currentRole==0||currentRole==4' >
+						<div class="mod mind" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==4' >
 							<div class="ico"></div>
 							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">心得</button>
 						</div>
@@ -251,8 +251,7 @@
 
 				</div>
 			</div>
-		
-		</div>
+	
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script src="../../js/framework/define.js"></script>

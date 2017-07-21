@@ -3,6 +3,7 @@
 	height: 56px;
 	color: #fff;
 	overflow: hidden;
+	margin-top: 0.2rem;
 }
 
 .orderdetails .topbar .mod {
@@ -92,6 +93,12 @@
 	list-style: none;
 	float: left;
 	text-align: center;
+	height: 1.8rem;
+}
+.popup-mod li .mod{
+	height: 1.6rem;
+	width: 1rem;
+	margin: 0 auto;
 }
 .mask {
 	position: fixed;
