@@ -1,17 +1,19 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		index:null,
 		type:0,
 		searchText: '',
 		personList: [{
 				id:1,
-				name:'name1'
+				name:'张三'
 			},
 			{
 				id:2,
-				name:'name2'
+				name:'李四'
 			}
 		],
+		photographer:[],// 已选人员
 		pick:'',
 		pickList:[]
 	},
@@ -19,18 +21,47 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
+	var wv = lf.window.currentWebview();
 	initPull();
-	vm.type = 1;//单选
-	vm.type = 2;//多选
+	vm.type = wv.type;
+	console.log('list:'+JSON.stringify(wv.list))
+	vm.pickList = wv.list
+	
+	if(vm.type == 1){
+		document.getElementById('header-title').innerHTML = '执行人'	
+	}else{
+		document.getElementById('header-title').innerHTML = '摄影师'
+	}
+	if(wv.index){
+		vm.index = wv.index;	
+	}
 })
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
 	console.log('search')
 })
 document.getElementById('saveBtn').addEventListener('tap',function(){
-	console.log('save')
 	console.log(JSON.stringify(vm.pick))// 获取单选值
-	console.log(JSON.stringify(vm.pickList))// 获取多选值
+	
+	console.log(JSON.stringify(list))
+	if(vm.type == 2){
+		console.log(JSON.stringify(vm.pickList))// 获取多选值
+		var list = [];
+		vm.pickList.forEach(function(v){
+			console.log(v)
+			for(var i in vm.personList){
+				if(vm.personList[i].id == v){
+					list.push(v+'-'+vm.personList[i].name);
+					break
+				}
+			}
+		})
+		lf.event.fire(lf.window.currentWebview().opener(),'addPhotographer',{
+			index: vm.index,
+			list: list
+		})
+		lf.window.closeCurrentWebview();
+	}
 })
 //			mui.init();
 //阻尼系数
@@ -40,47 +71,5 @@ function initPull() {
 		bounce: false,
 		indicators: true, //是否显示滚动条
 		deceleration: deceleration
-	});
-	mui.ready(function() {
-		//循环初始化所有下拉刷新，上拉加载。
-		mui.each(document.querySelectorAll('.mui-slider .mui-scroll'), function(index, pullRefreshEl) {
-			mui(pullRefreshEl).pullToRefresh({
-				down: {
-					callback: function() {
-						var self = this;
-						setTimeout(function() {
-							vm.msgList = [{
-									title: 'title1',
-									desc: '1',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
-								},
-								{
-									title: 'title2',
-									desc: '2',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
-								}
-							]
-							self.endPullDownToRefresh();
-						}, 1000);
-					}
-				},
-				up: {
-					callback: function() {
-						var self = this;
-						setTimeout(function() {
-							vm.msgList.push({
-								title: 'title3',
-								desc: '3',
-								time: '08:08',
-								url: '../images/shuijiao.jpg'
-							})
-							self.endPullUpToRefresh();
-						}, 1000);
-					}
-				}
-			});
-		});
 	});
 }

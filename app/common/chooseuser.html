@@ -103,7 +103,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">执行人</h1>
+			<h1 class="mui-title" id="header-title"></h1>
 			<a id="saveBtn" class="header-right-btn mui-pull-right">确定</a>
 		</header>
 		<div id="app" class="mui-content chooseuser-content" >
@@ -111,29 +111,20 @@
 				<input type="search" v-model="searchText" class="mui-input-clear" placeholder="">
 				<i id="searchBtn" class="mui-icon mui-icon-search"></i>
 			</div>
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-scroll">
-					<!--
-                    	作者：23229437@qq.com
-                    	时间：2017-07-21
-                    	描述：根据类型来渲染是单选还是多选
-                    -->
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" v-for="data in personList" v-if="type == 2">
-							<div class="mui-input-row mui-checkbox mui-left">
-								<label v-text="data.name"></label>
-								<input name="checkbox" v-model="pickList" :value="data.id" type="checkbox" >
-							</div>
-						</li>
-						<li class="mui-table-view-cell" v-for="data in personList" v-if="type == 1">
-							<div class="mui-input-row mui-radio mui-left">
-								<label v-text="data.name"></label>
-								<input name="radio" v-model="pick" :value="data.id" type="radio">
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" v-for="data in personList" v-if="type == 2">
+					<div class="mui-input-row mui-checkbox mui-left">
+						<label v-text="data.name"></label>
+						<input name="checkbox" v-model="pickList" :value="data.id" type="checkbox" >
+					</div>
+				</li>
+				<li class="mui-table-view-cell" v-for="data in personList" v-if="type == 1">
+					<div class="mui-input-row mui-radio mui-left">
+						<label v-text="data.name"></label>
+						<input name="radio" v-model="pick" :value="data.id" type="radio">
+					</div>
+				</li>
+			</ul>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>

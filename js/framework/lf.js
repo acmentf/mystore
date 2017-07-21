@@ -1668,6 +1668,7 @@ var lf = (function(document, undefined) {
 				}
 				return;
 			}
+			
 			var settings = $.extend({}, STYLE.webviewStyle, styles);
 			var wv = $.window.getWebviewById(id);
 			if(!$.util.isUndefined(wv)) {
@@ -2322,6 +2323,7 @@ var lf = (function(document, undefined) {
 	var Role = $.Role = $.Class.extend({
 		usercode:"",
 		username:"",
+		userrole:"",
 		loginsign:"",
 		init:function(){
 			this._init();
@@ -2334,15 +2336,18 @@ var lf = (function(document, undefined) {
 					l = $.util.strToJson(k);
 					this.usercode = l.usercode;
 					this.username = l.username;
+					this.userrole = l.userrole;
 					this.loginsign = l.loginsign;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
+					this.userrole = "";
 					this.usercode = "";
 				}
 			} else {
 				this.loginsign = "";
 				this.username = "";
+				this.userrole = "";
 				this.usercode = "";
 			}
 			$.log.info("complete loading role data is ："+k);
@@ -2350,9 +2355,10 @@ var lf = (function(document, undefined) {
 		save:function(k){
 			this.usercode = k.usercode;
 			this.username = k.username;
+			this.userrole = k.userrole;
 			this.loginsign = k.loginsign;
 			$.storage.put(j, JSON.stringify(k));
-			$.storage.put(s, k.signaturePwd);
+			$.storage.put(s, k.tonken);
 		},
 		logout:function(){
 			$.storage.removeItem(s);
