@@ -1,17 +1,32 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		msgList: [{
-				title: 'title1',
-				desc: '1',
-				time: '08:08',
-				url: '../../images/shuijiao.jpg'
+		orderList: [{
+				orderNo: 'dd1',//订单编号
+				status: '待确认',//订单状态
+				tourGuide: '导游1号',//导游姓名
+				tourNo: '1',//团号
+				productName产品: '桂林山水文化',
+				purchaser: '采购方1',//采购方
+				totalPrice: 1000 //订单金额
 			},
 			{
-				title: 'title2',
-				desc: '2',
-				time: '08:08',
-				url: '../../images/shuijiao.jpg'
+				orderNo: 'dd2',//订单编号
+				status: '已取消',//订单状态
+				tourGuide: '导游1号',//导游姓名
+				tourNo: '1',//团号
+				productName产品: '桂林山水文化',
+				purchaser: '采购方1',//采购方
+				totalPrice: 1000 //订单金额
+			},
+			{
+				orderNo: 'dd3',//订单编号
+				status: '已录入',//订单状态
+				tourGuide: '导游1号',//导游姓名
+				tourNo: '1',//团号
+				productName产品: '桂林山水文化',
+				purchaser: '采购方1',//采购方
+				totalPrice: 1000 //订单金额
 			}
 		]
 	}
@@ -36,17 +51,24 @@ function initPull() {
 					callback: function() {
 						var self = this;
 						setTimeout(function() {
-							vm.msgList = [{
-									title: 'title1',
-									desc: '1',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
+							vm.orderList = [
+								{
+									orderNo: 'dd1',//订单编号
+									status: '已录入',//订单状态
+									tourGuide: '导游1号',//导游姓名
+									tourNo: '1',//团号
+									productName产品: '桂林山水文化',
+									purchaser: '采购方1',//采购方
+									totalPrice: 1000 //订单金额
 								},
 								{
-									title: 'title2',
-									desc: '2',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
+									orderNo: 'dd1',//订单编号
+									status: '待确认',//订单状态
+									tourGuide: '导游1号',//导游姓名
+									tourNo: '1',//团号
+									productName产品: '桂林山水文化',
+									purchaser: '采购方1',//采购方
+									totalPrice: 1000 //订单金额
 								}
 							]
 							self.endPullDownToRefresh();
@@ -57,12 +79,17 @@ function initPull() {
 					callback: function() {
 						var self = this;
 						setTimeout(function() {
-							vm.msgList.push({
-								title: 'title3',
-								desc: '3',
-								time: '08:08',
-								url: '../images/shuijiao.jpg'
-							})
+							vm.orderList.push(
+								{
+									orderNo: 'dd1',//订单编号
+									status: '已录入',//订单状态
+									tourGuide: '导游1号',//导游姓名
+									tourNo: '1',//团号
+									productName产品: '桂林山水文化',
+									purchaser: '采购方1',//采购方
+									totalPrice: 1000 //订单金额
+								}
+							)
 							self.endPullUpToRefresh();
 						}, 1000);
 					}
