@@ -1,16 +1,20 @@
 .message-content .mui-input-row {
-  height: 35px;
+  background-color: #fff;
 }
 
 .message-content .mui-input-row input {
   padding-left: 30px;
   padding-right: 30px;
+  border-radius: 16px;
+  margin: 10px auto;
+  width: 96%;
+  display: inherit;
 }
 
 .message-content .mui-input-row .mui-icon-search {
   position: absolute;
-  top: 7px;
-  right: 5px;
+  top: 16px;
+  right: 13px;
   color: red;
 }
 
