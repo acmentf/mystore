@@ -11,7 +11,8 @@
 	</head>
 
 	<body class="app-index">
-		<header>
+		<div id="app">
+				<header>
 			<div class="toolbar">
 				<span class="search"></span>
 				<span class="message"></span>
@@ -21,33 +22,34 @@
 			<div class="mod pending">
 				<div class="info">
 					<span class="ico ico-pending"></span>
-					<span class="number">8</span>
+					<span class="number" v-text="pendingSum"></span>
 				</div>
 				<div class="title">待处理订单</div>
 			</div>
 			<div class="mod completed">
 				<div class="info">
 					<span class="ico ico-completed"></span>
-					<span class="number">8</span>
+					<span class="number"  v-text="completedSum"></span>
 				</div>
 				<div class="title">已完成订单</div>
 			</div>
 			<div class="mod cancled">
 				<div class="info">
 					<span class="ico ico-cancled"></span>
-					<span class="number">8</span>
+					<span class="number" v-text="cancelSum"></span>
 				</div>
 				<div class="title">已取消订单</div>
 			</div>
 			<div class="mod assigned">
 				<div class="info">
 					<span class="ico ico-assigned"></span>
-					<span class="number">8</span>
+					<span class="number" v-text="assignmentSum"></span>
 				</div>
 				<div class="title">已分派订单</div>
 			</div>
 		</div>
-		
+		</div>
+	
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
 		<script src="../js/framework/styles.js"></script>
@@ -55,16 +57,24 @@
 		<script src="../libs/vue.min.js"></script>
 		<script src="../js/framework/common.js"></script>
 		<script type="text/javascript">
-			var vm = null
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					pendingSum: 0,
+					completedSum: 0,
+					cancelSum: 0,
+					assignmentSum: 0
+				}
+			})
 			lf.ready(function(){
-				var a = lf.window.currentWebview().a
+				/*var a = lf.window.currentWebview().a
 				var b =lf.window.currentWebview().b
 				console.log(a)
 				console.log(b)
 				lf.event.fire(lf.window.currentWebview().opener(),'test',{
 					a:1,b:2
-				})
-//				lf.window.closeCurrentWebview();
+				})*/
+
 			})
 		</script>
 	</body>

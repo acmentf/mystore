@@ -16,15 +16,16 @@
 		<div id="app" >		
 			<div  class="mui-content">
 			<div class="topbar">
-				<div v-show='orderStatus == 0' class="mod pending">
-					<span> 该订单已耗时3小时23分</span>
+				<!--1：已支付 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
+				<div v-show='orderInfo.status == 1||orderInfo.status == 2||orderInfo.status == 4||orderInfo.status == 5||orderInfo.status == 6' class="mod pending">
+					该订单已耗时<span v-text="timeConsume"></span>
 					<span class="ico ico-pending"></span>
 				</div>
-				<div v-show='orderStatus == 1' class="mod cancled">
+				<div v-show='orderInfo.status == 3' class="mod cancled">
 					<span> 该订单已取消</span>
 					<span class="ico ico-cancled"></span>
 				</div>
-				<div v-show='orderStatus == 2' class="mod completed">
+				<div v-show='orderInfo.status == 7' class="mod completed">
 					<span>该订单已完成</span>
 					<span class="ico ico-completed"></span>
 				</div>
@@ -35,32 +36,39 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>订单号</label>
-								<span>207171234629472</span>
+								<label>订&nbsp;&nbsp;单&nbsp;&nbsp;号：</label>
+								<span v-text="orderInfo.orderId"></span>
 							</div>
 							<div class="item">
-								<label>订单状态</label>
-								<span>已分派</span>
+								<label>订单状态：</label>
+								<!--1：已支付 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
+								<span v-if="orderInfo.status ==1">已支付</span>
+								<span v-if="orderInfo.status ==2">已确认</span>
+								<span v-if="orderInfo.status ==3">已取消</span>
+								<span v-if="orderInfo.status ==4">已指派</span>
+								<span v-if="orderInfo.status ==5">已录入</span>
+								<span v-if="orderInfo.status ==6">已分配</span>
+								<span v-if="orderInfo.status ==7">已完成</span>
 							</div>
 							<div class="item">
-								<label>订单金额</label>
-								<span>200</span>
+								<label>订单金额：</label>
+								<span v-text="orderInfo.totalPrice">200</span>元
 							</div>
 							<div class="item">
-								<label>下单时间</label>
-								<span>2017-07-23 12:00:00</span>
+								<label>下单时间：</label>
+								<span v-text="orderInfo.createTime"></span>
 							</div>
 							<div class="item">
-								<label>产品名称</label>
-								<span>权限测试专用</span>
+								<label>产品名称：</label>
+								<span v-text="orderInfo.productName">权限测试专用</span>
 							</div>
 							<div class="item">
-								<label>线路名称</label>
-								<span>九黄一号</span>
+								<label>线路名称：</label>
+								<span v-text="orderInfo.lineName">九黄一号</span>
 							</div>
 							<div class="item">
-								<label>采购方</label>
-								<span>钱多多旅行社</span>
+								<label>采&nbsp;&nbsp;购&nbsp;&nbsp;方：</label>
+								<span v-text="orderInfo.purchaser">九黄一号</span>
 							</div>
 						</div>
 					</div>
@@ -71,44 +79,40 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>团人数</label>
-								<span>1</span>
+								<label>团&nbsp;&nbsp;人&nbsp;&nbsp;数：</label>
+								<span v-text="orderTrackInfo.personCount"></span>
 							</div>
 							<div class="item">
-								<label>团性质</label>
-								<span>散客</span>
+								<label>团&nbsp;&nbsp;性&nbsp;&nbsp;质：</label>
+								<span  v-text="orderTrackInfo.groupType"></span>
 							</div>
 							<div class="item">
-								<label>订单金额</label>
-								<span>200</span>
+								<label>导&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;游：</label>
+								<span  v-text="orderInfo.tourGuide"></span>
 							</div>
 							<div class="item">
-								<label>导游</label>
-								<span>小微</span>
+								<label>行程天数：</label>
+								<span v-text="orderTrackInfo.groupDays"></span>
 							</div>
 							<div class="item">
-								<label>行程天数</label>
-								<span>5</span>
+								<label>行程信息：</label>
+								<span v-text="orderTrackInfo.groupRoute"></span>
 							</div>
 							<div class="item">
-								<label>行程信息</label>
-								<span>惺惺惜惺惺想寻</span>
+								<label>车牌号码：</label>
+								<span v-text="orderTrackInfo.busCardNo"></span>
 							</div>
 							<div class="item">
-								<label>车牌号码</label>
-								<span>京A 000000</span>
+								<label>预留座位：</label>
+								<span  v-text="orderTrackInfo.preReservedSeats"></span>
 							</div>
 							<div class="item">
-								<label>预留座位</label>
-								<span>5</span>
+								<label>取片时间：</label>
+								<span  v-text="orderTrackInfo.fetchPhotoTime"></span>
 							</div>
 							<div class="item">
-								<label>取片时间</label>
-								<span>2017-07-24 12:00:00</span>
-							</div>
-							<div class="item">
-								<label>取片地点</label>
-								<span>景区酒店</span>
+								<label>取片地点：</label>
+								<span  v-text="orderTrackInfo.fetchPhotoScene"></span>
 							</div>
 						</div>
 					</div>
@@ -119,44 +123,45 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>选片张数</label>
-								<span>30</span>张
+								<label>选片张数：</label>
+								<span v-text="orderResult.selectsNum"></span>张
 							</div>
 							<div class="item">
-								<label>打印张数</label>
-								<span>10</span>张
+								<label>打印张数：</label>
+								<span v-text="orderResult.printsNum"></span>张
 							</div>
 							<div class="item">
-								<label>赠送张数</label>
-								<span>12寸 10张</span>
+								<label>赠送张数：</label>
+								<span v-text="orderResult.givesPicSize"></span>寸
+								<span v-text="orderResult.givesNum"></span>张
 							</div>
 							<div class="item">
-								<label>销售总数</label>
-								<span>100张</span>
+								<label>销售总数：</label>
+								<span v-text="orderResult.salesNum"></span>张
 							</div>
 							<div class="item">
-								<label>销售总额</label>
-								<span>500</span>
+								<label>销售总额：</label>
+								<span v-text="orderResult.salesAmt"></span>元
 							</div>
 							<div class="item">
-								<label>购买人数</label>
-								<span>30</span>
+								<label >购买人数：</label>
+								<span v-text="orderResult.buyers"></span>人
 							</div>
 							<div class="item">
-								<label>剩余张数</label>
-								<span>5张</span>
+								<label>剩余张数：</label>
+								<span v-text="orderResult.leavesNum"></span>张
 							</div>
 							<div class="item">
-								<label>客单价</label>
-								<span>5</span>
+								<label>客&nbsp;&nbsp;单&nbsp;&nbsp;价：</label>
+								<span v-text='unitPrice'></span>元
 							</div>
 							<div class="item">
-								<label>照片转化率</label>
-								<span>5%</span>
+								<label>照片转化率：</label>
+								<span v-text='photoPecent'></span>%
 							</div>
 							<div class="item">
-								<label>用户转化率</label>
-								<span>5%</span>
+								<label>用户转化率：</label>
+								<span v-text='userPecent'></span>%
 							</div>
 						</div>
 					</div>
@@ -173,7 +178,7 @@
 									<td>数量</td>
 									<td>合计</td>
 								</tr>
-								<tr v-for="item in resultInfo">
+								<tr v-for="item in orderResult.orderXms">
 									<td v-text="item.picSizeName"></td>
 									<td>￥<span v-text="item.price"></span></td>
 									<td v-text="item.picNum"></td>
@@ -189,7 +194,9 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div>摄影师心得</div>
-							<div>张三 李四 王五</div>
+							<div class="mind">
+								<span v-for='item in photographerInfos' :data-id="item.photographerId" v-text="item.photographerName" class="photpgrapher-name"></span> 
+							<div>
 						</div>
 					</div>
 				</div>
@@ -253,31 +260,7 @@
 		<script src="../../js/framework/lf.js"></script>
 		<script src="../../libs/vue.min.js"></script>
 		<script src="../../js/framework/common.js"></script>
-		<script type="text/javascript">
-			var vm = new Vue({
-				el: '#app',
-				data: {
-					maskShow: false,
-					popupShow: false,
-					resultInfo: [],
-					orderStatus:0 ,
-					currentRole: 0
-				}
-			})
-
-			lf.ready(function() {
-				//				initDateChoose()
-				//				lf.window.closeCurrentWebview();
-				mui('.operate').on('tap','.button',function(){
-				vm.maskShow=true;
-				vm.popupShow=true;
-				});
-				mui('body').on('tap','.mask',function(){
-				vm.maskShow=false;
-				vm.popupShow=false;
-				})
-			})
-		</script>
+		<script src="orderdetails.js"></script>
 	</body>
 
 </html>
