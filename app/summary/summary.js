@@ -54,7 +54,6 @@ lf.ready(function () {
             galleryImg: function () {
                 var self = this
                 plus.gallery.pick( function(path){
-                    var file = {size:10240}
                     plus.io.resolveLocalFileSystemURL( path, function( entry ) {
                         entry.file( function(file){
                             if (file.size / 1024 / 1024 > 5) {
@@ -70,8 +69,7 @@ lf.ready(function () {
                 }, function ( e ) {
                     console.log( '取消选择图片' );
                 },{
-                    filter:'image',
-                    multiple:true
+                    filter:'image'
                 });
             },
             fileSelect: function () {
