@@ -329,19 +329,22 @@
   margin: 5px;
 }
 
-.summary-summary .mui-content-padded .title {
+.summary-summary .mui-content-padded .tip {
   padding-bottom: 0.20rem;
 }
 
-.summary-summary .mui-content-padded .title .text {
+.summary-summary .mui-content-padded .tip .text {
   color: #3B3B3B;
 }
 
-.summary-summary .mui-content-padded .title .mark {
+.summary-summary .mui-content-padded .tip .mark {
   color: #BFBFBF;
 }
 
 .summary-summary .mui-content-padded .text-area {
+  border: none !important;
+  margin-top: 5px;
+  padding: 0;
   width: 100%;
   resize: none;
 }

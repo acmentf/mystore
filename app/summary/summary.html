@@ -13,15 +13,12 @@
 <body>
 <header class="mui-bar mui-bar-nav">
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">填写总结</h1>
+    <h1 class="mui-title">心得录入</h1>
 </header>
 <div class="mui-content summary-summary" id="app">
     <div class="mui-content-padded">
-        <div class="title">
-            <span class="red">*</span>
-            <span class="text">上传代表作品</span>
-            <span class="mark">( 限3张，每张照片小于5M )</span>
-            <span class="text"> :</span>
+        <div class="mui-input-row">
+            <textarea v-model="remark" rows="5" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
         </div>
         <div class="mui-input-row">
             <div class="uploader-wrap">
@@ -38,12 +35,8 @@
                 </div>
             </div>
         </div>
-        <div class="title">
-            <span class="red">*</span>
-            <span class="text">拍摄总结 :</span>
-        </div>
-        <div class="mui-input-row" style="margin: 10px 5px;">
-            <textarea v-model="remark" rows="5" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
+        <div class="tip">
+            <span class="mark">提示 : 心得字数不多于500字，照片最多上传3张，每张小于5M</span>
         </div>
         <div class="mui-button-row">
             <button type="button" class="mui-btn mui-btn-primary submit">提交</button>

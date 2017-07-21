@@ -1,3 +1,20 @@
+.orderlist-content .search {
+  position: relative;
+  background: #FB2C60;
+  padding: 10px 50px 10px 10px;
+  height: 50px; }
+  .orderlist-content .search .searchspan {
+    background: #FFFFFF;
+    color: #929292;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    padding: 0 10px; }
+  .orderlist-content .search .searchicon {
+    position: absolute;
+    right: 10px;
+    color: #FFFFFF;
+    top: 14px; }
 .orderlist-content .order-ul {
   list-style-type: none;
   padding: 0;

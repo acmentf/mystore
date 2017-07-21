@@ -178,18 +178,6 @@
   margin: 5px;
 }
 
-.summary-details .mui-content-padded .title {
-  padding-bottom: 0.20rem;
-}
-
-.summary-details .mui-content-padded .title .text {
-  color: #3B3B3B;
-}
-
-.summary-details .mui-content-padded .title .mark {
-  color: #BFBFBF;
-}
-
 .summary-details .mui-content-padded .summary {
   background-color: #f2f2f2;
 }

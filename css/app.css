@@ -19,3 +19,13 @@
 	font-size: 14px;
 	color: #8f8f94;
 }*/
+.mui-bar{
+	background-color:#000000;
+	color: #FFFFFF;
+}
+.mui-bar .mui-action-back{
+	color: #FFFFFF !important;
+}
+.mui-title{
+	color: #FFFFFF;
+}
