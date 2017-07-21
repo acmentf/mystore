@@ -357,7 +357,7 @@
   width: 80%;
 }
 
-.summary-summary .btn-submit:enabled:active, .summary-summary .btn-submit.mui-active:enabled {
+.summary-summary .btn-submit:enabled:active {
   color: #fff;
   border: 1px solid #FF3064;
   background-color: #FF3064;
