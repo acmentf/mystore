@@ -6,7 +6,7 @@ var vm = new Vue({
 				status: '1',//订单状态 1：待确认 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成
 				tourGuide: '导游1号',//导游姓名
 				tourNo: '1',//团号
-				productName产品: '桂林山水文化',
+				productName: '桂林山水文化',
 				purchaser: '采购方1',//采购方
 				totalPrice: 1000 //订单金额
 			},
@@ -15,7 +15,7 @@ var vm = new Vue({
 				status: '3',//订单状态
 				tourGuide: '导游1号',//导游姓名
 				tourNo: '1',//团号
-				productName产品: '桂林山水文化',
+				productName: '桂林山水文化',
 				purchaser: '采购方1',//采购方
 				totalPrice: 1000 //订单金额
 			},
@@ -24,7 +24,7 @@ var vm = new Vue({
 				status: '5',//订单状态
 				tourGuide: '导游1号',//导游姓名
 				tourNo: '1',//团号
-				productName产品: '桂林山水文化',
+				productName: '桂林山水文化',
 				purchaser: '采购方1',//采购方
 				totalPrice: 1000 //订单金额
 			}
