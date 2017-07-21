@@ -10,6 +10,7 @@ var vm = new Vue({
 		unitPrice: 0,
 		photoPecent: 0,
 		userPecent: 0,
+		currentOrderId:'',
 		orderInfo: {
 			"orderId": 1,
 			"orderNo": "1234",
@@ -70,6 +71,7 @@ lf.ready(function() {
 	vm.orderResult.orderXms.forEach(function(v, i) {
 		v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
 	})
+	vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
@@ -80,10 +82,49 @@ lf.ready(function() {
 		vm.maskShow = true;
 		vm.popupShow = true;
 	});
-	mui('body').on('tap', '.mask', function() {
+	mui('body').on('tap', '.mask', function() { //点击遮罩层隐藏弹窗
 		vm.maskShow = false;
 		vm.popupShow = false;
 	})
+	mui('.popup-mod').on('tap', '.assign', function() { //点击指派
+		var orderid = this.getAttribute('data-orderid');
+		console.log(orderid)
+		lf.window.openWindow('common/chooseuser.html','../common/chooseuser.html',{},{
+			orderNo: orderid
+		})
+	})
+	mui('.popup-mod').on('tap', '.allot', function() { //点击分配
+		var orderid = this.getAttribute('data-orderid');
+		console.log(orderid)
+		lf.window.openWindow('common/plancamera.html','../common/plancamera.html',{},{
+			orderNo: orderid
+		})
+	})
+	mui('.popup-mod').on('tap', '.trackinfo', function() { //点击跟踪信息
+		var orderid = this.getAttribute('data-orderid');
+		console.log(orderid)
+		lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
+			orderNo: orderid
+		})
+	})
+	mui('.popup-mod').on('tap', '.cancled', function() { //点击取消
+		
+	})
+	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
+		var orderid = this.getAttribute('data-orderid');
+		console.log(orderid)
+		lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
+			orderNo: orderid
+		})
+	})
+	mui('.popup-mod').on('tap', '.mind', function() { //点击心得
+		var orderid = this.getAttribute('data-orderid');
+		console.log(orderid)
+		lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
+			orderNo: orderid
+		})
+	})
+	
 })
 
 lf.event.listener('orderdetails',function(e){
