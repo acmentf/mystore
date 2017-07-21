@@ -1,6 +1,6 @@
 <!DOCTYPE html>
+<!--cwj-->
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title></title>
@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
-		
+
 		<style>
 			html,
 			body {
@@ -54,7 +54,7 @@
 				/*-webkit-backface-visibility: hidden;
 				-webkit-transition-duration: 400ms;
 				transition-duration: 400ms;*/
-				
+
 				margin: 0;
 			}
 			.mui-pull-top-wrapper .mui-icon,
@@ -103,41 +103,22 @@
 				</div>
 				<div class="mui-scroll">
 					<ul class="order-ul">
-						<li class="order-li">
+						<li class="order-li" v-for="item in orderList">
 							<div class="nr">
 								<div class="item">
-									订单编号: 111
+									导游: {{item.tourGuide}}
 								</div>
 								<div class="item">
-									导游: 111
+									团号: {{item.tourNo}}
 								</div>
 								<div class="item">
-									团号: 111
+									产品: {{item.productName产品}}
 								</div>
 								<div class="item">
-									产品: 111
+									采购方: {{item.purchaser}}
 								</div>
 								<div class="item">
-									采购方: 111
-								</div>
-							</div>
-						</li>
-						<li class="order-li">
-							<div class="nr">
-								<div class="item">
-									订单编号: 111
-								</div>
-								<div class="item">
-									导游: 111
-								</div>
-								<div class="item">
-									团号: 111
-								</div>
-								<div class="item">
-									产品: 111
-								</div>
-								<div class="item">
-									采购方: 111
+									金额: {{item.totalPrice}}
 								</div>
 							</div>
 						</li>

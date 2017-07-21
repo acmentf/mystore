@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/order-entering/result.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+	</head>
+
+	<body>	
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">执行结果</h1>
+		</header>
+		<div id="resultData" class="mui-content result-login-container">
+			<div class="mui-input-group">
+		    <div class="mui-input-row">
+		        <label>选片张数：</label>
+		        <input type="number" class="mui-input-clear" placeholder="请输入选片张数">
+		    </div>   
+		    <div class="mui-input-row">
+		        <label>打印张数：</label>
+		        <input type="number" class="mui-input-clear" placeholder="请输入打印张数">
+		    </div>
+		    <div class="mui-input-row give-number group-info" >
+		        <label>赠送张数：</label>
+		        <input type="number" class="mui-input-clear select-number" placeholder="请输入赠送张数">
+		        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
+		        <input type="text" v-model='size' class="select-size" readonly="readonly" placeholder="尺寸"/>
+		    </div>
+		    
+		    <div class="mui-input-row add-detail-box">
+		  		<label class="add-detail-btn">销售明细：</label>
+		  		<span id="add-detail" class="add-detail-icon mui-icon mui-icon-plus">增加</span>
+		    </div>
+		    <table class="table-box" border="1" bordercolor="#808080">
+		    	<tr>
+		    		<th>照片尺寸</th>
+		    		<th>单价</th>
+		    		<th>数量</th>
+		    		<th>合计</th>
+		    		<th></th>
+		    	</tr>
+		    	<tr>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    	</tr>
+		    	<tr>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    	</tr>
+		    	<tr>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    	</tr>
+		    	<tr>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    		<td>123</td>
+		    	</tr>
+		    </table>
+		    <div class="mui-input-row">
+		        <label>销售总额：</label>
+		        <input type="number" class="mui-input-clear" placeholder="请输入销售总额">
+		    </div>
+			<div class="mui-input-row">
+		        <label>购买人数：</label>
+		        <input type="number" class="mui-input-clear" placeholder="请输入购买人数">
+		    </div>
+		</div>
+		<div class="login-btn-box"><button type="button"id="save" class="mui-btn login-pass-btn">保存</button></div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#resultData',
+				data: {
+                    size:''
+				}
+			})
+			lf.ready(function() {
+				var opts = {"type":"date"}
+				picker = new mui.DtPicker(opts);//拍摄时间选择
+				userPicker = new mui.PopPicker();//具体时间选择 全天上午下午晚上
+				userPicker.setData([{
+						value: '1',
+						text: '16寸'
+					}, {
+						value: '2',
+						text: '12寸'
+					}, {
+						value: '3',
+						text: '10寸'
+					}, {
+						value: '4',
+						text: '8寸'
+					}, {
+						value: '5',
+						text: '6寸'
+					}
+					]);
+			})
+			mui('.group-info').on('tap','.select-size',function(){
+				userPicker.show(function(items) {
+							console.log(items[0].text);
+							vm.size = items[0].text
+				});
+
+			})
+			document.getElementById('add-detail').addEventListener('tap',function(){
+				lf.window.openWindow('add-detail','add-detail.html')
+			})
+		</script>
+	</body>
+
+</html>

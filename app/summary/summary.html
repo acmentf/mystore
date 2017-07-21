@@ -15,8 +15,8 @@
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
     <h1 class="mui-title">填写总结</h1>
 </header>
-<div class="mui-content summary-summary">
-    <div class="mui-content-padded" id="app">
+<div class="mui-content summary-summary" id="app">
+    <div class="mui-content-padded">
         <div class="title">
             <span class="red">*</span>
             <span class="text">上传代表作品</span>
@@ -29,14 +29,11 @@
                     <div class="finger-uploader__bd">
                         <ul class="finger-uploader__files">
                             <li v-for="(file,index) in uploaderFiles" class="finger-uploader__file">
-                                <span class="remove" @click="remove(index)">✖</span>
-                                <img class="preview" :src="file.info.fileUrl" data-preview-src="" data-preview-group="1">
+                                <span class="remove" :index="index">✖</span>
+                                <img class="preview" :src="file.fileUrl" data-preview-src="" data-preview-group="1">
                             </li>
                         </ul>
-                        <div class="finger-uploader__input-box" ref="uploaderInputWrap" @click="fileSelect">
-                            <input  v-show="false" v-if="uploaderInputFlag" @change="uploaderInput" class="finger-uploader__input" type="file" accept="image/*"
-                                    multiple="">
-                        </div>
+                        <div class="finger-uploader__input-box"></div>
                     </div>
                 </div>
             </div>
@@ -46,10 +43,10 @@
             <span class="text">拍摄总结 :</span>
         </div>
         <div class="mui-input-row" style="margin: 10px 5px;">
-            <textarea v-model="remark" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
+            <textarea v-model="remark" rows="5" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
         </div>
         <div class="mui-button-row">
-            <button type="button" class="mui-btn mui-btn-primary" onclick="return false;">提交</button>
+            <button type="button" class="mui-btn mui-btn-primary submit">提交</button>
         </div>
     </div>
 </div>

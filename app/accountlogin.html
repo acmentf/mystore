@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/accountlogin.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content account-login-container">
+			<div class="login-header">
+				<div>登录你的头条，精彩永不丢失</div>
+			</div>	
+			<div class="mui-input-row login-input-tel">
+		        <input type="text" class="mui-input-clear" placeholder="请输入账号">
+    		</div>
+    		<div class="mui-input-row login-input-code">
+		        <input type="password" class="mui-input-clear" placeholder="请输入密码">
+    		</div>
+    		<div class="login-input-message">未注册手机验证后自动登录</div>
+    		<div class="login-btn-box"><button type="button"id="login" class="mui-btn login-pass-btn">进入头条</button></div>
+    		<div class="login-check-box">
+    			<input type="checkbox" name="" id="" value="" />
+    			<span>我已阅读并同意“用户协议和隐私条款	”</span>
+			</div>
+			<div id="change-tel-login" class="login-change-box">
+				<span>手机号登录</span>
+			</div>
+    		</div>
+		</div>
+		<script src="../js/framework/common.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/framework/define.js"></script>
+		<script src="../js/framework/styles.js"></script>
+		<script src="../js/framework/lf.js"></script>
+		<script src="../libs/vue.min.js"></script>
+		<script type="text/javascript">
+			var vm = null
+			lf.ready(function(){
+				vm = new Vue();
+			})
+			document.getElementById('login').addEventListener('tap',function(){
+				lf.window.openWindow('index','index.html')
+			})
+			document.getElementById('change-tel-login').addEventListener('tap',function(){
+				lf.window.openWindow('login','login.html')
+			})
+		</script>
+	</body>
+
+</html>

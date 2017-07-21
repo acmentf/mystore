@@ -4,16 +4,29 @@ var vm = new Vue({
 		searchText: '',
 		msgList: [{
 				title: 'title1',
-				desc: '1',
-				time: '08:08',
-				url: '../../images/shuijiao.jpg'
+				descption: '消息内容1',//消息内容
+				createdTime: '08:08',//消息创建时间
+//				url: '../../images/shuijiao.jpg',
+				type: 1,//消息类型,
+				status:1 //1已读，0未读
 			},
 			{
-				title: 'title2',
-				desc: '2',
-				time: '08:08',
-				url: '../../images/shuijiao.jpg'
+				title: 'title1',
+				descption: '消息内容1',//消息内容
+				createdTime: '08:08',//消息创建时间
+//				url: '../../images/shuijiao.jpg',
+				type: 2,//消息类型
+				status:0 //1已读，0未读
+			},
+			{
+				title: 'title1',
+				descption: '消息内容1',//消息内容
+				createdTime: '08:08',//消息创建时间
+//				url: '../../images/shuijiao.jpg',
+				type: 1,//消息类型,
+				status:1 //1已读，0未读
 			}
+
 		]
 	},
 	computed: {
@@ -45,15 +58,19 @@ function initPull() {
 						setTimeout(function() {
 							vm.msgList = [{
 									title: 'title1',
-									desc: '1',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
+									descption: '消息内容1',//消息内容
+									createdTime: '08:08',//消息创建时间
+					//				url: '../../images/shuijiao.jpg',
+									type: 1,//消息类型,
+									status:1 //1已读，0未读
 								},
 								{
-									title: 'title2',
-									desc: '2',
-									time: '08:08',
-									url: '../images/shuijiao.jpg'
+									title: 'title1',
+									descption: '消息内容1',//消息内容
+									createdTime: '08:08',//消息创建时间
+					//				url: '../../images/shuijiao.jpg',
+									type: 1,//消息类型,
+									status:1 //1已读，0未读
 								}
 							]
 							self.endPullDownToRefresh();
@@ -66,9 +83,11 @@ function initPull() {
 						setTimeout(function() {
 							vm.msgList.push({
 								title: 'title3',
-								desc: '3',
-								time: '08:08',
-								url: '../images/shuijiao.jpg'
+								descption: '消息内容1',//消息内容
+								createdTime: '08:08',//消息创建时间
+				//				url: '../../images/shuijiao.jpg',
+								type: 2,//消息类型,
+								status:1 //1已读，0未读
 							})
 							self.endPullUpToRefresh();
 						}, 1000);

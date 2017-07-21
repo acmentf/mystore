@@ -6,23 +6,32 @@
   font-size: calc-rem(38);
   background-color: #fff;
   padding: 0 calc-rem(4);
-  .flex-box{
-    display:flex;
-    flex-flow:row;
-    .change{
-      flex:1;
+
+  .mui-content-padded{
+    margin: 5px;
+    .title {
+      padding-bottom: 0.20rem;
+      .text {
+        color: #3B3B3B;
+      }
+      .mark {
+        color: #BFBFBF;
+      }
     }
-  }
-  .img-wrap {
-    overflow: hidden;
-    .pro {
-      float: left;
-      margin-right: 9px;
-      margin-bottom: 9px;
-      width: 79px;
-      height: 79px;
-      background: no-repeat center center;
-      background-size: cover;
+    .summary{
+      background-color: rgba(242, 242, 242, 1);
+    }
+    .img-wrap {
+      overflow: hidden;
+      .pro {
+        float: left;
+        margin-right: 9px;
+        margin-bottom: 9px;
+        width: 79px;
+        height: 79px;
+        background: no-repeat center center;
+        background-size: cover;
+      }
     }
   }
 }

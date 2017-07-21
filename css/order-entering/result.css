@@ -1,0 +1,68 @@
+.result-login-container{
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0.2rem;
+}
+.give-number .select-size{
+	display: inline-block;
+	width: 20%;
+	height:100%;
+	border-right:1px solid rgba(0,0,0,.2);
+	border-left:1px solid rgba(0,0,0,.2);
+}
+.give-number .select-number{
+	width:45%!important;
+	padding-left: 0.2rem;
+}
+.give-number .size-text{
+	line-height: 40px;
+	color: #aaa;
+}
+.give-number .size-icon{
+	font-size: 0.2rem;
+	position: absolute;
+	top: 0.25rem;
+	right:3.3rem;
+}
+.add-detail-box{
+	position: relative;
+}
+.result-login-container .add-detail-icon{
+	position:absolute;
+	top: 0.28rem;
+	left: 1.9rem;
+	color: #97c1e1;
+	font-size: 0.3rem;
+}
+.table-box{
+	width: 100%;
+	margin-bottom: 0.2rem;
+}
+.table-box tr th{
+	width:20%;
+	height:0.8rem;
+	background-color: #ccc;
+	font-size: 0.3rem;
+}
+.table-box tr td{
+	height:0.6rem;
+	font-size:0.24rem;
+	text-align: center;
+}
+.login-btn-box{
+	margin-top:0.2rem;
+	width: 100%;
+	text-align: center;
+}
+.login-pass-btn{
+	width: 80%;
+	border-radius: 20px;
+	background-color: #f9aaaa;
+	color: #fff;
+	height:0.77rem;
+
+}
