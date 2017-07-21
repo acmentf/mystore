@@ -11,32 +11,47 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登录</h1>
-		</header>
-		<div class="mui-content login-container">
+		<div id="login" class="mui-content login-container">
 			<div class="login-header">
-				<div>登录你的头条，精彩永不丢失</div>
+				<div>途忆旅拍</div>
 			</div>	
-			<div class="mui-input-row login-input-tel">
-		        <input type="text" class="mui-input-clear" placeholder="手机号">
-		        <span class="code-line"></span>
-		        <div class="code-btn"><span class="code-btn-text">发送验证码</span></div>	
-    		</div>
-    		<div class="mui-input-row login-input-code">
-		        <input type="text" class="mui-input-clear" placeholder="请输入验证码">
-    		</div>
-    		<div class="login-input-message">未注册手机验证后自动登录</div>
-    		<div class="login-btn-box"><button type="button"id="login" class="mui-btn login-pass-btn">进入头条</button></div>
-    		<div class="login-check-box">
-    			<input type="checkbox" name="" id="" value="" />
-    			<span>我已阅读并同意“用户协议和隐私条款	”</span>
+			<div v-if="type==1">
+				<div class="mui-input-row login-input-tel">
+					<input type="text" class="mui-input-clear" v-model='account' placeholder="请输入账号">
+				</div>
+				<div class="mui-input-row login-input-code">
+					<input type="password" v-model="passWord" class="mui-input-clear" placeholder="请输入密码">
+				</div>
+				<div class="login-input-message">未注册手机验证后自动登录</div>
+				<div class="login-btn-box"><button type="button"id="accountlogin" class="mui-btn login-pass-btn">进入头条</button></div>
+				<div class="login-check-box">
+					<input type="checkbox" checked="checked"/>
+					<span>我已阅读并同意“用户协议和隐私条款	”</span>
+				</div>
+				<!--<div id="changelogin" class="login-change-box">-->
+					<!--<span class="login-change">账号密码登录</span>-->
+				<!--</div>-->
 			</div>
-			<div id="changelogin" class="login-change-box">
-				<span>账号密码登录</span>
+			<!--<div v-if="type==1">-->
+				<!--<div class="mui-input-row login-input-tel">-->
+					<!--<input type="text" class="mui-input-clear" v-model='tel' placeholder="手机号">-->
+					<!--<span class="code-line"></span>-->
+					<!--<div class="code-btn"><span class="code-btn-text">发送验证码</span></div>-->
+				<!--</div>-->
+				<!--<div class="mui-input-row login-input-code">-->
+					<!--<input type="text" class="mui-input-clear" placeholder="请输入验证码">-->
+				<!--</div>-->
+				<!--<div class="login-input-message">未注册手机验证后自动登录</div>-->
+				<!--<div class="login-btn-box"><button type="button"id="loginPass" class="mui-btn login-pass-btn">进入头条</button></div>-->
+				<!--<div class="login-check-box">-->
+					<!--<input type="checkbox" checked="checked"  name="" id="" value="" />-->
+					<!--<span>我已阅读并同意“用户协议和隐私条款	”</span>-->
+				<!--</div>-->
+				<!--<div id="changelogin" class="login-change-box">-->
+					<!--<span class="login-change">账号密码登录</span>-->
+				<!--</div>-->
+			<!--</div>-->
 			</div>
-    		</div>
-		</div>
 		<script src="../js/framework/common.js"></script>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
@@ -44,15 +59,86 @@
 		<script src="../js/framework/lf.js"></script>
 		<script src="../libs/vue.min.js"></script>
 		<script type="text/javascript">
-			var vm = null
+			var vm = new Vue({
+				el:'#login',
+				data: {
+				    code:false,
+					tel:'',
+					type:1,
+                    account:'',
+					passWord:''
+				}
+			});
+
+//            outSet( "获取客户端推送标识信息：" );
+//            outLine("id: "+info.id);
+//            outLine( "token: "+info.token );
+//
+//            outLine( "appid: "+info.appid );
+//            outLine( "appkey: "+info.appkey );
 			lf.ready(function(){
-				vm = new Vue();
+
 			})
-			document.getElementById('login').addEventListener('tap',function(){
-				lf.window.openWindow('index','index.html')
-			})
-			document.getElementById('changelogin').addEventListener('tap',function(){
-				lf.window.openWindow('accountlogin','accountlogin.html')
+//			mui('.login-change-box').on('tap','.login-change',function () {
+//				vm.type = 0
+//            })
+//			mui('.login-input-tel').on('tap','.code-btn-text',function () {
+//                if(!vm.tel){
+//                    lf.nativeUI.toast('请输入您的手机号码');
+//                    return
+//                }else if(vm.tel.length !== 11){
+//                    lf.nativeUI.toast('请输入正确的手机号码');
+//                    return
+//				}
+//                var time = 59;
+//                var count = 1;
+//			    var btn = document.querySelector('.code-btn-text')
+//
+//				var timer = setInterval(function () {
+//                    btn.innerHTML= time+'秒后重发'
+//				    time = time - count
+//					if( time <0 ){
+//				        btn.innerHTML = '发送验证码'
+//						clearInterval(timer)
+//					}
+//                },1000)
+//            })
+//			document.getElementById('loginPass').addEventListener('tap',function(){
+//			    if(vm.type == 1){
+//			        if(!vm.tel){
+//                        lf.nativeUI.toast('请输入手机号码');
+//                        return
+//					}
+//                    if(!vm.code){
+//                        lf.nativeUI.toast('请输入验证码');
+//                        return
+//                    }
+//				}else{
+//
+//				}
+//				lf.window.openWindow('index','index.html')
+//			})
+			document.getElementById('accountlogin').addEventListener('tap',function(){
+			    if (!vm.account){
+                    lf.nativeUI.toast('请输入您的账号');
+                    return
+				}
+				if (!vm.passWord){
+			        lf.nativeUI.toast('请输入您的密码')
+					return
+				}
+                var info = plus.push.getClientInfo();
+                outLine( "clientid: "+info.clientid );
+                var params = {
+                    phone : vm.account,
+                    password: vm.passWord,
+                    clientId:info.clientid
+				}
+				lf.net.getJSON('/user/login',params,function (data) {
+
+					console.log(data)
+                })
+//				lf.window.openWindow('index','index.html')
 			})
 		</script>
 	</body>
