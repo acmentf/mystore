@@ -20,17 +20,21 @@
 			<div class="mui-input-group">
 		    <div class="mui-input-row">
 		        <label>选片张数：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入选片张数">
+		        <input v-model="selectsNum" type="number" class="mui-input-clear" placeholder="请输入选片张数">
 		    </div>   
 		    <div class="mui-input-row">
 		        <label>打印张数：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入打印张数">
+		        <input v-model="printsNum" type="number" class="mui-input-clear" placeholder="请输入打印张数">
 		    </div>
 		    <div class="mui-input-row give-number group-info" >
 		        <label>赠送张数：</label>
-		        <input type="number" class="mui-input-clear select-number" placeholder="请输入赠送张数">
-		        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
-		        <input type="text" v-model='size' class="select-size" readonly="readonly" placeholder="尺寸"/>
+		        <div class="select">
+		        	
+		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
+		        <input type="text" v-model='givesPicSize' class="select-size" readonly="readonly" placeholder="尺寸"/>
+		        </div>
+		        <input type="number" v-model="givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">
+		        
 		    </div>
 		    
 		    <div class="mui-input-row add-detail-box">
@@ -45,42 +49,22 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
+		    	<tr v-for="( v, i ) in fromdata">
+		    		<td>{{v.picSize}}</td>
+		    		<td>{{v.price}}</td>
+		    		<td>{{v.saleNum}}</td>
+		    		<td>{{v.sum}}</td>
+		    		<td><span class="mui-icon mui-icon-minus"></span></td>
 		    	</tr>
-		    	<tr>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    	</tr>
-		    	<tr>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    	</tr>
-		    	<tr>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    		<td>123</td>
-		    	</tr>
+
 		    </table>
 		    <div class="mui-input-row">
 		        <label>销售总额：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入销售总额">
+		        <input v-model="salesNum" type="number" class="mui-input-clear" placeholder="请输入销售总额">
 		    </div>
 			<div class="mui-input-row">
 		        <label>购买人数：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入购买人数">
+		        <input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
 		    </div>
 		</div>
 		<div class="login-btn-box"><button type="button"id="save" class="mui-btn login-pass-btn">保存</button></div>
@@ -96,13 +80,37 @@
 			var vm = new Vue({
 				el: '#resultData',
 				data: {
-                    size:''
+                    orderXms: {
+                        selectsNum: '',
+                        printsNum: '',
+                        givesPicSize: '',
+                        givesNum: '',
+                        salesNum: '',
+                        buyers: '',
+                        fromdata: [
+                            {
+                                picSize: '',
+                                price: '',
+                                salesNum: '',
+                                sum: ''
+                            }
+                        ]
+                    }
+				},
+				method: {
+				    getFromData: function () {
+				        var params
+						lf.net.getJSON('/order/saveOrderResult', params, function (data) {
+                        })
+                    } 
+				},
+				created: {
 				}
 			})
 			lf.ready(function() {
 				var opts = {"type":"date"}
-				picker = new mui.DtPicker(opts);//拍摄时间选择
-				userPicker = new mui.PopPicker();//具体时间选择 全天上午下午晚上
+				picker = new mui.DtPicker(opts);
+				userPicker = new mui.PopPicker();
 				userPicker.setData([{
 						value: '1',
 						text: '16寸'
@@ -126,10 +134,13 @@
 							console.log(items[0].text);
 							vm.size = items[0].text
 				});
-
 			})
+            var p = lf.window.getParams('result');
+            console.log(p);
 			document.getElementById('add-detail').addEventListener('tap',function(){
-				lf.window.openWindow('add-detail','add-detail.html')
+				lf.window.openWindow('add-detail','add-detail.html',{},{
+
+				})
 			})
 		</script>
 	</body>

@@ -11,7 +11,7 @@
 		"72": "icon.png"
 	},
 	"fullscreen":true,
-	"launch_path": "app/login.html",/*必选，应用的入口页面，默认为根目录下的index.html；也可以是网络地址，网络地址必须以http://或https://开头*/
+	"launch_path": "app/order-entering/result.html",/*必选，应用的入口页面，默认为根目录下的index.html；也可以是网络地址，网络地址必须以http://或https://开头*/
 	"developer": {
 		"email": "",/*可选，开发者名称*/
 		"name": "",/*可选，开发者邮箱地址*/
@@ -1047,6 +1047,25 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order-entering/result.html": {
+				"resources": [
+					"js/framework/define.js",
+					"css/order-entering/result.css",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0

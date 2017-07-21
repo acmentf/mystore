@@ -24,12 +24,12 @@
 		        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
 		    </div>
 		    <div class="mui-input-row">
-		        <label>销售总额：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入销售总额">
+		        <label>销售单价：</label>
+		        <input type="number" v-model="price" class="mui-input-clear" placeholder="请输入销售单价">
 		    </div>
 			<div class="mui-input-row">
-		        <label>购买人数：</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入购买人数">
+		        <label>销售数量：</label>
+		        <input type="number" v-model="salesNum" class="mui-input-clear" placeholder="请输入销售数量">
 		    </div>
 		</div>
 			<div class="login-btn-box"><button type="button"id="result" class="mui-btn login-pass-btn">保存</button></div>
@@ -46,11 +46,17 @@
             var vm = new Vue({
                 el: '#addDetailData',
                 data: {
-					size:''
+					size:'',
+                    price: '',
+                    salesNum: ''
+                },
+				created () {
+                    lf.net.getJSON('/order/saveOrderResult')
                 }
             })
             lf.ready(function() {
-                var opts = {"type":"date"}
+
+				var opts = {"type":"date"}
                 picker = new mui.DtPicker(opts);
                 userPicker = new mui.PopPicker();
                 userPicker.setData([{
@@ -70,16 +76,24 @@
                     text: '6寸'
                 }
                 ]);
+				return addData
             })
             mui('.group-info').on('tap','.select-number',function(){
                 userPicker.show(function(items) {
-                    console.log(items[0].text);
                     vm.size = items[0].text
                 });
             })
+            var addData = {
+                picSize: vm.size,
+                price: vm.price,
+                salesNum: vm.salesNum
+            }
+            lf.window.closeCurrentWebview(addData)
             document.getElementById('result').addEventListener('tap',function(){
-                lf.window.openWindow('resultData','result.html')
+                lf.window.openWindow('result','result.html',{},addData)
+
             })
+
 		</script>
 	</body>
 
