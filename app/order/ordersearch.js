@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		searchText: '',
+		showAnswer:false,//是否显示搜索结果
 		orderList: [{
 				orderNo: 'dd1',//订单编号
 				status: '待确认',//订单状态

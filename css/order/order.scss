@@ -19,6 +19,17 @@
             top: 14px;
         }
     }
+    .seach-history{
+        background: #fff;
+        height: 12rem;
+        .search-jilu-title{
+            height: .8rem;
+            padding: 10px;
+            div:last-child{
+                float: right;
+            }
+        }
+    }
     .order-ul{
         list-style-type: none;
         padding: 0;
@@ -95,7 +106,7 @@
                 border-top: 1px solid #EEEEEE;
                 text-align: right;
                 padding: 5px 0;
-                
+
             }
         }
     }

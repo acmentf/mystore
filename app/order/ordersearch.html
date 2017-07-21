@@ -97,12 +97,22 @@
 		</header>
 		<div id="app" class="mui-content orderlist-content" >
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-input-row search-div">
+				<!--<div class="mui-input-row search-div">
 					<input type="search" v-model="searchText" class="mui-input-clear" placeholder="">
 					<i id="searchBtn" class="mui-icon mui-icon-search"></i>
+				</div>-->
+				<div class="mui-input-row search">
+					<div class="searchspan">搜索订单</div>
+					<span id="searchBtn" class="searchicon">搜索</span>
 				</div>
 				<div class="mui-scroll">
-					<ul class="order-ul">
+					<div class="seach-history" v-show="!showAnswer">
+						<div class="search-jilu-title">
+							<div>搜索记录</div>
+							<div>清除记录</div>
+						</div>
+					</div>
+					<ul class="order-ul" v-show="showAnswer">
 						<li class="order-li" v-for="item in orderList">
 							<div class="nr">
 								<div class="item">
