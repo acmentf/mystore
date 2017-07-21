@@ -104,9 +104,14 @@
 								<div class="mui-table-cell mui-col-xs-8">
 									订单编号:<span v-text="item.orderNo"></span>
 								</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-show="item.status ==1" >待确认</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-show="item.status ==3" >已取消</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-show="item.status ==5" >已录入</div>
+								<!--//订单状态 1：待确认 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
 							</div>
 							<div class="nr">
 								<div class="item">

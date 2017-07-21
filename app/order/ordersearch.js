@@ -1,6 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		searchText: '',
 		orderList: [{
 				orderNo: 'dd1',//订单编号
 				status: '待确认',//订单状态
@@ -35,6 +36,5 @@ lf.ready(function() {
 })
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
-	console.log('search')
+	console.log('search:'+ vm.searchText)
 })
-//			mui.init();
