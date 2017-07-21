@@ -348,3 +348,17 @@
   width: 100%;
   resize: none;
 }
+
+.summary-summary .btn-submit {
+  background-color: #FF3064;
+  border: 1px solid #FF3064;
+  border-radius: 20px;
+  color: #fff;
+  width: 80%;
+}
+
+.summary-summary .btn-submit:enabled:active, .summary-summary .btn-submit.mui-active:enabled {
+  color: #fff;
+  border: 1px solid #FF3064;
+  background-color: #FF3064;
+}
