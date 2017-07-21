@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 	</head>
-
 	<body>	
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">执行结果</h1>
@@ -29,7 +28,6 @@
 		    <div class="mui-input-row give-number group-info" >
 		        <label>赠送张数：</label>
 		        <div class="select">
-		        	
 		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
 		        <input type="text" v-model='givesPicSize' class="select-size" readonly="readonly" placeholder="尺寸"/>
 		        </div>
@@ -42,18 +40,18 @@
 		  		<span id="add-detail" class="add-detail-icon mui-icon mui-icon-plus">增加</span>
 		    </div>
 		    <table class="table-box" border="1" bordercolor="#808080">
-		    	<tr>
+		    	<tr>	
 		    		<th>照片尺寸</th>
 		    		<th>单价</th>
 		    		<th>数量</th>
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr v-for="( v, i ) in fromdata">
-		    		<td>{{v.picSize}}</td>
-		    		<td>{{v.price}}</td>
-		    		<td>{{v.saleNum}}</td>
-		    		<td>{{v.sum}}</td>
+		    	<tr>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
 		    		<td><span class="mui-icon mui-icon-minus"></span></td>
 		    	</tr>
 
@@ -80,22 +78,17 @@
 			var vm = new Vue({
 				el: '#resultData',
 				data: {
-                    orderXms: {
-                        selectsNum: '',
-                        printsNum: '',
-                        givesPicSize: '',
-                        givesNum: '',
-                        salesNum: '',
-                        buyers: '',
-                        fromdata: [
-                            {
-                                picSize: '',
-                                price: '',
-                                salesNum: '',
-                                sum: ''
-                            }
-                        ]
-                    }
+                    orderId: '',
+				    id: '',
+				    selectsNum: '',
+				    printsNum: '',
+				    givesNum: '',
+				    givesPicSize: '',
+				    salesNum: '',
+				    salesAmt: '',
+				    buyers: '',
+                    orderXms: []
+                
 				},
 				method: {
 				    getFromData: function () {
@@ -104,8 +97,6 @@
                         })
                     } 
 				},
-				created: {
-				}
 			})
 			lf.ready(function() {
 				var opts = {"type":"date"}
@@ -129,18 +120,17 @@
 					}
 					]);
 			})
-
-			mui('.group-info').on('tap','.select-size',function(){
-				userPicker.show(function(items) {
-							console.log(items[0].text);
-							vm.size = items[0].text
-				});
+			lf.event.listener('addPhotographer',function(e){
+				console.log(e.target)
 			})
-//			document.getElementById('add-detail').addEventListener('tap',function(){
-//				lf.window.openWindow('add-detail','add-detail.html',{},{
-//
-//				})
-//			})
+			 mui('.group-info').on('tap','.select-size',function(){
+                userPicker.show(function(items) {
+                    vm.givesPicSize = items[0].text
+                });
+           })
+			document.getElementById('add-detail').addEventListener('tap',function(){
+				lf.window.openWindow('add-detail','add-detail.html',{},{})
+			})
 		</script>
 	</body>
 

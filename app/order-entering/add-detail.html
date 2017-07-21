@@ -31,9 +31,9 @@
 		        <label>销售数量：</label>
 		        <input type="number" v-model="picNum" class="mui-input-clear" placeholder="请输入销售数量">
 		    </div>
-		</div>
-			<div class="login-btn-box"><button type="button"id="result" class="mui-btn login-pass-btn">保存</button></div>
-		</div>
+			</div>
+				<div class="login-btn-box"><button  type="button"id="result" class="mui-btn login-pass-btn">保存</button></div>
+			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
@@ -52,7 +52,6 @@
                 },
             })
             lf.ready(function() {
-
 				var opts = {"type":"date"}
                 picker = new mui.DtPicker(opts);
                 userPicker = new mui.PopPicker();
@@ -73,24 +72,47 @@
                     text: '6寸'
                 }
                 ]);
-				return addData
             })
             mui('.group-info').on('tap','.select-number',function(){
                 userPicker.show(function(items) {
-                    vm.size = items[0].text
+                    vm.picSize = items[0].text
                 });
             })
-			mui('')
-            lf.window.closeCurrentWebview(addData)
-            document.getElementById('result').addEventListener('tap',function(){
-                lf.window.openWindow('result','result.html',{},{
-                	picSize: vm.picSize,
+            mui('.detail-container').on('tap','.login-pass-btn',function(){
+				lf.window.openWindow('resultData','result.html',{},{
+					picSize: vm.picSize,
 			        price: vm.price,
 			        picNum: vm.picNum
-                })
-
+				})
+			})
+            document.getElementById('result').addEventListener('tap',function(){
+            	if(!vm.picSize){
+            		lf.nativeUI.toast('请选择照片尺寸')
+					return
+            	}
+            	if(!vm.price){
+            		lf.nativeUI.toast('请选择销售单价')
+					return
+            	}
+            	if(!vm.picNum){
+            		lf.nativeUI.toast('请选择销售数量')
+					return
+            	}
+             lf.event.listener('addData',function(e){
+				console.log(JSON.stringify(e.detail))
+				var picSize = e.detail.picSize;
+				var price = e.detail.price;
+				var temp = null;
+				vm.lineSight[index].photographer = [];
+				vm.lineSight[index].photographerName = [];
+				list.forEach(function(v){
+					temp = v.split('-')
+						vm.lineSight[index].photographer.push(Number(temp[0]))
+						vm.lineSight[index].photographerName.push(temp[1])
+					})
+				})
             })
-
+			
 		</script>
 	</body>
 
