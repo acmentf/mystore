@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link href="../../css/app.css" rel="stylesheet"/>
+    <link href="../../css/summary/summary.css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">填写总结</h1>
+</header>
+<div class="mui-content summary-summary">
+    <div class="mui-content-padded" id="app">
+        <div class="title">
+            <span class="red">*</span>
+            <span class="text">上传代表作品</span>
+            <span class="mark">( 限3张，每张照片小于5M )</span>
+            <span class="text"> :</span>
+        </div>
+        <div class="mui-input-row">
+            <div class="uploader-wrap">
+                <div class="finger-uploader">
+                    <div class="finger-uploader__bd">
+                        <ul class="finger-uploader__files">
+                            <li v-for="(file,index) in uploaderFiles" class="finger-uploader__file">
+                                <span class="remove" @click="remove(index)">✖</span>
+                                <img class="preview" :src="file.info.fileUrl" data-preview-src="" data-preview-group="1">
+                            </li>
+                        </ul>
+                        <div class="finger-uploader__input-box" ref="uploaderInputWrap" @click="fileSelect">
+                            <input  v-show="false" v-if="uploaderInputFlag" @change="uploaderInput" class="finger-uploader__input" type="file" accept="image/*"
+                                    multiple="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <span class="red">*</span>
+            <span class="text">拍摄总结 :</span>
+        </div>
+        <div class="mui-input-row" style="margin: 10px 5px;">
+            <textarea v-model="remark" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
+        </div>
+        <div class="mui-button-row">
+            <button type="button" class="mui-btn mui-btn-primary" onclick="return false;">提交</button>
+        </div>
+    </div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/framework/define.js"></script>
+<script src="../../js/framework/styles.js"></script>
+<script src="../../js/framework/lf.js"></script>
+<script src="../../libs/vue.min.js"></script>
+<script src="./summary.js"></script>
+</body>
+
+</html>

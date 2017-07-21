@@ -1,0 +1,56 @@
+@import "./mui-preview";
+@import "./finger-uploader";
+.summary-summary {
+  @function calc-rem($px) {
+    @return $px/50 + 0rem ;
+  }
+  font-size: calc-rem(38);
+  background-color: #fff;
+  padding: 0.20rem calc-rem(20);
+  .red {
+    color: red;
+  }
+  .uploader-wrap{
+    .preview{
+      width: 100%;
+      height: 100%;
+    }
+    .finger-uploader__file{
+      position: relative;
+      .remove{
+        /*display: none;*/
+        position: absolute;
+        top: calc-rem(8);
+        right: calc-rem(8);
+        background-color: rgba(0,0,0,.15);
+        color: #948d8d;
+        width: calc-rem(30);
+        height: calc-rem(30);
+        text-align: center;
+        border-radius: calc-rem(16);
+      }
+      &:hover{
+        .remove{
+          display: block;
+        }
+      }
+    }
+  }
+  .mui-content-padded{
+    margin: 5px;
+    .title {
+      padding-bottom: 0.20rem;
+      .text {
+        color: #3B3B3B;
+      }
+      .mark {
+        color: #BFBFBF;
+      }
+    }
+    .text-area {
+      width: 100%;
+      resize: none;
+      height: calc-rem(364);
+    }
+  }
+}
