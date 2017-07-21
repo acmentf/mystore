@@ -21,7 +21,7 @@ var vm = new Vue({
 			},
 			{
 				orderNo: 'dd3',//订单编号
-				status: '4',//订单状态
+				status: '5',//订单状态
 				tourGuide: '导游1号',//导游姓名
 				tourNo: '1',//团号
 				productName产品: '桂林山水文化',
