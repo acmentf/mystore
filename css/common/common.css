@@ -1,0 +1,18 @@
+.header-right-btn {
+  line-height: 40px;
+  padding: 0 10px; }
+
+.chooseuser-content .search {
+  height: 35px; }
+  .chooseuser-content .search input {
+    padding-left: 30px;
+    padding-right: 30px; }
+  .chooseuser-content .search .mui-icon-search {
+    position: absolute;
+    top: 7px;
+    right: 5px; }
+  .chooseuser-content .search .mui-icon-clear {
+    top: 7px;
+    right: 20px; }
+
+/*# sourceMappingURL=common.css.map */
