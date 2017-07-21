@@ -1,5 +1,5 @@
-.trackinfo .item input{
-	width: 77%;
+.trackinfo  input,.trackinfo  textarea{
+	color: #888;
 }
 .trackinfo  .shootTime{
 	border-bottom:1px solid #E3E2E5;

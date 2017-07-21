@@ -33,6 +33,12 @@
 	right: 0.2rem;
 	top: 0;
 }
+.orderdetails .item label{
+	color: #202020;
+}
+.orderdetails .item span{
+	color: #888;
+}
 .orderdetails .mui-card{
 	margin: 0 0 0.2rem 0;
 }
