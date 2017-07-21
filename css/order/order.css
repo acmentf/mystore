@@ -28,31 +28,50 @@
     border: 1px solid #eee;
     border-radius: 10px;
     box-shadow: 0 0 10px #EEEEEE; }
+    .orderlist-content .order-ul .order-li .mui-btn-danger {
+      background: #FB2C60; }
     .orderlist-content .order-ul .order-li:last-child {
       margin-bottom: 0.3rem; }
     .orderlist-content .order-ul .order-li .title {
-      color: #4E4D50;
+      color: #343434;
       font-size: 0.32rem;
       line-height: 1;
       padding: 18px 0 15px 0;
       border-bottom: 1px solid #EEEEEE; }
       .orderlist-content .order-ul .order-li .title .dqr {
-        color: #0000FF; }
+        color: #FA2E61; }
       .orderlist-content .order-ul .order-li .title .ylr {
-        color: #7AD7E7; }
+        color: #6DA6FF; }
       .orderlist-content .order-ul .order-li .title .yqx {
-        color: #FF0000; }
+        color: #888888; }
     .orderlist-content .order-ul .order-li .nr {
       padding: 15px 0 12px 0;
       font-size: 0.3rem;
       line-height: 1.8;
-      color: #8A8A8C; }
+      color: #888888; }
       .orderlist-content .order-ul .order-li .nr .item {
         word-break: break-all; }
         .orderlist-content .order-ul .order-li .nr .item .error {
           color: #E9A19A; }
         .orderlist-content .order-ul .order-li .nr .item .zc {
           color: #7AD7E7; }
+      .orderlist-content .order-ul .order-li .nr .imgbody {
+        position: relative;
+        padding-left: 100px; }
+        .orderlist-content .order-ul .order-li .nr .imgbody img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 90px;
+          height: 90px; }
+    .orderlist-content .order-ul .order-li .bottom {
+      color: #888888;
+      position: relative; }
+      .orderlist-content .order-ul .order-li .bottom .jespan {
+        position: relative;
+        top: 5px; }
+        .orderlist-content .order-ul .order-li .bottom .jespan span {
+          color: #FF2A00; }
     .orderlist-content .order-ul .order-li .btns {
       border-top: 1px solid #EEEEEE;
       text-align: right;

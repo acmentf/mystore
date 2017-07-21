@@ -260,7 +260,9 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					null,
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"images/timg.jpg",
+					"images/logo.png"
 				],
 				"refer": [
 					"app/index.html"
@@ -309,7 +311,8 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js",
-					null
+					null,
+					"images/60x60.gif"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -383,7 +386,6 @@
 				"js/mui.zoom.js",
 				"css/message/message.scss",
 				"js/mui.poppicker.js",
-				"images/60x60.gif",
 				"js/mui.previewimage.js",
 				"js/city.data.js",
 				"js/mui.js",
@@ -415,7 +417,6 @@
 				"js/mui.lazyload.img.js",
 				"css/common/common.css.map",
 				"app/summary/summary.js",
-				"images/logo.png",
 				"js/mui.listpicker.js",
 				"js/webviewGroup.js",
 				"images/login-1.png",
