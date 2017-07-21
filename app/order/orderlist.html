@@ -130,12 +130,21 @@
 									金额: {{item.totalPrice}}
 								</div>
 							</div>
-							<div class="btns">
+							<div class="btns" v-show="item.status==1">
 								<button type="button" class="mui-btn mui-btn-warning">
-									黄色
+									确认
 								</button>
 								<button type="button" class="mui-btn mui-btn-warning">
-									黄色
+									取消
+								</button>
+							</div>
+
+							<div class="btns" v-show="item.status==5">
+								<button type="button" class="mui-btn mui-btn-warning">
+									跟踪信息
+								</button>
+								<button type="button" class="mui-btn mui-btn-warning">
+									执行结果
 								</button>
 							</div>
 						</li>
