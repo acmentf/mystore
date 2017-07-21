@@ -1,8 +1,13 @@
-.app-index {
-  background: url(../../images/index/bg.jpg) no-repeat center top;
+.app-index #app{
+	position: fixed;
+	z-index: 998;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../../images/index/bg.jpg) no-repeat center top;
   background-size: 100% 100%;
 }
-
 .app-index .toolbar {
   text-align: right;
   padding: 0.2rem;
@@ -25,7 +30,7 @@
   font-size: 0.06rem;
   overflow: hidden;
   width: 5.6rem;
-  margin: 50% auto 20%;
+  margin: 85% auto 0;
 }
 
 .app-index .content .mod {
