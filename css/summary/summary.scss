@@ -38,7 +38,7 @@
   }
   .mui-content-padded{
     margin: 5px;
-    .title {
+    .tip {
       padding-bottom: 0.20rem;
       .text {
         color: #3B3B3B;
@@ -48,6 +48,9 @@
       }
     }
     .text-area {
+      border: none !important;
+      margin-top: 5px;
+      padding: 0;
       width: 100%;
       resize: none;
     }
