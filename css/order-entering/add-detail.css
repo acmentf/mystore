@@ -9,6 +9,9 @@
 .select-size-box {
 	margin-top:0.2rem ;
 }
+.detail-container .mui-input-group label {
+	padding:  0.22rem 0!important;
+}
 .detail-container .select-size{
 	padding-top: 11px;
 	display: inline-block;
@@ -31,9 +34,10 @@
 	text-align: center;
 }
 .login-pass-btn{
+	margin-top:0.5rem;
 	width: 80%;
 	border-radius: 20px;
-	background-color: #f9aaaa;
+	background-color: #ff3064;
 	color: #fff;
 	height:0.77rem;
 

@@ -5,7 +5,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	padding: 0.2rem;
+	padding-left: 0.2rem;
 }
 .give-number .select-size{
 	display: inline-block;
@@ -13,6 +13,9 @@
 	height:100%;
 	border-right:1px solid rgba(0,0,0,.2);
 	border-left:1px solid rgba(0,0,0,.2);
+}
+.result-login-container .mui-input-group label {
+	padding:  0.22rem 0!important;
 }
 .give-number .select-number{
 	width:45%!important;
@@ -43,6 +46,10 @@
 	color: #97c1e1;
 	font-size: 0.3rem;
 }
+.result-login-container .mui-icon-minus{
+	color: red;
+	font-size:0.3rem;
+}
 .table-box{
 	width: 100%;
 	margin-bottom: 0.2rem;
@@ -64,9 +71,10 @@
 	text-align: center;
 }
 .login-pass-btn{
+	margin-top:0.5rem;
 	width: 80%;
 	border-radius: 20px;
-	background-color: #f9aaaa;
+	background-color: #ff3064;
 	color: #fff;
 	height:0.77rem;
 

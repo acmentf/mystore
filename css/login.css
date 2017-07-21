@@ -1,5 +1,6 @@
 .login-container{
-	background-color: #fafafa;
+	background:url('../images/timg.jpg')no-repeat center;
+	background-size:cover;
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -22,6 +23,7 @@
 .mui-input-row input{
 	 width:80%;
 	 border-radius: 20px;
+	 opacity: 0.6;
 }
 .login-input-tel .mui-icon-clear {
 	position: absolute;
@@ -66,12 +68,13 @@
 	text-align: center;
 }
 .login-pass-btn{
+	margin-top:15px;
 	width: 80%;
 	border-radius: 20px;
-	background-color: #f9aaaa;
+	background-color: #ff3064;
 	color: #fff;
-	height:0.77rem;
-	
+	height:40px;
+	opacity: 0.6;;
 }
 .login-check-box{
 	font-size: 0.24rem;
