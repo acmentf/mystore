@@ -15,4 +15,13 @@
     top: 7px;
     right: 20px; }
 
+.plancamera-content .mui-table .title {
+  border-right: 1px solid #EEEEEE; }
+.plancamera-content .mui-table .persons {
+  padding-left: 10px; }
+  .plancamera-content .mui-table .persons span {
+    margin-right: 10px; }
+.plancamera-content .mui-table .add {
+  color: #009DD9; }
+
 /*# sourceMappingURL=common.css.map */

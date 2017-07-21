@@ -1668,6 +1668,7 @@ var lf = (function(document, undefined) {
 				}
 				return;
 			}
+			
 			var settings = $.extend({}, STYLE.webviewStyle, styles);
 			var wv = $.window.getWebviewById(id);
 			if(!$.util.isUndefined(wv)) {

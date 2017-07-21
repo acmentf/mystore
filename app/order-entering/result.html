@@ -129,19 +129,18 @@
 					}
 					]);
 			})
+
 			mui('.group-info').on('tap','.select-size',function(){
 				userPicker.show(function(items) {
 							console.log(items[0].text);
 							vm.size = items[0].text
 				});
 			})
-            var p = lf.window.getParams('result');
-            console.log(p);
-			document.getElementById('add-detail').addEventListener('tap',function(){
-				lf.window.openWindow('add-detail','add-detail.html',{},{
-
-				})
-			})
+//			document.getElementById('add-detail').addEventListener('tap',function(){
+//				lf.window.openWindow('add-detail','add-detail.html',{},{
+//
+//				})
+//			})
 		</script>
 	</body>
 

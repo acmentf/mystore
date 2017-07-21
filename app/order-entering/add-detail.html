@@ -20,7 +20,7 @@
 			<div class="mui-input-group">
 			<div class="mui-input-row give-number group-info">
 		        <label>照片尺寸：</label>
-				<input type="text" v-model='size' class="mui-input-clear select-number" readonly="readonly" placeholder="请选择尺寸"/>
+				<input type="text" v-model='picSize' class="mui-input-clear select-number" readonly="readonly" placeholder="请选择尺寸"/>
 		        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
 		    </div>
 		    <div class="mui-input-row">
@@ -29,7 +29,7 @@
 		    </div>
 			<div class="mui-input-row">
 		        <label>销售数量：</label>
-		        <input type="number" v-model="salesNum" class="mui-input-clear" placeholder="请输入销售数量">
+		        <input type="number" v-model="picNum" class="mui-input-clear" placeholder="请输入销售数量">
 		    </div>
 		</div>
 			<div class="login-btn-box"><button type="button"id="result" class="mui-btn login-pass-btn">保存</button></div>
@@ -46,13 +46,10 @@
             var vm = new Vue({
                 el: '#addDetailData',
                 data: {
-					size:'',
-                    price: '',
-                    salesNum: ''
+					picSize: '',
+			        price: '',
+			        picNum: ''
                 },
-				created () {
-                    lf.net.getJSON('/order/saveOrderResult')
-                }
             })
             lf.ready(function() {
 
@@ -83,14 +80,14 @@
                     vm.size = items[0].text
                 });
             })
-            var addData = {
-                picSize: vm.size,
-                price: vm.price,
-                salesNum: vm.salesNum
-            }
+			mui('')
             lf.window.closeCurrentWebview(addData)
             document.getElementById('result').addEventListener('tap',function(){
-                lf.window.openWindow('result','result.html',{},addData)
+                lf.window.openWindow('result','result.html',{},{
+                	picSize: vm.picSize,
+			        price: vm.price,
+			        picNum: vm.picNum
+                })
 
             })
 
