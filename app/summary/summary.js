@@ -9,7 +9,6 @@ lf.ready(function () {
         mui.each(pageParams,function (key) {
             if(key in params){
                 pageParams[key] = params[key]||''
-                console.log('pageParams '+key+':'+params[key])
             }
         })
     }
