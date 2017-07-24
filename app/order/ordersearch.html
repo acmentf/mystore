@@ -97,26 +97,23 @@
 		</header>
 		<div id="app" class="mui-content orderlist-content" >
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<!--<div class="mui-input-row search-div">
-					<input type="search" v-model="searchText" class="mui-input-clear" placeholder="">
-					<i id="searchBtn" class="mui-icon mui-icon-search"></i>
-				</div>-->
 				<div class="mui-input-row search">
 					<!--<div class="searchspan" v-model="seachTest">搜索订单</div>-->
 					<input class="searchspan" style="width: 100%;" v-model="seachTest" placeholder="搜索订单">
 					<span id="searchBtn" class="searchicon">搜索</span>
 				</div>
-				<div class="mui-scroll">
-					<div class="seach-history" v-show="!showAnswer">
-						<div class="search-jilu-title">
-							<div>搜索记录</div>
-							<div>清除记录</div>
-						</div>
-						<div class="search-jilu-neirong">
-							<div>桂林山水</div>
-							<div>岳麓山</div>
-						</div>
+				<div class="seach-history" v-show="!showAnswer">
+					<div class="search-jilu-title">
+						<div>搜索记录</div>
+						<div>清除记录</div>
 					</div>
+					<div class="search-jilu-neirong">
+						<div>桂林山水</div>
+						<div>岳麓山</div>
+					</div>
+				</div>
+				<div style="background: #fff;padding: 10px;height: .8rem;" v-show="showAnswer">搜索结果</div>
+				<div class="mui-scroll">
 					<ul class="order-ul" v-show="showAnswer">
 						<li class="order-li" v-for="item in orderList">
 							<div class="mui-table title">
@@ -133,7 +130,7 @@
 							</div>
 							<div class="nr" :data-id="item.orderNo">
 								<div class="imgbody">
-									<img src="../../images/60x60.gif" />
+									<img :src="item.covecoverImage" />
 									<div class="item">
 										导游: {{item.tourGuide}}
 									</div>
@@ -174,6 +171,7 @@
 							</div>
 						</li>
 					</ul>
+				</div>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
