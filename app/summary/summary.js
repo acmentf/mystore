@@ -9,6 +9,7 @@ lf.ready(function () {
         mui.each(pageParams,function (key) {
             if(key in params){
                 pageParams[key] = params[key]||''
+                console.log('pageParams '+key+':'+params[key])
             }
         })
     }
@@ -108,6 +109,7 @@ lf.ready(function () {
                 }, function (res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
+                        mui.toast('录入成功')
                       //跳转页面
                         lf.window.openWindow('summary/details.html','details.html',{},{
                             orderId: pageParams.orderId,

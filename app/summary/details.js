@@ -7,6 +7,7 @@ lf.ready(function () {
         mui.each(pageParams,function (key) {
             if(key in params){
                 pageParams[key] = params[key]||''
+                console.log('pageParams '+key+':'+params[key])
             }
         })
     }
@@ -37,6 +38,7 @@ lf.ready(function () {
             }, function (res) {
                 lf.nativeUI.closeWaiting()
                 if (res.code === '200') {
+                    console.log(JSON.stringify(res))
                     self.imgs = res.data.imgs || []
                     self.summary = res.data.summary || ''
                 } else {
