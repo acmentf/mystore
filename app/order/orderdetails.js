@@ -121,7 +121,9 @@ lf.ready(function() {
 		var orderid = this.getAttribute('data-orderid');
 		console.log(orderid)
 		lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
-			orderNo: orderid
+            tourId: '',
+            orderId: orderid,
+            photographerId: ''
 		})
 	})
 	

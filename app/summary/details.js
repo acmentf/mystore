@@ -11,10 +11,10 @@ lf.ready(function () {
         })
     }
     mui.plusReady(function(){
-        var currentWebview = plus.webview.currentWebview();
+        var currentWebview = lf.window.currentWebview();
         setPageParams(currentWebview)
     });
-    window.addEventListener('customEvent',function(event){
+    window.addEventListener('pageParams',function(event){
         setPageParams(event)
     });
 
