@@ -1,11 +1,33 @@
-.trackinfo .item input{
-	width: 77%;
+.trackinfo  input,.trackinfo  textarea{
+	color: #888;
 }
 .trackinfo  .shootTime{
 	border-bottom:1px solid #E3E2E5;
 	border-right:1px solid #E3E2E5;
 	width: 45%;
 	padding-left: 0.1rem;
+}
+.trackinfo  .mui-card{
+	margin: 0 0 0.2rem 0;
+}
+.trackinfo  .mui-content>.mui-card:first-child{
+	margin: 0 0 0.2rem 0;
+}
+.trackinfo  .mui-navigate-right{
+	font-weight: 700;
+	font-size: 0.28rem;
+
+}
+.trackinfo  .mui-card .mui-collapse{
+	border-bottom:1px solid #f1f1f1
+}
+.trackinfo   .mui-table-view-cell>a:not(.mui-btn){
+		padding-left: 0;	
+}
+.trackinfo  .mui-navigate-right .border-left{
+	border-left: 4px solid #000;
+	height: 0.2rem;
+	margin-right: 0.2rem;
 }
 .trackinfo .time{
 	width: 20%;
@@ -14,9 +36,17 @@
 	text-align: center;
 	padding-right: 0;
 }
-.trackinfo .save{
+.trackinfo .save {
+	text-align: center;
+}
+.trackinfo .save .mui-btn-primary{
 	text-align: center;
 	margin: 0.4rem 0;
+	width: 80%;
+	text-align: center;
+	background: #FF3064;
+	border: none;
+	border-radius: 0.5rem;
 }
 .trackinfo .addshootinfo{
 	text-align: center;

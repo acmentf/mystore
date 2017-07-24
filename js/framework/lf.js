@@ -2324,6 +2324,8 @@ var lf = (function(document, undefined) {
 		usercode:"",
 		username:"",
 		userrole:"",
+		phone:"",
+		companyId:"",
 		loginsign:"",
 		init:function(){
 			this._init();
@@ -2337,18 +2339,24 @@ var lf = (function(document, undefined) {
 					this.usercode = l.usercode;
 					this.username = l.username;
 					this.userrole = l.userrole;
+					this.phone = l.phone;
+					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
 					this.userrole = "";
 					this.usercode = "";
+					this.phone = "";
+					this.companyId = "";
 				}
 			} else {
 				this.loginsign = "";
 				this.username = "";
 				this.userrole = "";
 				this.usercode = "";
+				this.phone = "";
+				this.companyId = "";
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
@@ -2356,6 +2364,8 @@ var lf = (function(document, undefined) {
 			this.usercode = k.usercode;
 			this.username = k.username;
 			this.userrole = k.userrole;
+			this.phone = k.phone;
+			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
 			$.storage.put(j, JSON.stringify(k));
 			$.storage.put(s, k.tonken);

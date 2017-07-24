@@ -134,16 +134,18 @@
                 var info = plus.push.getClientInfo();
                 console.log( "clientid: "+info.clientid );
                 var params = {
-                    phone : vm.account,
+                    account : vm.account,
                     password: vm.passWord,
                     clientId:info.clientid
 				}
 				lf.net.getJSON('/user/login',params,function (data) {
 					if(data.code == 200) {
-						window.Role.save({
-							this.usercode = params.phone;
-							this.username = params.password;
-							this.userrole = 1;
+						window.Role.save({	
+							this.usercode = ;
+							this.username = '';
+							this.phone = params.account;
+							this.companyId = ''
+							this.userrole = data.systype;
 							this.loginsign = data.sign;
 							$.storage.put(j, JSON.stringify(k));
 							$.storage.put(s, data.tokunId);
@@ -151,7 +153,6 @@
 						console.log(data)
 						lf.window.openWindow('index','index.html')
 					}
-					
                 })
 //				lf.window.openWindow('index','index.html')
 			})

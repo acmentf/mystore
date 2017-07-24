@@ -179,26 +179,26 @@
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"retina35": "unpackage/qdy/640_960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "unpackage/qdy/640_1136.png","retina55":"unpackage/qdy/1242_2208.png","retina47":"unpackage/qdy/750_1334.png","retina55l":"unpackage/qdy/1242_2208.png"
 					},
 					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
+						"portrait": "unpackage/qdy/768_1004.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "unpackage/qdy/1536_2008.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "unpackage/qdy/720_1280.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "unpackage/qdy/1536_2008.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "unpackage/qdy/768_1024.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "unpackage/qdy/1536_2048.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "unpackage/qdy/768_1024.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "unpackage/qdy/1536_2048.png"
 					}
 				},
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"hdpi": "unpackage/qdy/480_800.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "unpackage/qdy/720_1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "unpackage/qdy/1080_1920.png"
 				}
 			}
 		}
@@ -261,8 +261,13 @@
 					"js/framework/styles.js",
 					null,
 					"fonts/mui.ttf",
+<<<<<<< HEAD
 					"images/logo_login.png",
 					"images/img_login.jpg"
+=======
+					"images/timg.jpg",
+					"images/logo.png"
+>>>>>>> 72b048e6a0f487daf10dc0532ae1c7ecfad7524b
 				],
 				"refer": [
 					"app/index.html"
@@ -311,7 +316,8 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js",
-					null
+					null,
+					"images/60x60.gif"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -385,7 +391,6 @@
 				"js/mui.zoom.js",
 				"css/message/message.scss",
 				"js/mui.poppicker.js",
-				"images/60x60.gif",
 				"js/mui.previewimage.js",
 				"js/city.data.js",
 				"js/mui.js",
@@ -417,7 +422,6 @@
 				"js/mui.lazyload.img.js",
 				"css/common/common.css.map",
 				"app/summary/summary.js",
-				"images/logo.png",
 				"js/mui.listpicker.js",
 				"js/webviewGroup.js",
 				"images/login-1.png",

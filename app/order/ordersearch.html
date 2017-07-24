@@ -97,12 +97,83 @@
 		</header>
 		<div id="app" class="mui-content orderlist-content" >
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-input-row search-div">
+				<!--<div class="mui-input-row search-div">
 					<input type="search" v-model="searchText" class="mui-input-clear" placeholder="">
 					<i id="searchBtn" class="mui-icon mui-icon-search"></i>
+				</div>-->
+				<div class="mui-input-row search">
+					<div class="searchspan">搜索订单</div>
+					<span id="searchBtn" class="searchicon">搜索</span>
 				</div>
 				<div class="mui-scroll">
-					<ul class="order-ul">
+					<div class="seach-history" v-show="!showAnswer">
+						<div class="search-jilu-title">
+							<div>搜索记录</div>
+							<div>清除记录</div>
+						</div>
+						<div class="search-jilu-neirong">
+							<div>桂林山水</div>
+							<div>岳麓山</div>
+						</div>
+					</div>
+					<ul class="order-ul" v-show="showAnswer">
+						<li class="order-li" v-for="item in orderList">
+							<div class="mui-table title">
+								<div class="mui-table-cell mui-col-xs-8">
+									订单编号:<span v-text="item.orderNo"></span>
+								</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+							</div>
+							<div class="nr" :data-id="item.orderNo">
+								<div class="imgbody">
+									<img src="../../images/60x60.gif" />
+									<div class="item">
+										导游: {{item.tourGuide}}
+									</div>
+									<div class="item">
+										团号: {{item.tourNo}}
+									</div>
+									<div class="item">
+										产品: {{item.productName}}
+									</div>
+									<div class="item">
+										采购方: {{item.purchaser}}
+									</div>
+								</div>
+							</div>
+							<div class="mui-table bottom">
+								<div class="mui-table-cell mui-col-xs-4">
+									<span class="jespan">金额: <span>￥{{item.totalPrice}}</span></span>
+								</div>
+								<div class="mui-table-cell mui-col-xs-8 mui-text-right">
+									<div class="btns" v-show="item.status==1">
+										<button type="button" class="mui-btn mui-btn-danger" :data-id="item.orderNo">
+											确认
+										</button>
+										<button type="button" class="mui-btn mui-btn-danger" :data-id="item.orderNo">
+											取消
+										</button>
+									</div>
+
+									<div class="btns" v-show="item.status==5">
+										<button type="button" class="mui-btn mui-btn-danger gzxx" :data-id="item.orderNo">
+											跟踪信息
+										</button>
+										<button type="button" class="mui-btn mui-btn-danger zxxx" :data-id="item.orderNo">
+											执行结果
+										</button>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!--<ul class="order-ul" v-show="showAnswer">
 						<li class="order-li" v-for="item in orderList">
 							<div class="nr">
 								<div class="item">
@@ -122,7 +193,7 @@
 								</div>
 							</div>
 						</li>
-					</ul>
+					</ul>-->
 				</div>
 			</div>
 		</div>

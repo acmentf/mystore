@@ -20,32 +20,28 @@
 	
 		<div class="content">
 			<div class="mod pending" data-status="1">
-				<div class="info">
-					<span class="ico ico-pending"></span>
+				<div class="info">	
 					<span class="number" v-text="pendingSum"></span>
 				</div>
-				<div class="title">待处理订单</div>
+				<div class="title"><span class="ico ico-pending"></span>待处理订单</div>
 			</div>
 			<div class="mod completed" data-status="2">
 				<div class="info">
-					<span class="ico ico-completed"></span>
 					<span class="number"  v-text="completedSum"></span>
 				</div>
-				<div class="title">已完成订单</div>
+				<div class="title"><span class="ico ico-completed"></span>已完成订单</div>
 			</div>
 			<div class="mod cancled" data-status="3">
 				<div class="info">
-					<span class="ico ico-cancled"></span>
 					<span class="number" v-text="cancelSum"></span>
 				</div>
-				<div class="title">已取消订单</div>
+				<div class="title"><span class="ico ico-cancled"></span>已取消订单</div>
 			</div>
 			<div class="mod assigned" data-status="4">
 				<div class="info">
-					<span class="ico ico-assigned"></span>
 					<span class="number" v-text="assignmentSum"></span>
 				</div>
-				<div class="title">已分派订单</div>
+				<div class="title"><span class="ico ico-assigned"></span>已分派订单</div>
 			</div>
 		</div>
 		</div>

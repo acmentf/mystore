@@ -1,14 +1,19 @@
 .message-content{
     .mui-input-row{
-        height: 35px;
+        background-color: #fff;
         input{
             padding-left: 30px;
             padding-right: 30px;
+            border-radius: 16px;
+            margin: 10px auto;
+            width: 96%;
+            display: inherit;
         }
         .mui-icon-search{
             position: absolute;
-            top: 7px;
-            right: 5px;
+            top: 16px;
+            right: 13px;
+            color: red;
         }
         .mui-icon-clear{
             top: 7px;
@@ -19,7 +24,17 @@
         .mui-media-object {
             line-height: 0.84rem !important;
             max-width: 0.84rem !important;
-            height: 0.84rem !important;
+//          height: 0.84rem !important;
+        }
+        .message-img{
+            width: 1.5rem;
+            height: 0.84rem;
+            border-radius: 50%;
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: 100%;
+            }
         }
         .mui-media-body{
             font-size: 0.34rem;
@@ -29,7 +44,7 @@
                 color: #8f8f94;
             }
             p{
-                font-size: 0.32rem;
+                font-size: 0.3rem;
                 line-height: 1;
             }
         }

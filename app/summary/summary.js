@@ -124,7 +124,7 @@ lf.ready(function () {
     }).on('tap','.finger-uploader__input-box',function (e) {
         var index = +e.target.getAttribute('index')
         vm.remove(index)
-    }).on('tap','.submit',function (e) {
+    }).on('tap','.btn-submit',function (e) {
         vm.save()
     })
 })

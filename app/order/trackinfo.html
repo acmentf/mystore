@@ -10,6 +10,14 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/order/trackinfo.css" />
+		<style>
+			.mui-table-view-cell.mui-active{
+				background: #FFFFFF;
+			}
+			.mui-table-view-cell.mui-active .mui-navigate-right{
+				border-bottom: 1px solid #EEEEEE;
+			}
+		</style>
 	</head>
 
 	<body class="trackinfo">
@@ -21,7 +29,8 @@
 			<div class="mui-card">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">团信息</a>
+						
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>团信息</a>
 						<div class="mui-collapse-content">
 							<div class="group-info">
 								<div class="mui-input-group">
@@ -49,8 +58,12 @@
 							</div>
 						</div>
 					</li>
+				</ul>
+			</div>
+			<div class="mui-card">
+				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">行程信息</a>
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>行程信息</a>
 						<div class="mui-collapse-content">
 							<div class="group-info">
 								<div class="mui-input-group">
@@ -74,8 +87,13 @@
 							</div>
 						</div>
 					</li>
+				</ul>
+			</div>
+			
+			<div class="mui-card">
+				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">拍摄信息</a>
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>拍摄信息</a>
 						<div class="mui-collapse-content shoot-info">
 							<div class="group-info" >
 								<div class="mui-input-group" v-for='(item,index) in shootInfoForms'>	
