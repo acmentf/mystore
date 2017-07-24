@@ -25,6 +25,8 @@ var vm = new Vue({
 })
 var picke = null;
 lf.ready(function() {
+	var orderId = lf.window.currentWebview().orderNo;
+	console.log(orderId)
 	//				initDateChoose()
 	//				lf.window.closeCurrentWebview();
 	var opts = { "type": "date" }
