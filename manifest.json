@@ -288,7 +288,15 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/framework/lf.js",
-					"libs/vue.min.js"
+					"libs/vue.min.js",
+					"images/index/icon_distribute.png",
+					"images/index/orderbg.png",
+					"images/index/bg.png",
+					"images/index/icon_done.png",
+					"images/index/icon_cancel.png",
+					"images/index/icon_pending.png",
+					"images/index/icon_messige_off.png",
+					"images/index/icon_search.png"
 				],
 				"refer": [
 					"app/order/orderlist.html",
