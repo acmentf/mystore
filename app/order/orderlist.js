@@ -1,62 +1,88 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		orderList: [{
-				orderNo: 'dd1',//订单编号
-				status: '1',//订单状态 1：待确认 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成
-				tourGuide: '导游1号',//导游姓名
-				tourNo: '1',//团号
-				productName: '桂林山水文化',
-				purchaser: '采购方1',//采购方
-				totalPrice: 1000 //订单金额
-			},
-			{
-				orderNo: 'dd2',//订单编号
-				status: '3',//订单状态
-				tourGuide: '导游1号',//导游姓名
-				tourNo: '1',//团号
-				productName: '桂林山水文化',
-				purchaser: '采购方1',//采购方
-				totalPrice: 1000 //订单金额
-			},
-			{
-				orderNo: 'dd3',//订单编号
-				status: '5',//订单状态
-				tourGuide: '导游1号',//导游姓名
-				tourNo: '1',//团号
-				productName: '桂林山水文化',
-				purchaser: '采购方1',//采购方
-				totalPrice: 1000 //订单金额
-			}
-		]
+		orderList: [
+			[],
+			[],
+			[],
+			[],
+			[]
+		],
+		pageNos:[
+			
+		],
+		pageNum: 10
 	}
 })
 lf.ready(function() {
 	initPull();
 	var status = lf.window.currentWebview().status;
-	console.log('status:'+status)
+	var gallery = mui('.mui-slider');
+	switch (status){
+		case '1':
+			gallery.slider().gotoItem(1,0);
+			break;
+		case '2':
+			gallery.slider().gotoItem(2,0);
+			break;
+		case '3':
+			gallery.slider().gotoItem(4,0);
+			break;
+		case '4':
+			gallery.slider().gotoItem(3,0);
+			break;
+		default:
+			break;
+	}
 })
 
-mui('.order-ul').on('tap','.nr',function(){
+mui('.order-ul').on('tap', '.nr', function() {
 	var id = this.getAttribute('data-id');
-	lf.window.openWindow('orderdetails.html','orderdetails.html',{},{
+	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id
 	})
 })
 
-mui('.order-ul').on('tap','.gzxx',function(){
+mui('.order-ul').on('tap', '.gzxx', function() {
 	var id = this.getAttribute('data-id');
-	lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
+	lf.window.openWindow('trackinfo.html', 'trackinfo.html', {}, {
 		orderNo: id
 	})
 })
-mui('.order-ul').on('tap','.zxxx',function(){
+mui('.order-ul').on('tap', '.zxxx', function() {
 	var id = this.getAttribute('data-id');
-	lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
+	lf.window.openWindow('order-entering/result.html', '../order-entering/result.html', {}, {
 		orderNo: id
 	})
 })
 //			mui.init();
+function dodata(type, index, data) {
+	if(type == 'up') {
+		Vue.set(vm.orderList, index, vm.orderList[index].concat(data))
+	} else {
+		Vue.set(vm.orderList, index, data)
+	}
+}
+function getType(index){
+	var r = "";
+	switch (index){
+		case 1:
+			r = 1;
+			break;
+		case 2:
+			r = 2;
+			break;
+		case 3:
+			r = 4;
+			break;
+		case 4:
+			r = 3;
+			break;
+		default:
+			break;
+	}
+	return r;
+}
 //阻尼系数
 function initPull() {
 	var deceleration = mui.os.ios ? 0.003 : 0.0009;
@@ -68,52 +94,56 @@ function initPull() {
 	mui.ready(function() {
 		//循环初始化所有下拉刷新，上拉加载。
 		mui.each(document.querySelectorAll('.mui-slider .mui-scroll'), function(index, pullRefreshEl) {
+			vm.pageNos[index] = 0;
 			mui(pullRefreshEl).pullToRefresh({
 				down: {
 					callback: function() {
 						var self = this;
-						setTimeout(function() {
-							vm.orderList = [
-								{
-									orderNo: 'dd1',//订单编号
-									status: '3',//订单状态
-									tourGuide: '导游1号',//导游姓名
-									tourNo: '1',//团号
-									productName产品: '桂林山水文化',
-									purchaser: '采购方1',//采购方
-									totalPrice: 1000 //订单金额
-								},
-								{
-									orderNo: 'dd1',//订单编号
-									status: '1',//订单状态
-									tourGuide: '导游1号',//导游姓名
-									tourNo: '1',//团号
-									productName产品: '桂林山水文化',
-									purchaser: '采购方1',//采购方
-									totalPrice: 1000 //订单金额
-								}
-							]
+						vm.pageNos[index] = 1;
+						var params = {
+							status:getType(index),
+							currPage:vm.pageNos[index],
+							pageSize:vm.pageNum
+						};
+						lf.net.getJSON('/order/search',params,function (res) {
 							self.endPullDownToRefresh();
-						}, 1000);
+							if(res.code == 200) {
+								self.refresh(true);
+								dodata('down', index, res.data.result)
+							}else{
+								vm.pageNos[index]--;
+								lf.nativeUI.toast(res.msg)
+							}
+		                },function(res){
+		                	vm.pageNos[index]--;
+		                	self.endPullDownToRefresh();
+		                	lf.nativeUI.toast(res.msg)
+		                })
 					}
 				},
 				up: {
+					auto: true,
 					callback: function() {
 						var self = this;
-						setTimeout(function() {
-							vm.orderList.push(
-								{
-									orderNo: 'dd1',//订单编号
-									status: '5',//订单状态
-									tourGuide: '导游1号',//导游姓名
-									tourNo: '1',//团号
-									productName产品: '桂林山水文化',
-									purchaser: '采购方1',//采购方
-									totalPrice: 1000 //订单金额
-								}
-							)
-							self.endPullUpToRefresh();
-						}, 1000);
+						vm.pageNos[index]++;
+						var params = {
+							status:getType(index),
+							currPage:vm.pageNos[index],
+							pageSize:vm.pageNum
+						};
+						lf.net.getJSON('/order/search',params,function (res) {
+							self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
+							if(res.code == 200) {
+								dodata('up', index, res.data.result)
+							}else{
+								vm.pageNos[index]--;
+								lf.nativeUI.toast(res.msg)
+							}
+		                },function(res){
+		                	vm.pageNos[index]--;
+		                	self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
+		                	lf.nativeUI.toast(res.msg)
+		                })
 					}
 				}
 			});

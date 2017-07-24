@@ -289,7 +289,15 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/framework/lf.js",
-					"libs/vue.min.js"
+					"libs/vue.min.js",
+					"images/index/icon_distribute.png",
+					"images/index/icon_cancel.png",
+					"images/index/icon_pending.png",
+					"images/index/orderbg.png",
+					"images/index/icon_messige_off.png",
+					"images/index/bg.png",
+					"images/index/icon_done.png",
+					"images/index/icon_search.png"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -357,7 +365,11 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/framework/lf.js",
-					"libs/vue.min.js"
+					"libs/vue.min.js",
+					"images/order/img_distubute.png",
+					"images/order/order_operation.png",
+					"images/order/img_done.png",
+					"images/order/img_cancel.png"
 				],
 				"refer": [],
 				"priority": 0
