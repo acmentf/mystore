@@ -31,6 +31,7 @@
 				<!--<div id="changelogin" class="login-change-box">-->
 					<!--<span class="login-change">账号密码登录</span>-->
 				<!--</div>-->
+				<div class="bottom_text">登录你的旅拍，留下最美瞬间</div>
 			</div>
 			<!--<div v-if="type==1">-->
 				<!--<div class="mui-input-row login-input-tel">-->
@@ -51,6 +52,7 @@
 					<!--<span class="login-change">账号密码登录</span>-->
 				<!--</div>-->
 			<!--</div>-->
+			
 			</div>
 		<script src="../js/framework/common.js"></script>
 		<script src="../js/mui.min.js"></script>
@@ -126,9 +128,9 @@
 				if (!vm.passWord){
 			        lf.nativeUI.toast('请输入您的密码')
 					return
-				}
-				lf.window.openWindow('index','index.html')
-				return ;
+				}else (
+					lf.nativeUI.toast('登录中')
+				)
                 var info = plus.push.getClientInfo();
                 console.log( "clientid: "+info.clientid );
                 var params = {
@@ -137,8 +139,19 @@
                     clientId:info.clientid
 				}
 				lf.net.getJSON('/user/login',params,function (data) {
-
-					console.log(data)
+					if(data.code == 200) {
+						window.Role.save({
+							this.usercode = params.phone;
+							this.username = params.password;
+							this.userrole = 1;
+							this.loginsign = data.sign;
+							$.storage.put(j, JSON.stringify(k));
+							$.storage.put(s, data.tokunId);
+						})
+						console.log(data)
+						lf.window.openWindow('index','index.html')
+					}
+					
                 })
 //				lf.window.openWindow('index','index.html')
 			})

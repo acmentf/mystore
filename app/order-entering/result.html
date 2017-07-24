@@ -38,7 +38,7 @@
 		    
 		    <div class="mui-input-row add-detail-box">
 		  		<label class="add-detail-btn">销售明细：</label>
-		  		<span id="add-detail" class="add-detail-icon mui-icon mui-icon-plus">增加</span>
+		  		<span  class="add-detail-icon mui-icon mui-icon-plus">增加</span>
 		    </div>
 		    <table class="table-box" border="1" bordercolor="#808080">
 		    	<tr>	
@@ -48,12 +48,12 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr v-for="(orderXms,i)in orderXms">
-		    		<td >{{orderXms.picSize}}</td>
-		    		<td >{{orderXms.price}}</td>
-		    		<td >{{orderXms.picNum}}</td>
+		    	<tr v-for=" v of orderXms">
+		    		<td >{{v.picSize}}</td>
+		    		<td >{{v.price}}</td>
+		    		<td >{{v.picNum}}</td>
 		    		<td></td>
-		    		<td><span  class="mui-icon mui-icon-minus"></span></td>
+		    		<td><span @click="deleteTable(i)"  class="mui-icon mui-icon-minus"></span></td>
 		    	</tr>
 
 		    </table>	
@@ -113,11 +113,9 @@
                 
 				},
 				method: {
-				    getFromData: function () {
-				        var params
-						lf.net.getJSON('/order/saveOrderResult', params, function (data) {
-                        })
-                   }
+					deleteTable:function (i) {
+						this.orderXms.splice(index,1);
+					}
 				}
 			})
 

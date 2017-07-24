@@ -260,7 +260,9 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					null,
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"images/logo_login.png",
+					"images/img_login.jpg"
 				],
 				"refer": [
 					"app/index.html"
