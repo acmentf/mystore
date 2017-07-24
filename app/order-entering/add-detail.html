@@ -79,27 +79,17 @@
                     vm.picSize = items[0].text
                 });
             })
- 			mui('.detail-container').on('tap','.login-pass-btn',function(){
-				lf.window.openWindow('resultData','result.html',{},{
+ 			document.getElementById('result').addEventListener('tap',function(){
+ 				lf.window.openWindow('result','result.html',{},{
 					picSize: vm.picSize,
 			        price: vm.price,
 			        picNum: vm.picNum
 				})
-			})
-            document.getElementById('result').addEventListener('tap',function(){
-            	if(!vm.picSize){
-            		lf.nativeUI.toast('请选择照片尺寸')
-					return
-            	}
-            	if(!vm.price){
-            		lf.nativeUI.toast('请选择销售单价')
-					return
-            	}
-            	if(!vm.picNum){
-            		lf.nativeUI.toast('请选择销售数量')
-					return
-            	}
-            })
+ 				lf.window.closeCurrentWebview()
+ 			})
+				
+			
+   
 			
 		</script>
 	</body>
