@@ -113,7 +113,7 @@ lf.ready(function () {
                         lf.window.openWindow('summary/details.html','details.html',{},{
                             orderId: pageParams.orderId,
                             photographerId: pageParams.photographerId
-                        })
+                        },lf.window.currentWebview())
                     } else {
                         mui.toast(res.msg)
                     }
