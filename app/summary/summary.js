@@ -32,17 +32,22 @@ lf.ready(function () {
             createImgUpload: function (path) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                var task = plus.uploader.createUpload( '/file/uploadFile', { method:'POST'}, function ( res, status ) {
+                var task = plus.uploader.createUpload(SERVER_BAS_URL +  '/file/uploadFile', { method:'POST'}, function ( res, status ) {
                     lf.nativeUI.closeWaiting()
                     if ( status === 200 ) {
-                        if (res.code === '200') {
-                            self.uploaderFiles.push({
-                                fileSize: res.data.fileSize,
-                                fileName: res.data.fileName,
-                                fileUrl: res.data.fileUrl
-                            })
-                        } else {
-                            mui.toast(res.msg)
+                        try{
+                            var response = JSON.parse(res.responseText)
+                            if (response.code === '200') {
+                                self.uploaderFiles.push({
+                                    fileSize: response.data.fileSize,
+                                    fileName: response.data.fileName,
+                                    fileUrl: response.data.fileUrl
+                                })
+                            } else {
+                                mui.toast(response.msg)
+                            }
+                        }catch(e) {
+                            mui.toast('上传失败')
                         }
                     } else {
                         mui.toast('上传失败')
@@ -125,8 +130,9 @@ lf.ready(function () {
     });
     mui('.summary-summary').on('tap','.finger-uploader__input-box',function () {
         vm.fileSelect()
-    }).on('tap','.finger-uploader__input-box',function (e) {
+    }).on('tap','.remove',function (e) {
         var index = +e.target.getAttribute('index')
+        console.log(index)
         vm.remove(index)
     }).on('tap','.btn-submit',function (e) {
         vm.save()
