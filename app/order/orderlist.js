@@ -46,6 +46,27 @@ mui('.order-ul').on('tap', '.nr', function() {
 	})
 })
 
+mui('.order-ul').on('tap', '.qdbtn', function() {
+	var id = this.getAttribute('data-id')
+	//确认，取消
+	lf.nativeUI.confirm("", "你确认要执行订单",  ["确定","取消"] ,function(e){
+ 		console.log( (e.index==0)?"Yes!":"No!" );
+ 		if(e.index == 0){
+ 			
+ 		}
+  	});
+})
+mui('.order-ul').on('tap', '.qxbtn', function() {
+	var id = this.getAttribute('data-id')
+	//确认，取消
+	lf.nativeUI.confirm("", "你确认要取消订单",  ["确定","取消"] ,function(e){
+ 		console.log( (e.index==0)?"Yes!":"No!" );
+ 		if(e.index == 0){
+ 			
+ 		}
+  	});
+})
+
 mui('.order-ul').on('tap', '.gzxx', function() {
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('trackinfo.html', 'trackinfo.html', {}, {
@@ -135,16 +156,17 @@ function initPull() {
 							pageSize:vm.pageNum
 						};
 						lf.net.getJSON('/order/search',params,function (res) {
-							self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 							if(res.code == 200) {
+								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								dodata('up', index, res.data.result)
 							}else{
+								self.endPullUpToRefresh();
 								vm.pageNos[index]--;
 								lf.nativeUI.toast(res.msg)
 							}
 		                },function(res){
 		                	vm.pageNos[index]--;
-		                	self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
+		                	self.endPullUpToRefresh();
 		                	lf.nativeUI.toast(res.msg)
 		                })
 					}
