@@ -115,8 +115,15 @@
 									<img class="" src="../../images/message/icon_pending.png" v-else>
 								</div>
 								<div class="mui-media-body">
-									{{data.title}}<span class="time" v-text="data.createdTime"></span>
-									<p class='mui-ellipsis' v-text="data.descption"></p>
+									<div class="mui-table">
+										<div class="mui-table-cell mui-col-xs-8">
+											<div class='title mui-ellipsis'>{{data.title}}</div>
+											<p class='mui-ellipsis' v-text="data.descption"></p>
+										</div>
+										<div class="mui-table-cell mui-col-xs-4">
+											<span class="time" v-text="dateChange(data.createdTime)"></span>
+										</div>
+									</div>
 								</div>
 							</a>
 						</li>
