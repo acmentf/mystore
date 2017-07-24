@@ -1,6 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		index:0,
 		orderList: [
 			[],
 			[],
@@ -11,11 +12,17 @@ var vm = new Vue({
 		pageNos:[
 			
 		],
-		pageNum: 10
+		pageNum: 10,
+		pullObjects:[]
 	}
 })
 lf.ready(function() {
 	initPull();
+	
+	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+		vm.index = event.detail.slideNumber;
+	});
+	
 	var status = lf.window.currentWebview().status;
 	var gallery = mui('.mui-slider');
 	switch (status){
@@ -34,6 +41,8 @@ lf.ready(function() {
 		default:
 			break;
 	}
+	
+	
 })
 document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
@@ -44,6 +53,61 @@ mui('.order-ul').on('tap', '.nr', function() {
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id
 	})
+})
+
+mui('.order-ul').on('tap', '.qdbtn', function() {
+	var id = this.getAttribute('data-id')
+	var no = this.getAttribute('data-no')
+	//确认，取消
+	lf.nativeUI.confirm("", "你确认要执行订单",  ["确定","取消"] ,function(e){
+ 		if(e.index == 0){
+ 			var params = {
+				"orderId":id,
+				"orderState": 2,
+				"orderNo": no
+			};
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('/order/updateOrderState',params,function (res) {
+				lf.nativeUI.closeWaiting()
+				if(res.code == 200) {
+					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+					lf.nativeUI.toast('操作成功')
+				}else{
+					lf.nativeUI.toast(res.msg)
+				}
+            },function(res){
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
+ 		}
+  	});
+})
+mui('.order-ul').on('tap', '.qxbtn', function() {
+	var id = this.getAttribute('data-id')
+	var no = this.getAttribute('data-no')
+	//确认，取消
+	lf.nativeUI.confirm("", "你确认要取消订单",  ["确定","取消"] ,function(e){
+ 		if(e.index == 0){
+ 			var params = {
+				"orderId":id,
+				"orderState": 3,
+				"orderNo": no
+			};
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('/order/updateOrderState',params,function (res) {
+				lf.nativeUI.closeWaiting()
+				if(res.code == 200) {
+					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+					lf.nativeUI.toast('操作成功')
+				}else{
+					lf.nativeUI.toast(res.msg)
+				}
+            },function(res){
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
+ 		}
+  	});
 })
 
 mui('.order-ul').on('tap', '.gzxx', function() {
@@ -98,6 +162,7 @@ function initPull() {
 		//循环初始化所有下拉刷新，上拉加载。
 		mui.each(document.querySelectorAll('.mui-slider .mui-scroll'), function(index, pullRefreshEl) {
 			vm.pageNos[index] = 0;
+			vm.pullObjects[index] = pullRefreshEl;
 			mui(pullRefreshEl).pullToRefresh({
 				down: {
 					callback: function() {
@@ -135,16 +200,17 @@ function initPull() {
 							pageSize:vm.pageNum
 						};
 						lf.net.getJSON('/order/search',params,function (res) {
-							self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 							if(res.code == 200) {
+								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								dodata('up', index, res.data.result)
 							}else{
+								self.endPullUpToRefresh();
 								vm.pageNos[index]--;
 								lf.nativeUI.toast(res.msg)
 							}
 		                },function(res){
 		                	vm.pageNos[index]--;
-		                	self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
+		                	self.endPullUpToRefresh();
 		                	lf.nativeUI.toast(res.msg)
 		                })
 					}
@@ -153,3 +219,7 @@ function initPull() {
 		});
 	});
 }
+
+lf.event.listener('orderdetails',function(e){
+	mui(vm.index).pullToRefresh().pullDownLoading();
+})

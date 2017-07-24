@@ -9,7 +9,6 @@ lf.ready(function () {
         mui.each(pageParams,function (key) {
             if(key in params){
                 pageParams[key] = params[key]||''
-                console.log('pageParams '+key+':'+params[key])
             }
         })
     }
@@ -101,7 +100,7 @@ lf.ready(function () {
                 lf.net.getJSON('/order/saveOrderPhotographer', {
                     tourId: pageParams.tourId,
                     orderId: pageParams.orderId,
-                    photographerId: pageParams.photographerId,
+                    // photographerId: pageParams.photographerId,
                     imgs: this.uploaderFiles.map(function (item) {
                         return item.fileName
                     }),
@@ -114,7 +113,7 @@ lf.ready(function () {
                         lf.window.openWindow('summary/details.html','details.html',{},{
                             orderId: pageParams.orderId,
                             photographerId: pageParams.photographerId
-                        })
+                        },lf.window.currentWebview())
                     } else {
                         mui.toast(res.msg)
                     }

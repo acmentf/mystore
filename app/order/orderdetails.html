@@ -121,6 +121,25 @@
 								<label>取片地点：</label>
 								<span  v-text="orderTrackInfo.fetchPhotoScene"></span>
 							</div>
+							<div class="item">
+								<label>拍摄信息：</label>
+								<table class="sale-table" border="1">
+								<tr class="table-hd">
+									<td>拍摄地点</td>
+									<td>拍摄时间</td>
+								</tr>
+								<tr v-for="item in orderTrackInfo.lineSight">
+									<td v-text="item.journeyName"></td>
+									<td>
+										<span v-text="item.shootTime"></span>
+										<span v-if="item.periodType==0">全部</span>
+										<span v-if="item.periodType==1">上午</span>
+										<span v-if="item.periodType==2">下午</span>
+										<span v-if="item.periodType==3">晚上</span>
+									</td>
+								</tr>
+							</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -205,7 +224,7 @@
 						<div class="mui-card-content-inner">
 							<div>摄影师心得</div>
 							<div class="mind">
-								<span v-for='item in photographerInfos' :data-id="item.photographerId" v-text="item.photographerName" class="photpgrapher-name"></span> 
+								<span v-for='item in photographerInfos' :data-photographerId="item.photographerId" :data-orderId="currentOrderId" v-text="item.photographerName" class="photpgrapher-name"></span> 
 							<div>
 						</div>
 					</div>
@@ -232,7 +251,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="mod trackinfo" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
+						<div class="mod trackinfo" :data-orderNo="currentOrderNo" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
 							<div class="ico">跟踪信息</div>
 						
 						</div>
