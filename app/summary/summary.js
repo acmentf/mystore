@@ -13,10 +13,10 @@ lf.ready(function () {
         })
     }
     mui.plusReady(function(){
-        var currentWebview = plus.webview.currentWebview();
+        var currentWebview = lf.window.currentWebview();
         setPageParams(currentWebview)
     });
-    window.addEventListener('customEvent',function(event){
+    window.addEventListener('pageParams',function(event){
         setPageParams(event)
     });
 
@@ -104,6 +104,10 @@ lf.ready(function () {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                       //跳转页面
+                        lf.window.openWindow('summary/details.html','details.html',{},{
+                            orderId: pageParams.orderId,
+                            photographerId: pageParams.photographerId
+                        })
                     } else {
                         mui.toast(res.msg)
                     }
