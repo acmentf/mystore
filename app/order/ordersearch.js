@@ -48,8 +48,10 @@ lf.ready(function() {
 
 		}
 		console.log("params="+JSON.stringify(params))
-		lf.net.getJSON("/order/search",params,function(data){
+		var url = 'baseUrl +/order/search';
+		lf.net.getJSON(url,params,function(data){
 			console.log("data="+JSON.stringify(data))
+			console.log("url="+JSON.stringify(url))
 			if(data.code == "200"){
 			vm.orderList = data.result;
 			}else{
