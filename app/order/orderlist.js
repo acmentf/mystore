@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		orderList: [
-			[],
+			[{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170722115554627470bc174c063d0f.png","id":242,"orderNo":"10100000001729","productId":101,"productName":"长沙三日游","purchaser":"途忆旅拍","status":1,"totalPrice":20000,"tourGuide":"1","tourId":242,"tourNo":"1"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170722115554627470bc174c063d0f.png","id":241,"orderNo":"10100000001728","productId":101,"productName":"长沙三日游","purchaser":"王巍巍测试旅行社","status":7,"totalPrice":20000,"tourGuide":"姓名","tourId":241,"tourNo":"123456"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":238,"orderNo":"10100000001725","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":1,"totalPrice":10000,"tourGuide":"小熊","tourId":238,"tourNo":"TY2017070602"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":239,"orderNo":"10100000001726","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":6,"totalPrice":15000,"tourGuide":"小威","tourId":239,"tourNo":"TY2017070603"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":240,"orderNo":"10100000001727","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":1,"totalPrice":5000,"tourGuide":"小威","tourId":240,"tourNo":"TY2017070604"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":235,"orderNo":"10100000001721","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":2,"totalPrice":10000,"tourGuide":"小熊","tourId":235,"tourNo":"TY2017070602"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":237,"orderNo":"10100000001723","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":1,"totalPrice":5000,"tourGuide":"小威","tourId":237,"tourNo":"TY2017070604"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170721175644598b0797964b0ad86c.png","id":236,"orderNo":"10100000001722","productId":99,"productName":"桂林的产品1","purchaser":"钱多多旅行社","status":1,"totalPrice":15000,"tourGuide":"小威","tourId":236,"tourNo":"TY2017070603"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170719112001966152fa82db2abeb7.png","id":234,"orderNo":"10100000001717","productId":82,"productName":"权限测试专用产品","purchaser":"钱多多旅行社","status":4,"totalPrice":50000,"tourGuide":"小熊","tourId":234,"tourNo":"TY2017070602"},{"covecoverImage":"http://img.test.fingercrm.cn/shoot_product_publicity_20170719112001966152fa82db2abeb7.png","id":233,"orderNo":"10100000001713","productId":82,"productName":"权限测试专用产品","purchaser":"钱多多旅行社","status":3,"totalPrice":50000,"tourGuide":"小熊","tourId":233,"tourNo":"TY2017070602"}],
 			[],
 			[],
 			[],
@@ -15,6 +15,7 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
+	return 
 	initPull();
 	var status = lf.window.currentWebview().status;
 	var gallery = mui('.mui-slider');
