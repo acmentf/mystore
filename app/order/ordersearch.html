@@ -102,7 +102,8 @@
 					<i id="searchBtn" class="mui-icon mui-icon-search"></i>
 				</div>-->
 				<div class="mui-input-row search">
-					<div class="searchspan">搜索订单</div>
+					<!--<div class="searchspan" v-model="seachTest">搜索订单</div>-->
+					<input class="searchspan" style="width: 100%;" v-model="seachTest" placeholder="搜索订单">
 					<span id="searchBtn" class="searchicon">搜索</span>
 				</div>
 				<div class="mui-scroll">
@@ -173,28 +174,6 @@
 							</div>
 						</li>
 					</ul>
-					<!--<ul class="order-ul" v-show="showAnswer">
-						<li class="order-li" v-for="item in orderList">
-							<div class="nr">
-								<div class="item">
-									导游: {{item.tourGuide}}
-								</div>
-								<div class="item">
-									团号: {{item.tourNo}}
-								</div>
-								<div class="item">
-									产品: {{item.productName产品}}
-								</div>
-								<div class="item">
-									采购方: {{item.purchaser}}
-								</div>
-								<div class="item">
-									金额: {{item.totalPrice}}
-								</div>
-							</div>
-						</li>
-					</ul>-->
-				</div>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
