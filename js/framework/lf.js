@@ -1460,7 +1460,7 @@ var lf = (function(document, undefined) {
 			options.data = $.util.jsonToStr(options.data);
 			options.success = _success;
 			options.error = _error;
-			$.ajax(url, options);
+			mui.ajax(url, options);
 		},
 		getJSON: function(url, data, success, error, async) {
 			if(!async){

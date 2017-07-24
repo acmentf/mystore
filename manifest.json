@@ -262,12 +262,19 @@
 					null,
 					"fonts/mui.ttf",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"images/logo_login.png",
 					"images/img_login.jpg"
 =======
 					"images/timg.jpg",
 					"images/logo.png"
 >>>>>>> 72b048e6a0f487daf10dc0532ae1c7ecfad7524b
+=======
+					"images/timg.jpg",
+					"images/logo.png",
+					"images/logo_login.png",
+					"images/img_login.jpg"
+>>>>>>> bfb321de7023fee2cc4c2c5defd42673f35443f1
 				],
 				"refer": [
 					"app/index.html"

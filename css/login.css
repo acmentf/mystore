@@ -1,5 +1,5 @@
 .login-container{
-	background:url('../images/img_login.jpg')no-repeat center;
+	background:url('../css/images/img_login.jpg')no-repeat center;
 	background-size:cover;
 	position: fixed;
 	left: 0;
@@ -7,7 +7,7 @@
 	top: 0;
 	bottom: 0;
 }
-.login-header{
+.login-container .login-header{
 	width: 100%;
 	height: 4rem;
 	display: flex;
@@ -15,35 +15,35 @@
 	align-items: center;
 	font-weight: 700;
 }
-.login-header div{
-	background:url('../images/logo_login.png')no-repeat center;
+.login-container .login-header div{
+	background:url('../css/images/logo_login.png')no-repeat center;
 	background-size:contain ;
 	width: 2rem;
 	height: 2rem;
 }
-.mui-input-row {
+.login-container .mui-input-row {
 	display: flex;
 	justify-content: center;
 	position: relative;
 }
-.mui-input-row input{
+.login-container .mui-input-row input{
 	 width:80%;
 	 border-radius: 20px;
 	 opacity: 0.6;
 }
-.login-input-tel .mui-icon-clear {
+.login-container .login-input-tel .mui-icon-clear {
 	position: absolute;
 	top: 0;
 	right:1rem!important;
 }
-.code-btn{
+.login-container .code-btn{
 	display: inline-block;
 	position: absolute;
 	top: 0.18rem;
 	right: 1rem;
 	
 }
-.code-line{
+.login-container .code-line{
 	display: inline-block;
 	width:0.02rem;
 	height:0.4rem;
@@ -52,28 +52,28 @@
 	top: 0.2rem;
 	right: 2.3rem;
 }
-.code-btn-text{
+.login-container .code-btn-text{
 	display: inline-block;
 	font-size: 0.22rem;
 }
-.login-input-code .mui-icon-clear{
+.login-container .login-input-code .mui-icon-clear{
 	position: absolute;
 	top: 0;
 	right:1rem!important;
 }
-.login-input-code input{
+.login-container .login-input-code input{
 	margin-bottom:0.1rem!important ;
 }
-.login-input-message{
+.login-container .login-input-message{
 	font-size: 0.2rem;
 	color:rgba(0,0,0,.2) ;
 	text-align: center;
 }
-.login-btn-box{
+.login-container .login-btn-box{
 	width: 100%;
 	text-align: center;
 }
-.login-pass-btn{
+.login-container .login-pass-btn{
 	margin-top:15px;
 	width: 80%;
 	border-radius: 20px;
@@ -82,21 +82,21 @@
 	height:40px;
 	border: none;
 }
-.login-check-box{
+.login-container .login-check-box{
 	font-size: 0.24rem;
 	margin: 0.1rem 0;
 	width: 100%;
 	text-align: center;
 }
 
-.login-change-box{
+.login-container .login-change-box{
 	width:100%;
 	text-align: center;
 	color: #4b6d9e;
 	font-size: 0.22rem;
 	margin: 0.2rem 0;
 }
-.bottom_text{
+.login-container .bottom_text{
 	position: fixed;
 	left: 0;
 	right: 0;
