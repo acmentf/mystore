@@ -20,19 +20,19 @@
 			<div class="mui-input-group">
 		    <div class="mui-input-row">
 		        <label>选片张数：</label>
-		        <input v-model="fromData.selectsNum" type="number" class="mui-input-clear" placeholder="请输入选片张数">
+		        <input v-model="selectsNum" type="number" class="mui-input-clear" placeholder="请输入选片张数">
 		    </div>   
 		    <div class="mui-input-row">
 		        <label>打印张数：</label>
-		        <input v-model="fromData.printsNum" type="number" class="mui-input-clear" placeholder="请输入打印张数">
+		        <input v-model="printsNum" type="number" class="mui-input-clear" placeholder="请输入打印张数">
 		    </div>
 		    <div class="mui-input-row give-number group-info" >
 		        <label>赠送张数：</label>
 		        <div class="select">
 		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
-		        <input type="text" v-model='fromData.givesPicSize' class="select-size"  placeholder="尺寸"/>
+		        <input type="text" v-model='givesPicSize' class="select-size"  placeholder="尺寸"/>
 		        </div>
-		        <input type="number" v-model="fromData.givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">
+		        <input type="number" v-model="givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">
 		        
 		    </div>
 		    
@@ -48,7 +48,7 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr v-for="(v, ind	ex ) in fromData.orderXms">
+		    	<tr v-for="(v, index ) in orderXms">
 		    		<td >{{v.picSize}}</td>
 		    		<td >{{v.price}}</td>
 		    		<td >{{v.picNum}}</td>
@@ -59,14 +59,14 @@
 		    </table>	
 		    <div class="mui-input-row">
 		        <label>销售总额：</label>
-		        <input v-model="fromData.salesNum" type="number" class="mui-input-clear" placeholder="请输入销售总额">
+		        <input v-model="salesNum" type="number" class="mui-input-clear" placeholder="请输入销售总额">
 		    </div>
 			<div class="mui-input-row">
 		        <label>购买人数：</label>
-		        <input v-model="fromData.buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
+		        <input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
 		    </div>
 		</div>
-		<div class="login-btn-box"><button type="button"id="save" class="mui-btn login-pass-btn">保存</button></div>
+		<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
@@ -79,40 +79,37 @@
 			var vm = new Vue({
 				el: '#resultData',
 				data: {
-                    fromData:{
-                    	orderId: '',
-					    id: '',
-					    selectsNum: '',
-					    printsNum: '',
-					    givesNum: '',
-					    givesPicSize: '',
-					    salesNum: '',
-					    salesAmt: '',
-					    buyers: '',
-	                    orderXms: [
-	                    	{
-	                		picSize: '12',
-					        price: '21',
-					        picNum: '3423'
-	                    	},
-	                    	{
-	                		picSize: '13',
-					        price: '4324',
-					        picNum: '234'
-	                    	},
-	                    	{
-	                		picSize: '14',
-					        price: '534543',
-					        picNum: '234'
-	                    	},
-	                    	{
-	                		picSize: '15',
-					        price: '2134',
-					        picNum: '123124'
-	                    	}
-	                    ]
-                    }
-                
+                	orderId: '',
+				    id: '',
+				    selectsNum: '',
+				    printsNum: '',
+				    givesNum: '',
+				    givesPicSize: '',
+				    salesNum: '',
+				    salesAmt: '',
+				    buyers: '',
+                    orderXms: [
+                    	{
+                		picSize: '12',
+				        price: '21',
+				        picNum: '3423'
+                    	},
+                    	{
+                		picSize: '13',
+				        price: '4324',
+				        picNum: '234'
+                    	},
+                    	{
+                		picSize: '14',
+				        price: '534543',
+				        picNum: '234'
+                    	},
+                    	{
+                		picSize: '15',
+				        price: '2134',
+				        picNum: '123124'
+                    	}
+                    ]
 				},
 				method: {
 					deleteTable:function (index) {
@@ -126,6 +123,8 @@
 			})
 
 			lf.ready(function() {
+				var wv = lf.window.currentWebview()
+				console.log(wv)
 				var opts = {"type":"date"}
                 picker = new mui.DtPicker(opts);
                 userPicker = new mui.PopPicker();
@@ -146,6 +145,23 @@
                     text: '6寸'
                 }
                 ]);
+                document.getElementById('save').addEventListener('tap',function(){
+				var params = {
+						orderId: vm.orderId,
+					    id: vm.id,
+					    selectsNum: vm.selectsNum,
+					    printsNum: vm.printsNum,
+					    givesNum: vm.givesNum,
+					    givesPicSize: vm.givesPicSize,
+					    salesNum: vm.salesNum,
+					    salesAmt: vm.salesAmt,
+					    buyers: vm.buyers,
+					    orderXms:vm.orderXms
+					}
+				lf.net.getJSON('/order/saveOrderResult',params,function(data){
+					console.log(data)
+				})
+				})
             })
             mui('.group-info').on('tap','.select-size',function(){
 	            userPicker.show(function(items) {
@@ -155,23 +171,7 @@
 			document.getElementById('add-detail').addEventListener('tap',function(){
 				lf.window.openWindow('add-detail','add-detail.html',{},{})
 			})
-			document.getElementById('save').addEventListener('tap',function(){
-				if(!vm.salesNum){
-					 lf.nativeUI.toast('请填写销售数量');
-					 return
-				}
-				if(!vm.salesAmt){
-					lf.nativeUI.toast('请填写销售总额');
-					return
-				}
-				if(!vm.buyers){
-					lf.nativeUI.toast('请填写购买人数');
-					return
-				}
-				lf.net.getJSON('order/saveOrderResult',params, function(){
-					
-				})
-			})
+			
 		</script>
 	</body>
 
