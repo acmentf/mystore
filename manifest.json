@@ -327,7 +327,8 @@
 				"refer": [
 					"app/order/orderdetails.html",
 					"app/order/trackinfo.html",
-					"app/order-entering/result.html"
+					"app/order-entering/result.html",
+					"app/order/ordersearch.html"
 				],
 				"priority": 0
 			},
@@ -344,7 +345,8 @@
 			},
 			"app/order/ordersearch.html": {
 				"resources": [
-					"app/order/ordersearch.js"
+					"app/order/ordersearch.js",
+					"images/60x60.gif"
 				],
 				"refer": [],
 				"priority": 0
