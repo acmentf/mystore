@@ -2,8 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		searchText: '',
-		msgList: [
-		],
+		msgList: [],
 		pageNo: 0,
 		pageNum: 10
 	},
@@ -21,7 +20,9 @@ document.getElementById('searchBtn').addEventListener('tap',function(){
 
 mui('.mui-content').on('tap','.message-li',function(){
 	var id = this.getAttribute('data-id');
-	console.log('id:'+id);
+	lf.window.openWindow('orderdetails.html', '../order/orderdetails.html', {}, {
+		orderNo: id
+	})
 })
 
 function findData(){
@@ -33,13 +34,20 @@ function findData(){
 	};
 	lf.net.getJSON('/information/queryPage',params,function (res) {
 		if(res.code == 200) {
-			vm.msgList = res.data.result
+			vm.msgList = doData(res.data.result)
 		}else{
 			lf.nativeUI.toast(res.msg)
 		}
     },function(res){
     	lf.nativeUI.toast(res.msg)
     })
+}
+
+function doData(data){
+	data.forEach(function(v){
+		v.data = JSON.parse(v.data);
+	})
+	return data;
 }
 
 //			mui.init();
@@ -91,7 +99,7 @@ function initPull() {
 						lf.net.getJSON('/information/queryPage',params,function (res) {
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNo >= res.data.totalPages);
-								vm.msgList = vm.msgList.concat(res.data.result)
+								vm.msgList = vm.msgList.concat(doData(res.data.result))
 							}else{
 								self.endPullUpToRefresh();
 								vm.pageNo--;
