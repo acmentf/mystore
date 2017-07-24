@@ -48,12 +48,12 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr v-for="(v, index ) in orderXms">
-		    		<td >{{v.picSize}}</td>
+		    	<tr class="listchange" v-for="(v, index ) in orderXms">
+		    		<td >{{v.picSizeName}}</td>
 		    		<td >{{v.price}}</td>
 		    		<td >{{v.picNum}}</td>
 		    		<td v-text="addNum(v.price,v.picNum)"></td>
-		    		<td><span class="deleteTable" :index="index" class="mui-icon mui-icon-minus"></span></td>
+		    		<td><span @click="deleteTable" :index="index" class="mui-icon mui-icon-minus"></span></td>
 		    	</tr>
 
 		    </table>	
@@ -92,8 +92,9 @@
                     	{
                 		picSize: '',
 				        price: '',
-				        picNum: ''
-                    	}
+				        picNum: '',
+				        picSizeName: ''
+                    	},	
                     ]
 				},
 				methods: {
@@ -108,6 +109,7 @@
 			})
 
 			lf.ready(function() {
+				console.log(JSON.stringify(vm.orderXms))
 				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
@@ -142,17 +144,87 @@
 	            });
             })
             function loadResult (){
-            	var params = {
-            		orderId: vm.orderId
+            	var params ={
+            		orderId:vm.orderId
             	}
-            	console.log(params)
+            	lf.nativeUI.showWaiting()
             	lf.net.getJSON('/order/getOrderResult',params,function(res){
+            		lf.nativeUI.closeWaiting()
+            		if(res.code == 200){
+            			vm.buyers = res.data.orderX.buyers
+            			vm.givesNum = res.data.orderX.givesNum
+            			vm.givesPicSize = res.data.givesPicSize
+            			vm.id = res.data.orderX.id
+            			vm.orderId = res.data.orderX.orderId
+            			vm.printsNum = res.data.orderX.printsNum
+            			vm.salesAmt = res.data.orderX.salesAmt
+            			vm.salesNum = res.data.orderX.salesNum
+            			vm.selectsNum = res.data.orderX.selectsNum
+            			vm.orderXms = res.data.orderXms
+						switch(res.data.givesPicSize){
+							case '1':
+								vm.givesPicSize ='16寸'
+								break
+							case '2':
+								vm.givesPicSize ='12寸'
+								break
+							case '3':
+								vm.givesPicSize ='10寸'
+								break
+							case '4':
+								vm.givesPicSize ='8寸'
+								break
+							case '5':
+								vm.givesPicSize='6寸'
+								break
+						}
+						console.log(JSON.stringify(vm.orderXms))
+						switch(vm.orderXms.picSize){
+							case '1':
+								vm.orderXms.picSize ='16寸'
+								break
+							case '2':
+								vm.orderXms.picSize ='12寸'
+								break
+							case '3':
+								vm.orderXms.picSize ='10寸'
+								break
+							case '4':
+								vm.orderXms.picSize ='8寸'
+								break
+							case '5':
+								vm.orderXms.picSize ='6寸'
+								break
+						}
+            		}else{
+            			lf.nativeUI.toast(data.msg);
+            		}
             	},function(res){
-            		
-            	})
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
             	
             }
             document.getElementById('save').addEventListener('tap',function(){
+     			
+            	switch(vm.orderXms.picSize){
+					case '16寸':
+						vm.orderXms.picSize ='1'
+						break
+					case '12寸':
+						vm.orderXms.picSize ='2'
+						break
+					case '10寸':
+						vm.orderXms.picSize ='3'
+						break
+					case '8寸':
+						vm.orderXms.picSize ='4'
+						break
+					case '6寸':
+						vm.orderXms.picSize ='5'
+						break
+				}
+            	console.log(vm.orderXms.picSize)
 				var params = {
 						orderId: vm.orderId,
 					    id: vm.id,
@@ -164,11 +236,34 @@
 					    salesAmt: vm.salesAmt,
 					    buyers: vm.buyers,
 					    orderXms:vm.orderXms
+					    
 					}
-				
+				lf.nativeUI.showWaiting()
+				console.log(JSON.stringify(params.orderXms))
 				lf.net.getJSON('order/saveOrderResult',params,function(data){
-					console.log(data)
+					
+					lf.nativeUI.closeWaiting()
+					switch(params.givesPicSize){
+						case '16寸':
+							params.givesPicSize ='1'
+							break
+						case '12寸':
+							params.givesPicSize ='2'
+							break
+						case '10寸':
+							params.givesPicSize ='3'
+							break
+						case '8寸':
+							params.givesPicSize ='4'
+							break
+						case '6寸':
+							params.givesPicSize ='5'
+							break
+					}
 					if(data.code == 200){
+						lf.nativeUI.toast('保存成功！');
+						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+						lf.window.closeCurrentWebview();
 					}
 				})
 			})
@@ -177,10 +272,7 @@
 			})
 			
 			lf.event.listener('listchange',function(e){
-				console.log(JSON.stringify(e.detail));
-				vm.orderXms.picSize = e.detail.picSize
-				vm.orderXms.price = e.detail.price
-				vm.orderXms.picNum = e.detail.picNum
+				vm.orderXms.push(e.detail)
 			})
 		</script>
 	</body>

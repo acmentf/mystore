@@ -50,7 +50,7 @@
 					picSize: '',
 			        price: '',
 			        picNum: ''
-                },
+                }
             })
             lf.ready(function() {
 				var opts = {"type":"date"}
@@ -81,7 +81,7 @@
             })
  			document.getElementById('result').addEventListener('tap',function(){
  				lf.event.fire(lf.window.currentWebview().opener(),'listchange',{
-					picSize: vm.picSize,
+					picSizeName: vm.picSize,
 			        price: vm.price,
 			        picNum: vm.picNum
 				})
