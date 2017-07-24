@@ -144,7 +144,9 @@
 							username:res.data.name,
 							phone:res.data.phone,
 							companyId:res.data.companyId,
+							companyId:res.data.companyId,
 							userrole:res.data.positions[0].type,
+							tonken:res.data.token
 						}
 						window.Role.save(obj)
 						lf.window.openWindow('index','index.html')
