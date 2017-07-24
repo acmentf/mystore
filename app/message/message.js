@@ -2,32 +2,10 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		searchText: '',
-		msgList: [{
-				title: 'title1',
-				descption: '消息内容1',//消息内容
-				createdTime: '08:08',//消息创建时间
-//				url: '../../images/shuijiao.jpg',
-				type: 1,//消息类型,
-				status:1 //1已读，0未读
-			},
-			{
-				title: 'title1',
-				descption: '消息内容1',//消息内容
-				createdTime: '08:08',//消息创建时间
-//				url: '../../images/shuijiao.jpg',
-				type: 2,//消息类型
-				status:0 //1已读，0未读
-			},
-			{
-				title: 'title1',
-				descption: '消息内容1',//消息内容
-				createdTime: '08:08',//消息创建时间
-//				url: '../../images/shuijiao.jpg',
-				type: 1,//消息类型,
-				status:1 //1已读，0未读
-			}
-
-		]
+		msgList: [
+		],
+		pageNo: 0,
+		pageNum: 10
 	},
 	computed: {
 	}
@@ -38,7 +16,32 @@ lf.ready(function() {
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
 	console.log('search')
+	findData();
 })
+
+mui('.mui-content').on('tap','.message-li',function(){
+	var id = this.getAttribute('data-id');
+	console.log('id:'+id);
+})
+
+function findData(){
+	vm.pageNo = 1;
+	var params = {
+		searchText: vm.searchText,
+		currPage:vm.pageNo,
+		pageSize:vm.pageNum
+	};
+	lf.net.getJSON('/information/queryPage',params,function (res) {
+		if(res.code == 200) {
+			vm.msgList = res.data.result
+		}else{
+			lf.nativeUI.toast(res.msg)
+		}
+    },function(res){
+    	lf.nativeUI.toast(res.msg)
+    })
+}
+
 //			mui.init();
 //阻尼系数
 function initPull() {
@@ -55,42 +58,50 @@ function initPull() {
 				down: {
 					callback: function() {
 						var self = this;
-						setTimeout(function() {
-							vm.msgList = [{
-									title: 'title1',
-									descption: '消息内容1',//消息内容
-									createdTime: '08:08',//消息创建时间
-					//				url: '../../images/shuijiao.jpg',
-									type: 1,//消息类型,
-									status:1 //1已读，0未读
-								},
-								{
-									title: 'title1',
-									descption: '消息内容1',//消息内容
-									createdTime: '08:08',//消息创建时间
-					//				url: '../../images/shuijiao.jpg',
-									type: 1,//消息类型,
-									status:1 //1已读，0未读
-								}
-							]
+						vm.pageNo = 1;
+						var params = {
+							searchText: vm.searchText,
+							currPage:vm.pageNo,
+							pageSize:vm.pageNum
+						};
+						lf.net.getJSON('/information/queryPage',params,function (res) {
 							self.endPullDownToRefresh();
-						}, 1000);
+							if(res.code == 200) {
+								self.refresh(true);
+								vm.msgList = res.data.result
+							}else{
+								lf.nativeUI.toast(res.msg)
+							}
+		                },function(res){
+		                	self.endPullDownToRefresh();
+		                	lf.nativeUI.toast(res.msg)
+		                })
 					}
 				},
 				up: {
+					auto: true,
 					callback: function() {
 						var self = this;
-						setTimeout(function() {
-							vm.msgList.push({
-								title: 'title3',
-								descption: '消息内容1',//消息内容
-								createdTime: '08:08',//消息创建时间
-				//				url: '../../images/shuijiao.jpg',
-								type: 2,//消息类型,
-								status:1 //1已读，0未读
-							})
-							self.endPullUpToRefresh();
-						}, 1000);
+						vm.pageNo++;
+						var params = {
+							searchText: vm.searchText,
+							currPage:vm.pageNo,
+							pageSize:vm.pageNum
+						};
+						lf.net.getJSON('/information/queryPage',params,function (res) {
+							if(res.code == 200) {
+								self.endPullUpToRefresh(vm.pageNo >= res.data.totalPages);
+								vm.msgList = vm.msgList.concat(res.data.result)
+							}else{
+								self.endPullUpToRefresh();
+								vm.pageNo--;
+								lf.nativeUI.toast(res.msg)
+							}
+		                },function(res){
+		                	vm.pageNos[index]--;
+		                	self.endPullUpToRefresh();
+		                	lf.nativeUI.toast(res.msg)
+		                })
 					}
 				}
 			});

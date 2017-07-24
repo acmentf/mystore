@@ -96,6 +96,7 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
+		console.log('orderNo:'+orderid);
 		lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
 			orderNo: orderid
 		})

@@ -288,7 +288,8 @@
 					"images/index/bg.png",
 					"images/index/icon_done.png",
 					"images/index/icon_search.png",
-					"app/push.js"
+					"app/push.js",
+					"images/index/icon_messige_on.png"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -333,7 +334,14 @@
 					"js/mui.pullToRefresh.js",
 					"css/app.css",
 					"js/mui.pullToRefresh.material.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"images/message/icon_pending.png"
 				],
 				"refer": [],
 				"priority": 0
