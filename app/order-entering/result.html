@@ -144,30 +144,32 @@
 	            });
             })
             document.getElementById('save').addEventListener('tap',function(){
+				var params = {
+						orderId: vm.orderId,
+					    id: vm.id,
+					    selectsNum: vm.selectsNum,
+					    printsNum: vm.printsNum,
+					    givesNum: vm.givesNum,
+					    givesPicSize: vm.givesPicSize,
+					    salesNum: vm.salesNum,
+					    salesAmt: vm.salesAmt,
+					    buyers: vm.buyers,
+					    orderXms:vm.orderXms
+					}
 				
-					var params = {
-							orderId: vm.orderId,
-						    id: vm.id,
-						    selectsNum: vm.selectsNum,
-						    printsNum: vm.printsNum,
-						    givesNum: vm.givesNum,
-						    givesPicSize: vm.givesPicSize,
-						    salesNum: vm.salesNum,
-						    salesAmt: vm.salesAmt,
-						    buyers: vm.buyers,
-						    orderXms:vm.orderXms
-						}
-					
-					lf.net.getJSON('/order/saveOrderResult',params,function(data){
-						if(data.code == 500){
-							console.log(JSON.stringify(data))
-						}
-					})
+				lf.net.getJSON('/order/saveOrderResult',params,function(data){
+					if(data.code == 500){
+						console.log(JSON.stringify(data))
+					}
 				})
+			})
 			document.getElementById('add-detail').addEventListener('tap',function(){
-				lf.window.openWindow('add-detail','add-detail.html',{},{})
+				lf.window.openWindow('add-detail','add-detail.html')
 			})
 			
+			lf.event.listener('listchange',function(e){
+				console.log(JSON.stringify(e.detail));
+			})
 		</script>
 	</body>
 

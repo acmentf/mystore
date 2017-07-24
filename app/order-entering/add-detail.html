@@ -80,17 +80,13 @@
                 });
             })
  			document.getElementById('result').addEventListener('tap',function(){
- 				lf.window.openWindow('result','result.html',{},{
+ 				lf.event.fire(lf.window.currentWebview().opener(),'listchange',{
 					picSize: vm.picSize,
 			        price: vm.price,
 			        picNum: vm.picNum
 				})
  				lf.window.closeCurrentWebview()
  			})
-				
-			
-   
-			
 		</script>
 	</body>
 
