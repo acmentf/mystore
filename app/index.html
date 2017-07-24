@@ -15,7 +15,8 @@
 	
 			<div class="toolbar">
 				<span class="search" id="searchBtn"></span>
-				<span class="message" id="messageBtn"></span>
+				<span v-if="countNoRead==0" class="message"></span>
+				<span v-if="countNoRead>0" class="message hasmessage"></span>
 			</div>
 	
 		<div class="content">
@@ -44,6 +45,8 @@
 				<div class="title"><span class="ico ico-assigned"></span>已分派订单</div>
 			</div>
 		</div>
+		
+		<div class="bottom_text">登录你的旅拍，留下最美瞬间</div>
 		</div>
 	
 		<script src="../js/mui.min.js"></script>

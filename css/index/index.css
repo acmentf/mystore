@@ -26,6 +26,10 @@
   background: url(../../images/index/icon_messige_off.png) no-repeat;
   background-size: 100% 100%;
 }
+.app-index .toolbar .hasmessage {
+  background: url(../../images/index/icon_messige_on.png) no-repeat;
+  background-size: 100% 100%;
+}
 
 .app-index .content {
   color: #fff;
@@ -87,4 +91,14 @@
 }
 .app-index .content .cancled{
 	margin-right: 1.4rem;
+}
+.app-index  .bottom_text{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 1rem;
+	letter-spacing:0.08rem;
+	font-size: 0.28rem;
+	color: #9f9f9f;
+	text-align: center;
 }
