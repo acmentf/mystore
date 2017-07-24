@@ -102,19 +102,18 @@
 					},
 					addNum: function (num1, num2) {
 		                var num = lf.util.multNum(num1, num2)
-		                console.log('11111111')
 		                return num
 	            	}
 				}
 			})
 
 			lf.ready(function() {
+				loadResult()
 				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
 				vm.orderXms.price = wv.price
 				vm.orderXms.picNum = wv.picNum
-				console.log(vm.orderXms.picSize,'222222')
 				var opts = {"type":"date"}
                 picker = new mui.DtPicker(opts);
                 userPicker = new mui.PopPicker();
@@ -143,6 +142,15 @@
 	                vm.givesPicSize = items[0].text
 	            });
             })
+            function loadResult (){
+            	var params = vm.orderId
+            	
+            	console.log(params)
+            	lf.net.getJSON('order/getOrderResult',params,function(res){
+            		console.log(JSON.stringify(res))
+            	})
+            	
+            }
             document.getElementById('save').addEventListener('tap',function(){
 				var params = {
 						orderId: vm.orderId,
@@ -157,9 +165,9 @@
 					    orderXms:vm.orderXms
 					}
 				
-				lf.net.getJSON('/order/saveOrderResult',params,function(data){
-					if(data.code == 500){
-						console.log(JSON.stringify(data))
+				lf.net.getJSON('order/saveOrderResult',params,function(data){
+					console.log(data)
+					if(data.code == 200){
 					}
 				})
 			})
@@ -169,6 +177,9 @@
 			
 			lf.event.listener('listchange',function(e){
 				console.log(JSON.stringify(e.detail));
+				vm.orderXms.picSize = e.detail.picSize
+				vm.orderXms.price = e.detail.price
+				vm.orderXms.picNum = e.detail.picNum
 			})
 		</script>
 	</body>
