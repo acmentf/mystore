@@ -32,8 +32,13 @@ lf.ready(function() {
 		})
 	});
 	mui('.operate').on('tap', '.button', function() {
-		vm.maskShow = true;
-		vm.popupShow = true;
+		if(vm.currentOrderStatus == 3){
+			lf.nativeUI.toast('该订单取消！');
+		}
+		else{
+			vm.maskShow = true;
+			vm.popupShow = true;
+		}	
 	});
 	mui('body').on('tap', '.mask', function() { //点击遮罩层隐藏弹窗
 		vm.maskShow = false;
@@ -65,10 +70,7 @@ lf.ready(function() {
 		vm.popupShow = false;
 	})
 	mui('.popup-mod').on('tap', '.cancled', function() { //点击取消
-		if(vm.currentOrderStatus == 3){
-			lf.nativeUI.toast('该订单已取消！');
-		}
-		else if(vm.currentOrderStatus == 7){
+		if(vm.currentOrderStatus == 7){
 			lf.nativeUI.toast('订单已完成，无法取消！');
 		}
 		else{
