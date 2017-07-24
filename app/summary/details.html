@@ -21,11 +21,13 @@
             <img v-for="item in imgs" :src="item.path" class="pro" data-preview-src="" data-preview-group="1">
         </div>
         <div class="summary">
-            <span class="text">{{summary}}</span>
+            <span class="text" v-html="summary"></span>
         </div>
     </div>
 </div>
 <script src="../../js/mui.min.js"></script>
+<script src="../../js/mui.zoom.js"></script>
+<script src="../../js/mui.previewimage.js"></script>
 <script src="../../js/framework/define.js"></script>
 <script src="../../js/framework/styles.js"></script>
 <script src="../../js/framework/lf.js"></script>
