@@ -5,25 +5,30 @@
 }
 
 .orderdetails .topbar .mod {
-	background: #66CCCC;
 	height: 100%;
 	padding: 0.5rem 0.4rem;
 	position: relative;
+	
 }
 .orderdetails .topbar .mod .title{
 	font-weight: 700;
 }
+.orderdetails .topbar .pending {
+	background:url(../../images/order/img_distubute.png) no-repeat;
+	background-size: 100% 100%;
+}
 
 .orderdetails .topbar .cancled {
-	background: #FFCC33;
+	background:url(../../images/order/img_cancel.png) no-repeat;
+	background-size: 100% 100%;
 }
 
 .orderdetails .topbar .completed {
-	background: #00CC66;
+	background:url(../../images/order/img_done.png) no-repeat;
+	background-size: 100% 100%;
 }
 
 .orderdetails .topbar .ico {
-	background: url(../../images/order/u402.png) no-repeat center;
 	width: 1rem;
 	height: 1rem;
 	display: inline-block;
@@ -57,9 +62,8 @@
 	font-size: 0.4rem;
 	line-height: 1rem;
 	color: #000;
-	background: #FFCC00;
-	border: 1px solid #999;
-	border-radius: 50%;
+	background:url(../../images/order/order_operation.png) no-repeat;
+	background-size: 100% 100%;
 	position: fixed;
 	bottom: 4rem;
 	right: 0.4rem;
