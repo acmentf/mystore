@@ -47,4 +47,5 @@ mui('.toolbar').on('tap', '.search', function() {
 
 mui('.toolbar').on('tap', '.message', function() {
 	lf.window.openWindow('message/message.html', 'message/message.html')
+	vm.countNoRead = 0;
 })
