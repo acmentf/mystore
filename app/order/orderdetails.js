@@ -92,7 +92,9 @@ lf.ready(function() {
 				})
 			}		
 			vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
-			vm.currentTourId = data.data.orderInfo.tourId;//记录tourId					
+			vm.currentTourId = data.data.orderInfo.tourId;//记录tourId		
+			vm.currentOrderStatus =  data.data.orderInfo.status;//记录订单状态
+			vm.currentOrderNo =  data.data.orderInfo.orderNo;//记录订单No
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
@@ -118,7 +120,8 @@ lf.ready(function() {
 		var orderid = this.getAttribute('data-orderid');
 		console.log(orderid)
 		lf.window.openWindow('common/chooseuser.html','../common/chooseuser.html',{},{
-			orderNo: orderid
+			orderNo: orderid,
+			type:1
 		})
 	})
 	mui('.popup-mod').on('tap', '.allot', function() { //点击分配
@@ -129,10 +132,10 @@ lf.ready(function() {
 		})
 	})
 	mui('.popup-mod').on('tap', '.trackinfo', function() { //点击跟踪信息
-		var orderid = this.getAttribute('data-orderid');
-		console.log(orderid)
+		var orderNo = this.getAttribute('data-orderNo');
+		console.log(orderNo)
 		lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
-			orderNo: orderid
+			orderNo: orderNo
 		})
 	})
 	mui('.popup-mod').on('tap', '.cancled', function() { //点击取消
@@ -141,9 +144,12 @@ lf.ready(function() {
 		 		if(e.index==0){
 		 			var params = {
 						orderId: vm.currentOrderId,
-						orderState:vm.currentOrderStatus,
+						orderState:3,
 						orderNo:vm.currentOrderNo
 					};
+					console.log(vm.currentOrderId)
+					console.log(vm.currentOrderStatus)
+					console.log(vm.currentOrderNo)
 		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
 						if(data.code == 200) {
 							lf.nativeUI.toast("订单取消成功！");

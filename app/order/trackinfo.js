@@ -7,9 +7,9 @@ var vm = new Vue({
 		timeName1: '上午',
 		timeName2: '下午',
 		timeName3: '晚上',
-		shootInfoForms: [{ "journeyName": "长沙", "periodType": 0, "shootTime": 1500048000000 }],
+		shootInfoForms: [{id: '', "journeyName": "", "periodType": 0, "shootTime": '' }],
 		trackInfo: {
-			"busCardNo": "0000",
+			/*"busCardNo": "0000",
 			"fetchPhotoScene": "麓谷",
 			"fetchPhotoTime": 1502985600000,
 			"groupDays": "2",
@@ -19,14 +19,38 @@ var vm = new Vue({
 			'personCount': 1,
 			"orderId": 126,
 			"personCount": 10,
-			"preReservedSeats": 10
-		}
+			"preReservedSeats": 10*/
+		},
+		currentOrderId:''
 	}
 })
 var picke = null;
 lf.ready(function() {
-	var orderId = lf.window.currentWebview().orderNo;
-	console.log(orderId)
+	var orderNo = lf.window.currentWebview().orderNo;
+	console.log(orderNo)
+	var params = {
+		orderNo: orderNo
+	};
+	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
+		if(data.code == 200) {
+			vm.trackInfo = data.data;
+			vm.shootInfoForms = data.data.lineSight;
+			vm.shootInfoForms.forEach(function(v, i) {
+				 v.shootTime = lf.util.timeStampToDate(data.data.shootTime)
+			})
+            if (data.data.fetchPhotoTime) {
+            	vm.trackInfo.fetchPhotoTime = lf.util.timeStampToDate(data.data.fetchPhotoTime)
+            }
+            else{
+            	vm.trackInfo.fetchPhotoTime = ''
+            }		
+			vm.currentOrderId = data.data.orderId;//记录订单Id
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
 	//				initDateChoose()
 	//				lf.window.closeCurrentWebview();
 	var opts = { "type": "date" }
@@ -56,11 +80,36 @@ mui('.shoot-info').on('tap', '.addshootinfo', function() { //添加拍摄信息
 	vm.shootInfoForms.push(obj)
 })
 mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
-	var orderid = this.getAttribute('data-orderid');
-	console.log(orderid)
-	lf.window.openWindow('orderdetails','orderdetails.html',{},{
-		orderId: orderid,
-	})
+	var params = {
+		orderId: vm.currentOrderId,
+		lineSightList: vm.shootInfoForms,
+		order: {
+			fetchPhotoTime: vm.trackInfo.fetchPhotoTime,
+			fetchPhotoScene: vm.trackInfo.fetchPhotoScene
+		},
+		tourGroups: {
+			id: vm.trackInfo.id,
+			personCount:vm.trackInfo.personCount,
+			groupType:  vm.trackInfo.groupType,
+			groupRoute:  vm.trackInfo.groupRoute,
+			groupDays:  vm.trackInfo.groupDays,
+			preReservedSeats:  vm.trackInfo.preReservedSeats,
+			busCardNo: vm.trackInfo.busCardNo
+		}
+	}
+	
+	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
+		if(data.code == 200) {
+			lf.nativeUI.toast('保存成功！');
+			lf.window.openWindow('order/orderdetails.html','../order/orderdetails.html',{},{
+				orderId: vm.currentOrderId
+			})
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
 })
 
 mui('.group-info').on('tap', '.time', function() {

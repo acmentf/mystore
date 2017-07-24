@@ -866,6 +866,34 @@ var lf = (function(document, undefined) {
 		strToJson: function(jsonStr) {
 			return JSON.parse(jsonStr);
 		},
+		timeStampToDate: function(timestamp) { //时间戳转换成正常日期格式
+			function add0(m) {
+				return m < 10 ? '0' + m : m
+			}
+			//timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+			var time = new Date(timestamp);
+			var year = time.getFullYear();
+			var month = time.getMonth() + 1;
+			var date = time.getDate();
+			var hours = time.getHours();
+			var minutes = time.getMinutes();
+			var seconds = time.getSeconds();
+			return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+		},
+		timeStampToDate2: function(timestamp) { //时间戳转换成年月日
+			function add0(m) {
+				return m < 10 ? '0' + m : m
+			}
+			//timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+			var time = new Date(timestamp);
+			var year = time.getFullYear();
+			var month = time.getMonth() + 1;
+			var date = time.getDate();
+//			var hours = time.getHours();
+//			var minutes = time.getMinutes();
+//			var seconds = time.getSeconds();
+			return year + '-' + add0(month) + '-' + add0(date);
+		},
 		jsonToStr: function(jsonObj) {
 			return JSON.stringify(jsonObj);
 		},
