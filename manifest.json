@@ -343,7 +343,9 @@
 					"js/framework/styles.js",
 					"images/message/icon_pending.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
 				"priority": 0
 			},
 			"app/order/ordersearch.html": {

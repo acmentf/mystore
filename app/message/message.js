@@ -2,12 +2,21 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		searchText: '',
-		msgList: [
-		],
+		msgList:  [{"clientId":null,"createdTime":1500890671000,"data":{"orderNo":"10100000001374","orderId":61,"type":1},"descption":"订单编号10100000001374已被小忆完成","id":3,"pushResult":null,"pushResultStatus":null,"status":0,"title":"订单编号10100000001374已被小忆完成","type":1,"updatedTime":null,"userId":1,"yn":null},{"clientId":null,"createdTime":null,"data":{"orderId":240},"descption":"测试2","id":2,"pushResult":null,"pushResultStatus":null,"status":0,"title":"测试2","type":1,"updatedTime":null,"userId":1,"yn":null}],
 		pageNo: 0,
 		pageNum: 10
 	},
 	computed: {
+	},
+	methods: {
+		dateChange:function(data){
+			if(data){
+				var date = new Date(data);
+				return date.format('yyyy-mm-dd')
+			}else{
+				return '';
+			}
+		}
 	}
 })
 lf.ready(function() {
@@ -21,7 +30,9 @@ document.getElementById('searchBtn').addEventListener('tap',function(){
 
 mui('.mui-content').on('tap','.message-li',function(){
 	var id = this.getAttribute('data-id');
-	console.log('id:'+id);
+	lf.window.openWindow('orderdetails.html', '../order/orderdetails.html', {}, {
+		orderNo: id
+	})
 })
 
 function findData(){
@@ -33,13 +44,21 @@ function findData(){
 	};
 	lf.net.getJSON('/information/queryPage',params,function (res) {
 		if(res.code == 200) {
-			vm.msgList = res.data.result
+			vm.msgList = doData(res.data.result)
 		}else{
 			lf.nativeUI.toast(res.msg)
 		}
     },function(res){
     	lf.nativeUI.toast(res.msg)
     })
+}
+
+function doData(data){
+	data.forEach(function(v){
+		v.data = JSON.parse(v.data);
+	})
+	console.log(JSON.stringify(data))
+	return data;
 }
 
 //			mui.init();
@@ -91,7 +110,7 @@ function initPull() {
 						lf.net.getJSON('/information/queryPage',params,function (res) {
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNo >= res.data.totalPages);
-								vm.msgList = vm.msgList.concat(res.data.result)
+								vm.msgList = vm.msgList.concat(doData(res.data.result))
 							}else{
 								self.endPullUpToRefresh();
 								vm.pageNo--;

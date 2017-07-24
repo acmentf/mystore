@@ -17,15 +17,12 @@ lf.ready(function() {
 	var params = {};
 	lf.net.getJSON('order/statistics', params, function(data) {
 		if(data.code == 200) {
-			if(data.data != null) { // 显示第三种页面样式
 				vm.pendingSum = data.data.pendingSum;
 				vm.completedSum = data.data.completedSum;
 				vm.cancelSum = data.data.cancelSum;
 				vm.assignmentSum = data.data.assignmentSum;
 				vm.countNoRead  = data.data.countNoRead;
-			} else {
-				
-			}
+			
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
