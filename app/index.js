@@ -4,7 +4,8 @@ var vm = new Vue({
 		pendingSum: 0,
 		completedSum: 0,
 		cancelSum: 0,
-		assignmentSum: 0
+		assignmentSum: 0,
+		messageCount: 0,
 	}
 })
 lf.ready(function() {
@@ -41,9 +42,10 @@ mui('.content').on('tap', '.mod', function() {
 	})
 })
 
-document.getElementById('searchBtn').addEventListener('tap', function() {
+mui('.toolbar').on('tap', '.search', function() {
 	lf.window.openWindow('order/ordersearch.html', 'order/ordersearch.html')
 })
-document.getElementById('messageBtn').addEventListener('tap', function() {
+
+mui('.toolbar').on('tap', '.message', function() {
 	lf.window.openWindow('message/message.html', 'message/message.html')
 })

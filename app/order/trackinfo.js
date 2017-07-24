@@ -7,7 +7,7 @@ var vm = new Vue({
 		timeName1: '上午',
 		timeName2: '下午',
 		timeName3: '晚上',
-		shootInfoForms: [{id: '', "journeyName": "", "periodType": 0, "shootTime": '' }],
+		shootInfoForms: [{ id: '', "journeyName": "", "periodType": 0, "shootTime": '' }],
 		trackInfo: {
 			/*"busCardNo": "0000",
 			"fetchPhotoScene": "麓谷",
@@ -21,7 +21,7 @@ var vm = new Vue({
 			"personCount": 10,
 			"preReservedSeats": 10*/
 		},
-		currentOrderId:''
+		currentOrderId: ''
 	}
 })
 var picke = null;
@@ -36,15 +36,14 @@ lf.ready(function() {
 			vm.trackInfo = data.data;
 			vm.shootInfoForms = data.data.lineSight;
 			vm.shootInfoForms.forEach(function(v, i) {
-				 v.shootTime = lf.util.timeStampToDate(data.data.shootTime)
+				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
 			})
-            if (data.data.fetchPhotoTime) {
-            	vm.trackInfo.fetchPhotoTime = lf.util.timeStampToDate(data.data.fetchPhotoTime)
-            }
-            else{
-            	vm.trackInfo.fetchPhotoTime = ''
-            }		
-			vm.currentOrderId = data.data.orderId;//记录订单Id
+			if(data.data.fetchPhotoTime) {
+				vm.trackInfo.fetchPhotoTime = lf.util.timeStampToDate2(data.data.fetchPhotoTime)
+			} else {
+				vm.trackInfo.fetchPhotoTime = ''
+			}
+			vm.currentOrderId = data.data.orderId; //记录订单Id
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
@@ -89,27 +88,41 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 		},
 		tourGroups: {
 			id: vm.trackInfo.id,
-			personCount:vm.trackInfo.personCount,
-			groupType:  vm.trackInfo.groupType,
-			groupRoute:  vm.trackInfo.groupRoute,
-			groupDays:  vm.trackInfo.groupDays,
-			preReservedSeats:  vm.trackInfo.preReservedSeats,
+			personCount: vm.trackInfo.personCount,
+			groupType: vm.trackInfo.groupType,
+			groupRoute: vm.trackInfo.groupRoute,
+			groupDays: vm.trackInfo.groupDays,
+			preReservedSeats: vm.trackInfo.preReservedSeats,
 			busCardNo: vm.trackInfo.busCardNo
 		}
 	}
-	
-	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
-		if(data.code == 200) {
-			lf.nativeUI.toast('保存成功！');
-			lf.window.openWindow('order/orderdetails.html','../order/orderdetails.html',{},{
-				orderId: vm.currentOrderId
-			})
-		} else {
-			lf.nativeUI.toast(data.msg);
+	var emptyFalg = false;
+	for(var i = 0; i < vm.shootInfoForms.length; i++) {
+		if(vm.shootInfoForms[i].journeyName == '') {
+			lf.nativeUI.toast('请填写拍摄地点！');
+			emptyFalg = true
+		} else if(vm.shootInfoForms[i].shootTime == '') {
+			lf.nativeUI.toast('请填写拍摄时间！');
+			emptyFalg = true
 		}
-	}, function(erro) {
-		lf.nativeUI.toast(erro.msg);
-	});
+	}
+	if(!emptyFalg) {
+		lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
+			if(data.code == 200) {
+				lf.nativeUI.toast('保存成功！');
+				/*lf.window.openWindow('order/orderdetails.html','../order/orderdetails.html',{},{
+					orderId: vm.currentOrderId
+				})*/
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function(erro) {
+			lf.nativeUI.toast(erro.msg);
+		});
+	}
+
 })
 
 mui('.group-info').on('tap', '.time', function() {

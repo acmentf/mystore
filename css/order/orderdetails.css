@@ -83,14 +83,13 @@
 	background: #D0D3E4;
 }
 
-.orderdetails .sale-table td {
+.sale-table td {
 	width: 20%;
-	text-align: center;
-	.orderdetails .sale-table span {
+	text-align: center;	
+}
+.orderdetails .sale-table span {
 		color: #333;
 	}
-}
-
 
 .orderdetails .sale-table .delete-ico {
 	background: url("../images/icon_phone.svg") no-repeat;
@@ -101,6 +100,20 @@
 	margin-right: 0.1rem;
 }
 
+.orderdetails  .routeinfo {
+        position: relative;
+        overflow: auto;
+        padding-left: 1.15rem !important;
+        color: #888;
+        
+    }
+.orderdetails  .routeinfo     label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.42rem;
+            display: inline-block;
+        }
 .popup-mod .ico {
 	background: #fff;
 	width: 2rem;
