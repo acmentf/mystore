@@ -36,6 +36,9 @@ lf.ready(function() {
 			break;
 	}
 })
+document.getElementById('searchDiv').addEventListener('tap',function(){
+	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
+})
 
 mui('.order-ul').on('tap', '.nr', function() {
 	var id = this.getAttribute('data-id');
