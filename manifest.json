@@ -262,7 +262,9 @@
 					null,
 					"fonts/mui.ttf",
 					"images/timg.jpg",
-					"images/logo.png"
+					"images/logo.png",
+					"images/logo_login.png",
+					"images/img_login.jpg"
 				],
 				"refer": [
 					"app/index.html"

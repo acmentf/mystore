@@ -67,8 +67,8 @@
 				    code:false,
 					tel:'',
 					type:1,
-                    account:'',
-					passWord:''
+                    account:'tuyi',
+					passWord:'123456'
 				}
 			});
 
@@ -128,33 +128,33 @@
 				if (!vm.passWord){
 			        lf.nativeUI.toast('请输入您的密码')
 					return
-				}else (
-					lf.nativeUI.toast('登录中')
-				)
+				}
                 var info = plus.push.getClientInfo();
-                console.log( "clientid: "+info.clientid );
                 var params = {
-                    account : vm.account,
+                    phone : vm.account,
                     password: vm.passWord,
                     clientId:info.clientid
 				}
-				lf.net.getJSON('/user/login',params,function (data) {
-					if(data.code == 200) {
-						window.Role.save({	
-							this.usercode = ;
-							this.username = '';
-							this.phone = params.account;
-							this.companyId = ''
-							this.userrole = data.systype;
-							this.loginsign = data.sign;
-							$.storage.put(j, JSON.stringify(k));
-							$.storage.put(s, data.tokunId);
-						})
-						console.log(data)
+                lf.nativeUI.showWaiting();
+				lf.net.getJSON('/user/login',params,function (res) {
+					lf.nativeUI.closeWaiting();
+					if(res.code == 200) {
+						var obj = {
+							usercode:res.data.id,
+							username:res.data.name,
+							phone:res.data.phone,
+							companyId:res.data.companyId,
+							userrole:res.data.positions[0].type,
+						}
+						window.Role.save(obj)
 						lf.window.openWindow('index','index.html')
+					}else{
+						lf.nativeUI.toast(res.msg)
 					}
+                },function(res){
+                	lf.nativeUI.closeWaiting();
+                	lf.nativeUI.toast(res.msg)
                 })
-//				lf.window.openWindow('index','index.html')
 			})
 		</script>
 	</body>
