@@ -8,26 +8,13 @@ var vm = new Vue({
 		timeName2: '下午',
 		timeName3: '晚上',
 		shootInfoForms: [{ id: '', "journeyName": "", "periodType": 0, "shootTime": '' }],
-		trackInfo: {
-			/*"busCardNo": "0000",
-			"fetchPhotoScene": "麓谷",
-			"fetchPhotoTime": 1502985600000,
-			"groupDays": "2",
-			"groupRoute": "第1天 【凤凰古城】\n\n07:00 汽车: 长沙火车站阿波罗广场集合，7：30左右 出发前往湘西，开始愉快的凤凰之旅，经宁乡、益阳、常德、沅陵、\n行程距离：450.00公里 行驶时间：390分钟\n第2天 【凤凰古城】\n  \n14:30 汽车: 根据旅行社安排中午12:00至15:00左右返回长沙（车行6个半小时左右），遇到旺季可能堵车，请勿购\n行程距离：450.00公里 行驶时间：390分钟",
-			"groupType": "跟团游",
-			"id": 126,
-			'personCount': 1,
-			"orderId": 126,
-			"personCount": 10,
-			"preReservedSeats": 10*/
-		},
+		trackInfo: {},
 		currentOrderId: ''
 	}
 })
 var picke = null;
 lf.ready(function() {
 	var orderNo = lf.window.currentWebview().orderNo;
-	console.log(orderNo)
 	var params = {
 		orderNo: orderNo
 	};
@@ -71,7 +58,6 @@ lf.ready(function() {
 })
 mui('.group-info').on('tap', '.shootTime', function() {
 	var index = this.getAttribute('data-index');
-	console.log('index:' + index)
 	initDateChoose(index);
 })
 mui('.shoot-info').on('tap', '.addshootinfo', function() { //添加拍摄信息
@@ -128,9 +114,7 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 mui('.group-info').on('tap', '.time', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
-		console.log(JSON.stringify(items[0]));
-
-		vm.shootInfoForms[index].periodType = items[0].value
+	vm.shootInfoForms[index].periodType = items[0].value
 		//返回 false 可以阻止选择框的关闭
 		//return false;
 	});
@@ -156,8 +140,6 @@ function initDateChoose(index) {
 		 * rs.h 时，用法同年
 		 * rs.i 分（minutes 的第二个字母），用法同年
 		 */
-		console.log(index)
-		console.log('选择结果: ' + rs.text)
 		vm.shootInfoForms[index].shootTime = rs.text
 		/* 
 		 * 返回 false 可以阻止选择框的关闭

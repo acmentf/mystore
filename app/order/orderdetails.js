@@ -11,51 +11,10 @@ var vm = new Vue({
 		photoPecent: 0,
 		userPecent: 0,
 		currentOrderId:'',
-		orderInfo: {
-			/*"orderId": 1,
-			"orderNo": "1234",
-			"tourId": 2,
-			"tourNo": "435",
-			"status": 1,
-			"totalPrice": 100,
-			"createTime": 2017 - 07 - 02,
-			"productName": "测试产品",
-			"lineName": "测试线路",
-			"purchaser": "采购方名称",
-			"tourGuide": "导游名字",
-			"tourGuidePhone": "13170459349"*/
-		},
-		orderTrackInfo: {
-			/*"personCount": 10,
-			"groupType": "团性质",
-			"groupDays": 2,
-			"groupRoute": "行程描述",
-			"busCardNo": "A0111",
-			"preReservedSeats": 10,
-			"fetchPhotoTime": "312321321",
-			"fetchPhotoScene": "取片地点"*/
-		},
-		orderResult: {
-			/*"selectsNum": 10,
-			"printsNum": 10,
-			"givesPicSize": 1,
-			"givesNum": 1,
-			"salesAmt": 10,
-			"salesNum": 10,
-			"buyers": 20,
-			"leavesNum": 0,
-			"orderXms": [{
-				"id": 1,
-				"orderId": 1,
-				"picSizeName": 1,
-				"price": 100,
-				"picNum": 10
-			}]*/
-		},
-		photographerInfos: [{
-			/*"photographerId": 1,
-			"photographerName": "张三"*/
-		}],
+		orderInfo: {},
+		orderTrackInfo: {},
+		orderResult: {},
+		photographerInfos: [{}],
 		currentTourId:'',
 		photographerId:'',
 		currentOrderNo:'',
@@ -65,6 +24,7 @@ var vm = new Vue({
 
 lf.ready(function() {	
 	renderOrderDetails();
+	vm.currentRole=window.Role.userrole;
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
@@ -81,7 +41,6 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.assign', function() { //点击指派
 		var orderid = this.getAttribute('data-orderid');
-		console.log(orderid)
 		lf.window.openWindow('common/chooseuser.html','../common/chooseuser.html',{},{
 			orderNo: orderid,
 			type:1
@@ -91,7 +50,6 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.allot', function() { //点击分配
 		var orderid = this.getAttribute('data-orderid');
-		console.log(orderid)
 		lf.window.openWindow('common/plancamera.html','../common/plancamera.html',{},{
 			orderNo: orderid
 		})
@@ -100,7 +58,6 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.trackinfo', function() { //点击跟踪信息
 		var orderNo = this.getAttribute('data-orderNo');
-		console.log(orderNo)
 		lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
 			orderNo: orderNo
 		})
@@ -116,16 +73,12 @@ lf.ready(function() {
 		}
 		else{
 			lf.nativeUI.confirm("操作提示", "确定要取消该订单吗?",  ["确定","取消"] ,function(e){
-		 		console.log( (e.index==0)?"Yes!":"No!" );
 		 		if(e.index==0){
 		 			var params = {
 						orderId: vm.currentOrderId,
 						orderState:3,
 						orderNo:vm.currentOrderNo
 					};
-					console.log(vm.currentOrderId)
-					console.log(vm.currentOrderStatus)
-					console.log(vm.currentOrderNo)
 		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
 						if(data.code == 200) {
 							lf.nativeUI.toast("订单取消成功！");
@@ -143,7 +96,6 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
-		console.log(orderid)
 		lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
 			orderNo: orderid
 		})
@@ -152,9 +104,6 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.mind', function() { //点击心得,进入录入心得页面
 		var orderid = this.getAttribute('data-orderid');
-		console.log(vm.currentTourId)
-		console.log(orderid)
-		console.log(vm.photographerId)
 		lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
             tourId: vm.currentTourId,
             orderId: orderid,
@@ -181,7 +130,6 @@ lf.event.listener('orderdetails',function(e){
 
 function renderOrderDetails(){
 	var orderId = lf.window.currentWebview().orderNo;
-	console.log('orderId:'+orderId)
 	var params = {
 		orderId: orderId
 	};
