@@ -196,6 +196,7 @@
 
 .finger-uploader .finger-uploader__files {
   list-style: none;
+  padding: 0;
 }
 
 .finger-uploader .finger-uploader__file {
@@ -311,12 +312,14 @@
 .summary-summary .uploader-wrap .finger-uploader__file .remove {
   /*display: none;*/
   position: absolute;
+  z-index: 10;
   top: 0.16rem;
   right: 0.16rem;
   background-color: rgba(0, 0, 0, 0.15);
   color: #948d8d;
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
   text-align: center;
   border-radius: 0.32rem;
 }

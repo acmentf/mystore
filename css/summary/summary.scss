@@ -20,12 +20,14 @@
       .remove{
         /*display: none;*/
         position: absolute;
+        z-index: 10;
         top: calc-rem(8);
         right: calc-rem(8);
         background-color: rgba(0,0,0,.15);
         color: #948d8d;
-        width: calc-rem(30);
-        height: calc-rem(30);
+        width: calc-rem(40);
+        height: calc-rem(40);
+        line-height: calc-rem(40);
         text-align: center;
         border-radius: calc-rem(16);
       }

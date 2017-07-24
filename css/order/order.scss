@@ -98,19 +98,22 @@
                 }
                 .imgbody{
                     position: relative;
-                    padding-left: 100px;
+                    padding-left: 2rem;
                     img{
                         position: absolute;
                         left: 0;
                         top: 0;
-                        width: 90px;
-                        height: 90px;
+                        width: 1.8rem;
+                        height: 1.8rem;
                     }
                 }
             }
             .bottom{
+                border-top: 1px solid #EEEEEE;
                 color: #888888;
                 position: relative;
+                height: 44px;
+                line-height: 44px;
                 .jespan{
                     position: relative;
                     top: 5px;
@@ -120,10 +123,9 @@
                 }
             }
             .btns{
-                border-top: 1px solid #EEEEEE;
                 text-align: right;
-                padding: 5px 0;
-
+                position: relative;
+                top: 5px;
             }
         }
     }
