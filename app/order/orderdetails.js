@@ -60,18 +60,38 @@ var vm = new Vue({
 })
 
 lf.ready(function() {
-	vm.timeConsume = new Date() - new Date(vm.orderInfo.createTime);
-	// 客单价 = 销售总额/购买人数 (前端计算)
-	vm.unitPrice = (vm.orderResult.salesAmt / vm.orderResult.buyers).toFixed(2)
-	// 照片转化率 = 销售总数/打印张数 (前端计算)
-	vm.photoPecent = (vm.orderResult.salesNum / vm.orderResult.printsNum).toFixed(2)
-	// 用户转化率  = 购买人数/团人数 (前端计算)
-	vm.userPecent = (vm.orderResult.buyers / vm.orderTrackInfo.personCount).toFixed(2)
-
-	vm.orderResult.orderXms.forEach(function(v, i) {
-		v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
-	})
-	vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
+	//var orderId = lf.window.currentWebview().orderNo;
+	//console.log('orderId:'+orderNo)
+	var params = {
+		orderId: 241
+	};
+	lf.net.getJSON('order/orderDetail', params, function(data) {
+		if(data.code == 200) {
+			vm.orderInfo = data.data.orderInfo;
+			vm.orderResult = data.data.orderResult;
+			vm.photographerInfos = data.data.photographerInfos;
+			vm.timeConsume = new Date() - new Date(vm.orderInfo.createTime);
+			// 客单价 = 销售总额/购买人数 (前端计算)
+			vm.unitPrice = (vm.orderResult.salesAmt / vm.orderResult.buyers).toFixed(2)
+			// 照片转化率 = 销售总数/打印张数 (前端计算)
+			vm.photoPecent = (vm.orderResult.salesNum / vm.orderResult.printsNum).toFixed(2)
+			// 用户转化率  = 购买人数/团人数 (前端计算)
+			vm.userPecent = (vm.orderResult.buyers / vm.orderTrackInfo.personCount).toFixed(2)
+		
+			vm.orderResult.orderXms.forEach(function(v, i) {
+				v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
+				lf.nativeUI.toast(v.total);
+			})
+			vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
+			
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
+	
+	
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
