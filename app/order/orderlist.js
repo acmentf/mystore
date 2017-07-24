@@ -1,6 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		index:0,
 		orderList: [
 			[],
 			[],
@@ -17,6 +18,11 @@ var vm = new Vue({
 })
 lf.ready(function() {
 	initPull();
+	
+	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+		vm.index = event.detail.slideNumber;
+	});
+	
 	var status = lf.window.currentWebview().status;
 	var gallery = mui('.mui-slider');
 	switch (status){
@@ -35,6 +41,8 @@ lf.ready(function() {
 		default:
 			break;
 	}
+	
+	
 })
 document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
@@ -211,3 +219,7 @@ function initPull() {
 		});
 	});
 }
+
+lf.event.listener('orderdetails',function(e){
+	mui(vm.index).pullToRefresh().pullDownLoading();
+})
