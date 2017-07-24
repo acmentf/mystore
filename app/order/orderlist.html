@@ -174,10 +174,10 @@
 											</div>
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns" v-show="item.status==1">
-													<button type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id">
+													<button type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
 														确认
 													</button>
-													<button type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id">
+													<button type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
 														取消
 													</button>
 												</div>

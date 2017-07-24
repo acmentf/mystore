@@ -11,7 +11,8 @@ var vm = new Vue({
 		pageNos:[
 			
 		],
-		pageNum: 10
+		pageNum: 10,
+		pullObjects:[]
 	}
 })
 lf.ready(function() {
@@ -48,21 +49,55 @@ mui('.order-ul').on('tap', '.nr', function() {
 
 mui('.order-ul').on('tap', '.qdbtn', function() {
 	var id = this.getAttribute('data-id')
+	var no = this.getAttribute('data-no')
 	//确认，取消
 	lf.nativeUI.confirm("", "你确认要执行订单",  ["确定","取消"] ,function(e){
- 		console.log( (e.index==0)?"Yes!":"No!" );
  		if(e.index == 0){
- 			
+ 			var params = {
+				"orderId":id,
+				"orderState": 2,
+				"orderNo": no
+			};
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('/order/updateOrderState',params,function (res) {
+				lf.nativeUI.closeWaiting()
+				if(res.code == 200) {
+					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+					lf.nativeUI.toast('操作成功')
+				}else{
+					lf.nativeUI.toast(res.msg)
+				}
+            },function(res){
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
  		}
   	});
 })
 mui('.order-ul').on('tap', '.qxbtn', function() {
 	var id = this.getAttribute('data-id')
+	var no = this.getAttribute('data-no')
 	//确认，取消
 	lf.nativeUI.confirm("", "你确认要取消订单",  ["确定","取消"] ,function(e){
- 		console.log( (e.index==0)?"Yes!":"No!" );
  		if(e.index == 0){
- 			
+ 			var params = {
+				"orderId":id,
+				"orderState": 3,
+				"orderNo": no
+			};
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('/order/updateOrderState',params,function (res) {
+				lf.nativeUI.closeWaiting()
+				if(res.code == 200) {
+					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+					lf.nativeUI.toast('操作成功')
+				}else{
+					lf.nativeUI.toast(res.msg)
+				}
+            },function(res){
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
  		}
   	});
 })
@@ -119,6 +154,7 @@ function initPull() {
 		//循环初始化所有下拉刷新，上拉加载。
 		mui.each(document.querySelectorAll('.mui-slider .mui-scroll'), function(index, pullRefreshEl) {
 			vm.pageNos[index] = 0;
+			vm.pullObjects[index] = pullRefreshEl;
 			mui(pullRefreshEl).pullToRefresh({
 				down: {
 					callback: function() {

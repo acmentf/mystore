@@ -285,7 +285,8 @@
 					"images/index/icon_messige_off.png",
 					"images/index/bg.png",
 					"images/index/icon_done.png",
-					"images/index/icon_search.png"
+					"images/index/icon_search.png",
+					"app/push.js"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -365,13 +366,19 @@
 					"images/order/img_done.png",
 					"images/order/img_cancel.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html"
+				],
 				"priority": 0
 			},
 			"app/order/trackinfo.html": {
 				"resources": [
 					"css/order/trackinfo.css",
-					"app/order/trackinfo.js"
+					"app/order/trackinfo.js",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0

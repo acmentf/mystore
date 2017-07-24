@@ -4,14 +4,8 @@ var vm = new Vue({
 		index:null,
 		type:0,
 		searchText: '',
-		personList: [{
-				id:1,
-				name:'张三'
-			},
-			{
-				id:2,
-				name:'李四'
-			}
+		orderId:'',
+		personList: [
 		],
 		photographer:[],// 已选人员
 		pick:'',
@@ -24,18 +18,55 @@ lf.ready(function() {
 	var wv = lf.window.currentWebview();
 	initPull();
 	vm.type = wv.type;
-	console.log('list:'+JSON.stringify(wv.list))
-	vm.pickList = wv.list
+	vm.orderId = wv.orderNo;
 	
 	if(vm.type == 1){
 		document.getElementById('header-title').innerHTML = '执行人'	
+		findZXR();
 	}else{
+		vm.pickList = wv.list
 		document.getElementById('header-title').innerHTML = '摄影师'
+		findSYS();
 	}
 	if(wv.index){
 		vm.index = wv.index;	
 	}
 })
+
+function findZXR(){
+	var params = {
+		name: vm.searchText
+	}
+	lf.nativeUI.showWaiting();
+	lf.net.getJSON('/order/getAllExecutor',params,function (res) {
+		lf.nativeUI.closeWaiting();
+		if(res.code == 200) {
+			vm.personList = res.data;
+		}else{
+			lf.nativeUI.toast(res.msg)
+		}
+    },function(res){
+    	lf.nativeUI.closeWaiting();
+    	lf.nativeUI.toast(res.msg)
+    })
+}
+function findSYS(){
+	var params = {
+		name: vm.searchText
+	}
+	lf.nativeUI.showWaiting();
+	lf.net.getJSON('/order/getAllPhotographer',params,function (res) {
+		lf.nativeUI.closeWaiting();
+		if(res.code == 200) {
+			vm.personList = res.data;
+		}else{
+			lf.nativeUI.toast(res.msg)
+		}
+    },function(res){
+    	lf.nativeUI.closeWaiting();
+    	lf.nativeUI.toast(res.msg)
+    })
+}
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
 	console.log('search')
@@ -61,6 +92,24 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 			list: list
 		})
 		lf.window.closeCurrentWebview();
+	}else{// 执行人
+		var params = {
+			orderId: vm.orderId,
+			assignId: vm.pick
+		}
+        lf.nativeUI.showWaiting();
+		lf.net.getJSON('/order/assignOrderExecutor',params,function (res) {
+			lf.nativeUI.closeWaiting();
+			if(res.code == 200) {
+				lf.event.fire(lf.window.currentWebview().opener(),'orderdetails')
+				lf.window.closeCurrentWebview();
+			}else{
+				lf.nativeUI.toast(res.msg)
+			}
+        },function(res){
+        	lf.nativeUI.closeWaiting();
+        	lf.nativeUI.toast(res.msg)
+        })
 	}
 })
 //			mui.init();
