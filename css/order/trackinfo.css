@@ -50,6 +50,15 @@
 }
 .trackinfo .addshootinfo{
 	text-align: center;
-	color: #0000FF;
-	margin: 0.1rem 0;
+	color: #007EFF;
+	margin: 0.2rem 0;
+}
+.trackinfo .addshootinfo .ico{
+	background: url(../../images/order/icon_add.png) no-repeat;
+	background-size: 100% 100%;
+	width: 0.24rem;
+	height:0.24rem;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.1rem;
 }
