@@ -14,7 +14,7 @@ lf.ready(function() {
 		console.log('search:'+ vm.searchText)
 		vm.showAnswer = true;
 		var params = {
-			searchText:vm.seachTest,
+			searchText:vm.searchTest,
 			status:'',
 			currPage :1,
 			pageSize : 10
@@ -25,7 +25,7 @@ lf.ready(function() {
 				lf.nativeUI.closeWaiting();
 				if(data.code == "200"){
 				vm.orderList = data.data.result;
-				console.log("orderList"+JSON.stringify(vm.orderList))
+//				console.log("orderList=="+vm.orderList.length)
 			}else{
 				lf.nativeUI.toast(data.msg);
 			}
