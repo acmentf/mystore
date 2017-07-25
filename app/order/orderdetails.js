@@ -18,11 +18,23 @@ var vm = new Vue({
 		currentTourId:'',
 		photographerId:'',
 		currentOrderNo:'',
-		currentOrderStatus:''
+		currentOrderStatus:'',
+		allotRole: false,
+		assignRole:false,
+		cancelRole:false,
+		summaryRole:false,
+		feedbackRole:false,
+		handleRole:false
 	}
 })
 
-lf.ready(function() {	
+lf.ready(function() {
+	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
+	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
+	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
+	vm.summaryRole = window.Role.hasAuth('summary')// 录入心得按钮的key
+	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
+	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
 	renderOrderDetails();
 	vm.currentRole=window.Role.userrole;
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字

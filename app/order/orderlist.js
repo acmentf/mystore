@@ -13,10 +13,18 @@ var vm = new Vue({
 			
 		],
 		pageNum: 10,
-		pullObjects:[]
+		pullObjects:[],
+		cancelRole:false,
+		confirmRole:false,
+		feedbackRole:false,
+		handleRole:false
 	}
 })
 lf.ready(function() {
+	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
+	vm.confirmRole =window.Role.hasAuth('confirm')// 确定按钮的key
+	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
+	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
 	initPull();
 	
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
