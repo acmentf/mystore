@@ -1,8 +1,8 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		maskShow: false, //遮罩
-		popupShow: false, //弹窗
+		maskShow: true, //遮罩
+		popupShow: true, //弹窗
 		resultInfo: [],
 		orderStatus: 0, //订单状态
 		currentRole: 0, //当前角色

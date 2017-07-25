@@ -20,6 +20,7 @@
   height: 0.6rem;
   display: inline-block;
   margin: 0 0.1rem;
+  vertical-align: middle;
 }
 
 .app-index .toolbar .message {
@@ -101,4 +102,10 @@
 	font-size: 0.28rem;
 	color: #9f9f9f;
 	text-align: center;
+}
+.app-index  .icon-tuichu{
+	color: #fff;
+	font-size: 0.6rem;
+	margin: 0 0.1rem;
+    vertical-align: middle;
 }

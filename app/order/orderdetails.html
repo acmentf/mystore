@@ -238,38 +238,38 @@
 		<div v-show="maskShow" class="mask"></div>
 		<div v-show="popupShow" class="popup-mod">
 				<ul>
-					<li>
-						<div class="mod assign" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1' >
+					<li v-if='currentRole==0||currentRole==1' >
+						<div class="mod assign" :data-orderid="currentOrderId" >
 							<div class="ico">指派</div>
 							
 						</div>
 					</li>
-					<li>
-						<div class="mod allot" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==3'>
+					<li  v-if='currentRole==0||currentRole==3'>
+						<div class="mod allot" :data-orderid="currentOrderId">
 							<div class="ico">分配</div>
 							
 						</div>
 					</li>
-					<li>
-						<div class="mod trackinfo" :data-orderNo="currentOrderNo" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3' >
+					<li  v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3'>
+						<div class="mod trackinfo" :data-orderNo="currentOrderNo" >
 							<div class="ico">跟踪信息</div>
 						
 						</div>
 					</li>
-					<li>
-						<div class="mod cancled" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1' >
+					<li v-if='currentRole==0||currentRole==1' >
+						<div class="mod cancled" :data-orderid="currentOrderId" >
 							<div class="ico">取消</div>
 							
 						</div>
 					</li>
-					<li>
-						<div class="mod excuteresult" :data-orderid="currentOrderId" v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3||currentRole==4' >
+					<li  v-if='currentRole==0||currentRole==1||currentRole==2||currentRole==3||currentRole==4' >
+						<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">执行信息</div>
 						
 						</div>
 					</li>
-					<li>
-						<div class="mod mind" :data-orderid="currentOrderId" :data-tourId="currentOrderId" :data-photographerId="currentOrderId" v-if='currentRole==0||currentRole==4' >
+					<li v-if='currentRole==0||currentRole==4' >
+						<div class="mod mind" :data-orderid="currentOrderId" :data-tourId="currentOrderId" :data-photographerId="currentOrderId" >
 							<div class="ico">心得</div>							
 						</div>
 					</li>
