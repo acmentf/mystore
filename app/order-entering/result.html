@@ -86,12 +86,6 @@
 				    salesAmt: '',
 				    buyers: '',
                     orderXms: [
-                    	{
-                		picSize: '',
-				        price: '',
-				        picNum: '',
-				        picSizeName: ''
-                    	},	
                     ]
 				},
 				methods: {
@@ -147,6 +141,9 @@
             	lf.net.getJSON('/order/getOrderResult',params,function(res){
             		lf.nativeUI.closeWaiting()
             		if(res.code == 200){
+            			if(!res.data){
+            				return;
+            			}
             			vm.buyers = res.data.orderX.buyers
             			vm.givesNum = res.data.orderX.givesNum
             			vm.givesPicSize = res.data.givesPicSize
@@ -266,9 +263,8 @@
 				lf.window.openWindow('add-detail','add-detail.html')
 			})
 			lf.event.listener('listchange',function(e){
+				console.log(JSON.stringify(e.detail))
 				vm.orderXms.push(e.detail)
-//				vm.orderXms.picSize = e.detail.picSize
-
 			})
 		</script>
 	</body>

@@ -419,7 +419,8 @@
 				"refer": [
 					"app/order-entering/result.html",
 					"app/common/chooseuser.html",
-					"app/common/plancamera.html"
+					"app/common/plancamera.html",
+					"app/order/trackinfo.html"
 				],
 				"priority": 0
 			},
