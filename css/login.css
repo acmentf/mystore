@@ -33,8 +33,9 @@
 }
 .login-container .login-input-tel .mui-icon-clear {
 	position: absolute;
-	top: 0;
 	right:1rem!important;
+	display: flex;
+	justify-content: center;
 }
 .login-container .code-btn{
 	display: inline-block;
