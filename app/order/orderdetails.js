@@ -188,7 +188,8 @@ function renderOrderDetails(){
 				vm.orderResult.orderXms.forEach(function(v, i) {
 					v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
 				})
-			}		
+			}	
+			vm.orderInfo.totalPrice = (vm.orderInfo.totalPrice/100).toFixed(2);
 			vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
 			vm.currentTourId = data.data.orderInfo.tourId;//记录tourId		
 			vm.currentOrderStatus =  data.data.orderInfo.status;//记录订单状态
