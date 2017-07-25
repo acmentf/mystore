@@ -59,8 +59,9 @@
 }
 .login-container .login-input-code .mui-icon-clear{
 	position: absolute;
-	top: 0;
 	right:1rem!important;
+	display: flex;
+	justify-content: center;
 }
 .login-container .login-input-code input{
 	margin-bottom:0.1rem!important ;
