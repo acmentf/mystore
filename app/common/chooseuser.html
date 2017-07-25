@@ -119,9 +119,9 @@
 					</div>
 				</li>
 				<li class="mui-table-view-cell" v-for="data in personList" v-if="type == 1">
-					<div class="mui-input-row mui-radio mui-left">
+					<div class="mui-input-row mui-checkbox  mui-left">
 						<label v-text="data.name"></label>
-						<input name="radio" v-model="pick" :value="data.id" type="radio">
+						<input name="checkbox" v-model="pick" :value="data.id" type="checkbox">
 					</div>
 				</li>
 			</ul>

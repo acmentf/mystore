@@ -8,7 +8,7 @@ var vm = new Vue({
 		personList: [
 		],
 		photographer:[],// 已选人员
-		pick:'',
+		pick:[],
 		pickList:[]
 	},
 	computed: {
@@ -72,9 +72,6 @@ document.getElementById('searchBtn').addEventListener('tap',function(){
 	console.log('search')
 })
 document.getElementById('saveBtn').addEventListener('tap',function(){
-	console.log(JSON.stringify(vm.pick))// 获取单选值
-	
-	console.log(JSON.stringify(list))
 	if(vm.type == 2){
 		console.log(JSON.stringify(vm.pickList))// 获取多选值
 		var list = [];
