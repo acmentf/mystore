@@ -94,6 +94,20 @@
                     	},	
                     ]
 				},
+				mounted:function(){
+					watch('data', function (newVal, oldVal) {
+	                var rs = lf.extend(true, {}, newVal)
+		                if (rs.orderXms && rs.orderXms.length > 0) {
+		                    var sum = 0
+		                    rs.orderXms.forEach((v) => {
+		                        sum = lf.util.addNum(sum, lf.util.multNum(v.picNum, v.price))
+		                    })
+		                    vm.salesAmt = sum
+		                } else {
+		                    vm.salesAmt = 0
+		                }
+					}
+				}
 				methods: {
 					deleteTable:function (index) {
 						this.orderXms.splice(index,1);
