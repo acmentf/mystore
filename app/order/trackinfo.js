@@ -12,7 +12,7 @@ var vm = new Vue({
 		currentOrderId: ''
 	}
 })
-var picke = null;
+var picker = null;
 lf.ready(function() {
 	var orderNo = lf.window.currentWebview().orderNo;
 	var params = {
@@ -121,6 +121,10 @@ mui('.group-info').on('tap', '.time', function() {
 
 })
 
+mui('.mui-input-row').on('tap', '.fetchtime', function() {
+	initFetchTimeChoose();
+})
+
 function initDateChoose(index) {
 	//					var optionsJson = this.getAttribute('data-options') || '{}';
 	//					var options = JSON.parse(optionsJson);
@@ -152,5 +156,15 @@ function initDateChoose(index) {
 		 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 		 */
 		//						picker.dispose();
+	});
+}
+
+function initFetchTimeChoose() {
+	
+	picker.show(function(rs) {
+		
+//		vm.trackInfo.fetchPhotoTime = rs.text
+		Vue.set(vm.trackInfo , 'fetchPhotoTime' , rs.text)
+		console.log(vm.trackInfo.fetchPhotoTime)			
 	});
 }

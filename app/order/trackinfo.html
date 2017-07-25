@@ -48,11 +48,11 @@
 									</div>-->
 									<div class="mui-input-row">
 										<label>车牌号码</label>
-										<input type="text"  v-model='trackInfo.busCardNo' readonly="readonly" class="mui-input-clear" placeholder="">
+										<input type="text"  v-model='trackInfo.busCardNo'  class="mui-input-clear" placeholder="">
 									</div>
 									<div class="mui-input-row">
 										<label>预留座位</label>
-										<input type="text"  v-model='trackInfo.preReservedSeats'  readonly="readonly" class="mui-input-clear" placeholder="">
+										<input type="text"  v-model='trackInfo.preReservedSeats'   class="mui-input-clear" placeholder="">
 									</div>
 								</div>
 							</div>
@@ -77,11 +77,11 @@
 									</div>
 									<div class="mui-input-row">
 										<label>取片时间</label>
-										<input v-model='trackInfo.fetchPhotoTime' type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+										<input v-model='trackInfo.fetchPhotoTime' readonly="readonly" type="text" class="mui-input-clear fetchtime" >
 									</div>
 									<div class="mui-input-row">
 										<label>取片地点</label>
-										<input v-model='trackInfo.fetchPhotoScene' type="text" readonly="readonly" class="mui-input-clear" placeholder="">
+										<input v-model='trackInfo.fetchPhotoScene' type="text"  class="mui-input-clear" placeholder="">
 									</div>
 								</div>
 							</div>
@@ -113,7 +113,7 @@
 								</div>						
 							</div>
 							<div class="addshootinfo">
-									<span class="ico"></span>添加拍摄信息
+									<span class="ico"></span><span style="vertical-align: middle;">添加拍摄信息</span>
 							</div>
 						</div>
 					</li>
