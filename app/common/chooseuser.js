@@ -92,7 +92,7 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 	}else{// 执行人
 		var params = {
 			orderId: vm.orderId,
-			assignId: vm.pick
+			assignId: vm.pick.join(',')
 		}
         lf.nativeUI.showWaiting();
 		lf.net.getJSON('/order/assignOrderExecutor',params,function (res) {

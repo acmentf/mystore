@@ -2360,6 +2360,7 @@ var lf = (function(document, undefined) {
 		phone:"",
 		companyId:"",
 		loginsign:"",
+		auths:[],
 		init:function(){
 			this._init();
 		},
@@ -2375,6 +2376,7 @@ var lf = (function(document, undefined) {
 					this.phone = l.phone;
 					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
+					this.auths = l.auths;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
@@ -2382,6 +2384,7 @@ var lf = (function(document, undefined) {
 					this.usercode = "";
 					this.phone = "";
 					this.companyId = "";
+					this.auths = [];
 				}
 			} else {
 				this.loginsign = "";
@@ -2390,6 +2393,7 @@ var lf = (function(document, undefined) {
 				this.usercode = "";
 				this.phone = "";
 				this.companyId = "";
+				this.auths = [];
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
@@ -2400,6 +2404,7 @@ var lf = (function(document, undefined) {
 			this.phone = k.phone;
 			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
+			this.auths = k.auths;
 			$.storage.put(j, JSON.stringify(k));
 			$.storage.put(s, k.tonken);
 		},
@@ -2407,6 +2412,16 @@ var lf = (function(document, undefined) {
 			$.storage.removeItem(s);
 			$.storage.removeItem(j);
 			this._init();
+		},
+		hasAuth:function(key){
+			var flag = false;
+			for(var i in this.auths){
+				if(this.auths[i] == key){
+					flag = true;
+					break;
+				}
+			}
+			return flag
 		},
 		getSignature:function(){
 			var signaturePwd = $.storage.get(s);
