@@ -30,7 +30,7 @@
 		        <label>赠送张数：</label>
 		        <div class="select">
 		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
-		        <input type="text" v-model='givesPicSize' class="select-size" readonly="readonly"  placeholder="尺寸"/>
+		        <input type="text" v-model="givesPicSize" class="select-size" readonly="readonly"  placeholder="尺寸"/>
 		        </div>
 		        <input v-model="givesNum" type="number" class="mui-input-clear select-number" placeholder="请输入赠送张数">       
 		    </div>
@@ -51,7 +51,7 @@
 		    		<td >{{v.price}}</td>
 		    		<td >{{v.picNum}}</td>
 		    		<td v-text="addNum(v.price,v.picNum)"></td>
-		    		<td><span @click="deleteTable" :index="index" class="mui-icon mui-icon-minus"></span></td>
+		    		<td><span :data-index="index" class="mui-icon mui-icon-minus deleteBtn"></span></td>
 		    	</tr>
 		    </table>	
 		    <div class="mui-input-row">
@@ -86,26 +86,28 @@
 				    salesAmt: '',
 				    buyers: '',
                     orderXms: [
+                    {
+                    	picSizeName:'11',
+                    	price:'11',
+                    	picNum:'11'
+                    },
+                    {
+                    	picSizeName:'22',
+                    	price:'22',
+                    	picNum:'22'
+                    },
+                    {
+                    	picSizeName:'33',
+                    	price:'33',
+                    	picNum:'33'
+                    },{
+                    	picSizeName:'44',
+                    	price:'44',
+                    	picNum:'44'
+                    }
                     ]
 				},
-				mounted:function(){
-					watch('data', function (newVal, oldVal) {
-	                var rs = lf.extend(true, {}, newVal)
-		                if (rs.orderXms && rs.orderXms.length > 0) {
-		                    var sum = 0
-		                    rs.orderXms.forEach((v) => {
-		                        sum = lf.util.addNum(sum, lf.util.multNum(v.picNum, v.price))
-		                    })
-		                    vm.salesAmt = sum
-		                } else {
-		                    vm.salesAmt = 0
-		                }
-					}
-				}
 				methods: {
-					deleteTable:function (index) {
-						this.orderXms.splice(index,1);
-					},
 					addNum: function (num1, num2) {
 		                var num = lf.util.multNum(num1, num2)
 		                return num
@@ -113,12 +115,6 @@
 				}
 			})
 			lf.ready(function() {
-				
-				var wv = lf.window.currentWebview()
-				vm.orderId = wv.orderNo
-				vm.orderXms.picSize = wv.picSize
-				vm.orderXms.price = wv.price
-				vm.orderXms.picNum = wv.picNum
 				var opts = {"type":"date"}
                 picker = new mui.DtPicker(opts);
                 userPicker = new mui.PopPicker();
@@ -139,13 +135,21 @@
                     text: '6寸'
                 }
                 ]);
+				var wv = lf.window.currentWebview()
+				vm.orderId = wv.orderNo
+				vm.orderXms.picSize = wv.picSize
+				vm.orderXms.price = wv.price
+				vm.orderXms.picNum = wv.picNum
                 loadResult()
-
             })
-            mui('.select').on('tap','.select-size',function(){
-	            userPicker.show(function(items) {
-	                vm.givesPicSize = items[0].text
-	            });
+           	mui('.group-info').on('tap','.select-size',function(){
+                userPicker.show(function(items) {
+                    vm.givesPicSize = items[0].text
+                });
+            })
+            mui('.listchange').on('tap','.deleteBtn',function(){
+            	var index = this.getAttribute('data-index')
+            	vm.orderXms.splice(index,1)
             })
             function loadResult (){
             	var params ={
@@ -278,7 +282,7 @@
 			})
 			lf.event.listener('listchange',function(e){
 				console.log(JSON.stringify(e.detail))
-				vm.orderXms.push(e.detail)
+				vm.orderXms.push(e.detail)				
 			})
 		</script>
 	</body>
