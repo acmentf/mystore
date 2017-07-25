@@ -1,8 +1,8 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		maskShow: true, //遮罩
-		popupShow: true, //弹窗
+		maskShow: false, //遮罩
+		popupShow: false, //弹窗
 		resultInfo: [],
 		orderStatus: 0, //订单状态
 		currentRole: 0, //当前角色
@@ -40,7 +40,8 @@ lf.ready(function() {
 			vm.popupShow = true;
 		}	
 	});
-	mui('body').on('tap', '.mask', function() { //点击遮罩层隐藏弹窗
+	mui('body').on('tap', '.mask', function(event) { //点击遮罩层隐藏弹窗
+		event.stopPropagation();
 		vm.maskShow = false;
 		vm.popupShow = false;
 	})

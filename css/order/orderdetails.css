@@ -118,29 +118,29 @@
         }
 .popup-mod .ico {
 	background: #fff;
-	width: 2rem;
-	height: 2rem;
+	width: 1.6rem;
+	height:1.6rem;
 	text-align: center;
-	line-height: 2rem;
+	line-height: 1.6rem;
 	border-radius: 50%;
-	margin: 0.1rem auto;
+	font-size: 0.3rem;
 }
 .popup-mod ul {
 	overflow: hidden;
 	padding: 0;
+	margin: 0;
 }
 .popup-mod li {
-	width: 50%;
 	list-style: none;
 	float: left;
 	text-align: center;
-	height: 2rem;
-	margin-bottom: 0.4rem;
+	height: 1.6rem;
+	width:50% ;
+	margin-bottom:0.4rem ;
 }
 .popup-mod li .mod{
-	height: 2rem;
-	width: 2rem;
-	margin: 0 auto;
+	height: 1.6rem;
+	width: 1.6rem;
 }
 .mask {
 	position: fixed;
@@ -154,9 +154,9 @@
 .popup-mod {
 	position: fixed;
 	z-index: 999;
-	top: 17%;
-	left: 10%;
-	width: 80%;
+	top: 24%;
+	left: 22%;
+	width: 4.4rem;
 	padding: 0.4rem 0;
 }
 .popup-mod .mui-btn {
