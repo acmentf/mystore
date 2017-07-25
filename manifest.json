@@ -379,7 +379,9 @@
 					"images/order/img_cancel.png"
 				],
 				"refer": [
-					"app/order-entering/result.html"
+					"app/order-entering/result.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html"
 				],
 				"priority": 0
 			},
