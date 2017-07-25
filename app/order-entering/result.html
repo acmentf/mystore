@@ -46,7 +46,7 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr v-if="havaData" class="listchange" v-for="(v, index ) in orderXms">
+		    	<tr  class="listchange" v-for="(v, index ) in orderXms">
 		    		<td >{{v.picSizeName}}</td>
 		    		<td >{{v.price}}</td>
 		    		<td >{{v.picNum}}</td>
@@ -76,7 +76,6 @@
 			var vm = new Vue({
 				el: '#resultData',
 				data: {
-					havaData:false,
                 	orderId: '',
 				    id: '',
 				    selectsNum: '',
@@ -106,10 +105,7 @@
 				}
 			})
 			lf.ready(function() {
-				if(vm.orderXms.picSize==""&&vm.orderXms.price==""&&vm.orderXms.picNum==""){
-            				vm.havaData = true
-            				return
-            			}
+				
 				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
@@ -136,6 +132,7 @@
                 }
                 ]);
                 loadResult()
+
             })
             mui('.select').on('tap','.select-size',function(){
 	            userPicker.show(function(items) {
@@ -269,8 +266,9 @@
 				lf.window.openWindow('add-detail','add-detail.html')
 			})
 			lf.event.listener('listchange',function(e){
-//				vm.orderXms.push(e.detail)
-				vm.orderXms.picSize = e.detail.picSize
+				vm.orderXms.push(e.detail)
+//				vm.orderXms.picSize = e.detail.picSize
+
 			})
 		</script>
 	</body>
