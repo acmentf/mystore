@@ -15,7 +15,7 @@
 			<div class="login-header">
 				<div></div>
 			</div>	
-			<div v-if="type==1">
+			<div v-show="type==1">
 				<div class="mui-input-row login-input-tel">
 					<input type="text" class="mui-input-clear" v-model='account' placeholder="请输入账号">
 				</div>
@@ -40,15 +40,23 @@
 				data: {
 				    code:false,
 					tel:'',
-					type:1,
-                    account:'tuyi',
-					passWord:'123456'
+					type:0,
+                    account:'',
+					passWord:''
 				}
 			});
 
 			lf.ready(function(){
-
+				var loginsign = window.Role.loginsign;
+				if(loginsign){
+					plus.navigator.closeSplashscreen();
+					lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
+				}else{
+					vm.type = 1
+					plus.navigator.closeSplashscreen();
+				}
 			})
+			
 			document.getElementById('accountlogin').addEventListener('tap',function(){
 			    if (!vm.account){
                     lf.nativeUI.toast('请输入您的账号');
@@ -68,18 +76,23 @@
 				lf.net.getJSON('/user/login',params,function (res) {
 					lf.nativeUI.closeWaiting();
 					if(res.code == 200) {
-						console.log(res)
+						if(!res.data.positions || (res.data.positions&&res.data.positions.length <= 0)){
+							lf.nativeUI.toast('无效的用户')
+//							return ;
+						}
 						var obj = {
 							usercode:res.data.id,
 							username:res.data.name,
 							phone:res.data.phone,
 							companyId:res.data.companyId,
 							companyId:res.data.companyId,
-							userrole:res.data.positions[0].type,
-							tonken:res.data.token
+//							userrole:res.data.positions[0].type,
+							userrole: 0,
+							tonken:res.data.token,
+							loginsign: '1'
 						}
 						window.Role.save(obj)
-						lf.window.openWindow('index','index.html')
+						lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
 					}else{
 						lf.nativeUI.toast(res.msg)
 					}
