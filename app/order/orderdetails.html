@@ -22,17 +22,17 @@
 				<!--1：已支付 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
 				<div v-show='orderInfo.status == 1||orderInfo.status == 2||orderInfo.status == 4||orderInfo.status == 5||orderInfo.status == 6' class="mod pending">
 					<div class="title">等待你的执行</div>
-					<div>订单到达你手中已经<span v-text="timeConsume"></span></div>
+					<div class="intro">订单到达你手中已经<span v-text="timeConsume"></span></div>
 					<span class="ico ico-pending"></span>
 				</div>
 				<div v-show='orderInfo.status == 3' class="mod cancled">
 					<div class="title">该订单已取消</div>
-					<div>你的订单已经取消，请进行其他操作</div>
+					<div  class="intro">你的订单已经取消，请进行其他操作</div>
 					<span class="ico ico-cancled"></span>
 				</div>
 				<div v-show='orderInfo.status == 7' class="mod completed">
 					<div class="title">该订单已完成</div>
-					<div>你的订单已完成</div>
+					<div  class="intro">你的订单已完成</div>
 					<span class="ico ico-completed"></span>
 				</div>
 			</div>

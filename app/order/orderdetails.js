@@ -97,7 +97,8 @@ lf.ready(function() {
 		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
 						if(data.code == 200) {
 							lf.nativeUI.toast("订单取消成功！");
-							lf.event.fire(lf.window.currentWebview().opener(), 'orderlist', {})
+							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+							lf.window.closeCurrentWebview();
 						} else {
 							lf.nativeUI.toast(data.msg);
 						}
