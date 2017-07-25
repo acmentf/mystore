@@ -32,10 +32,8 @@
 		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
 		        <input type="text" v-model='givesPicSize' class="select-size" readonly="readonly"  placeholder="尺寸"/>
 		        </div>
-		        <input type="number" v-model="givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">
-		        
+		        <input type="number" v-model="givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">        
 		    </div>
-		    
 		    <div  class="mui-input-row add-detail-box">
 		  		<label class="add-detail-btn">销售明细：</label>
 		  		<span id="add-detail" class="add-detail-icon mui-icon mui-icon-plus">增加</span>
@@ -55,7 +53,6 @@
 		    		<td v-text="addNum(v.price,v.picNum)"></td>
 		    		<td><span @click="deleteTable" :index="index" class="mui-icon mui-icon-minus"></span></td>
 		    	</tr>
-
 		    </table>	
 		    <div class="mui-input-row">
 		        <label>销售总额：</label>
@@ -107,9 +104,7 @@
 	            	}
 				}
 			})
-
 			lf.ready(function() {
-				console.log(JSON.stringify(vm.orderXms))
 				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
@@ -137,7 +132,6 @@
                 ]);
                 loadResult()
             })
-			
             mui('.select').on('tap','.select-size',function(){
 	            userPicker.show(function(items) {
 	                vm.givesPicSize = items[0].text
@@ -178,7 +172,6 @@
 								vm.givesPicSize='6寸'
 								break
 						}
-						console.log(JSON.stringify(vm.orderXms))
 						switch(vm.orderXms.picSize){
 							case '1':
 								vm.orderXms.picSize ='16寸'
@@ -197,16 +190,14 @@
 								break
 						}
             		}else{
-            			lf.nativeUI.toast(data.msg);
+            			lf.nativeUI.toast(res.msg);
             		}
             	},function(res){
             	lf.nativeUI.closeWaiting()
             	lf.nativeUI.toast(res.msg)
             })
-            	
             }
             document.getElementById('save').addEventListener('tap',function(){
-     			
             	switch(vm.orderXms.picSize){
 					case '16寸':
 						vm.orderXms.picSize ='1'
@@ -224,7 +215,6 @@
 						vm.orderXms.picSize ='5'
 						break
 				}
-            	console.log(vm.orderXms.picSize)
 				var params = {
 						orderId: vm.orderId,
 					    id: vm.id,
@@ -236,12 +226,9 @@
 					    salesAmt: vm.salesAmt,
 					    buyers: vm.buyers,
 					    orderXms:vm.orderXms
-					    
 					}
 				lf.nativeUI.showWaiting()
-				console.log(JSON.stringify(params.orderXms))
-				lf.net.getJSON('order/saveOrderResult',params,function(data){
-					
+				lf.net.getJSON('order/saveOrderResult',params,function(res){
 					lf.nativeUI.closeWaiting()
 					switch(params.givesPicSize){
 						case '16寸':
@@ -260,17 +247,21 @@
 							params.givesPicSize ='5'
 							break
 					}
-					if(data.code == 200){
+					if(res.code == 200){
 						lf.nativeUI.toast('保存成功！');
 						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 						lf.window.closeCurrentWebview();
-					}
-				})
+					}else{
+            			lf.nativeUI.toast(res.msg);
+            		}
+				},function(res){
+            	lf.nativeUI.closeWaiting()
+            	lf.nativeUI.toast(res.msg)
+            })
 			})
 			document.getElementById('add-detail').addEventListener('tap',function(){
 				lf.window.openWindow('add-detail','add-detail.html')
 			})
-			
 			lf.event.listener('listchange',function(e){
 				vm.orderXms.push(e.detail)
 			})
