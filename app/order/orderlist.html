@@ -170,7 +170,7 @@
 										</div>
 										<div class="mui-table bottom">
 											<div class="mui-table-cell mui-col-xs-4">
-												<span class="jespan">金额: <span>￥{{item.totalPrice}}</span></span>
+												<span class="jespan">金额: <span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
 											</div>
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns" v-show="item.status==1">

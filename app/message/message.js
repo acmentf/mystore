@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		searchText: '',
-		msgList:  [{"clientId":null,"createdTime":1500890671000,"data":{"orderNo":"10100000001374","orderId":61,"type":1},"descption":"订单编号10100000001374已被小忆完成","id":3,"pushResult":null,"pushResultStatus":null,"status":0,"title":"订单编号10100000001374已被小忆完成","type":1,"updatedTime":null,"userId":1,"yn":null},{"clientId":null,"createdTime":null,"data":{"orderId":240},"descption":"测试2","id":2,"pushResult":null,"pushResultStatus":null,"status":0,"title":"测试2","type":1,"updatedTime":null,"userId":1,"yn":null}],
+		msgList:  [],
 		pageNo: 0,
 		pageNum: 10
 	},
