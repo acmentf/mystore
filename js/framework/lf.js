@@ -1465,8 +1465,13 @@ var lf = (function(document, undefined) {
 			var error = options.error;
 			var _success = function(data, textStatus, xhr) {
 				$.log.debug("received[" + action + "]：" + JSON.stringify(data));
-				if(!(success === undefined)) {
-					success(data);
+				if(data.code == '401') {
+					window.Role.logout();
+					plus.runtime.restart();
+				} else {
+					if(!(success === undefined)) {
+						success(data);
+					}
 				}
 			};
 			var _error = function(xhr, type, errorThrown) {
