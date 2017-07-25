@@ -48,7 +48,7 @@ mui('.toolbar').on('tap', '.message', function() {
 })
 
 mui('.toolbar').on('tap', '.icon-tuichu', function() {
-	lf.nativeUI.confirm("操作提示", "确定要能出当前用户吗?", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 		if(e.index == 0) {
 			window.Role.logout();
 			plus.runtime.restart();
