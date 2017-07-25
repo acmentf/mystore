@@ -32,7 +32,7 @@
 		        	<span class="mui-icon mui-icon-arrowdown size-icon"></span>
 		        <input type="text" v-model='givesPicSize' class="select-size" readonly="readonly"  placeholder="尺寸"/>
 		        </div>
-		        <input type="number" v-model="givesNum" class="mui-input-clear select-number" placeholder="请输入赠送张数">        
+		        <input v-model="givesNum" type="number" class="mui-input-clear select-number" placeholder="请输入赠送张数">       
 		    </div>
 		    <div  class="mui-input-row add-detail-box">
 		  		<label class="add-detail-btn">销售明细：</label>
@@ -46,7 +46,7 @@
 		    		<th>合计</th>
 		    		<th></th>
 		    	</tr>
-		    	<tr class="listchange" v-for="(v, index ) in orderXms">
+		    	<tr v-if="havaData" class="listchange" v-for="(v, index ) in orderXms">
 		    		<td >{{v.picSizeName}}</td>
 		    		<td >{{v.price}}</td>
 		    		<td >{{v.picNum}}</td>
@@ -76,6 +76,7 @@
 			var vm = new Vue({
 				el: '#resultData',
 				data: {
+					havaData:false,
                 	orderId: '',
 				    id: '',
 				    selectsNum: '',
@@ -105,6 +106,10 @@
 				}
 			})
 			lf.ready(function() {
+				if(vm.orderXms.picSize==""&&vm.orderXms.price==""&&vm.orderXms.picNum==""){
+            				vm.havaData = true
+            				return
+            			}
 				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
@@ -155,6 +160,7 @@
             			vm.salesNum = res.data.orderX.salesNum
             			vm.selectsNum = res.data.orderX.selectsNum
             			vm.orderXms = res.data.orderXms
+            		
 						switch(res.data.givesPicSize){
 							case '1':
 								vm.givesPicSize ='16寸'
@@ -263,7 +269,8 @@
 				lf.window.openWindow('add-detail','add-detail.html')
 			})
 			lf.event.listener('listchange',function(e){
-				vm.orderXms.push(e.detail)
+//				vm.orderXms.push(e.detail)
+				vm.orderXms.picSize = e.detail.picSize
 			})
 		</script>
 	</body>
