@@ -314,7 +314,8 @@
 					"images/index/icon_done.png",
 					"images/index/icon_search.png",
 					"app/push.js",
-					"images/index/icon_messige_on.png"
+					"images/index/icon_messige_on.png",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -376,7 +377,19 @@
 			"app/order/ordersearch.html": {
 				"resources": [
 					"app/order/ordersearch.js",
-					"images/60x60.gif"
+					"images/60x60.gif",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"css/order/order.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
 				],
 				"refer": [],
 				"priority": 0

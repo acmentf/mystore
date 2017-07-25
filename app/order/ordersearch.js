@@ -70,6 +70,8 @@ function findData(){
 				vm.showAnswer = true;
 				vm.orderList = data.data.result;
 			}else{
+				vm.orderList = [];
+				vm.showAnswer = false;
 				lf.nativeUI.toast('查询不到数据');
 			}
 		}else{
