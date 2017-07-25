@@ -67,8 +67,8 @@
 	background:url(../../images/order/order_operation.png) no-repeat;
 	background-size: 100% 100%;
 	position: fixed;
-	bottom: 4rem;
-	right: 0.4rem;
+	bottom:1rem;
+	right: 0;
 }
 
 .orderdetails .operate .button {
@@ -149,7 +149,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, .3);
+	background-color: rgba(0, 0, 0, .8);
 }
 .popup-mod {
 	position: fixed;
