@@ -155,7 +155,7 @@ function renderOrderDetails(){
 			vm.orderTrackInfo.groupRoute=outLineBreak(vm.orderTrackInfo.groupRoute);	
 			vm.orderInfo.createTime = lf.util.timeStampToDate(vm.orderInfo.createTime)
 			if (data.data.orderTrackInfo.fetchPhotoTime) {
-            	vm.orderTrackInfo.fetchPhotoTime = lf.util.timeStampToDate(vm.orderTrackInfo.fetchPhotoTime)
+            	vm.orderTrackInfo.fetchPhotoTime = lf.util.timeStampToDate2(vm.orderTrackInfo.fetchPhotoTime)
             }
             else{
             	vm.orderTrackInfo.fetchPhotoTime = ''
