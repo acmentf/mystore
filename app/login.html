@@ -47,6 +47,7 @@
 			});
 
 			lf.ready(function(){
+				window.Role.logout()
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
 					plus.navigator.closeSplashscreen();
@@ -78,7 +79,7 @@
 					if(res.code == 200) {
 						if(!res.data.positions || (res.data.positions&&res.data.positions.length <= 0)){
 							lf.nativeUI.toast('无效的用户')
-//							return ;
+							return ;
 						}
 						var obj = {
 							usercode:res.data.id,
@@ -86,8 +87,7 @@
 							phone:res.data.phone,
 							companyId:res.data.companyId,
 							companyId:res.data.companyId,
-//							userrole:res.data.positions[0].type,
-							userrole: 0,
+							userrole:res.data.positions[0].type,
 							tonken:res.data.token,
 							loginsign: '1'
 						}
