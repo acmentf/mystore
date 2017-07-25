@@ -43,7 +43,7 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>订&nbsp;&nbsp;单&nbsp;&nbsp;号：</label>
+								<label>订单号：</label>
 								<span v-text="orderInfo.orderNo"></span>
 							</div>
 							<div class="item">
@@ -73,9 +73,9 @@
 								<label>线路名称：</label>
 								<div v-text="orderInfo.lineName"></div>
 							</div>
-							<div class="item">
-								<label>采&nbsp;&nbsp;购&nbsp;&nbsp;方：</label>
-								<span v-text="orderInfo.purchaser"></span>
+							<div class="item routeinfo">
+								<label>采购方：</label>
+								<div v-text="orderInfo.purchaser"></div>
 							</div>
 						</div>
 					</div>
@@ -86,15 +86,15 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>团&nbsp;&nbsp;人&nbsp;&nbsp;数：</label>
+								<label>团人数：</label>
 								<span v-text="orderTrackInfo.personCount"></span>
 							</div>
-							<div class="item">
-								<label>团&nbsp;&nbsp;性&nbsp;&nbsp;质：</label>
-								<span  v-text="orderTrackInfo.groupType"></span>
+							<div class="item routeinfo">
+								<label>团性质：</label>
+								<div  v-text="orderTrackInfo.groupType"></div>
 							</div>
 							<div class="item">
-								<label>导&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;游：</label>
+								<label>导游：</label>
 								<span  v-text="orderInfo.tourGuide"></span>
 							</div>
 							<div class="item">
@@ -123,7 +123,7 @@
 							</div>
 							<div class="item">
 								<label>拍摄信息：</label>
-								<table class="sale-table" border="1" width="70%">
+								<table style="margin-left: 0.3rem;" class="sale-table" border="1" width="70%">
 								<tr class="table-hd">
 									<td>拍摄地点</td>
 									<td>拍摄时间</td>
@@ -179,7 +179,7 @@
 								<span v-text="orderResult.leavesNum"></span><span>张</span>
 							</div>
 							<div class="item">
-								<label>客&nbsp;&nbsp;单&nbsp;&nbsp;价：</label>
+								<label>客单价：</label>
 								<span v-text='unitPrice'></span><span>元</span>
 							</div>
 							<div class="item">
