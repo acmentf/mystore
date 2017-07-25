@@ -56,7 +56,7 @@
 		    </table>	
 		    <div class="mui-input-row">
 		        <label>销售总额：</label>
-		        <input v-model="salesNum" type="number" class="mui-input-clear" placeholder="请输入销售总额">
+		        <input v-model="salesAmt" type="number" class="mui-input-clear" placeholder="请输入销售总额">
 		    </div>
 			<div class="mui-input-row">
 		        <label>购买人数：</label>
@@ -133,6 +133,7 @@
             	vm.orderXms.splice(index,1)
             })
             function loadResult (){
+            	
             	var params ={
             		orderId:vm.orderId
             	}
@@ -226,10 +227,7 @@
 					    buyers: vm.buyers,
 					    orderXms:vm.orderXms
 					}
-				lf.nativeUI.showWaiting()
-				lf.net.getJSON('order/saveOrderResult',params,function(res){
-					lf.nativeUI.closeWaiting()
-					switch(params.givesPicSize){
+				switch(params.givesPicSize){
 						case '16寸':
 							params.givesPicSize ='1'
 							break
@@ -246,6 +244,10 @@
 							params.givesPicSize ='5'
 							break
 					}
+				lf.nativeUI.showWaiting()
+				lf.net.getJSON('order/saveOrderResult',params,function(res){
+					lf.nativeUI.closeWaiting()
+					
 					if(res.code == 200){
 						lf.nativeUI.toast('保存成功！');
 						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
@@ -263,7 +265,8 @@
 			})
 			lf.event.listener('listchange',function(e){
 				console.log(JSON.stringify(e.detail))
-				vm.orderXms.push(e.detail)				
+				vm.orderXms.push(e.detail)	
+				
 			})
 		</script>
 	</body>
