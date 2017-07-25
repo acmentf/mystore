@@ -7,7 +7,7 @@
 	"id": "com.jdytrip.shoot",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "途忆旅拍",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.1",/*应用版本名称*/
+		"name": "1.0.3",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -279,7 +279,8 @@
 					"images/logo_login.png",
 					"images/img_login.jpg",
 					"css/images/img_login.jpg",
-					"css/images/logo_login.png"
+					"css/images/logo_login.png",
+					"images/index/bg.png"
 				],
 				"refer": [
 					"app/index.html"
@@ -424,7 +425,8 @@
 					"app/order-entering/result.html",
 					"app/common/chooseuser.html",
 					"app/common/plancamera.html",
-					"app/order/trackinfo.html"
+					"app/order/trackinfo.html",
+					"app/summary/summary.html"
 				],
 				"priority": 0
 			},
@@ -496,6 +498,24 @@
 					"app/order-entering/result.html"
 				],
 				"priority": 0
+			},
+			"app/summary/summary.html": {
+				"resources": [
+					"js/framework/define.js",
+					"app/summary/summary.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"css/summary/summary.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -505,10 +525,8 @@
 				"app/summary/details.html",
 				"css/summary/details.scss",
 				"js/mui.dtpicker.js",
-				"js/mui.zoom.js",
 				"css/message/message.scss",
 				"js/mui.poppicker.js",
-				"js/mui.previewimage.js",
 				"js/city.data.js",
 				"js/mui.js",
 				"css/mui.imageviewer.css",
@@ -538,7 +556,6 @@
 				"js/ad.js",
 				"js/mui.lazyload.img.js",
 				"css/common/common.css.map",
-				"app/summary/summary.js",
 				"js/mui.listpicker.js",
 				"js/webviewGroup.js",
 				"images/login-1.png",
@@ -552,7 +569,6 @@
 				"js/mui.picker.all.js",
 				"images/order/u408.png",
 				"css/order/order.css.map",
-				"app/summary/summary.html",
 				"css/common/common.scss",
 				"js/mui.locker.js",
 				"app/test/lf2.0_test.html"
