@@ -29,3 +29,19 @@
 .mui-title{
 	color: #FFFFFF;
 }
+
+
+@font-face {
+	font-family: "iconfont";
+	src: url('../fonts/iconfont.ttf?t=1500946903609') format('truetype'); 
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tuichu:before { content: "\e892"; }

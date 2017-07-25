@@ -17,12 +17,12 @@ lf.ready(function() {
 	var params = {};
 	lf.net.getJSON('order/statistics', params, function(data) {
 		if(data.code == 200) {
-				vm.pendingSum = data.data.pendingSum;
-				vm.completedSum = data.data.completedSum;
-				vm.cancelSum = data.data.cancelSum;
-				vm.assignmentSum = data.data.assignmentSum;
-				vm.countNoRead  = data.data.countNoRead;
-			
+			vm.pendingSum = data.data.pendingSum;
+			vm.completedSum = data.data.completedSum;
+			vm.cancelSum = data.data.cancelSum;
+			vm.assignmentSum = data.data.assignmentSum;
+			vm.countNoRead = data.data.countNoRead;
+
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
@@ -45,4 +45,13 @@ mui('.toolbar').on('tap', '.search', function() {
 mui('.toolbar').on('tap', '.message', function() {
 	lf.window.openWindow('message/message.html', 'message/message.html')
 	vm.countNoRead = 0;
+})
+
+mui('.toolbar').on('tap', '.icon-tuichu', function() {
+	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			window.Role.logout();
+			plus.runtime.restart();
+		}
+	});	
 })
