@@ -152,7 +152,8 @@ lf.ready(function() {
 		var orderid = this.getAttribute('data-orderid');
 		if(vm.photographerExperienceFlage==0){//1进入查看页面，0进入修改页面
 			lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
-            orderId: orderid
+            orderId: orderid,
+            tourId: vm.orderInfo.tourId
 			})
 		}
 		else{
@@ -185,6 +186,7 @@ function renderOrderDetails(){
 		orderId: orderId
 	};
 	vm.photographerId = window.Role.usercode;
+	
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
 			vm.orderInfo = data.data.orderInfo;	
@@ -201,6 +203,7 @@ function renderOrderDetails(){
 			vm.timeConsume='  '+day+'天'+hour+'小时'+min+'分';
 			vm.orderTrackInfo.groupRoute=outLineBreak(vm.orderTrackInfo.groupRoute);	
 			vm.orderInfo.createTime = lf.util.timeStampToDate(vm.orderInfo.createTime)
+			console.log(JSON.stringify(vm.orderInfo ))
 			if (data.data.orderTrackInfo.fetchPhotoTime) {
             	vm.orderTrackInfo.fetchPhotoTime = lf.util.timeStampToDate2(vm.orderTrackInfo.fetchPhotoTime)
             }
