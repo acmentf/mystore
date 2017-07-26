@@ -514,6 +514,16 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js"
 				],
+				"refer": [
+					"app/summary/details.html"
+				],
+				"priority": 0
+			},
+			"app/summary/details.html": {
+				"resources": [
+					"app/summary/details.js",
+					"css/summary/details.css"
+				],
 				"refer": [],
 				"priority": 0
 			}
@@ -522,7 +532,6 @@
 			"resources": [
 				"images/cbd.jpg",
 				"css/feedback.css",
-				"app/summary/details.html",
 				"css/summary/details.scss",
 				"js/mui.dtpicker.js",
 				"css/message/message.scss",
@@ -541,7 +550,6 @@
 				"js/city.data-3.js",
 				"js/95516.js",
 				"images/qrcode.png",
-				"app/summary/details.js",
 				"css/mui.dtpicker.css",
 				"css/mui.picker.all.css",
 				"js/update.js",

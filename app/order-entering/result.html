@@ -131,7 +131,7 @@
 			})
 			mui('.mui-content').on('tap', '.deleteBtn', function() {
 				var index = this.getAttribute('data-index')
-
+				
 				var old = 0;
 				var temp = 0;
 				var rs = 0;
@@ -219,6 +219,12 @@
 				})
 			}
 			document.getElementById('save').addEventListener('tap', function() {
+				
+				vm.salesNum = 0;
+				vm.orderXms.forEach(function(v) {
+					vm.salesNum = lf.util.addNum(vm.salesNum, v.picNum)
+				})
+				
 				var params = {
 					orderId: vm.orderId,
 					id: vm.id,
