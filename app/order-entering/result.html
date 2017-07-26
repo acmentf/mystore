@@ -86,7 +86,8 @@
 					salesNum: '',
 					salesAmt: '',
 					buyers: '',
-					orderXms: []
+					orderXms: [
+					]
 				},
 				methods: {
 					addNum: function(num1, num2) {
@@ -124,14 +125,15 @@
 				vm.orderXms.picNum = wv.picNum
 				loadResult()
 			})
-			mui('.group-info').on('tap', '.select-size', function() {
+			mui('.group-info').on('tap', '.select', function() {
 				userPicker.show(function(items) {
 					vm.givesPicSize = items[0].text
 				});
+				
 			})
 			mui('.mui-content').on('tap', '.deleteBtn', function() {
 				var index = this.getAttribute('data-index')
-
+				//计算销售总额
 				var old = 0;
 				var temp = 0;
 				var rs = 0;
@@ -149,6 +151,7 @@
 					})
 					vm.salesAmt = rs;
 				}
+				
 			})
 
 			function loadResult() {
