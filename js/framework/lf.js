@@ -2361,6 +2361,7 @@ var lf = (function(document, undefined) {
 		companyId:"",
 		loginsign:"",
 		auths:[],
+		positions:[],
 		init:function(){
 			this._init();
 		},
@@ -2377,6 +2378,7 @@ var lf = (function(document, undefined) {
 					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
 					this.auths = l.auths;
+					this.positions = l.positions;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
@@ -2385,6 +2387,7 @@ var lf = (function(document, undefined) {
 					this.phone = "";
 					this.companyId = "";
 					this.auths = [];
+					this.positions = [];
 				}
 			} else {
 				this.loginsign = "";
@@ -2394,6 +2397,7 @@ var lf = (function(document, undefined) {
 				this.phone = "";
 				this.companyId = "";
 				this.auths = [];
+				this.positions = [];
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
@@ -2405,6 +2409,7 @@ var lf = (function(document, undefined) {
 			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
 			this.auths = k.auths;
+			this.positions = k.positions;
 			$.storage.put(j, JSON.stringify(k));
 			$.storage.put(s, k.tonken);
 		},

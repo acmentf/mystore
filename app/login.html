@@ -89,7 +89,8 @@
 							userrole:res.data.positions[0].type,
 							tonken:res.data.token,
 							loginsign: '1',
-							auths: res.data.auths
+							auths: res.data.auths,
+							positions: res.data.positions
 						}
 						window.Role.save(obj)
 						lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
