@@ -92,10 +92,10 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 			emptyFalg = true
 		}
 	}
-	if(vm.trackInfo.fetchPhotoTime==''){
+	/*if(vm.trackInfo.fetchPhotoTime==''){
 		lf.nativeUI.toast('请填写取片时间！');
 		emptyFalg = true
-	}
+	}*/
 	if(!emptyFalg) {
 		lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 			if(data.code == 200) {
