@@ -4,7 +4,7 @@
 .trackinfo  .shootTime{
 	border-bottom:1px solid #E3E2E5;
 	border-right:1px solid #E3E2E5;
-	width: 45%;
+	width: 37%;
 	padding-left: 0.1rem;
 }
 .trackinfo  .mui-card{
@@ -65,4 +65,19 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 0.1rem;
+}
+.trackinfo  .delete-ico{
+	background: url(../../images/order/icon_delete.png) no-repeat;
+	background-size: 100% 100%;
+	width: 0.24rem;
+	height:0.24rem;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0.2rem;
+	margin-top: 0.2rem;
+
+}
+
+.trackinfo .mui-input-row label~input, .trackinfo .mui-input-row label~select,.trackinfo .mui-input-row label~textarea{
+	float: left;
 }

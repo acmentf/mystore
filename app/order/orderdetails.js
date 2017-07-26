@@ -24,7 +24,8 @@ var vm = new Vue({
 		cancelRole:false,
 		summaryRole:false,
 		feedbackRole:false,
-		handleRole:false
+		handleRole:false,
+		photographerExperienceFlage:''
 	}
 })
 
@@ -121,11 +122,19 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.mind', function() { //点击心得,进入录入心得页面
 		var orderid = this.getAttribute('data-orderid');
-		lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
+		if(vm.photographerExperienceFlage==0){//1进入查看页面，0进入修改页面
+			lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
             tourId: vm.currentTourId,
             orderId: orderid,
             photographerId: vm.photographerId
-		})
+			})
+		}
+		else{
+			lf.window.openWindow('summary/details.html','../summary/details.html',{},{
+            orderId: orderid,
+            photographerId: vm.photographerId
+			})
+		}
 		vm.maskShow = false;
 		vm.popupShow = false;
 	})
@@ -194,6 +203,7 @@ function renderOrderDetails(){
 			vm.currentTourId = data.data.orderInfo.tourId;//记录tourId		
 			vm.currentOrderStatus =  data.data.orderInfo.status;//记录订单状态
 			vm.currentOrderNo =  data.data.orderInfo.orderNo;//记录订单No
+			vm.photographerExperienceFlage= data.data.photographerExperienceFlage;
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}

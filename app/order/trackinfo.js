@@ -125,6 +125,12 @@ mui('.group-info').on('tap', '.time', function() {
 
 })
 
+mui('.group-info').on('tap', '.delete-ico', function() {
+	var index = this.getAttribute('data-index');
+	vm.shootInfoForms.splice(index,1)
+
+})
+
 mui('.mui-input-row').on('tap', '.fetchtime', function() {
 	initFetchTimeChoose();
 })

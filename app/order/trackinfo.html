@@ -103,12 +103,13 @@
 									</div>
 									<div class="mui-input-row">
 										<label>拍摄时间</label>
+										<input type="text" v-model='item.shootTime' :data-index="index" class="shootTime" readonly="readonly" placeholder="拍摄时间">
 										<input type="text" v-if='item.periodType == 0' :data-index="index" v-model='timeName0' class="time" placeholder="全天">
 										<input type="text" v-if='item.periodType == 1' :data-index="index" v-model='timeName1' class="time" placeholder="全天">
 										<input type="text" v-if='item.periodType == 2' :data-index="index" v-model='timeName2' class="time" placeholder="全天">
 										<input type="text" v-if='item.periodType == 3' :data-index="index" v-model='timeName3' class="time" placeholder="全天">
-										<input type="text" v-model='item.shootTime' :data-index="index" class="shootTime" readonly="readonly" placeholder="拍摄时间">
 										
+										<i :data-index='index'  v-if="shootInfoForms.length>1" class="delete-ico"></i>
 									</div>
 								</div>						
 							</div>
