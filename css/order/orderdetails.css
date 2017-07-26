@@ -10,23 +10,29 @@
 	height: 100%;
 	padding: 0.5rem 0.4rem;
 	position: relative;
-	
 }
-.orderdetails .topbar .mod .title{
+
+.orderdetails .topbar .mod .title {
 	font-weight: 700;
+	font-size: 0.3rem;
 }
+
+.orderdetails .topbar .mod .intro {
+	font-size: 0.24rem;
+}
+
 .orderdetails .topbar .pending {
-	background:url(../../images/order/img_distubute.png) no-repeat;
+	background: url(../../images/order/img_distubute.png) no-repeat;
 	background-size: 100% 100%;
 }
 
 .orderdetails .topbar .cancled {
-	background:url(../../images/order/img_cancel.png) no-repeat;
+	background: url(../../images/order/img_cancel.png) no-repeat;
 	background-size: 100% 100%;
 }
 
 .orderdetails .topbar .completed {
-	background:url(../../images/order/img_done.png) no-repeat;
+	background: url(../../images/order/img_done.png) no-repeat;
 	background-size: 100% 100%;
 }
 
@@ -40,23 +46,37 @@
 	right: 0.2rem;
 	top: 0;
 }
-.orderdetails .item label{
-	color: #202020;
+
+.orderdetails .item {
+	font-size: 0.28rem;
 }
-.orderdetails .item span{
+
+.orderdetails .item label {
+	color: #202020;
+	width: 1.7rem;
+	display: inline-block;
+	text-align: right;
+}
+
+.orderdetails .item span {
 	color: #888;
 }
-.orderdetails .mui-card{
+
+.orderdetails .mui-card {
 	margin: 0 0 0.2rem 0;
 }
-.orderdetails .mui-card .mui-card-header{
+
+.orderdetails .mui-card .mui-card-header {
 	padding-left: 0;
 	font-weight: 700;
 }
-.orderdetails .mui-card .mui-card-header .border-left{
+
+.orderdetails .mui-card .mui-card-header .border-left {
 	border-left: 4px solid #000;
 	text-indent: 0.2rem;
+	font-size: 0.36rem;
 }
+
 .orderdetails .operate {
 	width: 1rem;
 	height: 1rem;
@@ -64,10 +84,10 @@
 	font-size: 0.4rem;
 	line-height: 1rem;
 	color: #000;
-	background:url(../../images/order/order_operation.png) no-repeat;
+	background: url(../../images/order/order_operation.png) no-repeat;
 	background-size: 100% 100%;
 	position: fixed;
-	bottom:1rem;
+	bottom: 1rem;
 	right: 0;
 }
 
@@ -87,61 +107,67 @@
 
 .sale-table td {
 	width: 20%;
-	text-align: center;	
+	text-align: center;
 }
+
 .orderdetails .sale-table span {
-		color: #333;
-	}
+	color: #333;
+}
 
 .orderdetails .sale-table .delete-ico {
 	background: url("../images/icon_phone.svg") no-repeat;
 }
 
-.orderdetails  .photpgrapher-name{
+.orderdetails .photpgrapher-name {
 	color: #16A7D7;
 	margin-right: 0.1rem;
 }
 
-.orderdetails  .routeinfo {
-        position: relative;
-        overflow: auto;
-        padding-left: 1.15rem !important;
-        color: #888;
-        
-    }
-.orderdetails  .routeinfo     label {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 1.42rem;
-            display: inline-block;
-        }
+.orderdetails .routeinfo {
+	position: relative;
+	overflow: auto;
+	padding-left: 1.75rem !important;
+	color: #888;
+}
+
+.orderdetails .routeinfo label {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1.7rem;
+	display: inline-block;
+}
+
 .popup-mod .ico {
 	background: #fff;
 	width: 1.6rem;
-	height:1.6rem;
+	height: 1.6rem;
 	text-align: center;
 	line-height: 1.6rem;
 	border-radius: 50%;
 	font-size: 0.3rem;
 }
+
 .popup-mod ul {
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
 }
+
 .popup-mod li {
 	list-style: none;
 	float: left;
 	text-align: center;
 	height: 1.6rem;
-	width:50% ;
-	margin-bottom:0.4rem ;
+	width: 50%;
+	margin-bottom: 0.4rem;
 }
-.popup-mod li .mod{
+
+.popup-mod li .mod {
 	height: 1.6rem;
 	width: 1.6rem;
 }
+
 .mask {
 	position: fixed;
 	z-index: 998;
@@ -151,6 +177,7 @@
 	left: 0;
 	background-color: rgba(0, 0, 0, .8);
 }
+
 .popup-mod {
 	position: fixed;
 	z-index: 999;
@@ -159,6 +186,7 @@
 	width: 4.4rem;
 	padding: 0.4rem 0;
 }
+
 .popup-mod .mui-btn {
 	padding: 2px 4px;
 	font-size: 12px;

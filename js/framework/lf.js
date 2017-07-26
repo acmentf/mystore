@@ -2357,10 +2357,12 @@ var lf = (function(document, undefined) {
 		usercode:"",
 		username:"",
 		userrole:"",
+		userroleName:"",
 		phone:"",
 		companyId:"",
 		loginsign:"",
 		auths:[],
+		positions:[],
 		init:function(){
 			this._init();
 		},
@@ -2373,27 +2375,33 @@ var lf = (function(document, undefined) {
 					this.usercode = l.usercode;
 					this.username = l.username;
 					this.userrole = l.userrole;
+					this.userroleName = l.userroleName;
 					this.phone = l.phone;
 					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
 					this.auths = l.auths;
+					this.positions = l.positions;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
 					this.userrole = "";
+					this.userroleName = "";
 					this.usercode = "";
 					this.phone = "";
 					this.companyId = "";
 					this.auths = [];
+					this.positions = [];
 				}
 			} else {
 				this.loginsign = "";
 				this.username = "";
 				this.userrole = "";
+				this.userroleName = "";
 				this.usercode = "";
 				this.phone = "";
 				this.companyId = "";
 				this.auths = [];
+				this.positions = [];
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
@@ -2401,10 +2409,12 @@ var lf = (function(document, undefined) {
 			this.usercode = k.usercode;
 			this.username = k.username;
 			this.userrole = k.userrole;
+			this.userroleName = k.userroleName;
 			this.phone = k.phone;
 			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
 			this.auths = k.auths;
+			this.positions = k.positions;
 			$.storage.put(j, JSON.stringify(k));
 			$.storage.put(s, k.tonken);
 		},

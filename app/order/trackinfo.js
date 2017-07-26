@@ -92,6 +92,10 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 			emptyFalg = true
 		}
 	}
+	/*if(vm.trackInfo.fetchPhotoTime==''){
+		lf.nativeUI.toast('请填写取片时间！');
+		emptyFalg = true
+	}*/
 	if(!emptyFalg) {
 		lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 			if(data.code == 200) {
@@ -118,6 +122,12 @@ mui('.group-info').on('tap', '.time', function() {
 		//返回 false 可以阻止选择框的关闭
 		//return false;
 	});
+
+})
+
+mui('.group-info').on('tap', '.delete-ico', function() {
+	var index = this.getAttribute('data-index');
+	vm.shootInfoForms.splice(index,1)
 
 })
 

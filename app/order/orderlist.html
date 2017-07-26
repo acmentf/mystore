@@ -173,22 +173,27 @@
 												<span class="jespan">金额: <span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
 											</div>
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
-												<div class="btns" v-show="item.status==1">
-													<button type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
+												<div class="btns">
+													<button v-if="confirmRole&&item.status==1" type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
 														确认
 													</button>
-													<button type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
+													<button v-if="cancelRole&&!(item.status==3||item.status==7)" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
 														取消
 													</button>
-												</div>
-					
-												<div class="btns" v-show="item.status==5">
-													<button type="button" class="mui-btn mui-btn-danger gzxx" :data-id="item.id">
-														跟踪信息
+													<button v-if="assignRole" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
+														指派
 													</button>
-													<button type="button" class="mui-btn mui-btn-danger zxxx" :data-id="item.id">
-														执行结果
+													<button v-if="allotRole" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+														分配
 													</button>
+													<!--<template v-if="item.status!=3">
+														<button v-if="feedbackRole" type="button" class="mui-btn mui-btn-danger gzxx" :data-id="item.id">
+															跟踪信息
+														</button>
+														<button  v-if="handleRole"  type="button" class="mui-btn mui-btn-danger zxxx" :data-id="item.id">
+															执行结果
+														</button>
+													</template>-->
 												</div>
 											</div>
 										</div>

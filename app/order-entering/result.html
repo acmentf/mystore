@@ -20,6 +20,14 @@
 		<div id="resultData" class="mui-content result-login-container">
 			<div class="mui-input-group">
 				<div class="mui-input-row">
+					<label>拍摄人次：</label>
+					<input v-model="shootPeoNum" type="number" class="mui-input-clear" placeholder="请输入拍摄人次">
+				</div>
+				<div class="mui-input-row">
+					<label>拍摄张数：</label>
+					<input v-model="shootNum" type="number" class="mui-input-clear" placeholder="请输入拍摄张数">
+				</div>
+				<div class="mui-input-row">
 					<label>选片张数：</label>
 					<input v-model="selectsNum" type="number" class="mui-input-clear" placeholder="请输入选片张数">
 				</div>
@@ -63,6 +71,15 @@
 					<label>购买人数：</label>
 					<input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
 				</div>
+				<div class="mui-input-row">
+					<label>接待人数：</label>
+					<input v-model="receiveNum" type="number" class="mui-input-clear" placeholder="请输入接待人数">
+				</div>
+				<div class="mui-input-row  group-info">
+			        <label>销售时间：</label>
+					<input type="text" v-model="saleDate"  class="mui-input-clear selectDate" readonly="readonly" placeholder="请选择销售时间"/>
+			        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
+		    	</div>
 			</div>
 			<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
 		</div>
@@ -79,6 +96,8 @@
 				data: {
 					orderId: '',
 					id: '',
+					shootPeoNum: '',
+					shootNum: '',
 					selectsNum: '',
 					printsNum: '',
 					givesNum: '',
@@ -86,6 +105,8 @@
 					salesNum: '',
 					salesAmt: '',
 					buyers: '',
+					receiveNum: '',
+					saleDate: '',
 					orderXms: [
 					]
 				},
@@ -129,11 +150,12 @@
 				userPicker.show(function(items) {
 					vm.givesPicSize = items[0].text
 				});
-				
+			})
+			mui('.group-info').on('tap', '.selectDate', function(){
+						initDateChoose();
 			})
 			mui('.mui-content').on('tap', '.deleteBtn', function() {
 				var index = this.getAttribute('data-index')
-				//计算销售总额
 				var old = 0;
 				var temp = 0;
 				var rs = 0;
@@ -166,8 +188,12 @@
 						if(!res.data) {
 							return;
 						}
+						vm.shootPeoNum = res.data.orderX.shootPeoNum
+						vm.shootNum = res.data.orderX.shootNum
+						vm.receiveNum = res.data.orderX.receiveNum
 						vm.buyers = res.data.orderX.buyers
 						vm.givesNum = res.data.orderX.givesNum
+						vm.saleDate = res.data.orderX.saleDate
 						vm.givesPicSize = res.data.orderX.givesPicSize
 						vm.id = res.data.orderX.id
 						vm.orderId = res.data.orderX.orderId
@@ -222,6 +248,10 @@
 				})
 			}
 			document.getElementById('save').addEventListener('tap', function() {
+				vm.salesNum = 0;
+				vm.orderXms.forEach(function(v) {
+					vm.salesNum = lf.util.addNum(vm.salesNum, v.picNum)
+				})
 				var params = {
 					orderId: vm.orderId,
 					id: vm.id,
@@ -232,7 +262,11 @@
 					salesNum: vm.salesNum,
 					salesAmt: vm.salesAmt,
 					buyers: vm.buyers,
-					orderXms: vm.orderXms
+					orderXms: vm.orderXms,
+					shootPeoNum: vm.shootPeoNum,
+					shootNum: vm.shootNum,
+					saleDate: vm.saleDate,
+					receiveNum: vm.receiveNum
 				}
 				switch(params.givesPicSize) {
 					case '16寸':
@@ -270,6 +304,11 @@
 			document.getElementById('add-detail').addEventListener('tap', function() {
 				lf.window.openWindow('add-detail', 'add-detail.html')
 			})
+			function initDateChoose() {
+					picker.show(function(rs) {
+					vm.saleDate = rs.value
+				});
+			}
 			lf.event.listener('listchange', function(e) {
 				console.log(JSON.stringify(e.detail))
 				var old = 0
@@ -288,6 +327,8 @@
 					vm.salesAmt = rs;
 				}
 			})
+		
+
 		</script>
 	</body>
 

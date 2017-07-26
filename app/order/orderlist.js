@@ -13,10 +13,22 @@ var vm = new Vue({
 			
 		],
 		pageNum: 10,
-		pullObjects:[]
+		pullObjects:[],
+		cancelRole:false,
+		confirmRole:false,
+		feedbackRole:false,
+		handleRole:false,
+		allotRole: false,
+		assignRole:false,
 	}
 })
 lf.ready(function() {
+	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
+	vm.confirmRole =window.Role.hasAuth('confirm')// 确定按钮的key
+	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
+	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
+	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
+	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	initPull();
 	
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
@@ -110,7 +122,20 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
   	});
 })
 
-mui('.order-ul').on('tap', '.gzxx', function() {
+mui('.order-ul').on('tap', '.assign', function() { //点击指派
+		var orderid = this.getAttribute('data-id');
+		lf.window.openWindow('common/chooseuser.html','../common/chooseuser.html',{},{
+			orderNo: orderid,
+			type:1
+		})
+	})
+	mui('.order-ul').on('tap', '.allot', function() { //点击分配
+		var orderid = this.getAttribute('data-id');
+		lf.window.openWindow('common/plancamera.html','../common/plancamera.html',{},{
+			orderNo: orderid
+		})
+	})
+/*mui('.order-ul').on('tap', '.gzxx', function() {
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('trackinfo.html', 'trackinfo.html', {}, {
 		orderNo: id
@@ -121,7 +146,7 @@ mui('.order-ul').on('tap', '.zxxx', function() {
 	lf.window.openWindow('order-entering/result.html', '../order-entering/result.html', {}, {
 		orderNo: id
 	})
-})
+})*/
 //			mui.init();
 function dodata(type, index, data) {
 	if(type == 'up') {

@@ -87,8 +87,11 @@
 							companyId:res.data.companyId,
 							companyId:res.data.companyId,
 							userrole:res.data.positions[0].type,
+							userroleName: res.data.positions[0].name,
 							tonken:res.data.token,
-							loginsign: '1'
+							loginsign: '1',
+							auths: res.data.auths,
+							positions: res.data.positions
 						}
 						window.Role.save(obj)
 						lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())

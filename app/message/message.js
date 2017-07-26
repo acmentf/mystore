@@ -12,7 +12,7 @@ var vm = new Vue({
 		dateChange:function(data){
 			if(data){
 				var date = new Date(data);
-				return date.format('yyyy-mm-dd')
+				return date.format('yyyy-MM-dd')
 			}else{
 				return '';
 			}
