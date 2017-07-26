@@ -193,7 +193,6 @@
 						vm.receiveNum = res.data.orderX.receiveNum
 						vm.buyers = res.data.orderX.buyers
 						vm.givesNum = res.data.orderX.givesNum
-						vm.saleDate = res.data.orderX.saleDate
 						vm.givesPicSize = res.data.orderX.givesPicSize
 						vm.id = res.data.orderX.id
 						vm.orderId = res.data.orderX.orderId
@@ -202,6 +201,11 @@
 						vm.salesNum = res.data.orderX.salesNum
 						vm.selectsNum = res.data.orderX.selectsNum
 						vm.orderXms = res.data.orderXms
+						console.log(JSON.stringify(res.data.orderX))
+						if(res.data.orderX.saleDate){
+							console.log(res.data.orderX.saleDate)
+							vm.saleDate = new Date(res.data.orderX.saleDate).format('yyyy-MM-dd')
+						}
 						console.log(res.data.givesPicSize)
 						switch(res.data.orderX.givesPicSize) {
 							case '1':
