@@ -216,9 +216,9 @@ function renderOrderDetails(){
 				// 客单价 = 销售总额/购买人数 (前端计算)
 				vm.unitPrice = (vm.orderResult.salesAmt / vm.orderResult.buyers).toFixed(2)
 				// 照片转化率 = 销售总数/打印张数 (前端计算)
-				vm.photoPecent = (vm.orderResult.salesNum / vm.orderResult.printsNum).toFixed(2)
+				vm.photoPecent = ((vm.orderResult.salesNum / vm.orderResult.printsNum) * 100).toFixed(2)
 				// 用户转化率  = 购买人数/团人数 (前端计算)
-				vm.userPecent = (vm.orderResult.buyers / vm.orderTrackInfo.personCount).toFixed(2)
+				vm.userPecent = ((vm.orderResult.buyers / vm.orderTrackInfo.personCount) * 100).toFixed(2)
 			
 				vm.orderResult.orderXms.forEach(function(v, i) {
 					v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
