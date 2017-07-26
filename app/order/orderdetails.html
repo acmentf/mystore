@@ -159,7 +159,11 @@
 							</div>
 							<div class="item">
 								<label>赠送张数：</label>
-								<span v-text="orderResult.givesPicSize"></span><span>寸</span>
+								<span v-if="orderResult.givesPicSize==1">16寸</span>
+								<span v-if="orderResult.givesPicSize==2">12寸</span>
+								<span v-if="orderResult.givesPicSize==3">10寸</span>
+								<span v-if="orderResult.givesPicSize==4">8寸</span>
+								<span v-if="orderResult.givesPicSize==5">6寸</span>
 								<span v-text="orderResult.givesNum"></span><span>张</span>
 							</div>
 							<div class="item">
