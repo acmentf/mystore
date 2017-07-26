@@ -174,7 +174,6 @@ function initFetchTimeChoose() {
 	picker.show(function(rs) {
 		
 //		vm.trackInfo.fetchPhotoTime = rs.text
-		Vue.set(vm.trackInfo , 'fetchPhotoTime' , rs.text)
-		console.log(vm.trackInfo.fetchPhotoTime)			
+		Vue.set(vm.trackInfo , 'fetchPhotoTime' , rs.text)			
 	});
 }

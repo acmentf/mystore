@@ -6,10 +6,10 @@ var vm = new Vue({
 		cancelSum: 0,
 		assignmentSum: 0,
 		countNoRead: 0,
-		stationDate:[],
-		stationPickerDate:[],
-		currentStationName:'',
-		currentRole:''
+		stationDate: [],
+		stationPickerDate: [],
+		currentStationName: '',
+		currentRole: ''
 	}
 })
 lf.ready(function() {
@@ -18,7 +18,7 @@ lf.ready(function() {
 	lf.event.fire(lf.window.currentWebview().opener(),'test',{
 		a:1,b:2
 	})*/
-	
+
 	var params = {};
 	lf.net.getJSON('order/statistics', params, function(data) {
 		if(data.code == 200) {
@@ -34,20 +34,18 @@ lf.ready(function() {
 	}, function(erro) {
 		lf.nativeUI.toast(erro.msg);
 	})
-	vm.currentStationName =  window.Role.userroleName
-	vm.stationDate= window.Role.positions;
+	vm.currentStationName = window.Role.userroleName
+	vm.stationDate = window.Role.positions;
 	vm.currentRole = window.Role.userrole;
 	vm.stationDate.forEach(function(v, i) {
-		var obj={id:'',text:''};
-		obj.value=v.id;
-		obj.text=v.name;
+		var obj = { id: '', text: '' };
+		obj.value = v.id;
+		obj.text = v.name;
 		vm.stationPickerDate.push(obj);
-		console.log(obj)
 	})
 	stationPicker = new mui.PopPicker(); //具体时间选择 全天上午下午晚上
 	stationPicker.setData(vm.stationPickerDate);
-	
-	
+
 })
 
 mui('.content').on('tap', '.mod', function() {
@@ -72,11 +70,25 @@ mui('.toolbar').on('tap', '.icon-tuichu', function() {
 			window.Role.logout();
 			plus.runtime.restart();
 		}
-	});	
+	});
 })
 
-mui('.toolbar').on('tap', '.ico-loop', function() {
+mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 	stationPicker.show(function(items) {
-	 console.log(items[0].value)
+		console.log(items[0].value)
+		var params = {
+			positionId:items[0].value
+		};
+		lf.net.getJSON('user/switchPosition', params, function(data) {
+			if(data.code == 200) {
+				window.Role.logout();
+				plus.runtime.restart();	
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function(erro) {
+			lf.nativeUI.toast(erro.msg);
+		})
+
 	});
 })

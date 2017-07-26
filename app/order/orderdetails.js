@@ -142,7 +142,6 @@ lf.ready(function() {
 	
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
-		console.log('orderNo:'+orderid);
 		lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
 			orderNo: orderid
 		})
@@ -213,13 +212,27 @@ function renderOrderDetails(){
 			})
 			if(data.data.orderResult){
 				vm.orderResult = data.data.orderResult;
-				// 客单价 = 销售总额/购买人数 (前端计算)
-				vm.unitPrice = (vm.orderResult.salesAmt / vm.orderResult.buyers).toFixed(2)
-				// 照片转化率 = 销售总数/打印张数 (前端计算)
-				vm.photoPecent = ((vm.orderResult.salesNum / vm.orderResult.printsNum) * 100).toFixed(2)
-				// 用户转化率  = 购买人数/团人数 (前端计算)
-				vm.userPecent = ((vm.orderResult.buyers / vm.orderTrackInfo.personCount) * 100).toFixed(2)
-			
+				if(vm.orderResult.buyers == 0){
+					vm.unitPrice=0
+				}
+				else{
+					// 客单价 = 销售总额/购买人数 (前端计算)
+					vm.unitPrice = (vm.orderResult.salesAmt / vm.orderResult.buyers).toFixed(2)
+				}
+				if(vm.orderResult.printsNum==0){
+					vm.photoPecent=0
+				}
+				else{
+					// 照片转化率 = 销售总数/打印张数 (前端计算)
+					vm.photoPecent = ((vm.orderResult.salesNum / vm.orderResult.printsNum) * 100).toFixed(2)
+				}
+				if(vm.orderTrackInfo.personCount==0){
+					vm.userPecent=0
+				}
+				else{
+					// 用户转化率  = 购买人数/团人数 (前端计算)
+					vm.userPecent = ((vm.orderResult.buyers / vm.orderTrackInfo.personCount) * 100).toFixed(2)
+				}	
 				vm.orderResult.orderXms.forEach(function(v, i) {
 					v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
 				})
