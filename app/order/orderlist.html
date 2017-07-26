@@ -180,6 +180,12 @@
 													<button v-if="cancelRole&&!(item.status==3||item.status==7)" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
 														取消
 													</button>
+													<button v-if="assignRole" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
+														指派
+													</button>
+													<button v-if="allotRole" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+														分配
+													</button>
 													<!--<template v-if="item.status!=3">
 														<button v-if="feedbackRole" type="button" class="mui-btn mui-btn-danger gzxx" :data-id="item.id">
 															跟踪信息
