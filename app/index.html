@@ -6,6 +6,8 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../css/index/index.css" />
 	</head>
@@ -14,9 +16,11 @@
 		<div id="app">
 	
 			<div class="toolbar">
+				<span class="rolename" v-text="currentStationName"></span>
 				<span class="search" id="searchBtn"></span>
 				<span v-if="countNoRead==0" class="message"></span>
 				<span v-if="countNoRead>0" class="message hasmessage"></span>
+				<span class="mui-icon mui-icon-loop ico-loop"></span>
 				<span class="mui-icon iconfont icon-tuichu"></span> 
 			</div>
 	
@@ -39,7 +43,7 @@
 				</div>
 				<div class="title"><span class="ico ico-cancled"></span>已取消订单</div>
 			</div>
-			<div class="mod assigned" data-status="4">
+			<div class="mod assigned" data-status="4" v-show="currentRole!=2">
 				<div class="info">
 					<span class="number" v-text="assignmentSum"></span>
 				</div>
@@ -51,6 +55,7 @@
 		</div>
 	
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
 		<script src="../js/framework/define.js"></script>
 		<script src="../js/framework/styles.js"></script>
 		<script src="../js/framework/lf.js"></script>

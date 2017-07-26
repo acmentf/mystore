@@ -12,7 +12,12 @@
   text-align: right;
   padding: 0.2rem;
 }
-
+.app-index .toolbar .rolename{
+	float:left; 
+	margin-top: 0.15rem; 
+	font-size: 0.28rem;
+	color:#999;
+}
 .app-index .toolbar .search, .app-index .toolbar .message {
   background: url(../../images/index/icon_search.png) no-repeat;
   background-size: 100% 100%;
@@ -103,9 +108,10 @@
 	color: #9f9f9f;
 	text-align: center;
 }
-.app-index  .icon-tuichu{
+.app-index  .icon-tuichu,.app-index  .ico-loop{
 	color: #fff;
 	font-size: 0.6rem;
 	margin: 0 0.1rem;
     vertical-align: middle;
 }
+

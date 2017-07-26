@@ -223,6 +223,13 @@ function renderOrderDetails(){
 				vm.orderResult.orderXms.forEach(function(v, i) {
 					v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
 				})
+				if(data.data.orderResult.saleDate){
+					vm.orderResult.saleDate = lf.util.timeStampToDate2(data.data.orderResult.saleDate)
+				}
+				else{
+					vm.orderResult.saleDate = ''
+				}
+				
 			}	
 			vm.orderInfo.totalPrice = (vm.orderInfo.totalPrice/100).toFixed(2);
 			vm.currentOrderId = vm.orderInfo.orderId;//记录当前订单id
