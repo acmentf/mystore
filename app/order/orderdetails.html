@@ -260,7 +260,7 @@
 						
 						</div>
 					</li>
-					<li v-if='cancelRole' >
+					<li v-if='cancelRole&&!(orderInfo.status==3||orderInfo.status==7)' >
 						<div class="mod cancled" :data-orderid="currentOrderId" >
 							<div class="ico">取消</div>
 							
