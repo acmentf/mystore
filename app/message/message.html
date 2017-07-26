@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--cwj-->
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title></title>
@@ -17,10 +18,12 @@
 			body {
 				background-color: #efeff4;
 			}
+			
 			.mui-bar~.mui-content .mui-fullscreen {
 				top: 44px;
 				height: auto;
 			}
+			
 			.mui-pull-top-tips {
 				position: absolute;
 				top: -20px;
@@ -31,9 +34,11 @@
 				border-radius: 100%;
 				z-index: 1;
 			}
+			
 			.mui-bar~.mui-pull-top-tips {
 				top: 24px;
 			}
+			
 			.mui-pull-top-wrapper {
 				width: 42px;
 				height: 42px;
@@ -46,24 +51,28 @@
 				box-shadow: 0 4px 10px #bbb;
 				overflow: hidden;
 			}
+			
 			.mui-pull-top-tips.mui-transitioning {
 				-webkit-transition-duration: 200ms;
 				transition-duration: 200ms;
 			}
+			
 			.mui-pull-top-tips .mui-pull-loading {
 				/*-webkit-backface-visibility: hidden;
 				-webkit-transition-duration: 400ms;
 				transition-duration: 400ms;*/
-
 				margin: 0;
 			}
+			
 			.mui-pull-top-wrapper .mui-icon,
 			.mui-pull-top-wrapper .mui-spinner {
 				margin-top: 7px;
 			}
+			
 			.mui-pull-top-wrapper .mui-icon.mui-reverse {
 				/*-webkit-transform: rotate(180deg) translateZ(0);*/
 			}
+			
 			.mui-pull-bottom-tips {
 				text-align: center;
 				background-color: #efeff4;
@@ -71,6 +80,7 @@
 				line-height: 40px;
 				color: #777;
 			}
+			
 			.mui-pull-top-canvas {
 				overflow: hidden;
 				background-color: #fafafa;
@@ -80,16 +90,17 @@
 				height: 40px;
 				margin: 0 auto;
 			}
+			
 			.mui-pull-top-canvas canvas {
 				width: 40px;
 			}
+			
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-
-
+			
 			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {
-			    top: 104px;
+				top: 104px;
 			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
@@ -100,7 +111,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">消息管理</h1>
 		</header>
-		<div id="app" class="mui-content message-content" >
+		<div id="app" class="mui-content message-content">
 			<div class="mui-input-row">
 				<input type="search" v-model="searchText" class="search" placeholder="">
 				<i id="searchBtn" class="mui-icon mui-icon-search"></i>
@@ -109,28 +120,28 @@
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell mui-media message-li" :data-id="data.data.orderId" v-for="data in msgList">
-							<a href="javascript:;">
-								<div class="message-img mui-media-object mui-pull-left">
-									<img class="" src="../../images/message/icon_pending.png" v-if="data.type == 1">
-									<img class="" src="../../images/message/icon_pending.png" v-else>
-								</div>
-								<div class="mui-media-body">
-									<div class="mui-table">
-										<div class="mui-table-cell mui-col-xs-8">
-											<div class='title mui-ellipsis'>{{data.title}}</div>
-											<p class='mui-ellipsis' v-text="data.descption"></p>
-										</div>
-										<div class="mui-table-cell mui-col-xs-4">
-											<span class="time" v-text="dateChange(data.createdTime)"></span>
-										</div>
+							<div class="message-img mui-media-object mui-pull-left">
+								<img class="" src="../../images/message/icon_pending.png" v-if="data.type == 1">
+								<img class="" src="../../images/message/icon_pending.png" v-else>
+							</div>
+							<div class="mui-media-body">
+								<div class="mui-table">
+									<div class="mui-table-cell mui-col-xs-8">
+										<div class='title mui-ellipsis'>{{data.title}}</div>
+									</div>
+									<div class="mui-table-cell mui-col-xs-4">
+										<span class="time" v-text="dateChange(data.createdTime)"></span>
 									</div>
 								</div>
-							</a>
+								<p class='' v-text="data.descption" style="word-break:break-all; "></p>
+							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+
+		<p style="padding-top: 44px;word-break:break-all">aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnaaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnaaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnn</p>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
