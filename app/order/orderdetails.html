@@ -266,6 +266,11 @@
 							
 						</div>
 					</li>
+					<li v-if='confirmRole&&orderInfo.status==1' >
+						<div class="mod confirm" :data-orderid="currentOrderId" >
+							<div class="ico">确认</div>							
+						</div>
+					</li>
 					<li  v-if='feedbackRole' >
 						<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">执行信息</div>
@@ -273,7 +278,7 @@
 						</div>
 					</li>
 					<li v-if='summaryRole' >
-						<div class="mod mind" :data-orderid="currentOrderId" :data-tourId="currentOrderId" :data-photographerId="currentOrderId" >
+						<div class="mod mind" :data-orderid="currentOrderId" >
 							<div class="ico">心得</div>							
 						</div>
 					</li>

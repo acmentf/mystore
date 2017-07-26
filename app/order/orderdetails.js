@@ -21,6 +21,7 @@ var vm = new Vue({
 		currentOrderStatus:'',
 		allotRole: false,
 		assignRole:false,
+		confirmRole:false,
 		cancelRole:false,
 		summaryRole:false,
 		feedbackRole:false,
@@ -33,9 +34,11 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
+	vm.confirmRole = window.Role.hasAuth('confirm')// 取消按钮的key
 	vm.summaryRole = window.Role.hasAuth('summary')// 录入心得按钮的key
 	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
 	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
+	
 	renderOrderDetails();
 	vm.currentRole=window.Role.userrole;
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
@@ -46,7 +49,7 @@ lf.ready(function() {
 	});
 	mui('.operate').on('tap', '.button', function() {
 		if(vm.currentOrderStatus == 3){
-			lf.nativeUI.toast('该订单取消！');
+			lf.nativeUI.toast('该订单已取消！');
 		}
 		else{
 			vm.maskShow = true;
@@ -111,6 +114,32 @@ lf.ready(function() {
 		}
 		
 	})
+	mui('.popup-mod').on('tap', '.confirm', function() { //点击确认
+	
+			lf.nativeUI.confirm("操作提示", "你确认要执行订单?",  ["确定","取消"] ,function(e){
+		 		if(e.index==0){
+		 			var params = {
+						orderId: vm.currentOrderId,
+						orderState:2,
+						orderNo:vm.currentOrderNo
+					};
+		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
+						if(data.code == 200) {
+							lf.nativeUI.toast("操作成功！");
+							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+							lf.window.closeCurrentWebview();
+						} else {
+							lf.nativeUI.toast(data.msg);
+						}
+					}, function(erro) {
+						lf.nativeUI.toast(erro.msg);
+					});
+		 		}
+			});		
+		
+		
+	})
+	
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
 		console.log('orderNo:'+orderid);
@@ -124,15 +153,12 @@ lf.ready(function() {
 		var orderid = this.getAttribute('data-orderid');
 		if(vm.photographerExperienceFlage==0){//1进入查看页面，0进入修改页面
 			lf.window.openWindow('summary/summary.html','../summary/summary.html',{},{
-            tourId: vm.currentTourId,
-            orderId: orderid,
-            photographerId: vm.photographerId
+            orderId: orderid
 			})
 		}
 		else{
 			lf.window.openWindow('summary/details.html','../summary/details.html',{},{
-            orderId: orderid,
-            photographerId: vm.photographerId
+            orderId: orderid
 			})
 		}
 		vm.maskShow = false;
@@ -143,7 +169,7 @@ lf.ready(function() {
 		var photographerId = this.getAttribute('data-photographerId');
 		lf.window.openWindow('summary/details.html','../summary/details.html',{},{
             orderId: orderid,
-            photographerId: vm.photographerId
+            photographerId: photographerId
 		})
 		vm.maskShow = false;
 		vm.popupShow = false;
