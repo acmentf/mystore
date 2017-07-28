@@ -178,6 +178,7 @@ lf.ready(function() {
 
 lf.event.listener('orderdetails',function(e){
 	renderOrderDetails();
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 
 function renderOrderDetails(){

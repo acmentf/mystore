@@ -34,8 +34,12 @@ lf.ready(function() {
 	lf.net.getJSON('/order/getJourneyPhotographer',params,function (res) {
 		lf.nativeUI.closeWaiting();
 		if(res.code == 200) {
-			var rs = dodata(res.data);
-			vm.lineSight = rs;
+			if(res.data&&res.data.length > 0){
+				var rs = dodata(res.data);
+				vm.lineSight = rs;	
+			}else{
+				lf.nativeUI.toast('暂无拍摄地点，请先录入拍摄信息',{duration:'long'})
+			}
 		}else{
 			lf.nativeUI.toast(res.msg)
 		}
