@@ -85,7 +85,7 @@ function initPull() {
 							self.endPullDownToRefresh();
 							if(res.code == 200) {
 								self.refresh(true);
-								vm.msgList = res.data.result
+								vm.msgList = doData(res.data.result)
 							}else{
 								lf.nativeUI.toast(res.msg)
 							}
