@@ -246,5 +246,12 @@ function initPull() {
 }
 
 lf.event.listener('orderdetails',function(e){
-	mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
+	vm.orderList.forEach(function(v, i) { // 将数据制空
+		dodata('down', i, [])
+		vm.pageNos[i] = 0;
+	})
+
+	vm.pullObjects.forEach(function(v) {// 将数据全部重新加载一次
+		mui(v).pullToRefresh().pullUpLoading();
+	})
 })

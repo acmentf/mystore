@@ -109,6 +109,7 @@ lf.ready(function () {
                     if (res.code === '200') {
                         mui.toast('录入成功')
                       //跳转页面
+                      	lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
                         lf.window.openWindow('summary/details.html','details.html',{},{
                             orderId: pageParams.orderId,
                             photographerId: pageParams.photographerId
