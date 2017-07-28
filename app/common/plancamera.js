@@ -35,7 +35,6 @@ lf.ready(function() {
 		lf.nativeUI.closeWaiting();
 		if(res.code == 200) {
 			var rs = dodata(res.data);
-			console.log(JSON.stringify(rs))
 			vm.lineSight = rs;
 		}else{
 			lf.nativeUI.toast(res.msg)
@@ -110,7 +109,6 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
     })
 })
 lf.event.listener('addPhotographer',function(e){
-	console.log(JSON.stringify(e.detail))
 	var list = e.detail.list;
 	var index = e.detail.index;
 	var temp = null;

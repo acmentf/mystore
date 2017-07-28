@@ -69,14 +69,16 @@ function findSYS(){
 }
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
-	console.log('search')
+	if(vm.type == 1){
+		findZXR();
+	}else{
+		findSYS();
+	}
 })
 document.getElementById('saveBtn').addEventListener('tap',function(){
 	if(vm.type == 2){
-		console.log(JSON.stringify(vm.pickList))// 获取多选值
 		var list = [];
 		vm.pickList.forEach(function(v){
-			console.log(v)
 			for(var i in vm.personList){
 				if(vm.personList[i].id == v){
 					list.push(v+'-'+vm.personList[i].name);

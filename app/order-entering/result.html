@@ -206,12 +206,9 @@
 						vm.salesNum = res.data.orderX.salesNum
 						vm.selectsNum = res.data.orderX.selectsNum
 						vm.orderXms = res.data.orderXms
-						console.log(JSON.stringify(res.data.orderX))
 						if(res.data.orderX.saleDate){
-							console.log(res.data.orderX.saleDate)
 							vm.saleDate = new Date(res.data.orderX.saleDate).format('yyyy-MM-dd')
 						}
-						console.log(res.data.givesPicSize)
 						switch(res.data.orderX.givesPicSize) {
 							case '1':
 								vm.givesPicSize = '16寸'
@@ -319,7 +316,6 @@
 				});
 			}
 			lf.event.listener('listchange', function(e) {
-				console.log(JSON.stringify(e.detail))
 				var old = 0
 				var temp = 0;
 				var rs = 0;

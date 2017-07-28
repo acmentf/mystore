@@ -203,7 +203,6 @@ function renderOrderDetails(){
 			vm.timeConsume='  '+day+'天'+hour+'小时'+min+'分';
 			vm.orderTrackInfo.groupRoute=outLineBreak(vm.orderTrackInfo.groupRoute);	
 			vm.orderInfo.createTime = lf.util.timeStampToDate(vm.orderInfo.createTime)
-			console.log(JSON.stringify(vm.orderInfo ))
 			if (data.data.orderTrackInfo.fetchPhotoTime) {
             	vm.orderTrackInfo.fetchPhotoTime = lf.util.timeStampToDate2(vm.orderTrackInfo.fetchPhotoTime)
             }

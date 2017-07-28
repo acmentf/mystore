@@ -24,7 +24,6 @@ lf.ready(function() {
 })
 
 document.getElementById('searchBtn').addEventListener('tap',function(){
-	console.log('search')
 	findData();
 })
 
@@ -57,7 +56,6 @@ function doData(data){
 	data.forEach(function(v){
 		v.data = JSON.parse(v.data);
 	})
-	console.log(JSON.stringify(data))
 	return data;
 }
 

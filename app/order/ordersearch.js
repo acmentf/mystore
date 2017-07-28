@@ -18,7 +18,6 @@ lf.ready(function() {
 	
 	//搜索记录
 	var jl = lf.storage.get(HOT_SEARCH)
-	console.log(jl)
 	if(typeof jl != 'undefined'&& jl != null){
 		vm.his = JSON.parse(jl)
 	}
@@ -34,7 +33,6 @@ document.getElementById('clearBtn').addEventListener('tap',function(){
 })
 
 mui('.mui-content').on('tap','.hisbtn',function(){
-	console.log(this.innerText)
 	vm.searchText = this.innerText;
 	findData();
 })

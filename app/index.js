@@ -75,7 +75,6 @@ mui('.toolbar').on('tap', '.icon-tuichu', function() {
 
 mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 	stationPicker.show(function(items) {
-		console.log(items[0].value)
 		var params = {
 			positionId:items[0].value
 		};

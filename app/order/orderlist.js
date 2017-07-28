@@ -246,5 +246,5 @@ function initPull() {
 }
 
 lf.event.listener('orderdetails',function(e){
-	mui(vm.index).pullToRefresh().pullDownLoading();
+	mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })

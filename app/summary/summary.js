@@ -72,7 +72,6 @@ lf.ready(function () {
                         mui.toast( "Resolve file URL failed: " + e.message );
                     } );
                 }, function ( e ) {
-                    console.log( '取消选择图片' );
                 },{
                     filter:'image'
                 });
@@ -133,7 +132,6 @@ lf.ready(function () {
         vm.fileSelect()
     }).on('tap','.remove',function (e) {
         var index = +e.target.getAttribute('index')
-        console.log(index)
         vm.remove(index)
     }).on('tap','.btn-submit',function (e) {
         vm.save()

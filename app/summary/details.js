@@ -39,7 +39,6 @@ lf.ready(function () {
                 }, function (res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
-                        console.log(JSON.stringify(res))
                         self.imgs = res.data.imgs || []
                         self.summary = res.data.summary || ''
                     } else {
