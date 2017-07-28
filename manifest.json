@@ -7,7 +7,7 @@
 	"id": "com.jdytrip.shoot",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "途忆旅拍",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.3",/*应用版本名称*/
+		"name": "1.0.8",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -320,7 +320,11 @@
 					"images/1.jpg",
 					"images/2.jpg",
 					"images/3.jpg",
-					"images/4.png"
+					"images/4.png",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -351,7 +355,9 @@
 					"app/order/orderdetails.html",
 					"app/order/trackinfo.html",
 					"app/order-entering/result.html",
-					"app/order/ordersearch.html"
+					"app/order/ordersearch.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html"
 				],
 				"priority": 0
 			},
@@ -426,7 +432,8 @@
 					"app/common/chooseuser.html",
 					"app/common/plancamera.html",
 					"app/order/trackinfo.html",
-					"app/summary/summary.html"
+					"app/summary/summary.html",
+					"app/summary/details.html"
 				],
 				"priority": 0
 			},
@@ -522,7 +529,17 @@
 			"app/summary/details.html": {
 				"resources": [
 					"app/summary/details.js",
-					"css/summary/details.css"
+					"css/summary/details.css",
+					"js/framework/define.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
 				],
 				"refer": [],
 				"priority": 0
