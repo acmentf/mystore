@@ -254,4 +254,5 @@ lf.event.listener('orderdetails',function(e){
 	vm.pullObjects.forEach(function(v) {// 将数据全部重新加载一次
 		mui(v).pullToRefresh().pullUpLoading();
 	})
+	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })

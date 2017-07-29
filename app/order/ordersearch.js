@@ -8,6 +8,7 @@ var vm = new Vue({
 		pageNos:[
 
 		],
+		id:'',
 		his:[],
 		pageNum: 10
 	}
@@ -87,6 +88,12 @@ function dodata(type, index, data) {
 		vm.orderList = data
 	}
 }
+mui('.order-ul').on('tap', '.nr', function() {
+	var id = this.getAttribute('data-id');
+	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
+		orderNo: id
+	})
+})
 //阻尼系数
 function initPull() {
 	var deceleration = mui.os.ios ? 0.003 : 0.0009;

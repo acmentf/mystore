@@ -105,8 +105,13 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 			lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
 			lf.window.closeCurrentWebview();
 		}else{
-			lf.nativeUI.toast(res.msg)
+			if(!res.msg){
+				lf.nativeUI.toast("请求失败")
+			}else{
+				lf.nativeUI.toast(res.msg)
+			}
 		}
+		
     },function(res){
     	lf.nativeUI.closeWaiting();
     	lf.nativeUI.toast(res.msg)
@@ -119,7 +124,7 @@ lf.event.listener('addPhotographer',function(e){
 	vm.lineSight[index].photographer = [];
 	vm.lineSight[index].photographerName = [];
 	list.forEach(function(v){
-		temp = v.split('-')
+		temp = v.split('_')
 		vm.lineSight[index].photographer.push(Number(temp[0]))
 		vm.lineSight[index].photographerName.push(temp[1])
 	})

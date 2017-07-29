@@ -80,8 +80,8 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 		var list = [];
 		vm.pickList.forEach(function(v){
 			for(var i in vm.personList){
-				if(vm.personList[i].id == v){
-					list.push(v+'-'+vm.personList[i].name);
+				if(vm.personList[i].id == v){			
+					list.push(v+'_'+vm.personList[i].name);
 					break
 				}
 			}
