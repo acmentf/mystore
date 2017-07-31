@@ -95,6 +95,8 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 					positions: data.data.userPositionList
 				}
 				window.Role.save(obj)
+				vm.currentStationName = window.Role.userroleName
+				lf.nativeUI.toast('切换成功');
 			} else {
 				lf.nativeUI.toast(data.msg);
 			}
