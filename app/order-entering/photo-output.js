@@ -29,7 +29,7 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 	lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
-
+			lf.nativeUI.toast('保存成功')
 		}else{
 			lf.nativeUI.toast(data.msg)
 		}
