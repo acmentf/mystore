@@ -33,9 +33,15 @@
   text-align: center;
 }
 
+.photo-output .pho-table .mui-table .right-cell input {
+  border: 0;
+  padding-left: 5px;
+  margin: 0;
+}
+
 .photo-output .bz {
   float: left;
-  width: 13%;
+  width: 15%;
   padding-left: 10px;
 }
 

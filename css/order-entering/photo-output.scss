@@ -24,11 +24,16 @@
             }
             .right-cell{
                 text-align: center;
+                input{
+                    border: 0;
+                    padding-left: 5px;
+                    margin: 0;
+                    }
             }
         }
 
     }
-    .bz{float: left;width: 13%; padding-left: 10px;}
+    .bz{float: left;width: 15%; padding-left: 10px;}
     .bz-textarea{float: left;width: 80%;}
     .login-btn-box{
         margin-top:0.2rem;
