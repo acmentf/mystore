@@ -1,7 +1,8 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		orderId: ''
+		orderId: '',
+		photoOutList: []
 	}
 })
 
@@ -11,12 +12,27 @@ lf.ready(function(){
 })
 
 document.getElementById('save').addEventListener('tap',function(){
-	lf.net.getJSON()
+
 })
 
 // 请求数据
 function init(){
-	lf.net.getJSON()
+	var params = {
+		"orderId":vm.orderId
+	};
+	lf.nativeUI.showWaiting()
+	lf.net.getJSON('/order/queryOrderShootResult',params,function (res) {
+		lf.nativeUI.closeWaiting()
+		if(res.code == 200) {
+			lf.nativeUI.toast('操作成功')
+
+		}else{
+			lf.nativeUI.toast(res.msg)
+		}
+    },function(res){
+    	lf.nativeUI.closeWaiting()
+    	lf.nativeUI.toast(res.msg)
+    })
 }
 
 
