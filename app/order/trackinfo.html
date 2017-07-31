@@ -34,7 +34,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label>已指派人</label>
-						<textarea  rows="3" class="mui-input-clear" placeholder=""></textarea>
+						<textarea readonly="readonly" v-model='trackInfo.assignNames'  rows="3"></textarea>
 					</div>
 					
 				</div>
@@ -139,7 +139,7 @@
 									</div>
 									<div class="mui-input-row">
 										<label>具体时段</label>
-										<input  type="text" class="mui-input-clear" placeholder="">
+										<input  type="text" class="mui-input-clear" placeholder="如：7:00-8:00">
 									</div>
 									<div class="mui-input-row" style="height: auto;">
 										<label>备注</label>

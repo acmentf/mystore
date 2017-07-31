@@ -24,10 +24,12 @@ var vm = new Vue({
 		confirmRole:false,
 		cancelRole:false,
 		summaryRole:false,
-		feedbackRole:false,
+		feedbackRole:false,// 销售输出
 		handleRole:false,
+		shootFeedbackRole:false, // 拍摄输出
 		photographerExperienceFlage:'',
-		actionStatus:2, // 
+		actionStatus:'', // 
+		outPutStatus:0,
 	}
 })
 
@@ -39,7 +41,7 @@ lf.ready(function() {
 	vm.summaryRole = window.Role.hasAuth('summary')// 录入心得按钮的key
 	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
 	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
-	
+	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback')// 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole=window.Role.userrole;
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
@@ -252,10 +254,12 @@ function renderOrderDetails(){
 				else{
 					// 用户转化率  = 购买人数/团人数 (前端计算)
 					vm.userPecent = ((vm.orderResult.buyers / vm.orderTrackInfo.personCount) * 100).toFixed(2)
-				}	
-				vm.orderResult.orderXms.forEach(function(v, i) {
-					v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
-				})
+				}
+				if(vm.orderResult.orderXms){
+					vm.orderResult.orderXms.forEach(function(v, i) {
+						v.total = lf.util.multNum(v.picNum, v.price).toFixed(2)
+					})
+				}			
 				if(data.data.orderResult.saleDate){
 					vm.orderResult.saleDate = lf.util.timeStampToDate2(data.data.orderResult.saleDate)
 				}
@@ -270,6 +274,12 @@ function renderOrderDetails(){
 			vm.currentOrderStatus =  data.data.orderInfo.status;//记录订单状态
 			vm.currentOrderNo =  data.data.orderInfo.orderNo;//记录订单No
 			vm.photographerExperienceFlage= data.data.photographerExperienceFlage;
+			if(data.data.orderResult){
+				if(data.data.orderResult.isOut){
+					vm.outPutStatus = data.data.orderResult.isOut;
+				}	
+			}
+			vm.actionStatus = data.data.orderInfo.actionStatus;//订单执行状态
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}

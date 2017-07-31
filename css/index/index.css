@@ -16,6 +16,7 @@
 }
 .app-index .toolbar .rolename{
 	float: left;
+	text-align: left;
     font-size: 0.28rem;
     color: #999;
     width: 50%;

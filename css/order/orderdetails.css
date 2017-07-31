@@ -53,7 +53,7 @@
 
 .orderdetails .item label {
 	color: #202020;
-	width: 1.7rem;
+	width: 2rem;
 	display: inline-block;
 	text-align: right;
 }
@@ -98,7 +98,7 @@
 }
 
 .orderdetails .sale-table {
-	margin-bottom: 0.2rem;
+	margin: 0.1rem 0 0.2rem 0.6rem;
 }
 
 .orderdetails .sale-table .table-hd {
@@ -126,7 +126,7 @@
 .orderdetails .routeinfo {
 	position: relative;
 	overflow: auto;
-	padding-left: 1.75rem !important;
+	padding-left: 2.05rem !important;
 	color: #888;
 }
 
@@ -134,10 +134,22 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 1.7rem;
+	width: 2rem;
 	display: inline-block;
 }
-
+.orderdetails .remark label{
+	padding: 0.1rem 0 0 0;
+}
+.orderdetails .remark .cnt{
+	float: right;padding-top: 0;width: 74%;
+}
+.orderdetails .mui-input-group .mui-input-row:after{
+	background: #fff;
+}
+.orderdetails .mui-input-group .mui-input-row{
+	height: auto;
+	color: #888;
+}
 .popup-mod .ico {
 	background: #fff;
 	width: 1.6rem;
