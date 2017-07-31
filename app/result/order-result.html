@@ -25,17 +25,17 @@
 				 <!--点击切换S-->
 				<div class="cut">
 					<div class="mui-content">
-					    <div class="mui-row cut-list">
+					    <div class="mui-row ">
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
 									<label>已输出</label>
-									<input v-model="cut" class="export" name="radio" type="radio" value="1">
+									<input v-model="saleStatus" class="export" name="radio" type="radio" value="1">
 								</div>
 					        </div>
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
 									<label>未输出</label>
-									<input v-model="cut" class="no-export" name="radio" type="radio" value="2">
+									<input v-model="saleStatus" class="no-export" name="radio" type="radio" value="2">
 								</div>
 					        </div>
 					    </div>
@@ -43,69 +43,67 @@
 				</div>
 				<!--//点击切换E-->
 				<!--//已输出表单S-->
-			<div v-show="cut==1" class="mui-input-group">
+			<div v-show="saleStatus==1" class="mui-input-group">
 					<div class="mui-input-row  group-info">
 				        <label>销售时间：</label>
 						<input type="text" v-model="saleDate"  class="selectDate" readonly="readonly" placeholder="请选择销售时间"/>
 			    	</div>
-			    	<div class="mui-input-row group-info give-number" v-for="(v, i) in printsData">
+			    	<div class="mui-input-row group-info give-number" v-for="(v, i) in printOrderXms">
 						<label v-if="i==0" >打印张数：</label>
 						<label v-else >&nbsp;</label>
 						<div class="select" >
-							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
-							<input type="text" v-model="v.printsSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
-							<input type="number" v-model="v.printsNum" class="select-number" placeholder="请输入打印张数">
+							<input type="text" v-model="v.picSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
+							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入打印张数">
 						</div>
 						<span v-if="i==0"  class=" mui-icon mui-icon-plus add-printsNum add-num"></span>
-						<span v-else style="color:red;" class="mui-icon mui-icon-close add-num remove-icon"></span>
+						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
 					</div>
-					<div class="mui-input-row group-info give-number" v-for="(v,i) in salesData">
+					<div class="mui-input-row group-info give-number" v-for="(v,i) in saleOrderXms">
 						<label v-if="i==0">销售张数：</label>
 						<label v-else >&nbsp;</label>
 						<div class="select" >
-							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
-							<input type="text" v-model="v.salesSize" :data-index="i"  readonly="readonly" class="select-size salesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.salesNum" class="select-number" placeholder="请输入销售张数">
+
+							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size salesSize" placeholder="尺寸" />
+							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入销售张数">
 						</div>
 						<span v-if="i==0" class=" mui-icon mui-icon-plus add-salesNum add-num"></span>
-						<span v-else style="color:red;" class="mui-icon mui-icon-close add-num remove-icon"></span>
+						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-salesNum"></span>
 					</div>
-					<div class="mui-input-row group-info give-number" v-for="(v, i) in givesData">
+					<div class="mui-input-row group-info give-number" v-for="(v, i) in giveOrderXms">
 						<label v-if="i==0" >赠送张数：</label>
 						<label v-else >&nbsp;</label>
 						<div class="select" >
-							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
-							<input type="text" v-model="v.givesSize" :data-index="i"  readonly="readonly" class="select-size givesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.givesNum" class="select-number" placeholder="请输入赠送张数">
+							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size givesSize" placeholder="尺寸" />
+							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入赠送张数">
 						</div>
 						<span v-if="i==0" class=" mui-icon mui-icon-plus add-givesNum add-num"></span>
-						<span v-else style="color:red;" class="mui-icon mui-icon-close add-num remove-icon"></span>
+						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-givesNum"></span>
 					</div>
 					
 					<div class="mui-input-row group-info">
 						<label>销售总额：</label>
-						<input type="number" class="mui-input-clear" placeholder="请输入销售总额">
+						<input v-model="salesAmt" type="number" class="mui-input-clear" placeholder="请输入销售总额">
 					</div>
 					<div class="mui-input-row group-info">
 						<label>购买人数：</label>
-						<input  type="number" class="mui-input-clear" placeholder="请输入购买人数">
+						<input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
 					</div>
 					<div class="mui-input-row remark">
 						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea class="remark-text"></textarea>
+						<textarea v-model="remark" class="remark-text"></textarea>
 					</div>
 				</div>	
 				
 				<!--已输出表单E-->
 				<!--未输出表单S-->
-				<div v-show="cut==2" div class="mui-input-group">
+				<div v-show="saleStatus==2" div class="mui-input-group">
 					<div class="mui-input-row  group-info">
 				        <label>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：</label>
-						<input type="text"  class="select-cause" readonly="readonly" placeholder="请选择未输出原因"/>
+						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
 			    	</div>
 			    	<div class="mui-input-row remark">
 						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea class="remark-text"></textarea>
+						<textarea v-model="remark" class="remark-text"></textarea>
 					</div>
 				</div>
 				<!--未输出表单E-->
