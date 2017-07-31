@@ -98,7 +98,8 @@
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div class="mui-input-row search">
 					<!--<div class="searchspan" v-model="seachTest">搜索订单</div>-->
-					<input class="searchspan" style="width: 100%;" v-model="searchText" placeholder="订单编号/导游姓名/团号">
+					<!--<input class="searchspan" style="width: 100%;" v-model="searchText" placeholder="订单编号/导游姓名/团号">-->
+					<input type="search" style="width: 100%;" v-model="searchText" class="searchspan" placeholder="订单编号/导游姓名/团号">
 					<span id="searchBtn" class="searchicon">搜索</span>
 				</div>
 				<div class="seach-history" v-show="!showAnswer">
@@ -126,7 +127,7 @@
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
 							</div>
-							<div class="nr" :data-id="item.id">
+							<div class="nr" :data-id="item.i">
 								<div class="imgbody">
 									<img :src="item.covecoverImage" />
 									<div class="item">
@@ -164,8 +165,8 @@
 										<button type="button" class="mui-btn mui-btn-danger zxxx" :data-id="item.orderNo">
 											执行结果
 										</button>
-									</div>
-								</div>-->
+									</div>-->
+								</div>
 							</div>
 						</li>
 					</ul>
