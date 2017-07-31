@@ -11,18 +11,27 @@ lf.ready(function(){
 	init();
 })
 mui('.mui-content').on('tap','#saveBtn',function(){
-	console.log('save')
-	return;
+	var forNum = []
+	vm.photoOutList.forEach(function(val){
+		var reg= /[^\d]/g;
+		if(reg.test(val.num)){
+			lf.nativeUI.toast('拍摄张数请输入数字')
+		}else{
+			forNum.push(val.num)
+		}
+	})
 	var params = {
-		"orderId":vm.orderId
+		"orderId":vm.orderId,
+		"num" :forNum,
+		"remark": vm.remark
 	};
 	lf.nativeUI.showWaiting()
-	lf.net.getJSON('/order/saveOrderShootResult',params,function (res) {
+	lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
 		lf.nativeUI.closeWaiting()
-		if(res.code == 200) {
+		if(data.code == 200) {
 
 		}else{
-			lf.nativeUI.toast(res.msg)
+			lf.nativeUI.toast(data.msg)
 		}
     },function(res){
     	lf.nativeUI.closeWaiting()
@@ -36,13 +45,14 @@ function init(){
 		"orderId":vm.orderId
 	};
 	lf.nativeUI.showWaiting()
-	lf.net.getJSON('/order/queryOrderShootResult',params,function (res) {
+	lf.net.getJSON('/order/queryOrderShootResult',params,function (data) {
 		lf.nativeUI.closeWaiting()
-		if(res.code == 200) {
+		if(data.code == 200) {
 			lf.nativeUI.toast('操作成功')
-			console.log(res)
+			vm.remark = data.data.remark
+			vm.photoOutList = data.data.shootInfos
 		}else{
-			lf.nativeUI.toast(res.msg)
+			lf.nativeUI.toast(data.msg)
 		}
     },function(res){
     	lf.nativeUI.closeWaiting()
