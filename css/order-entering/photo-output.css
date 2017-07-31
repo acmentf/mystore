@@ -29,14 +29,11 @@
   border-right: 1px solid #D7D7D7;
 }
 
-.photo-output .pho-table .mui-table .right-cell {
-  text-align: center;
-}
-
 .photo-output .pho-table .mui-table .right-cell input {
   border: 0;
   padding-left: 5px;
   margin: 0;
+  text-align: center;
 }
 
 .photo-output .bz {

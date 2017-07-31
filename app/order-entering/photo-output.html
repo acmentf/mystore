@@ -14,6 +14,9 @@
 			body {
 				background-color: #fff;
 			}
+			.mui-btn.mui-active:enabled, .mui-btn:enabled:active, button.mui-active:enabled, button:enabled:active, input[type=button].mui-active:enabled, input[type=button]:enabled:active, input[type=reset].mui-active:enabled, input[type=reset]:enabled:active, input[type=submit].mui-active:enabled, input[type=submit]:enabled:active{
+				background: #ff3064;
+			}
 	</style>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -31,7 +34,7 @@
 			</div>
 			<div class="pho-table">
 				<div class="mui-table" v-for="item in photoOutList">
-					<div v-model="item.journeyName" class="mui-table-cell mui-col-xs-6 left-cell">
+					<div class="mui-table-cell mui-col-xs-6 left-cell">
 						{{item.journeyName}}
 					</div>
 					<div class="mui-table-cell mui-col-xs-6 right-cell">
@@ -43,10 +46,10 @@
 			</div>
 			<div>
 				<div class="bz">备注</div>
-				<textarea v-model="item.remark" rows="5" class="mui-input-clear bz-textarea" ></textarea>
+				<textarea v-model="remark" rows="5" class="mui-input-clear bz-textarea" ></textarea>
 			</div>
 			<div class="login-btn-box">
-				<button type="button" id="save" class="mui-btn login-pass-btn">保存</button>
+				<button type="button" id="saveBtn" class="mui-btn login-pass-btn">保存</button>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
