@@ -81,7 +81,7 @@ lf.ready(function() {
 	})
 	mui('.popup-mod').on('tap', '.trackinfo', function() { //点击跟踪信息
 		var orderNo = this.getAttribute('data-orderNo');
-		lf.window.openWindow('trackinfo.html','trackinfo.html',{},{
+		lf.window.openWindow('order/trackinfo.html','../order/trackinfo.html',{},{
 			orderNo: orderNo
 		})
 		vm.maskShow = false;

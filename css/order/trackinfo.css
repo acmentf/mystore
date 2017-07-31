@@ -81,3 +81,13 @@
 .trackinfo .mui-input-row label~input, .trackinfo .mui-input-row label~select,.trackinfo .mui-input-row label~textarea{
 	float: left;
 }
+.trackinfo .assigninfo{
+	padding: 0.2rem;
+}
+.trackinfo .assigninfo .item label{
+	width: 1.2rem;
+	display: inline-block;
+}
+.trackinfo .assigninfo .item textarea{
+	width: 80%;
+}

@@ -14,29 +14,7 @@ var vm = new Vue({
 })
 var picker = null;
 lf.ready(function() {
-	var orderNo = lf.window.currentWebview().orderNo;
-	var params = {
-		orderNo: orderNo
-	};
-	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
-		if(data.code == 200) {
-			vm.trackInfo = data.data;
-			vm.shootInfoForms = data.data.lineSight;
-			vm.shootInfoForms.forEach(function(v, i) {
-				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
-			})
-			if(data.data.fetchPhotoTime) {
-				vm.trackInfo.fetchPhotoTime = lf.util.timeStampToDate2(data.data.fetchPhotoTime)
-			} else {
-				vm.trackInfo.fetchPhotoTime = ''
-			}
-			vm.currentOrderId = data.data.orderId; //记录订单Id
-		} else {
-			lf.nativeUI.toast(data.msg);
-		}
-	}, function(erro) {
-		lf.nativeUI.toast(erro.msg);
-	});
+	renderTrackInfo();
 	//				initDateChoose()
 	//				lf.window.closeCurrentWebview();
 	var opts = { "type": "date" }
@@ -131,6 +109,14 @@ mui('.group-info').on('tap', '.delete-ico', function() {
 
 })
 
+mui('.assigninfo').on('tap', '.assign', function() { // 点击指派
+	var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('common/chooseuser.html','../common/chooseuser.html',{},{
+			orderNo: orderid,
+			type:1
+		})
+
+})
 mui('.mui-input-row').on('tap', '.fetchtime', function() {
 	initFetchTimeChoose();
 })
@@ -177,3 +163,34 @@ function initFetchTimeChoose() {
 		Vue.set(vm.trackInfo , 'fetchPhotoTime' , rs.text)			
 	});
 }
+
+function renderTrackInfo(){
+	var orderNo = lf.window.currentWebview().orderNo;
+	var params = {
+		orderNo: orderNo
+	};
+	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
+		if(data.code == 200) {
+			vm.trackInfo = data.data;
+			vm.shootInfoForms = data.data.lineSight;
+			vm.shootInfoForms.forEach(function(v, i) {
+				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
+			})
+			if(data.data.fetchPhotoTime) {
+				vm.trackInfo.fetchPhotoTime = lf.util.timeStampToDate2(data.data.fetchPhotoTime)
+			} else {
+				vm.trackInfo.fetchPhotoTime = ''
+			}
+			vm.currentOrderId = data.data.orderId; //记录订单Id
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
+}
+
+lf.event.listener('orderdetails',function(e){
+	renderTrackInfo();
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+})

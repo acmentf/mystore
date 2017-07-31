@@ -264,8 +264,10 @@
 					<li  v-if='handleRole'>
 						<!--<div class="mod trackinfo" :data-orderNo="currentOrderNo" >
 							<div class="ico">计调</div>
-						</div>-->
-						<button :disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3" :data-orderNo="currentOrderNo" type="button" class="mui-btn mod trackinfo ico">计调</button>
+						</div>
+						:disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3"
+						-->
+						<button  :data-orderNo="currentOrderNo" type="button" class="mui-btn mod trackinfo ico">计调</button>
 					</li>
 					<li v-if='cancelRole&&!(orderInfo.status==3||orderInfo.status==7)'>
 						<!--<div class="mod cancled" :data-orderid="currentOrderId" >
