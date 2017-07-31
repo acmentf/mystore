@@ -27,7 +27,7 @@ var vm = new Vue({
 		feedbackRole:false,
 		handleRole:false,
 		photographerExperienceFlage:'',
-		actionStatus:0, // 
+		actionStatus:2, // 
 	}
 })
 
@@ -144,6 +144,22 @@ lf.ready(function() {
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('order-entering/result.html','../order-entering/result.html',{},{
+			orderNo: orderid
+		})
+		vm.maskShow = false;
+		vm.popupShow = false;
+	})
+	mui('.popup-mod').on('tap', '.saleout', function() { //点击销售输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
+			orderNo: orderid
+		})
+		vm.maskShow = false;
+		vm.popupShow = false;
+	})
+	mui('.popup-mod').on('tap', '.shootout', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('order-entering/photo-output.html','../order-entering/photo-output.html',{},{
 			orderNo: orderid
 		})
 		vm.maskShow = false;
