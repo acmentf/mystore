@@ -76,12 +76,25 @@ mui('.toolbar').on('tap', '.icon-tuichu', function() {
 mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 	stationPicker.show(function(items) {
 		var params = {
-			positionId:items[0].value
+			positionId: items[0].value
 		};
 		lf.net.getJSON('user/switchPosition', params, function(data) {
 			if(data.code == 200) {
-				window.Role.logout();
-				plus.runtime.restart();	
+				//window.Role.logout();
+				//plus.runtime.restart();
+				var obj = {
+					usercode: data.data.id,
+					username: data.data.name,
+					phone: data.data.phone,
+					companyId: data.data.companyId,
+					userrole: data.data.positions[0].type,
+					userroleName: data.data.positions[0].name,
+					tonken: data.data.token,
+					loginsign: '1',
+					auths: data.data.auths,
+					positions: data.data.userPositionList
+				}
+				window.Role.save(obj)
 			} else {
 				lf.nativeUI.toast(data.msg);
 			}
