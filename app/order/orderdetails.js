@@ -30,6 +30,7 @@ var vm = new Vue({
 		photographerExperienceFlage:'',
 		actionStatus:'', // 
 		outPutStatus:0,
+		shotOrderOutput: [] //订单拍摄输出
 	}
 })
 
@@ -280,6 +281,9 @@ function renderOrderDetails(){
 				}	
 			}
 			vm.actionStatus = data.data.orderInfo.actionStatus;//订单执行状态
+			if(data.data.shotOrderOutput){
+				vm.shotOrderOutput = data.data.shotOrderOutput
+			}
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}

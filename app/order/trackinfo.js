@@ -7,7 +7,7 @@ var vm = new Vue({
 		timeName1: '上午',
 		timeName2: '下午',
 		timeName3: '晚上',
-		shootInfoForms: [{ id: '', "journeyName": "", "periodType": 0, "shootTime": '' }],
+		shootInfoForms: [{ id: '', "journeyName": "", "periodType": 0, "shootTime": '' ,remark:''}],
 		trackInfo: {},
 		currentOrderId: ''
 	}
@@ -48,7 +48,9 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 		lineSightList: vm.shootInfoForms,
 		order: {
 			fetchPhotoTime: vm.trackInfo.fetchPhotoTime,
-			fetchPhotoScene: vm.trackInfo.fetchPhotoScene
+			fetchPhotoScene: vm.trackInfo.fetchPhotoScene,
+			tourGuide: vm.trackInfo.tourGuide,
+			tourGuidePhone: vm.trackInfo.tourGuidePhone,
 		},
 		tourGroups: {
 			id: vm.trackInfo.id,
@@ -57,7 +59,7 @@ mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息
 			groupRoute: vm.trackInfo.groupRoute,
 			groupDays: vm.trackInfo.groupDays,
 			preReservedSeats: vm.trackInfo.preReservedSeats,
-			busCardNo: vm.trackInfo.busCardNo
+			busCardNo: vm.trackInfo.busCardNo,
 		}
 	}
 	var emptyFalg = false;

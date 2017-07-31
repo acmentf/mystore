@@ -239,7 +239,28 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="mui-card">
+					<div class="mui-card-header"><span class="border-left">订单拍摄输出</span></div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">					
+							<div class="item">
+								<table class="sale-table" border="1" width="70%">
+								<tr class="table-hd">
+									<td>景点</td>
+									<td>摄影师</td>
+									<td>数量</td>
+								</tr>
+								<tr v-for="item in shotOrderOutput">
+									<td v-text="item.journeyName"></td>
+									<td v-text="item.photographerNames"></td>
+									<td v-text="item.shootNum"></td>
+								</tr>
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div  class="mui-card">
 					<div class="mui-card-header">
 						<span class="border-left">其他信息</span></div>

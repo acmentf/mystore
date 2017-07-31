@@ -48,13 +48,13 @@
 						<div class="mui-collapse-content">
 							<div class="group-info">
 								<div class="mui-input-group">
-									<div class="mui-input-row">
+									<!--<div class="mui-input-row">
 										<label>区域</label>
 										<input readonly="readonly" type="text" v-model='trackInfo.personCount' placeholder="">
-									</div>
+									</div>-->
 									<div class="mui-input-row">
 										<label>线路</label>
-										<input readonly="readonly" type="text" v-model='trackInfo.personCount' placeholder="">
+										<input readonly="readonly" type="text" v-model='trackInfo.lineName' placeholder="">
 									</div>
 									<div class="mui-input-row">
 										<label>团人数</label>
@@ -66,11 +66,11 @@
 									</div>
 									<div class="mui-input-row">
 										<label>导游</label>
-										<input type="text"  v-model='trackInfo.groupType'  class="mui-input-clear" placeholder="">
+										<input type="text"  v-model='trackInfo.tourGuide'  class="mui-input-clear" placeholder="">
 									</div>
 									<div class="mui-input-row">
 										<label>导游电话</label>
-										<input type="text"  v-model='trackInfo.groupType' class="mui-input-clear" placeholder="">
+										<input type="text"  v-model='trackInfo.tourGuidePhone' class="mui-input-clear" placeholder="">
 									</div>
 									<div class="mui-input-row">
 										<label>车牌号码</label>
@@ -139,12 +139,12 @@
 									</div>
 									<div class="mui-input-row">
 										<label>具体时段</label>
-										<input  type="text" class="mui-input-clear" placeholder="如：7:00-8:00">
+										<input v-text='item.remark' type="text" class="mui-input-clear" placeholder="如：7:00-8:00">
 									</div>
-									<div class="mui-input-row" style="height: auto;">
+									<!--<div class="mui-input-row" style="height: auto;">
 										<label>备注</label>
 										<textarea   rows="3" class="mui-input-clear" placeholder="请输入备注"></textarea>
-									</div>
+									</div>-->
 								</div>
 							</div>
 							<div class="addshootinfo">
