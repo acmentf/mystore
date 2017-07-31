@@ -122,15 +122,15 @@
 
 .orderlist-content .order-ul .order-li .nr .imgbody {
   position: relative;
-  padding-left: 2rem;
 }
 
-.orderlist-content .order-ul .order-li .nr .imgbody img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1.8rem;
-  height: 1.8rem;
+.orderlist-content .order-ul .order-li .nr .imgbody .jespan {
+  position: relative;
+  top: 5px;
+}
+
+.orderlist-content .order-ul .order-li .nr .imgbody .jespan span {
+  color: #FF2A00;
 }
 
 .orderlist-content .order-ul .order-li .bottom {
@@ -139,15 +139,6 @@
   position: relative;
   height: 44px;
   line-height: 44px;
-}
-
-.orderlist-content .order-ul .order-li .bottom .jespan {
-  position: relative;
-  top: 5px;
-}
-
-.orderlist-content .order-ul .order-li .bottom .jespan span {
-  color: #FF2A00;
 }
 
 .orderlist-content .order-ul .order-li .btns {

@@ -11,12 +11,19 @@
 .app-index .toolbar {
   text-align: right;
   padding: 0.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
 }
 .app-index .toolbar .rolename{
-	float:left; 
-	margin-top: 0.15rem; 
-	font-size: 0.28rem;
-	color:#999;
+	float: left;
+    font-size: 0.28rem;
+    color: #999;
+    width: 50%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .app-index .toolbar .search, .app-index .toolbar .message {
   background: url(../../images/index/icon_search.png) no-repeat;
