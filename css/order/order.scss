@@ -99,14 +99,15 @@
                 }
                 .imgbody{
                     position: relative;
-                    padding-left: 2rem;
-                    img{
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        width: 1.8rem;
-                        height: 1.8rem;
+                    // padding-left: 2rem;
+                    // img{position: absolute;left: 0;top: 0;width: 1.8rem;height: 1.8rem;}
+                    .jespan{
+                    position: relative;
+                    top: 5px;
+                    span{
+                        color: #FF2A00;
                     }
+                }
                 }
             }
             .bottom{
@@ -115,13 +116,6 @@
                 position: relative;
                 height: 44px;
                 line-height: 44px;
-                .jespan{
-                    position: relative;
-                    top: 5px;
-                    span{
-                        color: #FF2A00;
-                    }
-                }
             }
             .btns{
                 text-align: right;
