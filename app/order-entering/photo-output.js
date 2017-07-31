@@ -12,31 +12,36 @@ lf.ready(function(){
 })
 mui('.mui-content').on('tap','#saveBtn',function(){
 	var forNum = []
+	var ifNum = true
 	vm.photoOutList.forEach(function(val){
 		var reg= /[^\d]/g;
 		if(reg.test(val.num)){
 			lf.nativeUI.toast('拍摄张数请输入数字')
+			ifNum = false
 		}else{
 			forNum.push(val.num)
 		}
 	})
-	var params = {
-		"orderId":vm.orderId,
-		"num" :forNum,
-		"remark": vm.remark
-	};
-	lf.nativeUI.showWaiting()
-	lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
-		lf.nativeUI.closeWaiting()
-		if(data.code == 200) {
-			lf.nativeUI.toast('保存成功')
-		}else{
-			lf.nativeUI.toast(data.msg)
-		}
-    },function(res){
-    	lf.nativeUI.closeWaiting()
-    	lf.nativeUI.toast(res.msg)
-    })
+	if(ifNum){
+		var params = {
+			"orderId":vm.orderId,
+			"num" :forNum,
+			"remark": vm.remark
+		};
+		lf.nativeUI.showWaiting()
+		lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
+			lf.nativeUI.closeWaiting()
+			if(data.code == 200) {
+				lf.nativeUI.toast('保存成功')
+			}else{
+				lf.nativeUI.toast(data.msg)
+			}
+	    },function(res){
+	    	lf.nativeUI.closeWaiting()
+	    	lf.nativeUI.toast(res.msg)
+	    })
+	}
+
 })
 
 // 请求数据
