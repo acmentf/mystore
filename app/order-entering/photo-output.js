@@ -25,7 +25,7 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 	if(ifNum){
 		var params = {
 			"orderId":vm.orderId,
-			"num" :forNum,
+			"shootInfos" :forNum,
 			"remark": vm.remark
 		};
 		lf.nativeUI.showWaiting()

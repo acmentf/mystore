@@ -69,7 +69,7 @@ lf.ready(function(){
 	loadResult()
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderNo	
-	
+	console.log(vm.orderId)
 })
 //尺寸选择器S
 mui('.mui-content').on('tap', '.printsSize', function() {
@@ -159,7 +159,7 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 //移除E
 mui('.mui-content').on('tap', '#save', function(){
 	var params1 = {
-		orderId:vm.orderID,
+		orderId:vm.orderId,
 		saleStatus:vm.saleStatus,
 		saleDate:vm.saleDate,
 		printOrderXms:vm.printOrderXms,
@@ -235,6 +235,7 @@ function loadResult(){
 				vm.saleOrderXms = res.data.saleOrderXms || []
 				vm.giveOrderXms = res.data.giveOrderXms || []
 				vm.saleOrderXms = res.data.saleOrderXms || []
+				vm.reason = res.data.reason
 				vm.buyers = res.data.buyers
 				vm.remark = res.data.remark
 				vm.saleStatus = res.data.saleStatus
