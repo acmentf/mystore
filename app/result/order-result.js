@@ -10,7 +10,8 @@ var vm = new Vue({
 		printsData: [
 		{
 			printsNum:'',
-			printsSize:''
+			printsSize:'',
+			printsSizeName:''
 		}
 		],
 		givesData: [
@@ -56,10 +57,11 @@ lf.ready(function(){
 mui('.mui-content').on('tap', '.printsSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
-		vm.printsData.forEach(function(v){
-			console.log('v：'+JSON.stringify(v),'item:'+JSON.stringify(items),'index:'+index)
-			v.printsSize[index]= items[0].text
-		}) 
+		Vue.set(vm.printsData,index,{
+			printsNum: vm.printsData[index].printsNum,
+			printsSize: items[0].value,
+			printsSizeName: items[0].text
+		})
 	});
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
@@ -103,4 +105,8 @@ mui('.mui-content').on('tap', '.remove-icon', function(){
 	var index = this.getAttribute('data-index');
 	console.log(index , JSON.stringify(vm.printsData) )
 	vm.printsData.splice(index,1)
+})
+
+mui('.mui-content').on('tap', '#save', function(){
+	console.log(JSON.stringify(vm.printsData))
 })
