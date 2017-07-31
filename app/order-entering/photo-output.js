@@ -53,7 +53,7 @@ function init(){
 	lf.net.getJSON('/order/queryOrderShootResult',params,function (data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
-			lf.nativeUI.toast('操作成功')
+//			lf.nativeUI.toast('操作成功')
 			vm.remark = data.data.remark
 			vm.photoOutList = data.data.shootInfos
 		}else{
