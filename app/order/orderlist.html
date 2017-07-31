@@ -86,9 +86,9 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-			
+
 			.mui-segmented-control .mui-control-item{
-				color: #A4A4A4 !important;	
+				color: #A4A4A4 !important;
 			}
 			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
 				border-bottom: 2px solid #FB2C60 !important;
@@ -153,7 +153,7 @@
 										<div class="nr" :data-id="item.id">
 											<div class="imgbody">
 												<!--<img src="../../images/60x60.gif" />-->
-												<img :src="item.covecoverImage" />
+												<!--<img :src="item.covecoverImage" />-->
 												<div class="item">
 													导游: {{item.tourGuide}}
 												</div>
@@ -166,16 +166,19 @@
 												<div class="item">
 													采购方: {{item.purchaser}}
 												</div>
+												<div class="item">
+													<span class="jespan">金额:<span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
+												</div>
 											</div>
 										</div>
 										<div class="mui-table bottom">
-											<div class="mui-table-cell mui-col-xs-4">
+											<!--<div class="mui-table-cell mui-col-xs-4">
 												<span class="jespan">金额: <span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
-											</div>
+											</div>-->
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns">
-													<button v-if="confirmRole&&item.status==1" type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
-														确认
+													<button  type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
+														计调
 													</button>
 													<button v-if="cancelRole&&!(item.status==3||item.status==7)" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
 														取消
