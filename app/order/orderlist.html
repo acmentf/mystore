@@ -172,16 +172,16 @@
 										<div class="mui-table bottom">
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns">
-													<button v-if="operatorRole" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
+													<button v-if="operatorRole&&item.status!=3" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
 														计调
 													</button>
-													<button v-if="cancelRole" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
+													<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
 														取消
 													</button>
-													<button v-if="assignRole" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
+													<button v-if="assignRole&&item.status!=3" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
 														指派
 													</button>
-													<button v-if="allotRole" :disabled="item.actionStatus==1" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+													<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==1" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
 														分配
 													</button>
 												</div>
