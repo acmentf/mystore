@@ -1,0 +1,47 @@
+.photo-output{
+    background: #fff;
+    .pho-title{
+        text-align: center;
+        background: #D7D7D7;
+        p{
+           color: #000000;
+           height: 35px;
+           line-height: 46px;
+        }
+
+    }
+    .pho-table{
+        //text-align: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        .mui-table{
+            height: 40px;
+            border-bottom: 1px solid #D7D7D7;
+            line-height: 40px;
+            .left-cell{
+                padding-left: 10px;
+                border-right: 1px solid #D7D7D7;
+            }
+            .right-cell{
+                text-align: center;
+            }
+        }
+
+    }
+    .bz{float: left;width: 13%; padding-left: 10px;}
+    .bz-textarea{float: left;width: 80%;}
+    .login-btn-box{
+        margin-top:0.2rem;
+        width: 100%;
+        text-align: center;
+    }
+    .login-pass-btn{
+        margin-top:0.5rem;
+        width: 80%;
+        border-radius: 20px;
+        background-color: #ff3064;
+        color: #fff;
+        height:2.77rem;
+
+    }
+}
