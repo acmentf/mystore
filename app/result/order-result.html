@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/result/order-rusult.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<style>
+			html,body,.mui-content{
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">销售输出</h1>
+			</header>
+			<div id="app" class="mui-content order-result">
+				 <!--点击切换S-->
+				<div class="cut">
+					<div class="mui-content">
+					    <div class="mui-row">
+					        <div class="mui-col-sm-6">
+								<div class="mui-input-row mui-checkbox">
+								  <label>已输出</label>
+								  <input name="checkbox1" value="Item 1" type="checkbox" checked>
+								</div>
+					        </div>
+					        <div class="mui-col-sm-6">
+								<div class="mui-input-row mui-checkbox">
+								  <label>未输出</label>
+								  <input name="checkbox1" value="Item 1" type="checkbox" checked>
+								</div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				<!--//点击切换E-->
+				<!--//表单S-->
+			<div class="mui-input-group">
+					<div class="mui-input-row  group-info">
+				        <label>销售时间：</label>
+						<input type="text" v-model="saleDate"  class="selectDate" readonly="readonly" placeholder="请选择销售时间"/>
+			    	</div>
+			    	<div class="mui-input-row group-info give-number">
+						<label>打印张数：</label>
+						<div class="select" v-for="v in printsData">
+							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
+							<input type="text" v-model="v.printsSize" readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
+							<input type="number" v-model="v.printsNum" class="select-number" placeholder="请输入赠送张数">
+						</div>
+						
+						<span class=" mui-icon mui-icon-plus add-num"></span>
+					</div>
+					<div class="mui-input-row group-info give-number">
+						<label>销售张数：</label>
+						<div class="select" v-for="v in givesData">
+							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
+							<input type="text" v-model="v.givesSize"  readonly="readonly" class="select-size givesSize" placeholder="尺寸" />
+							<input type="number" v-model="v.givesNum" class="select-number" placeholder="请输入赠送张数">
+						</div>
+						<span class=" mui-icon mui-icon-plus add-num"></span>
+					</div>
+					<div class="mui-input-row group-info give-number">
+						<label>赠送张数：</label>
+						<div class="select" v-for="v in salesData">
+							<span class="mui-icon mui-icon-arrowdown select-size-icon"></span>
+							<input type="text" v-model="v.salesSize" readonly="readonly" class="select-size salesSize" placeholder="尺寸" />
+							<input type="number" v-model="v.salesNum" class="select-number" placeholder="请输入赠送张数">
+						</div>
+						<span class=" mui-icon mui-icon-plus add-num"></span>
+					</div>
+					<div class="mui-input-row group-info">
+						<label>销售总额：</label>
+						<input type="number" class="mui-input-clear" placeholder="请输入销售总额">
+					</div>
+					<div class="mui-input-row group-info">
+						<label>购买人数：</label>
+						<input  type="number" class="mui-input-clear" placeholder="请输入购买人数">
+					</div>
+					<div class="mui-input-row remark">
+						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+						<textarea class="remark-text"></textarea>
+					</div>
+				</div>	
+				
+				<!--//表单E-->
+				
+							<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script src="./order-result.js"></script>
+	</body>
+</html>

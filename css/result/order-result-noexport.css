@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.order-result-noexport .remark label{
+	width:20%;
+	padding:10px 0 10px 15px;
+}
+.order-result-noexport .remark{
+	height: 3rem;
+}
+.order-result-noexport .remark-text{
+	width:80%;
+	height: 100%;
+}
+.login-btn-box{
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 2rem;
+}
+.login-pass-btn{
+	width: 80%;
+	border-radius: 20px;
+	background-color: #ff3064;
+	color: #fff;
+	height:0.77rem;
+
+}

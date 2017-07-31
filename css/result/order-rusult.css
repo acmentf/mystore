@@ -1,0 +1,78 @@
+.order-result{
+	padding:0.2rem;
+}
+.order-result .group-info label{
+	padding:10px 0;
+	width:30%;
+}
+.order-result .group-info input{
+	width:70%;
+}
+.order-result .givenumber{
+	position: relative;
+}
+.order-result .give-number .select-size{
+	display: inline-block;
+	padding:10px 0;
+	padding-left:10px;
+	width: 100%;
+	height:100%;
+	border-right:1px solid rgba(0,0,0,.2);
+	border-left:1px solid rgba(0,0,0,.2);
+}
+.order-result .give-number .select-number{
+	width:65%!important;
+	padding-left: 0.2rem;
+	padding-right:0.3rem;
+}
+.give-number .size-text{
+	line-height: 40px;
+	color: #aaa;
+}
+.give-number .select {
+	display: inline-block;
+	width: 70%;
+	position: relative;
+}
+.give-number .select .select-size{
+	width:25%;
+}
+.give-number .select-size-icon{
+	font-size: 0.2rem;
+	position: absolute;
+	top: 0.25rem;
+	left:0.85rem;
+}
+.give-number .add-num{
+	position:absolute;
+	right:0;
+	top:0.15rem;
+	color: #97c1e1;
+}
+.order-result .remark label{
+	width:20%;
+	padding:10px 0;
+}
+.order-result .remark{
+	height: 3rem;
+}
+.order-result .remark-text{
+	height:100%;
+	width:70%!important;
+	}
+.login-btn-box{
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 2rem;
+}
+.login-pass-btn{
+	width: 80%;
+	border-radius: 20px;
+	background-color: #ff3064;
+	color: #fff;
+	height:0.77rem;
+
+}

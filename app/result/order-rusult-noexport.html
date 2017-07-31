@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/result/order-result-noexport.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<style>
+			html,body,.mui-content{
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">销售输出</h1>
+			</header>
+			<div id="app" class="mui-content order-result-noexport">
+				 <!--点击切换S-->
+				<div class="cut">
+
+				</div>
+				<!--点击切换E-->
+				<!--表单S-->
+				<div>
+					<div class="mui-input-group">
+						<div class="mui-input-row  group-info">
+					        <label>原因：</label>
+							<input type="text" v-model="cause"  class="select-cause" readonly="readonly" placeholder="请选择未输出原因"/>
+				    	</div>
+				    	<div class="mui-input-row remark">
+							<label>备注：</label>
+							<textarea class="remark-text"></textarea>
+						</div>
+					</div>
+				</div>
+				<!--表单E-->
+				<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script src="./order-result-noexport.js"></script>
+	</body>
+</html>
