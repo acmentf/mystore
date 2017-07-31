@@ -177,7 +177,10 @@
 											</div>-->
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns">
-													<button  type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
+													<!--<button  type="button" class="mui-btn mui-btn-danger qdbtn" :data-id="item.id" :data-no="item.orderNo">
+														确定
+													</button>-->
+													<button  type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
 														计调
 													</button>
 													<button v-if="cancelRole&&!(item.status==3||item.status==7)" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">

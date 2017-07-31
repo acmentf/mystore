@@ -10,7 +10,7 @@ var vm = new Vue({
 			[]
 		],
 		pageNos:[
-			
+
 		],
 		pageNum: 10,
 		pullObjects:[],
@@ -30,11 +30,11 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	initPull();
-	
+
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 		vm.index = event.detail.slideNumber;
 	});
-	
+
 	var status = lf.window.currentWebview().status;
 	var gallery = mui('.mui-slider');
 	switch (status){
@@ -53,8 +53,8 @@ lf.ready(function() {
 		default:
 			break;
 	}
-	
-	
+
+
 })
 document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
@@ -66,7 +66,6 @@ mui('.order-ul').on('tap', '.nr', function() {
 		orderNo: id
 	})
 })
-
 mui('.order-ul').on('tap', '.qdbtn', function() {
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')
@@ -129,12 +128,18 @@ mui('.order-ul').on('tap', '.assign', function() { //点击指派
 			type:1
 		})
 	})
-	mui('.order-ul').on('tap', '.allot', function() { //点击分配
-		var orderid = this.getAttribute('data-id');
-		lf.window.openWindow('common/plancamera.html','../common/plancamera.html',{},{
-			orderNo: orderid
-		})
+mui('.order-ul').on('tap', '.allot', function() { //点击分配
+	var orderid = this.getAttribute('data-id');
+	lf.window.openWindow('common/plancamera.html','../common/plancamera.html',{},{
+		orderNo: orderid
 	})
+})
+mui('.order-ul').on('tap', '.operator', function() { //点击计调
+	var orderid = this.getAttribute('data-id');
+	lf.window.openWindow('order/trackinfo.html','../order/trackinfo.html',{},{
+		orderNo: orderid
+	})
+})
 /*mui('.order-ul').on('tap', '.gzxx', function() {
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('trackinfo.html', 'trackinfo.html', {}, {
