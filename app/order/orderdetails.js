@@ -26,7 +26,8 @@ var vm = new Vue({
 		summaryRole:false,
 		feedbackRole:false,
 		handleRole:false,
-		photographerExperienceFlage:''
+		photographerExperienceFlage:'',
+		actionStatus:0, // 
 	}
 })
 

@@ -17,6 +17,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">订单详情</h1>
 		</header>
+	
 		<div id="app"  class="mui-content">		
 			<div class="topbar">
 				<!--1：已支付 2：已确认 3：已取消 4：已指派 5：已录入 6：已分配 7：已完成-->
@@ -82,7 +83,7 @@
 				</div>
 
 				<div class="mui-card">
-					<div class="mui-card-header"><span class="border-left">订单跟踪信息</span></div>
+					<div class="mui-card-header"><span class="border-left">订单计调信息</span></div>
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
@@ -146,69 +147,65 @@
 
 				<div class="mui-card">
 					<div class="mui-card-header">
-						<span class="border-left">订单执行信息</span></div>
+						<span class="border-left">订单销售输出(已输出)</span></div>
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
-								<label>选片张数：</label>
-								<span v-text="orderResult.selectsNum"></span><span>张</span>
+								<label>销售日期：</label>
+								<span></span>
 							</div>
 							<div class="item">
 								<label>打印张数：</label>
-								<span v-text="orderResult.printsNum"></span><span>张</span>
+							</div>
+							<div>
+								<table style="margin-left: 0.3rem;" class="sale-table" border="1">
+								<tr class="table-hd">
+									<td>尺寸</td>
+									<td>数量</td>
+								</tr>
+								<tr v-for="item in orderResult.orderXms">
+									<td v-text="item.picSizeName"></td>
+									<td v-text="item.picNum"></td>
+								</tr>
+							</table>
+							</div>
+							<div class="item">
+								<label>销售张数：</label>
+							</div>
+							<div>
+								<table style="margin-left: 0.3rem;" class="sale-table" border="1">
+								<tr class="table-hd">
+									<td>尺寸</td>
+									<td>数量</td>
+								</tr>
+								<tr v-for="item in orderResult.orderXms">
+									<td v-text="item.picSizeName"></td>
+									<td v-text="item.picNum"></td>
+								</tr>
+							</table>
 							</div>
 							<div class="item">
 								<label>赠送张数：</label>
-								<span v-if="orderResult.givesPicSize==1">16寸</span>
-								<span v-if="orderResult.givesPicSize==2">12寸</span>
-								<span v-if="orderResult.givesPicSize==3">10寸</span>
-								<span v-if="orderResult.givesPicSize==4">8寸</span>
-								<span v-if="orderResult.givesPicSize==5">6寸</span>
-								<span v-text="orderResult.givesNum"></span><span>张</span>
+							</div>
+							<div>
+								<table style="margin-left: 0.3rem;" class="sale-table" border="1">
+								<tr class="table-hd">
+									<td>尺寸</td>
+									<td>数量</td>
+								</tr>
+								<tr v-for="item in orderResult.orderXms">
+									<td v-text="item.picSizeName"></td>
+									<td v-text="item.picNum"></td>
+								</tr>
+								</table>
 							</div>
 							<div class="item">
-								<label>销售总数：</label>
-								<span v-text="orderResult.salesNum"></span><span>张</span>
+								<label>销售人数：</label>
+								<span></span>
 							</div>
 							<div class="item">
 								<label>销售总额：</label>
-								<span v-text="orderResult.salesAmt"></span><span>元</span>
-							</div>
-							<div class="item">
-								<label >购买人数：</label>
-								<span v-text="orderResult.buyers"></span><span>人</span>
-							</div>
-							<div class="item">
-								<label>剩余张数：</label>
-								<span v-text="orderResult.leavesNum"></span><span>张</span>
-							</div>
-							<div class="item">
-								<label>客单价：</label>
-								<span v-text='unitPrice'></span><span>元</span>
-							</div>
-							<div class="item">
-								<label>照片转化率：</label>
-								<span v-text='photoPecent'></span><span>%</span>
-							</div>
-							<div class="item">
-								<label>用户转化率：</label>
-								<span v-text='userPecent'></span><span>%</span>
-							</div>
-							<div class="item"      >
-								<label>拍摄人数：</label>
-								<span v-text="orderResult.shootPeoNum"></span><span >人</span>
-							</div>
-							<div class="item">
-								<label>拍摄张数：</label>
-								<span v-text="orderResult.shootNum"></span><span>张</span>
-							</div>
-							<div class="item">
-								<label>选片人数：</label>
-								<span v-text="orderResult.receiveNum"></span><span >人</span>
-							</div>
-							<div class="item">
-								<label>销售日期：</label>
-								<span v-text="orderResult.saleDate"></span>
+								<span></span>
 							</div>
 						</div>
 					</div>
@@ -216,23 +213,17 @@
 
 				<div class="mui-card">
 					<div class="mui-card-header"><span class="border-left">
-						销售明细</span></div>
+						订单销售输出(未输出)</span></div>
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
-							<table class="sale-table" border="1">
-								<tr class="table-hd">
-									<td>照片尺寸</td>
-									<td>单价</td>
-									<td>数量</td>
-									<td>合计</td>
-								</tr>
-								<tr v-for="item in orderResult.orderXms">
-									<td v-text="item.picSizeName"></td>
-									<td>￥<span v-text="item.price"></span></td>
-									<td v-text="item.picNum"></td>
-									<td>￥<span v-text="item.total"></span></td>
-								</tr>
-							</table>
+							<div class="item">
+								<label>原因：</label>
+								<div></div>
+							</div>
+							<div class="item">
+								<label>备注：</label>
+								<div></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -258,45 +249,48 @@
 		<div v-show="maskShow" class="mask"></div>
 		<div v-show="popupShow" class="popup-mod">
 				<ul>
-					<li v-if='assignRole' >
-						<div class="mod assign" :data-orderid="currentOrderId" >
-							<div class="ico">指派</div>
-							
-						</div>
+					<li v-if='assignRole'>
+						<!--<div class="mod assign" :data-orderid="currentOrderId" >
+							<div class="ico">指派</div>						
+						</div>-->
+						<button :disabled="actionStatus != 0 || actionStatus != 1 || actionStatus != 3" :data-orderid="currentOrderId" type="button" class="mui-btn mod assign ico">指派</button>
 					</li>
-					<li  v-if='allotRole'>
-						<div class="mod allot" :data-orderid="currentOrderId">
-							<div class="ico">分配</div>
-							
-						</div>
+					<li  v-if='allotRole' >
+						<!--<div class="mod allot" :data-orderid="currentOrderId">
+							<div class="ico">分配</div>	
+						</div>-->
+						<button :disabled="actionStatus != 1" :data-orderid="currentOrderId" type="button" class="mui-btn mod allot ico">分配</button>
 					</li>
-					<li  v-if='handleRole'>
-						<div class="mod trackinfo" :data-orderNo="currentOrderNo" >
-							<div class="ico">跟踪信息</div>
-						
-						</div>
+					<li  v-if='handleRole' :class='{disabled:actionStatus!=0 || actionStatus!=1 ||actionStatus!=3}'>
+						<!--<div class="mod trackinfo" :data-orderNo="currentOrderNo" >
+							<div class="ico">计调</div>
+						</div>-->
+						<button :disabled="actionStatus != 1 || actionStatus!=1 ||actionStatus!=3" :data-orderNo="currentOrderNo" type="button" class="mui-btn mod trackinfo ico">计调</button>
 					</li>
-					<li v-if='cancelRole&&!(orderInfo.status==3||orderInfo.status==7)' >
-						<div class="mod cancled" :data-orderid="currentOrderId" >
+					<li v-if='cancelRole&&!(orderInfo.status==3||orderInfo.status==7)'>
+						<!--<div class="mod cancled" :data-orderid="currentOrderId" >
 							<div class="ico">取消</div>
-							
-						</div>
+						</div>-->
+						<button :disabled="actionStatus != 0 || actionStatus!=1 ||actionStatus!=3" :data-orderid="currentOrderId" type="button" class="mui-btn mod cancled ico">取消</button>
 					</li>
 					<li v-if='confirmRole&&orderInfo.status==1' >
-						<div class="mod confirm" :data-orderid="currentOrderId" >
+						<!--<div class="mod confirm" :data-orderid="currentOrderId" >
 							<div class="ico">确认</div>							
-						</div>
+						</div>-->
+						<button :data-orderid="currentOrderId" type="button" class="mui-btn mod confirm ico">确认</button>
 					</li>
-					<li  v-if='feedbackRole' >
-						<div class="mod excuteresult" :data-orderid="currentOrderId">
-							<div class="ico">执行信息</div>
+					<li  v-if='feedbackRole'>
+						<!--<div class="mod excuteresult" :data-orderid="currentOrderId">
+							<div class="ico">输出</div>
 						
-						</div>
+						</div>-->
+						<button :disabled="actionStatus!=3" :data-orderid="currentOrderId" type="button" class="mui-btn mod excuteresult ico">输出</button>
 					</li>
 					<li v-if='summaryRole' >
-						<div class="mod mind" :data-orderid="currentOrderId" >
+						<!--<div class="mod mind" :data-orderid="currentOrderId" >
 							<div class="ico">心得</div>							
-						</div>
+						</div>-->
+						<button :disabled="actionStatus!=4" :data-orderid="currentOrderId" type="button" class="mui-btn mod mind ico">心得</button>
 					</li>
 
 				</div>

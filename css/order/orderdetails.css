@@ -147,7 +147,9 @@
 	border-radius: 50%;
 	font-size: 0.3rem;
 }
-
+.popup-mod .disabled .ico {
+	background: #a4a4a4;
+}
 .popup-mod ul {
 	overflow: hidden;
 	padding: 0;
