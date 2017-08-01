@@ -1,14 +1,13 @@
-lf.ready(function(){
+lf.ready(function() {
 	update();
 })
+
 function update() {
 	var params = {
-		"data": {
-			"app_id": plus.runtime.appid,
-			"version": plus.runtime.version,
-			"imei": plus.device.imei,
-			"platform": plus.os.name
-		}
+		"app_id": plus.runtime.appid,
+		"version": plus.runtime.version,
+		"imei": plus.device.imei,
+		"platform": plus.os.name
 	};
 	lf.net.getJSON("/version", params, function(data) {
 		var update_desc = "发现新的版本，是否需要立即更新";
@@ -34,13 +33,10 @@ function update() {
 					} else {
 						if(0 == e.index) {
 							plus.runtime.openURL(data.result_data.upgrade_url);
-						} else {
-						}
+						} else {}
 					}
 				});
 			}
-		} else {
-		}
-	}, function(res) {
-	});
+		} else {}
+	}, function(res) {});
 }
