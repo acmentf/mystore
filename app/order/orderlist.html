@@ -184,7 +184,7 @@
 													<button v-if="assignRole&&item.status!=3" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
 														指派
 													</button>
-													<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==1" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+													<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==0||item.actionStatus==3||item.actionStatus==4" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
 														分配
 													</button>
 												</div>
