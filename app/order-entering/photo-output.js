@@ -3,7 +3,6 @@ var vm = new Vue({
 	data: {
 		orderId: '',
 		photoOutList: []
-//		remark:''
 	}
 })
 lf.ready(function(){
@@ -51,14 +50,18 @@ function init(){
 	lf.net.getJSON('/order/getShotOutput',params,function (data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
-			data.data.forEach(function(val){
-				var onePhoto = {
-					id: val.id,
-					journeyName: val.journeyName,
-					shootNum: val.shootNum
-				}
-				vm.photoOutList.push(onePhoto)
-			})
+			if(!data.data || (data.data&&data.data.length == 0)){
+				lf.nativeUI.toast('未查询到数据')
+			}else{
+				data.data.forEach(function(val){
+					var onePhoto = {
+						id: val.id,
+						journeyName: val.journeyName,
+						shootNum: val.shootNum
+					}
+					vm.photoOutList.push(onePhoto)
+				})
+			}
 		}else{
 			lf.nativeUI.toast(data.msg)
 		}
