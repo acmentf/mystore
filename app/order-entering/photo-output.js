@@ -2,8 +2,8 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		orderId: '',
-		photoOutList: [],
-		remark:''
+		photoOutList: []
+//		remark:''
 	}
 })
 lf.ready(function(){
@@ -25,8 +25,8 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 	if(ifNum){
 		var params = {
 			"orderId":vm.orderId,
-			"shootInfos" :forNum,
-			"remark": vm.remark
+			"shootInfos" :forNum
+//			"remark": vm.remark
 		};
 		lf.nativeUI.showWaiting()
 		lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
@@ -54,7 +54,7 @@ function init(){
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
 //			lf.nativeUI.toast('操作成功')
-			vm.remark = data.data.remark
+//			vm.remark = data.data.remark
 			vm.photoOutList = data.data.shootInfos
 		}else{
 			lf.nativeUI.toast(data.msg)

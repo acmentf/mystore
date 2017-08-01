@@ -29,13 +29,13 @@
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
 									<label>已输出</label>
-									<input v-model="saleStatus" class="export" name="radio" type="radio" value="1">
+									<input v-model="isOut" class="export" name="radio" type="radio" value="1">
 								</div>
 					        </div>
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
 									<label>未输出</label>
-									<input v-model="saleStatus" class="no-export" name="radio" type="radio" value="2">
+									<input v-model="isOut" class="no-export" name="radio" type="radio" value="2">
 								</div>
 					        </div>
 					    </div>
@@ -43,7 +43,7 @@
 				</div>
 				<!--//点击切换E-->
 				<!--//已输出表单S-->
-			<div v-show="saleStatus==1" class="mui-input-group">
+			<div v-show="isOut==1" class="mui-input-group">
 					<div class="mui-input-row  group-info">
 				        <label>销售时间：</label>
 						<input type="text" v-model="saleDate"  class="selectDate" readonly="readonly" placeholder="请选择销售时间"/>
@@ -90,20 +90,20 @@
 					</div>
 					<div class="mui-input-row remark">
 						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea v-model="remark" class="remark-text"></textarea>
+						<textarea v-model="saleRemark" class="remark-text"></textarea>
 					</div>
 				</div>
 
 				<!--已输出表单E-->
 				<!--未输出表单S-->
-				<div v-show="saleStatus==2" div class="mui-input-group">
+				<div v-show="isOut==2" div class="mui-input-group">
 					<div class="mui-input-row  group-info">
 				        <label>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：</label>
 						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
 			    	</div>
 			    	<div class="mui-input-row remark">
 						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea v-model="remark" class="remark-text"></textarea>
+						<textarea v-model="saleRemark" class="remark-text"></textarea>
 					</div>
 				</div>
 				<!--未输出表单E-->

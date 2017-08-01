@@ -1,7 +1,8 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		saleStatus:1,
+//		saleStatus:1,
+		isOut:1,
 		orderId: '33',
 		id: '',
 		printOrderXms: [
@@ -35,7 +36,7 @@ var vm = new Vue({
 		}],
 		salesAmt: '',
 		buyers: '',
-		remark: '',
+		saleRemark: '',
 		saleDate: '',
 		reason:''
 	},
@@ -179,12 +180,12 @@ mui('.mui-content').on('tap', '#save', function(){
 	var params1 = {
 		id: vm.id,
 		orderId:vm.orderId,
-		isOut: 1,
-		saleStatus:vm.saleStatus,
+		isOut: vm.isOut,
+//		saleStatus:vm.saleStatus,
 		saleDate:vm.saleDate,
-		orderXms:vm.printOrderXms,
+		printOrderXms:vm.printOrderXms,
 		saleOrderXms:vm.saleOrderXms,
-		giveOrderXms:vm.giveOrderXms,
+		shotOrderXms:vm.giveOrderXms,
 		buyers:vm.buyers,
 		salesAmt:vm.salesAmt,
 		saleRemark:vm.remark
@@ -192,17 +193,18 @@ mui('.mui-content').on('tap', '#save', function(){
 	var params2 = {
 		id: vm.id,
 		orderId:vm.orderId,
-		saleStatus:vm.saleStatus,
+		isOut: vm.isOut,
+//		saleStatus:vm.saleStatus,
 		noOutReason:vm.reason,
 		remark:vm.remark
 
 	}
 	var params
-	if(vm.saleStatus==1){
+	if(vm.isOut==1){
 		params = params1
 		var reg= /[^\d]/g;
 		flag = true
-		params.orderXms.forEach(function(v){
+		params.printOrderXms.forEach(function(v){
 		if(reg.test(v.picNum)){
 			lf.nativeUI.toast('请输入数字')
 			flag = false
@@ -214,7 +216,7 @@ mui('.mui-content').on('tap', '#save', function(){
 			flag = false
 		}
 		})
-		params.giveOrderXms.forEach(function(v){
+		params.shotOrderXms.forEach(function(v){
 		if(reg.test(v.picNum)){
 			lf.nativeUI.toast('请输入数字')
 			flag = false
@@ -229,7 +231,7 @@ mui('.mui-content').on('tap', '#save', function(){
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
-		lf.net.getJSON('order/saveOrderSaleResult', params, function(res) {
+		lf.net.getJSON('order/saveSalesOutput', params, function(res) {
 		lf.nativeUI.closeWaiting()
 		if(res.code == 200) {
 			lf.nativeUI.toast('保存成功！');
@@ -248,19 +250,31 @@ function loadResult(){
 	var params={
 		orderId:vm.orderId
 	}
-	lf.net.getJSON('/order/queryOrderSaleResult', params, function (res){
+	lf.net.getJSON('/order/getSalesOutput', params, function (res){
 		if(res.code == 200){
 			if(res.data == null){
 				return
 			}else{
+				if(res.data.salesOrderXms = []){
+					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				}else{
+					vm.saleOrderXms = res.data.salesOrderXms
+				}
+				if(res.data.shotOrderXms = []){
+					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				}else{
+					vm.giveOrderXms = res.data.shotOrderXms
+				}
+				if(res.data.printOrderXms = []){
+					vm.printOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				}else{
+					vm.printOrderXms = res.data.printOrderXms
+				}
 				vm.id = res.data.id
-				vm.saleOrderXms = res.data.saleOrderXms || []
-				vm.giveOrderXms = res.data.giveOrderXms || []
-				vm.saleOrderXms = res.data.saleOrderXms || []
 				vm.reason = res.data.reason
 				vm.buyers = res.data.buyers
-				vm.remark = res.data.remark
-				vm.saleStatus = res.data.saleStatus
+				vm.saleRemark = res.data.saleRemark
+				vm.isOut = res.data.isOut
 				vm.salesAmt = res.data.salesAmt
 			}
 		}else {
