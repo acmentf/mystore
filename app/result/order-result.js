@@ -40,11 +40,11 @@ var vm = new Vue({
 		reason:''
 	},
 	methods: {
-		
+
 	}
 })
 lf.ready(function(){
-	
+
 	var opts = {"type": "date"};
 	picker = new mui.DtPicker(opts);
 	userPicker = new mui.PopPicker();
@@ -68,7 +68,7 @@ lf.ready(function(){
 	reasonPicker.setData(['景点禁售','其他']);
 	loadResult()
 	var wv = lf.window.currentWebview()
-	vm.orderId = wv.orderNo	
+	vm.orderId = wv.orderNo
 	console.log(vm.orderId)
 })
 //尺寸选择器S
@@ -158,21 +158,42 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 })
 //移除E
 mui('.mui-content').on('tap', '#save', function(){
+//	var params1 = {
+//		orderId:vm.orderId,
+//		saleStatus:vm.saleStatus,
+//		saleDate:vm.saleDate,
+//		printOrderXms:vm.printOrderXms,
+//		saleOrderXms:vm.saleOrderXms,
+//		giveOrderXms:vm.giveOrderXms,
+//		buyers:vm.buyers,
+//		salesAmt:vm.salesAmt,
+//		remark:vm.remark
+//	}
+//	var params2 = {
+//		orderId:vm.orderId,
+//		saleStatus:vm.saleStatus,
+//		reason:vm.reason,
+//		remark:vm.remark
+//
+//	}
 	var params1 = {
+		id: vm.id,
 		orderId:vm.orderId,
+		isOut: 1,
 		saleStatus:vm.saleStatus,
 		saleDate:vm.saleDate,
-		printOrderXms:vm.printOrderXms,
+		orderXms:vm.printOrderXms,
 		saleOrderXms:vm.saleOrderXms,
 		giveOrderXms:vm.giveOrderXms,
 		buyers:vm.buyers,
 		salesAmt:vm.salesAmt,
-		remark:vm.remark
+		saleRemark:vm.remark
 	}
 	var params2 = {
+		id: vm.id,
 		orderId:vm.orderId,
 		saleStatus:vm.saleStatus,
-		reason:vm.reason,
+		noOutReason:vm.reason,
 		remark:vm.remark
 
 	}
@@ -181,7 +202,7 @@ mui('.mui-content').on('tap', '#save', function(){
 		params = params1
 		var reg= /[^\d]/g;
 		flag = true
-		params.printOrderXms.forEach(function(v){
+		params.orderXms.forEach(function(v){
 		if(reg.test(v.picNum)){
 			lf.nativeUI.toast('请输入数字')
 			flag = false
@@ -230,8 +251,9 @@ function loadResult(){
 	lf.net.getJSON('/order/queryOrderSaleResult', params, function (res){
 		if(res.code == 200){
 			if(res.data == null){
-				return 
+				return
 			}else{
+				vm.id = res.data.id
 				vm.saleOrderXms = res.data.saleOrderXms || []
 				vm.giveOrderXms = res.data.giveOrderXms || []
 				vm.saleOrderXms = res.data.saleOrderXms || []
