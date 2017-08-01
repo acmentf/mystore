@@ -19,21 +19,7 @@ lf.ready(function() {
 		a:1,b:2
 	})*/
 
-	var params = {};
-	lf.net.getJSON('order/statistics', params, function(data) {
-		if(data.code == 200) {
-			vm.pendingSum = data.data.pendingSum;
-			vm.completedSum = data.data.completedSum;
-			vm.cancelSum = data.data.cancelSum;
-			vm.assignmentSum = data.data.assignmentSum;
-			vm.countNoRead = data.data.countNoRead;
-
-		} else {
-			lf.nativeUI.toast(data.msg);
-		}
-	}, function(erro) {
-		lf.nativeUI.toast(erro.msg);
-	})
+	getStaticList();
 	vm.currentStationName = window.Role.userroleName
 	vm.stationDate = window.Role.positions;
 	vm.currentRole = window.Role.userrole;
@@ -99,6 +85,7 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 				window.Role.save(obj)
 				vm.currentStationName = window.Role.userroleName
 				lf.nativeUI.toast('切换成功');
+				getStaticList();
 			} else {
 				lf.nativeUI.closeWaiting();
 				lf.nativeUI.toast(data.msg);
@@ -110,3 +97,21 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 
 	});
 })
+
+function getStaticList(){
+	var params = {};
+	lf.net.getJSON('order/statistics', params, function(data) {
+		if(data.code == 200) {
+			vm.pendingSum = data.data.pendingSum;
+			vm.completedSum = data.data.completedSum;
+			vm.cancelSum = data.data.cancelSum;
+			vm.assignmentSum = data.data.assignmentSum;
+			vm.countNoRead = data.data.countNoRead;
+
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	})
+}
