@@ -3,7 +3,7 @@ var vm = new Vue({
 	data: {
 //		saleStatus:1,
 		isOut:1,
-		orderId: '33',
+		orderId: '',
 		id: '',
 		printOrderXms: [
 		{
@@ -67,10 +67,9 @@ lf.ready(function(){
 	}]);
 	reasonPicker = new mui.PopPicker();
 	reasonPicker.setData(['景点禁售','其他']);
-	loadResult()
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderNo
-	console.log(vm.orderId)
+	loadResult()
 })
 //尺寸选择器S
 mui('.mui-content').on('tap', '.printsSize', function() {
