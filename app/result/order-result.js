@@ -180,7 +180,6 @@ mui('.mui-content').on('tap', '#save', function(){
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
-//		saleStatus:vm.saleStatus,
 		saleDate:vm.saleDate,
 		printOrderXms:vm.printOrderXms,
 		saleOrderXms:vm.saleOrderXms,
@@ -193,7 +192,6 @@ mui('.mui-content').on('tap', '#save', function(){
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
-//		saleStatus:vm.saleStatus,
 		noOutReason:vm.reason,
 		saleRemark:vm.saleRemark
 
@@ -255,17 +253,17 @@ function loadResult(){
 			if(res.data == null){
 				return
 			}else{
-				if(res.data.salesOrderXms = []){
+				if( !res.data.salesOrderXms ||(res.data.salesOrderXms&&res.data.salesOrderXms.length == 0)){
 					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
 					vm.saleOrderXms = res.data.salesOrderXms
 				}
-				if(res.data.shotOrderXms = []){
+				if(!res.data.shotOrderXms||(res.data.shotOrderXms&&res.data.shotOrderXms.length == 0)){
 					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
 					vm.giveOrderXms = res.data.shotOrderXms
 				}
-				if(res.data.printOrderXms = []){
+				if(!res.data.printOrderXms || (res.data.printOrderXms&&res.data.printOrderXms.length == 0)){
 					vm.printOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
 					vm.printOrderXms = res.data.printOrderXms
@@ -276,6 +274,8 @@ function loadResult(){
 				vm.saleRemark = res.data.saleRemark
 				vm.isOut = res.data.isOut
 				vm.salesAmt = res.data.salesAmt
+				res.data.saleDate = lf.util.timeStampToDate2(res.data.saleDate)
+				vm.saleDate =res.data.saleDate
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);
