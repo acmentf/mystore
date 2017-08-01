@@ -156,6 +156,9 @@
 													导游: {{item.tourGuide}}
 												</div>
 												<div class="item">
+													导游电话： {{item.tourGuidePhone}}
+												</div>
+												<div class="item">
 													团号: {{item.tourNo}}
 												</div>
 												<div class="item">
@@ -172,7 +175,7 @@
 										<div class="mui-table bottom">
 											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
 												<div class="btns">
-													<button v-if="operatorRole&&item.status!=3" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
+													<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
 														计调
 													</button>
 													<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">

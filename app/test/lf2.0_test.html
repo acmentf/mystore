@@ -41,17 +41,16 @@
 			lf.log.log("test:%s-", "1");
 			lf.nativeUI.toast("1");
 			//确认，取消
-			lf.nativeUI.confirm("nativeUI", "Are you sure ready?",  ["Yes","No"] ,function(e){
-		 		console.log( (e.index==0)?"Yes!":"No!" );
-		  	});
+			lf.nativeUI.confirm("nativeUI", "Are you sure ready?", ["Yes", "No"], function(e) {
+				console.log((e.index == 0) ? "Yes!" : "No!");
+			});
 			//确认框
-		  	lf.nativeUI.alert("nativeUI", "Are you sure ready?" ,function(){
-		 	});
+			lf.nativeUI.alert("nativeUI", "Are you sure ready?", function() {});
 			var params = {
 				phone: '13612345678',
 				password: '123456'
 			}
-			
+
 			lf.net.getJSON("/user/login", params, function(res) {
 				if(res.code == 0) {} else {
 					lf.nativeUI.toast(res.msg);
@@ -59,7 +58,7 @@
 			}, function(res) {
 				lf.nativeUI.toast(res.msg);
 			});
-//			return;
+			//			return;
 			lf.log.group("日志级别");
 			lf.log.log("log");
 			lf.log.debug("debug");
@@ -120,7 +119,7 @@
 			var p = lf.window.getParams();
 			console.log(p);
 			lf.storage.put("mykey", JSON.stringify(obj));
-//			lf.storage.removeItem("mykey");
+			//			lf.storage.removeItem("mykey");
 			var r = lf.storage.get("mykey");
 			if(!r) {
 				console.log("is null");
