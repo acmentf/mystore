@@ -321,7 +321,7 @@
 						</div>-->
 						<button :disabled="actionStatus!=3&&actionStatus!=4"  :data-orderid="currentOrderId" type="button" class="mui-btn mod saleout ico">销售输出</button>
 					</li>
-					<li>
+					<li v-if='shootFeedbackRole'>
 						<!--<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">输出</div>
 							  v-if='shootFeedbackRole'						

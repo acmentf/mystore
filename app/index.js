@@ -78,10 +78,12 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 		var params = {
 			positionId: items[0].value
 		};
+		lf.nativeUI.showWaiting();
 		lf.net.getJSON('user/switchPosition', params, function(data) {
 			if(data.code == 200) {
 				//window.Role.logout();
 				//plus.runtime.restart();
+				lf.nativeUI.closeWaiting();
 				var obj = {
 					usercode: data.data.id,
 					username: data.data.name,
@@ -98,9 +100,11 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 				vm.currentStationName = window.Role.userroleName
 				lf.nativeUI.toast('切换成功');
 			} else {
+				lf.nativeUI.closeWaiting();
 				lf.nativeUI.toast(data.msg);
 			}
 		}, function(erro) {
+			lf.nativeUI.closeWaiting();
 			lf.nativeUI.toast(erro.msg);
 		})
 
