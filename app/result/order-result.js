@@ -188,7 +188,7 @@ mui('.mui-content').on('tap', '#save', function(){
 		shotOrderXms:vm.giveOrderXms,
 		buyers:vm.buyers,
 		salesAmt:vm.salesAmt,
-		saleRemark:vm.remark
+		saleRemark:vm.saleRemark
 	}
 	var params2 = {
 		id: vm.id,
@@ -196,7 +196,7 @@ mui('.mui-content').on('tap', '#save', function(){
 		isOut: vm.isOut,
 //		saleStatus:vm.saleStatus,
 		noOutReason:vm.reason,
-		remark:vm.remark
+		saleRemark:vm.saleRemark
 
 	}
 	var params
@@ -224,7 +224,8 @@ mui('.mui-content').on('tap', '#save', function(){
 		})
 	}else{
 		params = params2
-		if(vm.reason == '其他'&&vm.remark==""){
+		flag = true
+		if(vm.reason == '其他'&&vm.saleRemark==""){
 			lf.nativeUI.toast('请在备注中填写原因');
 			return
 		}
