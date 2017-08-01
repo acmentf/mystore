@@ -11,22 +11,18 @@ lf.ready(function(){
 	init();
 })
 mui('.mui-content').on('tap','#saveBtn',function(){
-	var forNum = []
 	var ifNum = true
 	vm.photoOutList.forEach(function(val){
 		var reg= /[^\d]/g;
-		if(reg.test(val.num)){
+		if(reg.test(val.shootNum)){
 			lf.nativeUI.toast('拍摄张数请输入数字')
 			ifNum = false
-		}else{
-			forNum.push(val.shootNum)
 		}
 	})
 	if(ifNum){
 		var params = {
-			"orderId":vm.orderId,
-			"shootInfos" :forNum
-//			"remark": vm.remark
+			orderId:vm.orderId,
+			mobileShotOutputVos :vm.photoOutList
 		};
 		lf.nativeUI.showWaiting()
 		lf.net.getJSON('/order/saveShotOutput',params,function (data) {
@@ -53,9 +49,14 @@ function init(){
 	lf.net.getJSON('/order/getShotOutput',params,function (data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
-//			lf.nativeUI.toast('操作成功')
-//			vm.remark = data.data.remark
-			vm.photoOutList = data.data.shootInfos
+			data.data.forEach(function(val){
+				var onePhoto = {
+					id: val.id,
+					journeyName: val.journeyName,
+					shootNum: val.shootNum
+				}
+				vm.photoOutList.push(onePhoto)
+			})
 		}else{
 			lf.nativeUI.toast(data.msg)
 		}
