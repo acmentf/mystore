@@ -19,7 +19,7 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 			lf.nativeUI.toast('拍摄张数请输入数字')
 			ifNum = false
 		}else{
-			forNum.push(val.num)
+			forNum.push(val.shootNum)
 		}
 	})
 	if(ifNum){
@@ -29,7 +29,7 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 //			"remark": vm.remark
 		};
 		lf.nativeUI.showWaiting()
-		lf.net.getJSON('/order/saveOrderShootResult',params,function (data) {
+		lf.net.getJSON('/order/saveShotOutput',params,function (data) {
 			lf.nativeUI.closeWaiting()
 			if(data.code == 200) {
 				lf.nativeUI.toast('保存成功')
@@ -50,7 +50,7 @@ function init(){
 		"orderId":vm.orderId
 	};
 	lf.nativeUI.showWaiting()
-	lf.net.getJSON('/order/queryOrderShootResult',params,function (data) {
+	lf.net.getJSON('/order/getShotOutput',params,function (data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
 //			lf.nativeUI.toast('操作成功')
