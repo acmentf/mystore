@@ -21,7 +21,7 @@ var vm = new Vue({
 		currentOrderStatus:'',
 		allotRole: false,
 		assignRole:false,
-		confirmRole:false,
+		// confirmRole:false,
 		cancelRole:false,
 		summaryRole:false,
 		feedbackRole:false,// 销售输出
@@ -38,7 +38,7 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
-	vm.confirmRole = window.Role.hasAuth('confirm')// 取消按钮的key
+	// vm.confirmRole = window.Role.hasAuth('confirm')// 取消按钮的key
 	vm.summaryRole = window.Role.hasAuth('summary')// 录入心得按钮的key
 	vm.feedbackRole = window.Role.hasAuth('feedback')// 录入执行结果按钮的key
 	vm.handleRole = window.Role.hasAuth('handle')// 录入跟踪信息按钮的key
@@ -118,7 +118,7 @@ lf.ready(function() {
 		}
 		
 	})
-	mui('.popup-mod').on('tap', '.confirm', function() { //点击确认
+	/*mui('.popup-mod').on('tap', '.confirm', function() { //点击确认
 	
 			lf.nativeUI.confirm("操作提示", "你确认要执行订单?",  ["确定","取消"] ,function(e){
 		 		if(e.index==0){
@@ -142,7 +142,7 @@ lf.ready(function() {
 			});		
 		
 		
-	})
+	})*/
 	
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
