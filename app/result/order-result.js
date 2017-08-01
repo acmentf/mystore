@@ -222,6 +222,10 @@ mui('.mui-content').on('tap', '#save', function(){
 	}else{
 		params = params2
 		flag = true
+		if(!vm.reason||(vm.reason&&vm.reason.length == 0)){
+			lf.nativeUI.toast('请选择原因');
+			return
+		}
 		if(vm.reason == '其他'&&vm.saleRemark==""){
 			lf.nativeUI.toast('请在备注中填写原因');
 			return
