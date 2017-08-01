@@ -86,17 +86,20 @@ mui('.plancamera-content').on('tap','.mui-icon-extra-addpeople',function(){
 })
 document.getElementById('saveBtn').addEventListener('tap',function(){
 	var lineSightDTOS = [];
+	var pn = [];
 	var obj = null;
 	vm.lineSight.forEach(function(v){
 		obj = new Object()
 		obj.id = v.id
 		obj.photographerIdStr = v.photographer
-		obj.photographer = v.photographerName.join(',')
+//		obj.photographer = v.photographerName.join(',')
+		pn.push(v.photographerName)
 		lineSightDTOS.push(obj)
 	})
 	var params = {
 		orderId: vm.orderId,
-		lineSightDTOS: lineSightDTOS
+		lineSightDTOS: lineSightDTOS,
+		photographer: pn.join(',')
 	}
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('/order/assignOrderPhotographer',params,function (res) {
