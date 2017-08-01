@@ -29,6 +29,8 @@ mui('.mui-content').on('tap','#saveBtn',function(){
 			lf.nativeUI.closeWaiting()
 			if(data.code == 200) {
 				lf.nativeUI.toast('保存成功')
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
 			}else{
 				lf.nativeUI.toast(data.msg)
 			}
