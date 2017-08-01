@@ -7,7 +7,7 @@ var vm = new Vue({
 		timeName1: '上午',
 		timeName2: '下午',
 		timeName3: '晚上',
-		shootInfoForms: [{ id: '', "journeyName": "", "periodType": 0, "shootTime": '' ,remark:''}],
+		shootInfoForms: [{ id: '', journeyName: "", periodType: 0, shootTime: '' ,remark:''}],
 		trackInfo: {},
 		currentOrderId: ''
 	}
@@ -39,7 +39,7 @@ mui('.group-info').on('tap', '.shootTime', function() {
 	initDateChoose(index);
 })
 mui('.shoot-info').on('tap', '.addshootinfo', function() { //添加拍摄信息
-	var obj = { journeyName: '', shootTime: '', periodType: 0 };
+	var obj = { journeyName: '', shootTime: '', periodType: 0 , remark:''};
 	vm.shootInfoForms.push(obj)
 })
 mui('.save').on('tap', '.save-trackinfo', function() { //保存跟踪信息

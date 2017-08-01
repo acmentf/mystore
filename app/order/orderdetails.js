@@ -29,7 +29,7 @@ var vm = new Vue({
 		shootFeedbackRole:false, // 拍摄输出
 		photographerExperienceFlage:'',
 		actionStatus:'', // 
-		outPutStatus:0,
+		outPutStatus:'',
 		shotOrderOutput: [] //订单拍摄输出
 	}
 })

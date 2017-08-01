@@ -160,7 +160,7 @@
 					<div class="mui-card-header"><span class="border-left">
 						订单销售输出</span></div>
 				</div>
-				<div v-if="outPutStatus==0" class="mui-card">
+				<div v-if="outPutStatus==1" class="mui-card">
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item">
@@ -225,7 +225,7 @@
 					</div>
 				</div>
 
-				<div v-if="outPutStatus==1" class="mui-card">
+				<div v-if="outPutStatus==2" class="mui-card">
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
 							<div class="item routeinfo">
@@ -244,13 +244,13 @@
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">					
 							<div class="item">
-								<table class="sale-table" border="1" width="70%">
+								<table class="sale-table" border="1" width="90%">
 								<tr class="table-hd">
 									<td>景点</td>
 									<td>摄影师</td>
 									<td>数量</td>
 								</tr>
-								<tr v-for="item in shotOrderOutput">
+								<tr v-for="item in shotOrderOutput" style="font-size: 0.24rem;">
 									<td v-text="item.journeyName"></td>
 									<td v-text="item.photographerNames"></td>
 									<td v-text="item.shootNum"></td>
@@ -300,7 +300,7 @@
 						</div>
 						:disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3"
 						-->
-						<button :disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3" :data-orderNo="currentOrderNo" type="button" class="mui-btn mod trackinfo ico">计调</button>
+						<button :disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3&&actionStatus!=4" :data-orderNo="currentOrderNo" type="button" class="mui-btn mod trackinfo ico">计调</button>
 					</li>
 					<li v-if='cancelRole&&!(orderInfo.status==3||orderInfo.status==7)'>
 						<!--<div class="mod cancled" :data-orderid="currentOrderId" >
@@ -308,25 +308,25 @@
 						</div>-->
 						<button :disabled="actionStatus != 0 && actionStatus!=1 && actionStatus!=3" :data-orderid="currentOrderId" type="button" class="mui-btn mod cancled ico">取消</button>
 					</li>
-					<li v-if='confirmRole&&orderInfo.status==1' >
-						<!--<div class="mod confirm" :data-orderid="currentOrderId" >
+					<!--<li v-if='confirmRole&&orderInfo.status==1' >
+						<div class="mod confirm" :data-orderid="currentOrderId" >
 							<div class="ico">确认</div>							
-						</div>-->
+						</div>
 						<button :data-orderid="currentOrderId" type="button" class="mui-btn mod confirm ico">确认</button>
-					</li>
+					</li>-->
 					<li  v-if='feedbackRole'>
 						<!--<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">输出</div>
 						
 						</div>-->
-						<button :disabled="actionStatus!=3"  :data-orderid="currentOrderId" type="button" class="mui-btn mod saleout ico">销售输出</button>
+						<button :disabled="actionStatus!=3&&actionStatus!=4"  :data-orderid="currentOrderId" type="button" class="mui-btn mod saleout ico">销售输出</button>
 					</li>
 					<li  v-if='shootFeedbackRole'>
 						<!--<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">输出</div>
 						
 						</div>-->
-						<button  :disabled="actionStatus!=3"   :data-orderid="currentOrderId" type="button" class="mui-btn mod shootout ico">拍摄输出</button>
+						<button  :disabled="actionStatus!=3&&actionStatus!=4"   :data-orderid="currentOrderId" type="button" class="mui-btn mod shootout ico">拍摄输出</button>
 					</li>
 					<li v-if='summaryRole' >
 						<!--<div class="mod mind" :data-orderid="currentOrderId" >
