@@ -131,7 +131,8 @@ mui('.order-ul').on('tap', '.allot', function() { //点击分配
 	})
 })
 mui('.order-ul').on('tap', '.operator', function() { //点击计调
-	var orderid = this.getAttribute('data-id');
+	var orderid = this.getAttribute('data-no');
+	console.log('id:'+orderid)
 	lf.window.openWindow('order/trackinfo.html','../order/trackinfo.html',{},{
 		orderNo: orderid
 	})
