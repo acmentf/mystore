@@ -321,10 +321,10 @@
 						</div>-->
 						<button :disabled="actionStatus!=3&&actionStatus!=4"  :data-orderid="currentOrderId" type="button" class="mui-btn mod saleout ico">销售输出</button>
 					</li>
-					<li  v-if='shootFeedbackRole'>
+					<li>
 						<!--<div class="mod excuteresult" :data-orderid="currentOrderId">
 							<div class="ico">输出</div>
-						
+							  v-if='shootFeedbackRole'						
 						</div>-->
 						<button  :disabled="actionStatus!=3&&actionStatus!=4"   :data-orderid="currentOrderId" type="button" class="mui-btn mod shootout ico">拍摄输出</button>
 					</li>
