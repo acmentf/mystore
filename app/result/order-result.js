@@ -86,7 +86,7 @@ mui('.mui-content').on('tap', '.givesSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.giveOrderXms,index,{
-			picNum: vm.giveOrderXms[index].givesNum,
+			picNum: vm.giveOrderXms[index].picNum,
 			picSize: items[0].value,
 			picSizeName: items[0].text
 		})
@@ -96,7 +96,7 @@ mui('.mui-content').on('tap', '.salesSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.saleOrderXms,index,{
-			picNum: vm.saleOrderXms[index].salesNum,
+			picNum: vm.saleOrderXms[index].picNum,
 			picSize: items[0].value,
 			picSizeName: items[0].text
 		})
@@ -202,22 +202,46 @@ mui('.mui-content').on('tap', '#save', function(){
 		var reg= /[^\d]/g;
 		flag = true
 		params.printOrderXms.forEach(function(v){
-		if(reg.test(v.picNum)){
-			lf.nativeUI.toast('请输入数字')
-			flag = false
-		}
+			if(v.picNum){
+				if(!v.picSize){
+					lf.nativeUI.toast('请选择打印尺寸')
+					flag = false;
+				}
+			}
+			if(v.picSize){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入打印数张数')
+				flag = false
+				}
+			}
 		})
 		params.saleOrderXms.forEach(function(v){
-		if(reg.test(v.picNum)){
-			lf.nativeUI.toast('请输入数字')
-			flag = false
-		}
+			if(v.picNum){
+				if(!v.picSize){
+					lf.nativeUI.toast('请选择销售尺寸')
+					flag = false;
+				}
+			}
+			if(v.picSize){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入销售张数')
+				flag = false
+				}
+			}
 		})
 		params.shotOrderXms.forEach(function(v){
-		if(reg.test(v.picNum)){
-			lf.nativeUI.toast('请输入数字')
-			flag = false
-		}
+			if(v.picNum){
+				if(!v.picSize){
+					lf.nativeUI.toast('请选择赠送尺寸')
+					flag = false;
+				}
+			}
+			if(v.picSize){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入赠送张数')
+				flag = false
+				}
+			}
 		})
 	}else{
 		params = params2

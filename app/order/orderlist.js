@@ -157,22 +157,40 @@ function dodata(type, index, data) {
 }
 function getType(index){
 	var r = "";
-	switch (index){
-		case 1:
-			r = 1;
-			break;
-		case 2:
-			r = 2;
-			break;
-		case 3:
-			r = 4;
-			break;
-		case 4:
-			r = 3;
-			break;
-		default:
-			break;
+	console.log(index);
+	if(vm.currentRole == 2){
+		switch (index){
+			case 1:
+				r = 1;
+				break;
+			case 2:
+				r = 2;
+				break;
+			case 3:
+				r = 3;
+				break;
+			default:
+				break;
+		}
+	}else{
+		switch (index){
+			case 1:
+				r = 1;
+				break;
+			case 2:
+				r = 2;
+				break;
+			case 3:
+				r = 4;
+				break;
+			case 4:
+				r = 3;
+				break;
+			default:
+				break;
+		}
 	}
+	console.log('r:'+r);
 	return r;
 }
 //阻尼系数
