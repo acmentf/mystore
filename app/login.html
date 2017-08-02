@@ -52,6 +52,10 @@
 					plus.navigator.closeSplashscreen();
 					lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
 				}else{
+					var hisAccount = lf.storage.get("LFACCOUNT");
+					if(hisAccount){
+						vm.account = hisAccount
+					}
 					vm.type = 1
 					plus.navigator.closeSplashscreen();
 				}
@@ -80,6 +84,7 @@
 							lf.nativeUI.toast('无效的用户')
 							return ;
 						}
+						lf.storage.put("LFACCOUNT",vm.account);
 						var obj = {
 							usercode:res.data.id,
 							username:res.data.name,
