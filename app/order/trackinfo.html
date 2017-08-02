@@ -27,11 +27,11 @@
 			<h1 class="mui-title">计调信息</h1>
 		</header>
 		<div id="trackinfo" class="mui-content">
-			<div v-if='assignRole' class="assigninfo">
-				<div style="margin-bottom: 0.15rem;">
+			<div class="assigninfo">
+				<div v-if='assignRole' style="margin-bottom: 0.15rem;">
 					<button type="button" class="mui-btn mui-btn-primary assign" :data-orderid='currentOrderId'>指派</button>
 				</div>
-				<div class="mui-input-group">
+				<div   class="mui-input-group">
 					<div class="mui-input-row" style="height: auto;">
 						<label>已指派人</label>
 						<textarea readonly="readonly" v-model='trackInfo.assignNames'></textarea>
