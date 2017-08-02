@@ -273,7 +273,7 @@ function loadResult(){
 					vm.printOrderXms = res.data.printOrderXms
 				}
 				vm.id = res.data.id
-				vm.reason = res.data.reason
+				vm.reason = res.data.noOutReason
 				vm.buyers = res.data.buyers
 				vm.saleRemark = res.data.saleRemark
 				vm.isOut = res.data.isOut == null ? 1 : res.data.isOut 
