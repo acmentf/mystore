@@ -86,6 +86,7 @@ mui('.toolbar').on('tap', '.ico-loop', function() { //角色转换
 				vm.currentStationName = window.Role.userroleName
 				lf.nativeUI.toast('切换成功');
 				getStaticList();
+				vm.currentRole = window.Role.userrole;
 			} else {
 				lf.nativeUI.closeWaiting();
 				lf.nativeUI.toast(data.msg);
