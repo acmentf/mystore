@@ -7,7 +7,7 @@
 	"id": "com.jdytrip.shoot",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "途忆旅拍",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.10",/*应用版本名称*/
+		"name": "1.1.6",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -90,7 +90,7 @@
 		},
 		"Push": {},
 		"Contacts": {},
-		"Speech": {}
+		"Speech": {},"Device":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -123,25 +123,7 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": [
-					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
-					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.GET_TASKS\"/>",
-					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
-					"<uses-feature android:name=\"android.hardware.camera\"/>",
-					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
-					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
-				]
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -324,7 +306,8 @@
 					"js/mui.picker.min.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"app/update.js"
 				],
 				"refer": [
 					"app/order/orderlist.html",
@@ -402,7 +385,9 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
 				"priority": 0
 			},
 			"app/order/orderdetails.html": {
@@ -433,7 +418,8 @@
 					"app/common/plancamera.html",
 					"app/order/trackinfo.html",
 					"app/summary/summary.html",
-					"app/summary/details.html"
+					"app/summary/details.html",
+					"app/result/order-result.html"
 				],
 				"priority": 0
 			},
@@ -444,9 +430,21 @@
 					"js/mui.picker.min.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
-					"images/order/icon_add.png"
+					"images/order/icon_add.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/icon_delete.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/common/chooseuser.html"
+				],
 				"priority": 0
 			},
 			"app/order-entering/result.html": {
@@ -540,6 +538,14 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/result/order-result.html": {
+				"resources": [
+					"css/result/order-rusult.css",
+					"app/result/order-result.js"
 				],
 				"refer": [],
 				"priority": 0
