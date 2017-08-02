@@ -9,11 +9,13 @@ var vm = new Vue({
 		timeName3: '晚上',
 		shootInfoForms: [{ id: '', journeyName: "", periodType: 0, shootTime: '' ,remark:''}],
 		trackInfo: {},
-		currentOrderId: ''
+		currentOrderId: '',
+		assignRole:false, // 是否有指派权限
 	}
 })
 var picker = null;
 lf.ready(function() {
+	vm.assignRole = window.Role.hasAuth('assign');// 指派按钮的key
 	renderTrackInfo();
 	//				initDateChoose()
 	//				lf.window.closeCurrentWebview();
