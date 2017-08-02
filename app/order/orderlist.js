@@ -115,6 +115,7 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 			lf.net.getJSON('/order/updateOrderState',params,function (res) {
 				lf.nativeUI.closeWaiting()
 				if(res.code == 200) {
+					lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
 					lf.nativeUI.toast('操作成功')
 				}else{
