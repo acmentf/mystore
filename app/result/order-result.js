@@ -278,7 +278,12 @@ function loadResult(){
 				vm.saleRemark = res.data.saleRemark
 				vm.isOut = res.data.isOut == null ? 1 : res.data.isOut 
 				vm.salesAmt = res.data.salesAmt
-				res.data.saleDate = lf.util.timeStampToDate2(res.data.saleDate)
+				if(res.data.saleDate){
+					res.data.saleDate = lf.util.timeStampToDate2(res.data.saleDate)	
+				}else{
+					res.data.saleDate = ''
+				}
+				
 				vm.saleDate =res.data.saleDate
 			}
 		}else {

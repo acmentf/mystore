@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		index:0,
+		orderHeader: ['全部','待处理','已完成','已分派','已取消'],
 		orderList: [
 			[],
 			[],
@@ -17,16 +18,26 @@ var vm = new Vue({
 		cancelRole:false,
 		allotRole: false,
 		assignRole:false,
-		operatorRole:false
+		operatorRole:false,
+		currentRole: '',
 	}
 })
 lf.ready(function() {
+	vm.currentRole = window.Role.userrole;
+	
 	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
 	vm.operatorRole =window.Role.hasAuth('handle')// 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
-	initPull();
-
+	
+	if(vm.currentRole == 2){
+		vm.orderHeader = ['全部','待处理','已完成','已取消']
+		vm.orderList.splice(3,1);
+	}
+	Vue.nextTick(function(){
+		initPull();	
+	})
+	
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 		vm.index = event.detail.slideNumber;
 	});
@@ -137,19 +148,6 @@ mui('.order-ul').on('tap', '.operator', function() { //点击计调
 		orderNo: orderid
 	})
 })
-/*mui('.order-ul').on('tap', '.gzxx', function() {
-	var id = this.getAttribute('data-id');
-	lf.window.openWindow('trackinfo.html', 'trackinfo.html', {}, {
-		orderNo: id
-	})
-})
-mui('.order-ul').on('tap', '.zxxx', function() {
-	var id = this.getAttribute('data-id');
-	lf.window.openWindow('order-entering/result.html', '../order-entering/result.html', {}, {
-		orderNo: id
-	})
-})*/
-//			mui.init();
 function dodata(type, index, data) {
 	if(type == 'up') {
 		Vue.set(vm.orderList, index, vm.orderList[index].concat(data))
@@ -247,14 +245,34 @@ function initPull() {
 	});
 }
 
+function find(index){
+	vm.pageNos[index]++;
+	var params = {
+		status:getType(index),
+		currPage:vm.pageNos[index],
+		pageSize:vm.pageNum
+	};
+	lf.net.getJSON('/order/search',params,function (res) {
+		if(res.code == 200) {
+			dodata('up', index, res.data.result)
+		}else{
+			vm.pageNos[index]--;
+			lf.nativeUI.toast(res.msg)
+		}
+    },function(res){
+    	vm.pageNos[index]--;
+    	lf.nativeUI.toast(res.msg)
+    })
+}
 lf.event.listener('orderdetails',function(e){
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
 		vm.pageNos[i] = 0;
+		find(i);
 	})
 
 	vm.pullObjects.forEach(function(v) {// 将数据全部重新加载一次
-		mui(v).pullToRefresh().pullUpLoading();
+		mui(v).pullToRefresh().refresh(true);
 	})
 	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();

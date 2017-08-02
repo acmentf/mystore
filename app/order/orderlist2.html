@@ -116,8 +116,7 @@
 			</div>
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader" v-text="data">
-						
+					<a class="mui-control-item" :class="{'mui-active':index == 0}" href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader" v-text="data">
 					</a>
 				</div>
 				<div class="mui-slider-group">
