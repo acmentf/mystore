@@ -119,17 +119,23 @@
 								<div class="mui-table-cell mui-col-xs-8">
 									订单编号:<span v-text="item.orderNo"></span>
 								</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >待确认</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >已支付</div>
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>-->
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>
-								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>-->
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>-->
 								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
 							</div>
 							<div class="nr" :data-id="item.id">
 								<div class="imgbody">
-									<!--<img :src="item.covecoverImage" />-->
+									<div class="item" style="color: green;">
+										执行状态: <span v-if="item.actionStatus == 0">待处理</span>
+										<span v-if="item.actionStatus == 1">已完成计调</span>
+										<span v-if="item.actionStatus == 2">已分配摄影师</span>
+										<span v-if="item.actionStatus == 3">已完成拍照</span>
+										<span v-if="item.actionStatus == 4">已完成输出</span>
+									</div>
 									<div class="item">
 										导游: {{item.tourGuide}}
 									</div>
@@ -143,7 +149,7 @@
 										采购方: {{item.purchaser}}
 									</div>
 									<div class="item">
-										<span class="jespan">金额: <span>￥{{item.totalPrice}}</span></span>
+										<span class="jespan">金额: <span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
 									</div>
 								</div>
 							</div>
