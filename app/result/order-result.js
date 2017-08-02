@@ -66,7 +66,7 @@ lf.ready(function(){
 		text: '6寸'
 	}]);
 	reasonPicker = new mui.PopPicker();
-	reasonPicker.setData(['景点禁售','其他']);
+	reasonPicker.setData(['天气原因','道路中断','旅行团未到指定地点','其他']);
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderNo
 	loadResult()
@@ -276,7 +276,7 @@ function loadResult(){
 				vm.reason = res.data.reason
 				vm.buyers = res.data.buyers
 				vm.saleRemark = res.data.saleRemark
-				vm.isOut = res.data.isOut
+				vm.isOut = res.data.isOut == null ? 1 : res.data.isOut 
 				vm.salesAmt = res.data.salesAmt
 				res.data.saleDate = lf.util.timeStampToDate2(res.data.saleDate)
 				vm.saleDate =res.data.saleDate

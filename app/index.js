@@ -115,3 +115,7 @@ function getStaticList(){
 		lf.nativeUI.toast(erro.msg);
 	})
 }
+
+lf.event.listener('indexdata',function(e){
+	getStaticList();
+})
