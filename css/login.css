@@ -1,5 +1,6 @@
 .login-container{
-	background:url('../images/index/bg.png')no-repeat center;
+	/*background:url('../images/index/bg.png')no-repeat center;*/
+	background: #FFFFFF;
 	background-size:cover;
 	position: fixed;
 	left: 0;
@@ -30,6 +31,10 @@
 	 width:80%;
 	 border-radius: 20px;
 	 opacity: 0.6;
+	 /*border-top: none;
+	 border-left: none;
+	 border-right: none;
+	 border-radius: 0;*/
 }
 .login-container .login-input-tel .mui-icon-clear {
 	position: absolute;
@@ -78,8 +83,8 @@
 .login-container .login-pass-btn{
 	margin-top:15px;
 	width: 80%;
-	border-radius: 20px;
-	background-color: #ff3064;
+	border-radius: 4px;
+	background-color: #3db391;
 	color: #fff;
 	height:40px;
 	border: none;
