@@ -19,17 +19,17 @@
 	font-size: 14px;
 	color: #8f8f94;
 }*/
-.mui-bar{
-	background-color:#000000;
-	color: #FFFFFF;
-}
+
 .mui-bar .mui-action-back{
-	color: #FFFFFF !important;
+	color: #000;
 }
 .mui-title{
-	color: #FFFFFF;
+	color: #000;
 }
-
+.mui-bar{
+	background-color: #fff;
+	box-shadow:none;
+}
 
 @font-face {
 	font-family: "iconfont";

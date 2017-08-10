@@ -11,20 +11,20 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<style>
 			html,body,.mui-content{
-				background: #FFFFFF;
+				background: #F6F6F6;
 			}
 		</style>
 	</head>
 	<body>
-		<div>
+		<div class="order-result">
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">销售输出</h1>
+				<h1 class="mui-title">拍摄输出</h1>
+				<span class="save-btn">保存</span>
 			</header>
-			<div id="app" class="mui-content order-result">
+			<div id="app" class="mui-content ">
 				 <!--点击切换S-->
 				<div class="cut">
-					<div class="mui-content">
 					    <div class="mui-row ">
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
@@ -39,16 +39,28 @@
 								</div>
 					        </div>
 					    </div>
-					</div>
 				</div>
 				<!--//点击切换E-->
 				<!--//已输出表单S-->
-			<div v-show="isOut==1" class="mui-input-group">
-					<div class="mui-input-row  group-info">
-				        <label>销售时间：</label>
-						<input type="text" v-model="saleDate"  class="selectDate" readonly="readonly" placeholder="请选择销售时间"/>
-			    	</div>
-			    	<div class="mui-input-row group-info give-number" v-for="(v, i) in printOrderXms">
+<div v-show="isOut==1">	
+					<div class="mui-input-group">
+						<div class="shoot-number">
+							<div class="mui-input-row  group-info">
+						        <label>拍摄张数</label>
+								<input type="text" placeholder="请填写拍摄张数"/>
+					    	</div>
+					    	<div class="mui-input-row  group-info">
+						        <label>选片张数</label>
+								<input type="text" placeholder="请填写选片张数"/>
+					    	</div>
+						</div>
+					</div>
+					<div  class="shoot-number">
+						<div class="mui-input-group ">
+							<div class="mui-input-row group-info">
+								<label>打印张数</label>
+							</div>
+						<div class="mui-input-row group-info give-number" v-for="(v, i) in printOrderXms">
 						<label v-if="i==0" >打印张数：</label>
 						<label v-else >&nbsp;</label>
 						<div class="select" >
@@ -58,56 +70,37 @@
 						<span v-if="i==0"  class=" mui-icon mui-icon-plus add-printsNum add-num"></span>
 						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
 					</div>
-					<div class="mui-input-row group-info give-number" v-for="(v,i) in saleOrderXms">
-						<label v-if="i==0">销售张数：</label>
-						<label v-else >&nbsp;</label>
-						<div class="select" >
-
-							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size salesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入销售张数">
+					</div>
+					<div class="mui-input-group">
+						<div class="shoot-number">
+							<div class="mui-input-row group-info">
+								<label>备注</label>
+							</div>
+							<div class="mui-input-row group-info remark-box">
+								<textarea class="remark-text" placeholder="请输入备注信息"></textarea>
+							</div>
 						</div>
-						<span v-if="i==0" class=" mui-icon mui-icon-plus add-salesNum add-num"></span>
-						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-salesNum"></span>
-					</div>
-					<div class="mui-input-row group-info give-number" v-for="(v, i) in giveOrderXms">
-						<label v-if="i==0" >赠送张数：</label>
-						<label v-else >&nbsp;</label>
-						<div class="select" >
-							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size givesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入赠送张数">
-						</div>
-						<span v-if="i==0" class=" mui-icon mui-icon-plus add-givesNum add-num"></span>
-						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-givesNum"></span>
-					</div>
-
-					<div class="mui-input-row group-info">
-						<label>销售总额：</label>
-						<input v-model="salesAmt" type="number" class="mui-input-clear" placeholder="请输入销售总额">
-					</div>
-					<div class="mui-input-row group-info">
-						<label>购买人数：</label>
-						<input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
-					</div>
-					<div class="mui-input-row remark">
-						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea v-model="saleRemark" class="remark-text"></textarea>
 					</div>
 				</div>
-
 				<!--已输出表单E-->
 				<!--未输出表单S-->
-				<div v-show="isOut==2" div class="mui-input-group">
-					<div class="mui-input-row  group-info">
-				        <label>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因：</label>
+				
+				<div v-show="isOut==2" div >
+					<div class="mui-input-row mui-input-group  group-info shoot-number">
+				        <label>原因</label>
 						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
 			    	</div>
-			    	<div class="mui-input-row remark">
-						<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-						<textarea v-model="saleRemark" class="remark-text"></textarea>
-					</div>
+			    	<div class="shoot-number mui-input-group">
+							<div class="mui-input-row group-info">
+								<label>其他原因</label>
+							</div>
+							<div class="mui-input-row group-info remark-box">
+								<textarea class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
+							</div>
+						</div>
 				</div>
 				<!--未输出表单E-->
-				<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
+			<!--	<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>-->
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>

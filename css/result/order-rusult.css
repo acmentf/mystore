@@ -1,9 +1,48 @@
-.order-result{
-	padding:0.2rem;
-}
+
 .order-result .group-info label{
 	padding:10px 0;
 	width:30%;
+}
+.order-result .mui-bar{
+	background-color: #fff;
+	box-shadow:none;
+}
+.order-result .mui-bar .mui-title{
+	color: #000000;
+}
+.order-result .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
+	color:#3DB391 ;
+}
+.order-result .shoot-number{
+	margin: 0.2rem 0;
+}
+.order-result .cut{
+	background-color: #fff;
+}
+.order-result .mui-input-row{
+	padding: 0 0.2rem;
+}
+.order-result .save-btn{
+	color: #3DB391;
+	float: right;
+	line-height: 44px;
+	width:1rem;
+}
+.order-result .add-size{
+	height: 80px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.order-result .add-size-btn{
+	height: 40px;
+	border: none;
+	background-color: #3DB391;
+	color: #fff;
+}
+.order-result .remark-box{
+	height:100px;
+	padding: 0.2rem;
 }
 .order-result .group-info input{
 	width:70%;
@@ -58,8 +97,9 @@
 }
 .order-result .remark-text{
 	height:100%;
-	width:70%!important;
-	}
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 0.1rem;;
+}
 .login-btn-box{
 	width: 100%;
 	text-align: center;
