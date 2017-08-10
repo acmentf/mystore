@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--cwj-->
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title></title>
@@ -17,10 +18,12 @@
 			body {
 				background-color: #efeff4;
 			}
+			
 			.mui-bar~.mui-content .mui-fullscreen {
 				top: 44px;
 				height: auto;
 			}
+			
 			.mui-pull-top-tips {
 				position: absolute;
 				top: -20px;
@@ -31,9 +34,11 @@
 				border-radius: 100%;
 				z-index: 1;
 			}
+			
 			.mui-bar~.mui-pull-top-tips {
 				top: 24px;
 			}
+			
 			.mui-pull-top-wrapper {
 				width: 42px;
 				height: 42px;
@@ -46,24 +51,28 @@
 				box-shadow: 0 4px 10px #bbb;
 				overflow: hidden;
 			}
+			
 			.mui-pull-top-tips.mui-transitioning {
 				-webkit-transition-duration: 200ms;
 				transition-duration: 200ms;
 			}
+			
 			.mui-pull-top-tips .mui-pull-loading {
 				/*-webkit-backface-visibility: hidden;
 				-webkit-transition-duration: 400ms;
 				transition-duration: 400ms;*/
-
 				margin: 0;
 			}
+			
 			.mui-pull-top-wrapper .mui-icon,
 			.mui-pull-top-wrapper .mui-spinner {
 				margin-top: 7px;
 			}
+			
 			.mui-pull-top-wrapper .mui-icon.mui-reverse {
 				/*-webkit-transform: rotate(180deg) translateZ(0);*/
 			}
+			
 			.mui-pull-bottom-tips {
 				text-align: center;
 				background-color: #efeff4;
@@ -71,6 +80,7 @@
 				line-height: 40px;
 				color: #777;
 			}
+			
 			.mui-pull-top-canvas {
 				overflow: hidden;
 				background-color: #fafafa;
@@ -80,25 +90,29 @@
 				height: 40px;
 				margin: 0 auto;
 			}
+			
 			.mui-pull-top-canvas canvas {
 				width: 40px;
 			}
+			
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-
-			.mui-segmented-control .mui-control-item{
-				color: #A4A4A4 !important;
+			
+			.mui-segmented-control .mui-control-item {
+				color: #CCECE1 !important;
 			}
+			
 			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-				border-bottom: 2px solid #FB2C60 !important;
-				color: #FB2C60 !important;
+				border-bottom: 1px solid #fff !important;
+				color: #fff !important;
 			}
-			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen{
-				top: 94px;
-			}
-			.mui-slider-indicator.mui-segmented-control{
-				background: #FFFFFF;
+			
+			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background: #3DB391;
+				color: #CCECE1
 			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
@@ -109,16 +123,18 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">订单管理</h1>
 		</header>
-		<div id="app" class="mui-content orderlist-content" >
-			<div id="searchDiv" class="mui-input-row search">
+		<div id="app" class="mui-content orderlist-content">
+			<!--<div id="searchDiv" class="mui-input-row search">
 				<input class="searchspan" type="text" placeholder="订单编号/导游姓名/团号" />
 				<span id="searchBtn" class="searchicon">搜索</span>
-			</div>
+			</div>-->
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader" v-text="data">
-						
+					<a class="mui-control-item" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader">
+						<span v-text="data.name"></span>
+						<span v-text='data.number'></span>
 					</a>
+
 				</div>
 				<div class="mui-slider-group">
 					<div :id="'item'+index+'mobile'" class="mui-slider-item mui-control-content" :class="{'mui-active':index == 0}" v-for="(data,index) in orderList">
@@ -127,49 +143,63 @@
 								<ul class="order-ul">
 									<li class="order-li" v-for="item in data">
 										<div class="mui-table title">
-											<div class="mui-table-cell mui-col-xs-8">
-												订单编号:<span v-text="item.orderNo"></span>
+											<div class="mui-clearfix">
+												<span class="colorgray">
+												订单号:<i v-text="item.orderNo"></i>
+												</span>
+												<span class="dqr colororange" v-if="item.actionStatus ==0">待处理</span>
+												<span class="dqr colorgreen" v-if="item.actionStatus ==1">已完成计调</span>
+												<span class="dqr colorblue" v-if="item.actionStatus ==2">已分配摄影师</span>
+												<span class="dqr colorpink" v-if="item.actionStatus ==3">正在拍摄中</span>
+												<span class="dqr coloryellow" v-if="item.actionStatus ==4">已完成</span>
 											</div>
-											<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >已支付</div>
-											<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>-->
-											<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
-											<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>-->
-											<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>-->
-											<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>-->
-											<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+											<div class="item">
+												{{item.productName}}
+											</div>
+
 										</div>
+
 										<div class="nr" :data-id="item.id">
 											<div class="imgbody">
-												<div class="item" style="color: green;">
-													执行状态: <span v-if="item.actionStatus == 0">待处理</span>
-													<span v-if="item.actionStatus == 1">已完成计调</span>
-													<span v-if="item.actionStatus == 2">已分配摄影师</span>
-													<span v-if="item.actionStatus == 3">已完成拍照</span>
-													<span v-if="item.actionStatus == 4">已完成输出</span>
+												<div class="tourinfo">
+													<div class="item">
+														<span class="ico ico-starttime"></span>
+														<span>出团日期: {{item.startTime}}</span>
+														<span>共5天</span>
+													</div>
+													<div class="item">
+														<span class="ico ico-linename"></span> 线路名称: {{item.lineName}}
+													</div>
+													<div class="item">
+														<span class="ico ico-personcount"></span> 团队人数: {{item.personCount}}
+													</div>
 												</div>
-												<div class="item">
-													导游: {{item.tourGuide}}
-												</div>
-												<div class="item">
-													导游电话： {{item.tourGuidePhone}}
-												</div>
-												<div class="item">
-													团号: {{item.tourNo}}
-												</div>
-												<div class="item">
-													产品: {{item.productName}}
-												</div>
-												<div class="item">
-													采购方: {{item.purchaser}}
-												</div>
-												<div class="item">
-													<span class="jespan">金额:<span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
+												<div class="item guideinfo">
+													<span class="ico ico-tourguide"></span> 导游: {{item.tourGuide}}({{item.tourGuidePhone}})
 												</div>
 											</div>
 										</div>
 										<div class="mui-table bottom">
-											<div class="mui-table-cell mui-col-xs-8 mui-text-right">
-												<div class="btns">
+											<div class="mui-table-cell">
+												<button type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														指派
+												</button>
+												<!--<button v-if="item.actionStatus ==0" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														计调
+												</button>
+												<button v-if="item.actionStatus ==1" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														分配
+												</button>
+												<button v-if="item.actionStatus ==2" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														填写输出信息
+												</button>
+												<button v-if="item.actionStatus ==3" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														填写销售信息
+												</button>
+												<button v-if="item.actionStatus ==4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														录入心得
+												</button>-->
+												<!--<div class="btns">
 													<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
 														计调
 													</button>
@@ -183,7 +213,7 @@
 														分配
 													</button>
 												</div>
-											</div>
+											</div>-->
 										</div>
 									</li>
 								</ul>
@@ -202,4 +232,5 @@
 		<script src="../../libs/vue.min.js"></script>
 		<script src="orderlist.js"></script>
 	</body>
+
 </html>

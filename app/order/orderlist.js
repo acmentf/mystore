@@ -2,10 +2,8 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		index:0,
-		orderHeader: ['全部','待处理','已完成','已分派','已取消'],
+		orderHeader: [{name:'处理中', number:10},{name:'已完成',number:12},{name:'已取消',number:1}],
 		orderList: [
-			[],
-			[],
 			[],
 			[],
 			[]
@@ -30,10 +28,10 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	
-	if(vm.currentRole == 2){
+	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
 		vm.orderList.splice(3,1);
-	}
+	}*/
 	Vue.nextTick(function(){
 		initPull();	
 	})
@@ -159,38 +157,19 @@ function dodata(type, index, data) {
 function getType(index){
 	var r = "";
 	console.log(index);
-	if(vm.currentRole == 2){
 		switch (index){
-			case 1:
+			case 0:
 				r = 1;
 				break;
-			case 2:
-				r = 2;
+			case 1:
+				r = 7;
 				break;
-			case 3:
+			case 2:
 				r = 3;
 				break;
 			default:
 				break;
 		}
-	}else{
-		switch (index){
-			case 1:
-				r = 1;
-				break;
-			case 2:
-				r = 2;
-				break;
-			case 3:
-				r = 4;
-				break;
-			case 4:
-				r = 3;
-				break;
-			default:
-				break;
-		}
-	}
 	console.log('r:'+r);
 	return r;
 }
