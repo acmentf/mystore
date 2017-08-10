@@ -1,0 +1,71 @@
+.designate-designate {
+  font-size: 0.76rem;
+}
+
+.designate-designate .btn-designate {
+  background-color: #fff;
+  border: 1px solid #9CBEB4;
+  border-radius: 0.4rem;
+  color: #9CBEB4;
+}
+
+.designate-designate .btn-designate:enabled:active {
+  color: #fff;
+  border: 1px solid #9CBEB4;
+  background-color: #fff;
+}
+
+.designate-designate .item-block {
+  background-color: #fff;
+  padding: 0.4rem;
+}
+
+.designate-designate .item-block .head-bar {
+  position: relative;
+}
+
+.designate-designate .item-block .head-bar .title {
+  padding-left: 0.1rem;
+  color: #535353;
+  line-height: 2rem;
+  font-size: 1rem;
+}
+
+.designate-designate .item-block .head-bar .mui-btn {
+  position: absolute;
+  right: 0.2rem;
+}
+
+.designate-designate .item-block .body-main {
+  padding-top: 0.2rem;
+}
+
+.designate-designate .item-block .body-main .item {
+  position: relative;
+  text-align: right;
+}
+
+.designate-designate .item-block .body-main .item .text-name {
+  color: #999999;
+  position: absolute;
+  left: 0.2rem;
+}
+
+.designate-designate .item-block .body-main .item .text-info {
+  color: #B4B4B4;
+}
+
+.designate-designate .item-block .body-main .item .text-info + .text-info {
+  margin-left: 0.2rem;
+}
+
+.designate-designate .item-block .body-main .empty {
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  color: #B4B4B4;
+}
+
+.designate-designate .item-block + .item-block {
+  margin-top: 0.4rem;
+}

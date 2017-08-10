@@ -1,0 +1,59 @@
+.designate-designate{
+  $btn-designate:#9CBEB4;
+  font-size: 0.76rem;
+  .btn-designate{
+    background-color: #fff;
+    border: 1px solid $btn-designate;
+    border-radius: 0.4rem;
+    color: $btn-designate;
+    &:enabled:active{
+      color: #fff;
+      border: 1px solid $btn-designate;
+      background-color:#fff;
+    }
+  }
+  .item-block{
+    background-color: #fff;
+    padding: 0.4rem;
+    .head-bar{
+      position: relative;
+      .title{
+        padding-left: 0.1rem;
+        color: #535353;
+        line-height: 2rem;
+        font-size: 1rem;
+      }
+      .mui-btn{
+        position: absolute;
+        right: 0.2rem;
+      }
+    }
+    .body-main{
+      padding-top: 0.2rem;
+      .item{
+        position: relative;
+        text-align: right;
+        .text-name{
+          color: #999999;
+          position: absolute;
+          left: 0.2rem;
+        }
+        .text-info{
+          color: #B4B4B4;
+        }
+        .text-info + .text-info{
+          margin-left: 0.2rem;
+        }
+      }
+      .empty{
+        height: 3rem;
+        line-height: 3rem;
+        text-align: center;
+        color: #B4B4B4;
+      }
+    }
+  }
+  .item-block + .item-block{
+    margin-top: 0.4rem;
+  }
+}

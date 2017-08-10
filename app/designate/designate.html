@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link href="../../css/app.css" rel="stylesheet"/>
+    <link href="../../css/designate/designate.css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">指派</h1>
+</header>
+<div class="mui-content designate-designate" id="app">
+    <div class="mui-content-padded">
+        <div class="item-block">
+            <div class="head-bar">
+                <span class="title">执行人</span>
+                <button type="button" class="mui-btn btn-designate">+ 指派</button>
+            </div>
+            <div class="body-main">
+                <div class="item" v-for="(item,index) in executorList">
+                    <span class="text-name" v-text="item.name"></span>
+                    <span class="text-info" v-text="item.phone"></span>
+                    <span class="text-info" v-text="item.area"></span>
+                    <span class="text-info" v-text="item.operator"></span>
+                </div>
+                <div class="empty" v-text="emptyTip"></div>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="head-bar">
+                <span class="title">输出</span>
+                <button type="button" class="mui-btn btn-designate">+ 指派</button>
+            </div>
+            <div class="body-main">
+                <div class="item"></div>
+                <div class="empty" v-text="emptyTip"></div>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="head-bar">
+                <span class="title">销售</span>
+                <button type="button" class="mui-btn btn-designate">+ 指派</button>
+            </div>
+            <div class="body-main">
+                <div class="item"></div>
+                <div class="empty" v-text="emptyTip"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/framework/define.js"></script>
+<script src="../../js/framework/styles.js"></script>
+<script src="../../js/framework/lf.js"></script>
+<script src="../../libs/vue.min.js"></script>
+<script src="./designate.js"></script>
+</body>
+
+</html>
