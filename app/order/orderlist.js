@@ -61,11 +61,12 @@ lf.ready(function() {
 
 
 })
-document.getElementById('searchDiv').addEventListener('tap',function(){
+/*document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
-})
+})*/
 
 mui('.order-ul').on('tap', '.nr', function() {
+	console.log('gotoorderdetails')
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id
