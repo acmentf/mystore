@@ -227,6 +227,13 @@ lf.ready(function() {
 		 		}
 			});		
 	})
+	mui('.topbar').on('tap', '.mod', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('order/statuslog.html','../order/statuslog.html',{},{
+			orderNo: orderid
+		})
+	})
+	
 })
 
 lf.event.listener('orderdetails',function(e){
