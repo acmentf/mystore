@@ -143,7 +143,7 @@ mui('#app').on('tap', '#sdbz', function() {
 
 //添加拍摄按钮
 mui('#app').on('tap', '.addshootinfo', function() {
-	let shootObj = {info:[]}
+	var shootObj = {info:[]}
 	vm.shootInfos.push(shootObj)
 }, false);
 //删除拍摄信息

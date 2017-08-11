@@ -36,9 +36,9 @@
   color: #A4A4A4;
 }
 
-.show-on-right .mui-media-object {
+.show-on-right .forinput {
   margin-left: 10px;
-  border: none;
+  border: 1px solid #fff;
   text-align: right;
   height: 14px;
   font-size: 14px;
@@ -86,7 +86,7 @@
 
 .superscript .superscript-num {
   color: #fff;
-  position: fixed;
+  position: absolute;
   left: 9px;
   top: 3px;
 }

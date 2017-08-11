@@ -114,7 +114,7 @@
 									区域
 								</span>
 								<span class="show-on-right">
-									<input type="text" class="mui-media-object mui-pull-right" readonly="readonly" value="西北"/>
+									<input type="text"  class="forinput mui-pull-right" readonly="readonly" value="西北"/>
 								</span>
 
 							</li>
@@ -123,7 +123,7 @@
 									线路
 								</span>
 								<span class="show-on-right">
-									<input type="text" class="mui-media-object mui-pull-right" readonly="readonly" value="甘南"/>
+									<input type="text" class="forinput mui-pull-right" readonly="readonly" value="甘南"/>
 								</span>
 							</li>
 							<li class="mui-table-view-cell ">
@@ -131,7 +131,7 @@
 									团队性质
 								</span>
 								<span class="show-on-right ">
-									<input type="text" id='showUserPicker' v-model="teamProperty.text"  class="mui-media-object mui-pull-right"  placeholder="请选择 >" />
+									<input type="text" id='showUserPicker' v-model="teamProperty.text"  class="forinput mui-pull-right"  placeholder="请选择 >" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -139,7 +139,7 @@
 									团队人数
 								</span>
 								<span class="show-on-right">
-									<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入"  value="西北"/>
+									<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -147,7 +147,7 @@
 									导游
 								</span>
 								<span class="show-on-right">
-									<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入导游姓名" value="西北"/>
+									<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入导游姓名" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -155,7 +155,7 @@
 									导游电话
 								</span>
 								<span class="show-on-right">
-									<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入导游电话" value="西北"/>
+									<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入导游电话" />
 								</span>
 							</li>
 						</ul>
@@ -165,7 +165,7 @@
 							<li class="mui-table-view-cell">
 								<span>出团日期</span>
 								<span class="show-on-right ">
-									<input type="text" readonly="readonly" id='chutuan' data-options='{"type":"date"}' v-model="goDate.text"  class="mui-media-object mui-pull-right"  placeholder="请选择 >" />
+									<input type="text" readonly="readonly" id='chutuan' data-options='{"type":"date"}' v-model="goDate.text"  class="forinput mui-pull-right"  placeholder="请选择 >" />
 								</span>
 
 							</li>
@@ -174,7 +174,7 @@
 											行程天数
 										</span>
 								<span class="show-on-right">
-											<input type="text" class="mui-media-object mui-pull-right" readonly="readonly" value="甘南"/>
+											<input type="text" class="forinput mui-pull-right" readonly="readonly" value="甘南"/>
 										</span>
 							</li>
 							<li class="mui-table-view-cell ">
@@ -182,7 +182,7 @@
 											取片日期
 										</span>
 								<span class="show-on-right ">
-											<input readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="mui-media-object mui-pull-right"  placeholder="请选择 >" />
+											<input readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="forinput mui-pull-right"  placeholder="请选择 >" />
 										</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -190,7 +190,7 @@
 											取片地点
 										</span>
 								<span class="show-on-right">
-											<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入"  value="西北"/>
+											<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入"  value="西北"/>
 										</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -198,7 +198,7 @@
 											摄影师预留座位
 										</span>
 								<span class="show-on-right">
-											<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入导游姓名" value="西北"/>
+											<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入导游姓名" value="西北"/>
 										</span>
 							</li>
 							<li class="mui-table-view-cell">
@@ -206,7 +206,7 @@
 											车牌号码
 										</span>
 								<span class="show-on-right">
-											<input type="text" :readonly="isRead" class="mui-media-object mui-pull-right" placeholder="请输入导游电话" value="西北"/>
+											<input type="text" :readonly="isRead" class="forinput mui-pull-right" placeholder="请输入导游电话" value="西北"/>
 										</span>
 							</li>
 						</ul>
@@ -229,7 +229,7 @@
 								<div class="superscript-img">
 									<img src="../../images/order/corner.png" alt="" />
 								</div>
-								<span v-text="index+1" class="superscript-num"></span>
+								<span v-text="index+1" class="superscript-num" ></span>
 								<div class="superscript-xx" :data-index="index">
 									<span>X</span>
 								</div>
@@ -237,31 +237,31 @@
 							<li class="mui-table-view-cell">
 								<span>拍摄景点</span>
 								<span class="show-on-right">
-									<input type="text" class="mui-media-object mui-pull-right"  placeholder="请输入景点名称"/>
+									<input type="text" class="forinput mui-pull-right"  placeholder="请输入景点名称"/>
 								</span>
 							</li>
 							<li class="mui-table-view-cell">
 								<span>拍摄日期</span>
 								<span class="show-on-right ">
-									<input readonly="readonly" type="text" id='psrq' data-options='{"type":"date"}' v-model="shootDate.text"  class="mui-media-object mui-pull-right"  placeholder="请选择拍摄日期 >" />
+									<input readonly="readonly" type="text" id='psrq' data-options='{"type":"date"}' v-model="shootDate.text"  class="forinput mui-pull-right"  placeholder="请选择拍摄日期 >" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell ">
 								<span>拍摄时段</span>
 								<span class="show-on-right ">
-									<input readonly="readonly" type="text" id='pssd' data-options='{"type":"date"}' v-model="ShootInterval.text"  class="mui-media-object mui-pull-right"  placeholder="请选择 拍摄时段 >" />
+									<input readonly="readonly" type="text" id='pssd' data-options='{"type":"date"}' v-model="ShootInterval.text"  class="forinput mui-pull-right"  placeholder="请选择 拍摄时段 >" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell ">
 								<span>时段备注</span>
 								<span class="show-on-right ">
-									<input readonly="readonly" type="text" id='sdbz' data-options='{"type":"time"}' v-model="intervalRemark.text"  class="mui-media-object mui-pull-right"  placeholder="备注准确拍摄时段 >" />
+									<input readonly="readonly" type="text" id='sdbz' data-options='{"type":"time"}' v-model="intervalRemark.text"  class="forinput mui-pull-right"  placeholder="备注准确拍摄时段 >" />
 								</span>
 							</li>
 							<li class="mui-table-view-cell ">
 								<span>摄影师</span>
 								<span class="show-on-right ">
-									<input readonly="readonly" type="text" id='sys'  class="mui-media-object mui-pull-right"  placeholder="分配摄影师 >" />
+									<input readonly="readonly" type="text" id='sys'  class="forinput mui-pull-right"  placeholder="分配摄影师 >" />
 								</span>
 							</li>
 						</ul>
