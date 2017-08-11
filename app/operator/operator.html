@@ -223,7 +223,16 @@
 						</div>
 					</div>
 					<div id="item3" class="mui-control-content">
-						<ul id="list" class="mui-table-view mui-table-view-chevron">
+						<ul id="list" v-for="(item,index) in shootInfos" class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell superscript">
+								<div class="superscript-img">
+									<img src="../../images/order/corner.png" alt="" />
+								</div>
+								<span v-text="index+1" class="superscript-num"></span>
+								<div class="superscript-xx" :data-index="index">
+									<span>X</span>
+								</div>
+							</li>
 							<li class="mui-table-view-cell">
 								<span>拍摄景点</span>
 								<span class="show-on-right">
@@ -255,6 +264,7 @@
 								</span>
 							</li>
 						</ul>
+						<button type="button"  class="mui-btn mui-btn-block addshootinfo" style="color: #3DB391;font-size: 14px;margin-top: 10px;">+添加拍摄点</button>
 					</div>
 				</div>
 			</div>

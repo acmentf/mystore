@@ -8,6 +8,7 @@ var vm = new Vue({
 			[],
 			[]
 		],
+		shootInfos:[{info:[]}], //存放所有拍摄信息
 		pullObjects: [],
 		isRead: false, //是否可以编辑
 		teamProperty: '', //团队性质
@@ -145,8 +146,21 @@ mui('#app').on('tap', '#sdbz', function() {
 	});
 }, false);
 
+//添加拍摄按钮
+mui('#app').on('tap', '.addshootinfo', function() {
+	let shootObj = {info:[]}
+	vm.shootInfos.push(shootObj)
+}, false);
+//删除拍摄信息
+mui('#app').on('tap', '.superscript-xx', function() {
+	if(vm.shootInfos.length<=1){
+		lf.nativeUI.toast('至少保留一组拍摄信息')
+		return;
+	}
+	var index = this.getAttribute('data-index');
+	vm.shootInfos.splice(index,1)
+}, false);
 
-var picker = null;
 lf.ready(function() {
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 		vm.index = event.detail.slideNumber;

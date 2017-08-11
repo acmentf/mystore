@@ -10,6 +10,14 @@
   color: #000000;
 }
 
+.mui-table-view-chevron .mui-table-view-cell {
+  padding-right: 0;
+}
+
+.mui-table-view {
+  margin-bottom: 10px;
+}
+
 .save {
   color: #3DB391;
   position: absolute;
@@ -56,4 +64,44 @@
   background: #F6F6F6;
   font-size: 15px;
   color: #8B8B8B;
+}
+
+.superscript {
+  height: 45px;
+  background: #fff;
+  overflow: inherit;
+  padding: 0;
+}
+
+.superscript .superscript-img {
+  width: 45px;
+  height: 100%;
+  float: left;
+}
+
+.superscript .superscript-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.superscript .superscript-num {
+  color: #fff;
+  position: fixed;
+  left: 9px;
+  top: 3px;
+}
+
+.superscript .superscript-xx {
+  float: right;
+  width: 45px;
+  height: 100%;
+}
+
+.superscript .superscript-xx span {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  display: inline-block;
+  line-height: 45px;
+  text-align: center;
 }
