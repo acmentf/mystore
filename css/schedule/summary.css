@@ -297,6 +297,7 @@
 .schedule-summary {
   font-size: 0.76rem;
   padding: 0.2rem 0.4rem;
+  background-color: #F6F6F6;
 }
 
 .schedule-summary .red {
@@ -355,4 +356,5 @@
   width: 100%;
   resize: none;
   height: 5rem;
+  background-color: #F6F6F6;
 }

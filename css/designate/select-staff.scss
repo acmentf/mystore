@@ -9,9 +9,11 @@ body {
   }
 }
 .designate-select-staff{
+  $primary-bg:#F6F6F6;
   $btn-primary:#3DB291;
   $btn-cancel:#E5E5E5;
   font-size: 0.76rem;
+  background-color: $primary-bg;
   .btn-call{
     background-color: #fff;
     border: 1px solid $btn-primary;

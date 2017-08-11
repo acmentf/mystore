@@ -1,5 +1,6 @@
 .designate-designate {
   font-size: 0.76rem;
+  background-color: #F6F6F6;
 }
 
 .designate-designate .btn-designate {
@@ -18,6 +19,7 @@
 .designate-designate .item-block {
   background-color: #fff;
   padding: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 .designate-designate .item-block .head-bar {
@@ -64,8 +66,4 @@
   line-height: 3rem;
   text-align: center;
   color: #B4B4B4;
-}
-
-.designate-designate .item-block + .item-block {
-  margin-top: 0.4rem;
 }

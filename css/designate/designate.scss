@@ -1,6 +1,8 @@
 .designate-designate{
+  $primary-bg:#F6F6F6;
   $btn-primary:#3DB291;
   font-size: 0.76rem;
+  background-color: $primary-bg;
   .btn-designate{
     background-color: #fff;
     border: 1px solid $btn-primary;
@@ -15,6 +17,7 @@
   .item-block{
     background-color: #fff;
     padding: 0.4rem;
+    margin-top: 0.4rem;
     .head-bar{
       position: relative;
       .title{
@@ -52,8 +55,5 @@
         color: #B4B4B4;
       }
     }
-  }
-  .item-block + .item-block{
-    margin-top: 0.4rem;
   }
 }

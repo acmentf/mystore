@@ -22,12 +22,14 @@
             <button type="button" class="mui-btn btn-designate" data-type="executorList">+ 指派</button>
         </div>
         <div class="body-main">
-            <div v-if="executorList.length" class="item" v-for="(item,index) in executorList">
-                <span class="text-name" v-text="item.name"></span>
-                <span class="text-info" v-text="item.phone"></span>
-                <span class="text-info" v-text="item.area"></span>
-                <span class="text-info" v-text="item.operator"></span>
-            </div>
+            <template v-if="executorList.length > 0">
+                <div class="item" v-for="(item,index) in executorList">
+                    <span class="text-name" v-text="item.name"></span>
+                    <span class="text-info" v-text="item.phone"></span>
+                    <span class="text-info" v-text="item.area"></span>
+                    <span class="text-info" v-text="item.operator"></span>
+                </div>
+            </template>
             <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
@@ -37,12 +39,14 @@
             <button type="button" class="mui-btn btn-designate" data-type="outputList">+ 指派</button>
         </div>
         <div class="body-main">
-            <div v-if="outputList.length" class="item" v-for="(item,index) in executorList">
-                <span class="text-name" v-text="item.name"></span>
-                <span class="text-info" v-text="item.phone"></span>
-                <span class="text-info" v-text="item.area"></span>
-                <span class="text-info" v-text="item.operator"></span>
-            </div>
+            <template v-if="outputList.length > 0">
+                <div class="item" v-for="(item,index) in outputList">
+                    <span class="text-name" v-text="item.name"></span>
+                    <span class="text-info" v-text="item.phone"></span>
+                    <span class="text-info" v-text="item.area"></span>
+                    <span class="text-info" v-text="item.operator"></span>
+                </div>
+            </template>
             <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
@@ -52,12 +56,14 @@
             <button type="button" class="mui-btn btn-designate" data-type="salesList">+ 指派</button>
         </div>
         <div class="body-main">
-            <div v-if="salesList.length" class="item" v-for="(item,index) in executorList">
-                <span class="text-name" v-text="item.name"></span>
-                <span class="text-info" v-text="item.phone"></span>
-                <span class="text-info" v-text="item.area"></span>
-                <span class="text-info" v-text="item.operator"></span>
-            </div>
+            <template v-if="salesList.length > 0">
+                <div class="item" v-for="(item,index) in salesList">
+                    <span class="text-name" v-text="item.name"></span>
+                    <span class="text-info" v-text="item.phone"></span>
+                    <span class="text-info" v-text="item.area"></span>
+                    <span class="text-info" v-text="item.operator"></span>
+                </div>
+            </template>
             <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
