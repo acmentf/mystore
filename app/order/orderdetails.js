@@ -233,6 +233,13 @@ lf.ready(function() {
 			orderNo: orderid
 		})
 	})
+	mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderid
+		})
+	})
+	
 	
 })
 

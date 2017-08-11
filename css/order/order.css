@@ -87,8 +87,8 @@
 	line-height: 1;
 	padding: 18px 0.2rem 15px;
 	border-bottom: 1px solid #EEEEEE;
+	position: relative;
 }
-
 
 .orderlist-content .order-ul .order-li .title .ylr {
 	color: #6DA6FF;
@@ -166,16 +166,20 @@
 .orderlist-content .colorgray {
 	color: #B6B6B6;
 }
-.orderlist-content .colorgray i{
- font-style: normal;
+
+.orderlist-content .colorgray i {
+	font-style: normal;
 }
+
 .orderlist-content .dqr {
 	color: #fff;
 	border-radius: 0.6rem;
 	padding: 0.1rem 0.1rem;
 	text-align: center;
 	font-size: 0.28rem;
-	float: right;
+	position: absolute;
+	top: 0.2rem;
+	right: 0.2rem;
 }
 
 .orderlist-content .colororange {
@@ -186,62 +190,74 @@
 .orderlist-content .colorgreen {
 	background: #49E5C6;
 }
+
 .orderlist-content .colorblue {
 	background: #16C0FF;
 }
+
 .orderlist-content .colorpink {
 	background: #FF7B9A;
 }
+
 .orderlist-content .coloryellow {
 	background: #FFD37E;
 }
-.orderlist-content .order-ul .ico{
+
+.orderlist-content .order-ul .ico {
 	display: inline-block;
 	vertical-align: middle;
 	width: 0.28rem;
 	height: 0.28rem;
 }
-.orderlist-content .order-ul .ico-starttime{
+
+.orderlist-content .order-ul .ico-starttime {
 	background: url(../../images/order/list_day.png) no-repeat center;
 	background-size: 100%;
 }
-.orderlist-content .order-ul .ico-linename{
+
+.orderlist-content .order-ul .ico-linename {
 	background: url(../../images/order/list_way.png) no-repeat center;
 	background-size: 100%;
 }
-.orderlist-content .order-ul .ico-personcount{
+
+.orderlist-content .order-ul .ico-personcount {
 	background: url(../../images/order/list_number.png) no-repeat center;
 	background-size: 100%;
 }
-.orderlist-content .guideinfo{
-	margin:0.2rem 0;
+
+.orderlist-content .guideinfo {
+	margin: 0.2rem 0;
 	color: #FF8458;
 }
-.orderlist-content .order-ul .ico-tourguide{
+
+.orderlist-content .order-ul .ico-tourguide {
 	background: url(../../images/order/list_guide.png) no-repeat center;
 	background-size: 100%;
 }
-.orderlist-content .order-ul .tourinfo{
+
+.orderlist-content .order-ul .tourinfo {
 	border-bottom: 1px solid #EEEEEE;
 	padding-bottom: 0.2rem;
 }
-.orderlist-content .order-ul .order-li .bottom .mui-btn{
-	width:100%;
-	border-radius:0 0 0.2rem 0.2rem;
+
+.orderlist-content .order-ul .order-li .button .mui-btn {
+	width: 100%;
+	border-radius: 0 0 0.2rem 0.2rem;
 	background: #3EB392;
 	color: #fff;
 	font-size: 0.36rem;
 }
-.orderlist-content .mui-slider-indicator{
+
+.orderlist-content .mui-slider-indicator {
 	padding-bottom: 0.1rem;
 	border: none;
 }
 
-.orderlist-content  .mui-fullscreen .mui-segmented-control~.mui-slider-group
-{
-	padding-top: 0.1rem ;
+.orderlist-content .mui-fullscreen .mui-segmented-control~.mui-slider-group {
+	padding-top: 0.1rem;
 	border: 0;
 }
-.orderlist-content .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+
+.orderlist-content .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
 	border-top: 0;
 }

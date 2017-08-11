@@ -233,7 +233,7 @@
 	text-align: center;
 	color: #C2CACC;
 }
-.orderdetails .more{
+.orderdetails .mui-icon-arrowright{
 	color: #C2CACC;
 }
 .orderdetails .buttons{
@@ -242,7 +242,7 @@
 }
 .orderdetails .buttons .mui-button{
 	padding: 0.2rem 0.4rem;
-	border: none;
+	border: none;     
 	margin: 0;
 	float: right;
 	border-radius: 0;

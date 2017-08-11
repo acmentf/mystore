@@ -65,7 +65,7 @@ lf.ready(function() {
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
 })*/
 
-mui('.order-ul').on('tap', '.nr', function() {
+mui('.order-ul').on('tap', '.tourinfo', function() {
 	console.log('gotoorderdetails')
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
