@@ -4,11 +4,6 @@ body {
   overflow: hidden;
 }
 
-.mui-bar {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
 .mui-bar #operate {
   color: #3DB291;
 }
