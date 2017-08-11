@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link href="../../css/app.css" rel="stylesheet"/>
+    <link href="../../css/order-pay/order-pay.css" rel="stylesheet"/>
+</head>
+<body>
+    <header id="order-pay-header" class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">销售订单</h1>
+    </header>
+
+    <div class="mui-content order-pay-content order-pay-list">
+        <div class="mui-content-padded">
+            <div class="order-pay-card">
+                <div class="order-pay-card-header">
+                    <div class="mui-pull-left">订单号：<span>123123123123</span></div>
+                </div>
+                <div class="order-pay-card-content">
+                    <p>生成时间：2017-08-09 <span class="mui-pull-right pay-status-paid">未支付</span></p>
+                    <p>照片张数：8寸 4张 <span class="mui-pull-right">200元</span></p>
+                </div>
+            </div>
+
+            <div class="order-pay-card">
+                <div class="order-pay-card-header">
+                    <div class="mui-pull-left">订单号：<span>123123123123</span></div>
+                </div>
+                <div class="order-pay-card-content">
+                    <p>生成时间：2017-08-09 <span class="mui-pull-right pay-status-paying">未支付</span></p>
+                    <p>照片张数：8寸 4张 <span class="mui-pull-right">200元</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-pay-generate">
+        <button type="button" class="mui-btn mui-btn-block">生成销售</button>
+    </div>
+   
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/mui.zoom.js"></script>
+    <script src="../../js/mui.previewimage.js"></script>
+    <script src="../../js/framework/define.js"></script>
+    <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/lf.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script>
+        // Event handle
+        var handleGoOrderPayGenerate = function() {
+            lf.window.openWindow('order-pay.html', 'order-pay.html')
+        }
+
+        // Add listener
+        mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
+    </script> 
+</body>
+</html>
