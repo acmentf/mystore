@@ -16,41 +16,49 @@
     <h1 class="mui-title">指派</h1>
 </header>
 <div class="mui-content designate-designate" id="app">
-    <div class="mui-content-padded">
-        <div class="item-block">
-            <div class="head-bar">
-                <span class="title">执行人</span>
-                <button type="button" class="mui-btn btn-designate">+ 指派</button>
-            </div>
-            <div class="body-main">
-                <div class="item" v-for="(item,index) in executorList">
-                    <span class="text-name" v-text="item.name"></span>
-                    <span class="text-info" v-text="item.phone"></span>
-                    <span class="text-info" v-text="item.area"></span>
-                    <span class="text-info" v-text="item.operator"></span>
-                </div>
-                <div class="empty" v-text="emptyTip"></div>
-            </div>
+    <div class="item-block">
+        <div class="head-bar">
+            <span class="title">执行人</span>
+            <button type="button" class="mui-btn btn-designate" data-type="executorList">+ 指派</button>
         </div>
-        <div class="item-block">
-            <div class="head-bar">
-                <span class="title">输出</span>
-                <button type="button" class="mui-btn btn-designate">+ 指派</button>
+        <div class="body-main">
+            <div v-if="executorList.length" class="item" v-for="(item,index) in executorList">
+                <span class="text-name" v-text="item.name"></span>
+                <span class="text-info" v-text="item.phone"></span>
+                <span class="text-info" v-text="item.area"></span>
+                <span class="text-info" v-text="item.operator"></span>
             </div>
-            <div class="body-main">
-                <div class="item"></div>
-                <div class="empty" v-text="emptyTip"></div>
-            </div>
+            <div v-else class="empty" v-text="emptyTip"></div>
         </div>
-        <div class="item-block">
-            <div class="head-bar">
-                <span class="title">销售</span>
-                <button type="button" class="mui-btn btn-designate">+ 指派</button>
+    </div>
+    <div class="item-block">
+        <div class="head-bar">
+            <span class="title">输出</span>
+            <button type="button" class="mui-btn btn-designate" data-type="outputList">+ 指派</button>
+        </div>
+        <div class="body-main">
+            <div v-if="outputList.length" class="item" v-for="(item,index) in executorList">
+                <span class="text-name" v-text="item.name"></span>
+                <span class="text-info" v-text="item.phone"></span>
+                <span class="text-info" v-text="item.area"></span>
+                <span class="text-info" v-text="item.operator"></span>
             </div>
-            <div class="body-main">
-                <div class="item"></div>
-                <div class="empty" v-text="emptyTip"></div>
+            <div v-else class="empty" v-text="emptyTip"></div>
+        </div>
+    </div>
+    <div class="item-block">
+        <div class="head-bar">
+            <span class="title">销售</span>
+            <button type="button" class="mui-btn btn-designate" data-type="salesList">+ 指派</button>
+        </div>
+        <div class="body-main">
+            <div v-if="salesList.length" class="item" v-for="(item,index) in executorList">
+                <span class="text-name" v-text="item.name"></span>
+                <span class="text-info" v-text="item.phone"></span>
+                <span class="text-info" v-text="item.area"></span>
+                <span class="text-info" v-text="item.operator"></span>
             </div>
+            <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
 </div>

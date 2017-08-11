@@ -1,0 +1,104 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+.mui-bar {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  #operate{
+    color: #3DB291;
+  }
+}
+.designate-select-staff{
+  $btn-primary:#3DB291;
+  $btn-cancel:#E5E5E5;
+  font-size: 0.76rem;
+  .btn-call{
+    background-color: #fff;
+    border: 1px solid $btn-primary;
+    border-radius: 0.2rem;
+    color: $btn-primary;
+    &:enabled:active{
+      color: #fff;
+      border: 1px solid $btn-primary;
+      background-color:#fff;
+    }
+  }
+  .btn-select{
+    background-color: $btn-primary;
+    border: 1px solid $btn-primary;
+    border-radius: 0.2rem;
+    color: #fff;
+    &:enabled:active{
+      color: #fff;
+      border: 1px solid $btn-primary;
+      background-color:#fff;
+    }
+  }
+  .btn-cancel{
+    background-color: $btn-cancel;
+    border: 1px solid $btn-cancel;
+    border-radius: 0.2rem;
+    color: #707070;
+    &:enabled:active{
+      color: #fff;
+      border: 1px solid $btn-cancel;
+      background-color:#fff;
+    }
+  }
+  .mui-indexed-list{
+    .mui-indexed-list-bar{
+      background-color: #fff;
+      a {
+        color: $btn-primary;
+      }
+      &.active {
+        background-color: #fff;
+        a {
+          color: $btn-primary;
+          &.active {
+            color: #fff;
+            background-color: $btn-primary;
+            border-radius: 1rem;
+          }
+        }
+      }
+    }
+    .mui-indexed-list-inner{
+      .mui-table-view{
+        .mui-indexed-list-item{
+          .item-wrap{
+            display: flex;
+            justify-content: space-between;
+            &.selected{
+              .text-name{
+                color: $btn-primary;
+              }
+            }
+            .text-name{
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              width: 5rem;
+              color: #707070;
+            }
+            .text-state{
+              border-radius: 0.8rem;
+              padding: 0 0.44rem 0.1rem;
+              color: #fff;
+              background-color: #FB9471;
+            }
+            .btn-wrap{
+              .mui-btn{
+                font-size: 0.8rem;
+                line-height: 1.3;
+                padding: 0.2rem 0.4rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

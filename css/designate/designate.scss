@@ -1,14 +1,14 @@
 .designate-designate{
-  $btn-designate:#9CBEB4;
+  $btn-primary:#3DB291;
   font-size: 0.76rem;
   .btn-designate{
     background-color: #fff;
-    border: 1px solid $btn-designate;
+    border: 1px solid $btn-primary;
     border-radius: 0.4rem;
-    color: $btn-designate;
+    color: $btn-primary;
     &:enabled:active{
       color: #fff;
-      border: 1px solid $btn-designate;
+      border: 1px solid $btn-primary;
       background-color:#fff;
     }
   }

@@ -4,14 +4,14 @@
 
 .designate-designate .btn-designate {
   background-color: #fff;
-  border: 1px solid #9CBEB4;
+  border: 1px solid #3DB291;
   border-radius: 0.4rem;
-  color: #9CBEB4;
+  color: #3DB291;
 }
 
 .designate-designate .btn-designate:enabled:active {
   color: #fff;
-  border: 1px solid #9CBEB4;
+  border: 1px solid #3DB291;
   background-color: #fff;
 }
 
