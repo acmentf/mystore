@@ -7,59 +7,66 @@
 }
 
 .orderdetails .topbar .mod {
+	background: linear-gradient(#FF9000,#FE5200); 
 	height: 100%;
 	padding: 0.5rem 0.4rem;
 	position: relative;
 }
 
 .orderdetails .topbar .mod .title {
-	font-weight: 700;
 	font-size: 0.3rem;
+	padding:0 0 0.1rem 1rem;
 }
 
 .orderdetails .topbar .mod .intro {
 	font-size: 0.24rem;
+	padding-left: 1rem;
 }
 
-.orderdetails .topbar .pending {
-	background: url(../../images/order/img_distubute.png) no-repeat;
+.orderdetails .topbar .status1 {
+	background: url(../../images/order/order_pending.png) no-repeat center;
 	background-size: 100% 100%;
 }
 
-.orderdetails .topbar .cancled {
-	background: url(../../images/order/img_cancel.png) no-repeat;
+.orderdetails .topbar .status2 {
+	background: url(../../images/order/order_jidiao.png) no-repeat;
 	background-size: 100% 100%;
 }
 
-.orderdetails .topbar .completed {
-	background: url(../../images/order/img_done.png) no-repeat;
+.orderdetails .topbar .status3 {
+	background: url(../../images/order/order_assigned.png) no-repeat;
 	background-size: 100% 100%;
 }
+.orderdetails .topbar .status4 {
+	background: url(../../images/order/order_outputed.png) no-repeat;
+	background-size: 100% 100%;
+}
+.orderdetails .topbar .status5 {
+	background: url(../../images/order/order_shooting.png) no-repeat;
+	background-size: 100% 100%;
+}
+
 
 .orderdetails .topbar .ico {
-	width: 1rem;
-	height: 1rem;
+	width: 0.94rem;
+	height: 1.06rem;
 	display: inline-block;
-	float: right;
 	margin: 0.1rem 0 0 0.4rem;
 	position: absolute;
-	right: 0.2rem;
-	top: 0;
+	left: 0;
+	top: 0.2rem;
 }
-
+.orderdetails .topbar .arrow{
+	position: absolute;
+	right: 0.2rem;
+	top:40%
+}
 .orderdetails .item {
 	font-size: 0.28rem;
 }
 
-.orderdetails .item label {
-	color: #202020;
-	width: 2rem;
-	display: inline-block;
-	text-align: right;
-}
-
-.orderdetails .item span {
-	color: #888;
+.orderdetails .item {
+	color: #666;
 }
 
 .orderdetails .mui-card {
@@ -68,13 +75,14 @@
 
 .orderdetails .mui-card .mui-card-header {
 	padding-left: 0;
-	font-weight: 700;
+
 }
 
 .orderdetails .mui-card .mui-card-header .border-left {
-	border-left: 4px solid #000;
+	border-left: 4px solid #3C9E82;
 	text-indent: 0.2rem;
 	font-size: 0.36rem;
+	color: #333;
 }
 
 .orderdetails .operate {
@@ -149,6 +157,103 @@
 .orderdetails .mui-input-group .mui-input-row{
 	height: auto;
 	color: #888;
+}
+.orderdetails  .mui-segmented-control{
+	border: none;
+	background: #fff;
+	color: #999999;
+}
+.orderdetails .mui-segmented-control .mui-control-item{
+	border: none;
+	color: #999999;
+}
+.orderdetails  .mui-segmented-control .mui-control-item.mui-active{
+	background: #fff;
+	color: #3EB392;
+	border: none;
+	border-bottom: 1px solid #3EB392;
+	
+}
+.orderdetails .sepline{
+	height: 1px;
+	background: #F6F6F6;
+	margin: 0.2rem 0;
+}
+.orderdetails .orderaction .name{
+	float: right;
+	color: #888;
+}
+.orderdetails .detail{
+	margin: 0.1rem 0 ;
+}
+.orderdetails .view-detail{
+	border: 1px solid #3EB392;
+	color: #3EB392;
+	float: right;
+	vertical-align: middle;
+	display: inline-block;
+}
+.orderdetails  .remark{
+	border-top: 1px solid #FFE0DB;
+	background: #FFFCF7;
+	padding: 0.2rem;
+	color: #5C5C5C;
+}
+.orderdetails   .shootinfo .ico{
+	color: #fff;
+	position:absolute;
+	top: 0;
+	left: 0;
+}
+.orderdetails   .shootinfo .item{
+	background: #FFF8F8;
+	padding: 0.2rem;
+	border-radius: 5px;
+	position: relative;
+	
+}
+.orderdetails .print{
+	padding-left: 0.5rem;
+}
+.orderdetails .print span{
+	margin-right: 0.2rem;
+}
+.orderdetails .ico-dot{
+	background: url(../../images/order/dot.png) no-repeat;
+	background-size: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.08rem;
+	height: 0.08rem;
+}
+.orderdetails .mind .name{
+	color: #3EB392;
+}
+.orderdetails .loadmore{
+	text-align: center;
+	color: #C2CACC;
+}
+.orderdetails .more{
+	color: #C2CACC;
+}
+.orderdetails .buttons{
+	text-align: right;
+	background: #fff;	
+}
+.orderdetails .buttons .mui-button{
+	padding: 0.2rem 0.4rem;
+	border: none;
+	margin: 0;
+	float: right;
+	border-radius: 0;
+}
+.orderdetails .buttons .colorlight{
+	background:#D8E8E3 ;
+	color: #3EB392;
+}
+.orderdetails .buttons .colordark{
+	background: #3EB392;
+	color: #fff;
 }
 .popup-mod .ico {
 	background: #fff;

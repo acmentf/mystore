@@ -30,7 +30,8 @@ var vm = new Vue({
 		photographerExperienceFlage:'',
 		actionStatus:'', // 
 		outPutStatus:'',
-		shotOrderOutput: [] //订单拍摄输出
+		shotOrderOutput: [], //订单拍摄输出
+		orderdetailShow: false
 	}
 })
 

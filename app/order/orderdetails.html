@@ -61,7 +61,7 @@
 				</div>
 			</div>
 			<div>
-				<div id="item1" class="mui-control-content mui-active">
+				<div id="item1" class="mui-control-content">
 					<div id="scroll" class="mui-scroll-wrapper" style="overflow: visible;">
 						<div class="mui-scroll" style="background: #fff; padding: 0.2rem;">
 							<div class="item colorgray">
@@ -102,7 +102,10 @@
 					</div>
 
 					<div class="mui-card">
-						<div class="mui-card-header"><span class="border-left">团信息</span></div>
+						<div class="mui-card-header">
+							<span class="border-left">团信息</span>
+							<span class="more">></span>
+						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
 								<div class="item">
@@ -134,7 +137,10 @@
 					</div>
 
 					<div class="mui-card">
-						<div class="mui-card-header"><span class="border-left">行程信息</span></div>
+						<div class="mui-card-header">
+							<span class="border-left">行程信息</span>
+							<span class="more">></span>
+						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
 								<div class="item">
@@ -142,43 +148,44 @@
 									<span v-text="orderTrackInfo.personCount"></span>
 								</div>
 								<div class="item">
-								<label>行程天数：</label>
-								<span v-text="orderTrackInfo.groupDays"></span>
+									<label>行程天数：</label>
+									<span v-text="orderTrackInfo.groupDays"></span>
 								</div>
 								<div class="item">
-								<label>取片时间：</label>
-								<span  v-text="orderTrackInfo.fetchPhotoTime"></span>
-							</div>
-							<div class="item">
-								<label>取片地点：</label>
-								<span  v-text="orderTrackInfo.fetchPhotoScene"></span>
-							</div>
-							<div class="item">
-								<label>攝影師预留座位：</label>
-								<span  v-text="orderTrackInfo.preReservedSeats"></span>
-							</div>
-							<div class="item">
-								<label>车牌号码：</label>
-								<span v-text="orderTrackInfo.busCardNo"></span>
-							</div>
-							<div class="sepline"></div>
-							<div class="detail">
-								行程详情
-								<button type="button" class="mui-btn view-detail">查看详情</button>
-							</div>
-							
+									<label>取片时间：</label>
+									<span v-text="orderTrackInfo.fetchPhotoTime"></span>
+								</div>
+								<div class="item">
+									<label>取片地点：</label>
+									<span v-text="orderTrackInfo.fetchPhotoScene"></span>
+								</div>
+								<div class="item">
+									<label>攝影師预留座位：</label>
+									<span v-text="orderTrackInfo.preReservedSeats"></span>
+								</div>
+								<div class="item">
+									<label>车牌号码：</label>
+									<span v-text="orderTrackInfo.busCardNo"></span>
+								</div>
+								<div class="sepline"></div>
+								<div class="detail">
+									行程详情
+									<button type="button" class="mui-btn view-detail">查看详情</button>
+								</div>
 
 							</div>
 						</div>
 						<div class="remark">
-								<div >备注</div>
-								<div>举起你的双手</div>
-							</div>
+							<div>备注</div>
+							<div>举起你的双手</div>
+						</div>
 					</div>
-					
-					
+
 					<div class="mui-card">
-						<div class="mui-card-header"><span class="border-left">拍摄信息</span></div>
+						<div class="mui-card-header">
+							<span class="border-left">拍摄信息</span>
+							<span class="more">></span>
+						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner shootinfo">
 								<div class="item">
@@ -187,36 +194,126 @@
 									<div>110办公室</div>
 									<div>摄影师：<span></span></div>
 								</div>
-							
 
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
-				<div id="item3" class="mui-control-content">
-					<div class="mui-card" style="padding: 0.2rem;">
-						<div class="mui-card-header"><span class="border-left">输出信息</span></div>
+				<div id="item3" class="mui-control-content  mui-active">
+					<div class="mui-card">
+						<div class="mui-card-header" style="padding: 0.2rem;">
+							<span class="border-left">输出信息</span>
+							<span class="more">></span>
+						</div>
 						<div class="mui-card-content">
-							<div class="item">
-								<label>拍摄张数：</label>
-								<span></span>
-							</div>
-							<div class="item">
-								<label>选片张数：</label>
-								<span></span>
-							</div>
-							<div class="item">
-								<label>打印张数：</label>
-								<div class="print">
-									<div><span style="margin-right: 0.1rem;">10吋</span><span>10张</span></div>
+							<div>
+								<div style="padding: 0.2rem;">
+									<div class="item">
+										<label>拍摄张数：</label>
+										<span></span>
+									</div>
+									<div class="item">
+										<label>选片张数：</label>
+										<span></span>
+									</div>
+									<div class="item">
+										<label>打印张数：</label>
+										<div class="print">
+											<div><span class="ico-dot"></span><span>10吋</span><span>10张</span></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="remark">
+									<div>备注</div>
+									<div>举起你的双手</div>
 								</div>
 							</div>
+							<!--未输出-->
+							<div style="padding: 0.2rem;">
+								<div>原因</div>
+								<div>没毛病</div>
+							</div>
+
 						</div>
+
+					</div>
+					<div class="mui-card" style="margin-bottom: 0;">
+						<div class="mui-card-header" style="padding: 0.2rem;">
+							<span class="border-left">销售订单</span>
+							<span class="more">></span>
+						</div>
+
+					</div>
+					<div class="mui-card">
+						<div class="mui-card-header" style="padding: 0.2rem;">
+							<span class="border-left">销售信息</span>
+							<span class="more">></span>
+						</div>
+						<div class="mui-card-content" style="padding: 0.2rem;">
+							<div class="item">
+								<label>赠送张数：</label>
+								<div class="print">
+									<div><span class="ico-dot"></span><span>10吋</span><span>10张</span></div>
+								</div>
+							</div>
+							<div class="item">
+								<label>销售张数：</label>
+								<div class="print">
+									<div><span class="ico-dot"></span><span>10吋</span><span>10张</span></div>
+								</div>
+							</div>
+							<div class="item">
+								<label>购买人数：</label>
+								<span>10</span>
+							</div>
+							<div class="item">
+								<label>销售金额：</label>
+								<span>10</span>元
+							</div>
+						</div>
+
+					</div>
+					<div class="mui-card">
+						<div class="mui-card-header" style="padding: 0.2rem;">
+							<span class="border-left">摄影心得</span>
+							<span class="more">></span>
+						</div>
+						<div class="mui-card-content mind" style="padding: 0.2rem;">
+							<div class="item">
+								<div class="name">张三李四<span class="ico-pic"></span></div>
+								<div>
+									嗯，这是一个神奇的网站
+								</div>
+							</div>
+							<div class="sepline"></div>
+							<div class="item">
+								<div>张三李四<span class="ico-pic"></span></div>
+								<div>
+									嗯，这是一个神奇的网站
+								</div>
+							</div>
+							<div class="sepline"></div>
+							<div class="loadmore">
+								查看更多心得
+							</div>
+						</div>
+
 					</div>
 				</div>
-			</div>
 
+			</div>
+			<!--执行主管  计调 指派-->
+			<!--执行人  计调 -->
+			<!--摄影主管  修改拍摄信息  分配 -->
+			<!--填写输出信息   -->
+			<!--销售  生成销售  -->
+			<!--摄影师  录入心得  -->
+			<div class="buttons">
+				<button class="mui-button colordark">指派</button>
+				<button class="mui-button colorlight">计调</button>
+			</div>
 			<div class="content">
 				<!--<div class="mui-card">
 					<div class="mui-card-header">
