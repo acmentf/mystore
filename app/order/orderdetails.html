@@ -26,38 +26,38 @@
 					<span class="ico status1"></span>
 					<div class="title">待处理</div>
 					<div class="intro">新订单已分配给<span v-text="timeConsume"></span></div>
-					<span class="arrow">></span>
+					<span class="mui-icon mui-icon-arrowright arrow"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 1' class="mod">
 					<span class="ico status2"></span>
 					<div class="title">已完成计调</div>
 					<div class="intro"><span v-text="timeConsume"></span>修改了计调信息</div>
-					<span class="arrow">></span>
+					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 2' class="mod">
 					<span class="ico status3"></span>
 					<div class="title">已分配摄影师</div>
 					<div class="intro"><span v-text="timeConsume"></span>修改了计调信息</div>
-					<span class="arrow">></span>
+					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 3' class="mod">
 					<span class="ico status4"></span>
 					<div class="title">正在拍摄中</div>
 					<div class="intro"><span v-text="timeConsume"></span>修改了计调信息</div>
-					<span class="arrow">></span>
+					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 4' class="mod">
 					<span class="ico status5"></span>
 					<div class="title">已完成输出</div>
 					<div class="intro"><span v-text="timeConsume"></span>修改了计调信息</div>
-					<span class="arrow">></span>
+					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 			</div>
 
 			<div style="margin-bottom: 0.2rem;">
 				<div id="segmentedControl" class="mui-segmented-control">
 					<a class="mui-control-item mui-active" href="#item1">订单信息</a>
-					<a class="mui-control-item" href="#item2">计调信息</a>
+					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 2}" href="#item2">计调信息</a>
 					<a class="mui-control-item" href="#item3">拍摄信息</a>
 				</div>
 			</div>

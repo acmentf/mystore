@@ -31,11 +31,13 @@ var vm = new Vue({
 		actionStatus:'', // 
 		outPutStatus:'',
 		shotOrderOutput: [], //订单拍摄输出
-		orderdetailShow: false
+		orderdetailShow: false,
+		currentTabIndex: '',
 	}
 })
 
 lf.ready(function() {
+	vm.currentTabIndex = lf.window.currentWebview().orderNo;
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key

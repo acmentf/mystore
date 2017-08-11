@@ -69,7 +69,8 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 	console.log('gotoorderdetails')
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
-		orderNo: id
+		orderNo: id,
+		index: 2
 	})
 })
 mui('.order-ul').on('tap', '.qdbtn', function() {
