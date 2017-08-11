@@ -1,0 +1,58 @@
+.mui-control-content {
+    margin-top: 10px;
+}
+
+.mui-bar {
+    background-color: #fff;
+}
+
+.mui-title {
+    color: #000000
+}
+
+.save {
+    color: #3DB391;
+    position: absolute;
+    right: 24px;
+    line-height: 44px;
+}
+
+.show-on-right {
+    position: absolute;
+    right: 15px;
+    a {
+        text-decoration: none;
+        margin-right: 31px;
+        color: #A4A4A4;
+    }
+    #showUserPicker {
+        //       margin-right: 15px;
+    }
+    .mui-media-object {
+        margin-left: 10px;
+        border: none;
+        text-align: right;
+        height: 14px;
+        font-size: 14px;
+        color: #A4A4A4;
+        max-width: 250px;
+    }
+}
+
+.remark {
+    height: 3rem!important;
+    margin-top: 10px;
+    .remarkTitle {
+        line-height: 1.1;
+        padding: 11px 15px;
+        margin-bottom: 0;
+    }
+    .remark-text {
+        width: 95% !important;
+        margin: 0 auto;
+        display: block;
+        background: #F6F6F6;
+        font-size: 15px;
+        color: #8B8B8B;
+    }
+}
