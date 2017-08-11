@@ -33,9 +33,9 @@
     #showUserPicker {
         //       margin-right: 15px;
     }
-    .mui-media-object {
+    .forinput {
         margin-left: 10px;
-        border: none;
+        border: 1px solid #fff;
         text-align: right;
         height: 14px;
         font-size: 14px;
@@ -78,7 +78,7 @@
     }
     .superscript-num{
         color:#fff;
-        position: fixed;
+        position: absolute;
         left: 9px;
         top: 3px;
     }
