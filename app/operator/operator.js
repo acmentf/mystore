@@ -1,7 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		index: 2,
+		status:1,
 		orderHeader: ['团信息', '行程信息', '拍摄信息'],
 		orderList: [
 			[],
@@ -160,8 +160,13 @@ mui('#app').on('tap', '.superscript-xx', function() {
 	var index = this.getAttribute('data-index');
 	vm.shootInfos.splice(index,1)
 }, false);
+//选择摄影师
+mui('#app').on('tap', '.sys', function() {
+	lf.window.openWindow('../order/ordersearch.html', 'ordersearch.html')
+}, false);
 
 lf.ready(function() {
+	renderTrackInfo();
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 		vm.index = event.detail.slideNumber;
 
@@ -184,6 +189,28 @@ lf.ready(function() {
 			break;
 	}
 
+})
+
+//读取页面信息
+function renderTrackInfo(){
+//	var orderNo = lf.window.currentWebview().orderNo;
+	var params = {
+		orderNo: 10100000002357
+	};
+	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
+		if(data.code == 200) {
+			console.log('data==',data)
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
+}
+
+lf.event.listener('orderdetails',function(e){
+	renderTrackInfo();
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 //document.getElementById('searchDiv').addEventListener('tap',function(){
 //	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
