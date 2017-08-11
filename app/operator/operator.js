@@ -3,11 +3,6 @@ var vm = new Vue({
 	data: {
 		status:1,
 		orderHeader: ['团信息', '行程信息', '拍摄信息'],
-		orderList: [
-			[],
-			[],
-			[]
-		],
 		shootInfos:[{info:[]}], //存放所有拍摄信息
 		pullObjects: [],
 		isRead: false, //是否可以编辑
