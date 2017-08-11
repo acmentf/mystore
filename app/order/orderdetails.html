@@ -16,6 +16,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">订单详情</h1>
+			<a id="menu" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 		</header>
 
 		<div id="app" class="mui-content">
@@ -127,8 +128,7 @@
 								<div class="item">
 									<label>导游：</label>
 									<span v-text="orderInfo.tourGuide"></span>
-
-									<a style="float:right; color: #FF8080;" v-text="orderInfo.tourGuidePhone"></a>
+									<a style="float:right; color: #FF8080; margin-left: 0.1rem;" v-text="orderInfo.tourGuidePhone"></a>
 									<a style="float:right;" class="tel-ico"></a>
 								</div>
 
@@ -189,10 +189,12 @@
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner shootinfo">
 								<div class="item">
-									<span class="ico">1</span>
-									<div><span style="margin-right: 0.1rem;">2017-08-15</span><span>下午</span><span style="margin-left: 0.1rem;">11：00-12：00</span></div>
-									<div>110办公室</div>
-									<div>摄影师：<span></span></div>
+									<span class="ico-index">1</span>
+									<div style="padding-left: 0.4rem;">
+										<div><span style="margin-right: 0.1rem;">2017-08-15</span><span>下午</span><span style="margin-left: 0.1rem;">11：00-12：00</span></div>
+										<div>110办公室</div>
+										<div>摄影师：<span></span></div>
+									</div>
 								</div>
 
 							</div>
@@ -313,6 +315,28 @@
 			<div class="buttons">
 				<button class="mui-button colordark">指派</button>
 				<button class="mui-button colorlight">计调</button>
+			</div>
+
+			<div v-show="maskShow" class="mask"></div>
+			<div v-show='orderdetailShow' class="dialog-detail">
+				<div class="hd">
+					行程详情
+				</div>
+				<div class="cnt">
+					这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情 这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情 这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情
+				</div>
+				<div class="close">
+					确定
+				</div>
+			</div>
+			<div id="topPopover" class="mui-popover" style="width: 1rem;">
+				<div class="mui-popover-arrow"></div>
+				<div class="">
+
+					<button style="width: 1rem;" class="mui-button cancle">取消</button>
+
+				</div>
+
 			</div>
 			<div class="content">
 				<!--<div class="mui-card">
@@ -556,7 +580,7 @@
 			</div>
 		</div>
 		-->
-				<div v-show="maskShow" class="mask"></div>
+				<!--<div v-show="maskShow" class="mask"></div>-->
 				<div v-show="popupShow" class="popup-mod">
 					<ul>
 						<li v-if='assignRole'>

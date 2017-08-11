@@ -305,7 +305,54 @@
 	width: 4.4rem;
 	padding: 0.4rem 0;
 }
+.orderdetails .dialog-detail{
+	background: #fff;
+	border-radius: 0.2rem;
+	position: fixed;
+	z-index: 999;
+	top: 24%;
+	left: 5%;
+	width: 90%;
+	
+	border:none;
+	
+}
+.orderdetails .dialog-detail .hd{
+	padding: 0.2rem 0 0 0.2rem;
 
+}
+.orderdetails .dialog-detail .cnt{
+	padding:0.2rem;
+	max-height: 4rem;
+	overflow: auto;
+}
+.orderdetails .dialog-detail .close{
+	width: 100%;
+	background: #3DB391;
+	color: #fff;
+	text-align: center;
+	padding:0.1rem 0;
+	border-radius: 0 0 .2rem .2rem;
+}
+.orderdetails .tel-ico{
+	background: url(../../images/order/call_btn.png) no-repeat;
+	background-size: 100%;
+	width: 0.28rem;
+	height: 0.28rem;
+	display: inline-block;
+}
+.orderdetails .shootinfo .ico-index{
+	background: url(../../images/order/corner.png) no-repeat;
+	background-size: 100%;
+	width: 0.54rem;
+	height: 0.54rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	color: #fff;
+	padding-left: 0.1rem;
+}
 .popup-mod .mui-btn {
 	padding: 2px 4px;
 	font-size: 12px;

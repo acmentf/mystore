@@ -65,6 +65,7 @@ lf.ready(function() {
 		event.stopPropagation();
 		vm.maskShow = false;
 		vm.popupShow = false;
+		vm.orderdetailShow = false;
 	})
 	mui('.popup-mod').on('tap', '.assign', function() { //点击指派
 		var orderid = this.getAttribute('data-orderid');
@@ -194,6 +195,37 @@ lf.ready(function() {
 		})
 		vm.maskShow = false;
 		vm.popupShow = false;
+	})
+	
+	mui('.detail').on('tap', '.view-detail', function() { //查看详情，打开弹窗
+		vm.maskShow = true;
+		vm.orderdetailShow = true;
+	})
+	mui('.dialog-detail').on('tap', '.close', function() { //查看详情弹窗确定按钮，关闭弹窗
+		vm.maskShow = false;
+		vm.orderdetailShow = false;
+	})
+	mui('#topPopover').on('tap', '.cancle', function() { //取消订单
+		lf.nativeUI.confirm("操作提示", "是否确认取消订单?",  ["确认取消","不取消"] ,function(e){
+		 		if(e.index==0){
+		 			var params = {
+						orderId: vm.currentOrderId,
+						orderState:3,
+						orderNo:vm.currentOrderNo
+					};
+		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
+						if(data.code == 200) {
+							lf.nativeUI.toast("订单取消成功！");
+							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+							lf.window.closeCurrentWebview();
+						} else {
+							lf.nativeUI.toast(data.msg);
+						}
+					}, function(erro) {
+						lf.nativeUI.toast(erro.msg);
+					});
+		 		}
+			});		
 	})
 })
 
