@@ -18,17 +18,33 @@ var vm = new Vue({
 		assignRole: false,
 		operatorRole: false,
 		currentRole: '',
+		assignOrder:false, //计调、指派 
+		allotPhotoOrder:false, // 分配
+		outOrder:false, // 填写输出信息
+		saleOutOrder:false, // 销售输出
+		genSale:false, // 生成销售
+		summary:false, // 录入心得
 	}
 })
 lf.ready(function() {
+	//assignOrder 计调、指派
+	//allotPhotoOrder 分配
+	//outOrder 填写输出信息
+	//saleOutOrder 销售输出
+	//genSale 生成销售
+	//summary 录入心得
+	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
+	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
+	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
+	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
+	vm.summary=window.Role.hasAuth('summary'), // 录入心得
 	vm.currentRole = window.Role.userrole;
-
+	
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
-
-	console.log(lf.storage.get("LFACCOUNT"))
 
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
@@ -130,35 +146,39 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 	});
 })
 
-mui('.order-ul').on('tap', '.assign', function() { //点击指派
-	var orderid = this.getAttribute('data-id');
-	lf.window.openWindow('common/chooseuser.html', '../common/chooseuser.html', {}, {
-		orderNo: orderid,
-		type: 1
-	})
-})
-mui('.order-ul').on('tap', '.allot', function() { //点击分配
-	var orderid = this.getAttribute('data-id');
-	lf.window.openWindow('common/plancamera.html', '../common/plancamera.html', {}, {
-		orderNo: orderid
-	})
-})
-mui('.order-ul').on('tap', '.operator', function() { //点击计调
+
+mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
-	lf.window.openWindow('order/trackinfo.html', '../order/trackinfo.html', {}, {
+	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
 		orderNo: orderid
+	})
+})
+mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
+		orderNo: orderid
+	})
+})
+mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderid
 	})
 })
 
-mui('body').on('tap', '#logout', function() {
-	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
-		if(e.index == 0) {
-			window.Role.logout();
-			plus.runtime.restart();
-		}
-	});
+mui('.order-ul').on('tap', '.summary', function() { //点击心得
+	var orderid = this.getAttribute('data-no');
+	var tourId = this.getAttribute('data-tourId');
+	console.log('id:' + orderid)
+	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
+            orderId: orderid,
+            tourId: tourId
+	})
 })
+
 
 function dodata(type, index, data) {
 	if(type == 'up') {
@@ -215,6 +235,10 @@ function initPull() {
 							if(res.code == 200) {
 								self.refresh(true);
 								dodata('down', index, res.data.result)
+								res.data.result.forEach(function(v, i){
+									v.startTime = lf.util.timeStampToDate2(v.startTime)
+								})
+				
 								vm.orderHeader[0].number = res.data.result[0].doCount;//处理中
 								vm.orderHeader[1].number = res.data.result[0].completeCount;//已完成
 								vm.orderHeader[2].number = res.data.result[0].cancelCount;//已取消
@@ -243,6 +267,9 @@ function initPull() {
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								dodata('up', index, res.data.result)
+								res.data.result.forEach(function(v, i){
+									v.startTime = lf.util.timeStampToDate2(v.startTime)
+								})
 								vm.orderHeader[0].number = res.data.result[0].doCount;//处理中
 								vm.orderHeader[1].number = res.data.result[0].completeCount;//已完成
 								vm.orderHeader[2].number = res.data.result[0].cancelCount;//已取消

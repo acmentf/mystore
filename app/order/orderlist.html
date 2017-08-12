@@ -119,145 +119,132 @@
 	</head>
 
 	<body>
-		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单管理</h1>
+		</header>
+		<div id="app" class="mui-content orderlist-content">
+			<!--<div id="searchDiv" class="mui-input-row search">
+				<input class="searchspan" type="text" placeholder="订单编号/导游姓名/团号" />
+				<span id="searchBtn" class="searchicon">搜索</span>
+			</div>-->
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader">
+						<span v-text="data.name"></span>
+						<span v-text='data.number'></span>
+					</a>
 
-		<!--侧滑菜单部分-->
-        <aside id="offCanvasSide" class="mui-off-canvas-left">
-			<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<div class="offCanvasSide-header">
-						<img src="../../css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
-						<p class="offCanvasSide-header-name">欧阳筱筱</p>
-					</div>
-
-					<div class="offCanvasSide-role-wrap">
-						<form>
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell mui-radio mui-left">
-									<input name="role" type="radio" checked="checked">长沙研发部 执行主管
-								</li>
-								<li class="mui-table-view-cell mui-radio mui-left">
-									<input name="role" type="radio">长沙研发部 执行主管
-								</li>
-							</ul>
-						</form>
-					</div>
-
-					<div class="offCanvasSide-logout">
-						<button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
-					</div>
 				</div>
-			</div>
-		</aside>
-
-		<div class="mui-inner-wrap" style="background:#efeff4">
-
-			<header class="mui-bar mui-bar-nav">
-				<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-				<h1 class="mui-title">订单管理</h1>
-			</header>
-			<div id="app" class="mui-content orderlist-content">
-				<!--<div id="searchDiv" class="mui-input-row search">
-					<input class="searchspan" type="text" placeholder="订单编号/导游姓名/团号" />
-					<span id="searchBtn" class="searchicon">搜索</span>
-				</div>-->
-				<div id="slider" class="mui-slider mui-fullscreen">
-					<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-						<a class="mui-control-item" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader">
-							<span v-text="data.name"></span>
-							<span v-text='data.number'></span>
-						</a>
-
-					</div>
-					<div class="mui-slider-group" >
-						<div :id="'item'+index+'mobile'" class="mui-slider-item mui-control-content" :class="{'mui-active':index == 0}" v-for="(data,index) in orderList">
-							<div id="scroll1" class="mui-scroll-wrapper">
-								<div class="mui-scroll">
-									<ul class="order-ul">
-										<li class="order-li" v-for="item in data">
-											<div class="mui-table title">
-												<div class="mui-clearfix" style="margin-bottom: 0.2rem;">
-													<span class="colorgray">
-													订单号:<i v-text="item.orderNo"></i>
-													</span>
-													<span class="dqr colororange" v-if="item.actionStatus ==0">待处理</span>
-													<span class="dqr colorgreen" v-if="item.actionStatus ==1">已完成计调</span>
-													<span class="dqr colorblue" v-if="item.actionStatus ==2">已分配摄影师</span>
-													<span class="dqr colorpink" v-if="item.actionStatus ==3">正在拍摄中</span>
-													<span class="dqr coloryellow" v-if="item.actionStatus ==4">已完成</span>
-												</div>
-												<div class="item">
-													{{item.productName}}
-												</div>
-
+				<div class="mui-slider-group">
+					<div :id="'item'+index+'mobile'" class="mui-slider-item mui-control-content" :class="{'mui-active':index == 0}" v-for="(data,index) in orderList">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="order-ul">
+									<li class="order-li" v-for="item in data">
+										<div class="mui-table title">
+											<div class="mui-clearfix" style="margin-bottom: 0.2rem;">
+												<span class="colorgray">
+												订单号:<i v-text="item.orderNo"></i>
+												</span>
+												<span class="dqr colororange" v-if="item.actionStatus ==0">待处理</span>
+												<span class="dqr colorgreen" v-if="item.actionStatus ==1">已完成计调</span>
+												<span class="dqr colorblue" v-if="item.actionStatus ==2">已分配摄影师</span>
+												<span class="dqr colorpink" v-if="item.actionStatus ==3">正在拍摄中</span>
+												<span class="dqr coloryellow" v-if="item.actionStatus ==4">已完成</span>
+											</div>
+											<div class="item">
+												{{item.productName}}
 											</div>
 
-											<div class="nr" >
-												<div class="imgbody">
-													<div class="tourinfo" :data-id="item.id">
-														<div class="item">
-															<span class="ico ico-starttime"></span>
-															<span>出团日期: {{item.startTime}}</span>
-															<span>共{{item.groupDays}}天</span>
-														</div>
-														<div class="item">
-															<span class="ico ico-linename"></span> 线路名称: {{item.lineName}}
-														</div>
-														<div class="item">
-															<span class="ico ico-personcount"></span> 团队人数: {{item.personCount}}
-														</div>
+										</div>
+
+										<div class="nr">
+											<div class="imgbody">
+												<div class="tourinfo" :data-id="item.id">
+													<div class="item">
+														<span class="ico ico-starttime"></span>
+														<span>出团日期: {{item.startTime}}</span>
+														<span>共{{item.groupDays}}天</span>
 													</div>
-													<div class="item guideinfo">
-														<span class="ico ico-tourguide"></span> 
-														<a href='tel:// + item.tourGuidePhone' style=" color: #FF8458; margin-left: 0.1rem;" >导游: {{item.tourGuide}}({{item.tourGuidePhone}})</a>
-								
+													<div class="item">
+														<span class="ico ico-linename"></span> 线路名称: {{item.lineName}}
+													</div>
+													<div class="item">
+														<span class="ico ico-personcount"></span> 团队人数: {{item.personCount}}
 													</div>
 												</div>
+												<div class="item guideinfo">
+													<span class="ico ico-tourguide"></span>
+													<a href='tel:// + item.tourGuidePhone' style=" color: #FF8458; margin-left: 0.1rem;">导游: {{item.tourGuide}}({{item.tourGuidePhone}})</a>
+
+												</div>
 											</div>
-											<div class="button">
-						
-													<button type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															指派
+										</div>
+										<div class="button">
+											<!--
+											assignOrder 计调、指派
+											allotPhotoOrder 分配
+											outOrder 填写输出信息
+											saleOutOrder 销售输出
+											genSale 生成销售
+											summary 录入心得
+												-->
+											<button v-if="assignOrder&&item.actionStatus!=4" type="button" class="mui-btn assignOrder" :data-id="item.id" :data-no="item.orderNo">
+														指派
+											</button>
+											<button v-if="assignOrder&&(item.actionStatus!=3||item.actionStatus!=4)" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+														计调
+											</button>
+											<button v-if="allotPhotoOrder&&(item.actionStatus!=0||item.actionStatus!=4)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
+														分配
+											</button>
+											<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
+														录入心得
+											</button>
+											<button v-if="outOrder&&(item.actionStatus!=0||item.actionStatus!=1)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
+														填写输出信息
+											</button>
+											<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo">
+														生成销售
+											</button>
+											<!--<button v-if="item.actionStatus ==0" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														计调
+												</button>
+												<button v-if="item.actionStatus ==1" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														分配
+												</button>
+												<button v-if="item.actionStatus ==2" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														填写输出信息
+												</button>
+												<button v-if="item.actionStatus ==3" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														填写销售信息
+												</button>
+												<button v-if="item.actionStatus ==4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+														录入心得
+												</button>-->
+											<!--<div class="btns">
+													<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
+														计调
 													</button>
-													<!--<button v-if="item.actionStatus ==0" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															计调
+													<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
+														取消
 													</button>
-													<button v-if="item.actionStatus ==1" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															分配
+													<button v-if="assignRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
+														指派
 													</button>
-													<button v-if="item.actionStatus ==2" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															填写输出信息
+													<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==0" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+														分配
 													</button>
-													<button v-if="item.actionStatus ==3" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															填写销售信息
-													</button>
-													<button v-if="item.actionStatus ==4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-															录入心得
-													</button>-->
-													<!--<div class="btns">
-														<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
-															计调
-														</button>
-														<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
-															取消
-														</button>
-														<button v-if="assignRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
-															指派
-														</button>
-														<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==0" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
-															分配
-														</button>
-													</div>
-												</div>-->
-											</div>
-										</li>
-									</ul>
-								</div>
+												</div>
+											</div>-->
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>

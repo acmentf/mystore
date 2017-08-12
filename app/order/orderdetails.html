@@ -26,7 +26,7 @@
 					<span class="ico status1"></span>
 					<div class="title">待处理</div>
 					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright arrow"></span>
+					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 1' class="mod">
 					<span class="ico status2"></span>
@@ -268,8 +268,11 @@
 						<div class="mui-card-content" style="padding: 0.2rem;">
 							<div class="item">
 								<label>赠送张数：</label>
-								<div class="print">
-									<div><span class="ico-dot"></span><span></span><span></span></div>
+								<div class="print" v-for="item in orderResult.giveOrderXms">
+									<div><span class="ico-dot"></span>
+										<span v-text="item.picSizeName"></span>
+										<span v-text="item.picNum"></span>张
+									</div>
 								</div>
 							</div>
 							<div class="item">
@@ -304,10 +307,8 @@
 								
 								</div>
 								<div class="sepline"></div>
-							</div>
-							
-						
-							<div class="loadmore">
+							</div>					
+							<div class="loadmore" v-if="photographerInfos.length>1">
 								查看更多心得
 							</div>
 						</div>
