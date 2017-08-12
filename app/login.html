@@ -50,7 +50,7 @@
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
 					plus.navigator.closeSplashscreen();
-					lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
+					lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 				}else{
 					var hisAccount = lf.storage.get("LFACCOUNT");
 					if(hisAccount){
@@ -99,7 +99,7 @@
 							positions: res.data.userPositionList
 						}
 						window.Role.save(obj)
-						lf.window.openWindow('index','index.html',{},{},lf.window.currentWebview())
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 					}else{
 						lf.nativeUI.toast(res.msg)
 					}
