@@ -179,7 +179,29 @@ mui('.order-ul').on('tap', '.summary', function() { //点击心得
 	})
 })
 
+mui('.order-ul').on('tap', '.outOrder', function() { //点击填写输出信息
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
+            orderId: orderid,
+	})
+})
 
+mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
+            orderId: orderid,
+	})
+})
+
+mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('order-pay/order-pay.html','../order-pay/order-pay.html',{},{
+            orderId: orderid,
+	})
+})
 function dodata(type, index, data) {
 	if(type == 'up') {
 		Vue.set(vm.orderList, index, vm.orderList[index].concat(data))

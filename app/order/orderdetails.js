@@ -36,11 +36,29 @@ var vm = new Vue({
 		shotOrderOutput: [],
 		assignedPhotographers:[],
 		temp:[],
-		assignedPhotographersString:''
+		assignedPhotographersString:'',
+		assignOrder:false, //计调、指派 
+		allotPhotoOrder:false, // 分配
+		outOrder:false, // 填写输出信息
+		saleOutOrder:false, // 销售输出
+		genSale:false, // 生成销售
+		summary:false, // 录入心得
 	}
 })
 
 lf.ready(function() {
+	//assignOrder 计调、指派
+	//allotPhotoOrder 分配
+	//outOrder 填写输出信息
+	//saleOutOrder 销售输出
+	//genSale 生成销售
+	//summary 录入心得
+	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
+	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
+	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
+	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
+	vm.summary=window.Role.hasAuth('summary'), // 录入心得
 	vm.currentTabIndex = lf.window.currentWebview().orderNo;
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
@@ -254,6 +272,63 @@ lf.ready(function() {
 		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
 			orderId: orderid
 		})
+	})
+})
+
+
+mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
+		orderNo: orderid
+	})
+})
+mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
+		orderNo: orderid
+	})
+})
+mui('.body').on('tap', '.jidiao', function() { //点击计调
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderid
+	})
+})
+
+mui('.buttons').on('tap', '.summary', function() { //点击心得
+	var orderid = this.getAttribute('data-no');
+	var tourId = this.getAttribute('data-tourId');
+	console.log('id:' + orderid)
+	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
+            orderId: orderid,
+            tourId: tourId
+	})
+})
+
+mui('.buttons').on('tap', '.outOrder', function() { //点击填写输出信息
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
+            orderId: orderid,
+	})
+})
+
+mui('.buttons').on('tap', '.saleOutOrder', function() { //点击销售输出
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
+            orderId: orderid,
+	})
+})
+
+mui('.buttons').on('tap', '.genSale', function() { //点击生成销售
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('order-pay/order-pay.html','../order-pay/order-pay.html',{},{
+            orderId: orderid,
 	})
 })
 
