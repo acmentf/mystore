@@ -14,7 +14,7 @@ var vm = new Vue({
 		orderInfo: {},
 		orderTrackInfo: {},
 		orderResult: {},
-		photographerInfos: [{}],
+		photographerInfos: [],
 		currentTourId:'',
 		photographerId:'',
 		currentOrderNo:'',
@@ -33,6 +33,10 @@ var vm = new Vue({
 		shotOrderOutput: [], //订单拍摄输出
 		orderdetailShow: false,
 		currentTabIndex: '',
+		shotOrderOutput: [],
+		assignedPhotographers:[],
+		temp:[],
+		assignedPhotographersString:''
 	}
 })
 
@@ -262,6 +266,8 @@ function renderOrderDetails(){
 			vm.orderInfo = data.data.orderInfo;	
 			vm.orderTrackInfo = data.data.orderTrackInfo;	
 			vm.photographerInfos = data.data.photographerInfos;
+			console.log("photographerInfos"+JSON.stringify(vm.photographerInfos))
+			vm.shotOrderOutput = data.data.shotOrderOutput;
 			var time = new Date() - new Date(vm.orderInfo.createTime);
 			var total = time/1000; 
 			var day = parseInt(total / (24*60*60));//计算整数天数
@@ -278,10 +284,24 @@ function renderOrderDetails(){
             }
             else{
             	vm.orderTrackInfo.fetchPhotoTime = ''
-            }	
-            vm.orderTrackInfo.lineSight.forEach(function(v, i) {
-					v.shootTime = lf.util.timeStampToDate2(v.shootTime)
+            }
+            vm.shotOrderOutput.forEach(function(v, i){
+            	vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+            	vm.temp.push(v.photographerNames)
+            })
+            console.log("temp"+JSON.stringify(vm.temp))
+            for(var i=0;i<vm.temp.length;i++){
+            	if(vm.assignedPhotographers.indexOf(vm.temp[i])==-1){
+            		vm.assignedPhotographers.push(vm.temp[i])
+            	}
+            }
+            vm.assignedPhotographersString = vm.assignedPhotographers.toString()
+            console.log("assignedPhotographers"+vm.assignedPhotographersString)
+            vm.orderTrackInfo.lineSight.forEach(function(v, i) { // 拍摄信息数据
+            	v.index = i+1
+				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
 			})
+            
 			if(data.data.orderResult){
 				vm.orderResult = data.data.orderResult;
 				if(vm.orderResult.buyers == 0){

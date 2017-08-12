@@ -134,7 +134,7 @@
 .orderdetails .routeinfo {
 	position: relative;
 	overflow: auto;
-	padding-left: 2.05rem !important;
+	/*padding-left: 2.05rem !important;*/
 	color: #888;
 }
 
@@ -254,6 +254,9 @@
 .orderdetails .buttons .colordark{
 	background: #3EB392;
 	color: #fff;
+}
+.orderdetails .colorgray{
+	color: #B1B1B1;
 }
 .popup-mod .ico {
 	background: #fff;
