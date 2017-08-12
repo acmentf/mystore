@@ -1,6 +1,10 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:''
+        passPack:'',
+        orderId:'',
+        lineSightDTOS:'',
+        photographerIdStr:'',
+        photographer:''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -8,7 +12,7 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
-        //init()
+        init()
     }
     mui.plusReady(function(){
         var currentWebview = lf.window.currentWebview();
@@ -23,10 +27,10 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                    {
+                   /* {
                         group:'A',
                         text:'A'
-                    },
+                    },*/
                     {
                         value:'AKU',
                         tags:'AKeSu',
@@ -62,7 +66,21 @@ lf.ready(function () {
         },
         methods: {
             init:function (indexedList) {
-                this.indexedList = indexedList || []
+                var list = (indexedList || []).map(function (item) {
+                    return {
+                        value:item.id,
+                        tags:item.pyname,
+                        text:item.name,
+                        phone:item.phone,
+                        area:'',
+                        operator:'',
+                        state:true,
+                        selected:false
+                    }
+                }).sort(function (a, b) {
+                    return a.localeCompare(b)
+                })
+                this.indexedList = list
             },
             select:function (index) {
                 this.indexedList[index].selected = true
@@ -77,9 +95,10 @@ lf.ready(function () {
     });
     function init() {
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('', {}, function (res) {
+        lf.net.getJSON('/order/getAllPhotographer', {}, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
+                console.log(JSON.stringify(res,null,2))
                 vmTableView.init(res.data.indexedList)
             } else {
                 mui.toast(res.msg)
@@ -87,6 +106,10 @@ lf.ready(function () {
         }, function () {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)
+        })
+        // pyname
+        lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
+            console.log(JSON.stringify(res,null,2))
         })
     }
     function initTableViewEvent(vm){
@@ -108,12 +131,23 @@ lf.ready(function () {
             });
             if (checkedValues.length > 0) {
                 mui.alert('你选择了: ' + checkedValues);
-                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
-                    passPack:pageParams.passPack,
-                    userList:vm.indexedList.filter(function (item) {
-                        return item.selected
-                    })
-                });
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('/order/assignOrderPhotographer', {}, function (res) {
+                    lf.nativeUI.closeWaiting()
+                    if (res.code === '200') {
+                        lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
+                            passPack:pageParams.passPack,
+                            userList:vm.indexedList.filter(function (item) {
+                                return item.selected
+                            })
+                        });
+                    } else {
+                        mui.toast(res.msg)
+                    }
+                }, function () {
+                    lf.nativeUI.closeWaiting()
+                    mui.toast(res.msg)
+                })
                 lf.window.closeCurrentWebview();
             } else {
                 mui.alert('你没选择任何员工');

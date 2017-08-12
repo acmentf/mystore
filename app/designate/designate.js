@@ -57,7 +57,7 @@ lf.ready(function () {
             init:function () {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('', {}, function (res) {
+                lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                         self.executorList = res.data.executorList || []
@@ -73,7 +73,6 @@ lf.ready(function () {
             }
         },
         mounted: function () {
-
         }
     });
     mui('.designate-designate').on('tap','.btn-designate',function (e) {
