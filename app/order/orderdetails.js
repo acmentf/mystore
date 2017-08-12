@@ -246,7 +246,15 @@ lf.ready(function() {
 		})
 	})
 	
-	
+	/**
+	 * 查看销售订单
+	 */
+	mui('.mui-card').on('tap', '#order-pay-list-btn', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
+			orderId: orderid
+		})
+	})
 })
 
 lf.event.listener('orderdetails',function(e){
