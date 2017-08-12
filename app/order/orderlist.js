@@ -28,6 +28,8 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 
+	console.log(lf.storage.get("LFACCOUNT"))
+
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
 		vm.orderList.splice(3,1);
@@ -147,6 +149,15 @@ mui('.order-ul').on('tap', '.operator', function() { //点击计调
 	lf.window.openWindow('order/trackinfo.html', '../order/trackinfo.html', {}, {
 		orderNo: orderid
 	})
+})
+
+mui('body').on('tap', '#logout', function() {
+	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			window.Role.logout();
+			plus.runtime.restart();
+		}
+	});
 })
 
 function dodata(type, index, data) {

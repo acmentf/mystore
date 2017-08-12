@@ -14,7 +14,7 @@
         <h1 class="mui-title">销售订单</h1>
     </header>
 
-    <div class="mui-content order-pay-content order-pay-list">
+    <div class="mui-content order-pay-content order-pay-list" id="app">
         <div class="mui-content-padded">
             <div class="order-pay-card">
                 <div class="order-pay-card-header">
@@ -58,6 +58,7 @@
         }
 
         var vm = new Vue({
+            el: '#app',
             data: data
         })
 

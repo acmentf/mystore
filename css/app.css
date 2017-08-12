@@ -70,13 +70,25 @@
 
 #offCanvasSide .offCanvasSide-header-name {
 	color: #3eb392;
-	font-size: 16px;
+	font-size: 0.3rem;
 }
 
 #offCanvasSide .offCanvasSide-role-wrap {
 	color: #bbb;
+	font-size: 0.3rem;
 }
 
 #offCanvasSide .offCanvasSide-role-wrap .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
 	color: #3eb392;
+}
+
+#offCanvasSide .offCanvasSide-logout {
+	margin: 50px 20px;
+}
+
+#offCanvasSide .offCanvasSide-logout > button {
+	border: none;
+	color: #fff;
+	overflow: hidden;
+	background: #3eb392;
 }
