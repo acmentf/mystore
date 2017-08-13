@@ -78,6 +78,10 @@
 	font-size: 0.3rem;
 }
 
+#offCanvasSide .offCanvasSide-role-wrap input[type=radio] {
+	margin-right: 10px;
+}
+
 #offCanvasSide .offCanvasSide-role-wrap .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
 	color: #3eb392;
 }

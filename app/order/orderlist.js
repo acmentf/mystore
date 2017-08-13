@@ -24,6 +24,17 @@ var vm = new Vue({
 		saleOutOrder:false, // 销售输出
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
+
+		username: '',
+		rolePositionList: [],
+		rolePositionId: '',
+		userroleId: ''
+	},
+	watch: {
+		rolePositionId: function(val) {
+			console.log(val);
+			switchRolePostion(val)
+		}
 	}
 })
 lf.ready(function() {
@@ -45,6 +56,10 @@ lf.ready(function() {
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
+
+	vm.userroleId = window.Role.userroleId // 岗位id
+	vm.username = window.Role.username // 用户昵称
+	vm.rolePositionList = window.Role.positions // 岗位列表
 
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
@@ -211,6 +226,39 @@ mui('body').on('tap', '#logout', function() {
 		}
 	});
 })
+
+function switchRolePostion (val) {
+	var params = {
+		positionId: val
+	};
+	lf.nativeUI.showWaiting();
+	lf.net.getJSON('user/switchPosition', params, function(data) {
+		if(data.code == 200) {
+			lf.nativeUI.closeWaiting();
+			var obj = {
+				usercode: data.data.id,
+				username: data.data.name,
+				phone: data.data.phone,
+				companyId: data.data.companyId,
+				userrole: data.data.positions[0].type,
+				userroleName: data.data.positions[0].name,
+				userroleId: res.data.positions[0].id,
+				tonken: data.data.token,
+				loginsign: '1',
+				auths: data.data.auths,
+				positions: data.data.userPositionList
+			}
+			window.Role.save(obj)
+			lf.nativeUI.toast('切换岗位成功');
+		} else {
+			lf.nativeUI.closeWaiting();
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.closeWaiting();
+		lf.nativeUI.toast(erro.msg);
+	})
+}
 
 function dodata(type, index, data) {
 	if(type == 'up') {

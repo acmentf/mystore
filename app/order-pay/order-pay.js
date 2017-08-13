@@ -48,10 +48,14 @@ lf.ready(function() {
                     return
                 }
 
+                lf.nativeUI.showWaiting();
+
                 this.isPaying = true
 
                 this.payType = payType
                 this.payName = this.getPayName(this.payType)
+
+                this.payment()
             },
 
             // 发起支付请求
@@ -71,12 +75,15 @@ lf.ready(function() {
                     console.log(JSON.stringify(data));
 
                     if(data.code == 200) {
-                        
+                        lf.nativeUI.closeWaiting();
+
                     } else {
+                        lf.nativeUI.closeWaiting();
                         lf.nativeUI.toast(data.msg);
                     }
 
                 }, function(erro) {
+                    lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(erro.msg);
                 })
             },

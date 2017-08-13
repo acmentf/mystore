@@ -2358,6 +2358,7 @@ var lf = (function(document, undefined) {
 		username:"",
 		userrole:"",
 		userroleName:"",
+		userroleId:"",
 		phone:"",
 		companyId:"",
 		loginsign:"",
@@ -2376,6 +2377,7 @@ var lf = (function(document, undefined) {
 					this.username = l.username;
 					this.userrole = l.userrole;
 					this.userroleName = l.userroleName;
+					this.userroleId = l.userroleId;
 					this.phone = l.phone;
 					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
@@ -2386,6 +2388,7 @@ var lf = (function(document, undefined) {
 					this.username = "";
 					this.userrole = "";
 					this.userroleName = "";
+					this.userroleId = "";
 					this.usercode = "";
 					this.phone = "";
 					this.companyId = "";
@@ -2397,6 +2400,7 @@ var lf = (function(document, undefined) {
 				this.username = "";
 				this.userrole = "";
 				this.userroleName = "";
+				this.userroleId = "";
 				this.usercode = "";
 				this.phone = "";
 				this.companyId = "";
@@ -2410,6 +2414,7 @@ var lf = (function(document, undefined) {
 			this.username = k.username;
 			this.userrole = k.userrole;
 			this.userroleName = k.userroleName;
+			this.userroleId = k.userroleId;
 			this.phone = k.phone;
 			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
