@@ -17,7 +17,8 @@ lf.ready(function() {
 
         isPaying: false,
         payType: 0,
-        payName: ''
+        payName: '',
+        loopTime: 3000
     }
 
     var vm = new Vue({
@@ -77,6 +78,10 @@ lf.ready(function() {
                     if(data.code == 200) {
                         lf.nativeUI.closeWaiting();
 
+                        // 轮询支付状态
+                        this.timer = setInterval(this.loopCheckPayStatus, this.loopTime)
+
+                        this.generateQrcode(data.data.resultUrl)
                     } else {
                         lf.nativeUI.closeWaiting();
                         lf.nativeUI.toast(data.msg);
@@ -85,6 +90,34 @@ lf.ready(function() {
                 }, function(erro) {
                     lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(erro.msg);
+                })
+            },
+
+            // 生成二维码
+            generateQrcode: function(url) {
+                new QRCode(document.getElementById("qrcode-img"), {
+                    text: url,
+                    width: 100,
+                    height: 100,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                })
+            },
+
+            // 轮询方法
+            loopCheckPayStatus: function() {
+                lf.net.getJSON('', params, function(data) {
+                    if(data.code == 200) {
+
+                        // 移除轮询
+                        clearInterval(this.timer)
+
+                        this.isPaying = false
+
+                        this.payCallback()
+
+                    }
                 })
             },
 
