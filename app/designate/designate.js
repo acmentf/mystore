@@ -8,6 +8,7 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
+        //vm.init()
     }
     mui.plusReady(function(){
         var currentWebview = lf.window.currentWebview();
@@ -15,6 +16,18 @@ lf.ready(function () {
     });
     window.addEventListener('pageParams',function(event){
         setPageParams(event)
+    });
+    window.addEventListener('selectUser',function(event){
+       if(event && event.passPack && event.userList){
+           vm[event.passPack] = vm[event.passPack].concat(event.userList.map(function (item) {
+               return {
+                   name:item.text,
+                   phone:item.phone,
+                   area:item.area,
+                   operator:item.operator
+               }
+           }))
+       }
     });
 
    var vm = new Vue({
@@ -41,12 +54,31 @@ lf.ready(function () {
             }
         },
         methods: {
+            init:function () {
+                var self = this
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
+                    lf.nativeUI.closeWaiting()
+                    if (res.code === '200') {
+                        self.executorList = res.data.executorList || []
+                        self.outputList = res.data.outputList || []
+                        self.salesList = res.data.salesList || []
+                    } else {
+                        mui.toast(res.msg)
+                    }
+                }, function () {
+                    lf.nativeUI.closeWaiting()
+                    mui.toast(res.msg)
+                })
+            }
         },
         mounted: function () {
-
         }
     });
-    mui('.designate-designate').on('tap','',function () {
-
+    mui('.designate-designate').on('tap','.btn-designate',function (e) {
+        var type = e.target.getAttribute('data-type')
+        lf.window.openWindow('designate/allocation-staff.html','allocation-staff.html',{},{
+            passPack: type
+        })
     })
 })

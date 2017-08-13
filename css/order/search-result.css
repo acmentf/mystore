@@ -1,0 +1,89 @@
+.search-result{
+	margin: 0.2rem;
+}
+.order-detail{
+	background-color: #fff;
+	border-radius: 0.1rem;
+	padding:0.2rem;
+	color: #999;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.order-state1{
+	float:right;
+	background-color: #FF9369;
+	color: #FFF;
+	width: 1.5rem;
+	text-align: center;
+	border-radius: 0.5rem;
+}
+.order-state2{
+	float:right;
+	background-color: #FF9369;
+	color: #FFF;
+	width: 1.3rem;
+	text-align: center;
+	border-radius: 0.5rem;
+}
+
+.order-state3{
+	float:right;
+	background-color: #FF9369;
+	color: #FFF;
+	width: 1.5rem;
+	text-align: center;
+	border-radius: 0.5rem;
+}
+
+.order-name{
+	padding-top: 0.2rem;
+	color: #000;
+	padding-bottom: 0.2rem;
+	border-bottom: 1px solid #f4f4f4;
+}
+.tour-date-icon{
+	display: inline-block;
+	background:url('../../images/order/list_day.png') center center no-repeat;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-size: cover;
+}
+.tour-path-icon{
+	display: inline-block;
+	background:url('../../images/order/list_way.png') center center no-repeat;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-size: cover;
+}
+.tour-number-icon{
+	display: inline-block;
+	background:url('../../images/order/list_number.png') center center no-repeat;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-size: cover;
+}
+.tour-message{
+	border-bottom: 1px solid #f4f4f4;
+}
+.tour-guide{
+	padding: 0.2rem 0;
+	color: #FF9369;
+	display: flex;
+	align-items: center;
+}
+.tour-guide-icon{
+	display: inline-block;
+	background:url('../../images/order/list_guide.png') center center no-repeat;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-size: cover;
+}
+.assign-btn{
+	height: 0.8rem;
+	background-color: #3EB392;
+	border-bottom-right-radius: 0.1rem;
+	border-bottom-left-radius: 0.1rem;
+	text-align: center;
+	line-height: 0.8rem;
+	color: #fff;
+}

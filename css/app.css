@@ -45,3 +45,50 @@
 }
 
 .icon-tuichu:before { content: "\e892"; }
+
+/* reset mui style */
+.mui-off-canvas-wrap.mui-active .mui-off-canvas-backdrop {
+	background: rgba(0,0,0,0);
+	box-shadow: -4px 0 4px rgba(0,0,0,.2), 4px 0 4px rgba(0,0,0,.2);
+}
+
+/* drag right style */
+#offCanvasSide {
+	background-color: #fff;
+}
+
+#offCanvasSide .offCanvasSide-header {
+	text-align: center;
+	margin: 50px 0 20px 0
+}
+
+#offCanvasSide .offCanvasSide-header-avatar {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 10px;
+}
+
+#offCanvasSide .offCanvasSide-header-name {
+	color: #3eb392;
+	font-size: 0.3rem;
+}
+
+#offCanvasSide .offCanvasSide-role-wrap {
+	color: #bbb;
+	font-size: 0.3rem;
+}
+
+#offCanvasSide .offCanvasSide-role-wrap .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+	color: #3eb392;
+}
+
+#offCanvasSide .offCanvasSide-logout {
+	margin: 50px 20px;
+}
+
+#offCanvasSide .offCanvasSide-logout > button {
+	border: none;
+	color: #fff;
+	overflow: hidden;
+	background: #3eb392;
+}

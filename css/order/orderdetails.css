@@ -134,7 +134,7 @@
 .orderdetails .routeinfo {
 	position: relative;
 	overflow: auto;
-	padding-left: 2.05rem !important;
+	/*padding-left: 2.05rem !important;*/
 	color: #888;
 }
 
@@ -233,7 +233,7 @@
 	text-align: center;
 	color: #C2CACC;
 }
-.orderdetails .more{
+.orderdetails .mui-icon-arrowright{
 	color: #C2CACC;
 }
 .orderdetails .buttons{
@@ -242,7 +242,7 @@
 }
 .orderdetails .buttons .mui-button{
 	padding: 0.2rem 0.4rem;
-	border: none;
+	border: none;     
 	margin: 0;
 	float: right;
 	border-radius: 0;
@@ -254,6 +254,9 @@
 .orderdetails .buttons .colordark{
 	background: #3EB392;
 	color: #fff;
+}
+.orderdetails .colorgray{
+	color: #B1B1B1;
 }
 .popup-mod .ico {
 	background: #fff;

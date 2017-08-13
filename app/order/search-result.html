@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/order/search-result.css" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<style>
+		</style>
+		<script src="../../js/framework/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav search-header" style="background-color:#3EB392;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title" style="color: #fff;">搜索结果</h1>
+			<span class="mui-icon mui-icon-search" style="color: #fff; float: right;"></span>
+		</header>
+		<div id="app" class="mui-content search-result">
+			
+			<div  v-for="(v, i) in result">
+				<div class="order-detail">
+					<div class="order-message">
+					<span class="order-number">
+						<span>订单号:</span>
+						<span v-text="v.orderNo"></span>
+					</span>
+					<span v-if="v.status == 1" class="order-state1">待处理</span>
+					<span v-if="v.status == 2" class="order-state2">已完成</span>
+					<span v-if="v.status == 3" class="order-state3">已取消</span>
+				</div>
+				<div class="order-name">
+					<span v-text="v.productName"></span>
+				</div>
+				<div class="tour-message">
+					<div style="padding: 0.15rem 0; display: flex;align-items: center;">
+						<span class="tour-date-icon"></span>
+						<span style="margin-left: 0.2rem;" >出团日期:</span>
+						<span>2017-07-07</span>
+						<span style="margin-left: 0.4rem;">共五天</span>
+					</div>
+					<div style="padding: 0.15rem 0; display: flex;align-items: center;">
+						<span class="tour-path-icon"></span>
+						<span style="margin-left: 0.2rem;" >线路名称：</span>
+						<span>甘南</span>
+					</div>
+					<div style="padding: 0.15rem 0; display: flex;align-items: center;">
+						<span class="tour-number-icon"></span>
+						<span style="margin-left: 0.2rem;" >团队人数：</span>
+						<span>15人</span>
+					</div>
+				</div>
+				<div class="tour-guide">
+					<span class="tour-guide-icon"></span>
+					<span style="margin-left: 0.2rem;" >导游:</span>
+					<span>俞三儿</span>
+					<span>(16456468468)</span>
+				</div>
+				</div>
+				<div class="assign-btn">
+					指派
+				</div>
+			</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="./search-result.js"></script>
+	</body>
+
+</html>

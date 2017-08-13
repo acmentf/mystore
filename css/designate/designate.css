@@ -1,23 +1,25 @@
 .designate-designate {
   font-size: 0.76rem;
+  background-color: #F6F6F6;
 }
 
 .designate-designate .btn-designate {
   background-color: #fff;
-  border: 1px solid #9CBEB4;
+  border: 1px solid #3DB291;
   border-radius: 0.4rem;
-  color: #9CBEB4;
+  color: #3DB291;
 }
 
 .designate-designate .btn-designate:enabled:active {
   color: #fff;
-  border: 1px solid #9CBEB4;
+  border: 1px solid #3DB291;
   background-color: #fff;
 }
 
 .designate-designate .item-block {
   background-color: #fff;
   padding: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 .designate-designate .item-block .head-bar {
@@ -64,8 +66,4 @@
   line-height: 3rem;
   text-align: center;
   color: #B4B4B4;
-}
-
-.designate-designate .item-block + .item-block {
-  margin-top: 0.4rem;
 }

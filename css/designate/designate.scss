@@ -1,20 +1,23 @@
 .designate-designate{
-  $btn-designate:#9CBEB4;
+  $primary-bg:#F6F6F6;
+  $btn-primary:#3DB291;
   font-size: 0.76rem;
+  background-color: $primary-bg;
   .btn-designate{
     background-color: #fff;
-    border: 1px solid $btn-designate;
+    border: 1px solid $btn-primary;
     border-radius: 0.4rem;
-    color: $btn-designate;
+    color: $btn-primary;
     &:enabled:active{
       color: #fff;
-      border: 1px solid $btn-designate;
+      border: 1px solid $btn-primary;
       background-color:#fff;
     }
   }
   .item-block{
     background-color: #fff;
     padding: 0.4rem;
+    margin-top: 0.4rem;
     .head-bar{
       position: relative;
       .title{
@@ -52,8 +55,5 @@
         color: #B4B4B4;
       }
     }
-  }
-  .item-block + .item-block{
-    margin-top: 0.4rem;
   }
 }

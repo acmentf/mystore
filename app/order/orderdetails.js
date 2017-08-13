@@ -14,7 +14,7 @@ var vm = new Vue({
 		orderInfo: {},
 		orderTrackInfo: {},
 		orderResult: {},
-		photographerInfos: [{}],
+		photographerInfos: [],
 		currentTourId:'',
 		photographerId:'',
 		currentOrderNo:'',
@@ -31,11 +31,35 @@ var vm = new Vue({
 		actionStatus:'', // 
 		outPutStatus:'',
 		shotOrderOutput: [], //订单拍摄输出
-		orderdetailShow: false
+		orderdetailShow: false,
+		currentTabIndex: '',
+		shotOrderOutput: [],
+		assignedPhotographers:[],
+		temp:[],
+		assignedPhotographersString:'',
+		assignOrder:false, //计调、指派 
+		allotPhotoOrder:false, // 分配
+		outOrder:false, // 填写输出信息
+		saleOutOrder:false, // 销售输出
+		genSale:false, // 生成销售
+		summary:false, // 录入心得
 	}
 })
 
 lf.ready(function() {
+	//assignOrder 计调、指派
+	//allotPhotoOrder 分配
+	//outOrder 填写输出信息
+	//saleOutOrder 销售输出
+	//genSale 生成销售
+	//summary 录入心得
+	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
+	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
+	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
+	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
+	vm.summary=window.Role.hasAuth('summary'), // 录入心得
+	vm.currentTabIndex = lf.window.currentWebview().orderNo;
 	vm.allotRole = window.Role.hasAuth('allotPhoto')// 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign')// 指派按钮的key
 	vm.cancelRole = window.Role.hasAuth('cancel')// 取消按钮的key
@@ -233,7 +257,79 @@ lf.ready(function() {
 			orderNo: orderid
 		})
 	})
+	mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderid
+		})
+	})
 	
+	/**
+	 * 查看销售订单
+	 */
+	mui('.mui-card').on('tap', '#order-pay-list-btn', function() { //点击拍摄输出
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
+			orderId: orderid
+		})
+	})
+})
+
+
+mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
+		orderNo: orderid
+	})
+})
+mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
+		orderNo: orderid
+	})
+})
+mui('.body').on('tap', '.jidiao', function() { //点击计调
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderid
+	})
+})
+
+mui('.buttons').on('tap', '.summary', function() { //点击心得
+	var orderid = this.getAttribute('data-no');
+	var tourId = this.getAttribute('data-tourId');
+	console.log('id:' + orderid)
+	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
+            orderId: orderid,
+            tourId: tourId
+	})
+})
+
+mui('.buttons').on('tap', '.outOrder', function() { //点击填写输出信息
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
+            orderId: orderid,
+	})
+})
+
+mui('.buttons').on('tap', '.saleOutOrder', function() { //点击销售输出
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
+            orderId: orderid,
+	})
+})
+
+mui('.buttons').on('tap', '.genSale', function() { //点击生成销售
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('order-pay/order-pay.html','../order-pay/order-pay.html',{},{
+            orderId: orderid,
+	})
 })
 
 lf.event.listener('orderdetails',function(e){
@@ -253,6 +349,8 @@ function renderOrderDetails(){
 			vm.orderInfo = data.data.orderInfo;	
 			vm.orderTrackInfo = data.data.orderTrackInfo;	
 			vm.photographerInfos = data.data.photographerInfos;
+			console.log("photographerInfos"+JSON.stringify(vm.photographerInfos))
+			vm.shotOrderOutput = data.data.shotOrderOutput;
 			var time = new Date() - new Date(vm.orderInfo.createTime);
 			var total = time/1000; 
 			var day = parseInt(total / (24*60*60));//计算整数天数
@@ -269,10 +367,24 @@ function renderOrderDetails(){
             }
             else{
             	vm.orderTrackInfo.fetchPhotoTime = ''
-            }	
-            vm.orderTrackInfo.lineSight.forEach(function(v, i) {
-					v.shootTime = lf.util.timeStampToDate2(v.shootTime)
+            }
+            vm.shotOrderOutput.forEach(function(v, i){
+            	vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+            	vm.temp.push(v.photographerNames)
+            })
+            console.log("temp"+JSON.stringify(vm.temp))
+            for(var i=0;i<vm.temp.length;i++){
+            	if(vm.assignedPhotographers.indexOf(vm.temp[i])==-1){
+            		vm.assignedPhotographers.push(vm.temp[i])
+            	}
+            }
+            vm.assignedPhotographersString = vm.assignedPhotographers.toString()
+            console.log("assignedPhotographers"+vm.assignedPhotographersString)
+            vm.orderTrackInfo.lineSight.forEach(function(v, i) { // 拍摄信息数据
+            	v.index = i+1
+				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
 			})
+            
 			if(data.data.orderResult){
 				vm.orderResult = data.data.orderResult;
 				if(vm.orderResult.buyers == 0){
