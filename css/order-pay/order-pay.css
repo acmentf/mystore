@@ -4,6 +4,8 @@
   #order-pay-header .mui-title, #order-pay-header .mui-action-back {
     color: #333 !important; }
 
+.order-pay-content .order-pay-paying, .order-pay-content .order-pay-paid {
+  margin-top: 20px; }
 .order-pay-content.order-pay-list {
   margin-bottom: 100px; }
 .order-pay-content .mui-table-view {

@@ -8,6 +8,10 @@
 }
 
 .order-pay-content {
+    .order-pay-paying,.order-pay-paid {
+        margin-top: 20px;
+    }
+
     &.order-pay-list {
         margin-bottom: 100px;
     }

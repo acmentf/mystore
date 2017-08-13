@@ -50,45 +50,51 @@
     <script src="../../js/framework/lf.js"></script>
     <script src="../../libs/vue.min.js"></script>
     <script>
-        var data = {
-            currentId: lf.window.currentWebview().orderId,
-            orderPayList: [],
-            curPage: 0,
-            pageSize: 10
-        }
-
-        var vm = new Vue({
-            el: '#app',
-            data: data
-        })
-
-        var getOrderPayList = function() {
-            var params = {
-                orderId: vm.currentId,
-                curPage: vm.curPage,
-                pageSize: vm.pageSize
-            }
-            
-            lf.net.getJSON('pay/getOrderList', params, function(data) {
-
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
-                    console.log(JSON.stringify(data));
-                } else {
-                    lf.nativeUI.toast(data.msg);
-                }
-            }, function(erro) {
-                lf.nativeUI.toast(erro.msg);
-            })
-        }
-
-        getOrderPayList()
-
         lf.ready(function() {
-            // Event handle
+
+            var data = {
+                currentId: lf.window.currentWebview().orderId,
+                areaCode: lf.window.currentWebview().areaCode,
+                orderPayList: [],
+                curPage: 1,
+                pageSize: 10
+            }
+
+            var vm = new Vue({
+                el: '#app',
+                data: data
+            })
+
+            var getOrderPayList = function() {
+                var params = {
+                    orderId: vm.currentId,
+                    curPage: vm.curPage,
+                    pageSize: vm.pageSize
+                }
+                
+                lf.net.getJSON('pay/getOrderList', params, function(data) {
+
+                    console.log(JSON.stringify(data));
+
+                    if(data.code == 200) {
+                        
+                    } else {
+                        lf.nativeUI.toast(data.msg);
+                    }
+                }, function(erro) {
+                    lf.nativeUI.toast(erro.msg);
+                })
+            }
+
+            
+            getOrderPayList()
+
+            // 前往销售订单
             var handleGoOrderPayGenerate = function() {
-                lf.window.openWindow('order-pay.html', 'order-pay.html')
+                lf.window.openWindow('order-pay.html', 'order-pay.html', {}, {
+                    orderId: vm.currentId, // 订单ID
+                    areaCode: vm.areaCode // 区域code
+                })
             }
 
             // Add listener
