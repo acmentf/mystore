@@ -202,6 +202,16 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
             orderId: orderid,
 	})
 })
+
+mui('body').on('tap', '#logout', function() {
+	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			window.Role.logout();
+			plus.runtime.restart();
+		}
+	});
+})
+
 function dodata(type, index, data) {
 	if(type == 'up') {
 		Vue.set(vm.orderList, index, vm.orderList[index].concat(data))
