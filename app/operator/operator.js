@@ -161,7 +161,7 @@ mui('#app').on('tap', '.fpsys', function() {
 	        //订单Id
 	        orderId:vm.orderId,
 	        //拍摄明细ID
-	        photoId:vm.shootInfos[index].photographers
+	        passBack:vm.shootInfos[index].photographers
 		})
 	}
 }, false);
@@ -293,5 +293,5 @@ lf.event.listener('orderdetails',function(e){
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 lf.event.listener('selectAssignUser',function(e){
-	console.log('分配返回的-'+e)
+	console.log(e)
 })
