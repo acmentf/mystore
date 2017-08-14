@@ -115,11 +115,11 @@ lf.ready(function () {
                return item.selected
             }).map(function (item) {
                 return item.value
-            })
+            }).join(',')
         }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                mui.toast('分配成功')
+                mui.toast('指派成功')
                 lf.event.fire(lf.window.currentWebview().opener(),'selectAllocationUser',{
                     passBack:pageParams.passBack,
                     userList:vmTableView.indexedList.filter(function (item) {
