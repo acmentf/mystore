@@ -22,9 +22,9 @@ lf.ready(function () {
     });
     window.addEventListener('selectAllocationUser',function(event){
         var detail = event.detail
-        if(detail && detail.passPack && detail.userList){
+        if(detail && detail.passBack && detail.userList){
             lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
-            vm[detail.passPack] = vm[detail.passPack].concat(detail.userList.map(function (item) {
+            vm[detail.passBack] = vm[detail.passBack].concat(detail.userList.map(function (item) {
                 return {
                     name:item.name,
                     phone:item.phone
@@ -73,7 +73,7 @@ lf.ready(function () {
     mui('.designate-designate').on('tap','.btn-designate',function (e) {
         var type = e.target.getAttribute('data-type')
         lf.window.openWindow('designate/allocation-staff.html','allocation-staff.html',{},{
-            passPack: type,
+            passBack: type,
             orderId: pageParams.orderId
         })
     })

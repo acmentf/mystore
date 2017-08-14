@@ -1,6 +1,6 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:'',
+        passBack:null,
         //订单Id
         orderId:'',
         //拍摄明细ID
@@ -148,7 +148,7 @@ lf.ready(function () {
         }
         function sendSelectAssignUser() {
             lf.event.fire(lf.window.currentWebview().opener(),'selectAssignUser',{
-                passPack:pageParams.passPack,
+                passBack:pageParams.passBack,
                 userList:vmTableView.indexedList.filter(function (item) {
                     return item.selected
                 }).map(function (item) {

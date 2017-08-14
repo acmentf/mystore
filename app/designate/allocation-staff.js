@@ -1,6 +1,6 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:'',
+        passBack:'',
         //订单Id
         orderId: ''
     }
@@ -121,7 +121,7 @@ lf.ready(function () {
             if (res.code === '200') {
                 mui.toast('分配成功')
                 lf.event.fire(lf.window.currentWebview().opener(),'selectAllocationUser',{
-                    passPack:pageParams.passPack,
+                    passBack:pageParams.passBack,
                     userList:vmTableView.indexedList.filter(function (item) {
                         return item.selected
                     }).map(function (item) {
