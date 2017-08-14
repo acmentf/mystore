@@ -260,28 +260,26 @@ function renderTrackInfo(){
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}
-				data.data.lineSight.forEach(function(v){
-					v.shootTime = lf.util.timeStampToDate2(v.shootTime)
-					var forLine = {
-						id : v.id,
-						journeyName :v.journeyName,
-						shootTime : v.shootTime,
-						periodType :v.periodType,
-						remark :v.remark,
-					}
-					var forGrapherName = []
-					var forGrapherId = []
-					v.photographers.forEach(function(value){
-						forGrapherId.push(value.id)
-						forGrapherName.push(value.name)
-					})
-					forLine.photographers = forGrapherId
-					forLine.photographerNames = forGrapherName.join(',')
-					console.log(JSON.stringify(forLine))
-					vm.shootInfos.push(forLine)
+			data.data.lineSight.forEach(function(v){
+				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
+				var forLine = {
+					id : v.id,
+					journeyName :v.journeyName,
+					shootTime : v.shootTime,
+					periodType :v.periodType,
+					remark :v.remark,
+				}
+				var forGrapherName = []
+				var forGrapherId = []
+				v.photographers.forEach(function(value){
+					forGrapherId.push(value.id)
+					forGrapherName.push(value.name)
 				})
-//			}
-
+				forLine.photographers = forGrapherId
+				forLine.photographerNames = forGrapherName.join(',')
+				console.log(JSON.stringify(forLine))
+				vm.shootInfos.push(forLine)
+			})
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
@@ -295,5 +293,5 @@ lf.event.listener('orderdetails',function(e){
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 lf.event.listener('selectAssignUser',function(e){
-
+	console.log('分配返回的-'+e)
 })
