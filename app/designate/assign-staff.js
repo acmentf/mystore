@@ -110,7 +110,6 @@ lf.ready(function () {
         })
     }
     function save() {
-        lf.nativeUI.showWaiting()
         var photographerIdStr = []
         var photographer = []
         var photoIds = Array.isArray(pageParams.photoId) ? pageParams.photoId : pageParams.photoId ? [pageParams.photoId]:[]
@@ -122,6 +121,7 @@ lf.ready(function () {
             photographer.push(item.text)
         })
         if(photoIds.length){
+            lf.nativeUI.showWaiting()
             lf.net.getJSON('/order/assignOrderPhotographer', {
                 orderId:pageParams.orderId,
                 lineSightDTOS: photoIds.map(function (id) {
