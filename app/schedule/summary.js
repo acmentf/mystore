@@ -17,7 +17,7 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
    var vm = new Vue({
@@ -119,7 +119,7 @@ lf.ready(function () {
                     }
                 }, function (res) {
                     lf.nativeUI.closeWaiting()
-                    mui.toast(res.msg)
+                    mui.toast(res.msg || '服务器异常')
                 })
             }
         },

@@ -9,7 +9,7 @@
     border-radius: 0.4rem;
     color: $btn-primary;
     &:enabled:active{
-      color: #fff;
+      color: $btn-primary;
       border: 1px solid $btn-primary;
       background-color:#fff;
     }

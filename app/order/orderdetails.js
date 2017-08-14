@@ -278,17 +278,19 @@ lf.ready(function() {
 
 
 mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-		orderNo: orderid
+        orderId: orderid
 	})
 })
 mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
-		orderNo: orderid
+        orderId: orderid,
+        //拍摄明细ID
+        photoId:[]
 	})
 })
 mui('.body').on('tap', '.jidiao', function() { //点击计调
@@ -337,7 +339,9 @@ lf.event.listener('orderdetails',function(e){
 	renderOrderDetails();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
+lf.event.listener('selectAssignUser',function(e){
 
+})
 function renderOrderDetails(){
 	var orderId = lf.window.currentWebview().orderNo;
 	var params = {

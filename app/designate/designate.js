@@ -1,6 +1,8 @@
 
 lf.ready(function () {
     var pageParams = {
+        //订单Id
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -8,6 +10,7 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
+        //后台接口无法初始化执行人
         //vm.init()
     }
     mui.plusReady(function(){
@@ -15,19 +18,19 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
-    window.addEventListener('selectUser',function(event){
-       if(event && event.passPack && event.userList){
-           vm[event.passPack] = vm[event.passPack].concat(event.userList.map(function (item) {
-               return {
-                   name:item.text,
-                   phone:item.phone,
-                   area:item.area,
-                   operator:item.operator
-               }
-           }))
-       }
+    window.addEventListener('selectAllocationUser',function(event){
+        var detail = event.detail
+        if(detail && detail.passBack && detail.userList){
+            lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
+            vm[detail.passBack] = vm[detail.passBack].concat(detail.userList.map(function (item) {
+                return {
+                    name:item.name,
+                    phone:item.phone
+                }
+            }))
+        }
     });
 
    var vm = new Vue({
@@ -35,18 +38,10 @@ lf.ready(function () {
         data: function () {
             return {
                 executorList:[
-                    {
+                   /* {
                         name:'欧阳小小',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人'
-                    },
-                    {
-                        name:'欧阳小小',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人'
-                    }
+                        phone:'13264752368'
+                    }*/
                 ],
                 outputList:[],
                 salesList:[],
@@ -68,7 +63,7 @@ lf.ready(function () {
                     }
                 }, function () {
                     lf.nativeUI.closeWaiting()
-                    mui.toast(res.msg)
+                    mui.toast(res.msg || '服务器异常')
                 })
             }
         },
@@ -78,7 +73,8 @@ lf.ready(function () {
     mui('.designate-designate').on('tap','.btn-designate',function (e) {
         var type = e.target.getAttribute('data-type')
         lf.window.openWindow('designate/allocation-staff.html','allocation-staff.html',{},{
-            passPack: type
+            passBack: type,
+            orderId: pageParams.orderId
         })
     })
 })

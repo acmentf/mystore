@@ -36,7 +36,7 @@ body {
 .designate-select-staff .btn-select:enabled:active {
   color: #fff;
   border: 1px solid #3DB291;
-  background-color: #fff;
+  background-color: #3DB291;
 }
 
 .designate-select-staff .btn-cancel {
@@ -47,9 +47,9 @@ body {
 }
 
 .designate-select-staff .btn-cancel:enabled:active {
-  color: #fff;
+  color: #707070;
   border: 1px solid #E5E5E5;
-  background-color: #fff;
+  background-color: #E5E5E5;
 }
 
 .designate-select-staff .mui-indexed-list .mui-indexed-list-bar {
