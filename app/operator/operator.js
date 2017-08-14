@@ -3,6 +3,7 @@ var vm = new Vue({
 	data: {
 		forindex: 0,
 		forStatus:'check',//check是查看，edit是直接能编辑的
+		forGrapher:[],
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
 		shootInfos:[{}], //存放所有拍摄信息
@@ -132,7 +133,8 @@ mui('#app').on('tap', '.pssd', function() {
 
 //添加拍摄按钮
 mui('#app').on('tap', '.addshootinfo', function() {
-	var shootObj = {
+	if(vm.forStatus == 'edit'){
+		var shootObj = {
 		id:null,
 		photographers:[],
 		journeyName :'',
@@ -140,21 +142,25 @@ mui('#app').on('tap', '.addshootinfo', function() {
 		periodType :'',
 		remark :'',
 		photographerNames :''}
-	vm.shootInfos.push(shootObj)
+		vm.shootInfos.push(shootObj)
+	}
 }, false);
 //删除拍摄信息
 mui('#app').on('tap', '.superscript-xx', function() {
-	if(vm.shootInfos.length<=1){
-		lf.nativeUI.toast('至少保留一组拍摄信息')
-		return;
+	if(vm.forStatus == 'edit'){
+		if(vm.shootInfos.length<=1){
+			lf.nativeUI.toast('至少保留一组拍摄信息')
+			return;
+		}
+		var index = this.getAttribute('data-index');
+		vm.shootInfos.splice(index,1)
 	}
-	var index = this.getAttribute('data-index');
-	vm.shootInfos.splice(index,1)
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
 	console.log('orderId='+vm.orderId)
 	var index = this.getAttribute('data-index');
+
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
 	        //订单Id
@@ -163,12 +169,24 @@ mui('#app').on('tap', '.fpsys', function() {
 	        passBack:vm.shootInfos[index].photographers
 		})
 	}
+	lf.event.listener('selectAssignUser',function(e){
+		var forgraphersId=[]
+			var forgraphersNames = []
+		e.detail.userList.forEach(function(val){
+
+			forgraphersId.push(val.id)
+			forgraphersNames.push(val.name)
+		})
+		vm.shootInfos[index].photographers = forgraphersId
+		vm.shootInfos[index].photographerNames = forgraphersNames
+		console.log('passBack='+vm.shootInfos[index].photographers)
+		console.log('摄影师姓名='+vm.shootInfos[index].photographerNames)
+	})
 }, false);
 
 
 //修改
 mui('.mui-bar-nav').on('tap', '.edit',function(){
-	console.log('点击了修改')
 	vm.forStatus = 'edit'
 })
 //保存
@@ -219,7 +237,7 @@ function renderTrackInfo(){
 	var orderNo = lf.window.currentWebview().orderNo;
 //	var forindex = lf.window.currentWebview().type;
 	vm.forindex = 2
-	vm.forStatus = 'edit'
+	vm.forStatus = 'check'
 	var params = {
 		orderNo: orderNo
 	};
@@ -255,7 +273,7 @@ function renderTrackInfo(){
 				groupRoute : data.data.groupRoute,//行程详情
 				exeRemark : data.data.exeRemark//备注信息
 			}
-			console.log('长度='+JSON.stringify(data.data.lineSight))
+//			console.log('长度='+JSON.stringify(data.data.lineSight))
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}
@@ -271,12 +289,13 @@ function renderTrackInfo(){
 				var forGrapherName = []
 				var forGrapherId = []
 				v.photographers.forEach(function(value){
-					forGrapherId.push(value.id)
+					forGrapherId.push(value.id+'')
 					forGrapherName.push(value.name)
 				})
 				forLine.photographers = forGrapherId
-				forLine.photographerNames = forGrapherName.join(',')
-				console.log(JSON.stringify(forLine))
+//				forLine.photographerNames = forGrapherName.join(',')
+				forLine.photographerNames = forGrapherName
+//				console.log(JSON.stringify(forLine))
 				vm.shootInfos.push(forLine)
 			})
 		} else {
@@ -290,8 +309,4 @@ function renderTrackInfo(){
 lf.event.listener('orderdetails',function(e){
 	renderTrackInfo();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-})
-lf.event.listener('selectAssignUser',function(e){
-	console.log(JSON.stringify(e.detail))
-	lf.event.fire(lf.window.currentWebview().opener(), 'selectAssignUser', {})
 })
