@@ -294,14 +294,13 @@ mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
 	})
 })
 mui('body').on('tap', '.jidiao', function() { //点击计调
-	var orderid = this.getAttribute('data-no');
 	var type = this.getAttribute('data-type')
 	var status = this.getAttribute('data-status')==1?'check' : 'edit'
-	console.log('id............' + orderid)
+	console.log('orderNO............' + vm.currentOrderNo)
 	console.log('type.........:' + type)
 	console.log('status.........:' + status)
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid,
+			orderNo: vm.currentOrderNo,
 			type: type,
 			status: status
 	})
