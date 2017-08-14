@@ -2,9 +2,12 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		forindex: 0,
+		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
-		shootInfos:[{}], //存放所有拍摄信息
+		shootInfos:[{
+
+		}], //存放所有拍摄信息
 		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
@@ -30,82 +33,92 @@ var vm = new Vue({
 
 //团队性质
 mui('#app').on('tap', '#showUserPicker', function() {
-	var index = this.getAttribute('data-index');
-	var userPicker = new mui.PopPicker();
-	userPicker.setData([{
-		value: 'ywj',
-		text: '自由组团'
-	}, {
-		value: 'aaa',
-		text: '摄影团'
-	}]);
-	userPicker.show(function(items) {
-		vm.groupInfo.groupType = items[0].text
-		vm.groupInfo.groupTypeValue = items[0].value
-		//返回 false 可以阻止选择框的关闭
-		//return false;
-	}, false);
-
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: 'ywj',
+			text: '自由组团'
+		}, {
+			value: 'aaa',
+			text: '摄影团'
+		}]);
+		userPicker.show(function(items) {
+			vm.groupInfo.groupType = items[0].text
+			vm.groupInfo.groupTypeValue = items[0].value
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		}, false);
+	}
 })
 
 // 出团日期
 mui('#app').on('tap', '#chutuan', function() {
-	var optionsJson = this.getAttribute('data-options') || '{}';
-	var options = JSON.parse(optionsJson);
-	var picker = new mui.DtPicker(options);
-	picker.show(function(rs) {
-		vm.marchInfo.startTime = rs.text;
-		vm.marchInfo.startTimeValue = rs.value;
-		picker.dispose();
-	});
+	if(vm.forStatus == 'edit'){
+		var optionsJson = this.getAttribute('data-options') || '{}';
+		var options = JSON.parse(optionsJson);
+		var picker = new mui.DtPicker(options);
+		picker.show(function(rs) {
+			vm.marchInfo.startTime = rs.text;
+			vm.marchInfo.startTimeValue = rs.value;
+			picker.dispose();
+		});
+	}
 }, false);
 
 //取片日期
 mui('#app').on('tap', '#qupian', function() {
-	var optionsJson = this.getAttribute('data-options') || '{}';
-	var options = JSON.parse(optionsJson);
-	var picker = new mui.DtPicker(options);
-	picker.show(function(rs) {
-		vm.getPhotoDate = rs;
-		picker.dispose();
-	});
+	if(vm.forStatus == 'edit'){
+		var optionsJson = this.getAttribute('data-options') || '{}';
+		var options = JSON.parse(optionsJson);
+		var picker = new mui.DtPicker(options);
+		picker.show(function(rs) {
+			vm.marchInfo.fetchPhotoTime = rs.text;
+			vm.marchInfo.fetchPhotoTime = rs.value;
+			picker.dispose();
+		});
+	}
+
 }, false);
 
 //拍摄日期
 mui('#app').on('tap', '.psrq', function() {
-	var index = this.getAttribute('data-index');
-	var optionsJson = this.getAttribute('data-options') || '{}';
-	var options = JSON.parse(optionsJson);
-	var picker = new mui.DtPicker(options);
-	picker.show(function(rs) {
-		console.log(rs)
-		vm.shootInfos[index].shootTime = rs.text;
-		picker.dispose();
-	});
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var optionsJson = this.getAttribute('data-options') || '{}';
+		var options = JSON.parse(optionsJson);
+		var picker = new mui.DtPicker(options);
+		picker.show(function(rs) {
+			console.log(rs)
+			vm.shootInfos[index].shootTime = rs.text;
+			picker.dispose();
+		});
+	}
 }, false);
 
 //拍摄时段
 mui('#app').on('tap', '.pssd', function() {
-	var index = this.getAttribute('data-index');
-	var userPicker = new mui.PopPicker();
-	userPicker.setData([{
-		value: '0',
-		text: '全天'
-	}, {
-		value: '1',
-		text: '上午'
-	}, {
-		value: '2',
-		text: '下午'
-	}, {
-		value: '3',
-		text: '晚上'
-	}]);
-	userPicker.show(function(items) {
-		console.log(JSON.stringify(vm.shootInfos))
-		vm.shootInfos[index].periodType = items[0].value
-	}, false);
-
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: '0',
+			text: '全天'
+		}, {
+			value: '1',
+			text: '上午'
+		}, {
+			value: '2',
+			text: '下午'
+		}, {
+			value: '3',
+			text: '晚上'
+		}]);
+		userPicker.show(function(items) {
+			console.log(JSON.stringify(vm.shootInfos))
+			vm.shootInfos[index].periodType = items[0].value
+		}, false);
+	}
 })
 
 //时段备注
@@ -148,8 +161,19 @@ mui('#app').on('tap', '.fpsys', function() {
         //拍摄明细ID
         photoId:[]
 	})
+	if(vm.forStatus == 'edit'){
+		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
+            photoId: vm.orderId
+		})
+	}
 }, false);
 
+
+//修改
+mui('.mui-bar-nav').on('tap', '.edit',function(){
+	console.log('点击了修改')
+	vm.forStatus = 'edit'
+})
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
 	var params = {
@@ -198,6 +222,7 @@ function renderTrackInfo(){
 	var orderNo = lf.window.currentWebview().orderNo;
 //	var type = lf.window.currentWebview().type;
 	vm.forindex = 1
+	vm.forStatus = 'check'
 	var params = {
 //		orderNo: 10100000002385
 		orderNo: orderNo
@@ -237,7 +262,9 @@ function renderTrackInfo(){
 			data.data.lineSight.forEach(function(val){
 				val.shootTime = lf.util.timeStampToDate2(val.shootTime)
 			})
-			vm.shootInfos = []
+			if(data.data.lineSight && data.data.lineSight.length>0){
+				vm.shootInfos = []
+			}
 			data.data.lineSight.forEach(function(v){
 				var forLine = {
 					id : v.id,
