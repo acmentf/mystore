@@ -1,6 +1,8 @@
 
 lf.ready(function () {
     var pageParams = {
+        //订单Id
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -8,6 +10,7 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
+        //后台接口无法初始化执行人
         //vm.init()
     }
     mui.plusReady(function(){
@@ -78,7 +81,8 @@ lf.ready(function () {
     mui('.designate-designate').on('tap','.btn-designate',function (e) {
         var type = e.target.getAttribute('data-type')
         lf.window.openWindow('designate/allocation-staff.html','allocation-staff.html',{},{
-            passPack: type
+            passPack: type,
+            orderId: pageParams.orderId
         })
     })
 })

@@ -334,7 +334,8 @@
 					"images/order/list_number.png",
 					"images/order/list_guide.png",
 					"images/order/list_day.png",
-					"images/order/list_way.png"
+					"images/order/list_way.png",
+					"css/images/logo_login.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",

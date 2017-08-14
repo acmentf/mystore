@@ -1,10 +1,10 @@
 lf.ready(function () {
     var pageParams = {
         passPack:'',
+        //订单Id
         orderId:'',
-        lineSightDTOS:'',
-        photographerIdStr:'',
-        photographer:''
+        //拍摄明细ID
+        photoId:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -30,7 +30,7 @@ lf.ready(function () {
                    /* {
                         group:'A',
                         text:'A'
-                    },*/
+                    },
                     {
                         value:'AKU',
                         tags:'AKeSu',
@@ -60,7 +60,7 @@ lf.ready(function () {
                         operator:'执行人',
                         state:true,
                         selected:false
-                    }
+                    }*/
                 ]
             }
         },
@@ -68,17 +68,17 @@ lf.ready(function () {
             init:function (indexedList) {
                 var list = (indexedList || []).map(function (item) {
                     return {
-                        value:item.id,
-                        tags:item.pyname,
-                        text:item.name,
-                        phone:item.phone,
+                        value:item.id+'',
+                        tags:(item.pyname || '').toUpperCase(),
+                        text:item.name || '',
+                        phone:item.phone || '',
                         area:'',
                         operator:'',
-                        state:true,
+                        state:false,
                         selected:false
                     }
                 }).sort(function (a, b) {
-                    return a.localeCompare(b)
+                    return a.tags.localeCompare(b.tags)
                 })
                 this.indexedList = list
             },
@@ -98,8 +98,8 @@ lf.ready(function () {
         lf.net.getJSON('/order/getAllPhotographer', {}, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                console.log(JSON.stringify(res,null,2))
-                vmTableView.init(res.data.indexedList)
+                // console.log(JSON.stringify(res,null,2))
+                vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
             }
@@ -112,6 +112,43 @@ lf.ready(function () {
             console.log(JSON.stringify(res,null,2))
         })
     }
+    function save() {
+        lf.nativeUI.showWaiting()
+        var photographerIdStr = []
+        var photographer = []
+        vmTableView.indexedList.filter(function(item) {
+            return item.selected
+        }).forEach(function (item) {
+            photographerIdStr.push(item.value.split('|')[0]||'')
+            photographer.push(item.text)
+        })
+        lf.net.getJSON('/order/assignOrderPhotographer', {
+            orderId:pageParams.orderId,
+            lineSightDTOS: pageParams.photoId.map(function (id) {
+                return {
+                    id:id,
+                    photographerIdStr:photographerIdStr
+                }
+            }),
+            photographer:photographer
+        }, function (res) {
+            lf.nativeUI.closeWaiting()
+            if (res.code === '200') {
+                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
+                    passPack:pageParams.passPack,
+                    userList:vm.indexedList.filter(function (item) {
+                        return item.selected
+                    })
+                });
+            } else {
+                mui.toast(res.msg)
+            }
+        }, function () {
+            lf.nativeUI.closeWaiting()
+            mui.toast(res.msg)
+        })
+        lf.window.closeCurrentWebview();
+    }
     function initTableViewEvent(vm){
         var header = document.querySelector('header.mui-bar');
         var list = document.getElementById('list');
@@ -122,33 +159,11 @@ lf.ready(function () {
         window.indexedList = new mui.IndexedList(list);
 
         operate.addEventListener('tap', function() {
-            var checkedValues = [];
-
-            vm.indexedList.forEach(function(item) {
-                if (item.selected) {
-                    checkedValues.push(item.text);
-                }
+            var bool = vmTableView.indexedList.some(function(item) {
+                return item.selected
             });
-            if (checkedValues.length > 0) {
-                mui.alert('你选择了: ' + checkedValues);
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('/order/assignOrderPhotographer', {}, function (res) {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
-                            passPack:pageParams.passPack,
-                            userList:vm.indexedList.filter(function (item) {
-                                return item.selected
-                            })
-                        });
-                    } else {
-                        mui.toast(res.msg)
-                    }
-                }, function () {
-                    lf.nativeUI.closeWaiting()
-                    mui.toast(res.msg)
-                })
-                lf.window.closeCurrentWebview();
+            if (bool) {
+                save()
             } else {
                 mui.alert('你没选择任何员工');
             }

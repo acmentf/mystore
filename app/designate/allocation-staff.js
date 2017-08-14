@@ -1,6 +1,8 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:''
+        passPack:'',
+        //订单Id
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -8,7 +10,7 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
-        //init()
+        init()
     }
     mui.plusReady(function(){
         var currentWebview = lf.window.currentWebview();
@@ -23,7 +25,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                    {
+                    /*{
                         group:'A',
                         text:'A'
                     },
@@ -56,13 +58,27 @@ lf.ready(function () {
                         operator:'执行人',
                         state:true,
                         selected:false
-                    }
+                    }*/
                 ]
             }
         },
         methods: {
             init:function (indexedList) {
-                this.indexedList = indexedList || []
+                var list = (indexedList || []).map(function (item) {
+                    return {
+                        value:item.id+'',
+                        tags:(item.pyname || '').toUpperCase(),
+                        text:item.name || '',
+                        phone:item.phone || '',
+                        area:'',
+                        operator:'',
+                        state:false,
+                        selected:false
+                    }
+                }).sort(function (a, b) {
+                    return a.tags.localeCompare(b.tags)
+                })
+                this.indexedList = list
             },
             select:function (index) {
                 this.indexedList[index].selected = true
@@ -80,7 +96,8 @@ lf.ready(function () {
         lf.net.getJSON('', {}, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                vmTableView.init(res.data.indexedList)
+                // console.log(JSON.stringify(res,null,2))
+                vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
             }
@@ -88,6 +105,33 @@ lf.ready(function () {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)
         })
+    }
+    function save() {
+        lf.nativeUI.showWaiting()
+        lf.net.getJSON('/order/assignOrderExecutor', {
+            orderId:pageParams.orderId,
+            assignId:vmTableView.indexedList.filter(function(item) {
+               return item.selected
+            }).map(function (item) {
+                return item.value
+            })
+        }, function (res) {
+            lf.nativeUI.closeWaiting()
+            if (res.code === '200') {
+                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
+                    passPack:pageParams.passPack,
+                    userList:vm.indexedList.filter(function (item) {
+                        return item.selected
+                    })
+                });
+            } else {
+                mui.toast(res.msg)
+            }
+        }, function () {
+            lf.nativeUI.closeWaiting()
+            mui.toast(res.msg)
+        })
+        lf.window.closeCurrentWebview();
     }
     function initTableViewEvent(vm){
         var header = document.querySelector('header.mui-bar');
@@ -99,22 +143,11 @@ lf.ready(function () {
         window.indexedList = new mui.IndexedList(list);
 
         operate.addEventListener('tap', function() {
-            var checkedValues = [];
-
-            vm.indexedList.forEach(function(item) {
-                if (item.selected) {
-                    checkedValues.push(item.text);
-                }
+            var bool = vmTableView.indexedList.some(function(item) {
+                return item.selected
             });
-            if (checkedValues.length > 0) {
-                mui.alert('你选择了: ' + checkedValues);
-                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
-                    passPack:pageParams.passPack,
-                    userList:vm.indexedList.filter(function (item) {
-                        return item.selected
-                    })
-                });
-                lf.window.closeCurrentWebview();
+            if (bool) {
+                save()
             } else {
                 mui.alert('你没选择任何员工');
             }
