@@ -26,8 +26,6 @@
                 <div class="item" v-for="(item,index) in executorList">
                     <span class="text-name" v-text="item.name"></span>
                     <span class="text-info" v-text="item.phone"></span>
-                    <span class="text-info" v-text="item.area"></span>
-                    <span class="text-info" v-text="item.operator"></span>
                 </div>
             </template>
             <div v-else class="empty" v-text="emptyTip"></div>
@@ -43,8 +41,6 @@
                 <div class="item" v-for="(item,index) in outputList">
                     <span class="text-name" v-text="item.name"></span>
                     <span class="text-info" v-text="item.phone"></span>
-                    <span class="text-info" v-text="item.area"></span>
-                    <span class="text-info" v-text="item.operator"></span>
                 </div>
             </template>
             <div v-else class="empty" v-text="emptyTip"></div>
@@ -60,8 +56,6 @@
                 <div class="item" v-for="(item,index) in salesList">
                     <span class="text-name" v-text="item.name"></span>
                     <span class="text-info" v-text="item.phone"></span>
-                    <span class="text-info" v-text="item.area"></span>
-                    <span class="text-info" v-text="item.operator"></span>
                 </div>
             </template>
             <div v-else class="empty" v-text="emptyTip"></div>

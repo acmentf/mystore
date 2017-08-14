@@ -142,7 +142,12 @@ mui('#app').on('tap', '.superscript-xx', function() {
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
-	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html')
+	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
+        //订单Id
+        orderId:'',
+        //拍摄明细ID
+        photoId:[]
+	})
 }, false);
 
 //保存
@@ -263,4 +268,7 @@ function renderTrackInfo(){
 lf.event.listener('orderdetails',function(e){
 	renderTrackInfo();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+})
+lf.event.listener('selectUser',function(e){
+
 })

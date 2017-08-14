@@ -27,7 +27,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                   /* {
+                    /*{
                         group:'A',
                         text:'A'
                     },
@@ -50,35 +50,34 @@ lf.ready(function () {
                         operator:'执行人',
                         state:false,
                         selected:true
-                    },
-                    {
-                        value:'AAT',
-                        tags:'ALeTai',
-                        text:'阿勒泰机场',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人',
-                        state:true,
-                        selected:false
                     }*/
                 ]
             }
         },
         methods: {
             init:function (indexedList) {
-                var list = (indexedList || []).map(function (item) {
+                var c = ''
+                var list = [];
+                (indexedList || []).map(function (item) {
                     return {
                         value:item.id+'',
                         tags:(item.pyname || '').toUpperCase(),
                         text:item.name || '',
                         phone:item.phone || '',
-                        area:'',
-                        operator:'',
                         state:false,
                         selected:false
                     }
                 }).sort(function (a, b) {
                     return a.tags.localeCompare(b.tags)
+                }).forEach(function (item) {
+                    if(item.tags[0] !== c){
+                        c = item.tags[0]
+                        list.push({
+                            group:c,
+                            text:c
+                        })
+                    }
+                    list.push(item)
                 })
                 this.indexedList = list
             },
@@ -107,10 +106,6 @@ lf.ready(function () {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)
         })
-        // pyname
-        lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
-            console.log(JSON.stringify(res,null,2))
-        })
     }
     function save() {
         lf.nativeUI.showWaiting()
@@ -134,20 +129,27 @@ lf.ready(function () {
         }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
+                mui.toast('分配成功')
                 lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
                     passPack:pageParams.passPack,
-                    userList:vm.indexedList.filter(function (item) {
+                    userList:vmTableView.indexedList.filter(function (item) {
                         return item.selected
+                    }).map(function (item) {
+                        return {
+                            id:item.id,
+                            name:item.name,
+                            phone:item.phone
+                        }
                     })
                 });
             } else {
                 mui.toast(res.msg)
             }
+            lf.window.closeCurrentWebview();
         }, function () {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)
         })
-        lf.window.closeCurrentWebview();
     }
     function initTableViewEvent(vm){
         var header = document.querySelector('header.mui-bar');
@@ -159,7 +161,7 @@ lf.ready(function () {
         window.indexedList = new mui.IndexedList(list);
 
         operate.addEventListener('tap', function() {
-            var bool = vmTableView.indexedList.some(function(item) {
+            var bool = vm.indexedList.some(function(item) {
                 return item.selected
             });
             if (bool) {

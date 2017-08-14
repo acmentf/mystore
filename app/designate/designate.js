@@ -22,12 +22,11 @@ lf.ready(function () {
     });
     window.addEventListener('selectUser',function(event){
        if(event && event.passPack && event.userList){
+           lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
            vm[event.passPack] = vm[event.passPack].concat(event.userList.map(function (item) {
                return {
-                   name:item.text,
-                   phone:item.phone,
-                   area:item.area,
-                   operator:item.operator
+                   name:item.name,
+                   phone:item.phone
                }
            }))
        }
@@ -38,18 +37,10 @@ lf.ready(function () {
         data: function () {
             return {
                 executorList:[
-                    {
+                   /* {
                         name:'欧阳小小',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人'
-                    },
-                    {
-                        name:'欧阳小小',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人'
-                    }
+                        phone:'13264752368'
+                    }*/
                 ],
                 outputList:[],
                 salesList:[],

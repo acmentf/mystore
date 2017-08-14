@@ -280,14 +280,16 @@ mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-		orderNo: orderid
+        orderId: orderid
 	})
 })
 mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
-		orderNo: orderid
+        orderId: orderid,
+        //拍摄明细ID
+        photoId:[]
 	})
 })
 mui('.body').on('tap', '.jidiao', function() { //点击计调
