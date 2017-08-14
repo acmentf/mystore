@@ -1,10 +1,10 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		status:1,
+		index :1,
 		orderId:null,
 		orderHeader: ['团信息', '行程信息', '拍摄信息'],
-		shootInfos:[], //存放所有拍摄信息
+		shootInfos:[{}], //存放所有拍摄信息
 		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
@@ -161,11 +161,12 @@ mui('#app').on('tap', '.pssd', function() {
 mui('#app').on('tap', '.addshootinfo', function() {
 	var shootObj = {
 		id:null,
+		photographerIds:[],
 		journeyName :'',
 		shootTime : '',
 		periodType :'',
 		remark :'',
-		photographer :''}
+		photographerNames :''}
 	vm.shootInfos.push(shootObj)
 }, false);
 //删除拍摄信息
@@ -265,6 +266,7 @@ function renderTrackInfo(){
 			data.data.lineSight.forEach(function(val){
 				val.shootTime = lf.util.timeStampToDate2(val.shootTime)
 			})
+			vm.shootInfos = []
 			data.data.lineSight.forEach(function(v){
 				var forLine = {
 					id : v.id,
@@ -272,7 +274,8 @@ function renderTrackInfo(){
 					shootTime : v.shootTime,
 					periodType :v.periodType,
 					remark :v.remark,
-					photographer :v.photographer
+					photographerNames :v.photographerNames,
+					photographerIds : v.photographerIds
 				}
 				vm.shootInfos.push(forLine)
 			})
