@@ -104,7 +104,7 @@ lf.ready(function () {
             }
         }, function () {
             lf.nativeUI.closeWaiting()
-            mui.toast(res.msg)
+            mui.toast(res.msg || '服务器异常')
         })
     }
     function save() {
@@ -135,7 +135,7 @@ lf.ready(function () {
                 lf.window.closeCurrentWebview();
 
             } else {
-                mui.toast(res.msg)
+                mui.toast(res.msg || '服务器异常')
             }
         }, function () {
             lf.nativeUI.closeWaiting()

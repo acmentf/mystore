@@ -106,7 +106,7 @@ lf.ready(function () {
             }
         }, function () {
             lf.nativeUI.closeWaiting()
-            mui.toast(res.msg)
+            mui.toast(res.msg || '服务器异常')
         })
     }
     function save() {
@@ -141,7 +141,7 @@ lf.ready(function () {
                 }
             }, function () {
                 lf.nativeUI.closeWaiting()
-                mui.toast(res.msg)
+                mui.toast(res.msg || '服务器异常')
             })
         }else {
             sendSelectAssignUser()

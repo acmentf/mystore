@@ -345,7 +345,9 @@
 					"app/common/chooseuser.html",
 					"app/common/plancamera.html",
 					"app/designate/assign-staff.html",
-					"app/schedule/summary.html"
+					"app/schedule/summary.html",
+					"app/operator/operator.html",
+					"app/designate/designate.html"
 				],
 				"priority": 0
 			},
@@ -597,9 +599,14 @@
 				"resources": [
 					"images/order/corner.png",
 					"app/operator/operator.js",
-					"css/operator/operator.css"
+					"css/operator/operator.css",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"app/designate/assign-staff.html"
+				],
 				"priority": 0
 			},
 			"app/designate/assign-staff.html": {
@@ -629,6 +636,27 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"app/designate/designate.html": {
+				"resources": [
+					"app/designate/designate.js",
+					"css/designate/designate.css"
+				],
+				"refer": [
+					"app/designate/allocation-staff.html"
+				],
+				"priority": 0
+			},
+			"app/designate/allocation-staff.html": {
+				"resources": [
+					"css/designate/select-staff.css",
+					"js/mui.js",
+					"css/mui.indexedlist.css",
+					"app/designate/allocation-staff.js",
+					"js/mui.indexedlist.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -640,7 +668,6 @@
 				"css/message/message.scss",
 				"js/mui.poppicker.js",
 				"js/city.data.js",
-				"js/mui.js",
 				"css/mui.imageviewer.css",
 				"js/mui.view.js",
 				"README.md",
