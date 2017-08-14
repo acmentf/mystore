@@ -5,9 +5,7 @@ var vm = new Vue({
 		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
-		shootInfos:[{
-
-		}], //存放所有拍摄信息
+		shootInfos:[{}], //存放所有拍摄信息
 		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
@@ -136,7 +134,7 @@ mui('#app').on('tap', '.pssd', function() {
 mui('#app').on('tap', '.addshootinfo', function() {
 	var shootObj = {
 		id:null,
-		photographers:[123,161],
+		photographers:[108,117],
 		journeyName :'',
 		shootTime : '',
 		periodType :'',
@@ -155,15 +153,15 @@ mui('#app').on('tap', '.superscript-xx', function() {
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
-	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
-        //订单Id
-        orderId:'',
-        //拍摄明细ID
-        photoId:[]
-	})
+	console.log('orderId='+vm.orderId)
+	var index = this.getAttribute('data-index');
+	console.log('photoId='+vm.shootInfos[index].photographers)
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
-            photoId: vm.orderId
+	        //订单Id
+	        orderId:vm.orderId,
+	        //拍摄明细ID
+	        photoId:vm.shootInfos[index].photographers
 		})
 	}
 }, false);
@@ -220,11 +218,10 @@ lf.ready(function() {
 //读取页面信息
 function renderTrackInfo(){
 	var orderNo = lf.window.currentWebview().orderNo;
-//	var type = lf.window.currentWebview().type;
+//	var forindex = lf.window.currentWebview().type;
 	vm.forindex = 1
-	vm.forStatus = 'check'
+	vm.forStatus = 'edit'
 	var params = {
-//		orderNo: 10100000002385
 		orderNo: orderNo
 	};
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
@@ -259,31 +256,32 @@ function renderTrackInfo(){
 				groupRoute : data.data.groupRoute,//行程详情
 				exeRemark : data.data.exeRemark//备注信息
 			}
-			data.data.lineSight.forEach(function(val){
-				val.shootTime = lf.util.timeStampToDate2(val.shootTime)
-			})
+			console.log('长度='+JSON.stringify(data.data.lineSight))
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}
-			data.data.lineSight.forEach(function(v){
-				var forLine = {
-					id : v.id,
-					journeyName :v.journeyName,
-					shootTime : v.shootTime,
-					periodType :v.periodType,
-					remark :v.remark,
-				}
-				var forGrapherName = []
-				var forGrapherId = []
-				v.photographers.forEach(function(value){
-					forGrapherId.push(value.id)
-					forGrapherName.push(value.name)
+				data.data.lineSight.forEach(function(v){
+					v.shootTime = lf.util.timeStampToDate2(v.shootTime)
+					var forLine = {
+						id : v.id,
+						journeyName :v.journeyName,
+						shootTime : v.shootTime,
+						periodType :v.periodType,
+						remark :v.remark,
+					}
+					var forGrapherName = []
+					var forGrapherId = []
+					v.photographers.forEach(function(value){
+						forGrapherId.push(value.id)
+						forGrapherName.push(value.name)
+					})
+					forLine.photographers = forGrapherId
+					forLine.photographerNames = forGrapherName.join(',')
+					console.log(JSON.stringify(forLine))
+					vm.shootInfos.push(forLine)
 				})
-				forLine.photographers = forGrapherId
-				forLine.photographerNames = forGrapherName.join(',')
-				console.log(JSON.stringify(forLine))
-				vm.shootInfos.push(forLine)
-			})
+//			}
+
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
