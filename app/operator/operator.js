@@ -155,12 +155,11 @@ mui('#app').on('tap', '.superscript-xx', function() {
 mui('#app').on('tap', '.fpsys', function() {
 	console.log('orderId='+vm.orderId)
 	var index = this.getAttribute('data-index');
-	console.log(JSON.stringify(vm.shootInfos[index].photographers))
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
 	        //订单Id
 	        orderId:vm.orderId,
-	        //拍摄明细ID
+	        //摄影师ID
 	        passBack:vm.shootInfos[index].photographers
 		})
 	}
@@ -293,5 +292,6 @@ lf.event.listener('orderdetails',function(e){
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 lf.event.listener('selectAssignUser',function(e){
-	console.log(e)
+	console.log(JSON.stringify(e.detail))
+	lf.event.fire(lf.window.currentWebview().opener(), 'selectAssignUser', {})
 })
