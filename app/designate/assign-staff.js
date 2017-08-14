@@ -19,7 +19,7 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
     var vmTableView = new Vue({
@@ -27,7 +27,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                    /*{
+                    {
                         group:'A',
                         text:'A'
                     },
@@ -50,7 +50,7 @@ lf.ready(function () {
                         operator:'执行人',
                         state:false,
                         selected:true
-                    }*/
+                    }
                 ]
             }
         },
@@ -151,8 +151,8 @@ lf.ready(function () {
                     return item.selected
                 }).map(function (item) {
                     return {
-                        id:item.id,
-                        name:item.name,
+                        id:item.value,
+                        name:item.text,
                         phone:item.phone
                     }
                 })

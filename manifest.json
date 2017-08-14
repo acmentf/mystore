@@ -344,7 +344,8 @@
 					"app/order/ordersearch.html",
 					"app/common/chooseuser.html",
 					"app/common/plancamera.html",
-					"app/designate/assign-staff.html"
+					"app/designate/assign-staff.html",
+					"app/schedule/summary.html"
 				],
 				"priority": 0
 			},
@@ -615,6 +616,16 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/schedule/summary.html": {
+				"resources": [
+					"css/schedule/summary.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"app/schedule/summary.js"
 				],
 				"refer": [],
 				"priority": 0

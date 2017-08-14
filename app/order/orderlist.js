@@ -405,5 +405,5 @@ lf.event.listener('orderdetails', function(e) {
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })
 lf.event.listener('selectAssignUser',function(e){
-
+     console.log(JSON.stringify(e.detail,null,2))
 })

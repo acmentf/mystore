@@ -16,7 +16,7 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
     var vm = new Vue({

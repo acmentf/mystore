@@ -18,18 +18,19 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
     window.addEventListener('selectAllocationUser',function(event){
-       if(event && event.passPack && event.userList){
-           lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
-           vm[event.passPack] = vm[event.passPack].concat(event.userList.map(function (item) {
-               return {
-                   name:item.name,
-                   phone:item.phone
-               }
-           }))
-       }
+        var detail = event.detail
+        if(detail && detail.passPack && detail.userList){
+            lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
+            vm[detail.passPack] = vm[detail.passPack].concat(detail.userList.map(function (item) {
+                return {
+                    name:item.name,
+                    phone:item.phone
+                }
+            }))
+        }
     });
 
    var vm = new Vue({

@@ -17,7 +17,7 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
     var vmTableView = new Vue({
@@ -124,8 +124,8 @@ lf.ready(function () {
                         return item.selected
                     }).map(function (item) {
                         return {
-                            id:item.id,
-                            name:item.name,
+                            id:item.value,
+                            name:item.text,
                             phone:item.phone
                         }
                     })
