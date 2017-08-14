@@ -293,11 +293,17 @@ mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
         photoId:[]
 	})
 })
-mui('.body').on('tap', '.jidiao', function() { //点击计调
+mui('body').on('tap', '.jidiao', function() { //点击计调
 	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
+	var type = this.getAttribute('data-type')
+	var status = this.getAttribute('data-status')==1?'check' : 'edit'
+	console.log('id............' + orderid)
+	console.log('type.........:' + type)
+	console.log('status.........:' + status)
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid
+			orderNo: orderid,
+			type: type,
+			status: status
 	})
 })
 
@@ -339,9 +345,7 @@ lf.event.listener('orderdetails',function(e){
 	renderOrderDetails();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
-lf.event.listener('selectAssignUser',function(e){
 
-})
 function renderOrderDetails(){
 	var orderId = lf.window.currentWebview().orderNo;
 	var params = {

@@ -182,7 +182,9 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid
+			orderNo: orderid,
+			type: 0,
+			status: 'edit'
 	})
 })
 
