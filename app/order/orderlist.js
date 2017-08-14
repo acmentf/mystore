@@ -170,12 +170,12 @@ mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
 	})
 })
 mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderid = this.getAttribute('data-id');
-	console.log('id:' + orderid)
-	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
-        orderId: orderid,
-        //拍摄明细ID
-        photoId:[]
+	var orderNo = this.getAttribute('data-no');
+	console.log('id:' + orderNo)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderNo,
+			type: 2,
+			status: 'edit'
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
