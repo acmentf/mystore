@@ -269,6 +269,6 @@ lf.event.listener('orderdetails',function(e){
 	renderTrackInfo();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
-lf.event.listener('selectUser',function(e){
+lf.event.listener('selectAssignUser',function(e){
 
 })

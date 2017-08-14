@@ -20,7 +20,7 @@ lf.ready(function () {
     window.addEventListener('pageParams',function(event){
         setPageParams(event)
     });
-    window.addEventListener('selectUser',function(event){
+    window.addEventListener('selectAllocationUser',function(event){
        if(event && event.passPack && event.userList){
            lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
            vm[event.passPack] = vm[event.passPack].concat(event.userList.map(function (item) {

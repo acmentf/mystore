@@ -338,7 +338,7 @@ lf.event.listener('orderdetails',function(e){
 	renderOrderDetails();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
-lf.event.listener('selectUser',function(e){
+lf.event.listener('selectAssignUser',function(e){
 
 })
 function renderOrderDetails(){

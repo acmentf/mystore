@@ -404,6 +404,6 @@ lf.event.listener('orderdetails', function(e) {
 	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })
-lf.event.listener('selectUser',function(e){
+lf.event.listener('selectAssignUser',function(e){
 
 })

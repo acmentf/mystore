@@ -130,7 +130,7 @@ lf.ready(function () {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 mui.toast('分配成功')
-                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
+                lf.event.fire(lf.window.currentWebview().opener(),'selectAssignUser',{
                     passPack:pageParams.passPack,
                     userList:vmTableView.indexedList.filter(function (item) {
                         return item.selected
