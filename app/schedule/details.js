@@ -23,14 +23,14 @@ lf.ready(function () {
         el: '#app',
         data: function () {
             return {
-                name:'张三',
-                area:'西北部',
-                operator:'摄影师',
-                time:'2017-08-10 20:44',
+                name:'',
+                area:'',
+                operator:'',
+                time:'',
                 // 代表作品 图片数组
-                imgs: ['nimei'],
+                imgs: [],
                 // 拍摄总结  string
-                summary: '摄影师摄影师摄影师摄影师<br>摄影师摄影师摄影师摄影师'
+                summary: ''
             }
         },
         methods:{
