@@ -270,7 +270,8 @@ lf.ready(function() {
 	mui('.mui-card').on('tap', '#order-pay-list-btn', function() {
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
-			orderId: orderid
+			orderId: orderid,
+			areaCode: vm.orderInfo.areaCode
 		})
 	})
 })
@@ -346,6 +347,7 @@ function renderOrderDetails(){
 	
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
+			console.log(JSON.stringify(data.data));
 			vm.orderInfo = data.data.orderInfo;	
 			vm.orderTrackInfo = data.data.orderTrackInfo;	
 			vm.photographerInfos = data.data.photographerInfos;

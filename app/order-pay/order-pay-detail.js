@@ -8,6 +8,10 @@ lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
+        payId: lf.window.currentWebview().payId,
+        orderStatus: '',
+        orderNo: '',
+        orderTime: '',
         channelCode: '',
         nums: '',
         amount: '',
@@ -21,7 +25,6 @@ lf.ready(function() {
             4: '8寸',
             5: '6寸'
         },
-        currentOrderId: '',
 
         isPaying: false,
         payType: 0,
@@ -34,9 +37,63 @@ lf.ready(function() {
         el: '#app',
         data: data,
         mounted: function() {
-            
+            var params = {
+                id: this.payId
+            }
+
+            lf.nativeUI.showWaiting();
+    
+            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+                console.log(JSON.stringify(data));
+
+                if(data.code == 200) {
+                    lf.nativeUI.closeWaiting();
+    
+                    vm.orderNo = data.data.orderNo
+                    vm.nums = data.data.nums
+                    vm.amount = data.data.totalAmount
+                    vm.orderStatus = data.data.status
+                    vm.orderTime = data.data.orderTime
+                    vm.channelCode = data.data.channelName
+                    vm.remark = data.data.remark
+                    vm.argDictName = data.data.argDictName
+                    vm.argDictId = data.data.argDictId
+    
+                } else {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(data.msg);
+                }
+    
+            }, function(erro) {
+                lf.nativeUI.closeWaiting();
+                lf.nativeUI.toast(erro.msg);
+            })
         },
         methods: {
+            payStatus: function(status) {
+                switch (status) {
+                    case 1:
+                        return "待支付"
+                    case 2:
+                        return "已支付"
+                    case 3:
+                        return "已取消"
+                    case 4:
+                        return "支付失败"
+                }
+            },
+
+            payStatusClass: function(status) {
+                switch (status) {
+                    case 2:
+                        return "pay-status-paid"
+                    case 1:
+                    case 3:
+                    case 4:
+                        return "pay-status-paying"
+                }
+            },
+
             handlePay: function(payType) {
                 if (!vm.nums){
                     lf.nativeUI.toast('请输入数量')
@@ -81,7 +138,11 @@ lf.ready(function() {
                         this.channelCode = 'alipay'
                         return '支付宝'
                 }
-            }
+            },
+
+            formatterTime: function(time) {
+                return lf.util.timeStampToDate(time)
+            },
         }
     })
 
@@ -116,8 +177,6 @@ lf.ready(function() {
             if(data.code == 200) {
                 lf.nativeUI.closeWaiting();
 
-                vm.currentOrderId = data.data.saleOrderId
-
                 // 轮询支付状态
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
 
@@ -149,7 +208,7 @@ lf.ready(function() {
     // 轮询方法
     function loopCheckPayStatus() {
         var params = {
-            id: vm.currentOrderId
+            id: vm.orderNo
         }
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
