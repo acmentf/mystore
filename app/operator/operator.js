@@ -134,7 +134,7 @@ mui('#app').on('tap', '.pssd', function() {
 mui('#app').on('tap', '.addshootinfo', function() {
 	var shootObj = {
 		id:null,
-		photographers:[108,117],
+		photographers:[],
 		journeyName :'',
 		shootTime : '',
 		periodType :'',
@@ -155,7 +155,7 @@ mui('#app').on('tap', '.superscript-xx', function() {
 mui('#app').on('tap', '.fpsys', function() {
 	console.log('orderId='+vm.orderId)
 	var index = this.getAttribute('data-index');
-	console.log('photoId='+vm.shootInfos[index].photographers)
+	console.log(JSON.stringify(vm.shootInfos[index].photographers))
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
 	        //订单Id
@@ -219,7 +219,7 @@ lf.ready(function() {
 function renderTrackInfo(){
 	var orderNo = lf.window.currentWebview().orderNo;
 //	var forindex = lf.window.currentWebview().type;
-	vm.forindex = 1
+	vm.forindex = 2
 	vm.forStatus = 'edit'
 	var params = {
 		orderNo: orderNo
