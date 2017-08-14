@@ -163,14 +163,14 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 
 
 mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
         orderId: orderid
 	})
 })
 mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
         orderId: orderid,

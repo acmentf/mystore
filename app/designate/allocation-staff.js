@@ -92,7 +92,9 @@ lf.ready(function () {
     });
     function init() {
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('', {}, function (res) {
+        lf.net.getJSON('/order/getAllExecutor', {
+            orderId:pageParams.orderId
+        }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 // console.log(JSON.stringify(res,null,2))
