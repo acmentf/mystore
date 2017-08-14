@@ -130,10 +130,11 @@ lf.ready(function () {
                         }
                     })
                 });
+                lf.window.closeCurrentWebview();
+
             } else {
                 mui.toast(res.msg)
             }
-            lf.window.closeCurrentWebview();
         }, function () {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)

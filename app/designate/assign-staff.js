@@ -111,45 +111,54 @@ lf.ready(function () {
         lf.nativeUI.showWaiting()
         var photographerIdStr = []
         var photographer = []
+        var photoIds = Array.isArray(pageParams.photoId) ? pageParams.photoId : pageParams.photoId ? [pageParams.photoId]:[]
+
         vmTableView.indexedList.filter(function(item) {
             return item.selected
         }).forEach(function (item) {
             photographerIdStr.push(item.value.split('|')[0]||'')
             photographer.push(item.text)
         })
-        lf.net.getJSON('/order/assignOrderPhotographer', {
-            orderId:pageParams.orderId,
-            lineSightDTOS: pageParams.photoId.map(function (id) {
-                return {
-                    id:id,
-                    photographerIdStr:photographerIdStr
+        if(photoIds.length){
+            lf.net.getJSON('/order/assignOrderPhotographer', {
+                orderId:pageParams.orderId,
+                lineSightDTOS: photoIds.map(function (id) {
+                    return {
+                        id:id,
+                        photographerIdStr:photographerIdStr
+                    }
+                }),
+                photographer:photographer
+            }, function (res) {
+                lf.nativeUI.closeWaiting()
+                if (res.code === '200') {
+                    mui.toast('分配成功')
+                    sendSelectAssignUser()
+                } else {
+                    mui.toast(res.msg)
                 }
-            }),
-            photographer:photographer
-        }, function (res) {
-            lf.nativeUI.closeWaiting()
-            if (res.code === '200') {
-                mui.toast('分配成功')
-                lf.event.fire(lf.window.currentWebview().opener(),'selectAssignUser',{
-                    passPack:pageParams.passPack,
-                    userList:vmTableView.indexedList.filter(function (item) {
-                        return item.selected
-                    }).map(function (item) {
-                        return {
-                            id:item.id,
-                            name:item.name,
-                            phone:item.phone
-                        }
-                    })
-                });
-            } else {
+            }, function () {
+                lf.nativeUI.closeWaiting()
                 mui.toast(res.msg)
-            }
+            })
+        }else {
+            sendSelectAssignUser()
+        }
+        function sendSelectAssignUser() {
+            lf.event.fire(lf.window.currentWebview().opener(),'selectAssignUser',{
+                passPack:pageParams.passPack,
+                userList:vmTableView.indexedList.filter(function (item) {
+                    return item.selected
+                }).map(function (item) {
+                    return {
+                        id:item.id,
+                        name:item.name,
+                        phone:item.phone
+                    }
+                })
+            });
             lf.window.closeCurrentWebview();
-        }, function () {
-            lf.nativeUI.closeWaiting()
-            mui.toast(res.msg)
-        })
+        }
     }
     function initTableViewEvent(vm){
         var header = document.querySelector('header.mui-bar');
