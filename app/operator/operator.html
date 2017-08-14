@@ -100,14 +100,17 @@
 		<div id="app" class="mui-content ">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div>
-					<div id="segmentedControl" class="mui-segmented-control">
+					<!--<div id="segmentedControl" class="mui-segmented-control">
 						<a class="mui-control-item mui-active" href="#item1">团信息</a>
 						<a class="mui-control-item" href="#item2">行程信息</a>
 						<a class="mui-control-item" href="#item3">拍摄信息</a>
+					</div>-->
+					<div id="segmentedControl"  class="mui-segmented-control">
+						<a class="mui-control-item" :class="{'mui-active':index == forindex}" :href="'#item'+index" v-for="(data,index) in operatorHeader" v-text="data"></a>
 					</div>
 				</div>
 				<div>
-					<div id="item1" class="mui-control-content mui-active">
+					<div id="item0" :class="{'mui-active':forindex == 0}"  class="mui-control-content">
 						<ul id="list" class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<span>区域</span>
@@ -151,7 +154,7 @@
 							</li>
 						</ul>
 					</div>
-					<div id="item2" class="mui-control-content">
+					<div id="item1" :class="{'mui-active':forindex == 1}" class="mui-control-content">
 						<ul id="list" class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<span>出团日期</span>
@@ -204,7 +207,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="item3" class="mui-control-content" >
+					<div id="item2" :class="{'mui-active':forindex == 2}"  class="mui-control-content" >
 						<ul v-for="(item,index) in shootInfos" class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell superscript">
 								<div class="superscript-img">
@@ -246,7 +249,7 @@
 							<li class="mui-table-view-cell ">
 								<span>摄影师</span>
 								<span class="show-on-right ">
-									<input readonly="readonly" type="text" v-model="item.photographer" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师 >" />
+									<input readonly="readonly" type="text" v-model="item.photographerNames" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师 >" />
 								</span>
 							</li>
 						</ul>

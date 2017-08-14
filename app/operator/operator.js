@@ -1,9 +1,9 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		index :1,
+		forindex: 0,
 		orderId:null,
-		orderHeader: ['团信息', '行程信息', '拍摄信息'],
+		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
 		shootInfos:[{}], //存放所有拍摄信息
 		pullObjects: [],
 		groupInfo:{//存放所有团信息
@@ -27,44 +27,6 @@ var vm = new Vue({
 	}
 })
 
-function getType(index) {
-	var r = "";
-	console.log(index);
-	if(vm.currentRole == 2) {
-		switch(index) {
-			case 1:
-				r = 1;
-				break;
-			case 2:
-				r = 2;
-				break;
-			case 3:
-				r = 3;
-				break;
-			default:
-				break;
-		}
-	} else {
-		switch(index) {
-			case 1:
-				r = 1;
-				break;
-			case 2:
-				r = 2;
-				break;
-			case 3:
-				r = 4;
-				break;
-			case 4:
-				r = 3;
-				break;
-			default:
-				break;
-		}
-	}
-	console.log('r:' + r);
-	return r;
-}
 
 //团队性质
 mui('#app').on('tap', '#showUserPicker', function() {
@@ -161,7 +123,7 @@ mui('#app').on('tap', '.pssd', function() {
 mui('#app').on('tap', '.addshootinfo', function() {
 	var shootObj = {
 		id:null,
-		photographerIds:[],
+		photographers:[123,161],
 		journeyName :'',
 		shootTime : '',
 		periodType :'',
@@ -209,6 +171,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				exeRemark : vm.marchInfo.exeRemark//备注信息
 		}
 	};
+	console.log(JSON.stringify(params.lineSightList))
 
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 		if(data.code == 200) {
@@ -227,9 +190,12 @@ lf.ready(function() {
 
 //读取页面信息
 function renderTrackInfo(){
-//	var orderNo = lf.window.currentWebview().orderNo;
+	var orderNo = lf.window.currentWebview().orderNo;
+//	var type = lf.window.currentWebview().type;
+	vm.forindex = 1
 	var params = {
-		orderNo: 10100000002385
+//		orderNo: 10100000002385
+		orderNo: orderNo
 	};
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
 		if(data.code == 200) {
@@ -274,12 +240,18 @@ function renderTrackInfo(){
 					shootTime : v.shootTime,
 					periodType :v.periodType,
 					remark :v.remark,
-					photographerNames :v.photographerNames,
-					photographerIds : v.photographerIds
 				}
+				var forGrapherName = []
+				var forGrapherId = []
+				v.photographers.forEach(function(value){
+					forGrapherId.push(value.id)
+					forGrapherName.push(value.name)
+				})
+				forLine.photographers = forGrapherId
+				forLine.photographerNames = forGrapherName.join(',')
+				console.log(JSON.stringify(forLine))
 				vm.shootInfos.push(forLine)
 			})
-//			vm.shootInfos = data.data.lineSight
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
