@@ -232,6 +232,13 @@ mui('body').on('tap', '#logout', function() {
 	});
 })
 
+/**
+ * 搜索订单
+ */
+mui('body').on('tap', '#search-order', function() {
+	lf.window.openWindow('search.html','search.html',{})
+})
+
 function switchRolePostion (val) {
 	var params = {
 		positionId: val

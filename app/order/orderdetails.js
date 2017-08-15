@@ -271,7 +271,10 @@ lf.ready(function() {
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
 			orderId: orderid,
-			areaCode: vm.orderInfo.areaCode
+			areaCode: vm.orderInfo.areaCode,
+			tourGuide: vm.orderInfo.tourGuide,
+			purchaser: vm.orderInfo.purchaser,
+			aliasName: vm.orderInfo.aliasName,
 		})
 	})
 })

@@ -13,6 +13,9 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<style>
+			.search-box ::placeholder {
+				color: #fff;
+			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
@@ -21,10 +24,10 @@
 		<div id="app" class="mui-content search">
 		<header class="mui-bar mui-bar-nav search-header" style="display: flex; align-items: center;">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
-			<span class="search-lien"></span>
+			<!-- <span class="search-lien"></span> -->
 			<div class="search-box mui-input-row  group-info">
 				<span class="mui-icon mui-icon-search" style="color: #fff;"></span>
-				<input type="text" v-model="searchText" placeholder="请输入" class="mui-input-clear search-input"/>
+				<input type="text" v-model="searchText" style="color: #fff;" placeholder="请输入" class="mui-input-clear search-input"/>
 			</div>
 		</header>
 		
@@ -36,15 +39,25 @@
 						<span class="right-arrow mui-icon mui-icon-arrowright order-state"></span>
 			    	</div>
 			    	<div class="mui-input-row  group-info">
-				        <label>订单日期</label>
-						<input v-model="orderDate" type="text" class="order-date" readonly="readonly" />
+				        <label>订单开始日期</label>
+						<input v-model="orderTimeBegin" type="text" class="order-date-begin" readonly="readonly" />
 						<span class="order-date right-arrow mui-icon mui-icon-arrowright"></span>
 			    	</div>
 			    	<div class="mui-input-row  group-info">
-				        <label>出团时间</label>
-						<input v-model="teamOutDate" type="text" class="team-out-date" readonly="readonly" />
-						<span class="right-arrow team-out-date mui-icon mui-icon-arrowright"></span>
+				        <label>订单结束日期</label>
+						<input v-model="orderTimeEnd" type="text" class="order-date-end" readonly="readonly" />
+						<span class="order-date right-arrow mui-icon mui-icon-arrowright"></span>
 			    	</div>
+			    	<div class="mui-input-row  group-info">
+				        <label>出团开始时间</label>
+						<input v-model="startBeginTime" type="text" class="team-date-begin" readonly="readonly" />
+						<span class="right-arrow team-out-date mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-input-row  group-info">
+						<label>出团结束时间</label>
+						<input v-model="startEndTime" type="text" class="team-date-end" readonly="readonly" />
+						<span class="right-arrow team-out-date mui-icon mui-icon-arrowright"></span>
+					</div>
 				</div>
 			</div>
 			<div style="text-align: center;">
