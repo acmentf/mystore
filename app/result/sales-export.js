@@ -135,9 +135,14 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 		buyers: vm.buyers,
 		orderXms: orderXms
 	}
-	lf.net.getJSON('order/saveSalesOutput', params, function (res){
+	if(flag){
+		lf.nativeUI.showWaiting()
+		lf.net.getJSON('order/saveSalesOutput', params, function (res){
+		lf.nativeUI.closeWaiting()
 		if(res.code == 200){
-			lf.nativeUI.toast('保存成功')
+			lf.nativeUI.toast('保存成功！');
+			lf.event.fire(lf.window.currentWebview().opener(), 'sss', {})
+			lf.window.closeCurrentWebview();
 		}else {
 			lf.nativeUI.toast(res.msg);
 		}
@@ -145,6 +150,7 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 		lf.nativeUI.closeWaiting()
 		lf.nativeUI.toast(res.msg)
 	})
+	}
 			
 })
 function loadResult(){

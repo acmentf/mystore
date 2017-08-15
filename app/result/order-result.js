@@ -152,14 +152,12 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		}
 	}
 	if(flag){
-		console.log(vm.printOrderXms,'2222222222222222')
 		lf.nativeUI.showWaiting()
 		lf.net.getJSON('order/saveShotOutput', params, function(res) {
 		lf.nativeUI.closeWaiting()
 		if(res.code == 200) {
-			
 			lf.nativeUI.toast('保存成功！');
-//			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.closeCurrentWebview();
 		} else {
 			lf.nativeUI.toast(res.msg);
