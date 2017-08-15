@@ -32,7 +32,7 @@ var vm = new Vue({
 		outPutStatus:'',
 		shotOrderOutput: [], //订单拍摄输出
 		orderdetailShow: false,
-		currentTabIndex: '',
+		currentTabIndex: 1,
 		shotOrderOutput: [],
 		assignedPhotographers:[],
 		temp:[],
@@ -43,6 +43,7 @@ var vm = new Vue({
 		saleOutOrder:false, // 销售输出
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
+		photographerId:'',//当前登录用户的摄影师id
 	}
 })
 
@@ -53,6 +54,9 @@ lf.ready(function() {
 	//saleOutOrder 销售输出
 	//genSale 生成销售
 	//summary 录入心得
+	vm.currentTabIndex = lf.window.currentWebview().index;
+	vm.photograherId = window.Role.photograherId,
+	console.log("当前photograherId"+ vm.photograherId)
 	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
 	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
 	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
@@ -144,31 +148,6 @@ lf.ready(function() {
 		}
 		
 	})
-	/*mui('.popup-mod').on('tap', '.confirm', function() { //点击确认
-	
-			lf.nativeUI.confirm("操作提示", "你确认要执行订单?",  ["确定","取消"] ,function(e){
-		 		if(e.index==0){
-		 			var params = {
-						orderId: vm.currentOrderId,
-						orderState:2,
-						orderNo:vm.currentOrderNo
-					};
-		 			lf.net.getJSON('order/updateOrderState', params, function(data) {
-						if(data.code == 200) {
-							lf.nativeUI.toast("操作成功！");
-							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-							lf.window.closeCurrentWebview();
-						} else {
-							lf.nativeUI.toast(data.msg);
-						}
-					}, function(erro) {
-						lf.nativeUI.toast(erro.msg);
-					});
-		 		}
-			});		
-		
-		
-	})*/
 	
 	mui('.popup-mod').on('tap', '.excuteresult', function() { //点击执行结果
 		var orderid = this.getAttribute('data-orderid');
@@ -306,14 +285,23 @@ mui('body').on('tap', '.jidiao', function() { //点击计调
 mui('.buttons').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('id:' + orderid)
+	console.log('点击心得摄影师id'+JSON.stringify(window.Role.photograherId))
 	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
             orderId: orderid,
-            tourId: tourId
+            tourId: tourId,
+            photographerId: window.Role.photograherId
+	})
+})
+mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一个item跳心得
+	var photographerId = this.getAttribute('data-id');
+	console.log('id:' + orderid)
+	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
+            orderId: vm.currentOrderId,
+            photographerId: photographerId
 	})
 })
 
-mui('.buttons').on('tap', '.outOrder', function() { //点击填写输出信息
+mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
@@ -347,8 +335,6 @@ function renderOrderDetails(){
 	var params = {
 		orderId: orderId
 	};
-	vm.photographerId = window.Role.usercode;
-	
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
 			vm.orderInfo = data.data.orderInfo;	

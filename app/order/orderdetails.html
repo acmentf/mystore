@@ -56,13 +56,13 @@
 
 			<div style="margin-bottom: 0.2rem;">
 				<div id="segmentedControl" class="mui-segmented-control">
-					<a class="mui-control-item mui-active" href="#item1">订单信息</a>
-					<a class="mui-control-item"  href="#item2">计调信息</a>
-					<a class="mui-control-item" href="#item3">拍摄信息</a>
+					<a class="mui-control-item mui-active" :class="{'mui-active':currentTabIndex == 1}" href="#item1">订单信息</a>
+					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 2}" href="#item2">计调信息</a>
+					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 3}" href="#item3">拍摄信息</a>
 				</div>
 			</div>
 			<div>
-				<div id="item1" class="mui-control-content ">
+				<div id="item1" class="mui-control-content" :class="{'mui-active':currentTabIndex == 1}">
 					<div id="scroll" class="mui-scroll-wrapper" style="overflow: visible;">
 						<div class="mui-scroll" style="background: #fff; padding: 0.2rem;">
 							<div class="item colorgray">
@@ -89,7 +89,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="item2" class="mui-control-content">
+				<div id="item2" class="mui-control-content" :class="{'mui-active':currentTabIndex == 2}">
 					<div class="orderaction" style="background: #fff; padding: 0.2rem;">
 						<div class="item assignOrder">
 							执行人
@@ -210,9 +210,9 @@
 					</div>
 
 				</div>
-				<div id="item3" class="mui-control-content   mui-active">
+				<div id="item3" class="mui-control-content" :class="{'mui-active':currentTabIndex == 3}">
 					<div class="mui-card">
-						<div class="mui-card-header" style="padding: 0.2rem;">
+						<div class="mui-card-header outOrder" style="padding: 0.2rem;">
 							<span class="border-left">输出信息</span>
 							<span class="mui-icon mui-icon-arrowright"></span>
 						</div>
@@ -258,7 +258,6 @@
 							<span class="border-left">销售订单</span>
 							<span class="mui-icon mui-icon-arrowright"></span>
 						</div>
-
 					</div>
 					<div class="mui-card">
 						<div class="mui-card-header saleOutOrder" :data-id="currentOrderId" style="padding: 0.2rem;">
@@ -296,15 +295,14 @@
 
 					</div>
 					<div class="mui-card">
-						<div class="mui-card-header" style="padding: 0.2rem;">
+						<div class="mui-card-header summary" style="padding: 0.2rem;">
 							<span class="border-left">摄影心得</span>
 							<span class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content mind" style="padding: 0.2rem;">
-							<div class="item" v-for="item in photographerInfos">
+							<div class="item summary-item" v-for="item in photographerInfos" :data-id="item.id">
 								<div class="name"><span v-text="item.photographerName"></span><span class="ico-pic"></span></div>
-								<div v-text="item.summary">
-								
+								<div v-text="item.summary">			
 								</div>
 								<div class="sepline"></div>
 							</div>					

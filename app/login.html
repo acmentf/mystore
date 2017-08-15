@@ -98,7 +98,8 @@
 							tonken:res.data.token,
 							loginsign: '1',
 							auths: res.data.auths,
-							positions: res.data.userPositionList
+							positions: res.data.userPositionList,
+							photograherId: res.data.photograherId
 						}
 						window.Role.save(obj)
 						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())

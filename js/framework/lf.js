@@ -2364,6 +2364,7 @@ var lf = (function(document, undefined) {
 		loginsign:"",
 		auths:[],
 		positions:[],
+		photograherId:'',
 		init:function(){
 			this._init();
 		},
@@ -2383,6 +2384,7 @@ var lf = (function(document, undefined) {
 					this.loginsign = l.loginsign;
 					this.auths = l.auths;
 					this.positions = l.positions;
+					this.photograherId = l.photograherId;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
@@ -2394,6 +2396,7 @@ var lf = (function(document, undefined) {
 					this.companyId = "";
 					this.auths = [];
 					this.positions = [];
+					this.photograherId = '';
 				}
 			} else {
 				this.loginsign = "";
@@ -2406,6 +2409,7 @@ var lf = (function(document, undefined) {
 				this.companyId = "";
 				this.auths = [];
 				this.positions = [];
+				this.photograherId = '';
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
@@ -2420,6 +2424,7 @@ var lf = (function(document, undefined) {
 			this.loginsign = k.loginsign;
 			this.auths = k.auths;
 			this.positions = k.positions;
+			this.photograherId = k.photograherId;
 			$.storage.put(j, JSON.stringify(k));
 			$.storage.put(s, k.tonken);
 		},

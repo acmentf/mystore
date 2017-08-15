@@ -24,7 +24,7 @@ var vm = new Vue({
 		saleOutOrder:false, // 销售输出
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
-
+		photograherId:'',
 		username: '',
 		rolePositionList: [],
 		rolePositionId: ''
@@ -44,6 +44,8 @@ lf.ready(function() {
 	//saleOutOrder 销售输出
 	//genSale 生成销售
 	//summary 录入心得
+	vm.photograherId = window.Role.photograherId,
+	console.log("当前photograherId"+ JSON.stringify(window.Role))
 	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
 	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
 	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
@@ -103,7 +105,8 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id,
-		index: 2
+		index: 2,
+		photographerId: window.Role.photograherId
 	})
 })
 mui('.order-ul').on('tap', '.qdbtn', function() {
@@ -192,10 +195,11 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('id:' + orderid)
+	console.log('id..............:' + window.Role.photograherId)
 	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
             orderId: orderid,
-            tourId: tourId
+            tourId: tourId,
+            photographerId: window.Role.photograherId
 	})
 })
 
@@ -251,7 +255,8 @@ function switchRolePostion (val) {
 				tonken: data.data.token,
 				loginsign: '1',
 				auths: data.data.auths,
-				positions: data.data.userPositionList
+				positions: data.data.userPositionList,
+				photograherId: data.data.photograherId
 			}
 			window.Role.save(obj)
 			lf.nativeUI.toast('切换岗位成功');
