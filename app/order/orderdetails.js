@@ -230,10 +230,10 @@ lf.ready(function() {
 		 		}
 			});		
 	})
-	mui('.topbar').on('tap', '.mod', function() { //点击拍摄输出
-		var orderid = this.getAttribute('data-orderid');
+	mui('.topbar').on('tap', '.mod', function() { //点击顶部，跳转状态日志页面
+		console.log('状态日志订单id，，，。'+vm.currentOrderId)
 		lf.window.openWindow('order/statuslog.html','../order/statuslog.html',{},{
-			orderNo: orderid
+			orderid: vm.currentOrderId
 		})
 	})
 	mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
@@ -300,7 +300,7 @@ mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一�
 	var photographerId = this.getAttribute('data-photographerId');
 	var userId = this.getAttribute('data-userId');
 	console.log('id:1111111111111' + ','+vm.currentOrderId+ ','+photographerId+ ','+userId)
-	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
+	lf.window.openWindow('schedule/details.html','../schedule/details.html',{},{
             orderId: vm.currentOrderId,
             photographerId: photographerId,
             userId:userId
