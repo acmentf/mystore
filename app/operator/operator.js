@@ -221,6 +221,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 		if(data.code == 200) {
 			lf.nativeUI.toast('保存成功');
+			vm.forStatus = 'check'
 		} else {
 			lf.nativeUI.toast(data.msg);
 		}
