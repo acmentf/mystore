@@ -1,58 +1,73 @@
-var vm = new Vue({
-	el: '#app',
-	data: {
-	    totalCount: 1,
-	    totalPages: 1,
-	    result: [
-	        {
-            id: 123,
-            orderNo: '12312321',
-            status: 1,
-            tourGuide: "张三",
-            tourNo: "UA32123",
-            productName: "测试产品名称测试产品名称测试产品名称测试产品名称测试产品名称测试产品名称测试产品名称测试产品名称测试产品名称",
-            purchaser: "金豆云旅游",
-            totalPrice: 200,
-            tourId: 123,
-			actionStatus:0
-	        }
-	    ]
-	}
-})
-lf.ready(function(){
-	findData()
-})
-var wv = lf.window.currentWebview()
-	console.log(wv)
-	function findData(){
-	//处理搜索
-	var params = {
-		searchText: vm.searchText,
-		status: vm.state.value,
-		currPage: vm.currPage,
-		pageSize : vm.pageSize,
-		orderDate: vm.orderDate,
-		teamOutDate: vm.teamOutDate
-	}
-	console.log(JSON.stringify(params))
-	lf.nativeUI.showWaiting();
-	lf.net.getJSON('/order/search',params,function(data){
-		lf.nativeUI.closeWaiting();
-		if(data.code == "200"){
-			console.log(data.data)
-			if(data.data.result.length > 0){
-				vm.showAnswer = true;
-				vm.orderList = data.data.result;
-			}else{
-				vm.orderList = [];
-				vm.showAnswer = false;
-				lf.nativeUI.toast('查询不到数据');
-			}
-		}else{
-			lf.nativeUI.toast(data.msg);
+lf.ready(function() {
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			searchText: lf.window.currentWebview().searchText,
+			status: lf.window.currentWebview().status,
+			orderTimeBegin: lf.window.currentWebview().orderTimeBegin,
+			orderTimeEnd: lf.window.currentWebview().orderTimeEnd,
+			startBeginTime: lf.window.currentWebview().startBeginTime,
+			startEndTime: lf.window.currentWebview().startEndTime,
+			currPage: lf.window.currentWebview().currPage,
+			pageSize: lf.window.currentWebview().pageSize,
+			orderList: [],
+			isEmpty: false
 		}
-	},function(error){
-		lf.nativeUI.closeWaiting();
-		lf.nativeUI.toast(error.msg);
 	})
-}
+
+	function findData() {
+		vm.currPage++ 
+
+		var self = this
+
+		//处理搜索
+		var params = {
+			searchText: vm.searchText,
+			status: vm.status,
+			orderTimeBegin: vm.orderTimeBegin,
+			orderTimeEnd: vm.orderTimeEnd,
+			startBeginTime: vm.startBeginTime,
+			startEndTime: vm.startEndTime,
+			currPage: vm.currPage,
+			pageSize: vm.pageSize
+		}
+
+		console.log(JSON.stringify(params))
+
+		lf.net.getJSON('/order/search', params, function (data) {
+			
+			console.log(JSON.stringify(data))
+
+			if (data.code == "200") {
+				
+				if (data.data.result.length > 0) {
+					data.data.result.forEach(function(item) {
+						vm.orderList.push(item)
+					})
+					self.endPullupToRefresh(false)
+				} else {
+					vm.isEmpty = true
+					self.endPullupToRefresh(true)
+				}
+
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function (error) {
+			lf.nativeUI.toast(error.msg);
+		})
+	}
+
+	mui.init({
+		pullRefresh : {
+			container: '.search-result',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+			up : {
+				height:50,//可选.默认50.触发上拉加载拖动距离
+				auto:true,//可选,默认false.自动上拉加载一次
+				contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+				contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+				callback : findData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+			}
+		}
+	});
+})

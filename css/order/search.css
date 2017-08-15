@@ -14,7 +14,7 @@
 	width: 80%;
 	display: flex;
 	align-items: center;
-	border-bottom: 1px solid #fff;
+	/* border-bottom: 1px solid #fff; */
 	height: 35px;
 }
 .search-input{
@@ -25,10 +25,19 @@
 	padding: 0!important;
 	margin: 0!important;
 	color: #fff;
+	font-size: 0.3rem;
 }
 .search-order-detail{
 	margin:0.2rem 0;
 }
+.search-order-detail{
+	font-size: 0.3rem;
+	color: #333;
+}
+.search-order-detail input{
+	font-size: 0.3rem;
+}
+
 .right-arrow{
 	position: absolute;
 	top: 0.15rem;

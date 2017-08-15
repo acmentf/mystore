@@ -34,6 +34,7 @@
         payType: 0,
         payName: '',
         loopTime: 2000,
+        loopOrderId: '',
         timer: null
     }
 
@@ -193,6 +194,10 @@
             if(data.code == 200) {
                 lf.nativeUI.closeWaiting();
 
+                vm.loopOrderId = data.data.saleOrderId
+
+                dispatchEvent()
+
                 // 轮询支付状态
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
 
@@ -224,7 +229,7 @@
     // 轮询方法
     function loopCheckPayStatus() {
         var params = {
-            id: vm.orderNo
+            id: vm.loopOrderId
         }
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
@@ -254,7 +259,11 @@
             lf.nativeUI.toast("支付失败");
         }
         
-        lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
+        dispatchEvent()
         lf.window.closeCurrentWebview();
+    }
+
+    function dispatchEvent() {
+        lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
     }
 })
