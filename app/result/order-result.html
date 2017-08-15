@@ -47,11 +47,11 @@
 						<div class="shoot-number">
 							<div class="mui-input-row  group-info">
 						        <label>拍摄张数</label>
-								<input type="text" class="mui-input-clear" placeholder="请填写拍摄张数"/>
+								<input type="text" v-model="shootNum" class="mui-input-clear" placeholder="请填写拍摄张数"/>
 					    	</div>
 					    	<div class="mui-input-row  group-info">
 						        <label>选片张数</label>
-								<input type="text" class="mui-input-clear" placeholder="请填写选片张数"/>
+								<input type="text" v-model="selectsNum" class="mui-input-clear" placeholder="请填写选片张数"/>
 					    	</div>
 						</div>
 					</div>
@@ -79,10 +79,11 @@
 								<label>备注</label>
 							</div>
 							<div class="mui-input-row group-info remark-box">
-								<textarea class="remark-text" placeholder="请输入备注信息"></textarea>
+								<textarea v-model="saleRemark" class="remark-text" placeholder="请输入备注信息"></textarea>
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 				<!--已输出表单E-->
 				<!--未输出表单S-->
@@ -93,13 +94,13 @@
 						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
 			    	</div>
 			    	<div class="shoot-number mui-input-group">
-							<div class="mui-input-row group-info">
-								<label>其他原因</label>
-							</div>
-							<div class="mui-input-row group-info remark-box">
-								<textarea class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
-							</div>
+						<div class="mui-input-row group-info">
+							<label>其他原因</label>
 						</div>
+						<div class="mui-input-row group-info remark-box">
+							<textarea v-model="noOutRemark" class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
+						</div>
+					</div>
 				</div>
 				<!--未输出表单E-->
 			<!--	<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>-->

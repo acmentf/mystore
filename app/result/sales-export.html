@@ -16,7 +16,8 @@
 		</style>
 	</head>
 	<body>
-		<header class="sales-export mui-bar mui-bar-nav">
+		<div class="sale-out">
+			<header class="sales-export mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">销售输出</h1>
 			<span class="save-btn">保存</span>
@@ -57,13 +58,14 @@
 					</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>购买人数</label>
-					<input type="text" class="mui-input-clear" placeholder="请填写购买人数"/>
+					<input type="text" v-model="buyers" class="mui-input-clear" placeholder="请填写购买人数"/>
 		    	</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>销售金额</label>
-					<input type="text" class="mui-input-clear" placeholder="请填写销售总金额"/>
+					<input type="text" v-model="salesAmt" class="mui-input-clear" placeholder="请填写销售总金额"/>
 		    	</div>
 			</div>
+		</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
