@@ -282,7 +282,7 @@ mui('body').on('tap', '.jidiao', function() { //点击计调
 	})
 })
 
-mui('.buttons').on('tap', '.summary', function() { //点击心得
+mui('body').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
 	console.log('点击心得摄影师id'+JSON.stringify(window.Role.photograherId))
@@ -293,11 +293,13 @@ mui('.buttons').on('tap', '.summary', function() { //点击心得
 	})
 })
 mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一个item跳心得
-	var photographerId = this.getAttribute('data-id');
-	console.log('id:' + orderid)
+	var photographerId = this.getAttribute('data-photographerId');
+	var userId = this.getAttribute('data-userId');
+	console.log('id:1111111111111' + ','+vm.currentOrderId+ ','+photographerId+ ','+userId)
 	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
             orderId: vm.currentOrderId,
-            photographerId: photographerId
+            photographerId: photographerId,
+            userId:userId
 	})
 })
 

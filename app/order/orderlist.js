@@ -105,7 +105,7 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 	var id = this.getAttribute('data-id');
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id,
-		index: 2,
+		index: 1,
 		photographerId: window.Role.photograherId
 	})
 })
