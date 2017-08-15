@@ -27,13 +27,13 @@ var vm = new Vue({
 
 		username: '',
 		rolePositionList: [],
-		rolePositionId: '',
-		userroleId: ''
+		rolePositionId: ''
 	},
 	watch: {
 		rolePositionId: function(val) {
 			console.log(val);
 			switchRolePostion(val)
+			return val
 		}
 	}
 })
@@ -57,10 +57,11 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 
-	vm.userroleId = window.Role.userroleId // 岗位id
+	vm.rolePositionId = window.Role.userroleId // 岗位id
 	vm.username = window.Role.username // 用户昵称
 	vm.rolePositionList = window.Role.positions // 岗位列表
 
+	console.log(JSON.stringify(vm.rolePositionList))
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
 		vm.orderList.splice(3,1);
@@ -246,7 +247,7 @@ function switchRolePostion (val) {
 				companyId: data.data.companyId,
 				userrole: data.data.positions[0].type,
 				userroleName: data.data.positions[0].name,
-				userroleId: res.data.positions[0].id,
+				userroleId: data.data.positions[0].id,
 				tonken: data.data.token,
 				loginsign: '1',
 				auths: data.data.auths,
