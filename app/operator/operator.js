@@ -3,11 +3,11 @@ var vm = new Vue({
 	data: {
 		forindex: 0,
 		forStatus:'check',//check是查看，edit是直接能编辑的
-		forGrapher:[],
+//		forGrapher:[],
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
-		shootInfos:[{}], //存放所有拍摄信息
-		pullObjects: [],
+		shootInfos:[{photographerNames:[]}], //存放所有拍摄信息
+//		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
 			groupTypeValue:'',//团队性质的value
@@ -158,8 +158,9 @@ mui('#app').on('tap', '.superscript-xx', function() {
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
-	console.log('orderId='+vm.orderId)
 	var index = this.getAttribute('data-index');
+//	console.log('index='+index)
+//	console.log('vm.shootInfos='+JSON.stringify(vm.shootInfos))
 
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
@@ -169,18 +170,18 @@ mui('#app').on('tap', '.fpsys', function() {
 	        passBack:vm.shootInfos[index].photographers
 		})
 	}
+	var idx = 0
+	var forgraphersId=[{idx:[]}]
+	var forgraphersNames = [{idx:[]}]
 	lf.event.listener('selectAssignUser',function(e){
-		var forgraphersId=[]
-			var forgraphersNames = []
 		e.detail.userList.forEach(function(val){
-
-			forgraphersId.push(val.id)
-			forgraphersNames.push(val.name)
+			forgraphersId[idx].idx.push(val.id)
+			forgraphersNames[idx].idx.push(val.name)
 		})
-		vm.shootInfos[index].photographers = forgraphersId
-		vm.shootInfos[index].photographerNames = forgraphersNames
-		console.log('passBack='+vm.shootInfos[index].photographers)
-		console.log('摄影师姓名='+vm.shootInfos[index].photographerNames)
+		console.log('forgraphersId='+JSON.stringify(forgraphersId))
+		vm.shootInfos[index].photographers = forgraphersId[idx].idx
+		vm.shootInfos[index].photographerNames = forgraphersNames[idx].idx
+		idx ++
 	})
 }, false);
 
