@@ -20,10 +20,7 @@ var vm = new Vue({
 			price: ''
 		}],
 		salesAmt: '',
-		buyers: '',
-		saleRemark: '',
-		saleDate: '',
-		reason:''
+		buyers: ''
 	}
 })
 lf.ready(function(){
@@ -49,6 +46,7 @@ mui('.mui-content').on('tap', '.givesSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.giveOrderXms,index,{
+			fType:'2',
 			picNum: vm.giveOrderXms[index].picNum,
 			picSize: items[0].value,
 			picSizeName: items[0].text
@@ -59,6 +57,7 @@ mui('.mui-content').on('tap', '.salesSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.saleOrderXms,index,{
+			fType:'3',
 			picNum: vm.saleOrderXms[index].picNum,
 			picSize: items[0].value,
 			picSizeName: items[0].text
@@ -92,3 +91,73 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 	vm.giveOrderXms.splice(index,1)
 
 })
+mui('.sale-out').on('tap', '.save-btn', function(){
+	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
+	var params ={
+		salesAmt: vm.salesAmt,
+		buyers: vm.buyers,
+		orderXms: orderXms
+	}
+	var flag = true 
+//	params.saleOrderXms.forEach(function(v){
+//			if(v.picNum){
+//				if(!v.picSize){
+//					lf.nativeUI.toast('请选择销售尺寸')
+//					flag = false;
+//				}
+//			}
+//			if(v.picSize){
+//				if(!v.picNum){
+//					lf.nativeUI.toast('请输入销售张数')
+//				flag = false
+//				}
+//			}
+//		})
+//		params.giveOrderXms.forEach(function(v){
+//			if(v.picNum){
+//				if(!v.picSize){
+//					lf.nativeUI.toast('请选择赠送尺寸')
+//					flag = false;
+//				}
+//			}
+//			if(v.picSize){
+//				if(!v.picNum){
+//					lf.nativeUI.toast('请输入赠送张数')
+//				flag = false
+//				}
+//			}
+//		})
+		console.log(params)
+})
+function loadResult(){
+	var params={
+		orderId:vm.orderId
+	}
+	lf.net.getJSON('/order/getSalesOutput', params, function (res){
+		if(res.code == 200){
+			console.log(res.data)
+			if(res.data == null){
+				return
+			}else{
+				if( !res.data.salesOrderXms ||(res.data.salesOrderXms&&res.data.salesOrderXms.length == 0)){
+					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				}else{
+					vm.saleOrderXms = res.data.salesOrderXms
+				}
+				if(!res.data.shotOrderXms||(res.data.shotOrderXms&&res.data.shotOrderXms.length == 0)){
+					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				}else{
+					vm.giveOrderXms = res.data.shotOrderXms
+				}
+				vm.id = res.data.id
+				vm.buyers = res.data.buyers
+				vm.salesAmt = res.data.salesAmt
+			}
+		}else {
+			lf.nativeUI.toast(res.msg);
+		}
+	}, function(res) {
+		lf.nativeUI.closeWaiting()
+		lf.nativeUI.toast(res.msg)
+	})
+}

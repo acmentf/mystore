@@ -200,7 +200,7 @@ mui('.order-ul').on('tap', '.summary', function() { //点击心得
 })
 
 mui('.order-ul').on('tap', '.outOrder', function() { //点击填写输出信息
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
             orderId: orderid,

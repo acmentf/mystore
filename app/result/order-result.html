@@ -42,16 +42,16 @@
 				</div>
 				<!--//点击切换E-->
 				<!--//已输出表单S-->
-<div v-show="isOut==1">	
+				<div v-show="isOut==1">	
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row  group-info">
 						        <label>拍摄张数</label>
-								<input type="text" placeholder="请填写拍摄张数"/>
+								<input type="text" v-model="shootNum" class="mui-input-clear" placeholder="请填写拍摄张数"/>
 					    	</div>
 					    	<div class="mui-input-row  group-info">
 						        <label>选片张数</label>
-								<input type="text" placeholder="请填写选片张数"/>
+								<input type="text" v-model="selectsNum" class="mui-input-clear" placeholder="请填写选片张数"/>
 					    	</div>
 						</div>
 					</div>
@@ -61,14 +61,16 @@
 								<label>打印张数</label>
 							</div>
 						<div class="mui-input-row group-info give-number" v-for="(v, i) in printOrderXms">
-						<label v-if="i==0" >打印张数：</label>
+						<!--<label v-if="i==0" >打印张数：</label>-->
 						<label v-else >&nbsp;</label>
 						<div class="select" >
 							<input type="text" v-model="v.picSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入打印张数">
+							<input type="number" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入打印张数">
 						</div>
-						<span v-if="i==0"  class=" mui-icon mui-icon-plus add-printsNum add-num"></span>
-						<span v-else style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
+						<span v-if="i!==0"style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
+					</div>
+					<div style="display: flex; justify-content: center;">
+						<button type="button" class="mui-btn  add-printsNum ">添加打印尺寸</button>
 					</div>
 					</div>
 					<div class="mui-input-group">
@@ -77,10 +79,11 @@
 								<label>备注</label>
 							</div>
 							<div class="mui-input-row group-info remark-box">
-								<textarea class="remark-text" placeholder="请输入备注信息"></textarea>
+								<textarea v-model="saleRemark" class="remark-text" placeholder="请输入备注信息"></textarea>
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 				<!--已输出表单E-->
 				<!--未输出表单S-->
@@ -91,13 +94,13 @@
 						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
 			    	</div>
 			    	<div class="shoot-number mui-input-group">
-							<div class="mui-input-row group-info">
-								<label>其他原因</label>
-							</div>
-							<div class="mui-input-row group-info remark-box">
-								<textarea class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
-							</div>
+						<div class="mui-input-row group-info">
+							<label>其他原因</label>
 						</div>
+						<div class="mui-input-row group-info remark-box">
+							<textarea v-model="noOutRemark" class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
+						</div>
+					</div>
 				</div>
 				<!--未输出表单E-->
 			<!--	<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>-->

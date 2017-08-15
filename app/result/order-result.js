@@ -1,44 +1,28 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-//		saleStatus:1,
-		isOut:1,
-		orderId: '',
-		id: '',
-		printOrderXms: [
-		{
-			fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''
-		}
-		],
-		giveOrderXms: [{
-			fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''
-		}],
-		saleOrderXms: [{
-			fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''
-		}],
-		salesAmt: '',
-		buyers: '',
-		saleRemark: '',
-		saleDate: '',
-		reason:''
+		id: '',                      //销售输出ID
+	    orderId: '',                //订单ID
+	    isOut: 1,                    //是否输出   1已输出   2未输出
+	    saleRemark: '',        //备注
+	    reason: '',   	//原因
+	    noOutRemark: '',   // 为输出
+	    saleDate: '',      //销售时间
+	    buyers: '',                 //购买人数
+		salesAmt: '',                //销售额
+		selectsNum: '',				//选片张数
+		shootNum: '',				//拍摄张数
+	    printOrderXms: [             //打印张数
+	        {
+	        	fType: '1',
+				id: '',
+				orderId: '',
+				picNum: '',
+				picSize: '',
+				picSizeName: '',
+				price: ''           //1 打印 2赠送3销售
+	        }
+	    ]
 	},
 	methods: {
 
@@ -68,35 +52,17 @@ lf.ready(function(){
 	reasonPicker = new mui.PopPicker();
 	reasonPicker.setData(['天气原因','道路中断','旅行团未到指定地点','其他']);
 	var wv = lf.window.currentWebview()
-	vm.orderId = wv.orderNo
+	vm.orderId = wv.orderId
 	loadResult()
+	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 //尺寸选择器S
 mui('.mui-content').on('tap', '.printsSize', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.printOrderXms,index,{
+			fType:'1',
 			picNum: vm.printOrderXms[index].picNum,
-			picSize: items[0].value,
-			picSizeName: items[0].text
-		})
-	});
-})
-mui('.mui-content').on('tap', '.givesSize', function() {
-	var index = this.getAttribute('data-index');
-	userPicker.show(function(items) {
-		Vue.set(vm.giveOrderXms,index,{
-			picNum: vm.giveOrderXms[index].picNum,
-			picSize: items[0].value,
-			picSizeName: items[0].text
-		})
-	});
-})
-mui('.mui-content').on('tap', '.salesSize', function() {
-	var index = this.getAttribute('data-index');
-	userPicker.show(function(items) {
-		Vue.set(vm.saleOrderXms,index,{
-			picNum: vm.saleOrderXms[index].picNum,
 			picSize: items[0].value,
 			picSizeName: items[0].text
 		})
@@ -116,26 +82,9 @@ mui('.mui-content').on('tap','.select-reason',function(){
 })
 //尺寸选择器E
 mui('.mui-content').on('tap', '.add-printsNum', function() { //添加打印张数
-	vm.printOrderXms.push({fType: '',
+	vm.printOrderXms.push({
 			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''})
-})
-mui('.mui-content').on('tap', '.add-givesNum', function() { //添加赠送张数
-	vm.giveOrderXms.push({fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''})
-})
-mui('.mui-content').on('tap', '.add-salesNum', function() { //添加销售张数
-	vm.saleOrderXms.push({fType: '',
-			id: '',
+			fType: '1',
 			orderId: '',
 			picNum: '',
 			picSize: '',
@@ -157,51 +106,31 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 
 })
 //移除E
-mui('.mui-content').on('tap', '#save', function(){
-//	var params1 = {
-//		orderId:vm.orderId,
-//		saleStatus:vm.saleStatus,
-//		saleDate:vm.saleDate,
-//		printOrderXms:vm.printOrderXms,
-//		saleOrderXms:vm.saleOrderXms,
-//		giveOrderXms:vm.giveOrderXms,
-//		buyers:vm.buyers,
-//		salesAmt:vm.salesAmt,
-//		remark:vm.remark
-//	}
-//	var params2 = {
-//		orderId:vm.orderId,
-//		saleStatus:vm.saleStatus,
-//		reason:vm.reason,
-//		remark:vm.remark
-//
-//	}
+
+//保存S
+
+mui('.order-result').on('tap', '.save-btn', function(){
 	var params1 = {
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
-		saleDate:vm.saleDate,
-		printOrderXms:vm.printOrderXms,
-		saleOrderXms:vm.saleOrderXms,
-		shotOrderXms:vm.giveOrderXms,
-		buyers:vm.buyers,
-		salesAmt:vm.salesAmt,
+		orderXms:vm.printOrderXms,
+		selectsNum: vm.selectsNum,			
+		shootNum: vm.shootNum,
 		saleRemark:vm.saleRemark
 	}
 	var params2 = {
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
-		noOutReason:vm.reason,
-		saleRemark:vm.saleRemark
+		noOutReason:vm.reason
 
 	}
 	var params
 	if(vm.isOut==1){
 		params = params1
-		var reg= /[^\d]/g;
 		flag = true
-		params.printOrderXms.forEach(function(v){
+		params.orderXms.forEach(function(v){
 			if(v.picNum){
 				if(!v.picSize){
 					lf.nativeUI.toast('请选择打印尺寸')
@@ -215,34 +144,6 @@ mui('.mui-content').on('tap', '#save', function(){
 				}
 			}
 		})
-		params.saleOrderXms.forEach(function(v){
-			if(v.picNum){
-				if(!v.picSize){
-					lf.nativeUI.toast('请选择销售尺寸')
-					flag = false;
-				}
-			}
-			if(v.picSize){
-				if(!v.picNum){
-					lf.nativeUI.toast('请输入销售张数')
-				flag = false
-				}
-			}
-		})
-		params.shotOrderXms.forEach(function(v){
-			if(v.picNum){
-				if(!v.picSize){
-					lf.nativeUI.toast('请选择赠送尺寸')
-					flag = false;
-				}
-			}
-			if(v.picSize){
-				if(!v.picNum){
-					lf.nativeUI.toast('请输入赠送张数')
-				flag = false
-				}
-			}
-		})
 	}else{
 		params = params2
 		flag = true
@@ -250,18 +151,24 @@ mui('.mui-content').on('tap', '#save', function(){
 			lf.nativeUI.toast('请选择原因');
 			return
 		}
-		if(vm.reason == '其他'&&vm.saleRemark==""){
-			lf.nativeUI.toast('请在备注中填写原因');
+		if(vm.reason == '其他'&&vm.noOutRemark==""){
+			lf.nativeUI.toast('请在备注中填写其他原因');
+			return
+		}
+		if(params.reason == '其他'){
+			params.reason = vm.noOutRemark
 			return
 		}
 	}
 	if(flag){
+		console.log(vm.printOrderXms,'2222222222222222')
 		lf.nativeUI.showWaiting()
-		lf.net.getJSON('order/saveSalesOutput', params, function(res) {
+		lf.net.getJSON('order/saveShotOutput', params, function(res) {
 		lf.nativeUI.closeWaiting()
 		if(res.code == 200) {
+			
 			lf.nativeUI.toast('保存成功！');
-			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+//			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.closeCurrentWebview();
 		} else {
 			lf.nativeUI.toast(res.msg);
@@ -276,39 +183,23 @@ function loadResult(){
 	var params={
 		orderId:vm.orderId
 	}
-	lf.net.getJSON('/order/getSalesOutput', params, function (res){
+	lf.net.getJSON('/order/getShotOutput', params, function (res){
 		if(res.code == 200){
-			if(res.data == null){
+			console.log(JSON.stringify(res.data.orderX))
+			if(res.data.orderX == null){
 				return
 			}else{
-				if( !res.data.salesOrderXms ||(res.data.salesOrderXms&&res.data.salesOrderXms.length == 0)){
-					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
-				}else{
-					vm.saleOrderXms = res.data.salesOrderXms
-				}
-				if(!res.data.shotOrderXms||(res.data.shotOrderXms&&res.data.shotOrderXms.length == 0)){
-					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
-				}else{
-					vm.giveOrderXms = res.data.shotOrderXms
-				}
-				if(!res.data.printOrderXms || (res.data.printOrderXms&&res.data.printOrderXms.length == 0)){
+				if(!res.data.orderX.printOrderXms || (res.data.orderX.printOrderXms&&res.data.orderX.printOrderXms.length == 0)){
 					vm.printOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
-					vm.printOrderXms = res.data.printOrderXms
+					vm.printOrderXms = res.data.orderX.printOrderXms
 				}
-				vm.id = res.data.id
-				vm.reason = res.data.noOutReason
-				vm.buyers = res.data.buyers
-				vm.saleRemark = res.data.saleRemark
-				vm.isOut = res.data.isOut == null ? 1 : res.data.isOut 
-				vm.salesAmt = res.data.salesAmt
-				if(res.data.saleDate){
-					res.data.saleDate = lf.util.timeStampToDate2(res.data.saleDate)	
-				}else{
-					res.data.saleDate = ''
-				}
-				
-				vm.saleDate =res.data.saleDate
+				vm.selectsNum = res.data.orderX.selectsNum
+				vm.shootNum = res.data.orderX.shootNum
+				vm.id = res.data.orderX.id
+				vm.reason = res.data.orderX.noOutReason
+				vm.saleRemark = res.data.orderX.saleRemark
+				vm.isOut = res.data.orderX.isOut == null ? 1 : res.data.orderX.isOut 
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);
