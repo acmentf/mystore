@@ -16,8 +16,8 @@
     <h1 class="mui-title">摄影心得</h1>
 </header>
 <div class="mui-content schedule-details" id="app">
-    <div class="title" v-text="area + ' ' + operator + ' : ' + name"></div>
-    <div class="time" v-text="time"></div>
+    <div class="title" v-text="areaName + ' ' + photographer"></div>
+    <div class="time" v-text="createDate"></div>
     <div class="img-wrap">
         <img v-for="item in imgs" :src="item.path" class="pro" data-preview-src="" data-preview-group="1">
     </div>

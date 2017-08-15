@@ -7,7 +7,7 @@
 .order-pay-content .order-pay-paying, .order-pay-content .order-pay-paid {
   margin-top: 20px; }
 .order-pay-content.order-pay-list {
-  margin-bottom: 100px; }
+  margin-bottom: 80px; }
 .order-pay-content .mui-table-view {
   margin-bottom: 20px; }
 .order-pay-content .order-pay-avatar {
@@ -39,9 +39,11 @@
     overflow: hidden;
     background-color: #3db391;
     color: #fff;
-    padding: 10px; }
+    padding: 10px;
+    box-sizing: border-box; }
   .order-pay-content .order-pay-card .order-pay-card-content {
     padding: 10px;
+    box-sizing: border-box;
     background-color: #fff;
     color: #333; }
     .order-pay-content .order-pay-card .order-pay-card-content p {

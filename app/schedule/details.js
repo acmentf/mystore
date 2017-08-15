@@ -1,6 +1,7 @@
 lf.ready(function () {
     var pageParams = {
         orderId: '',
+        userId:'',
         photographerId: ''
     }
     function setPageParams(params) {
@@ -23,10 +24,9 @@ lf.ready(function () {
         el: '#app',
         data: function () {
             return {
-                name:'',
-                area:'',
-                operator:'',
-                time:'',
+                photographer:'',
+                areaName:'',
+                createDate:'',
                 // 代表作品 图片数组
                 imgs: [],
                 // 拍摄总结  string
@@ -39,10 +39,14 @@ lf.ready(function () {
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('/order/getOrderPhotographer', {
                     orderId: pageParams.orderId,
+                    userId:pageParams.userId,
                     photographerId: pageParams.photographerId
                 }, function (res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
+                        self.photographer = res.data.photographer || ''
+                        self.areaName = res.data.areaName || ''
+                        self.createDate = res.data.createDate || ''
                         self.imgs = res.data.imgs || []
                         self.summary = res.data.summary || ''
                     } else {

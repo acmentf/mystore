@@ -96,3 +96,8 @@
 	overflow: hidden;
 	background: #3eb392;
 }
+
+.empty-tips {
+    text-align: center;
+    color: #bbb;
+}

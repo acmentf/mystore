@@ -13,7 +13,7 @@
     }
 
     &.order-pay-list {
-        margin-bottom: 100px;
+        margin-bottom: 80px;
     }
 
     .mui-table-view {
@@ -63,10 +63,12 @@
             background-color: #3db391;
             color: #fff;
             padding: 10px;
+            box-sizing: border-box;
         }
 
         .order-pay-card-content {
             padding: 10px;
+            box-sizing: border-box;
             background-color: #fff;
             color: #333;
             

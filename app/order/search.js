@@ -5,10 +5,12 @@ var vm = new Vue({
 			value: '',
 			text: ''
 		},
-		orderDate:'',
-		teamOutDate: '',
+		orderTimeBegin:'',
+		orderTimeEnd:'',
+		startBeginTime: '',
+		startEndTime: '',
 		searchText: '',
-		currPage: 1,
+		currPage: 0,
 		pageSize: 10
 	}
 })
@@ -33,60 +35,46 @@ mui('.mui-content').on('tap', '.order-state', function() {
 	vm.state.text = items[0].text
 	})
 })
-mui('.mui-content').on('tap', '.order-date', function(){
+
+
+mui('.mui-content').on('tap', '.order-date-begin', function(){
 	picker.show(function(items) {
-		vm.orderDate = items.value
-		console.log(vm.orderDate )
+		vm.orderTimeBegin = items.value
+		console.log(vm.orderTimeBegin)
 	});
 	
 })
-mui('.mui-content').on('tap', '.team-out-date', function(){
+mui('.mui-content').on('tap', '.order-date-end', function(){
 	picker.show(function(items) {
-		vm.teamOutDate = items.value
-		console.log(vm.teamOutDate)
+		vm.orderTimeEnd = items.value
+		console.log(vm.orderTimeEnd)
+	});
+})
+
+mui('.mui-content').on('tap', '.team-date-begin', function(){
+	picker.show(function(items) {
+		vm.startBeginTime = items.value
+		console.log(vm.startBeginTime )
 	});
 	
+})
+mui('.mui-content').on('tap', '.team-date-end', function(){
+	picker.show(function(items) {
+		vm.startEndTime = items.value
+		console.log(vm.startEndTime)
+	});
 })
 
 //点击搜索
 mui('.mui-content').on('tap','#search-btn', function(){
-	lf.window.openWindow('order/search-result.html','../order/search-result.html',{},{
+	lf.window.openWindow('search-result.html','search-result.html',{},{
 		searchText: vm.searchText,
-		stateValue: vm.state.value,
-		orderDate: vm.orderDate,
-		teamOutDate: vm.teamOutDate,
+		status: vm.state.value,
+		orderTimeBegin: vm.orderTimeBegin,
+		orderTimeEnd: vm.orderTimeEnd,
+		startBeginTime: vm.startBeginTime,
+		startEndTime: vm.startEndTime,
 		currPage: vm.currPage,
 		pageSize: vm.pageSize
 	})
 })
-function findData(){
-	//处理搜索
-	var params = {
-		searchText: vm.searchText,
-		status: vm.state.value,
-		currPage: vm.currPage,
-		pageSize : vm.pageSize,
-		orderDate: vm.orderDate,
-		teamOutDate: vm.teamOutDate
-	}
-	console.log(JSON.stringify(params))
-	lf.nativeUI.showWaiting();
-	lf.net.getJSON('/order/search',params,function(data){
-		lf.nativeUI.closeWaiting();
-		if(data.code == "200"){
-			if(data.data.result.length > 0){
-				vm.showAnswer = true;
-				vm.orderList = data.data.result;
-			}else{
-				vm.orderList = [];
-				vm.showAnswer = false;
-				lf.nativeUI.toast('查询不到数据');
-			}
-		}else{
-			lf.nativeUI.toast(data.msg);
-		}
-	},function(error){
-		lf.nativeUI.closeWaiting();
-		lf.nativeUI.toast(error.msg);
-	})
-}
