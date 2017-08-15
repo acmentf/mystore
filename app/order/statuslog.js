@@ -18,7 +18,6 @@ var vm = new Vue({
 
 lf.ready(function() {
 	vm.currentOrderId = lf.window.currentWebview().orderid
-	console.log("接收到的id........." + vm.currentOrderId)
 	getStatusLogList()
 
 })
@@ -31,7 +30,6 @@ function getStatusLogList() {
 	lf.net.getJSON('order/queryOrderLogs', params, function(data) {
 		if(data.code == 200) {
 			if(data.data != '') {
-				console.log("这也能跳进来？")
 				vm.statusData0 = data.data.s0
 				vm.statusData1 = data.data.s1
 				vm.statusData2 = data.data.s2
