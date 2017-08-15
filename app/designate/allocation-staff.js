@@ -1,6 +1,8 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:''
+        passBack:'',
+        //订单Id
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -8,14 +10,14 @@ lf.ready(function () {
                 pageParams[key] = params[key]||''
             }
         })
-        //init()
+        init()
     }
     mui.plusReady(function(){
         var currentWebview = lf.window.currentWebview();
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
     var vmTableView = new Vue({
@@ -23,7 +25,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                    {
+                    /*{
                         group:'A',
                         text:'A'
                     },
@@ -46,23 +48,36 @@ lf.ready(function () {
                         operator:'执行人',
                         state:false,
                         selected:true
-                    },
-                    {
-                        value:'AAT',
-                        tags:'ALeTai',
-                        text:'阿勒泰机场',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人',
-                        state:true,
-                        selected:false
-                    }
+                    }*/
                 ]
             }
         },
         methods: {
             init:function (indexedList) {
-                this.indexedList = indexedList || []
+                var c = ''
+                var list = [];
+                (indexedList || []).map(function (item) {
+                    return {
+                        value:item.id+'',
+                        tags:(item.pyname || '').toUpperCase(),
+                        text:item.name || '',
+                        phone:item.phone || '',
+                        state:false,
+                        selected:false
+                    }
+                }).sort(function (a, b) {
+                    return a.tags.localeCompare(b.tags)
+                }).forEach(function (item) {
+                    if(item.tags[0] !== c){
+                        c = item.tags[0]
+                        list.push({
+                            group:c,
+                            text:c
+                        })
+                    }
+                    list.push(item)
+                })
+                this.indexedList = list
             },
             select:function (index) {
                 this.indexedList[index].selected = true
@@ -77,12 +92,50 @@ lf.ready(function () {
     });
     function init() {
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('', {}, function (res) {
+        lf.net.getJSON('/order/getAllExecutor', {
+            orderId:pageParams.orderId
+        }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                vmTableView.init(res.data.indexedList)
+                // console.log(JSON.stringify(res,null,2))
+                vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
+            }
+        }, function () {
+            lf.nativeUI.closeWaiting()
+            mui.toast(res.msg || '服务器异常')
+        })
+    }
+    function save() {
+        lf.nativeUI.showWaiting()
+        lf.net.getJSON('/order/assignOrderExecutor', {
+            orderId:pageParams.orderId,
+            assignId:vmTableView.indexedList.filter(function(item) {
+               return item.selected
+            }).map(function (item) {
+                return item.value
+            }).join(',')
+        }, function (res) {
+            lf.nativeUI.closeWaiting()
+            if (res.code === '200') {
+                mui.toast('指派成功')
+                lf.event.fire(lf.window.currentWebview().opener(),'selectAllocationUser',{
+                    passBack:pageParams.passBack,
+                    userList:vmTableView.indexedList.filter(function (item) {
+                        return item.selected
+                    }).map(function (item) {
+                        return {
+                            id:item.value,
+                            name:item.text,
+                            phone:item.phone
+                        }
+                    })
+                });
+                lf.window.closeCurrentWebview();
+
+            } else {
+                mui.toast(res.msg || '服务器异常')
             }
         }, function () {
             lf.nativeUI.closeWaiting()
@@ -99,22 +152,11 @@ lf.ready(function () {
         window.indexedList = new mui.IndexedList(list);
 
         operate.addEventListener('tap', function() {
-            var checkedValues = [];
-
-            vm.indexedList.forEach(function(item) {
-                if (item.selected) {
-                    checkedValues.push(item.text);
-                }
+            var bool = vm.indexedList.some(function(item) {
+                return item.selected
             });
-            if (checkedValues.length > 0) {
-                mui.alert('你选择了: ' + checkedValues);
-                lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
-                    passPack:pageParams.passPack,
-                    userList:vm.indexedList.filter(function (item) {
-                        return item.selected
-                    })
-                });
-                lf.window.closeCurrentWebview();
+            if (bool) {
+                save()
             } else {
                 mui.alert('你没选择任何员工');
             }

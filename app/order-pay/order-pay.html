@@ -14,8 +14,9 @@
         <h1 class="mui-title">销售订单</h1>
     </header>
 
-    <div class="mui-content order-pay-content">
-        <div class="mui-content-padded">
+    <div class="mui-content order-pay-content" id="app">
+       
+        <!-- <div class="mui-content-padded">
             <div class="order-pay-header">
                 <p>销售订单：<span>未支付</span></p>
                 <p class="order-pay-clear">
@@ -23,70 +24,63 @@
                     <span class="mui-pull-right">2017-09-09 12:32</span>
                 </p>
             </div>
-        </div>
+        </div> -->
 
         <!--未支付-->
         <div class="order-pay-paying">
             <form class="mui-input-group">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">销售数量</label>
-                    <input type="number" class="mui-input-clear order-pay-list-value" placeholder="请输入销售数量">
                 </div>
 
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">选择尺寸</label>
-                    <select class="order-pay-list-value">
-                        <option value="item-1">请选择尺寸</option>
-                        <option value="item-1">item-1</option>
-                        <option value="item-2">item-2</option>
-                        <option value="item-3">item-3</option>
-                        <option value="item-4">item-4</option>
-                        <option value="item-5">item-5</option>
+                    <select class="order-pay-list-value" v-model="argDictId">
+                        <option value="">请选择尺寸</option>
+                        <option v-for="(value, key) in sizeOptions" :value="key">{{value}}</option>
                     </select>
                 </div>
 
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">数量</label>
-                    <input type="number" class="mui-input-clear order-pay-list-value" placeholder="请输入数量">
+                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="nums" placeholder="请输入数量">
                 </div>
             </form>
 
             <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">销售类型</label>
-                    <select class="order-pay-list-value">
-                        <option value="item-1">请选择销售类型</option>
-                        <option value="item-1">item-1</option>
-                        <option value="item-2">item-2</option>
-                        <option value="item-3">item-3</option>
-                        <option value="item-4">item-4</option>
-                        <option value="item-5">item-5</option>
+                    <select class="order-pay-list-value" v-model="remark">
+                        <option value="">请选择销售类型</option>
+                        <option value="相片">相片</option>
+                        <option value="相框">相框</option>
+                        <option value="相片+相框">相片+相框</option>
                     </select>
                 </div>
             </ul>
 
-            <ul class="mui-table-view">
+            <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">金额</label>
-                    <input type="number" class="mui-input-clear order-pay-list-value" placeholder="请输入销售金额">
+                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="amount" placeholder="请输入销售金额">
                 </div>
             </ul>
 
             <ul class="mui-table-view logout">
-                <li class="mui-table-view-cell">
+                <li class="mui-table-view-cell" @click="handlePay(0)">
                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_cash.png" alt=""> 现金支付</div>
                 </li>
-                <li class="mui-table-view-cell">
+                <li class="mui-table-view-cell" @click="handlePay(1)">
                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_wechat.png" alt=""> 微信支付</div>
                 </li>
-                <li class="mui-table-view-cell">
+                <li class="mui-table-view-cell" @click="handlePay(2)">
                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_alipay.png" alt=""> 支付宝支付</div>
                 </li>
             </ul>
         </div>
 
         <!--已支付  -->
-        <div class="order-pay-paid">
+        <!-- <div class="order-pay-paid">
             <ul class="mui-table-view logout">
                 <li class="mui-table-view-cell">
                     <div class="mui-pull-left order-pay-list-key">销售数量</div>
@@ -105,20 +99,24 @@
                     <div class="mui-pull-right order-pay-list-value"><img class="pay-icon" src="../../css/images/sell_wechat.png" alt=""> 微信支付</div>
                 </li>
             </ul>
+        </div> -->
+
+        <!-- 支付弹窗 -->
+        <div class="order-pay-dialog" v-show="isPaying">
+            <div class="order-pay-dialog-header">
+                <h2>{{payName}}</h2>
+                <p><span>{{amount}}</span>元</p>
+            </div>
+    
+            <div class="order-pay-dialog-qrcode">
+                <div id="qrcode-img" style="margin: 0 auto; width: 200px; padding-top: 50px"></div>
+            </div>
         </div>
+
+        <div class="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:2; background: rgba(0,0,0,.5)"></div>
     </div>
 
-    <!-- 支付弹窗 -->
-    <!-- <div class="order-pay-dialog">
-        <div class="order-pay-dialog-header">
-            <h2>微信支付</h2>
-            <p><span>200</span>元</p>
-        </div>
-
-        <div class="order-pay-dialog-qrcode">
-            <img class="qrcode-img" src="" alt="">
-        </div>
-    </div> -->
+    
 
     <script src="../../js/mui.min.js"></script>
     <script src="../../js/mui.zoom.js"></script>
@@ -126,6 +124,7 @@
     <script src="../../js/framework/define.js"></script>
     <script src="../../js/framework/styles.js"></script>
     <script src="../../js/framework/lf.js"></script>
+    <script src="../../js/framework/qrcode.min.js"></script>
     <script src="../../libs/vue.min.js"></script>
     <script src="./order-pay.js"></script> 
 </body>

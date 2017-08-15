@@ -1,10 +1,10 @@
 lf.ready(function () {
     var pageParams = {
-        passPack:'',
+        passBack:null,
+        //订单Id
         orderId:'',
-        lineSightDTOS:'',
-        photographerIdStr:'',
-        photographer:''
+        //拍摄明细ID
+        photoId:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -19,7 +19,7 @@ lf.ready(function () {
         setPageParams(currentWebview)
     });
     window.addEventListener('pageParams',function(event){
-        setPageParams(event)
+        setPageParams(event.detail)
     });
 
     var vmTableView = new Vue({
@@ -27,10 +27,10 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                   /* {
+                    /*{
                         group:'A',
                         text:'A'
-                    },*/
+                    },
                     {
                         value:'AKU',
                         tags:'AKeSu',
@@ -50,35 +50,34 @@ lf.ready(function () {
                         operator:'执行人',
                         state:false,
                         selected:true
-                    },
-                    {
-                        value:'AAT',
-                        tags:'ALeTai',
-                        text:'阿勒泰机场',
-                        phone:'13264752368',
-                        area:'西北区',
-                        operator:'执行人',
-                        state:true,
-                        selected:false
-                    }
+                    }*/
                 ]
             }
         },
         methods: {
             init:function (indexedList) {
-                var list = (indexedList || []).map(function (item) {
+                var c = ''
+                var list = [];
+                (indexedList || []).map(function (item) {
                     return {
-                        value:item.id,
-                        tags:item.pyname,
-                        text:item.name,
-                        phone:item.phone,
-                        area:'',
-                        operator:'',
-                        state:true,
+                        value:item.id+'',
+                        tags:(item.pyname || '').toUpperCase(),
+                        text:item.name || '',
+                        phone:item.phone || '',
+                        state:false,
                         selected:false
                     }
                 }).sort(function (a, b) {
-                    return a.localeCompare(b)
+                    return a.tags.localeCompare(b.tags)
+                }).forEach(function (item) {
+                    if(item.tags[0] !== c){
+                        c = item.tags[0]
+                        list.push({
+                            group:c,
+                            text:c
+                        })
+                    }
+                    list.push(item)
                 })
                 this.indexedList = list
             },
@@ -95,22 +94,73 @@ lf.ready(function () {
     });
     function init() {
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('/order/getAllPhotographer', {}, function (res) {
+        lf.net.getJSON('/order/getAllPhotographer', {
+            orderId:pageParams.orderId
+        }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                console.log(JSON.stringify(res,null,2))
-                vmTableView.init(res.data.indexedList)
+                // console.log(JSON.stringify(res,null,2))
+                vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
             }
         }, function () {
             lf.nativeUI.closeWaiting()
-            mui.toast(res.msg)
+            mui.toast(res.msg || '服务器异常')
         })
-        // pyname
-        lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
-            console.log(JSON.stringify(res,null,2))
+    }
+    function save() {
+        var photographerIdStr = []
+        var photographer = []
+        var photoIds = Array.isArray(pageParams.photoId) ? pageParams.photoId : pageParams.photoId ? [pageParams.photoId]:[]
+
+        vmTableView.indexedList.filter(function(item) {
+            return item.selected
+        }).forEach(function (item) {
+            photographerIdStr.push(item.value.split('|')[0]||'')
+            photographer.push(item.text)
         })
+        if(photoIds.length){
+            lf.nativeUI.showWaiting()
+            lf.net.getJSON('/order/assignOrderPhotographer', {
+                orderId:pageParams.orderId,
+                lineSightDTOS: photoIds.map(function (id) {
+                    return {
+                        id:id,
+                        photographerIdStr:photographerIdStr
+                    }
+                }),
+                photographer:photographer
+            }, function (res) {
+                lf.nativeUI.closeWaiting()
+                if (res.code === '200') {
+                    mui.toast('分配成功')
+                    sendSelectAssignUser()
+                } else {
+                    mui.toast(res.msg)
+                }
+            }, function () {
+                lf.nativeUI.closeWaiting()
+                mui.toast(res.msg || '服务器异常')
+            })
+        }else {
+            sendSelectAssignUser()
+        }
+        function sendSelectAssignUser() {
+            lf.event.fire(lf.window.currentWebview().opener(),'selectAssignUser',{
+                passBack:pageParams.passBack,
+                userList:vmTableView.indexedList.filter(function (item) {
+                    return item.selected
+                }).map(function (item) {
+                    return {
+                        id:item.value,
+                        name:item.text,
+                        phone:item.phone
+                    }
+                })
+            });
+            lf.window.closeCurrentWebview();
+        }
     }
     function initTableViewEvent(vm){
         var header = document.querySelector('header.mui-bar');
@@ -122,33 +172,11 @@ lf.ready(function () {
         window.indexedList = new mui.IndexedList(list);
 
         operate.addEventListener('tap', function() {
-            var checkedValues = [];
-
-            vm.indexedList.forEach(function(item) {
-                if (item.selected) {
-                    checkedValues.push(item.text);
-                }
+            var bool = vm.indexedList.some(function(item) {
+                return item.selected
             });
-            if (checkedValues.length > 0) {
-                mui.alert('你选择了: ' + checkedValues);
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('/order/assignOrderPhotographer', {}, function (res) {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        lf.event.fire(lf.window.currentWebview().opener(),'selectUser',{
-                            passPack:pageParams.passPack,
-                            userList:vm.indexedList.filter(function (item) {
-                                return item.selected
-                            })
-                        });
-                    } else {
-                        mui.toast(res.msg)
-                    }
-                }, function () {
-                    lf.nativeUI.closeWaiting()
-                    mui.toast(res.msg)
-                })
-                lf.window.closeCurrentWebview();
+            if (bool) {
+                save()
             } else {
                 mui.alert('你没选择任何员工');
             }

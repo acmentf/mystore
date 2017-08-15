@@ -267,34 +267,42 @@ lf.ready(function() {
 	/**
 	 * 查看销售订单
 	 */
-	mui('.mui-card').on('tap', '#order-pay-list-btn', function() { //点击拍摄输出
+	mui('.mui-card').on('tap', '#order-pay-list-btn', function() {
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('order-pay/order-pay-list.html','../order-pay/order-pay-list.html',{},{
-			orderId: orderid
+			orderId: orderid,
+			areaCode: vm.orderInfo.areaCode
 		})
 	})
 })
 
 
 mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-		orderNo: orderid
+        orderId: orderid
 	})
 })
 mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
-	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
-		orderNo: orderid
+	var orderNo = this.getAttribute('data-no');
+	console.log('id:' + orderNo)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderNo,
+			type: 2,
+			status: 'edit'
 	})
 })
-mui('.body').on('tap', '.jidiao', function() { //点击计调
-	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
+mui('body').on('tap', '.jidiao', function() { //点击计调
+	var type = this.getAttribute('data-type')
+	var status = this.getAttribute('data-status')==1?'check' : 'edit'
+	console.log('orderNO............' + vm.currentOrderNo)
+	console.log('type.........:' + type)
+	console.log('status.........:' + status)
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid
+			orderNo: vm.currentOrderNo,
+			type: type,
+			status: status
 	})
 })
 
@@ -346,6 +354,7 @@ function renderOrderDetails(){
 	
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
+			console.log(JSON.stringify(data.data));
 			vm.orderInfo = data.data.orderInfo;	
 			vm.orderTrackInfo = data.data.orderTrackInfo;	
 			vm.photographerInfos = data.data.photographerInfos;

@@ -16,25 +16,19 @@
 
     <div class="mui-content order-pay-content order-pay-list" id="app">
         <div class="mui-content-padded">
-            <div class="order-pay-card">
+
+
+            <div class="order-pay-card" v-for="item in orderPayList" :data-id="item.id">
                 <div class="order-pay-card-header">
-                    <div class="mui-pull-left">订单号：<span>123123123123</span></div>
+                    <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
                 </div>
                 <div class="order-pay-card-content">
-                    <p>生成时间：2017-08-09 <span class="mui-pull-right pay-status-paid">未支付</span></p>
-                    <p>照片张数：8寸 4张 <span class="mui-pull-right">200元</span></p>
+                    <p>生成时间：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
+                    <p>照片张数：{{item.argDictName}} {{item.nums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
                 </div>
             </div>
 
-            <div class="order-pay-card">
-                <div class="order-pay-card-header">
-                    <div class="mui-pull-left">订单号：<span>123123123123</span></div>
-                </div>
-                <div class="order-pay-card-content">
-                    <p>生成时间：2017-08-09 <span class="mui-pull-right pay-status-paying">未支付</span></p>
-                    <p>照片张数：8寸 4张 <span class="mui-pull-right">200元</span></p>
-                </div>
-            </div>
+            <div class="empty-tips" v-show="!orderPayList.length">暂无数据</div>
         </div>
     </div>
 
@@ -50,49 +44,98 @@
     <script src="../../js/framework/lf.js"></script>
     <script src="../../libs/vue.min.js"></script>
     <script>
-        var data = {
-            currentId: lf.window.currentWebview().orderId,
-            orderPayList: [],
-            curPage: 0,
-            pageSize: 10
-        }
-
-        var vm = new Vue({
-            el: '#app',
-            data: data
-        })
-
-        var getOrderPayList = function() {
-            var params = {
-                orderId: vm.currentId,
-                curPage: vm.curPage,
-                pageSize: vm.pageSize
-            }
-            
-            lf.net.getJSON('pay/getOrderList', params, function(data) {
-
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
-                    console.log(JSON.stringify(data));
-                } else {
-                    lf.nativeUI.toast(data.msg);
-                }
-            }, function(erro) {
-                lf.nativeUI.toast(erro.msg);
-            })
-        }
-
-        getOrderPayList()
-
         lf.ready(function() {
-            // Event handle
+            var data = {
+                currentId: lf.window.currentWebview().orderId,
+                areaCode: lf.window.currentWebview().areaCode,
+                orderPayList: [],
+                curPage: 1,
+                pageSize: 10
+            }
+
+            var vm = new Vue({
+                el: '#app',
+                data: data,
+                methods: {
+                    payStatus: function(status) {
+                        switch (status) {
+                            case 1:
+                                return "待支付"
+                            case 2:
+                                return "已支付"
+                            case 3:
+                                return "已取消"
+                            case 4:
+                                return "支付失败"
+                        }
+                    },
+                    formatterTime: function(time) {
+                        return lf.util.timeStampToDate(time)
+                    },
+                    payStatusClass: function(status) {
+                        switch (status) {
+                            case 2:
+                                return "pay-status-paid"
+                            case 1:
+                            case 3:
+                            case 4:
+                                return "pay-status-paying"
+                        }
+                    }
+                }
+            })
+
+            lf.nativeUI.showWaiting();
+            
+
+            function getOrderPayList() {
+                var params = {
+                    orderId: vm.currentId,
+                    curPage: vm.curPage,
+                    pageSize: vm.pageSize
+                }
+
+                lf.net.getJSON('pay/getOrderList', params, function(data) {
+
+                    console.log(JSON.stringify(data));
+
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+
+                        vm.orderPayList = data.data
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
+            }
+
+            getOrderPayList()
+            
+            // 前往销售订单
             var handleGoOrderPayGenerate = function() {
-                lf.window.openWindow('order-pay.html', 'order-pay.html')
+                lf.window.openWindow('order-pay.html', 'order-pay.html', {}, {
+                    orderId: vm.currentId, // 订单ID
+                    areaCode: vm.areaCode // 区域code
+                })
+            }
+
+            var handleGoOrderPayDetail = function() {
+                var id = this.getAttribute('data-id');
+           
+                lf.window.openWindow('order-pay-detail.html', 'order-pay-detail.html', {}, {
+                    orderId: vm.currentId, // 订单ID
+                    areaCode: vm.areaCode, // 区域code
+                    payId: id
+                })
             }
 
             // Add listener
             mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
+            mui('body').on('tap', '.order-pay-card', handleGoOrderPayDetail)
         })
     </script> 
 </body>

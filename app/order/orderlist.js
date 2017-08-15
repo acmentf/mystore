@@ -24,6 +24,17 @@ var vm = new Vue({
 		saleOutOrder:false, // 销售输出
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
+
+		username: '',
+		rolePositionList: [],
+		rolePositionId: ''
+	},
+	watch: {
+		rolePositionId: function(val) {
+			console.log(val);
+			switchRolePostion(val)
+			return val
+		}
 	}
 })
 lf.ready(function() {
@@ -46,6 +57,11 @@ lf.ready(function() {
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 
+	vm.rolePositionId = window.Role.userroleId // 岗位id
+	vm.username = window.Role.username // 用户昵称
+	vm.rolePositionList = window.Role.positions // 岗位列表
+
+	console.log(JSON.stringify(vm.rolePositionList))
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
 		vm.orderList.splice(3,1);
@@ -148,24 +164,28 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 
 
 mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-		orderNo: orderid
+        orderId: orderid
 	})
 })
 mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
-	lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html', {}, {
-		orderNo: orderid
+	var orderNo = this.getAttribute('data-no');
+	console.log('id:' + orderNo)
+	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
+			orderNo: orderNo,
+			type: 2,
+			status: 'edit'
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid
+			orderNo: orderid,
+			type: 0,
+			status: 'edit'
 	})
 })
 
@@ -202,6 +222,49 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
             orderId: orderid,
 	})
 })
+
+mui('body').on('tap', '#logout', function() {
+	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			window.Role.logout();
+			plus.runtime.restart();
+		}
+	});
+})
+
+function switchRolePostion (val) {
+	var params = {
+		positionId: val
+	};
+	lf.nativeUI.showWaiting();
+	lf.net.getJSON('user/switchPosition', params, function(data) {
+		if(data.code == 200) {
+			lf.nativeUI.closeWaiting();
+			var obj = {
+				usercode: data.data.id,
+				username: data.data.name,
+				phone: data.data.phone,
+				companyId: data.data.companyId,
+				userrole: data.data.positions[0].type,
+				userroleName: data.data.positions[0].name,
+				userroleId: data.data.positions[0].id,
+				tonken: data.data.token,
+				loginsign: '1',
+				auths: data.data.auths,
+				positions: data.data.userPositionList
+			}
+			window.Role.save(obj)
+			lf.nativeUI.toast('切换岗位成功');
+		} else {
+			lf.nativeUI.closeWaiting();
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.closeWaiting();
+		lf.nativeUI.toast(erro.msg);
+	})
+}
+
 function dodata(type, index, data) {
 	if(type == 'up') {
 		Vue.set(vm.orderList, index, vm.orderList[index].concat(data))
@@ -343,4 +406,7 @@ lf.event.listener('orderdetails', function(e) {
 	})
 	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
+})
+lf.event.listener('selectAssignUser',function(e){
+     console.log(JSON.stringify(e.detail,null,2))
 })

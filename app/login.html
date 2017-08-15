@@ -80,6 +80,7 @@
 				lf.net.getJSON('/user/login',params,function (res) {
 					lf.nativeUI.closeWaiting();
 					if(res.code == 200) {
+						console.log(JSON.stringify(res.data));
 						if(!res.data.positions || (res.data.positions&&res.data.positions.length <= 0)){
 							lf.nativeUI.toast('无效的用户')
 							return ;
@@ -93,6 +94,7 @@
 							companyId:res.data.companyId,
 							userrole:res.data.positions[0].type,
 							userroleName: res.data.positions[0].name,
+							userroleId: res.data.positions[0].id,
 							tonken:res.data.token,
 							loginsign: '1',
 							auths: res.data.auths,

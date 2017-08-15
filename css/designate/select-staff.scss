@@ -33,7 +33,7 @@ body {
     &:enabled:active{
       color: #fff;
       border: 1px solid $btn-primary;
-      background-color:#fff;
+      background-color: $btn-primary;
     }
   }
   .btn-cancel{
@@ -42,9 +42,9 @@ body {
     border-radius: 0.2rem;
     color: #707070;
     &:enabled:active{
-      color: #fff;
+      color: #707070;
       border: 1px solid $btn-cancel;
-      background-color:#fff;
+      background-color:$btn-cancel;
     }
   }
   .mui-indexed-list{
