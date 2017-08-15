@@ -4,6 +4,7 @@
  * Email: nishu@foxmail.com
  */
 
+ // 废弃
 lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
@@ -29,7 +30,7 @@ lf.ready(function() {
         isPaying: false,
         payType: 0,
         payName: '',
-        loopTime: 3000,
+        loopTime: 2000,
         timer: null
     }
 
@@ -37,6 +38,8 @@ lf.ready(function() {
         el: '#app',
         data: data,
         mounted: function() {
+            if (!this.payId) return
+
             var params = {
                 id: this.payId
             }
@@ -102,6 +105,11 @@ lf.ready(function() {
                 
                 if (!vm.amount){
                     lf.nativeUI.toast('请输入金额')
+                    return
+                }
+
+                if (vm.amount < 0.01){
+                    lf.nativeUI.toast('金额不能小于0.01')
                     return
                 }
                 
@@ -233,6 +241,8 @@ lf.ready(function() {
 
     // 支付回调
     function payCallback(data) {
-        console.log("pay callback");
+        lf.nativeUI.toast("支付成功");
+        lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
+        lf.window.closeCurrentWebview();
     }
 })

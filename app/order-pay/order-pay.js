@@ -4,10 +4,18 @@
  * Email: nishu@foxmail.com
  */
 
-lf.ready(function() {
+ lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
+        payId: lf.window.currentWebview().payId,
+        guideName: lf.window.currentWebview().tourGuide,
+        purchaser: lf.window.currentWebview().purchaser,
+        alias: lf.window.currentWebview().aliasName,
+        orderStatus: '',
+        orderNo: '',
+        channelName: '',
+        orderTime: '',
         channelCode: '',
         nums: '',
         amount: '',
@@ -21,12 +29,11 @@ lf.ready(function() {
             4: '8寸',
             5: '6寸'
         },
-        currentOrderId: '',
 
         isPaying: false,
         payType: 0,
         payName: '',
-        loopTime: 3000,
+        loopTime: 2000,
         timer: null
     }
 
@@ -34,9 +41,67 @@ lf.ready(function() {
         el: '#app',
         data: data,
         mounted: function() {
-            
+            if (!this.payId) return
+
+            var params = {
+                id: this.payId
+            }
+
+            lf.nativeUI.showWaiting();
+    
+            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+                console.log(JSON.stringify(data));
+
+                if(data.code == 200) {
+                    lf.nativeUI.closeWaiting();
+    
+                    vm.orderNo = data.data.orderNo
+                    vm.nums = data.data.nums
+                    vm.amount = data.data.totalAmount
+                    vm.orderStatus = data.data.status
+                    vm.orderTime = data.data.orderTime
+                    vm.remark = data.data.remark
+                    vm.argDictName = data.data.argDictName
+                    vm.argDictId = data.data.argDictId
+
+
+                    vm.channelName = data.data.channelName
+    
+                } else {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(data.msg);
+                }
+    
+            }, function(erro) {
+                lf.nativeUI.closeWaiting();
+                lf.nativeUI.toast(erro.msg);
+            })
         },
         methods: {
+            payStatus: function(status) {
+                switch (status) {
+                    case 1:
+                        return "待支付"
+                    case 2:
+                        return "已支付"
+                    case 3:
+                        return "已取消"
+                    case 4:
+                        return "支付失败"
+                }
+            },
+
+            payStatusClass: function(status) {
+                switch (status) {
+                    case 2:
+                        return "pay-status-paid"
+                    case 1:
+                    case 3:
+                    case 4:
+                        return "pay-status-paying"
+                }
+            },
+
             handlePay: function(payType) {
                 if (!vm.nums){
                     lf.nativeUI.toast('请输入数量')
@@ -45,6 +110,11 @@ lf.ready(function() {
                 
                 if (!vm.amount){
                     lf.nativeUI.toast('请输入金额')
+                    return
+                }
+
+                if (vm.amount < 0.01){
+                    lf.nativeUI.toast('金额不能小于0.01')
                     return
                 }
                 
@@ -81,7 +151,11 @@ lf.ready(function() {
                         this.channelCode = 'alipay'
                         return '支付宝'
                 }
-            }
+            },
+
+            formatterTime: function(time) {
+                return lf.util.timeStampToDate(time)
+            },
         }
     })
 
@@ -104,6 +178,9 @@ lf.ready(function() {
             remark: vm.remark,
             argDictId: vm.argDictId,
             argDictName: vm.sizeOptions[vm.argDictId],
+            guideName: vm.guideName,
+            purchaser: vm.purchaser,
+            alias: vm.alias
         }
 
         console.log(JSON.stringify(params));
@@ -115,8 +192,6 @@ lf.ready(function() {
 
             if(data.code == 200) {
                 lf.nativeUI.closeWaiting();
-
-                vm.currentOrderId = data.data.saleOrderId
 
                 // 轮询支付状态
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
@@ -149,7 +224,7 @@ lf.ready(function() {
     // 轮询方法
     function loopCheckPayStatus() {
         var params = {
-            id: vm.currentOrderId
+            id: vm.orderNo
         }
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
@@ -157,23 +232,29 @@ lf.ready(function() {
 
                 console.log('looping');
                 console.log(JSON.stringify(data.data));
-        
-                // 已支付
-                if (data.data.status == 2) {
-                    // 移除轮询
-                    clearInterval(vm.timer)
 
+                if (data.data.status != 1) {
                     vm.isPaying = false
 
-                    payCallback()
+                    // 移除轮询
+                    clearInterval(vm.timer)
+                    payCallback(data.data.status)
                 }
-                
             }
         })
     }
 
     // 支付回调
     function payCallback(data) {
-        console.log("pay callback");
+        if (data == 2) {
+            lf.nativeUI.toast("支付成功");
+        } else if (data == 3) {
+            lf.nativeUI.toast("支付已取消");
+        } else if (data == 4) {
+            lf.nativeUI.toast("支付失败");
+        }
+        
+        lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
+        lf.window.closeCurrentWebview();
     }
 })

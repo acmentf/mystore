@@ -43,7 +43,11 @@
                 </li>
                 <li class="mui-table-view-cell" v-if="orderStatus == 2">
                     <div class="mui-pull-left order-pay-list-key">支付方式</div>
-                    <div class="mui-pull-right order-pay-list-value"><img class="pay-icon" src="../../css/images/sell_wechat.png" alt=""> 微信支付</div>
+                    <div class="mui-pull-right order-pay-list-value">
+                        <img class="pay-icon" src="../../css/images/sell_wechat.png" v-if="channelName == '微信支付'">
+                        <img class="pay-icon" src="../../css/images/sell_cash.png" v-if="channelName == '现金支付'">
+                        <img class="pay-icon" src="../../css/images/sell_alipay.png" v-if="channelName == '支付宝支付'">
+                        {{channelName}}</div>
                 </li>
             </ul>
 
@@ -83,6 +87,6 @@
     <script src="../../js/framework/lf.js"></script>
     <script src="../../js/framework/qrcode.min.js"></script>
     <script src="../../libs/vue.min.js"></script>
-    <script src="./order-pay-detail.js"></script> 
+    <script src="./order-pay.js"></script> 
 </body>
 </html>

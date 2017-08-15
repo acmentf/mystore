@@ -17,7 +17,6 @@
     <div class="mui-content order-pay-content order-pay-list" id="app">
         <div class="mui-content-padded">
 
-
             <div class="order-pay-card" v-for="item in orderPayList" :data-id="item.id">
                 <div class="order-pay-card-header">
                     <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
@@ -115,18 +114,25 @@
 
             getOrderPayList()
             
-            // 前往销售订单
+            // 生成销售
             var handleGoOrderPayGenerate = function() {
                 lf.window.openWindow('order-pay.html', 'order-pay.html', {}, {
+                    tourGuide: vm.tourGuide,
+                    purchaser: vm.purchaser,
+                    aliasName: vm.aliasName,
                     orderId: vm.currentId, // 订单ID
                     areaCode: vm.areaCode // 区域code
                 })
             }
 
+            // 销售详情
             var handleGoOrderPayDetail = function() {
                 var id = this.getAttribute('data-id');
            
                 lf.window.openWindow('order-pay-detail.html', 'order-pay-detail.html', {}, {
+                    tourGuide: vm.tourGuide,
+                    purchaser: vm.purchaser,
+                    aliasName: vm.aliasName,
                     orderId: vm.currentId, // 订单ID
                     areaCode: vm.areaCode, // 区域code
                     payId: id
@@ -136,6 +142,10 @@
             // Add listener
             mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
             mui('body').on('tap', '.order-pay-card', handleGoOrderPayDetail)
+
+            lf.event.listener('orderPay', function(e) {
+                getOrderPayList()
+            })
         })
     </script> 
 </body>
