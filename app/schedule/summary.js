@@ -3,6 +3,7 @@ lf.ready(function () {
     var pageParams = {
         tourId: '',
         orderId: '',
+        userId:'',
         photographerId: ''
     }
     function setPageParams(params) {
@@ -112,6 +113,7 @@ lf.ready(function () {
                       	lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
                         lf.window.openWindow('schedule/details.html','details.html',{},{
                             orderId: pageParams.orderId,
+                            userId:pageParams.userId,
                             photographerId: pageParams.photographerId
                         },lf.window.currentWebview())
                     } else {
