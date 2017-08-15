@@ -193,12 +193,13 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 })
 
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('id..............:' + window.Role.photograherId)
+	console.log('列表页点击心得' + orderid+'，'+tourId+','+window.Role.usercode+','+window.Role.photograherId)
 	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
             orderId: orderid,
             tourId: tourId,
+            userId: window.Role.usercode,
             photographerId: window.Role.photograherId
 	})
 })

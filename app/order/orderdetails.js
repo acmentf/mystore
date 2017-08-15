@@ -285,10 +285,11 @@ mui('body').on('tap', '.jidiao', function() { //点击计调
 mui('body').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('点击心得摄影师id'+JSON.stringify(window.Role.photograherId))
+	console.log('点击心得摄影师'+vm.currentOrderId+','+vm.currentTourId+','+window.Role.usercode+','+window.Role.photograherId)
 	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
-            orderId: orderid,
-            tourId: tourId,
+            orderId: vm.currentOrderId,
+            tourId: vm.currentTourId,
+            userId: window.Role.usercode,
             photographerId: window.Role.photograherId
 	})
 })
