@@ -321,10 +321,8 @@ mui('.buttons').on('tap', '.outOrder', function() { //点击填写输出信息
 })
 
 mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
-	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
 	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
-            orderId: orderid,
+            orderId: currentOrderId,
 	})
 })
 
