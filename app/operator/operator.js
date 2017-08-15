@@ -235,9 +235,8 @@ lf.ready(function() {
 //读取页面信息
 function renderTrackInfo(){
 	var orderNo = lf.window.currentWebview().orderNo;
-//	var forindex = lf.window.currentWebview().type;
-	vm.forindex = 2
-	vm.forStatus = 'check'
+	vm.forindex = lf.window.currentWebview().type;
+	vm.forStatus = lf.window.currentWebview().status;
 	var params = {
 		orderNo: orderNo
 	};
