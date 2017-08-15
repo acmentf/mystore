@@ -276,19 +276,15 @@ lf.ready(function() {
 	})
 })
 
-
-mui('.buttons').on('tap', '.assignOrder', function() { //点击指派
-	var orderid = this.getAttribute('data-id');
-	console.log('id:' + orderid)
+mui('body').on('tap', '.assignOrder', function() { //点击指派
+	console.log("指派")
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-        orderId: orderid
+        orderId: vm.currentOrderId
 	})
 })
-mui('.buttons').on('tap', '.allotPhotoOrder', function() { //点击分配
-	var orderNo = this.getAttribute('data-no');
-	console.log('id:' + orderNo)
+mui('body').on('tap', '.allotPhotoOrder', function() { //点击分配
 	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderNo,
+			orderNo: vm.currentOrderNo,
 			type: 2,
 			status: 'edit'
 	})
@@ -324,7 +320,7 @@ mui('.buttons').on('tap', '.outOrder', function() { //点击填写输出信息
 	})
 })
 
-mui('.buttons').on('tap', '.saleOutOrder', function() { //点击销售输出
+mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
