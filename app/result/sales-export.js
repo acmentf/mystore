@@ -1,6 +1,8 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		id: '888',
+		orderId: '785',
 		giveOrderXms: [{
 			fType: '',
 			id: '',
@@ -41,6 +43,10 @@ lf.ready(function(){
 		value: '5',
 		text: '6寸'
 	}]);
+	var wv = lf.window.currentWebview()
+//	vm.orderId = wv.orderId
+//	loadResult()
+//	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
 	var index = this.getAttribute('data-index');
@@ -92,42 +98,51 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 
 })
 mui('.sale-out').on('tap', '.save-btn', function(){
+		var flag = true 
+		vm.saleOrderXms.forEach(function(v){
+			if(v.picNum){
+				if(!v.picSize){
+					lf.nativeUI.toast('请选择销售尺寸')
+					flag = false;
+				}
+			}
+			if(v.picSize){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入销售张数')
+				flag = false
+				}
+			}
+		})
+		vm.giveOrderXms.forEach(function(v){
+			if(v.picNum){
+				if(!v.picSize){
+					lf.nativeUI.toast('请选择赠送尺寸')
+					flag = false;
+				}
+			}
+			if(v.picSize){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入赠送张数')
+				flag = false
+				}
+			}
+		})
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
 	var params ={
+		id: vm.id,
+		orderId: vm.orderId,
 		salesAmt: vm.salesAmt,
 		buyers: vm.buyers,
 		orderXms: orderXms
 	}
-	var flag = true 
-//	params.saleOrderXms.forEach(function(v){
-//			if(v.picNum){
-//				if(!v.picSize){
-//					lf.nativeUI.toast('请选择销售尺寸')
-//					flag = false;
-//				}
-//			}
-//			if(v.picSize){
-//				if(!v.picNum){
-//					lf.nativeUI.toast('请输入销售张数')
-//				flag = false
-//				}
-//			}
-//		})
-//		params.giveOrderXms.forEach(function(v){
-//			if(v.picNum){
-//				if(!v.picSize){
-//					lf.nativeUI.toast('请选择赠送尺寸')
-//					flag = false;
-//				}
-//			}
-//			if(v.picSize){
-//				if(!v.picNum){
-//					lf.nativeUI.toast('请输入赠送张数')
-//				flag = false
-//				}
-//			}
-//		})
-		console.log(params)
+	lf.net.getJSON('order/saveSalesOutput', params, function (res){
+		if(res.code == 200){
+			console.log(JSON.stringify(params))
+		}
+	})
+	
+
+		
 })
 function loadResult(){
 	var params={
@@ -135,7 +150,6 @@ function loadResult(){
 	}
 	lf.net.getJSON('/order/getSalesOutput', params, function (res){
 		if(res.code == 200){
-			console.log(res.data)
 			if(res.data == null){
 				return
 			}else{
