@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		id: '',
+		userId: '',
 		orderId: '785',
 		giveOrderXms: [{
 			fType: '',
@@ -46,6 +47,7 @@ lf.ready(function(){
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderId
 	loadResult()
+	vm.userId = wv.userId
 	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
@@ -130,6 +132,7 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
 	var params ={
 		id: vm.id,
+		userId: vm.userId,
 		orderId: vm.orderId,
 		salesAmt: vm.salesAmt,
 		buyers: vm.buyers,
