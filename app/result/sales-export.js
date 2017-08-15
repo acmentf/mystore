@@ -1,7 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		id: '888',
+		id: '',
 		orderId: '785',
 		giveOrderXms: [{
 			fType: '',
@@ -44,9 +44,9 @@ lf.ready(function(){
 		text: '6寸'
 	}]);
 	var wv = lf.window.currentWebview()
-//	vm.orderId = wv.orderId
-//	loadResult()
-//	console.log(JSON.stringify(lf.window.currentWebview()))
+	vm.orderId = wv.orderId
+	loadResult()
+	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
 	var index = this.getAttribute('data-index');
@@ -137,12 +137,15 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 	}
 	lf.net.getJSON('order/saveSalesOutput', params, function (res){
 		if(res.code == 200){
-			console.log(JSON.stringify(params))
+			lf.nativeUI.toast('保存成功')
+		}else {
+			lf.nativeUI.toast(res.msg);
 		}
+	}, function(res) {
+		lf.nativeUI.closeWaiting()
+		lf.nativeUI.toast(res.msg)
 	})
-	
-
-		
+			
 })
 function loadResult(){
 	var params={
@@ -150,22 +153,23 @@ function loadResult(){
 	}
 	lf.net.getJSON('/order/getSalesOutput', params, function (res){
 		if(res.code == 200){
+			console.log(JSON.stringify(res.data.orderX))
 			if(res.data == null){
 				return
 			}else{
-				if( !res.data.salesOrderXms ||(res.data.salesOrderXms&&res.data.salesOrderXms.length == 0)){
+				if( !res.data.orderX.saleOrderXms ||(res.data.orderX.saleOrderXms&&res.data.orderX.saleOrderXms.length == 0)){
 					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
-					vm.saleOrderXms = res.data.salesOrderXms
+					vm.saleOrderXms = res.data.orderX.saleOrderXms
 				}
-				if(!res.data.shotOrderXms||(res.data.shotOrderXms&&res.data.shotOrderXms.length == 0)){
+				if(!res.data.orderX.shotOrderXms||(res.data.orderX.shotOrderXms&&res.data.orderX.shotOrderXms.length == 0)){
 					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
-					vm.giveOrderXms = res.data.shotOrderXms
+					vm.giveOrderXms = res.data.orderX.shotOrderXms
 				}
-				vm.id = res.data.id
-				vm.buyers = res.data.buyers
-				vm.salesAmt = res.data.salesAmt
+				vm.id = res.data.orderX.id
+				vm.buyers = res.data.orderX.buyers
+				vm.salesAmt = res.data.orderX.salesAmt
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);

@@ -54,7 +54,7 @@
 }
 .give-number .add-num{
 	position:absolute;
-	right:0;
+	right:0.15rem;
 	top:0.15rem;
 	color: #97c1e1;
 }

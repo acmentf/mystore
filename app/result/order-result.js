@@ -96,15 +96,6 @@ mui('.mui-content').on('tap', '.remove-printsNum', function(){
 	var index = this.getAttribute('data-index');
 	vm.printOrderXms.splice(index,1)
 })
-mui('.mui-content').on('tap', '.remove-salesNum', function(){
-	var index = this.getAttribute('data-index');
-	vm.saleOrderXms.splice(index,1)
-})
-mui('.mui-content').on('tap', '.remove-givesNum', function(){
-	var index = this.getAttribute('data-index');
-	vm.giveOrderXms.splice(index,1)
-
-})
 //移除E
 
 //保存S
