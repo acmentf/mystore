@@ -28,6 +28,7 @@ var vm = new Vue({
 		username: '',
 		rolePositionList: [],
 		rolePositionId: '',
+		currentRoleId:'',//当前用户角色id
 	},
 	methods: {
 		switchPosition: function() {
@@ -51,7 +52,8 @@ lf.ready(function() {
 		vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
 		vm.summary = window.Role.hasAuth('summary'), // 录入心得
 		vm.currentRole = window.Role.userrole;
-
+	vm.currentRoleId = window.Role.currentPositions[0].roleId;
+	console.log("当前用户的角色id"+vm.currentRoleId)
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
@@ -272,6 +274,7 @@ function switchRolePostion(val) {
 				loginsign: '1',
 				auths: data.data.auths,
 				positions: data.data.userPositionList,
+				currentPositions: data.data.positions,
 				photograherId: data.data.photograherId
 			}
 			window.Role.save(obj)

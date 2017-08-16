@@ -74,6 +74,8 @@ lf.ready(function() {
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback')// 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole=window.Role.userrole;
+	vm.currentRoleId = window.Role.currentPositions[0].roleId;
+	console.log("当前用户的角色id"+vm.currentRoleId)
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
