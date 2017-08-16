@@ -44,6 +44,7 @@ var vm = new Vue({
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
 		photographerId:'',//当前登录用户的摄影师id
+		currentRoleId:'',//当前用户的角色id
 	}
 })
 
