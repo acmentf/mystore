@@ -613,7 +613,15 @@
 					"js/mui.pullToRefresh.js",
 					"js/framework/common.js",
 					"js/mui.pullToRefresh.material.js",
-					"images/order/operator_delete.png"
+					"images/order/operator_delete.png",
+					"js/framework/define.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"
