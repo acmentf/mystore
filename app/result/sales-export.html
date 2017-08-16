@@ -12,7 +12,7 @@
 		<style>
 			html,body,.mui-content{
 				background: #F6F6F6;
-				color:#999;
+				color:#333;
 			}
 			.sales-export ::placeholder{
 				color:#bbb;
@@ -39,7 +39,7 @@
 						<label v-else >&nbsp;</label>
 						<div class="select" >
 							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size givesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入赠送张数">
+							<input type="number"  style="text-align:right" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入赠送张数">
 						</div>
 						<span v-if="i!==0" style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-givesNum"></span>
 					</div>
@@ -56,7 +56,7 @@
 						<label v-else >&nbsp;</label>
 						<div class="select" >
 							<input type="text" v-model="v.picSizeName" :data-index="i"  readonly="readonly" class="select-size salesSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入销售张数">
+							<input type="number"  style="text-align:right" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入销售张数">
 						</div>
 						<span v-if="i!==0"style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-salesNum"></span>
 					</div>
@@ -65,11 +65,11 @@
 					</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>购买人数</label>
-					<input type="number" v-model="buyers"  placeholder="请填写购买人数"/>
+					<input type="number"  style="text-align:right" v-model="buyers"  placeholder="请填写购买人数"/>
 		    	</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>销售金额</label>
-					<input type="number" v-model="salesAmt"  placeholder="请填写销售总金额"/>
+					<input type="number"  style="text-align:right" v-model="salesAmt"  placeholder="请填写销售总金额"/>
 		    	</div>
 			</div>
 		</div>
