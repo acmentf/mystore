@@ -45,7 +45,11 @@
     <script src="../../js/framework/lf.js"></script>
     <script src="../../libs/vue.min.js"></script>
     <script>
-        var data = {
+        
+
+        lf.ready(function() {
+
+            var data = {
             currentId: lf.window.currentWebview().orderId,
             areaCode: lf.window.currentWebview().areaCode,
             orderPayList: [],
@@ -85,8 +89,6 @@
                 }
             }
         })
-
-        lf.ready(function() {
 
             function getOrderPayList() {
                 vm.curPage++
