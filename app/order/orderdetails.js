@@ -311,9 +311,9 @@ mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一�
 
 mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 	var orderid = this.getAttribute('data-no');
-	console.log('点击输出信息currentOrderNo' + vm.currentOrderNo)
+	console.log('点击输出信息currentOrderId' + vm.currentOrderId)
 	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
-            orderId: vm.currentOrderNo,
+            orderId: vm.currentOrderId,
 	})
 })
 
