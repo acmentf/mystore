@@ -249,12 +249,12 @@
 }
 
 .orderlist-content .mui-slider-indicator {
-	padding-bottom: 0.1rem;
+	padding-bottom: 0.02rem;
 	border: none;
 }
 
 .orderlist-content .mui-fullscreen .mui-segmented-control~.mui-slider-group {
-	padding-top: 0.1rem;
+	padding-top: 0.02rem;
 	border: 0;
 }
 

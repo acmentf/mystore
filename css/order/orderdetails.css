@@ -343,6 +343,7 @@
 	width: 0.28rem;
 	height: 0.28rem;
 	display: inline-block;
+	vertical-align: middle;
 }
 .orderdetails .shootinfo .ico-index{
 	background: url(../../images/order/corner.png) no-repeat;

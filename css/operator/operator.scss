@@ -41,6 +41,9 @@
         font-size: 14px;
         color: #A4A4A4;
         max-width: 250px;
+        white-space:nowrap;    //必须
+        overflow:hidden;     //必须
+        text-overflow:ellipsis;    //必须
     }
 }
 

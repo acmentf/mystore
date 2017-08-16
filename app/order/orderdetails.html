@@ -16,7 +16,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">订单详情</h1>
-			<a id="menu" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
+			<a id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 		</header>
 
 		<div id="app" class="mui-content">
@@ -131,8 +131,11 @@
 								<div class="item">
 									<label>导游：</label>
 									<span v-text="orderInfo.tourGuide"></span>
-									<a style="float:right; color: #FF8080; margin-left: 0.1rem;" v-text="orderInfo.tourGuidePhone"></a>
-									<a style="float:right;" class="tel-ico"></a>
+									<a href="'tel://' + orderInfo.tourGuidePhone"  style="float:right; color: #FF8080; margin-left: 0.1rem;" >
+										<span  class="tel-ico"></span>
+										<span v-text="orderInfo.tourGuidePhone"></span>
+									</a>
+									
 								</div>
 
 							</div>

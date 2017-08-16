@@ -11,9 +11,36 @@ lf.ready(function() {
 			currPage: lf.window.currentWebview().currPage,
 			pageSize: lf.window.currentWebview().pageSize,
 			orderList: [],
-			isEmpty: false
+			isEmpty: false,
+
+			cancelRole: false,
+			allotRole: false,
+			assignRole: false,
+			operatorRole: false,
+			currentRole: '',
+			assignOrder:false, //计调、指派 
+			allotPhotoOrder:false, // 分配
+			outOrder:false, // 填写输出信息
+			saleOutOrder:false, // 销售输出
+			genSale:false, // 生成销售
+			summary:false, // 录入心得
+			photograherId: ''
 		}
 	})
+
+	vm.photograherId = window.Role.photograherId
+	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
+	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
+	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
+	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
+	vm.summary=window.Role.hasAuth('summary'), // 录入心得
+	vm.currentRole = window.Role.userrole;
+	
+	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
+	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
+	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
+	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 
 	function findData() {
 		vm.currPage++ 
@@ -70,4 +97,14 @@ lf.ready(function() {
 			}
 		}
 	});
+
+	mui('.order-ul').on('tap', '.tourinfo', function() {
+		console.log('gotoorderdetails')
+		var id = this.getAttribute('data-id');
+		lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
+			orderNo: id,
+			index: 1,
+			photographerId: window.Role.photograherId
+		})
+	})
 })

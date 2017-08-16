@@ -22,51 +22,109 @@
 			<!-- <span class="mui-icon mui-icon-search" style="color: #fff; float: right;"></span> -->
 		</header>
 		<div id="app" class="mui-content search-result mui-scroll-wrapper">
-			<div class="mui-scroll">
-			<div  v-for="(v, i) in orderList">
-				<div class="order-detail">
-					<div class="order-message">
-						<span class="order-number">
-							<span>订单号:</span>
-							<span v-text="v.orderNo"></span>
-						</span>
-						<span v-if="v.status == 1" class="order-state1">待处理</span>
-						<span v-if="v.status == 2" class="order-state2">已完成</span>
-						<span v-if="v.status == 3" class="order-state3">已取消</span>
-					</div>
-					<div class="order-name">
-						<span v-text="v.productName"></span>
-					</div>
-					<div class="tour-message">
-						<div style="padding: 0.15rem 0; display: flex;align-items: center;">
-							<span class="tour-date-icon"></span>
-							<span style="margin-left: 0.2rem;" >出团日期:</span>
-							<span>2017-07-07</span>
-							<span style="margin-left: 0.4rem;">共五天</span>
-						</div>
-						<div style="padding: 0.15rem 0; display: flex;align-items: center;">
-							<span class="tour-path-icon"></span>
-							<span style="margin-left: 0.2rem;" >线路名称：</span>
-							<span>甘南</span>
-						</div>
-						<div style="padding: 0.15rem 0; display: flex;align-items: center;">
-							<span class="tour-number-icon"></span>
-							<span style="margin-left: 0.2rem;" >团队人数：</span>
-							<span>15人</span>
-						</div>
-					</div>
-					<div class="tour-guide">
-						<span class="tour-guide-icon"></span>
-						<span style="margin-left: 0.2rem;" >导游:</span>
-						<span>俞三儿</span>
-						<span>(16456468468)</span>
-					</div>
-					</div>
-					<div class="assign-btn">
-						指派
-					</div>
-				</div>
- 
+			
+		<div class="mui-scroll">
+					<ul class="order-ul">
+						<li class="order-li" v-for="item in orderList">
+							<div class="mui-table title">
+								<div class="mui-clearfix" style="margin-bottom: 0.2rem;">
+									<span class="colorgray">
+									订单号:<i v-text="item.orderNo"></i>
+									</span>
+									<span class="dqr colororange" v-if="item.actionStatus ==0">待处理</span>
+									<span class="dqr colorgreen" v-if="item.actionStatus ==1">已完成计调</span>
+									<span class="dqr colorblue" v-if="item.actionStatus ==2">已分配摄影师</span>
+									<span class="dqr colorpink" v-if="item.actionStatus ==3">正在拍摄中</span>
+									<span class="dqr coloryellow" v-if="item.actionStatus ==4">已完成</span>
+								</div>
+								<div class="item">
+									{{item.productName}}
+								</div>
+
+							</div>
+
+							<div class="nr">
+								<div class="imgbody">
+									<div class="tourinfo" :data-id="item.id">
+										<div class="item">
+											<span class="ico ico-starttime"></span>
+											<span>出团日期: {{item.startTime}}</span>
+											<span>共{{item.groupDays}}天</span>
+										</div>
+										<div class="item">
+											<span class="ico ico-linename"></span> 线路名称: {{item.lineName}}
+										</div>
+										<div class="item">
+											<span class="ico ico-personcount"></span> 团队人数: {{item.personCount}}
+										</div>
+									</div>
+									<div class="item guideinfo">
+										<span class="ico ico-tourguide"></span>
+										<a href='tel:// + item.tourGuidePhone' style=" color: #FF8458; margin-left: 0.1rem;">导游: {{item.tourGuide}}({{item.tourGuidePhone}})</a>
+
+									</div>
+								</div>
+							</div>
+							<div class="button">
+								<!--
+								assignOrder 计调、指派
+								allotPhotoOrder 分配
+								outOrder 填写输出信息
+								saleOutOrder 销售输出
+								genSale 生成销售
+								summary 录入心得
+									-->
+								<button v-if="assignOrder&&item.actionStatus!=4" type="button" class="mui-btn assignOrder" :data-id="item.id" :data-no="item.orderNo">
+											指派
+								</button>
+								<button v-if="assignOrder&&(item.actionStatus!=3||item.actionStatus!=4)" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+											计调
+								</button>
+								<button v-if="allotPhotoOrder&&(item.actionStatus!=0||item.actionStatus!=4)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
+											分配
+								</button>
+								<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
+											录入心得
+								</button>
+								<button v-if="outOrder&&(item.actionStatus!=0||item.actionStatus!=1)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
+											填写输出信息
+								</button>
+								<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo">
+											生成销售
+								</button>
+								<!--<button v-if="item.actionStatus ==0" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+											计调
+									</button>
+									<button v-if="item.actionStatus ==1" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+											分配
+									</button>
+									<button v-if="item.actionStatus ==2" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+											填写输出信息
+									</button>
+									<button v-if="item.actionStatus ==3" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+											填写销售信息
+									</button>
+									<button v-if="item.actionStatus ==4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
+											录入心得
+									</button>-->
+								<!--<div class="btns">
+										<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
+											计调
+										</button>
+										<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
+											取消
+										</button>
+										<button v-if="assignRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
+											指派
+										</button>
+										<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==0" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
+											分配
+										</button>
+									</div>
+								</div>-->
+							</div>
+						</li>
+					</ul>
 			</div>
 
 			<!-- <div class="empty-tips" v-show="currPage == 1 && isEmpty">查询不到数据</div> -->

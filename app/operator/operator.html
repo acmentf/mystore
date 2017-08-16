@@ -128,8 +128,8 @@
 								<li class="mui-table-view-cell ">
 									<span>团队性质</span>
 									<span class="show-on-right ">
-										<input type="text" v-if="forStatus == 'check'" v-model="groupInfo.groupType+' >'" readonly="readonly" class="forinput mui-pull-right"  placeholder=" >" />
-										<input type="text" v-if="forStatus == 'edit'" id='showUserPicker' v-model="groupInfo.groupType+' >'" readonly="readonly" class="forinput mui-pull-right"  placeholder="请选择 >" />
+										<input type="text" v-if="forStatus == 'check'" v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder=" >" />
+										<input type="text" v-if="forStatus == 'edit'" id='showUserPicker' v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder="请选择 >" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell">
@@ -186,21 +186,21 @@
 								<li class="mui-table-view-cell">
 									<span>取片地点</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" v-model="marchInfo.fetchPhotoScene" readonly="readonly" class="forinput mui-pull-right"  />
+										<input type="text" v-if="forStatus == 'check'" v-model="marchInfo.fetchPhotoScene" readonly="readonly" class="forinput mui-pull-right" placeholder="请输入取片地点" />
 										<input type="text" v-else v-model="marchInfo.fetchPhotoScene"  class="forinput mui-pull-right" placeholder="请输入取片地点" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>摄影师预留座位</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'"  v-model="marchInfo.preReservedSeats" readonly="readonly" class="forinput mui-pull-right"/>
+										<input type="text" v-if="forStatus == 'check'"  v-model="marchInfo.preReservedSeats" readonly="readonly" placeholder="请输入座位数" class="forinput mui-pull-right"/>
 										<input type="text" v-else v-model="marchInfo.preReservedSeats"  class="forinput mui-pull-right" placeholder="请输入座位数" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>车牌号码</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" v-model="marchInfo.busCardNo" readonly="readonly" class="forinput mui-pull-right" />
+										<input type="text" v-if="forStatus == 'check'" v-model="marchInfo.busCardNo" readonly="readonly" placeholder="请输入车牌号码"  class="forinput mui-pull-right" />
 										<input type="text" v-else v-model="marchInfo.busCardNo"  class="forinput mui-pull-right" placeholder="请输入车牌号码" />
 									</span>
 								</li>
@@ -208,14 +208,14 @@
 							<div class="mui-input-group">
 								<div class="mui-input-row remark">
 									<p class="remarkTitle">行程详情</p>
-									<textarea v-if="forStatus == 'check'"  v-model="marchInfo.groupRoute" readonly="readonly"  class="remark-text" rows="4" ></textarea>
+									<textarea v-if="forStatus == 'check'"  v-model="marchInfo.groupRoute" readonly="readonly" placeholder="请输入行程详情" class="remark-text" rows="4" ></textarea>
 									<textarea v-else  v-model="marchInfo.groupRoute" class="remark-text" rows="4" placeholder="请输入行程详情"></textarea>
 								</div>
 							</div>
 							<div class="mui-input-group">
 								<div class="mui-input-row remark">
 									<p class="remarkTitle">备注</p>
-									<textarea v-if="forStatus == 'check'" readonly="readonly"  v-model="marchInfo.exeRemark" class="remark-text" rows="4" ></textarea>
+									<textarea v-if="forStatus == 'check'" readonly="readonly"  v-model="marchInfo.exeRemark" placeholder="请输入备注信息" class="remark-text" rows="4" ></textarea>
 									<textarea v-else v-model="marchInfo.exeRemark" class="remark-text" rows="4" placeholder="请输入备注信息"></textarea>
 								</div>
 							</div>
@@ -234,7 +234,7 @@
 								<li class="mui-table-view-cell">
 									<span>拍摄景点</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' class="forinput mui-pull-right" />
+										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请输入景点名称" class="forinput mui-pull-right" />
 										<input type="text" v-else  v-model='item.journeyName' class="forinput mui-pull-right"  placeholder="请输入景点名称"/>
 									</span>
 								</li>
@@ -264,7 +264,7 @@
 								<li class="mui-table-view-cell ">
 									<span>摄影师</span>
 									<span class="show-on-right ">
-										<input required="required" readonly="readonly" :data-index="index" type="text" v-model="item.photographerNames +'>'" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师 >" />
+										<input  readonly="readonly" :data-index="index" type="text" v-model="item.photographerNames" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师 >" />
 									</span>
 								</li>
 							</ul>

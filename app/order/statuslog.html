@@ -17,20 +17,40 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">状态日志</h1>
 		</header>
-		<div class="mui-content statuslog">
-			<div class="item">
-				<div class="title">订单已分配摄影师</div>
-				<div class="detail">
-					<div class="time"><span class="dot"></span>2014-01-01</div>
-					<div class="name">所有页面</div>
+		<div class="mui-content statuslog" id="app" >
+			<div class="item" v-if="statusData4Show">
+				<div class="title">订单已完成</div>
+				<div class="detail"  v-for="item in statusData4">
+					<div class="time"><span class="dot"></span><span v-text="item.createTime">{{item.createTime}}</span></div>
+					<div class="name" v-text="item.remark"></div>
 				</div>
 			</div>
-			
-			<div class="item">
+			<div class="item" v-if="statusData3Show" >
+				<div class="title">订单已完成拍照</div>
+				<div class="detail" v-for="item in statusData3">
+					<div class="time"><span class="dot"></span><span v-text="item.createTime"></span></div>
+					<div class="name" v-text="item.remark"></div>
+				</div>
+			</div>
+			<div class="item" v-if="statusData2Show" >
 				<div class="title">订单已分配摄影师</div>
-				<div class="detail">
-					<div class="time"><span class="dot-gray"></span>2014-01-01</div>
-					<div class="name">所有页面</div>
+				<div class="detail" v-for="item in statusData2">
+					<div class="time"><span class="dot"></span><span v-text="item.createTime"></span></div>
+					<div class="name" v-text="item.remark"></div>
+				</div>
+			</div>
+			<div class="item" v-if="statusData1Show" >
+				<div class="title">已完成计调</div>
+				<div class="detail" v-for="item in statusData1">
+					<div class="time"><span class="dot"></span><span v-text="item.createTime"></span></div>
+					<div class="name" v-text="item.remark"></div>
+				</div>
+			</div>
+			<div class="item" v-if="statusData0Show" >
+				<div class="title">订单待处理</div>
+				<div class="detail" v-for="item in statusData0">
+					<div class="time"><span class="dot"></span><span v-text="item.createTime"></span></div>
+					<div class="name" v-text="item.remark"></div>
 				</div>
 			</div>
 		</div>
