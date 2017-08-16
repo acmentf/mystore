@@ -4,6 +4,7 @@
 	overflow: hidden;
 	height: 1.8rem;
 	background: #fff;
+	margin-top: 44px;
 }
 
 .orderdetails .topbar .mod {
@@ -71,6 +72,7 @@
 
 .orderdetails .mui-card {
 	margin: 0 0 0.2rem 0;
+	box-shadow: none;
 }
 
 .orderdetails .mui-card .mui-card-header {
@@ -237,6 +239,10 @@
 	color: #C2CACC;
 }
 .orderdetails .buttons{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 	text-align: right;
 	background: #fff;	
 }

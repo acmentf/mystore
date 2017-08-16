@@ -2,9 +2,7 @@ lf.ready(function () {
     var pageParams = {
         passBack:'',
         //订单Id
-        orderId: '',
-        //员工id列表
-        staffList:[]
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -64,8 +62,9 @@ lf.ready(function () {
                         tags:(item.pyname || '').toUpperCase(),
                         text:item.name || '',
                         phone:item.phone || '',
+                        roleName:item.roleName || '',
                         state:false,
-                        selected:false
+                        selected:!!item.assignState
                     }
                 }).sort(function (a, b) {
                     return a.tags.localeCompare(b.tags)
@@ -133,7 +132,8 @@ lf.ready(function () {
                         return {
                             id:item.value,
                             name:item.text,
-                            phone:item.phone
+                            phone:item.phone,
+                            roleName:item.roleName
                         }
                     })
                 });

@@ -18,20 +18,21 @@
 <div class="mui-content designate-designate" id="app">
     <div class="item-block">
         <div class="head-bar">
-            <span class="title">执行人</span>
+            <span class="title">指派人</span>
             <button type="button" class="mui-btn btn-designate" data-type="executorList">+ 指派</button>
         </div>
         <div class="body-main">
             <template v-if="executorList.length > 0">
                 <div class="item" v-for="(item,index) in executorList">
                     <span class="text-name" v-text="item.name"></span>
+                    <span class="text-info" v-text="item.roleName"></span>
                     <span class="text-info" v-text="item.phone"></span>
                 </div>
             </template>
             <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
-    <div class="item-block" v-if="false">
+    <div class="item-block" style="display: none">
         <div class="head-bar">
             <span class="title">输出</span>
             <button type="button" class="mui-btn btn-designate" data-type="outputList">+ 指派</button>
@@ -46,7 +47,7 @@
             <div v-else class="empty" v-text="emptyTip"></div>
         </div>
     </div>
-    <div class="item-block"  v-if="false">
+    <div class="item-block"  style="display: none">
         <div class="head-bar">
             <span class="title">销售</span>
             <button type="button" class="mui-btn btn-designate" data-type="salesList">+ 指派</button>
