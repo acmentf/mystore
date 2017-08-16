@@ -27,13 +27,11 @@ var vm = new Vue({
 		photograherId:'',
 		username: '',
 		rolePositionList: [],
-		rolePositionId: ''
+		rolePositionId: '',
 	},
-	watch: {
-		rolePositionId: function(val) {
-			console.log(val);
-			switchRolePostion(val)
-			return val
+	methods: {
+		switchPosition: function() {
+			switchRolePostion(this.rolePositionId)
 		}
 	}
 })
@@ -250,6 +248,7 @@ function switchRolePostion (val) {
 	};
 	lf.nativeUI.showWaiting();
 	lf.net.getJSON('user/switchPosition', params, function(data) {
+		console.log(JSON.stringify(data));
 		if(data.code == 200) {
 			lf.nativeUI.closeWaiting();
 			var obj = {
@@ -268,6 +267,7 @@ function switchRolePostion (val) {
 			}
 			window.Role.save(obj)
 			lf.nativeUI.toast('切换岗位成功');
+			
 		} else {
 			lf.nativeUI.closeWaiting();
 			lf.nativeUI.toast(data.msg);
