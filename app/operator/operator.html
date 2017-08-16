@@ -266,7 +266,7 @@
 									<span class="show-on-right ">
 										<input  readonly="readonly" :data-index="index" type="text" v-model="item.photographerNames" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师" />
 									</span>
-									<span class="mui-icon mui-icon-arrowright"></span>
+									<span v-if="currentRoleId==5" class="mui-icon mui-icon-arrowright"></span>
 								</li>
 							</ul>
 							<button type="button" v-if="forStatus == 'edit'" class="mui-btn mui-btn-block addshootinfo" >+添加拍摄点</button>

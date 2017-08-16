@@ -1,6 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		currentRoleId:'',
 		forindex: 0,
 		orderNo:null,
 		forStatus:'check',//check是查看，edit是直接能编辑的
@@ -152,6 +153,9 @@ mui('#app').on('tap', '.superscript-xx', function() {
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
+	if(vm.currentRoleId!==5){
+		return
+	}
 	var index = this.getAttribute('data-index');
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
@@ -230,6 +234,11 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 })
 
 lf.ready(function() {
+//	vm.currentRole = window.Role.userrole;
+	if(window.Role.currentPositions.length>0){
+			vm.currentRoleId = window.Role.currentPositions[0].roleId;
+			console.log("当前用户的角色id"+vm.currentRoleId)
+	}
 	renderTrackInfo();
 })
 

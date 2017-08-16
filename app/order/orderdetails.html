@@ -94,14 +94,14 @@
 					<div class="orderaction" style="background: #fff; padding: 0.2rem;">
 						<div class="item assignOrder">
 							执行人
-							<span class="mui-icon mui-icon-arrowright" style="float: right;"></span>
+							<span v-if="currentRoleId == 4" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
 							<div v-if="!orderTrackInfo.assignNames" class="name">尚未指派</div>
 							<div v-if="orderTrackInfo.assignNames != ''" class="name assign-name" v-text="orderTrackInfo.assignNames"></div>
 						</div>
 						<div class="sepline"></div>
 						<div class="item allotPhotoOrder">
 							摄影师
-							<span class="mui-icon mui-icon-arrowright" style="float: right;"></span>
+							<span v-if="currentRoleId == 5" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
 							<div v-if="assignedPhotographersString == ''" class="name">尚未分配</div>
 							<div v-if="assignedPhotographersString != ''" class="name assign-name" v-text="assignedPhotographersString"></div>
 						</div>
@@ -110,7 +110,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='0' :data-status="1">
 							<span class="border-left">团信息</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId ==4||currentRoleId==2" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
@@ -147,7 +147,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='1' :data-status="1">
 							<span class="border-left">行程信息</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId ==4||currentRoleId==2"  class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
@@ -192,7 +192,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='2' :data-status="1">
 							<span class="border-left">拍摄信息</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId ==4||currentRoleId==2||currentRoleId==5"  class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner shootinfo">
@@ -219,7 +219,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header outOrder" style="padding: 0.2rem;">
 							<span class="border-left">输出信息</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==5||currentRoleId==8" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div v-if="orderResult.isOut ==1">
@@ -260,13 +260,13 @@
 					<div class="mui-card" style="margin-bottom: 0;">
 						<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="currentOrderId" style="padding: 0.2rem;">
 							<span class="border-left">销售订单</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==4||currentRoleId==9" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 					</div>
 					<div class="mui-card">
 						<div class="mui-card-header saleOutOrder" :data-id="currentOrderId" style="padding: 0.2rem;">
 							<span class="border-left">销售信息</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==4||currentRoleId==9" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content" style="padding: 0.2rem;">
 							<div class="item">
@@ -301,7 +301,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header summary" style="padding: 0.2rem;">
 							<span class="border-left">摄影心得</span>
-							<span class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==3||currentRoleId==5" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content mind" style="padding: 0.2rem;">
 							<div class="item summary-item" v-for="item in photographerInfos" :data-userId="item.userId" :data-photographerId="item.photographerId">
