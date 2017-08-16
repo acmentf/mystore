@@ -7,6 +7,11 @@
     <link href="../../css/mui.min.css" rel="stylesheet" />
     <link href="../../css/app.css" rel="stylesheet"/>
     <link href="../../css/order-pay/order-pay.css" rel="stylesheet"/>
+    <style>
+        .hide {
+            display: none
+        }
+    </style>
 </head>
 <body>
     <header id="order-pay-header" class="mui-bar mui-bar-nav">
@@ -102,7 +107,7 @@
         </div> -->
 
         <!-- 支付弹窗 -->
-        <div class="order-pay-dialog" v-show="isPaying">
+        <div class="order-pay-dialog hide" id="pay-dialog" v-show="isPaying">
             <div class="order-pay-dialog-header">
                 <h2>{{payName}}</h2>
                 <p><span>{{amount}}</span>元</p>
@@ -113,7 +118,7 @@
             </div>
         </div>
 
-        <div class="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:2; background: rgba(0,0,0,.5)"></div>
+        <div class="pay-mask hide" id="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:2; background: rgba(0,0,0,.5)"></div>
     </div>
 
     

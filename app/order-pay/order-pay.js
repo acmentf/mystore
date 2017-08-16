@@ -4,7 +4,7 @@
  * Email: nishu@foxmail.com
  */
 
-//  lf.ready(function() {
+ lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
@@ -42,6 +42,9 @@
         el: '#app',
         data: data,
         mounted: function() {
+            document.getElementById("pay-dialog").classList.remove("hide");
+            document.getElementById("pay-mask").classList.remove("hide");
+
             if (!this.saleOrderId) return
 
             var params = {
@@ -49,35 +52,33 @@
             }
 
             lf.nativeUI.showWaiting();
-    
-            lf.ready(function() {
-                lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-                    console.log(JSON.stringify(data));
-    
-                    if(data.code == 200) {
-                        lf.nativeUI.closeWaiting();
-        
-                        vm.orderNo = data.data.orderNo
-                        vm.nums = data.data.nums
-                        vm.amount = data.data.totalAmount
-                        vm.orderStatus = data.data.status
-                        vm.orderTime = data.data.orderTime
-                        vm.remark = data.data.remark
-                        vm.argDictName = data.data.argDictName
-                        vm.argDictId = data.data.argDictId
-    
-    
-                        vm.channelName = data.data.channelName
-        
-                    } else {
-                        lf.nativeUI.closeWaiting();
-                        lf.nativeUI.toast(data.msg);
-                    }
-        
-                }, function(erro) {
+
+            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+                console.log(JSON.stringify(data));
+
+                if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
-                    lf.nativeUI.toast(erro.msg);
-                })
+    
+                    vm.orderNo = data.data.orderNo
+                    vm.nums = data.data.nums
+                    vm.amount = data.data.totalAmount
+                    vm.orderStatus = data.data.status
+                    vm.orderTime = data.data.orderTime
+                    vm.remark = data.data.remark
+                    vm.argDictName = data.data.argDictName
+                    vm.argDictId = data.data.argDictId
+
+
+                    vm.channelName = data.data.channelName
+    
+                } else {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(data.msg);
+                }
+    
+            }, function(erro) {
+                lf.nativeUI.closeWaiting();
+                lf.nativeUI.toast(erro.msg);
             })
         },
         methods: {
@@ -191,33 +192,29 @@
 
         lf.nativeUI.showWaiting();
 
-        lf.ready(function() {
+        lf.net.getJSON('pay/payment', params, function(data) {
+            console.log(JSON.stringify(data));
 
-            lf.net.getJSON('pay/payment', params, function(data) {
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
-                    lf.nativeUI.closeWaiting();
-
-                    vm.loopOrderId = data.data.saleOrderId
-
-                    dispatchEvent()
-
-                    // 轮询支付状态
-                    vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
-
-                    generateQrcode(data.data.resultUrl)
-
-                } else {
-                    lf.nativeUI.closeWaiting();
-                    lf.nativeUI.toast(data.msg);
-                }
-
-            }, function(erro) {
+            if(data.code == 200) {
                 lf.nativeUI.closeWaiting();
-                lf.nativeUI.toast(erro.msg);
-            })
 
+                vm.loopOrderId = data.data.saleOrderId
+
+                dispatchEvent()
+
+                // 轮询支付状态
+                vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
+
+                generateQrcode(data.data.resultUrl)
+
+            } else {
+                lf.nativeUI.closeWaiting();
+                lf.nativeUI.toast(data.msg);
+            }
+
+        }, function(erro) {
+            lf.nativeUI.closeWaiting();
+            lf.nativeUI.toast(erro.msg);
         })
     }
 
@@ -273,4 +270,4 @@
     function dispatchEvent() {
         lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
     }
-// })
+})
