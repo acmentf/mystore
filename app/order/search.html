@@ -38,6 +38,11 @@
 						<input v-model="state.text"  type="text" class="order-state" readonly="readonly" />
 						<span class="right-arrow mui-icon mui-icon-arrowright order-state"></span>
 			    	</div>
+					<div class="mui-input-row  group-info">
+				        <label>执行状态</label>
+						<input v-model="stateAction.text"  type="text" class="order-action-state" readonly="readonly" />
+						<span class="right-arrow mui-icon mui-icon-arrowright order-action-state"></span>
+			    	</div>
 			    	<div class="mui-input-row  group-info">
 				        <label>订单开始日期</label>
 						<input v-model="orderTimeBegin" type="text" class="order-date-begin" readonly="readonly" />

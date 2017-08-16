@@ -5,6 +5,10 @@ var vm = new Vue({
 			value: '',
 			text: ''
 		},
+		stateAction:{
+			value: '',
+			text: ''
+		},
 		orderTimeBegin:'',
 		orderTimeEnd:'',
 		startBeginTime: '',
@@ -17,6 +21,7 @@ var vm = new Vue({
 lf.ready(function(){
 	var opts = {"type": "date"};
 	picker = new mui.DtPicker(opts);
+
 	userPicker = new mui.PopPicker();
 	userPicker.setData([{
 		value: '1',
@@ -28,11 +33,37 @@ lf.ready(function(){
 		value: '3',
 		text: '已取消'
 	}]);
-	})
+
+	actionPicker = new mui.PopPicker();
+	actionPicker.setData([{
+		value: '0',
+		text: '待处理'
+	}, {
+		value: '1',
+		text: '已完成计调'
+	}, {
+		value: '2',
+		text: '已分配摄影师'
+	},{
+		value: '3',
+		text: '已完成拍照'
+	},{
+		value: '4',
+		text: '已完成输出'
+	}]);
+})
+
+
 mui('.mui-content').on('tap', '.order-state', function() {
 	userPicker.show(function(items) {
 	vm.state.value = items[0].value
 	vm.state.text = items[0].text
+	})
+})
+mui('.mui-content').on('tap', '.order-action-state', function() {
+	actionPicker.show(function(items) {
+		vm.stateAction.value = items[0].value
+		vm.stateAction.text = items[0].text
 	})
 })
 
@@ -75,6 +106,7 @@ mui('.mui-content').on('tap','#search-btn', function(){
 		startBeginTime: vm.startBeginTime,
 		startEndTime: vm.startEndTime,
 		currPage: vm.currPage,
-		pageSize: vm.pageSize
+		pageSize: vm.pageSize,
+		actionStatus: vm.stateAction
 	})
 })
