@@ -44,11 +44,12 @@
   .item {
     background-color: #fff;
     padding: 0.8rem;
-    line-height: 0.6rem;
     margin-top: 0.6rem;
     .title {
+      line-height: 2rem;
       padding-bottom: 0.20rem;
       .text {
+        font-size: 15px;
         color: #3B3B3B;
       }
       .mark {
@@ -57,11 +58,15 @@
     }
     .form-item {
       .text-area {
+        font-size: 14px;
         margin-top: 0.5rem;
         width: 100%;
         resize: none;
         height: 5rem;
         background-color: $primary-bg;
+        &::placeholder{
+          color: #999;
+        }
       }
     }
   }

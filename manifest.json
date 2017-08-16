@@ -348,7 +348,8 @@
 					"app/schedule/summary.html",
 					"app/operator/operator.html",
 					"app/designate/designate.html",
-					"app/result/order-result.html"
+					"app/result/order-result.html",
+					"app/order/search.html"
 				],
 				"priority": 0
 			},
@@ -597,7 +598,9 @@
 				"resources": [
 					"css/order-pay/order-pay.css",
 					"js/mui.zoom.js",
-					"js/mui.previewimage.js"
+					"js/mui.previewimage.js",
+					"css/app.css",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -730,6 +733,19 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order/search.html": {
+				"resources": [
+					"css/order/search.css",
+					"app/order/search.js",
+					"js/mui.picker.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0
