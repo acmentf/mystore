@@ -225,15 +225,18 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		}
 	};
 	console.log(JSON.stringify(params.lineSightList))
-
+	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
+		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
 			lf.nativeUI.toast('保存成功');
 			vm.forStatus = 'check'
 		} else {
-			lf.nativeUI.toast(data.msg);
+//			lf.nativeUI.toast(data.msg);
+			lf.nativeUI.toast(data.code);
 		}
 	}, function(erro) {
+		lf.nativeUI.closeWaiting()
 		lf.nativeUI.toast(erro.msg);
 	});
 })
@@ -250,7 +253,9 @@ function renderTrackInfo(){
 	var params = {
 		orderNo: orderNo
 	};
+	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
+		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
@@ -311,6 +316,7 @@ function renderTrackInfo(){
 			lf.nativeUI.toast(data.msg);
 		}
 	}, function(erro) {
+		lf.nativeUI.closeWaiting()
 		lf.nativeUI.toast(erro.msg);
 	});
 }
