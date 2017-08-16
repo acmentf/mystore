@@ -79,6 +79,14 @@
 	padding-left: 0;
 
 }
+.orderdetails .assign-name{
+	width: 70%; 
+	display: inline-block; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+	text-align: right;
+}
 
 .orderdetails .mui-card .mui-card-header .border-left {
 	border-left: 4px solid #3C9E82;
