@@ -41,7 +41,11 @@ lf.ready(function () {
         data: function () {
             return {
                 executorList:[
-                   /* {
+                    /*{
+                        name:'欧阳小小',
+                        phone:'13264752368'
+                    },
+                    {
                         name:'欧阳小小',
                         phone:'13264752368'
                     }*/
