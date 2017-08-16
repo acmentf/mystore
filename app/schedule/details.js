@@ -56,6 +56,9 @@ lf.ready(function () {
                     lf.nativeUI.closeWaiting()
                     mui.toast(res.msg || '服务器异常')
                 })
+            },
+            outLineBreak:function (str) {
+                return (str || '').replace(/\n/g, '<br>')
             }
         },
         mounted: function () {
