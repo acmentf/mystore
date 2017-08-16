@@ -191,8 +191,8 @@
 								<li class="mui-table-view-cell">
 									<span>摄影师预留座位</span>
 									<span class="show-on-right">
-										<input type="number" v-if="forStatus == 'check'"  v-model="marchInfo.preReservedSeats" readonly="readonly" placeholder="请输入座位数" class="forinput mui-pull-right"/>
-										<input type="number" v-else v-model="marchInfo.preReservedSeats"  class="forinput mui-pull-right" placeholder="请输入座位数" />
+										<input type="text" v-if="forStatus == 'check'"  v-model="marchInfo.preReservedSeats" readonly="readonly" placeholder="请输入座位数" class="forinput mui-pull-right"/>
+										<input type="text" v-else v-model="marchInfo.preReservedSeats"  class="forinput mui-pull-right" placeholder="请输入座位数" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell">
