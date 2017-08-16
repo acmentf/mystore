@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		id: '',
+		userId: '',
 		orderId: '785',
 		giveOrderXms: [{
 			fType: '',
@@ -46,6 +47,7 @@ lf.ready(function(){
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderId
 	loadResult()
+	vm.userId = wv.userId
 	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
@@ -97,7 +99,7 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 	vm.giveOrderXms.splice(index,1)
 
 })
-mui('.sale-out').on('tap', '.save-btn', function(){
+mui('.mui-bar').on('tap', '.save-btn', function(){
 		var flag = true 
 		vm.saleOrderXms.forEach(function(v){
 			if(v.picNum){
@@ -128,8 +130,41 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 			}
 		})
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
+	// 校验 是否输入了相同的尺寸
+	var orderX = []
+	var orderY = []
+	for (var i = 0;i<orderXms.length; i++){
+		if(orderXms[i].fType == 2){
+			orderX[orderX.length] = orderXms[i].picSize
+		}
+		console.log(orderX)
+	}
+	for(var i=0;i<orderX.length;i++){
+		for(var j = i+1;j<orderX.length;j++){
+			if(orderX[i]==orderX[j]){
+				lf.nativeUI.toast('请勿输入相同照片尺寸')
+				flag =false
+			}
+		}
+	}
+	for (var i = 0;i<orderXms.length; i++){
+		if(orderXms[i].fType == 3){
+			orderY[orderY.length] = orderXms[i].picSize
+		}
+		console.log(orderY)
+	}
+	for(var i=0;i<orderY.length;i++){
+		for(var j = i+1;j<orderY.length;j++){
+			if(orderY[i]==orderY[j]){
+				lf.nativeUI.toast('请勿输入相同照片尺寸')
+				flag =false
+			}
+		}
+	}
+	// 传参
 	var params ={
 		id: vm.id,
+		userId: vm.userId,
 		orderId: vm.orderId,
 		salesAmt: vm.salesAmt,
 		buyers: vm.buyers,
@@ -141,7 +176,7 @@ mui('.sale-out').on('tap', '.save-btn', function(){
 		lf.nativeUI.closeWaiting()
 		if(res.code == 200){
 			lf.nativeUI.toast('保存成功！');
-			lf.event.fire(lf.window.currentWebview().opener(), 'sss', {})
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.closeCurrentWebview();
 		}else {
 			lf.nativeUI.toast(res.msg);
