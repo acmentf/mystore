@@ -339,13 +339,13 @@
 				<div v-if="currentRoleId==4">
 					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
 						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
-						<button id="allot" class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
+						<button  class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 					</div>
 				</div>
 				<!--执行人-->
 				<div v-if="currentRoleId==2">
 					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
-						<button id="allot" class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
+						<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 					</div>
 				</div>
 				<!--摄影主管-->

@@ -229,14 +229,9 @@ lf.ready(function() {
 
 //读取页面信息
 function renderTrackInfo(){
-	window.addEventListener('orderdetails',function(event){
-        setPageParams(event.detail)
-    });
 	vm.orderNo = lf.window.currentWebview().orderNo;
 	vm.forindex = lf.window.currentWebview().type;
 	vm.forStatus = lf.window.currentWebview().status;
-	console.log('vm.forindex==-=='+vm.forindex)
-	console.log('vm.forStatus==-=='+vm.forStatus)
 	console.log('orderNo111-=='+vm.orderNo)
 	var params = {
 		orderNo: vm.orderNo
@@ -309,5 +304,7 @@ function renderTrackInfo(){
 lf.event.listener('orderdetails',function(e){
 	console.log('e.detail==='+e.detail)
 	renderTrackInfo();
-	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {
+		orderNo : orderNo
+	})
 })

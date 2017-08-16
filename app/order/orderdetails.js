@@ -28,7 +28,7 @@ var vm = new Vue({
 		handleRole: false,
 		shootFeedbackRole: false, // 拍摄输出
 		photographerExperienceFlage: '',
-		actionStatus: '', // 
+		actionStatus: '', //
 		outPutStatus: '',
 		shotOrderOutput: [], //订单拍摄输出
 		orderdetailShow: false,
@@ -37,7 +37,7 @@ var vm = new Vue({
 		assignedPhotographers: [],
 		temp: [],
 		assignedPhotographersString: '',
-		assignOrder: false, //计调、指派 
+		assignOrder: false, //计调、指派
 		allotPhotoOrder: false, // 分配
 		outOrder: false, // 填写输出信息
 		saleOutOrder: false, // 销售输出
@@ -58,7 +58,7 @@ lf.ready(function() {
 	vm.currentTabIndex = lf.window.currentWebview().index;
 	vm.photograherId = window.Role.photograherId,
 		console.log("当前photograherId" + vm.photograherId)
-	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派
 		vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder'), // 分配
 		vm.outOrder = window.Role.hasAuth('outOrder'), // 填写输出信息
 		vm.saleOutOrder = window.Role.hasAuth('saleOutOrder'), // 销售输出
@@ -238,12 +238,12 @@ lf.ready(function() {
 			orderid: vm.currentOrderId
 		})
 	})*/
-	mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
+	/*mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 			orderNo: orderid
 		})
-	})
+	})*/
 
 	/**
 	 * 查看销售订单
@@ -435,7 +435,7 @@ function renderOrderDetails() {
 			vm.orderInfo.totalPrice = (vm.orderInfo.totalPrice / 100).toFixed(2);
 			vm.currentOrderId = data.data.orderInfo.orderId; //记录当前订单id
 			console.log("-------------" + vm.currentOrderId)
-			vm.currentTourId = data.data.orderInfo.tourId; //记录tourId		
+			vm.currentTourId = data.data.orderInfo.tourId; //记录tourId
 			vm.currentOrderStatus = data.data.orderInfo.status; //记录订单状态
 			vm.currentOrderNo = data.data.orderInfo.orderNo; //记录订单No
 			vm.photographerExperienceFlage = data.data.photographerExperienceFlage;
