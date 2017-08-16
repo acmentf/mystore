@@ -2,9 +2,7 @@
 lf.ready(function () {
     var pageParams = {
         //订单Id
-        orderId: '',
-        //员工id列表
-        staffList:[]
+        orderId: ''
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -13,7 +11,7 @@ lf.ready(function () {
             }
         })
         //后台接口无法初始化执行人
-        //vm.init()
+        vm.init()
     }
     mui.plusReady(function(){
         var currentWebview = lf.window.currentWebview();
@@ -28,8 +26,10 @@ lf.ready(function () {
             lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
             vm[detail.passBack] = vm[detail.passBack].concat(detail.userList.map(function (item) {
                 return {
+                    id:item.id,
                     name:item.name,
-                    phone:item.phone
+                    phone:item.phone,
+                    roleName:item.roleName
                 }
             }))
         }
@@ -54,12 +54,12 @@ lf.ready(function () {
             init:function () {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('/order/getAllExecutor', {}, function (res) {
+                lf.net.getJSON('/order/getAllExecutor', {
+                    orderId:pageParams.orderId
+                }, function (res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
-                        self.executorList = res.data.executorList || []
-                        self.outputList = res.data.outputList || []
-                        self.salesList = res.data.salesList || []
+                        self.initList(res.data || [])
                     } else {
                         mui.toast(res.msg)
                     }
@@ -67,6 +67,18 @@ lf.ready(function () {
                     lf.nativeUI.closeWaiting()
                     mui.toast(res.msg || '服务器异常')
                 })
+            },
+            initList:function (allExecutorList) {
+                var list = []
+                allExecutorList.forEach(function (item) {
+                    !!item.assignState && list.push({
+                        id:item.id,
+                        name:item.name,
+                        phone:item.phone,
+                        roleName:item.roleName
+                    })
+                })
+                this.executorList = list
             }
         },
         mounted: function () {
