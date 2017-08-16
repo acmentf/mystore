@@ -107,6 +107,6 @@ mui('.mui-content').on('tap','#search-btn', function(){
 		startEndTime: vm.startEndTime,
 		currPage: vm.currPage,
 		pageSize: vm.pageSize,
-		actionStatus: vm.stateAction
+		actionStatus: vm.stateAction.value
 	})
 })
