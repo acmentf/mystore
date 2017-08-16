@@ -357,7 +357,7 @@ mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 })
 
 mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
-	if(vm.currentRoleId!==4&&vm.currentRoleId!==9){
+	if(vm.currentRoleId!==9){
 		return
 	}
 	var orderid = this.getAttribute('data-id');
