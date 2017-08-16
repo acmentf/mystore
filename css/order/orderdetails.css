@@ -72,6 +72,7 @@
 
 .orderdetails .mui-card {
 	margin: 0 0 0.2rem 0;
+	box-shadow: none;
 }
 
 .orderdetails .mui-card .mui-card-header {
