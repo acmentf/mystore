@@ -121,6 +121,18 @@ mui('.order-result').on('tap', '.save-btn', function(){
 	if(vm.isOut==1){
 		params = params1
 		flag = true
+		if(params.shootNum==''){
+			lf.nativeUI.toast('请输入拍摄张数')
+			flag = false
+		}
+		if(params.selectsNum==''){
+			lf.nativeUI.toast('请输入选片张数')
+			flag = false
+		}
+		if(params.orderXms[0].picSize ==''){
+			lf.nativeUI.toast('请填写打印的张数')
+			flag = false
+		}
 		params.orderXms.forEach(function(v){
 			if(v.picNum){
 				if(!v.picSize){
@@ -130,7 +142,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			}
 			if(v.picSize){
 				if(!v.picNum){
-					lf.nativeUI.toast('请输入打印数张数')
+				lf.nativeUI.toast('请输入打印数张数')
 				flag = false
 				}
 			}
@@ -150,6 +162,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 				}
 			}
 		}
+		
 	}else{
 		params = params2
 		flag = true
