@@ -5,8 +5,8 @@ lf.ready(function () {
         orderId:'',
         //拍摄明细ID
         photoId:[],
-        //用户id列表
-        userList:[]
+        //员工id列表
+        staffList:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {

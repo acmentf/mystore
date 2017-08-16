@@ -3,8 +3,8 @@ lf.ready(function () {
         passBack:'',
         //订单Id
         orderId: '',
-        //用户id列表
-        userList:[]
+        //员工id列表
+        staffList:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
