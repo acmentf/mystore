@@ -13,6 +13,7 @@
 	background-color: #3DB391;
 	color: #FFF;
 	margin: 0.2rem 0;
+	border: none;
 }
 .sales-export .group-info input{
 	width:70%;
