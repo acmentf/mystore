@@ -135,6 +135,21 @@ mui('.order-result').on('tap', '.save-btn', function(){
 				}
 			}
 		})
+		var orderX = []
+		for (var i = 0;i<params.orderXms.length; i++){
+			if(params.orderXms[i].fType == 1){
+				orderX[orderX.length] = params.orderXms[i].picSize
+			}
+			console.log(orderX)
+		}
+		for(var i=0;i<orderX.length;i++){
+			for(var j = i+1;j<orderX.length;j++){
+				if(orderX[i]==orderX[j]){
+					lf.nativeUI.toast('请勿输入相同照片尺寸')
+					flag =false
+				}
+			}
+		}
 	}else{
 		params = params2
 		flag = true
