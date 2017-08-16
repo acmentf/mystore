@@ -376,6 +376,10 @@ mui('.buttons').on('tap', '.genSale', function() { //点击生成销售
 	if(vm.currentOrderStatus != 3) {
 	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 		orderId: orderid,
+		areaCode: vm.orderInfo.areaCode,
+		tourGuide: vm.orderInfo.tourGuide,
+		purchaser: vm.orderInfo.purchaser,
+		aliasName: vm.orderInfo.aliasName,
 	})
 	}
 })

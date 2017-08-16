@@ -133,7 +133,7 @@
 						<form class="offCanvasSide-role-wrap mui-input-group">
 							<div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
 								<label>{{item.name}}</label>
-								<input type="radio" v-bind:value="item.id" v-model="rolePositionId" @change="switchPosition">
+								<input type="radio" v-bind:value="item.id" v-model="rolePositionId">
 							</div>
 						</form>
 
@@ -251,7 +251,7 @@
 														</button>
 														</div>
 														<div v-if="currentRoleId == 9">
-															<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo">
+															<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName">
 																生成销售
 														</button>
 														</div>
