@@ -30,9 +30,10 @@ var vm = new Vue({
 		rolePositionId: '',
 		currentRoleId:'',//当前用户角色id
 	},
-	methods: {
-		switchPosition: function() {
-			switchRolePostion(this.rolePositionId)
+	watch: {
+		rolePositionId: function(val, oldVal) {
+			if (oldVal == '') return
+			switchRolePostion(val)
 		}
 	}
 })
