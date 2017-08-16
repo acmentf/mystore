@@ -99,11 +99,21 @@ lf.ready(function() {
 })*/
 
 mui('.order-ul').on('tap', '.tourinfo', function() {
-	console.log('gotoorderdetails')
 	var id = this.getAttribute('data-id');
+	var actionStatus = this.getAttribute('data-actionStatus');
+	var index = 1;
+	//待处理0 已完成计调1 已分配摄影师2 状态，跳到详情页默认展示计调信息tab
+	//正在拍摄中 3  已完成输出4 跳到详情页默认展示输出信息tab
+	if(actionStatus == 0 ||actionStatus == 1 ||actionStatus == 2){
+		index = 2
+	}
+	if(actionStatus==3 || actionStatus ==4){
+		index = 3
+	}
+	console.log('actionStatus....'+actionStatus)
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id,
-		index: 1,
+		index: index,
 		photographerId: window.Role.photograherId
 	})
 })
