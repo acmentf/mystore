@@ -18,13 +18,13 @@ var vm = new Vue({
 		assignRole: false,
 		operatorRole: false,
 		currentRole: '',
-		assignOrder:false, //计调、指派 
-		allotPhotoOrder:false, // 分配
-		outOrder:false, // 填写输出信息
-		saleOutOrder:false, // 销售输出
-		genSale:false, // 生成销售
-		summary:false, // 录入心得
-		photograherId:'',
+		assignOrder: false, //计调、指派 
+		allotPhotoOrder: false, // 分配
+		outOrder: false, // 填写输出信息
+		saleOutOrder: false, // 销售输出
+		genSale: false, // 生成销售
+		summary: false, // 录入心得
+		photograherId: '',
 		username: '',
 		rolePositionList: [],
 		rolePositionId: '',
@@ -43,15 +43,15 @@ lf.ready(function() {
 	//genSale 生成销售
 	//summary 录入心得
 	vm.photograherId = window.Role.photograherId,
-	console.log("当前photograherId"+ JSON.stringify(window.Role))
-	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
-	vm.allotPhotoOrder=window.Role.hasAuth('allotPhotoOrder'), // 分配
-	vm.outOrder=window.Role.hasAuth('outOrder'), // 填写输出信息
-	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
-	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
-	vm.summary=window.Role.hasAuth('summary'), // 录入心得
-	vm.currentRole = window.Role.userrole;
-	
+		console.log("当前photograherId" + JSON.stringify(window.Role))
+	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派 
+		vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder'), // 分配
+		vm.outOrder = window.Role.hasAuth('outOrder'), // 填写输出信息
+		vm.saleOutOrder = window.Role.hasAuth('saleOutOrder'), // 销售输出
+		vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
+		vm.summary = window.Role.hasAuth('summary'), // 录入心得
+		vm.currentRole = window.Role.userrole;
+
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
@@ -163,66 +163,65 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 	});
 })
 
-
 mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
 	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-        orderId: orderid
+		orderId: orderid
 	})
 })
 mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
 	var orderNo = this.getAttribute('data-no');
 	console.log('id:' + orderNo)
-	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderNo,
-			type: 2,
-			status: 'edit'
+	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+		orderNo: orderNo,
+		type: 2,
+		status: 'edit'
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
-	lf.window.openWindow('operator/operator.html','../operator/operator.html',{},{
-			orderNo: orderid,
-			type: 0,
-			status: 'edit'
+	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+		orderNo: orderid,
+		type: 0,
+		status: 'edit'
 	})
 })
 
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-id');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('列表页点击心得' + orderid+'，'+tourId+','+window.Role.usercode+','+window.Role.photograherId)
-	lf.window.openWindow('schedule/summary.html','../schedule/summary.html',{},{
-            orderId: orderid,
-            tourId: tourId,
-            userId: window.Role.usercode,
-            photographerId: window.Role.photograherId
+	console.log('列表页点击心得' + orderid + '，' + tourId + ',' + window.Role.usercode + ',' + window.Role.photograherId)
+	lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
+		orderId: orderid,
+		tourId: tourId,
+		userId: window.Role.usercode,
+		photographerId: window.Role.photograherId
 	})
 })
 
 mui('.order-ul').on('tap', '.outOrder', function() { //点击填写输出信息
 	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
-	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
-            orderId: orderid,
+	lf.window.openWindow('result/order-result.html', '../result/order-result.html', {}, {
+		orderId: orderid,
 	})
 })
 
 mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
-	lf.window.openWindow('result/sales-export.html','../result/sales-export.html',{},{
-            orderId: orderid,
+	lf.window.openWindow('result/sales-export.html', '../result/sales-export.html', {}, {
+		orderId: orderid,
 	})
 })
 
 mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
-	lf.window.openWindow('order-pay/order-pay.html','../order-pay/order-pay.html',{},{
-            orderId: orderid,
+	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
+		orderId: orderid,
 	})
 })
 
@@ -239,10 +238,10 @@ mui('body').on('tap', '#logout', function() {
  * 搜索订单
  */
 mui('body').on('tap', '#search-order', function() {
-	lf.window.openWindow('search.html','search.html',{})
+	lf.window.openWindow('search.html', 'search.html', {})
 })
 
-function switchRolePostion (val) {
+function switchRolePostion(val) {
 	var params = {
 		positionId: val
 	};
@@ -333,13 +332,15 @@ function initPull() {
 							if(res.code == 200) {
 								self.refresh(true);
 								dodata('down', index, res.data.result)
-								res.data.result.forEach(function(v, i){
+								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 								})
-				
-								vm.orderHeader[0].number = res.data.result[0].doCount;//处理中
-								vm.orderHeader[1].number = res.data.result[0].completeCount;//已完成
-								vm.orderHeader[2].number = res.data.result[0].cancelCount;//已取消
+								if(res.data.result.length > 0) {
+									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
+									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
+									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+								}
+
 							} else {
 								vm.pageNos[index]--;
 								lf.nativeUI.toast(res.msg)
@@ -365,12 +366,14 @@ function initPull() {
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								dodata('up', index, res.data.result)
-								res.data.result.forEach(function(v, i){
+								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 								})
-								vm.orderHeader[0].number = res.data.result[0].doCount;//处理中
-								vm.orderHeader[1].number = res.data.result[0].completeCount;//已完成
-								vm.orderHeader[2].number = res.data.result[0].cancelCount;//已取消
+								if(res.data.result.length > 0) {
+									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
+									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
+									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+								}
 							} else {
 								self.endPullUpToRefresh();
 								vm.pageNos[index]--;
@@ -420,6 +423,6 @@ lf.event.listener('orderdetails', function(e) {
 	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })
-lf.event.listener('selectAssignUser',function(e){
-     console.log(JSON.stringify(e.detail,null,2))
+lf.event.listener('selectAssignUser', function(e) {
+	console.log(JSON.stringify(e.detail, null, 2))
 })

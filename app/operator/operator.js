@@ -6,7 +6,15 @@ var vm = new Vue({
 //		forGrapher:[],
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
-		shootInfos:[{photographerNames:[]}], //存放所有拍摄信息
+		shootInfos:[{
+			id:null,
+			photographers:[],
+			journeyName :'',
+			shootTime : '',
+			periodType :'',
+			remark :'',
+			photographerNames :''
+		}], //存放所有拍摄信息
 //		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质

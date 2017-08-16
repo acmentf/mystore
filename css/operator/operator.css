@@ -44,6 +44,9 @@
   font-size: 14px;
   color: #A4A4A4;
   max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .remark {
