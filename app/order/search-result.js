@@ -10,6 +10,7 @@ lf.ready(function() {
 			startEndTime: lf.window.currentWebview().startEndTime,
 			currPage: lf.window.currentWebview().currPage,
 			pageSize: lf.window.currentWebview().pageSize,
+			actionStatus: lf.window.currentWebview().actionStatus,
 			orderList: [],
 			isEmpty: false,
 
@@ -24,7 +25,8 @@ lf.ready(function() {
 			saleOutOrder:false, // 销售输出
 			genSale:false, // 生成销售
 			summary:false, // 录入心得
-			photograherId: ''
+			photograherId: '',
+			currentRoleId: ''
 		}
 	})
 
@@ -36,6 +38,8 @@ lf.ready(function() {
 	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
 	vm.summary=window.Role.hasAuth('summary'), // 录入心得
 	vm.currentRole = window.Role.userrole;
+
+	vm.currentRoleId = window.Role.currentPositions[0].roleId;
 	
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
@@ -56,7 +60,8 @@ lf.ready(function() {
 			startBeginTime: vm.startBeginTime,
 			startEndTime: vm.startEndTime,
 			currPage: vm.currPage,
-			pageSize: vm.pageSize
+			pageSize: vm.pageSize,
+			actionStatus: vm.actionStatus
 		}
 
 		console.log(JSON.stringify(params))
@@ -69,6 +74,7 @@ lf.ready(function() {
 				
 				if (data.data.result.length > 0) {
 					data.data.result.forEach(function(item) {
+						item.startTime = lf.util.timeStampToDate2(item.startTime)
 						vm.orderList.push(item)
 					})
 					self.endPullupToRefresh(false)

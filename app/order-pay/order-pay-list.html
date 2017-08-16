@@ -37,6 +37,8 @@
    
     <script src="../../js/mui.min.js"></script>
     <script src="../../js/mui.zoom.js"></script>
+    <script src="../../js/mui.pullToRefresh.js"></script>
+    <script src="../../js/mui.pullToRefresh.material.js"></script>
     <script src="../../js/mui.previewimage.js"></script>
     <script src="../../js/framework/define.js"></script>
     <script src="../../js/framework/styles.js"></script>
@@ -103,7 +105,7 @@
                     console.log(JSON.stringify(data));
 
                     if(data.code == 200) {
-
+                        self.refresh(true);
                         if (data.data.length) {
                             data.data.forEach(function(item) {
                                 vm.orderPayList.push(item)

@@ -101,11 +101,6 @@
 			<div  class="mui-content ">
 				<div id="slider" class="mui-slider mui-fullscreen">
 					<div>
-						<!--<div id="segmentedControl" class="mui-segmented-control">
-							<a class="mui-control-item mui-active" href="#item1">团信息</a>
-							<a class="mui-control-item" href="#item2">行程信息</a>
-							<a class="mui-control-item" href="#item3">拍摄信息</a>
-						</div>-->
 						<div id="segmentedControl"  class="mui-segmented-control">
 							<a class="mui-control-item" :class="{'mui-active':index == forindex}" :href="'#item'+index" v-for="(data,index) in operatorHeader" v-text="data"></a>
 						</div>
@@ -128,9 +123,10 @@
 								<li class="mui-table-view-cell ">
 									<span>团队性质</span>
 									<span class="show-on-right ">
-										<input type="text" v-if="forStatus == 'check'" v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder=" >" />
-										<input type="text" v-if="forStatus == 'edit'" id='showUserPicker' v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder="请选择 >" />
+										<input type="text" v-if="forStatus == 'check'" v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder="请选择团队性质" />
+										<input type="text" v-if="forStatus == 'edit'" id='showUserPicker' v-model="groupInfo.groupType" readonly="readonly" class="forinput mui-pull-right"  placeholder="请选择团队性质" />
 									</span>
+									<span class="mui-icon mui-icon-arrowright"></span>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>团队人数</span>
@@ -165,7 +161,8 @@
 									<span>出团日期</span>
 									<span class="show-on-right ">
 										<!--<input type="text" readonly="readonly" v-if="forStatus == 'check'" v-model="marchInfo.startTime"  class="forinput mui-pull-right"   />-->
-										<input type="text" readonly="readonly" id='chutuan' data-options='{"type":"date"}' v-model="marchInfo.startTime"  class="forinput mui-pull-right"  placeholder="请选择出团日期 >" />
+										<input type="text" readonly="readonly" id='chutuan' data-options='{"type":"date"}' v-model="marchInfo.startTime"  class="forinput mui-pull-right"  placeholder="请选择出团日期" />
+										<span class="mui-icon mui-icon-arrowright"></span>
 									</span>
 
 								</li>
@@ -180,8 +177,9 @@
 									<span>取片日期</span>
 									<span class="show-on-right ">
 										<!--<input v-model="marchInfo.fetchPhotoTime" v-if="forStatus == 'check'" readonly="readonly" type="text"  v-model="getPhotoDate.text"  class="forinput mui-pull-right"  />-->
-										<input v-model="marchInfo.fetchPhotoTime" readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="forinput mui-pull-right"  placeholder="请选择取片日期 >" />
+										<input v-model="marchInfo.fetchPhotoTime" readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="forinput mui-pull-right"  placeholder="请选择取片日期" />
 									</span>
+									<span class="mui-icon mui-icon-arrowright"></span>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>取片地点</span>
@@ -242,8 +240,9 @@
 									<span>拍摄日期</span>
 									<span class="show-on-right ">
 										<!--<input v-if="forStatus == 'check'" readonly="readonly" type="text" v-model="item.shootTime"  class="forinput mui-pull-right"/>-->
-										<input readonly="readonly" type="text" :data-index="index"  data-options='{"type":"date"}' v-model="item.shootTime"  class="forinput mui-pull-right psrq"  placeholder="请选择拍摄日期 >" />
+										<input readonly="readonly" type="text" :data-index="index"  data-options='{"type":"date"}' v-model="item.shootTime"  class="forinput mui-pull-right psrq"  placeholder="请选择拍摄日期" />
 									</span>
+									<span class="mui-icon mui-icon-arrowright"></span>
 								</li>
 								<li class="mui-table-view-cell ">
 									<span>拍摄时段</span>
@@ -252,20 +251,22 @@
 										<input readonly="readonly" type="text" v-if='item.periodType == 1' :data-index="index" v-model='timeName1' class="forinput mui-pull-right pssd">
 										<input readonly="readonly" type="text" v-if='item.periodType == 2' :data-index="index" v-model='timeName2' class="forinput mui-pull-right pssd">
 										<input readonly="readonly" type="text" v-if='item.periodType == 3' :data-index="index" v-model='timeName3' class="forinput mui-pull-right pssd">
-										<input readonly="readonly"  type="text"  data-options='{"type":"date"}' v-model="item.periodType" :data-index="index" class="forinput mui-pull-right pssd"  placeholder="请选择拍摄时段 >" />
+										<input readonly="readonly"  type="text" v-else data-options='{"type":"date"}' v-model="item.periodType" :data-index="index" class="forinput mui-pull-right pssd"  placeholder="请选择拍摄时段" />
 									</span>
+									<span class="mui-icon mui-icon-arrowright"></span>
 								</li>
 								<li class="mui-table-view-cell ">
 									<span>时段备注</span>
 									<span class="show-on-right ">
-										<input  type="text" :data-index="index"  v-model="item.remark"  class="forinput mui-pull-right "  placeholder="备注准确拍摄时段 " />
+										<input  type="text" :data-index="index"  v-model="item.remark"  class="forinput mui-pull-right "  placeholder="备注准确拍摄时段" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell ">
 									<span>摄影师</span>
 									<span class="show-on-right ">
-										<input  readonly="readonly" :data-index="index" type="text" v-model="item.photographerNames" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师 >" />
+										<input  readonly="readonly" :data-index="index" type="text" v-model="item.photographerNames" class="forinput mui-pull-right fpsys"  placeholder="分配摄影师" />
 									</span>
+									<span class="mui-icon mui-icon-arrowright"></span>
 								</li>
 							</ul>
 							<button type="button" v-if="forStatus == 'edit'" class="mui-btn mui-btn-block addshootinfo" >+添加拍摄点</button>
