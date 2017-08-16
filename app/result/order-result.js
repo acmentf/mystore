@@ -101,56 +101,44 @@ mui('.mui-content').on('tap', '.remove-printsNum', function(){
 //保存S
 
 mui('.order-result').on('tap', '.save-btn', function(){
-	var params1 = {
-		id: vm.id,
-		orderId:vm.orderId,
-		isOut: vm.isOut,
-		orderXms:vm.printOrderXms,
-		selectsNum: vm.selectsNum,			
-		shootNum: vm.shootNum,
-		saleRemark:vm.saleRemark
-	}
-	var params2 = {
-		id: vm.id,
-		orderId:vm.orderId,
-		isOut: vm.isOut,
-		noOutReason:vm.reason
-
-	}
 	var params
 	if(vm.isOut==1){
-		params = params1
 		flag = true
-		if(params.shootNum==''){
-			lf.nativeUI.toast('请输入拍摄张数')
-			flag = false
-		}
-		if(params.selectsNum==''){
-			lf.nativeUI.toast('请输入选片张数')
-			flag = false
-		}
-		if(params.orderXms[0].picSize ==''){
-			lf.nativeUI.toast('请填写打印的张数')
-			flag = false
-		}
-		params.orderXms.forEach(function(v){
+//		if(vm.shootNum==''){
+//			lf.nativeUI.toast('请输入拍摄张数')
+//			flag = false
+//			return
+//		}
+//		if(vm.selectsNum==''){
+//			lf.nativeUI.toast('请输入选片张数')
+//			flag = false
+//			return
+//		}
+//		if(vm.printOrderXms[0].picSize ==''){
+//			lf.nativeUI.toast('请填写打印的尺寸及张数')
+//			flag = false
+//			return
+//		}
+		vm.printOrderXms.forEach(function(v){
 			if(v.picNum){
 				if(!v.picSize){
 					lf.nativeUI.toast('请选择打印尺寸')
 					flag = false;
+					return
 				}
 			}
 			if(v.picSize){
 				if(!v.picNum){
 				lf.nativeUI.toast('请输入打印数张数')
 				flag = false
+				return
 				}
 			}
 		})
 		var orderX = []
-		for (var i = 0;i<params.orderXms.length; i++){
-			if(params.orderXms[i].fType == 1){
-				orderX[orderX.length] = params.orderXms[i].picSize
+		for (var i = 0;i<vm.printOrderXms.length; i++){
+			if(vm.printOrderXms[i].fType == 1){
+				orderX[orderX.length] = vm.printOrderXms[i].picSize
 			}
 			console.log(orderX)
 		}
@@ -159,12 +147,21 @@ mui('.order-result').on('tap', '.save-btn', function(){
 				if(orderX[i]==orderX[j]){
 					lf.nativeUI.toast('请勿输入相同照片尺寸')
 					flag =false
+					return
 				}
 			}
 		}
+		params = {
+		id: vm.id,
+		orderId:vm.orderId,
+		isOut: vm.isOut,
+		orderXms:vm.printOrderXms,
+		selectsNum: vm.selectsNum,			
+		shootNum: vm.shootNum,
+		saleRemark:vm.saleRemark
+	}
 		
 	}else{
-		params = params2
 		flag = true
 		if(!vm.reason||(vm.reason&&vm.reason.length == 0)){
 			lf.nativeUI.toast('请选择原因');
@@ -174,10 +171,17 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			lf.nativeUI.toast('请在备注中填写其他原因');
 			return
 		}
-		if(params.reason == '其他'){
-			params.reason = vm.noOutRemark
+		if(vm.reason == '其他'){
+			vm.reason = vm.noOutRemark
 			return
 		}
+		params = {
+		id: vm.id,
+		orderId:vm.orderId,
+		isOut: vm.isOut,
+		noOutReason:vm.reason
+
+	}
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
