@@ -58,7 +58,7 @@ body {
 
 .designate-select-staff .mui-indexed-list .search-wrap {
   background-color: #fff;
-  padding: 20px;
+  padding: 5px 20px;
   border-bottom: solid 1px #f1f1f1;
 }
 
@@ -68,12 +68,12 @@ body {
 }
 
 .designate-select-staff .mui-indexed-list .mui-search .mui-input-clear {
-  height: 44px;
+  height: 30px;
 }
 
 .designate-select-staff .mui-indexed-list .mui-search .mui-placeholder {
-  line-height: 44px;
-  height: 44px;
+  line-height: 30px;
+  height: 30px;
 }
 
 .designate-select-staff .mui-indexed-list .mui-indexed-list-bar {
