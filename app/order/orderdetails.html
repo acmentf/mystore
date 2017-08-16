@@ -56,9 +56,9 @@
 
 			<div style="margin-bottom: 0.2rem;">
 				<div id="segmentedControl" class="mui-segmented-control">
-					<a class="mui-control-item mui-active" :class="{'mui-active':currentTabIndex == 1}" href="#item1">订单信息</a>
+					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 1}" href="#item1">订单信息</a>
 					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 2}" href="#item2">计调信息</a>
-					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 3}" href="#item3">拍摄信息</a>
+					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 3}" href="#item3">输出信息</a>
 				</div>
 			</div>
 			<div>
@@ -101,7 +101,8 @@
 						<div class="item allotPhotoOrder">
 							摄影师
 							<span class="mui-icon mui-icon-arrowright" style="float: right;"></span>
-							<div class="name" v-text="assignedPhotographersString"></div>
+							<div v-if="assignedPhotographersString == ''" class="name">尚未分配</div>
+							<div v-if="assignedPhotographersString != ''" class="name" v-text="assignedPhotographersString"></div>
 						</div>
 					</div>
 
@@ -324,24 +325,54 @@
 			<!--填写输出信息   -->
 			<!--销售  生成销售  -->
 			<!--摄影师  录入心得  -->
+			<!--
+				计调主管 4 可指派 可计调
+				执行人 2 可计调
+				摄影主管 5 可分配
+				摄影师 3 可录入心得
+				输出 8 可填写输出信息
+				销售  9 可生成销售 可销售输出
+			-->
 			<div class="buttons">
-				<div v-if="assignOrder&&orderInfo.actionStatus!=4">
-					<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
-					<button id="allot" class="mui-button colorlight jidiao" :data-type="0"  :data-no="currentOrderNo">计调</button>
+				<!--计调主管-->
+				<div v-if="currentRoleId==4">
+					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
+						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
+						<button id="allot" class="mui-button colorlight jidiao" :data-type="0"  :data-no="currentOrderNo">计调</button>
+					</div>
 				</div>
-				<div v-if="allotPhotoOrder&&(orderInfo.actionStatus!=0||orderInfo.actionStatus!=4)" >
-					<button  class="mui-button colorlight allotPhotoOrder"  :data-no="currentOrderNo">分配</button>
+				<!--执行人-->
+				<div v-if="currentRoleId==2">
+					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
+						<button id="allot" class="mui-button colorlight jidiao" :data-type="0"  :data-no="currentOrderNo">计调</button>
+					</div>
 				</div>
-				<div v-if="summary&&(orderInfo.actionStatus==4)">
-					<button  class="mui-button colorlight summary"  :data-no="currentOrderNo">录入心得</button>
+				<!--摄影主管-->
+				<div v-if="currentRoleId==5">
+					<div v-if="allotPhotoOrder&&(orderInfo.actionStatus!=0||orderInfo.actionStatus!=4)" >
+						<button  class="mui-button colorlight allotPhotoOrder"  :data-no="currentOrderNo">分配</button>
+					</div>
 				</div>
-				<div v-if="outOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)">
-					<button  class="mui-button colorlight outOrder"  :data-no="currentOrderNo">填写输出信息</button>
+				<!--摄影师-->
+				<div v-if="currentRoleId==3">
+					<div v-if="summary&&(orderInfo.actionStatus==4)">
+						<button  class="mui-button colorlight summary"  :data-no="currentOrderNo">录入心得</button>
+					</div>
 				</div>
-				<div>
-					<button  :data-no="currentOrderNo"  v-if="genSale&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)" class="mui-button colorlight genSale">生成销售</button>
-					<button  :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)"  class="mui-button colorlight saleOutOrder">销售输出</button>
+				<!--输出-->
+				<div v-if="currentRoleId==8">
+					<div v-if="outOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)">
+						<button  class="mui-button colorlight outOrder"  :data-no="currentOrderNo">填写输出信息</button>
+					</div>
 				</div>
+				<!--销售-->
+				<div v-if="currentRoleId==9">
+					<div>
+						<button  :data-no="currentOrderNo"  v-if="genSale&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)" class="mui-button colorlight genSale">生成销售</button>
+						<button  :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)"  class="mui-button colorlight saleOutOrder">销售输出</button>
+					</div>
+				</div>
+				
 			</div>
 
 			<div v-show="maskShow" class="mask"></div>
@@ -359,7 +390,7 @@
 			<div id="topPopover" class="mui-popover" style="width: 1.6rem;">
 				<div class="mui-popover-arrow"></div>
 				<div class="" style="width: 1.6rem;">
-					<button style="width: 1.6rem;" class="mui-button cancle">取消详情</button>
+					<button style="width: 1.6rem;" class="mui-button cancle">取消订单</button>
 				</div>
 
 			</div>

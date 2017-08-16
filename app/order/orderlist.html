@@ -119,8 +119,8 @@
 	</head>
 
 	<body>
-		<div class="mui-off-canvas-wrap mui-draggable" id="app" >
-								
+		<div class="mui-off-canvas-wrap mui-draggable" id="app">
+
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
@@ -144,7 +144,7 @@
 				</div>
 			</aside>
 
-			<div class="mui-inner-wrap" style="background:#efeff4">										   
+			<div class="mui-inner-wrap" style="background:#efeff4">
 				<header class="mui-bar mui-bar-nav" style="background:#3db391;">
 					<a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
 					<h1 class="mui-title" style="color: #fff;">订单管理</h1>
@@ -188,7 +188,7 @@
 
 												<div class="nr">
 													<div class="imgbody">
-														<div class="tourinfo" :data-id="item.id">
+														<div class="tourinfo" :data-id="item.id" :data-actionStatus="item.actionStatus">
 															<div class="item">
 																<span class="ico ico-starttime"></span>
 																<span>出团日期: {{item.startTime}}</span>
@@ -216,55 +216,43 @@
 													saleOutOrder 销售输出
 													genSale 生成销售
 													summary 录入心得
+													计调主管 4 可指派
+													执行人 2 可计调
+													摄影主管 5 可分配
+													摄影师 3 可录入心得
+													输出 8 可填写输出信息
+													销售  9 可生成销售
 														-->
-													<button v-if="assignOrder&&item.actionStatus!=4" type="button" class="mui-btn assignOrder" :data-id="item.id" :data-no="item.orderNo">
+													<div v-if="currentRoleId == 4">
+														<button v-if="assignOrder&&item.actionStatus!=4" type="button" class="mui-btn assignOrder" :data-id="item.id" :data-no="item.orderNo">
 																指派
-													</button>
-													<button v-if="assignOrder&&(item.actionStatus!=3||item.actionStatus!=4)" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+														</button>
+													</div>
+													<div v-if="currentRoleId == 2">
+														<button v-if="assignOrder&&(item.actionStatus!=3||item.actionStatus!=4)" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
 																计调
-													</button>
-													<button v-if="allotPhotoOrder&&(item.actionStatus!=0||item.actionStatus!=4)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
+														</button>
+													</div>
+													<div v-if="currentRoleId == 5">
+														<button v-if="allotPhotoOrder&&(item.actionStatus!=0||item.actionStatus!=4)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
 																分配
-													</button>
-													<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
+														</button>
+													</div>
+													<div v-if="currentRoleId == 3">
+														<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
 																录入心得
-													</button>
-													<button v-if="outOrder&&(item.actionStatus!=0||item.actionStatus!=1)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
+														</button>
+													</div>
+													<div v-if="currentRoleId == 8">
+														<button v-if="outOrder&&(item.actionStatus!=0||item.actionStatus!=1)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
 																填写输出信息
-													</button>
-													<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo">
+														</button>
+													</div>
+													<div v-if="currentRoleId == 9">
+														<button v-if="genSale&&(item.actionStatus==3||item.actionStatus==4)" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo">
 																生成销售
-													</button>
-													<!--<button v-if="item.actionStatus ==0" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-																计调
 														</button>
-														<button v-if="item.actionStatus ==1" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-																分配
-														</button>
-														<button v-if="item.actionStatus ==2" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-																填写输出信息
-														</button>
-														<button v-if="item.actionStatus ==3" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-																填写销售信息
-														</button>
-														<button v-if="item.actionStatus ==4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo">
-																录入心得
-														</button>-->
-													<!--<div class="btns">
-															<button v-if="operatorRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger operator" :data-id="item.id" :data-no="item.orderNo">
-																计调
-															</button>
-															<button v-if="cancelRole&&item.status!=3&&item.status!=7" :disabled="item.actionStatus==4" type="button" class="mui-btn mui-btn-danger qxbtn" :data-id="item.id" :data-no="item.orderNo">
-																取消
-															</button>
-															<button v-if="assignRole&&item.status!=3" type="button" class="mui-btn mui-btn-danger assign" :data-id="item.id">
-																指派
-															</button>
-															<button v-if="allotRole&&item.status!=3" :disabled="item.actionStatus==0" type="button" class="mui-btn mui-btn-danger allot" :data-id="item.id">
-																分配
-															</button>
-														</div>
-													</div>-->
+													</div>
 												</div>
 											</li>
 										</ul>

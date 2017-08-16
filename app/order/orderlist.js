@@ -28,6 +28,7 @@ var vm = new Vue({
 		username: '',
 		rolePositionList: [],
 		rolePositionId: '',
+		currentRoleId:'',//当前用户角色id
 	},
 	methods: {
 		switchPosition: function() {
@@ -51,7 +52,8 @@ lf.ready(function() {
 		vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
 		vm.summary = window.Role.hasAuth('summary'), // 录入心得
 		vm.currentRole = window.Role.userrole;
-
+	vm.currentRoleId = window.Role.currentPositions[0].roleId;
+	console.log("当前用户的角色id"+vm.currentRoleId)
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
@@ -99,11 +101,21 @@ lf.ready(function() {
 })*/
 
 mui('.order-ul').on('tap', '.tourinfo', function() {
-	console.log('gotoorderdetails')
 	var id = this.getAttribute('data-id');
+	var actionStatus = this.getAttribute('data-actionStatus');
+	var index = 1;
+	//待处理0 已完成计调1 已分配摄影师2 状态，跳到详情页默认展示计调信息tab
+	//正在拍摄中 3  已完成输出4 跳到详情页默认展示输出信息tab
+	if(actionStatus == 0 ||actionStatus == 1 ||actionStatus == 2){
+		index = 2
+	}
+	if(actionStatus==3 || actionStatus ==4){
+		index = 3
+	}
+	console.log('actionStatus....'+actionStatus)
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id,
-		index: 1,
+		index: index,
 		photographerId: window.Role.photograherId
 	})
 })
@@ -262,6 +274,7 @@ function switchRolePostion(val) {
 				loginsign: '1',
 				auths: data.data.auths,
 				positions: data.data.userPositionList,
+				currentPositions: data.data.positions,
 				photograherId: data.data.photograherId
 			}
 			window.Role.save(obj)

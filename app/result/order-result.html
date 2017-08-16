@@ -12,6 +12,7 @@
 		<style>
 			html,body,.mui-content{
 				background: #F6F6F6;
+				color:#666;
 			}
 		</style>
 	</head>
@@ -47,11 +48,11 @@
 						<div class="shoot-number">
 							<div class="mui-input-row  group-info">
 						        <label>拍摄张数</label>
-								<input type="number" v-model="shootNum" class="mui-input-clear" placeholder="请填写拍摄张数"/>
+								<input type="number" v-model="shootNum"  placeholder="请填写拍摄张数"/>
 					    	</div>
 					    	<div class="mui-input-row  group-info">
 						        <label>选片张数</label>
-								<input type="number" v-model="selectsNum" class="mui-input-clear" placeholder="请填写选片张数"/>
+								<input type="number" v-model="selectsNum"  placeholder="请填写选片张数"/>
 					    	</div>
 						</div>
 					</div>
@@ -65,7 +66,7 @@
 						<label v-else >&nbsp;</label>
 						<div class="select" >
 							<input type="text" v-model="v.picSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
-							<input type="number" v-model="v.picNum" class="select-number mui-input-clear" placeholder="请输入打印张数">
+							<input type="number" v-model="v.picNum" class="select-number" placeholder="请输入打印张数">
 						</div>
 						<span v-if="i!==0"style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
 					</div>

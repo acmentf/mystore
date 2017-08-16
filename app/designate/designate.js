@@ -2,7 +2,9 @@
 lf.ready(function () {
     var pageParams = {
         //订单Id
-        orderId: ''
+        orderId: '',
+        //员工id列表
+        staffList:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {

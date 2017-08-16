@@ -441,7 +441,8 @@
 					"app/operator/operator.html",
 					"app/result/sales-export.html",
 					"app/schedule/summary.html",
-					"app/schedule/details.html"
+					"app/schedule/details.html",
+					"app/designate/designate.html"
 				],
 				"priority": 0
 			},
@@ -608,7 +609,10 @@
 					"css/operator/operator.css",
 					"js/mui.picker.min.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"js/mui.pullToRefresh.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"

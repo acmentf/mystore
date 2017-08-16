@@ -221,14 +221,14 @@
 							</div>
 						</div>
 						<div id="item2" :class="{'mui-active':forindex == 2}"  class="mui-control-content" >
-							<ul v-for="(item,index) in shootInfos" class="mui-table-view mui-table-view-chevron">
+							<ul v-for="(item,index) in shootInfos" class="mui-table-view mui-table-view-chevron shoot-table">
 								<li class="mui-table-view-cell superscript">
 									<div class="superscript-img">
 										<img src="../../images/order/corner.png" alt="" />
 									</div>
 									<span v-text="index+1" class="superscript-num" ></span>
 									<div class="superscript-xx" :data-index="index">
-										<span>X</span>
+										<img src="../../images/order/operator_delete.png" alt="" />
 									</div>
 								</li>
 								<li class="mui-table-view-cell">
@@ -268,7 +268,7 @@
 									</span>
 								</li>
 							</ul>
-							<button type="button" v-if="forStatus == 'edit'" class="mui-btn mui-btn-block addshootinfo" style="color: #3DB391;font-size: 14px;margin-top: 10px;">+添加拍摄点</button>
+							<button type="button" v-if="forStatus == 'edit'" class="mui-btn mui-btn-block addshootinfo" >+添加拍摄点</button>
 						</div>
 					</div>
 				</div>

@@ -44,6 +44,7 @@ var vm = new Vue({
 		genSale:false, // 生成销售
 		summary:false, // 录入心得
 		photographerId:'',//当前登录用户的摄影师id
+		currentRoleId:'',//当前用户的角色id
 	}
 })
 
@@ -74,6 +75,8 @@ lf.ready(function() {
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback')// 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole=window.Role.userrole;
+	vm.currentRoleId = window.Role.currentPositions[0].roleId;
+	console.log("当前用户的角色id"+vm.currentRoleId)
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
@@ -309,9 +312,9 @@ mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一�
 
 mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 	var orderid = this.getAttribute('data-no');
-	console.log('id:' + orderid)
+	console.log('点击输出信息currentOrderId' + vm.currentOrderId)
 	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
-            orderId: orderid,
+            orderId: vm.currentOrderId,
 	})
 })
 
