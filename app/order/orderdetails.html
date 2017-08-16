@@ -389,7 +389,7 @@
 				</div>
 			</div>
 			<!--取消必须是计调主管 + 订单为非取消状态才出现-->
-			<div v-if="currentOrderStatus!=3&&currentRoleId == 4" id="topPopover" class="mui-popover" style="width: 1.6rem;">
+			<div v-if="currentOrderStatus==1&&currentRoleId == 4" id="topPopover" class="mui-popover" style="width: 1.6rem;">
 				<div class="mui-popover-arrow"></div>
 				<div class="" style="width: 1.6rem;">
 					<button style="width: 1.6rem;" class="mui-button cancle">取消订单</button>
