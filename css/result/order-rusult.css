@@ -32,6 +32,8 @@
 	color: #FFF;
 	margin: 0.2rem 0;
 	border: none;
+	widows: 2.2rem;
+	height: 0.68rem;
 }
 .order-result .add-size{
 	height: 80px;
@@ -97,8 +99,9 @@
 }
 .order-result .remark-text{
 	height:100%;
-	border: 1px solid rgba(0,0,0,.2);
+	border: 1px solid #FDE3E4;
 	border-radius: 0.1rem;;
+	background-color: #FEFDF6;
 }
 .login-btn-box{
 	width: 100%;
