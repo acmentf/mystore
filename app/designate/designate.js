@@ -24,14 +24,15 @@ lf.ready(function () {
         var detail = event.detail
         if(detail && detail.passBack && detail.userList){
             lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
-            vm[detail.passBack] = vm[detail.passBack].concat(detail.userList.map(function (item) {
+            vm.init()
+           /* vm[detail.passBack] = vm[detail.passBack].concat(detail.userList.map(function (item) {
                 return {
                     id:item.id,
                     name:item.name,
                     phone:item.phone,
                     roleName:item.roleName
                 }
-            }))
+            }))*/
         }
     });
 

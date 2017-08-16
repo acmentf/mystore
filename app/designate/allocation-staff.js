@@ -25,7 +25,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                    /*{
+                   /* {
                         group:'A',
                         text:'A'
                     },
@@ -35,7 +35,7 @@ lf.ready(function () {
                         text:'阿克苏机场',
                         phone:'13264752368',
                         area:'西北区',
-                        operator:'执行人',
+                        roleName:'执行人',
                         state:true,
                         selected:false
                     },
@@ -45,7 +45,7 @@ lf.ready(function () {
                         text:'阿拉山口机场',
                         phone:'13264752368',
                         area:'西北区',
-                        operator:'执行人',
+                        roleName:'执行人',
                         state:false,
                         selected:true
                     }*/

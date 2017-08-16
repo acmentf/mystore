@@ -87,11 +87,13 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 6rem;
   color: #707070;
 }
 
 .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .text-role {
-  width: 5rem;
+  text-align: left;
+  width: 3rem;
   color: #707070;
 }
 

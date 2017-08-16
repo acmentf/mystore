@@ -80,11 +80,12 @@ body {
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
-              //width: 5rem;
+              width: 6rem;
               color: #707070;
             }
             .text-role{
-              width: 5rem;
+              text-align: left;
+              width: 3rem;
               color: #707070;
             }
             .text-state{

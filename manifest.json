@@ -612,7 +612,8 @@
 					"css/mui.picker.min.css",
 					"js/mui.pullToRefresh.js",
 					"js/framework/common.js",
-					"js/mui.pullToRefresh.material.js"
+					"js/mui.pullToRefresh.material.js",
+					"images/order/operator_delete.png"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"
