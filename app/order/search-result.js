@@ -105,12 +105,147 @@ lf.ready(function() {
 	});
 
 	mui('.order-ul').on('tap', '.tourinfo', function() {
-		console.log('gotoorderdetails')
 		var id = this.getAttribute('data-id');
+		var actionStatus = this.getAttribute('data-actionStatus');
+		var index = 1;
+		//待处理0 已完成计调1 已分配摄影师2 状态，跳到详情页默认展示计调信息tab
+		//正在拍摄中 3  已完成输出4 跳到详情页默认展示输出信息tab
+		if(actionStatus == 0 ||actionStatus == 1 ||actionStatus == 2){
+			index = 2
+		}
+		if(actionStatus==3 || actionStatus ==4){
+			index = 3
+		}
+		console.log('actionStatus....'+actionStatus)
 		lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 			orderNo: id,
-			index: 1,
+			index: index,
 			photographerId: window.Role.photograherId
 		})
 	})
+	mui('.order-ul').on('tap', '.qdbtn', function() {
+		var id = this.getAttribute('data-id')
+		var no = this.getAttribute('data-no')
+		//确认，取消
+		lf.nativeUI.confirm("", "你确认要执行订单", ["确定", "取消"], function(e) {
+			if(e.index == 0) {
+				var params = {
+					"orderId": id,
+					"orderState": 2,
+					"orderNo": no
+				};
+				lf.nativeUI.showWaiting()
+				lf.net.getJSON('/order/updateOrderState', params, function(res) {
+					lf.nativeUI.closeWaiting()
+					if(res.code == 200) {
+						mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+						lf.nativeUI.toast('操作成功')
+					} else {
+						lf.nativeUI.toast(res.msg)
+					}
+				}, function(res) {
+					lf.nativeUI.closeWaiting()
+					lf.nativeUI.toast(res.msg)
+				})
+			}
+		});
+	})
+	mui('.order-ul').on('tap', '.qxbtn', function() {
+		var id = this.getAttribute('data-id')
+		var no = this.getAttribute('data-no')
+		//确认，取消
+		lf.nativeUI.confirm("", "你确认要取消订单", ["确定", "取消"], function(e) {
+			if(e.index == 0) {
+				var params = {
+					"orderId": id,
+					"orderState": 3,
+					"orderNo": no
+				};
+				lf.nativeUI.showWaiting()
+				lf.net.getJSON('/order/updateOrderState', params, function(res) {
+					lf.nativeUI.closeWaiting()
+					if(res.code == 200) {
+						lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
+						mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
+						lf.nativeUI.toast('操作成功')
+					} else {
+						lf.nativeUI.toast(res.msg)
+					}
+				}, function(res) {
+					lf.nativeUI.closeWaiting()
+					lf.nativeUI.toast(res.msg)
+				})
+			}
+		});
+	})
+
+mui('.order-ul').on('tap', '.assignOrder', function() { //点击指派
+	var orderid = this.getAttribute('data-id');
+	console.log('id:' + orderid)
+	lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
+		orderId: orderid
+	})
+})
+mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
+	var orderNo = this.getAttribute('data-no');
+	console.log('id:' + orderNo)
+	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+		orderNo: orderNo,
+		type: 2,
+		status: 'edit'
+	})
+})
+mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+		orderNo: orderid,
+		type: 0,
+		status: 'edit'
+	})
+})
+
+mui('.order-ul').on('tap', '.summary', function() { //点击心得
+	var orderid = this.getAttribute('data-id');
+	var tourId = this.getAttribute('data-tourId');
+	console.log('列表页点击心得' + orderid + '，' + tourId + ',' + window.Role.usercode + ',' + window.Role.photograherId)
+	lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
+		orderId: orderid,
+		tourId: tourId,
+		userId: window.Role.usercode,
+		photographerId: window.Role.photograherId
+	})
+})
+
+mui('.order-ul').on('tap', '.outOrder', function() { //点击填写输出信息
+	var orderid = this.getAttribute('data-id');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/order-result.html', '../result/order-result.html', {}, {
+		orderId: orderid,
+	})
+})
+
+mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
+	var orderid = this.getAttribute('data-no');
+	console.log('id:' + orderid)
+	lf.window.openWindow('result/sales-export.html', '../result/sales-export.html', {}, {
+		orderId: orderid,
+	})
+})
+
+mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
+	var orderid = this.getAttribute('data-no');
+	var areaCode = this.getAttribute('data-areaCode');
+	var tourGuide = this.getAttribute('data-tourGuide');
+	var purchaser = this.getAttribute('data-purchaser');
+	var aliasName = this.getAttribute('data-aliasName');
+	console.log('id:' + orderid)
+	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
+		orderId: orderid,
+		areaCode: areaCode,
+		tourGuide: tourGuide,
+		purchaser: purchaser,
+		aliasName: aliasName,
+	})
+})
 })
