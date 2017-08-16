@@ -3,7 +3,6 @@ var vm = new Vue({
 	data: {
 		forindex: 0,
 		forStatus:'check',//check是查看，edit是直接能编辑的
-//		forGrapher:[],
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
 		shootInfos:[{
@@ -15,7 +14,6 @@ var vm = new Vue({
 			remark :'',
 			photographerNames :''
 		}], //存放所有拍摄信息
-//		pullObjects: [],
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
 			groupTypeValue:'',//团队性质的value
@@ -96,7 +94,6 @@ mui('#app').on('tap', '.psrq', function() {
 		var options = JSON.parse(optionsJson);
 		var picker = new mui.DtPicker(options);
 		picker.show(function(rs) {
-			console.log(rs)
 			vm.shootInfos[index].shootTime = rs.text;
 			picker.dispose();
 		});
@@ -122,22 +119,10 @@ mui('#app').on('tap', '.pssd', function() {
 			text: '晚上'
 		}]);
 		userPicker.show(function(items) {
-			console.log(JSON.stringify(vm.shootInfos))
 			vm.shootInfos[index].periodType = items[0].value
 		}, false);
 	}
 })
-
-//时段备注
-//mui('#app').on('tap', '.sdbz', function() {
-//	var optionsJson = this.getAttribute('data-options') || '{}';
-//	var options = JSON.parse(optionsJson);
-//	var picker = new mui.DtPicker(options);
-//	picker.show(function(rs) {
-//		vm.intervalRemark = rs;
-//		picker.dispose();
-//	});
-//}, false);
 
 //添加拍摄按钮
 mui('#app').on('tap', '.addshootinfo', function() {
@@ -167,9 +152,6 @@ mui('#app').on('tap', '.superscript-xx', function() {
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
 	var index = this.getAttribute('data-index');
-//	console.log('index='+index)
-//	console.log('vm.shootInfos='+JSON.stringify(vm.shootInfos))
-
 	if(vm.forStatus == 'edit'){
 		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
 	        //订单Id
@@ -186,7 +168,7 @@ mui('#app').on('tap', '.fpsys', function() {
 			forgraphersId[idx].idx.push(val.id)
 			forgraphersNames[idx].idx.push(val.name)
 		})
-		console.log('forgraphersId='+JSON.stringify(forgraphersId))
+
 		vm.shootInfos[index].photographers = forgraphersId[idx].idx
 		vm.shootInfos[index].photographerNames = forgraphersNames[idx].idx
 		idx ++
@@ -224,7 +206,6 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				exeRemark : vm.marchInfo.exeRemark//备注信息
 		}
 	};
-	console.log(JSON.stringify(params.lineSightList))
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 		lf.nativeUI.closeWaiting()
@@ -287,7 +268,6 @@ function renderTrackInfo(){
 				groupRoute : data.data.groupRoute,//行程详情
 				exeRemark : data.data.exeRemark//备注信息
 			}
-//			console.log('长度='+JSON.stringify(data.data.lineSight))
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}
@@ -307,9 +287,7 @@ function renderTrackInfo(){
 					forGrapherName.push(value.name)
 				})
 				forLine.photographers = forGrapherId
-//				forLine.photographerNames = forGrapherName.join(',')
 				forLine.photographerNames = forGrapherName
-//				console.log(JSON.stringify(forLine))
 				vm.shootInfos.push(forLine)
 			})
 		} else {
