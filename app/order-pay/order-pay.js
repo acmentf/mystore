@@ -8,7 +8,7 @@
     var data = {
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
-        payId: lf.window.currentWebview().payId,
+        saleOrderId: lf.window.currentWebview().saleOrderId,
         guideName: lf.window.currentWebview().tourGuide,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
@@ -42,10 +42,10 @@
         el: '#app',
         data: data,
         mounted: function() {
-            if (!this.payId) return
+            if (!this.saleOrderId) return
 
             var params = {
-                id: this.payId
+                id: this.saleOrderId
             }
 
             lf.nativeUI.showWaiting();
@@ -181,7 +181,8 @@
             argDictName: vm.sizeOptions[vm.argDictId],
             guideName: vm.guideName,
             purchaser: vm.purchaser,
-            alias: vm.alias
+            alias: vm.alias,
+            saleOrderId: vm.saleOrderId
         }
 
         console.log(JSON.stringify(params));
