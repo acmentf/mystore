@@ -335,15 +335,16 @@
 .schedule-summary .item {
   background-color: #fff;
   padding: 0.8rem;
-  line-height: 0.6rem;
   margin-top: 0.6rem;
 }
 
 .schedule-summary .item .title {
+  line-height: 2rem;
   padding-bottom: 0.20rem;
 }
 
 .schedule-summary .item .title .text {
+  font-size: 15px;
   color: #3B3B3B;
 }
 
@@ -352,9 +353,14 @@
 }
 
 .schedule-summary .item .form-item .text-area {
+  font-size: 14px;
   margin-top: 0.5rem;
   width: 100%;
   resize: none;
   height: 5rem;
   background-color: #F6F6F6;
+}
+
+.schedule-summary .item .form-item .text-area::placeholder {
+  color: #999;
 }

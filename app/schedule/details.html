@@ -22,7 +22,7 @@
         <img v-for="item in imgs" :src="item.path" class="pro" data-preview-src="" data-preview-group="1">
     </div>
     <div class="summary">
-        <span class="text" v-html="summary"></span>
+        <span class="text" v-html="outLineBreak(summary)"></span>
     </div>
 </div>
 <script src="../../js/mui.min.js"></script>
