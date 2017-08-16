@@ -233,7 +233,7 @@ mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
 })
 
 mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	var areaCode = this.getAttribute('data-areaCode');
 	var tourGuide = this.getAttribute('data-tourGuide');
 	var purchaser = this.getAttribute('data-purchaser');
