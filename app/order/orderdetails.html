@@ -135,7 +135,7 @@
 										<span  class="tel-ico"></span>
 										<span v-text="orderInfo.tourGuidePhone"></span>
 									</a>
-									
+
 								</div>
 
 							</div>
@@ -305,10 +305,10 @@
 						<div class="mui-card-content mind" style="padding: 0.2rem;">
 							<div class="item summary-item" v-for="item in photographerInfos" :data-userId="item.userId" :data-photographerId="item.photographerId">
 								<div class="name"><span v-text="item.photographerName"></span><span class="ico-pic"></span></div>
-								<div v-text="item.summary">			
+								<div v-text="item.summary">
 								</div>
 								<div class="sepline"></div>
-							</div>					
+							</div>
 							<div class="loadmore" v-if="photographerInfos.length>1">
 								查看更多心得
 							</div>
@@ -350,22 +350,20 @@
 					行程详情
 				</div>
 				<div class="cnt" v-html="orderTrackInfo.groupRoute">
-					  
+
 				</div>
 				<div class="close">
 					确定
 				</div>
 			</div>
-			<div id="topPopover" class="mui-popover" style="width: 1rem;">
+			<div id="topPopover" class="mui-popover" style="width: 1.6rem;">
 				<div class="mui-popover-arrow"></div>
-				<div class="">
-
-					<button style="width: 1rem;" class="mui-button cancle">取消</button>
-
+				<div class="" style="width: 1.6rem;">
+					<button style="width: 1.6rem;" class="mui-button cancle">取消详情</button>
 				</div>
 
 			</div>
-			
+
 
 			<script src="../../js/mui.min.js"></script>
 			<script src="../../js/mui.picker.min.js"></script>
