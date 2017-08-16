@@ -25,7 +25,7 @@ lf.ready(function () {
         data: function () {
             return {
                 indexedList:[
-                   /* {
+                    {
                         group:'A',
                         text:'A'
                     },
@@ -48,7 +48,7 @@ lf.ready(function () {
                         roleName:'执行人',
                         state:false,
                         selected:true
-                    }*/
+                    }
                 ]
             }
         },
