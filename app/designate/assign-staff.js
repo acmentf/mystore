@@ -4,7 +4,9 @@ lf.ready(function () {
         //订单Id
         orderId:'',
         //拍摄明细ID
-        photoId:[]
+        photoId:[],
+        //用户id列表
+        userList:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -80,6 +82,9 @@ lf.ready(function () {
                     list.push(item)
                 })
                 this.indexedList = list
+                this.$nextTick(function () {
+                    initSelectIndexEvent()
+                })
             },
             select:function (index) {
                 this.indexedList[index].selected = true
@@ -99,7 +104,7 @@ lf.ready(function () {
         }, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                // console.log(JSON.stringify(res,null,2))
+                console.log(JSON.stringify(res,null,2))
                 vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
@@ -162,14 +167,16 @@ lf.ready(function () {
             lf.window.closeCurrentWebview();
         }
     }
-    function initTableViewEvent(vm){
+    function initSelectIndexEvent() {
         var header = document.querySelector('header.mui-bar');
         var list = document.getElementById('list');
-        var operate = document.getElementById('operate');
         //calc hieght
         list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
         //create
         window.indexedList = new mui.IndexedList(list);
+    }
+    function initTableViewEvent(vm){
+        var operate = document.getElementById('operate');
 
         operate.addEventListener('tap', function() {
             var bool = vm.indexedList.some(function(item) {

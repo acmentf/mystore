@@ -2,7 +2,9 @@ lf.ready(function () {
     var pageParams = {
         passBack:'',
         //订单Id
-        orderId: ''
+        orderId: '',
+        //用户id列表
+        userList:[]
     }
     function setPageParams(params) {
         mui.each(pageParams,function (key) {
@@ -78,6 +80,9 @@ lf.ready(function () {
                     list.push(item)
                 })
                 this.indexedList = list
+                this.$nextTick(function () {
+                    initSelectIndexEvent()
+                })
             },
             select:function (index) {
                 this.indexedList[index].selected = true
@@ -142,14 +147,16 @@ lf.ready(function () {
             mui.toast(res.msg)
         })
     }
-    function initTableViewEvent(vm){
+    function initSelectIndexEvent() {
         var header = document.querySelector('header.mui-bar');
         var list = document.getElementById('list');
-        var operate = document.getElementById('operate');
         //calc hieght
         list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
         //create
         window.indexedList = new mui.IndexedList(list);
+    }
+    function initTableViewEvent(vm){
+        var operate = document.getElementById('operate');
 
         operate.addEventListener('tap', function() {
             var bool = vm.indexedList.some(function(item) {
