@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		forindex: 0,
+		orderNo:null,
 		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
@@ -228,11 +229,17 @@ lf.ready(function() {
 
 //读取页面信息
 function renderTrackInfo(){
-	var orderNo = lf.window.currentWebview().orderNo;
+	window.addEventListener('orderdetails',function(event){
+        setPageParams(event.detail)
+    });
+	vm.orderNo = lf.window.currentWebview().orderNo;
 	vm.forindex = lf.window.currentWebview().type;
 	vm.forStatus = lf.window.currentWebview().status;
+	console.log('vm.forindex==-=='+vm.forindex)
+	console.log('vm.forStatus==-=='+vm.forStatus)
+	console.log('orderNo111-=='+vm.orderNo)
 	var params = {
-		orderNo: orderNo
+		orderNo: vm.orderNo
 	};
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
@@ -300,6 +307,7 @@ function renderTrackInfo(){
 }
 
 lf.event.listener('orderdetails',function(e){
+	console.log('e.detail==='+e.detail)
 	renderTrackInfo();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
