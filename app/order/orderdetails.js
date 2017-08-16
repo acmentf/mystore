@@ -311,7 +311,7 @@ mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 	var orderid = this.getAttribute('data-no');
 	console.log('点击输出信息currentOrderNo' + vm.currentOrderNo)
 	lf.window.openWindow('result/order-result.html','../result/order-result.html',{},{
-            orderNo: vm.currentOrderNo,
+            orderId: vm.currentOrderNo,
 	})
 })
 
