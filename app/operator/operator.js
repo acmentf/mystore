@@ -187,12 +187,19 @@ mui('.mui-bar-nav').on('tap', '.edit',function(){
 })
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
-	vm.shootInfos.forEach(function(v,i){
-		if(v.shootTime == ''){
-			lf.nativeUI.toast('拍摄日期不能为空');
-			return 
-		}
-	})
+	var flag = false
+
+	if (vm.forindex == 2) {
+		vm.shootInfos.forEach(function(v,i){
+			if(!v.shootTime){
+				lf.nativeUI.toast('拍摄日期不能为空');
+				flag = true 
+			}
+		})
+	}
+
+	if (flag) return
+	
 	var params = {
 		orderId: vm.orderId,
 		lineSightList : vm.shootInfos,
