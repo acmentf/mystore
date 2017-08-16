@@ -45,47 +45,48 @@
     <script src="../../js/framework/lf.js"></script>
     <script src="../../libs/vue.min.js"></script>
     <script>
-        lf.ready(function() {
-            var data = {
-                currentId: lf.window.currentWebview().orderId,
-                areaCode: lf.window.currentWebview().areaCode,
-                orderPayList: [],
-                curPage: 0,
-                pageSize: 10,
-                isEmpty: false
-            }
+        var data = {
+            currentId: lf.window.currentWebview().orderId,
+            areaCode: lf.window.currentWebview().areaCode,
+            orderPayList: [],
+            curPage: 0,
+            pageSize: 10,
+            isEmpty: false
+        }
 
-            var vm = new Vue({
-                el: '#app',
-                data: data,
-                methods: {
-                    payStatus: function(status) {
-                        switch (status) {
-                            case 1:
-                                return "待支付"
-                            case 2:
-                                return "已支付"
-                            case 3:
-                                return "已取消"
-                            case 4:
-                                return "支付失败"
-                        }
-                    },
-                    formatterTime: function(time) {
-                        return lf.util.timeStampToDate(time)
-                    },
-                    payStatusClass: function(status) {
-                        switch (status) {
-                            case 2:
-                                return "pay-status-paid"
-                            case 1:
-                            case 3:
-                            case 4:
-                                return "pay-status-paying"
-                        }
+        var vm = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                payStatus: function(status) {
+                    switch (status) {
+                        case 1:
+                            return "待支付"
+                        case 2:
+                            return "已支付"
+                        case 3:
+                            return "已取消"
+                        case 4:
+                            return "支付失败"
+                    }
+                },
+                formatterTime: function(time) {
+                    return lf.util.timeStampToDate(time)
+                },
+                payStatusClass: function(status) {
+                    switch (status) {
+                        case 2:
+                            return "pay-status-paid"
+                        case 1:
+                        case 3:
+                        case 4:
+                            return "pay-status-paying"
                     }
                 }
-            })
+            }
+        })
+
+        lf.ready(function() {
 
             function getOrderPayList() {
                 vm.curPage++

@@ -213,6 +213,8 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		if(data.code == 200) {
 			lf.nativeUI.toast('保存成功');
 			vm.forStatus = 'check'
+
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 		} else {
 //			lf.nativeUI.toast(data.msg);
 			lf.nativeUI.toast(data.code);

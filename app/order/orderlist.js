@@ -233,9 +233,17 @@ mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
 
 mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 	var orderid = this.getAttribute('data-no');
+	var areaCode = this.getAttribute('data-areaCode');
+	var tourGuide = this.getAttribute('data-tourGuide');
+	var purchaser = this.getAttribute('data-purchaser');
+	var aliasName = this.getAttribute('data-aliasName');
 	console.log('id:' + orderid)
 	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 		orderId: orderid,
+		areaCode: areaCode,
+		tourGuide: tourGuide,
+		purchaser: purchaser,
+		aliasName: aliasName,
 	})
 })
 
@@ -355,6 +363,7 @@ function initPull() {
 						};
 						lf.net.getJSON('/order/search', params, function(res) {
 							self.endPullDownToRefresh();
+							console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.refresh(true);
 								dodata('down', index, res.data.result)
@@ -389,6 +398,7 @@ function initPull() {
 							pageSize: vm.pageNum
 						};
 						lf.net.getJSON('/order/search', params, function(res) {
+							console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								dodata('up', index, res.data.result)
@@ -425,6 +435,7 @@ function find(index) {
 		pageSize: vm.pageNum
 	};
 	lf.net.getJSON('/order/search', params, function(res) {
+		console.log(JSON.stringify(res));
 		if(res.code == 200) {
 			dodata('up', index, res.data.result)
 		} else {
