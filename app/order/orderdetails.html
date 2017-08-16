@@ -18,7 +18,7 @@
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">订单详情</h1>
-				<a v-if="currentOrderStatus!=3" id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
+				<a v-if="currentOrderStatus!=3&&currentRoleId == 4" id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 			</header>
 
 			<div class="topbar">
@@ -95,7 +95,7 @@
 						<div class="item assignOrder">
 							执行人
 							<span class="mui-icon mui-icon-arrowright" style="float: right;"></span>
-							<div v-if="orderTrackInfo.assignNames == ''" class="name">尚未分配</div>
+							<div v-if="!orderTrackInfo.assignNames" class="name">尚未指派</div>
 							<div v-if="orderTrackInfo.assignNames != ''" class="name" v-text="orderTrackInfo.assignNames"></div>
 						</div>
 						<div class="sepline"></div>
@@ -414,7 +414,8 @@
 					确定
 				</div>
 			</div>
-			<div v-if="currentOrderStatus!=3" id="topPopover" class="mui-popover" style="width: 1.6rem;">
+			<!--取消必须是计调主管 + 订单为非取消状态才出现-->
+			<div v-if="currentOrderStatus!=3&&currentRoleId == 4" id="topPopover" class="mui-popover" style="width: 1.6rem;">
 				<div class="mui-popover-arrow"></div>
 				<div class="" style="width: 1.6rem;">
 					<button style="width: 1.6rem;" class="mui-button cancle">取消订单</button>
