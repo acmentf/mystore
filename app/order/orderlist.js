@@ -266,7 +266,18 @@ function switchRolePostion(val) {
 			}
 			window.Role.save(obj)
 			lf.nativeUI.toast('切换岗位成功');
-			
+
+			vm.orderList.forEach(function(v, i) { // 将数据制空
+				dodata('down', i, [])
+				vm.pageNos[i] = 0;
+				find(i);
+			})
+		
+			vm.pullObjects.forEach(function(v) { // 将数据全部重新加载一次
+				mui(v).pullToRefresh().refresh(true);
+			})
+
+			lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 		} else {
 			lf.nativeUI.closeWaiting();
 			lf.nativeUI.toast(data.msg);
