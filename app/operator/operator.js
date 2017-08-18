@@ -193,13 +193,17 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		vm.shootInfos.forEach(function(v,i){
 			if(!v.shootTime){
 				lf.nativeUI.toast('拍摄日期不能为空');
-				flag = true 
+				flag = true
 			}
 		})
 	}
+	if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
+		lf.nativeUI.toast('预留座位数只能填写数字');
+		flag = true
+	}
 
 	if (flag) return
-	
+
 	var params = {
 		orderId: vm.orderId,
 		lineSightList : vm.shootInfos,
