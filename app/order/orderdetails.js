@@ -45,6 +45,8 @@ var vm = new Vue({
 		summary: false, // 录入心得
 		photographerId: '', //当前登录用户的摄影师id
 		currentRoleId: '', //当前用户的角色id
+		photographerData: [],
+		summaryFlag: ''
 	}
 })
 
@@ -56,6 +58,7 @@ lf.ready(function() {
 	//genSale 生成销售
 	//summary 录入心得
 	vm.currentTabIndex = lf.window.currentWebview().index;
+	vm.summaryFlag = lf.window.currentWebview().summary;
 	vm.photograherId = window.Role.photograherId,
 		console.log("当前photograherId" + vm.photograherId)
 	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派
@@ -75,9 +78,9 @@ lf.ready(function() {
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback') // 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole = window.Role.userrole;
-	if(window.Role.currentPositions.length>0){
-			vm.currentRoleId = window.Role.currentPositions[0].roleId;
-			console.log("当前用户的角色id"+vm.currentRoleId)
+	if(window.Role.currentPositions.length > 0) {
+		vm.currentRoleId = window.Role.currentPositions[0].roleId;
+		console.log("当前用户的角色id" + vm.currentRoleId)
 	}
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
@@ -249,7 +252,7 @@ lf.ready(function() {
 	 * 查看销售订单
 	 */
 	mui('.mui-card').on('tap', '#order-pay-list-btn', function() {
-		if(vm.currentRoleId!==4&&vm.currentRoleId!==9){
+		if(vm.currentRoleId !== 4 && vm.currentRoleId !== 9) {
 			return
 		}
 		var orderid = this.getAttribute('data-orderid');
@@ -265,69 +268,81 @@ lf.ready(function() {
 
 mui('body').on('tap', '.assignOrder', function() { //点击指派
 	console.log("指派")
-	if(vm.currentRoleId!==4){
+	if(vm.currentRoleId !== 4) {
 		return
-	}else{
+	} else {
 		if(vm.currentOrderStatus != 3) {
-		lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
-			orderId: vm.currentOrderId
-		})
+			lf.window.openWindow('designate/designate.html ', '../designate/designate.html', {}, {
+				orderId: vm.currentOrderId
+			})
+		}
 	}
-	}
-	
+
 })
 mui('body').on('tap', '.allotPhotoOrder', function() { //点击分配
-	if(vm.currentRoleId!==5){
+	if(vm.currentRoleId !== 5) {
 		return
 	}
 	console.log('分配' + vm.currentOrderNo)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
-		orderNo: vm.currentOrderNo,
-		type: 2,
-		status: 'edit'
-	})
+		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+			orderNo: vm.currentOrderNo,
+			type: 2,
+			status: 'edit'
+		})
 	}
 })
 mui('body').on('tap', '.jidiao', function() { //点击计调
 	var type = this.getAttribute('data-type')
-	if(type ==0||type==1){
-		if(vm.currentRoleId!==2&&vm.currentRoleId!==4){
-		return
+	if(type == 0 || type == 1) {
+		if(vm.currentRoleId !== 2 && vm.currentRoleId !== 4) {
+			return
+		}
 	}
-	} 
-	if(type ==2){
-		if(vm.currentRoleId!==2&&vm.currentRoleId!==4&&vm.currentRoleId!==5){
-		return
+	if(type == 2) {
+		if(vm.currentRoleId !== 2 && vm.currentRoleId !== 4 && vm.currentRoleId !== 5) {
+			return
+		}
 	}
-	} 
 	var status = this.getAttribute('data-status') == 1 ? 'check' : 'edit'
 	console.log('orderNO............' + vm.currentOrderNo)
 	console.log('type.........:' + type)
 	console.log('status.........:' + status)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
-		orderNo: vm.currentOrderNo,
-		type: type,
-		status: status
-	})
+		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
+			orderNo: vm.currentOrderNo,
+			type: type,
+			status: status
+		})
 	}
 })
 
 mui('body').on('tap', '.summary', function() { //点击心得
-	if(vm.currentRoleId!==3&&vm.currentRoleId!==5){
+	if(vm.currentRoleId !== 3 && vm.currentRoleId !== 5) {
 		return
 	}
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('点击心得摄影师' + vm.currentOrderId + ',' + vm.currentTourId + ',' + window.Role.usercode + ',' + window.Role.photograherId)
+	console.log('点击心得摄影师' + vm.currentOrderId + ',' + vm.currentTourId + ',' + window.Role.usercode + ',' + window.Role.photograherId+','+vm.summaryFlag)
+	console.log("是否已录入心得", vm.summaryFlag)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
-		orderId: vm.currentOrderId,
-		tourId: vm.currentTourId,
-		userId: window.Role.usercode,
-		photographerId: window.Role.photograherId
-	})
+		if(!vm.summaryFlag){
+			lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
+				orderId: vm.currentOrderId,
+				tourId: vm.currentTourId,
+				userId: window.Role.usercode,
+				photographerId: window.Role.photograherId
+			})
+		}
+		else{
+			lf.window.openWindow('schedule/details.html', '../schedule/details.html', {}, {
+				orderId: vm.currentOrderId,
+				tourId: vm.currentTourId,
+				userId: window.Role.usercode,
+				photographerId: window.Role.photograherId
+			})
+		}
+		
 	}
 })
 mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一个item跳心得
@@ -335,38 +350,38 @@ mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一�
 	var userId = this.getAttribute('data-userId');
 	console.log('id:1111111111111' + ',' + vm.currentOrderId + ',' + photographerId + ',' + userId)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('schedule/details.html', '../schedule/details.html', {}, {
-		orderId: vm.currentOrderId,
-		photographerId: photographerId,
-		userId: userId
-	})
+		lf.window.openWindow('schedule/details.html', '../schedule/details.html', {}, {
+			orderId: vm.currentOrderId,
+			photographerId: photographerId,
+			userId: userId
+		})
 	}
 })
 
 mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
-	if(vm.currentRoleId!==5&&vm.currentRoleId!==8){
+	if(vm.currentRoleId !== 5 && vm.currentRoleId !== 8) {
 		return
 	}
 	var orderid = this.getAttribute('data-no');
 	console.log('点击输出信息currentOrderId' + vm.currentOrderId)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('result/order-result.html', '../result/order-result.html', {}, {
-		orderId: vm.currentOrderId,
-	})
+		lf.window.openWindow('result/order-result.html', '../result/order-result.html', {}, {
+			orderId: vm.currentOrderId,
+		})
 	}
 })
 
 mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
-	if(vm.currentRoleId!==9){
+	if(vm.currentRoleId !== 9) {
 		return
 	}
 	var orderid = this.getAttribute('data-id');
 	console.log('点击销售输出' + vm.currentOrderId + '，' + window.Role.usercode)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('result/sales-export.html', '../result/sales-export.html', {}, {
-		orderId: vm.currentOrderId,
-		userId: window.Role.usercode,
-	})
+		lf.window.openWindow('result/sales-export.html', '../result/sales-export.html', {}, {
+			orderId: vm.currentOrderId,
+			userId: window.Role.usercode,
+		})
 	}
 })
 
@@ -374,13 +389,28 @@ mui('.buttons').on('tap', '.genSale', function() { //点击生成销售
 	var orderid = this.getAttribute('data-no');
 	console.log('id:' + orderid)
 	if(vm.currentOrderStatus != 3) {
-	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
-		orderId: orderid,
-		areaCode: vm.orderInfo.areaCode,
-		tourGuide: vm.orderInfo.tourGuide,
-		purchaser: vm.orderInfo.purchaser,
-		aliasName: vm.orderInfo.aliasName,
-	})
+		lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
+			orderId: orderid,
+			areaCode: vm.orderInfo.areaCode,
+			tourGuide: vm.orderInfo.tourGuide,
+			purchaser: vm.orderInfo.purchaser,
+			aliasName: vm.orderInfo.aliasName,
+		})
+	}
+})
+
+mui('body').on('tap', '.loadmore', function() { //摄影心得点击加载更多，每次加载三条
+	var length = vm.photographerData.length; // 当前显示的条数
+	var totalLength = vm.photographerInfos.length; // 接口返回的总条数
+	vm.photographerData = []
+	if(totalLength - length > 3) {
+		for(var i = 0; i < length + 3; i++) {
+			vm.photographerData.push(vm.photographerInfos[i])
+		}
+	} else {
+		for(var i = 0; i < totalLength; i++) {
+			vm.photographerData.push(vm.photographerInfos[i])
+		}
 	}
 })
 
@@ -399,6 +429,10 @@ function renderOrderDetails() {
 			vm.orderInfo = data.data.orderInfo;
 			vm.orderTrackInfo = data.data.orderTrackInfo;
 			vm.photographerInfos = data.data.photographerInfos;
+			var totalLength = vm.photographerInfos.length > 3 ? 3 : vm.photographerInfos.length
+			for(i = 0; i < totalLength; i++) {
+				vm.photographerData.push(vm.photographerInfos[i])
+			}
 			vm.shotOrderOutput = data.data.shotOrderOutput;
 			var time = new Date() - new Date(vm.orderInfo.createTime);
 			var total = time / 1000;

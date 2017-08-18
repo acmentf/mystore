@@ -188,7 +188,7 @@
 
 												<div class="nr">
 													<div class="imgbody">
-														<div class="tourinfo" :data-id="item.id" :data-actionStatus="item.actionStatus">
+														<div class="tourinfo" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus">
 															<div class="item">
 																<span class="ico ico-starttime"></span>
 																<span>出团日期: {{item.startTime}}</span>
@@ -241,7 +241,7 @@
 														</button>
 														</div>
 														<div v-if="currentRoleId == 3">
-															<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
+															<button v-if="summary&&item.actionStatus==4" type="button" class="mui-btn summary" :data-summary="item.summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
 																录入心得
 														</button>
 														</div>

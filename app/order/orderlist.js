@@ -106,6 +106,7 @@ lf.ready(function() {
 mui('.order-ul').on('tap', '.tourinfo', function() {
 	var id = this.getAttribute('data-id');
 	var actionStatus = this.getAttribute('data-actionStatus');
+	var summary = this.getAttribute('data-summary');
 	var index = 1;
 	//待处理0 已完成计调1 已分配摄影师2 状态，跳到详情页默认展示计调信息tab
 	//正在拍摄中 3  已完成输出4 跳到详情页默认展示输出信息tab
@@ -115,11 +116,12 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 	if(actionStatus==3 || actionStatus ==4){
 		index = 3
 	}
-	console.log('actionStatus....'+actionStatus)
+	console.log('actionStatus....'+actionStatus+','+summary)
 	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
 		orderNo: id,
 		index: index,
-		photographerId: window.Role.photograherId
+		photographerId: window.Role.photograherId,
+		summary: summary
 	})
 })
 mui('.order-ul').on('tap', '.qdbtn', function() {
@@ -207,13 +209,25 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
 	var orderid = this.getAttribute('data-id');
 	var tourId = this.getAttribute('data-tourId');
-	console.log('列表页点击心得' + orderid + '，' + tourId + ',' + window.Role.usercode + ',' + window.Role.photograherId)
-	lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
-		orderId: orderid,
-		tourId: tourId,
-		userId: window.Role.usercode,
-		photographerId: window.Role.photograherId
-	})
+	var summary = this.getAttribute('data-summary');
+	console.log('列表页点击心得' + orderid + '，' + tourId + ',' + window.Role.usercode + ',' + window.Role.photograherId+','+summary)
+	if(!summary){ // summary= false 进入录入页面，summary= true 进入查看页面，
+		lf.window.openWindow('schedule/summary.html', '../schedule/summary.html', {}, {
+			orderId: orderid,
+			tourId: tourId,
+			userId: window.Role.usercode,
+			photographerId: window.Role.photograherId
+		})
+	}
+	else{
+		lf.window.openWindow('schedule/details.html', '../schedule/details.html', {}, {
+			orderId: orderid,
+			tourId: tourId,
+			userId: window.Role.usercode,
+			photographerId: window.Role.photograherId
+		})
+	}
+	
 })
 
 mui('.order-ul').on('tap', '.outOrder', function() { //点击填写输出信息

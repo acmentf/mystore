@@ -304,15 +304,15 @@
 							<span v-if="currentRoleId==3||currentRoleId==5" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content mind" style="padding: 0.2rem;">
-							<div class="item summary-item" v-for="item in photographerInfos" :data-userId="item.userId" :data-photographerId="item.photographerId">
+							<div class="item summary-item" v-for="item in photographerData" :data-userId="item.userId" :data-photographerId="item.photographerId">
 								<div class="name"><span v-text="item.photographerName"></span><span class="ico-pic"></span></div>
 								<div v-text="item.summary">
 								</div>
 								<div class="sepline"></div>
 							</div>
-							<!--<div class="loadmore" v-if="photographerInfos.length>1">
+							<div class="loadmore" v-if="photographerInfos.length!=photographerData.length">
 								查看更多心得
-							</div>-->
+							</div>
 						</div>
 
 					</div>
