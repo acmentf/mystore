@@ -376,6 +376,11 @@ function initPull() {
 									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
 									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
 								}
+								else{
+									vm.orderHeader[0].number = ''; //处理中
+									vm.orderHeader[1].number = ''; //已完成
+									vm.orderHeader[2].number = ''; //已取消
+								}
 
 							} else {
 								vm.pageNos[index]--;
@@ -410,6 +415,11 @@ function initPull() {
 									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
 									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
 									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+								}
+								else{
+									vm.orderHeader[0].number = ''; //处理中
+									vm.orderHeader[1].number = ''; //已完成
+									vm.orderHeader[2].number = ''; //已取消
 								}
 							} else {
 								self.endPullUpToRefresh();
