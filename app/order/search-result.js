@@ -1,35 +1,44 @@
+var vm = new Vue({
+	el: '#app',
+	data: {
+		searchText: '',
+		status: '',
+		orderTimeBegin: '',
+		orderTimeEnd: '',
+		startBeginTime: '',
+		startEndTime: '',
+		currPage: '',
+		pageSize: '',
+		actionStatus: '',
+		orderList: [],
+		isEmpty: false,
+
+		cancelRole: false,
+		allotRole: false,
+		assignRole: false,
+		operatorRole: false,
+		currentRole: '',
+		assignOrder:false, //计调、指派 
+		allotPhotoOrder:false, // 分配
+		outOrder:false, // 填写输出信息
+		saleOutOrder:false, // 销售输出
+		genSale:false, // 生成销售
+		summary:false, // 录入心得
+		photograherId: '',
+		currentRoleId: ''
+	}
+})
 
 lf.ready(function() {
-	var vm = new Vue({
-		el: '#app',
-		data: {
-			searchText: lf.window.currentWebview().searchText,
-			status: lf.window.currentWebview().status,
-			orderTimeBegin: lf.window.currentWebview().orderTimeBegin,
-			orderTimeEnd: lf.window.currentWebview().orderTimeEnd,
-			startBeginTime: lf.window.currentWebview().startBeginTime,
-			startEndTime: lf.window.currentWebview().startEndTime,
-			currPage: lf.window.currentWebview().currPage,
-			pageSize: lf.window.currentWebview().pageSize,
-			actionStatus: lf.window.currentWebview().actionStatus,
-			orderList: [],
-			isEmpty: false,
-	
-			cancelRole: false,
-			allotRole: false,
-			assignRole: false,
-			operatorRole: false,
-			currentRole: '',
-			assignOrder:false, //计调、指派 
-			allotPhotoOrder:false, // 分配
-			outOrder:false, // 填写输出信息
-			saleOutOrder:false, // 销售输出
-			genSale:false, // 生成销售
-			summary:false, // 录入心得
-			photograherId: '',
-			currentRoleId: ''
-		}
-	})
+	vm.searchText = lf.window.currentWebview().searchText
+	vm.status = lf.window.currentWebview().status
+	vm.orderTimeBegin = lf.window.currentWebview().orderTimeBegin
+	vm.orderTimeEnd = lf.window.currentWebview().orderTimeEnd
+	vm.startBeginTime = lf.window.currentWebview().startBeginTime
+	vm.startEndTime = lf.window.currentWebview().startEndTime
+	vm.currPage = lf.window.currentWebview().currPage
+	vm.pageSize = lf.window.currentWebview().pageSize
+	vm.actionStatus = lf.window.currentWebview().actionStatus
 
 	vm.photograherId = window.Role.photograherId
 	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 
