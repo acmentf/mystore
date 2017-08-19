@@ -12,7 +12,7 @@ var vm = new Vue({
 		actionStatus: '',
 		orderList: [],
 		isEmpty: false,
-
+		opType: 'search', //搜索类型
 		cancelRole: false,
 		allotRole: false,
 		assignRole: false,
@@ -71,7 +71,8 @@ lf.ready(function() {
 			startEndTime: vm.startEndTime,
 			currPage: vm.currPage,
 			pageSize: vm.pageSize,
-			actionStatus: vm.actionStatus
+			actionStatus: vm.actionStatus,
+			opType: vm.opType
 		}
 
 		console.log(JSON.stringify(params))

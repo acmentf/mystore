@@ -188,18 +188,17 @@ mui('.mui-bar-nav').on('tap', '.edit',function(){
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
 	var flag = false
-
-	if (vm.forindex == 2) {
-		vm.shootInfos.forEach(function(v,i){
-			if(!v.shootTime){
-				lf.nativeUI.toast('拍摄日期不能为空');
-				flag = true
-			}
-		})
-	}
-	if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
+	vm.shootInfos.forEach(function(v,i){
+		if(!v.shootTime){
+			lf.nativeUI.toast('拍摄日期不能为空');
+			flag = true
+		}
+	})
+	if(vm.marchInfo.preReservedSeats){
+		if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
 		lf.nativeUI.toast('预留座位数只能填写数字');
 		flag = true
+	}
 	}
 
 	if (flag) return

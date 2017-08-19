@@ -11,6 +11,7 @@ var vm = new Vue({
 		pageNos: [
 
 		],
+		opType: 'list',//搜索类型
 		pageNum: 10,
 		pullObjects: [],
 		cancelRole: false,
@@ -374,7 +375,8 @@ function initPull() {
 						var params = {
 							status: getType(index),
 							currPage: vm.pageNos[index],
-							pageSize: vm.pageNum
+							pageSize: vm.pageNum,
+							optype: vm.opType
 						};
 						lf.net.getJSON('/order/search', params, function(res) {
 							self.endPullDownToRefresh();
@@ -415,7 +417,8 @@ function initPull() {
 						var params = {
 							status: getType(index),
 							currPage: vm.pageNos[index],
-							pageSize: vm.pageNum
+							pageSize: vm.pageNum,
+							opType: vm.opType
 						};
 						lf.net.getJSON('/order/search', params, function(res) {
 							console.log(JSON.stringify(res));
