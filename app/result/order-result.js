@@ -158,7 +158,8 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		orderXms:vm.printOrderXms,
 		selectsNum: vm.selectsNum,			
 		shootNum: vm.shootNum,
-		saleRemark:vm.saleRemark
+		saleRemark:vm.saleRemark,
+		flag: 1
 	}
 		
 	}else{
@@ -179,11 +180,13 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
-		noOutReason:vm.reason
+		noOutReason:vm.reason,
+		flag: 1
 
 	}
 	}
 	if(flag){
+		console.log(JSON.stringify(params));
 		lf.nativeUI.showWaiting()
 		lf.net.getJSON('order/saveShotOutput', params, function(res) {
 		lf.nativeUI.closeWaiting()
