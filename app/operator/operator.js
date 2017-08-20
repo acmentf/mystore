@@ -194,14 +194,14 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 			flag = true
 		}
 	})
-	if(vm.marchInfo.preReservedSeats){
-		if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
-		lf.nativeUI.toast('预留座位数只能填写数字');
-		flag = true
-	}
-	}
-
 	if (flag) return
+
+	if(vm.marchInfo.preReservedSeats){
+			if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
+			lf.nativeUI.toast('预留座位数只能填写数字');
+			flag = true
+		}
+	}
 
 	var params = {
 		orderId: vm.orderId,
