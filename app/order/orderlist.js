@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		index: 0,
-		orderHeader: [{ name: '处理中', number: '' }, { name: '已完成', number: '' }, { name: '已取消', number: '' }],
+		orderHeader: [{ name: '待处理', number: '' }, { name: '已处理', number: '' }],
 		orderList: [
 			[],
 			[],
@@ -271,6 +271,34 @@ mui('body').on('tap', '#logout', function() {
 	});
 })
 
+mui('body').on('tap', '#confirmComplete', function() { //确认完成
+	lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			completeFn()
+		}
+	});
+
+
+	function completeFn() {
+		var params = {
+			orderId: vm.currentOrderId,
+			orderState: 2,
+			orderNo: vm.currentOrderNo
+		};
+		lf.net.getJSON('order/updateOrderState', params, function(data) {
+			if(data.code == 200) {
+				lf.nativeUI.toast("确认成功！");
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function(erro) {
+			lf.nativeUI.toast(erro.msg);
+		});
+	}
+})
+
 /**
  * 搜索订单
  */
@@ -374,8 +402,10 @@ function initPull() {
 						var params = {
 							status: getType(index),
 							currPage: vm.pageNos[index],
-							pageSize: vm.pageNum
+							pageSize: vm.pageNum,
+							searchSource: 'list'
 						};
+						console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
 							self.endPullDownToRefresh();
 							console.log(JSON.stringify(res));
@@ -385,15 +415,17 @@ function initPull() {
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 								})
+								console.log("*******************");
+								console.log(res.data.result.length);
 								if(res.data.result.length > 0) {
-									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
-									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
-									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+									vm.orderHeader[0].number = res.data.result[0].doCount; //待处理
+									vm.orderHeader[1].number = res.data.result[0].completeCount; //已处理
+									// vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
 								}
 								else{
 									vm.orderHeader[0].number = ''; //处理中
 									vm.orderHeader[1].number = ''; //已完成
-									vm.orderHeader[2].number = ''; //已取消
+									// vm.orderHeader[2].number = ''; //已取消
 								}
 
 							} else {
@@ -415,8 +447,10 @@ function initPull() {
 						var params = {
 							status: getType(index),
 							currPage: vm.pageNos[index],
-							pageSize: vm.pageNum
+							pageSize: vm.pageNum,
+							searchSource: 'list'
 						};
+						console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
 							console.log(JSON.stringify(res));
 							if(res.code == 200) {
@@ -425,15 +459,17 @@ function initPull() {
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 								})
+								console.log("##############");
+								console.log(res.data.result.length);
 								if(res.data.result.length > 0) {
 									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
 									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
-									vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+									// vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
 								}
 								else{
 									vm.orderHeader[0].number = ''; //处理中
 									vm.orderHeader[1].number = ''; //已完成
-									vm.orderHeader[2].number = ''; //已取消
+									// vm.orderHeader[2].number = ''; //已取消
 								}
 							} else {
 								self.endPullUpToRefresh();
@@ -457,12 +493,26 @@ function find(index) {
 	var params = {
 		status: getType(index),
 		currPage: vm.pageNos[index],
-		pageSize: vm.pageNum
+		pageSize: vm.pageNum,
+		searchSource: 'list'
 	};
 	lf.net.getJSON('/order/search', params, function(res) {
 		console.log(JSON.stringify(res));
+
+		console.log("%%%%%%%%%%%%%%%%%%%%");
 		if(res.code == 200) {
 			dodata('up', index, res.data.result)
+
+			if(res.data.result.length > 0) {
+				vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
+				vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
+				// vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
+			}
+			else{
+				vm.orderHeader[0].number = ''; //处理中
+				vm.orderHeader[1].number = ''; //已完成
+				// vm.orderHeader[2].number = ''; //已取消
+			}
 		} else {
 			vm.pageNos[index]--;
 			lf.nativeUI.toast(res.msg)

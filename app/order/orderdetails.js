@@ -252,7 +252,7 @@ lf.ready(function() {
 	 * 查看销售订单
 	 */
 	mui('.mui-card').on('tap', '#order-pay-list-btn', function() {
-		if(vm.currentRoleId !== 4 && vm.currentRoleId !== 9) {
+		if(!(vm.currentRoleId==9 && (vm.orderInfo.actionStatus==44||vm.orderInfo.actionStatus==33))) {
 			return
 		}
 		var orderid = this.getAttribute('data-orderid');
@@ -263,6 +263,53 @@ lf.ready(function() {
 			purchaser: vm.orderInfo.purchaser,
 			aliasName: vm.orderInfo.aliasName,
 		})
+	})
+
+	mui('body').on('tap', '#confirmComplete', function() { //确认完成
+		lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function(e) {
+			if(e.index == 0) {
+				completeFn()
+			}
+		});
+	
+	
+		function completeFn() {
+			var params = {
+				orderId: vm.currentOrderId,
+				orderState: 2,
+				orderNo: vm.currentOrderNo
+			};
+			lf.net.getJSON('order/updateOrderState', params, function(data) {
+				if(data.code == 200) {
+					lf.nativeUI.toast("确认成功！");
+					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+					lf.window.closeCurrentWebview();
+				} else {
+					lf.nativeUI.toast(data.msg);
+				}
+			}, function(erro) {
+				lf.nativeUI.toast(erro.msg);
+			});
+		}
+	})
+
+	mui('body').on('tap', '#saleComplete', function() { //销售完成
+		var params = {
+			orderId: vm.currentOrderId,
+			orderState: 1,
+			orderNo: vm.currentOrderNo
+		};
+		lf.net.getJSON('order/updateOrderState', params, function(data) {
+			if(data.code == 200) {
+				lf.nativeUI.toast("已完成所有销售！");
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function(erro) {
+			lf.nativeUI.toast(erro.msg);
+		});
 	})
 })
 
@@ -294,13 +341,18 @@ mui('body').on('tap', '.allotPhotoOrder', function() { //点击分配
 })
 mui('body').on('tap', '.jidiao', function() { //点击计调
 	var type = this.getAttribute('data-type')
-	if(type == 0 || type == 1) {
-		if(vm.currentRoleId !== 2 && vm.currentRoleId !== 4) {
+	if(type == 0) {
+		if(!((vm.currentRoleId ==4||vm.currentRoleId==2) && vm.orderInfo.actionStatus!=55)) {
+			return
+		}
+	}
+	if(type == 1) {
+		if(!((vm.currentRoleId ==4||vm.currentRoleId==2) && vm.orderInfo.actionStatus!=55)) {
 			return
 		}
 	}
 	if(type == 2) {
-		if(vm.currentRoleId !== 2 && vm.currentRoleId !== 4 && vm.currentRoleId !== 5) {
+		if(!((vm.currentRoleId ==4||vm.currentRoleId==2||vm.currentRoleId==5) && vm.orderInfo.actionStatus!=55)) {
 			return
 		}
 	}
@@ -318,7 +370,7 @@ mui('body').on('tap', '.jidiao', function() { //点击计调
 })
 
 mui('body').on('tap', '.summary', function() { //点击心得
-	if(vm.currentRoleId !== 3 && vm.currentRoleId !== 5) {
+	if(!(vm.currentRoleId==3&&(vm.orderInfo.actionStatus!=0&&vm.orderInfo.actionStatus!=11))) {
 		return
 	}
 	var orderid = this.getAttribute('data-no');
@@ -359,7 +411,7 @@ mui('.mind').on('tap', '.summary-item', function() { //点击拍摄信息第一�
 })
 
 mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
-	if(vm.currentRoleId !== 5 && vm.currentRoleId !== 8) {
+	if(!(((vm.currentRoleId==5||vm.currentRoleId==4)&&(vm.orderInfo.actionStatus==33||vm.orderInfo.actionStatus==44)) || (vm.currentRoleId==8 &&(vm.orderInfo.actionStatus==33||vm.orderInfo.actionStatus==44||vm.orderInfo.actionStatus==22)))) {
 		return
 	}
 	var orderid = this.getAttribute('data-no');
@@ -372,7 +424,7 @@ mui('body').on('tap', '.outOrder', function() { //点击填写输出信息
 })
 
 mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
-	if(vm.currentRoleId !== 9) {
+	if(!((vm.currentRoleId==9 && (vm.orderInfo.actionStatus==44||vm.orderInfo.actionStatus==33)) || (vm.currentRoleId==4 && vm.orderInfo.actionStatus==44))) {
 		return
 	}
 	var orderid = this.getAttribute('data-id');

@@ -110,7 +110,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='0' :data-status="1">
 							<span class="border-left">团信息</span>
-							<span v-if="currentRoleId ==4||currentRoleId==2" class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
@@ -147,7 +147,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='1' :data-status="1">
 							<span class="border-left">行程信息</span>
-							<span v-if="currentRoleId ==4||currentRoleId==2"  class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
@@ -192,7 +192,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header jidiao" :data-type='2' :data-status="1">
 							<span class="border-left">拍摄信息</span>
-							<span v-if="currentRoleId ==4||currentRoleId==2||currentRoleId==5"  class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="(currentRoleId ==4||currentRoleId==2||currentRoleId==5) && orderInfo.actionStatus!=55"  class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner shootinfo">
@@ -219,7 +219,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header outOrder" style="padding: 0.2rem;">
 							<span class="border-left">输出信息</span>
-							<span v-if="currentRoleId==5||currentRoleId==8" class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="((currentRoleId==5||currentRoleId==4)&&(orderInfo.actionStatus==33||orderInfo.actionStatus==44)) || (currentRoleId==8 &&(orderInfo.actionStatus==33||orderInfo.actionStatus==44||orderInfo.actionStatus==22))" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content">
 							<div v-if="orderResult.isOut ==1">
@@ -260,13 +260,13 @@
 					<div class="mui-card" style="margin-bottom: 0;">
 						<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="currentOrderId" style="padding: 0.2rem;">
 							<span class="border-left">销售订单</span>
-							<span v-if="currentRoleId==4||currentRoleId==9" class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 					</div>
 					<div class="mui-card">
 						<div class="mui-card-header saleOutOrder" :data-id="currentOrderId" style="padding: 0.2rem;">
 							<span class="border-left">销售信息</span>
-							<span v-if="currentRoleId==9" class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="(currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)) || (currentRoleId==4 && orderInfo.actionStatus==44)"  class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content" style="padding: 0.2rem;">
 							<div class="item">
@@ -301,7 +301,7 @@
 					<div class="mui-card">
 						<div class="mui-card-header summary" style="padding: 0.2rem;">
 							<span class="border-left">摄影心得</span>
-							<span v-if="currentRoleId==3||currentRoleId==5" class="mui-icon mui-icon-arrowright"></span>
+							<span v-if="currentRoleId==3&&(orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11)" class="mui-icon mui-icon-arrowright"></span>
 						</div>
 						<div class="mui-card-content mind" style="padding: 0.2rem;">
 							<div class="item summary-item" v-for="item in photographerData" :data-userId="item.userId" :data-photographerId="item.photographerId">
@@ -337,40 +337,46 @@
 			<div v-if="currentOrderStatus!=3" class="buttons">
 				<!--计调主管-->
 				<div v-if="currentRoleId==4">
-					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
+					<div v-if="assignOrder&&orderInfo.actionStatus!=44&&orderInfo.actionStatus!=55">
 						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
 						<button  class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
+					</div>
+					<div v-if="assignOrder&&orderInfo.actionStatus==44">
+						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo" id="confirmComplete">确认完成</button>
 					</div>
 				</div>
 				<!--执行人-->
 				<div v-if="currentRoleId==2">
-					<div v-if="assignOrder&&orderInfo.actionStatus!=4">
+					<div v-if="assignOrder&&orderInfo.actionStatus!=55">
 						<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 					</div>
 				</div>
 				<!--摄影主管-->
 				<div v-if="currentRoleId==5">
-					<div v-if="allotPhotoOrder&&(orderInfo.actionStatus!=0||orderInfo.actionStatus!=4)">
+					<div v-if="allotPhotoOrder&&(orderInfo.actionStatus!=0&&orderInfo.actionStatus!=55)">
 						<button class="mui-button colorlight allotPhotoOrder" :data-no="currentOrderNo">分配</button>
 					</div>
 				</div>
 				<!--摄影师-->
 				<div v-if="currentRoleId==3">
-					<div v-if="summary&&(orderInfo.actionStatus==4)">
+					<div v-if="summary&&(orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11)">
 						<button class="mui-button colorlight summary" :data-no="currentOrderNo">录入心得</button>
 					</div>
 				</div>
 				<!--输出-->
 				<div v-if="currentRoleId==8">
-					<div v-if="outOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)">
-						<button class="mui-button colorlight outOrder" :data-no="currentOrderNo">填写输出信息</button>
+					<div v-if="outOrder&&(orderInfo.actionStatus==22||orderInfo.actionStatus==33||orderInfo.actionStatus==44)">
+						<button class="mui-button colorlight outOrder" :data-no="currentOrderNo">输出</button>
 					</div>
 				</div>
 				<!--销售-->
 				<div v-if="currentRoleId==9">
 					<div>
-						<button :data-no="currentOrderNo" v-if="genSale&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)" class="mui-button colorlight genSale">生成销售</button>
-						<button :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==3||orderInfo.actionStatus==4)" class="mui-button colorlight saleOutOrder">销售输出</button>
+						<button :data-no="currentOrderNo" v-if="genSale&&(orderInfo.actionStatus==33)" class="mui-button colorlight genSale">生成销售</button>
+						<button :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==33)" class="mui-button colorlight saleOutOrder">销售输出</button>
+						<button :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==33)" class="mui-button colorlight saleOutOrder" id="saleComplete">销售完成</button>
+
+						<button :data-no="currentOrderNo" v-if="saleOutOrder&&(orderInfo.actionStatus==44)" class="mui-button colorlight saleOutOrder">销售输出</button>
 					</div>
 				</div>
 

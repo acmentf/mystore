@@ -188,7 +188,8 @@ mui('.mui-bar-nav').on('tap', '.edit',function(){
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
 	var flag = false
-
+	console.log("*******");
+	console.log(vm.forindex);
 	if (vm.forindex == 2) {
 		vm.shootInfos.forEach(function(v,i){
 			if(!v.shootTime){
