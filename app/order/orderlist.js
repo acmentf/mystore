@@ -273,6 +273,8 @@ mui('body').on('tap', '#logout', function() {
 })
 
 mui('body').on('tap', '#confirmComplete', function() { //确认完成
+	var id = this.getAttribute('data-id')
+	var no = this.getAttribute('data-no')
 	lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function(e) {
 		if(e.index == 0) {
 			completeFn()
@@ -282,9 +284,9 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 
 	function completeFn() {
 		var params = {
-			orderId: vm.currentOrderId,
+			orderId: id,
 			orderState: 2,
-			orderNo: vm.currentOrderNo
+			orderNo: no
 		};
 		lf.net.getJSON('order/updateOrderState', params, function(data) {
 			if(data.code == 200) {
