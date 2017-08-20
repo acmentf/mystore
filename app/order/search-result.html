@@ -29,13 +29,13 @@
 						<div class="mui-table title">
 							<div class="mui-clearfix" style="margin-bottom: 0.2rem;">
 								<span class="colorgray">
-								订单号:<i v-text="item.orderNo"></i>
+								团号:<i v-text="item.tourNo"></i>
 								</span>
 								<span class="dqr colororange" v-if="item.actionStatus ==0">待计调</span>
 								<span class="dqr colorgreen" v-if="item.actionStatus ==11">待分配</span>
 								<span class="dqr colorblue" v-if="item.actionStatus ==22">待输出</span>
 								<span class="dqr colorpink" v-if="item.actionStatus ==33">待销售</span>
-								<span class="dqr coloryellow" v-if="item.actionStatus ==44">待确认</span>
+								<span class="dqr coloryellow" v-if="item.actionStatus ==44">待完成</span>
 								<span class="dqr colorgreen" v-if="item.actionStatus ==55">已完成</span>
 							</div>
 							<div class="item">
@@ -62,7 +62,7 @@
 								<div class="item guideinfo">
 									<span class="ico ico-tourguide"></span>
 									导游: {{item.tourGuide}}
-									(<a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;"> {{tp}} </a>)
+									<a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;"> <span v-text="tp"></span> </a>
 
 								</div>
 							</div>
@@ -89,19 +89,32 @@
 										指派
 								</button> 
 								</div>-->
-								<div v-if="currentRoleId == 2 || currentRoleId == 4">
-									<button v-if="item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+								<div v-if="currentRoleId == 4">
+									<button v-if="item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
 										计调
 									</button>
 
-									<button v-if="item.actionStatus==44&&currentRoleId == 4" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo" id="confirmComplete">
+									<button v-if="item.actionStatus==33 || item.actionStatus==44" type="button" class="mui-btn tourinfo" :data-id="item.id" :data-no="item.orderNo">
+										修改信息
+									</button>
+
+									<button v-if="item.actionStatus==44" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo" id="confirmComplete">
 										确认完成
 									</button>
 								</div>
+								<div v-if="currentRoleId == 2">
+									<button v-if="item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+										计调
+									</button>
+								</div>
 								<div v-if="currentRoleId == 5">
-									<button v-if="item.actionStatus!=0&&item.actionStatus!=44" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
-										分配
-								</button>
+									<button v-if="item.actionStatus==11||item.actionStatus==22" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
+											分配
+									</button>
+
+									<button v-if="item.actionStatus==33" type="button" class="mui-btn tourinfo" :data-id="item.id" :data-no="item.orderNo">
+										修改信息
+									</button>
 								</div>
 								<div v-if="currentRoleId == 3">
 									<button v-if="item.actionStatus!=0&&item.actionStatus!=11" type="button" class="mui-btn summary" :data-summary="item.summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
