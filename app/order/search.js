@@ -27,7 +27,7 @@ lf.ready(function(){
 		value: '1',
 		text: '处理中'
 	}, {
-		value: '2',
+		value: '7',
 		text: '已完成'
 	}, {
 		value: '3',
@@ -37,19 +37,22 @@ lf.ready(function(){
 	actionPicker = new mui.PopPicker();
 	actionPicker.setData([{
 		value: '0',
-		text: '待处理'
+		text: '待计调'
 	}, {
-		value: '1',
-		text: '已完成计调'
+		value: '11',
+		text: '待分配'
 	}, {
-		value: '2',
-		text: '已分配摄影师'
+		value: '22',
+		text: '待输出'
 	},{
-		value: '3',
-		text: '已完成拍照'
+		value: '33',
+		text: '待销售'
 	},{
-		value: '4',
-		text: '已完成输出'
+		value: '44',
+		text: '待完成'
+	},{
+		value: '55',
+		text: '已完成'
 	}]);
 })
 
