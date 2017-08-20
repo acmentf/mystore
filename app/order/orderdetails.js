@@ -294,22 +294,30 @@ lf.ready(function() {
 	})
 
 	mui('body').on('tap', '#saleComplete', function() { //销售完成
-		var params = {
-			orderId: vm.currentOrderId,
-			orderState: 1,
-			orderNo: vm.currentOrderNo
-		};
-		lf.net.getJSON('order/updateOrderState', params, function(data) {
-			if(data.code == 200) {
-				lf.nativeUI.toast("已完成所有销售！");
-				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-				lf.window.closeCurrentWebview();
-			} else {
-				lf.nativeUI.toast(data.msg);
+		lf.nativeUI.confirm("操作提示", "是否已完成所有销售?", ["确定", "取消"], function(e) {
+			if(e.index == 0) {
+				saleFn()
 			}
-		}, function(erro) {
-			lf.nativeUI.toast(erro.msg);
 		});
+
+		function saleFn() {
+			var params = {
+				orderId: vm.currentOrderId,
+				orderState: 1,
+				orderNo: vm.currentOrderNo
+			};
+			lf.net.getJSON('order/updateOrderState', params, function(data) {
+				if(data.code == 200) {
+					lf.nativeUI.toast("已完成所有销售！");
+					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+					lf.window.closeCurrentWebview();
+				} else {
+					lf.nativeUI.toast(data.msg);
+				}
+			}, function(erro) {
+				lf.nativeUI.toast(erro.msg);
+			});
+		}
 	})
 })
 

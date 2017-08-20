@@ -168,7 +168,8 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		orderId: vm.orderId,
 		salesAmt: vm.salesAmt,
 		buyers: vm.buyers,
-		orderXms: orderXms
+		orderXms: orderXms,
+		flag: 2
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
