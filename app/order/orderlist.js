@@ -368,10 +368,10 @@ function getType(index) {
 	console.log(index);
 	switch(index) {
 		case 0:
-			r = 1;
+			r = 0;
 			break;
 		case 1:
-			r = 7;
+			r = 1;
 			break;
 		case 2:
 			r = 3;
