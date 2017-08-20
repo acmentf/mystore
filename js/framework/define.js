@@ -4,13 +4,8 @@
 
 
 //开发服务器路径
-<<<<<<< HEAD
-// var SERVER_BAS_URL = "http://116.62.14.92:8091/shoot-mobile-web";//开发
-var SERVER_BAS_URL = "http://192.168.0.148:8091/shoot-mobile-web";//开发
-=======
 //var SERVER_BAS_URL = "http://116.62.14.92:8091/shoot-mobile-web";//开发
-   var SERVER_BAS_URL = "http://192.168.0.148:8091/shoot-mobile-web";//开发
->>>>>>> 782ba6fd4c60ca7c9dc0ba626cee81a17066e450
+var SERVER_BAS_URL = "http://192.168.0.148:8091/shoot-mobile-web";//开发
 
 var REQUESTDATA = {
     "sysType": "1",

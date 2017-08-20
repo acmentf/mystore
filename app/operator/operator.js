@@ -188,17 +188,6 @@ mui('.mui-bar-nav').on('tap', '.edit',function(){
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
 	var flag = false
-<<<<<<< HEAD
-	console.log("*******");
-	console.log(vm.forindex);
-	if (vm.forindex == 2) {
-		vm.shootInfos.forEach(function(v,i){
-			if(!v.shootTime){
-				lf.nativeUI.toast('拍摄日期不能为空');
-				flag = true 
-			}
-		})
-=======
 	vm.shootInfos.forEach(function(v,i){
 		if(!v.shootTime){
 			lf.nativeUI.toast('拍摄日期不能为空');
@@ -210,7 +199,6 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		lf.nativeUI.toast('预留座位数只能填写数字');
 		flag = true
 	}
->>>>>>> 782ba6fd4c60ca7c9dc0ba626cee81a17066e450
 	}
 
 	if (flag) return

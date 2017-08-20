@@ -404,11 +404,8 @@ function initPull() {
 							status: getType(index),
 							currPage: vm.pageNos[index],
 							pageSize: vm.pageNum,
-<<<<<<< HEAD
-							searchSource: 'list'
-=======
+							searchSource: 'list',
 							optype: vm.opType
->>>>>>> 782ba6fd4c60ca7c9dc0ba626cee81a17066e450
 						};
 						console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
@@ -453,11 +450,8 @@ function initPull() {
 							status: getType(index),
 							currPage: vm.pageNos[index],
 							pageSize: vm.pageNum,
-<<<<<<< HEAD
-							searchSource: 'list'
-=======
+							searchSource: 'list',
 							opType: vm.opType
->>>>>>> 782ba6fd4c60ca7c9dc0ba626cee81a17066e450
 						};
 						console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
