@@ -37,19 +37,19 @@
 				</div>
 				<div v-show='orderInfo.actionStatus == 22' class="mod">
 					<span class="ico status3"></span>
-					<div class="title">待拍摄输出</div>
+					<div class="title">待输出</div>
 					<div class="intro" v-text="orderInfo.msgRemark"></div>
 					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 33' class="mod">
 					<span class="ico status4"></span>
-					<div class="title">待销售输出</div>
+					<div class="title">待销售</div>
 					<div class="intro" v-text="orderInfo.msgRemark"></div>
 					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
 				<div v-show='orderInfo.actionStatus == 44' class="mod">
 					<span class="ico status4"></span>
-					<div class="title">待确认完成</div>
+					<div class="title">待完成</div>
 					<div class="intro" v-text="orderInfo.msgRemark"></div>
 					<span class="mui-icon mui-icon-arrowright"></span>
 				</div>
@@ -258,6 +258,8 @@
 								<div>未输出</div>
 								<div>原因</div>
 								<div v-text="orderResult.noOutReason"></div>
+								<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+								<div style="text-indent:2em;" v-text="orderResult.saleRemark"></div>
 							</div>
 
 						</div>
@@ -348,7 +350,7 @@
 						<button  class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 					</div>
 					<div v-if="orderInfo.actionStatus==44">
-						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo" id="confirmComplete">确认完成</button>
+						<button class="mui-button colordark" :data-no="currentOrderNo" id="confirmComplete">确认完成</button>
 					</div>
 				</div>
 				<!--执行人-->
@@ -378,9 +380,9 @@
 				<!--销售-->
 				<div v-if="currentRoleId==9">
 					<div>
-						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight genSale">生成销售</button>
+						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" :data-no="currentOrderNo" class="mui-button colorlight genSale">生成销售</button>
 						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight saleOutOrder">销售输出</button>
-						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight saleOutOrder" id="saleComplete">销售完成</button>
+						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight" id="saleComplete">销售完成</button>
 
 						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==44" class="mui-button colorlight saleOutOrder">销售输出</button>
 					</div>
