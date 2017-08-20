@@ -488,7 +488,7 @@ function renderOrderDetails() {
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
 			vm.orderInfo = data.data.orderInfo;
-			vm.tourGuidePhoneList = orderInfo.tourGuidePhone.split(',')
+			vm.tourGuidePhoneList = vm.orderInfo.tourGuidePhone.split(',')
 			vm.orderTrackInfo = data.data.orderTrackInfo;
 			vm.photographerInfos = data.data.photographerInfos;
 			var totalLength = vm.photographerInfos.length > 3 ? 3 : vm.photographerInfos.length
