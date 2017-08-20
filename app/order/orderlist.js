@@ -334,6 +334,11 @@ function switchRolePostion(val) {
 			window.Role.save(obj)
 			lf.nativeUI.toast('切换岗位成功');
 
+			if(window.Role.currentPositions.length>0){
+				vm.currentRoleId = window.Role.currentPositions[0].roleId;
+				console.log("当前用户的角色id"+vm.currentRoleId)
+			}
+
 			vm.orderList.forEach(function(v, i) { // 将数据制空
 				dodata('down', i, [])
 				vm.pageNos[i] = 0;

@@ -251,7 +251,7 @@
 															</button>
 														</div>
 														<div v-if="currentRoleId == 5">
-															<button v-if="item.actionStatus==11&&item.actionStatus==22" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
+															<button v-if="item.actionStatus==11||item.actionStatus==22" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo">
 																	分配
 															</button>
 
