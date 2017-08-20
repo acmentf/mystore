@@ -259,4 +259,52 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 		aliasName: aliasName,
 	})
 })
+
+mui('body').on('tap', '#confirmComplete', function() { //确认完成
+	lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			completeFn()
+		}
+	});
+
+
+	function completeFn() {
+		var params = {
+			orderId: vm.currentOrderId,
+			orderState: 2,
+			orderNo: vm.currentOrderNo
+		};
+		lf.net.getJSON('order/updateOrderState', params, function(data) {
+			if(data.code == 200) {
+				lf.nativeUI.toast("确认成功！");
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			} else {
+				lf.nativeUI.toast(data.msg);
+			}
+		}, function(erro) {
+			lf.nativeUI.toast(erro.msg);
+		});
+	}
+})
+
+mui('body').on('tap', '#saleComplete', function() { //销售完成
+	var params = {
+		orderId: vm.currentOrderId,
+		orderState: 1,
+		orderNo: vm.currentOrderNo
+	};
+	lf.net.getJSON('order/updateOrderState', params, function(data) {
+		if(data.code == 200) {
+			lf.nativeUI.toast("已完成所有销售！");
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+			lf.window.closeCurrentWebview();
+		} else {
+			lf.nativeUI.toast(data.msg);
+		}
+	}, function(erro) {
+		lf.nativeUI.toast(erro.msg);
+	});
+})
+
 })
