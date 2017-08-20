@@ -284,7 +284,6 @@ lf.ready(function() {
 				if(data.code == 200) {
 					lf.nativeUI.toast("确认成功！");
 					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-					lf.window.closeCurrentWebview();
 				} else {
 					lf.nativeUI.toast(data.msg);
 				}
@@ -311,7 +310,6 @@ lf.ready(function() {
 				if(data.code == 200) {
 					lf.nativeUI.toast("已完成所有销售！");
 					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-					lf.window.closeCurrentWebview();
 				} else {
 					lf.nativeUI.toast(data.msg);
 				}

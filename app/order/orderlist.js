@@ -291,8 +291,6 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 		lf.net.getJSON('order/updateOrderState', params, function(data) {
 			if(data.code == 200) {
 				lf.nativeUI.toast("确认成功！");
-				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-				lf.window.closeCurrentWebview();
 			} else {
 				lf.nativeUI.toast(data.msg);
 			}
