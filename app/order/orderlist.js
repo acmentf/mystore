@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		index: 0,
-		orderHeader: [{ name: '待处理', number: '' }, { name: '已处理', number: '' }],
+		orderHeader: [{ name: '待处理', number: '' }, { name: '进行中', number: '' }],
 		orderList: [
 			[],
 			[],

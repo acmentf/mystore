@@ -139,7 +139,7 @@
 								<div class="item">
 									<label>导游：</label>
 									<span v-text="orderInfo.tourGuide"></span>
-									<a href="'tel://' + orderInfo.tourGuidePhone" style="float:right; color: #FF8080; margin-left: 0.1rem;">
+									<a :href="'tel:'+orderInfo.tourGuidePhone" style="float:right; color: #FF8080; margin-left: 0.1rem;">
 										<span class="tel-ico"></span>
 										<span v-text="orderInfo.tourGuidePhone"></span>
 									</a>
