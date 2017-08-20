@@ -29,7 +29,7 @@ var vm = new Vue({
 		username: '',
 		rolePositionList: [],
 		rolePositionId: '',
-		currentRoleId:'',//当前用户角色id
+		currentRoleId:'',//当前用户角色id,
 	},
 	watch: {
 		rolePositionId: function(val, oldVal) {
@@ -416,6 +416,7 @@ function initPull() {
 								dodata('down', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
+									v.tourGuidePhone = v.tourGuidePhone.split(',')
 								})
 								console.log("*******************");
 								console.log(res.data.result.length);
@@ -461,6 +462,7 @@ function initPull() {
 								dodata('up', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
+									v.tourGuidePhone = v.tourGuidePhone.split(',')
 								})
 								console.log("##############");
 								console.log(res.data.result.length);

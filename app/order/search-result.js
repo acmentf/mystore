@@ -86,6 +86,7 @@ lf.ready(function() {
 				if (data.data.result.length > 0) {
 					data.data.result.forEach(function(item) {
 						item.startTime = lf.util.timeStampToDate2(item.startTime)
+						item.tourGuidePhone = item.tourGuidePhone.split(',')
 						vm.orderList.push(item)
 					})
 					self.endPullupToRefresh(false)
