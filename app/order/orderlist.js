@@ -417,6 +417,8 @@ function initPull() {
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
+
+									console.log(JSON.stringify(v.tourGuidePhone));
 								})
 								console.log("*******************");
 								console.log(res.data.result.length);
@@ -463,6 +465,7 @@ function initPull() {
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
+									console.log(JSON.stringify(v.tourGuidePhone));
 								})
 								console.log("##############");
 								console.log(res.data.result.length);
@@ -470,11 +473,6 @@ function initPull() {
 									vm.orderHeader[0].number = res.data.result[0].doCount; //处理中
 									vm.orderHeader[1].number = res.data.result[0].completeCount; //已完成
 									// vm.orderHeader[2].number = res.data.result[0].cancelCount; //已取消
-								}
-								else{
-									vm.orderHeader[0].number = ''; //处理中
-									vm.orderHeader[1].number = ''; //已完成
-									// vm.orderHeader[2].number = ''; //已取消
 								}
 							} else {
 								self.endPullUpToRefresh();
@@ -507,6 +505,12 @@ function find(index) {
 		console.log("%%%%%%%%%%%%%%%%%%%%");
 		if(res.code == 200) {
 			dodata('up', index, res.data.result)
+
+			res.data.result.forEach(function(v, i) {
+				v.startTime = lf.util.timeStampToDate2(v.startTime)
+				v.tourGuidePhone = v.tourGuidePhone.split(',')
+				console.log(JSON.stringify(v.tourGuidePhone));
+			})
 
 			if(res.data.result.length > 0) {
 				vm.orderHeader[0].number = res.data.result[0].doCount; //处理中

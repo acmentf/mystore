@@ -205,7 +205,7 @@
 														<div class="item guideinfo">
 															<span class="ico ico-tourguide"></span>
 															导游: {{item.tourGuide}}
-															(<a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;"> {{tp}} </a>)
+															<a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;"> <span v-text="tp"></span> </a>
 
 														</div>
 													</div>
