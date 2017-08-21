@@ -1441,7 +1441,7 @@ var lf = (function(document, undefined) {
 				options.data = {};
 			}
 			if(!options.timeout) {
-				options.timeout = 10000;
+				options.timeout = 30000;
 			}
 			if(!options.crossDomain) {
 				options.crossDomain = true;
@@ -1500,7 +1500,7 @@ var lf = (function(document, undefined) {
 				async = true
 			}
 			var type = "post";
-			var timeout = 10000;
+			var timeout = 30000;
 			var defaule = $.util.strToJson($.util.jsonToStr(REQUESTDATA));
 			var tempData = {
 				data: data
