@@ -43,9 +43,9 @@
             <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">导游</label>
-                    <select class="order-pay-list-value" v-model="tour">
+                    <select class="order-pay-list-value" v-model="orderIndex">
                         <option value="">请选择导游</option>
-                        <option v-for="(value, key) in tours" :value="key">{{value}}</option>
+                        <option v-for="(item, index) in tours" :value="index">{{item.tourGuide}}{{item.saleDate}}</option>
                     </select>
                 </div>
             </ul>

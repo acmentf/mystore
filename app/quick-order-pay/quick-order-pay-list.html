@@ -17,7 +17,7 @@
     <div class="mui-content order-pay-content order-pay-list mui-scroll-wrapper" id="app">
         <div class="mui-scroll">
         
-            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id">
+            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-orderId="item.orderId" :data-areaCode="item.areaCode">
                 <div class="order-pay-card-header">
                     <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
                 </div>
@@ -96,14 +96,14 @@
                 var self = this
 
                 var params = {
-                    orderId: vm.currentId,
+                    // orderId: vm.currentId,
                     curPage: vm.curPage,
                     pageSize: vm.pageSize
                 }
 
                 console.log(JSON.stringify(params));
 
-                lf.net.getJSON('pay/getOrderList', params, function(data) {
+                lf.net.getJSON('pay/getSaleOrdersList', params, function(data) {
 
                     console.log(JSON.stringify(data));
 
@@ -155,19 +155,24 @@
             // 销售详情
             var handleGoOrderPayDetail = function() {
                 var id = this.getAttribute('data-id');
+                var tourGuide = this.getAttribute('data-tourGuide');
+                var purchaser = this.getAttribute('data-purchaser');
+                var aliasName = this.getAttribute('data-aliasName');
+                var orderId = this.getAttribute('data-orderId');
+                var areaCode = this.getAttribute('data-areaCode');
            
-                lf.window.openWindow('quickOrderPayDetail', 'quick-order-pay-detail.html', {}, {
-                    tourGuide: vm.tourGuide,
-                    purchaser: vm.purchaser,
-                    aliasName: vm.aliasName,
-                    orderId: vm.currentId, // 订单ID
-                    areaCode: vm.areaCode, // 区域code
+                lf.window.openWindow('orderPayDetail', '../order-pay/order-pay-detail.html', {}, {
+                    tourGuide: tourGuide,
+                    purchaser: purchaser,
+                    aliasName: aliasName,
+                    orderId: orderId, // 订单ID
+                    areaCode: areaCode, // 区域code
                     saleOrderId: id
                 })
             }
 
             // Add listener
-            mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
+            // mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
             mui('body').on('tap', '.order-pay-card', handleGoOrderPayDetail)
 
             lf.event.listener('orderPay', function(e) {

@@ -6,12 +6,13 @@
 
  lf.ready(function() {
     var data = {
-        orderId: lf.window.currentWebview().orderId,
-        areaCode: lf.window.currentWebview().areaCode,
-        saleOrderId: lf.window.currentWebview().saleOrderId,
-        guideName: lf.window.currentWebview().tourGuide,
-        purchaser: lf.window.currentWebview().purchaser,
-        alias: lf.window.currentWebview().aliasName,
+        // orderId: lf.window.currentWebview().orderId,
+        // areaCode: lf.window.currentWebview().areaCode,
+        // saleOrderId: lf.window.currentWebview().saleOrderId,
+        // guideName: lf.window.currentWebview().tourGuide,
+        // purchaser: lf.window.currentWebview().purchaser,
+        // alias: lf.window.currentWebview().aliasName,
+        orderIndex: '',
         orderStatus: '',
         orderNo: '',
         channelName: '',
@@ -29,7 +30,6 @@
             4: '8寸',
             5: '6寸'
         },
-        tour: '',
         tours: [],
 
         isPaying: false,
@@ -54,7 +54,7 @@
                 if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
     
-                    
+                    vm.tours = data.data
     
                 } else {
                     lf.nativeUI.closeWaiting();
@@ -194,19 +194,20 @@
 
     // 发起支付请求
     function payment() {
+        var orderDta = vm.tours[vm.orderIndex]
         var params = {
-            orderId: vm.orderId,
-            areaCode: vm.areaCode,
+            orderId: orderDta.id,
+            areaCode: orderDta.areaCode,
             channelCode: vm.channelCode,
             nums: vm.nums,
             amount: vm.amount,
             remark: vm.remark,
             argDictId: vm.argDictId,
             argDictName: vm.sizeOptions[vm.argDictId],
-            guideName: vm.guideName,
-            purchaser: vm.purchaser,
-            alias: vm.alias,
-            saleOrderId: vm.saleOrderId
+            guideName: orderDta.tourGuide,
+            purchaser: orderDta.purchaser,
+            alias: orderDta.aliasName,
+            saleDate: orderDta.saleDate
         }
 
         console.log(JSON.stringify(params));
@@ -284,8 +285,8 @@
             lf.nativeUI.toast("支付失败");
         }
         
-        dispatchEvent()
-        lf.window.closeCurrentWebview();
+        // dispatchEvent()
+        // lf.window.closeCurrentWebview();
     }
 
     function dispatchEvent() {
