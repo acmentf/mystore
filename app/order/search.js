@@ -3,11 +3,11 @@ var vm = new Vue({
 	data: {
 		state:{
 			value: '',
-			text: ''
+			text: '请选择'
 		},
 		stateAction:{
 			value: '',
-			text: ''
+			text: '请选择'
 		},
 		orderTimeBegin:'',
 		orderTimeEnd:'',
@@ -24,6 +24,9 @@ lf.ready(function(){
 
 	userPicker = new mui.PopPicker();
 	userPicker.setData([{
+		value: '',
+		text: '请选择'
+	},{
 		value: '1',
 		text: '处理中'
 	}, {
@@ -36,6 +39,9 @@ lf.ready(function(){
 
 	actionPicker = new mui.PopPicker();
 	actionPicker.setData([{
+		value: '',
+		text: '请选择'
+	},{
 		value: '0',
 		text: '待计调'
 	}, {

@@ -19,15 +19,16 @@
         channelCode: '',
         nums: '',
         amount: '',
-        remark: '',
-        argDictId: '',
+        remark: '相片',
+        argDictId: 6,
         argDictName: '',
         sizeOptions: {
             1: '16寸',
             2: '12寸',
             3: '10寸',
             4: '8寸',
-            5: '6寸'
+            6: '7寸',
+            5: '6寸',
         },
 
         isPaying: false,
