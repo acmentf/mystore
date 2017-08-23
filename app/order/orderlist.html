@@ -127,9 +127,9 @@
 	</head>
 
 	<body>
-		<img src="../../images/order/quick_icon.png" class="quick-sale-pay" alt="">
 		<div class="mui-off-canvas-wrap mui-draggable" id="app">
-
+			<img src="../../images/order/quick_icon.png" v-if="currentRoleId == 9" class="quick-sale-pay">
+		
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
