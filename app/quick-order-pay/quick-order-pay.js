@@ -9,7 +9,7 @@
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
         saleOrderId: lf.window.currentWebview().saleOrderId,
-        guideName: lf.window.currentWebview().tourGuide,
+        tourGuide: lf.window.currentWebview().tourGuide,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
         saleDate: '',
@@ -49,63 +49,65 @@
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
 
-            lf.nativeUI.showWaiting();
-
-            lf.net.getJSON('/shoot/getOrders', {}, function(data) {
-                console.log("##########");
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
+            if (!this.saleOrderId) {
+                lf.nativeUI.showWaiting();
+                
+                lf.net.getJSON('/shoot/getOrders', {}, function(data) {
+                    console.log("##########");
+                    console.log(JSON.stringify(data));
+    
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+        
+                        vm.tours = data.data
+        
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
                     lf.nativeUI.closeWaiting();
-    
-                    vm.tours = data.data
-    
-                } else {
-                    lf.nativeUI.closeWaiting();
-                    lf.nativeUI.toast(data.msg);
-                }
-    
-            }, function(erro) {
-                lf.nativeUI.closeWaiting();
-                lf.nativeUI.toast(erro.msg);
-            })
-
-            if (!this.saleOrderId) return
-
-            var params = {
-                id: this.saleOrderId
+                    lf.nativeUI.toast(erro.msg);
+                })
             }
 
-            lf.nativeUI.showWaiting();
-
-            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
-                    lf.nativeUI.closeWaiting();
-    
-                    vm.orderNo = data.data.orderNo
-                    vm.nums = data.data.nums
-                    vm.amount = data.data.totalAmount
-                    vm.orderStatus = data.data.status
-                    vm.orderTime = data.data.orderTime
-                    vm.remark = data.data.remark
-                    vm.argDictName = data.data.argDictName
-                    vm.argDictId = data.data.argDictId
-                    vm.saleDate = data.data.saleDate
-
-
-                    vm.channelName = data.data.channelName
-    
-                } else {
-                    lf.nativeUI.closeWaiting();
-                    lf.nativeUI.toast(data.msg);
+            if (this.saleOrderId) {
+                var params = {
+                    id: this.saleOrderId
                 }
     
-            }, function(erro) {
-                lf.nativeUI.closeWaiting();
-                lf.nativeUI.toast(erro.msg);
-            })
+                lf.nativeUI.showWaiting();
+    
+                lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+                    console.log(JSON.stringify(data));
+    
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+        
+                        vm.orderNo = data.data.orderNo
+                        vm.nums = data.data.nums
+                        vm.amount = data.data.totalAmount
+                        vm.orderStatus = data.data.status
+                        vm.orderTime = data.data.orderTime
+                        vm.remark = data.data.remark
+                        vm.argDictName = data.data.argDictName
+                        vm.argDictId = data.data.argDictId
+                        vm.tourGuide = data.data.saleName
+                        vm.orderIndex = 1
+    
+                        vm.channelName = data.data.channelName
+        
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
+            }
         },
         methods: {
             payStatus: function(status) {
@@ -134,7 +136,7 @@
 
             handlePay: function(payType) {
 
-                if (!vm.orderIndex){
+                if (vm.orderIndex < 0){
                     lf.nativeUI.toast('请选择导游')
                     return
                 }
@@ -205,21 +207,21 @@
 
     // 发起支付请求
     function payment() {
-        if (!this.saleOrderId) {
-            var orderDta = vm.tours[vm.orderIndex]
+        if (!vm.saleOrderId) {
+            var orderData = vm.tours[vm.orderIndex]
             var params = {
-                orderId: orderDta.id,
-                areaCode: orderDta.areaCode,
+                orderId: orderData.id,
+                areaCode: orderData.areaCode,
                 channelCode: vm.channelCode,
                 nums: vm.nums,
                 amount: vm.amount,
                 remark: vm.remark,
                 argDictId: vm.argDictId,
                 argDictName: vm.sizeOptions[vm.argDictId],
-                guideName: orderDta.tourGuide,
-                purchaser: orderDta.purchaser,
-                alias: orderDta.aliasName,
-                saleDate: orderDta.saleDate
+                guideName: orderData.tourGuide,
+                purchaser: orderData.purchaser,
+                alias: orderData.aliasName,
+                saleDate: orderData.saleDate
             }
         } else {
             var params = {
@@ -231,7 +233,7 @@
                 remark: vm.remark,
                 argDictId: vm.argDictId,
                 argDictName: vm.sizeOptions[vm.argDictId],
-                guideName: vm.guideName,
+                guideName: vm.tourGuide,
                 purchaser: vm.purchaser,
                 alias: vm.alias,
                 saleOrderId: vm.saleOrderId
@@ -314,9 +316,14 @@
             lf.nativeUI.toast("支付失败");
         }
         
-        clearFormData()
-        // dispatchEvent()
-        // lf.window.closeCurrentWebview();
+
+        if (vm.saleOrderId) {
+            dispatchEvent()
+            lf.window.closeCurrentWebview();
+        } else {
+            clearFormData()
+        }
+        
     }
 
     function clearFormData() {
