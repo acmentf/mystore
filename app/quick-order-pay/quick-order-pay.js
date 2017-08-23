@@ -6,13 +6,14 @@
 
  lf.ready(function() {
     var data = {
-        // orderId: lf.window.currentWebview().orderId,
-        // areaCode: lf.window.currentWebview().areaCode,
-        // saleOrderId: lf.window.currentWebview().saleOrderId,
-        // guideName: lf.window.currentWebview().tourGuide,
-        // purchaser: lf.window.currentWebview().purchaser,
-        // alias: lf.window.currentWebview().aliasName,
-        orderIndex: '',
+        orderId: lf.window.currentWebview().orderId,
+        areaCode: lf.window.currentWebview().areaCode,
+        saleOrderId: lf.window.currentWebview().saleOrderId,
+        guideName: lf.window.currentWebview().tourGuide,
+        purchaser: lf.window.currentWebview().purchaser,
+        alias: lf.window.currentWebview().aliasName,
+        saleDate: '',
+        orderIndex: -1,
         orderStatus: '',
         orderNo: '',
         channelName: '',
@@ -20,8 +21,8 @@
         channelCode: '',
         nums: '',
         amount: '',
-        remark: '',
-        argDictId: '',
+        remark: '相片',
+        argDictId: 1,
         argDictName: '',
         sizeOptions: {
             1: '16寸',
@@ -46,6 +47,8 @@
         mounted: function() {
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
+
+            lf.nativeUI.showWaiting();
 
             lf.net.getJSON('/shoot/getOrders', {}, function(data) {
                 console.log("##########");
@@ -88,6 +91,7 @@
                     vm.remark = data.data.remark
                     vm.argDictName = data.data.argDictName
                     vm.argDictId = data.data.argDictId
+                    vm.saleDate = data.data.saleDate
 
 
                     vm.channelName = data.data.channelName
@@ -128,6 +132,12 @@
             },
 
             handlePay: function(payType) {
+
+                if (!vm.orderIndex){
+                    lf.nativeUI.toast('请选择导游')
+                    return
+                }
+
                 if (!vm.nums){
                     lf.nativeUI.toast('请输入数量')
                     return
@@ -194,21 +204,39 @@
 
     // 发起支付请求
     function payment() {
-        var orderDta = vm.tours[vm.orderIndex]
-        var params = {
-            orderId: orderDta.id,
-            areaCode: orderDta.areaCode,
-            channelCode: vm.channelCode,
-            nums: vm.nums,
-            amount: vm.amount,
-            remark: vm.remark,
-            argDictId: vm.argDictId,
-            argDictName: vm.sizeOptions[vm.argDictId],
-            guideName: orderDta.tourGuide,
-            purchaser: orderDta.purchaser,
-            alias: orderDta.aliasName,
-            saleDate: orderDta.saleDate
+        if (!this.saleOrderId) {
+            var orderDta = vm.tours[vm.orderIndex]
+            var params = {
+                orderId: orderDta.id,
+                areaCode: orderDta.areaCode,
+                channelCode: vm.channelCode,
+                nums: vm.nums,
+                amount: vm.amount,
+                remark: vm.remark,
+                argDictId: vm.argDictId,
+                argDictName: vm.sizeOptions[vm.argDictId],
+                guideName: orderDta.tourGuide,
+                purchaser: orderDta.purchaser,
+                alias: orderDta.aliasName,
+                saleDate: orderDta.saleDate
+            }
+        } else {
+            var params = {
+                orderId: vm.orderId,
+                areaCode: vm.areaCode,
+                channelCode: vm.channelCode,
+                nums: vm.nums,
+                amount: vm.amount,
+                remark: vm.remark,
+                argDictId: vm.argDictId,
+                argDictName: vm.sizeOptions[vm.argDictId],
+                guideName: vm.guideName,
+                purchaser: vm.purchaser,
+                alias: vm.alias,
+                saleOrderId: vm.saleOrderId
+            }
         }
+        
 
         console.log(JSON.stringify(params));
 
@@ -285,8 +313,15 @@
             lf.nativeUI.toast("支付失败");
         }
         
+        clearFormData()
         // dispatchEvent()
         // lf.window.closeCurrentWebview();
+    }
+
+    function clearFormData() {
+        vm.orderIndex = -1
+        vm.nums = ''
+        vm.amount = ''
     }
 
     function dispatchEvent() {
