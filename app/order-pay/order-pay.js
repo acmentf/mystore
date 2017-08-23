@@ -34,7 +34,7 @@
         isPaying: false,
         payType: 0,
         payName: '',
-        loopTime: 2000,
+        loopTime: 1000,
         loopOrderId: '',
         timer: null
     }

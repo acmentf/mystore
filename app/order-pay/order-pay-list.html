@@ -175,6 +175,7 @@
                 vm.orderPayList = []
                 vm.isEmpty = false
                 mui('.order-pay-content').pullRefresh().refresh(true)
+                lf.window.currentWebview().reload()
             })
         })
     </script> 

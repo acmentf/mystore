@@ -13,6 +13,7 @@
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
         saleDate: '',
+        orderSaleDate: '',
         orderIndex: -1,
         orderStatus: '',
         orderNo: '',
@@ -37,7 +38,7 @@
         isPaying: false,
         payType: 0,
         payName: '',
-        loopTime: 2000,
+        loopTime: 1000,
         loopOrderId: '',
         timer: null
     }
@@ -58,6 +59,10 @@
     
                     if(data.code == 200) {
                         lf.nativeUI.closeWaiting();
+
+                        data.data.forEach(function(v, i) {
+                            v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+                        })
         
                         vm.tours = data.data
         
@@ -93,8 +98,10 @@
                         vm.remark = data.data.remark
                         vm.argDictName = data.data.argDictName
                         vm.argDictId = data.data.argDictId
-                        vm.tourGuide = data.data.saleName
+                        vm.tourGuide = data.data.guideName
                         vm.orderIndex = 1
+                        vm.saleDate = lf.util.timeStampToDate2(data.data.saleDate)
+                        vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
     
                         vm.channelName = data.data.channelName
         
