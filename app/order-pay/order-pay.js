@@ -201,7 +201,7 @@
 
                 vm.loopOrderId = data.data.saleOrderId
 
-                dispatchEvent()
+                // dispatchEvent()
 
                 // 轮询支付状态
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
