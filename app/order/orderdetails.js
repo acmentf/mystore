@@ -380,6 +380,10 @@ mui('body').on('tap', '.summary', function() { //点击心得
 	if(!(vm.currentRoleId==3&&(vm.orderInfo.actionStatus!=0&&vm.orderInfo.actionStatus!=11))) {
 		return
 	}
+	if (vm.PhotographerExperienceFlage==1) {
+		lf.nativeUI.toast("您已录入过心得");
+		return
+	}
 	var orderid = this.getAttribute('data-no');
 	var tourId = this.getAttribute('data-tourId');
 	console.log('点击心得摄影师' + vm.currentOrderId + ',' + vm.currentTourId + ',' + window.Role.usercode + ',' + window.Role.photograherId+','+vm.summaryFlag)
