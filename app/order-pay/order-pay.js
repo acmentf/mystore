@@ -19,6 +19,7 @@
         channelName: '',
         orderTime: '',
         channelCode: '',
+        salePersonnelNum: '',
         nums: '',
         amount: '',
         remark: '相片',
@@ -71,6 +72,7 @@
                     vm.argDictName = data.data.argDictName
                     vm.argDictId = data.data.argDictId
                     vm.channelName = data.data.channelName
+                    vm.salePersonnelNum = data.data.salePersonnelNum
 
                     vm.province = vm.province || data.data.province
                     vm.city = vm.city || data.data.city
@@ -192,6 +194,7 @@
             saleOrderId: vm.saleOrderId,
             province: vm.province,
             city: vm.city,
+            salePersonnelNum: vm.salePersonnelNum
         }
 
         console.log(JSON.stringify(params));

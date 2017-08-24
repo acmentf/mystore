@@ -14,6 +14,7 @@
         alias: lf.window.currentWebview().aliasName,
         province: lf.window.currentWebview().province,
         city: lf.window.currentWebview().city,
+        salePersonnelNum: '',
         saleDate: '',
         orderSaleDate: '',
         orderIndex: -1,
@@ -109,6 +110,7 @@
                         vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
     
                         vm.channelName = data.data.channelName
+                        vm.salePersonnelNum = data.data.salePersonnelNum
 
                         vm.province = vm.province || data.data.province
                         vm.city = vm.city || data.data.city
@@ -239,6 +241,7 @@
                 saleDate: orderData.saleDate,
                 province: orderData.province,
                 city: orderData.city,
+                salePersonnelNum: vm.salePersonnelNum,
             }
         } else {
             var params = {
@@ -256,6 +259,7 @@
                 saleOrderId: vm.saleOrderId,
                 province: vm.province,
                 city: vm.city,
+                salePersonnelNum: vm.salePersonnelNum,
             }
         }
         
