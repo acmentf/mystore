@@ -12,6 +12,8 @@
         tourGuide: lf.window.currentWebview().tourGuide,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
+        province: lf.window.currentWebview().province,
+        city: lf.window.currentWebview().city,
         saleDate: '',
         orderSaleDate: '',
         orderIndex: -1,
@@ -50,6 +52,9 @@
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
 
+            /**
+             * 获取导游列表
+             */
             if (!this.saleOrderId) {
                 lf.nativeUI.showWaiting();
                 
@@ -104,6 +109,9 @@
                         vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
     
                         vm.channelName = data.data.channelName
+
+                        vm.province = vm.province || data.data.province
+                        vm.city = vm.city || data.data.city
         
                     } else {
                         lf.nativeUI.closeWaiting();
@@ -228,7 +236,9 @@
                 guideName: orderData.tourGuide,
                 purchaser: orderData.purchaser,
                 alias: orderData.aliasName,
-                saleDate: orderData.saleDate
+                saleDate: orderData.saleDate,
+                province: orderData.province,
+                city: orderData.city,
             }
         } else {
             var params = {
@@ -243,7 +253,9 @@
                 guideName: vm.tourGuide,
                 purchaser: vm.purchaser,
                 alias: vm.alias,
-                saleOrderId: vm.saleOrderId
+                saleOrderId: vm.saleOrderId,
+                province: vm.province,
+                city: vm.city,
             }
         }
         

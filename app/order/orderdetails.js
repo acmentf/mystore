@@ -263,6 +263,8 @@ lf.ready(function() {
 			tourGuide: vm.orderInfo.tourGuide,
 			purchaser: vm.orderInfo.purchaser,
 			aliasName: vm.orderInfo.aliasName,
+			province: vm.orderInfo.province,
+			city: vm.orderInfo.city,
 		})
 	})
 

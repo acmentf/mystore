@@ -22,13 +22,14 @@
     <div class="mui-content order-pay-content order-pay-list mui-scroll-wrapper" id="app">
         <div class="mui-scroll">
         
-            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-orderId="item.orderId" :data-areaCode="item.areaCode">
+            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-orderId="item.orderId" :data-areaCode="item.areaCode" :data-province="item.province" :data-city="item.city">
                 <div class="order-pay-card-header">
                     <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
                 </div>
                 <div class="order-pay-card-content">
                     <p>生成时间：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
                     <p>照片张数：{{item.argDictName}} {{item.nums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
+                    <p>{{item.province}} {{item.city}}</p>
                 </div>
             </div>
 
@@ -165,6 +166,8 @@
                 var aliasName = this.getAttribute('data-aliasName');
                 var orderId = this.getAttribute('data-orderId');
                 var areaCode = this.getAttribute('data-areaCode');
+                var province = this.getAttribute('data-province');
+                var city = this.getAttribute('data-city');
            
                 lf.window.openWindow('quickOrderPayDetail', '../quick-order-pay/quick-order-pay-detail.html', {}, {
                     tourGuide: tourGuide,
@@ -172,7 +175,9 @@
                     aliasName: aliasName,
                     orderId: orderId, // 订单ID
                     areaCode: areaCode, // 区域code
-                    saleOrderId: id
+                    saleOrderId: id,
+                    province: province,
+                    city: city,
                 })
             }
 

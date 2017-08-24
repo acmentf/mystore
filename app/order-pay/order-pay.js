@@ -12,6 +12,8 @@
         guideName: lf.window.currentWebview().tourGuide,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
+        province: lf.window.currentWebview().province,
+        city: lf.window.currentWebview().city,
         orderStatus: '',
         orderNo: '',
         channelName: '',
@@ -68,9 +70,10 @@
                     vm.remark = data.data.remark
                     vm.argDictName = data.data.argDictName
                     vm.argDictId = data.data.argDictId
-
-
                     vm.channelName = data.data.channelName
+
+                    vm.province = vm.province || data.data.province
+                    vm.city = vm.city || data.data.city
     
                 } else {
                     lf.nativeUI.closeWaiting();
@@ -186,7 +189,9 @@
             guideName: vm.guideName,
             purchaser: vm.purchaser,
             alias: vm.alias,
-            saleOrderId: vm.saleOrderId
+            saleOrderId: vm.saleOrderId,
+            province: vm.province,
+            city: vm.city,
         }
 
         console.log(JSON.stringify(params));

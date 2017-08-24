@@ -24,6 +24,7 @@
                 <div class="order-pay-card-content">
                     <p>生成时间：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
                     <p>照片张数：{{item.argDictName}} {{item.nums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
+                    <p>{{item.province}} {{item.city}}</p>
                 </div>
             </div>
 
@@ -48,6 +49,11 @@
          var data = {
             currentId: '',
             areaCode: '',
+            tourGuide: '',
+            purchaser: '',
+            aliasName: '',
+            province: '',
+            city: '',
             orderPayList: [],
             curPage: 0,
             pageSize: 10,
@@ -89,6 +95,11 @@
         lf.ready(function() {
             vm.currentId = lf.window.currentWebview().orderId
             vm.areaCode = lf.window.currentWebview().areaCode
+            vm.tourGuide = lf.window.currentWebview().tourGuide
+            vm.purchaser = lf.window.currentWebview().purchaser
+            vm.aliasName = lf.window.currentWebview().aliasName
+            vm.province = lf.window.currentWebview().province
+            vm.city = lf.window.currentWebview().city
 
             function getOrderPayList() {
                 vm.curPage++
@@ -148,7 +159,9 @@
                     purchaser: vm.purchaser,
                     aliasName: vm.aliasName,
                     orderId: vm.currentId, // 订单ID
-                    areaCode: vm.areaCode // 区域code
+                    areaCode: vm.areaCode, // 区域code
+                    province: vm.province,
+                    city: vm.city
                 })
             }
 
@@ -162,6 +175,8 @@
                     aliasName: vm.aliasName,
                     orderId: vm.currentId, // 订单ID
                     areaCode: vm.areaCode, // 区域code
+                    province: vm.province,
+                    city: vm.city,
                     saleOrderId: id
                 })
             }
