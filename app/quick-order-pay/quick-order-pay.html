@@ -71,7 +71,7 @@
                 </div>
             </form>
 
-            <ul class="mui-table-view" style="margin-top: 20px;">
+            <form class="mui-input-group" style="margin-top: 20px">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">销售类型</label>
                     <select class="order-pay-list-value" v-model="remark">
@@ -80,14 +80,12 @@
                         <option value="相片+相框">相片+相框</option>
                     </select>
                 </div>
-            </ul>
 
-            <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">销售人数</label>
-                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="salePersonnelNum" placeholder="请输入数">
+                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="salePersonnelNum" placeholder="请输入人数">
                 </div>
-            </ul>
+            </form>
 
             <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">

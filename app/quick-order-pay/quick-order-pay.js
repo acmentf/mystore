@@ -226,6 +226,8 @@
     function payment() {
         if (!vm.saleOrderId) {
             var orderData = vm.tours[vm.orderIndex]
+            console.log(JSON.stringify(orderData))
+            
             var params = {
                 orderId: orderData.id,
                 areaCode: orderData.areaCode,
@@ -239,8 +241,8 @@
                 purchaser: orderData.purchaser,
                 alias: orderData.aliasName,
                 saleDate: orderData.saleDate,
-                province: orderData.province,
-                city: orderData.city,
+                province: orderData.prodName,
+                city: orderData.cityName,
                 salePersonnelNum: vm.salePersonnelNum,
             }
         } else {
