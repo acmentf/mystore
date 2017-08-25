@@ -203,6 +203,11 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		}
 	}
 
+	if(!vm.marchInfo.fetchPhotoTime) {
+		lf.nativeUI.toast('销售日期必填');
+		return
+	}
+
 	var params = {
 		orderId: vm.orderId,
 		lineSightList : vm.shootInfos,

@@ -46,6 +46,9 @@ lf.ready(function(){
 		value: '4',
 		text: '8寸'
 	}, {
+		value: '6',
+		text: '7寸'
+	}, {
 		value: '5',
 		text: '6寸'
 	}]);

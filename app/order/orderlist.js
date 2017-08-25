@@ -272,6 +272,13 @@ mui('body').on('tap', '#logout', function() {
 	});
 })
 
+/**
+ * 快速支付
+ */
+mui('body').on('tap', '.quick-sale-pay', function() {
+	lf.window.openWindow('quickOrderPay', '../quick-order-pay/quick-order-pay.html', {}, {})
+})
+
 mui('body').on('tap', '#confirmComplete', function() { //确认完成
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')

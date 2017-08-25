@@ -9,17 +9,20 @@
         orderId: lf.window.currentWebview().orderId,
         areaCode: lf.window.currentWebview().areaCode,
         saleOrderId: lf.window.currentWebview().saleOrderId,
-        guideName: lf.window.currentWebview().tourGuide,
+        tourGuide: lf.window.currentWebview().tourGuide,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
         province: lf.window.currentWebview().province,
         city: lf.window.currentWebview().city,
+        salePersonnelNum: '',
+        saleDate: '',
+        orderSaleDate: '',
+        orderIndex: -1,
         orderStatus: '',
         orderNo: '',
         channelName: '',
         orderTime: '',
         channelCode: '',
-        salePersonnelNum: '',
         nums: '',
         amount: '',
         remark: '相片',
@@ -33,6 +36,7 @@
             6: '7寸',
             5: '6寸',
         },
+        tours: [],
 
         isPaying: false,
         payType: 0,
@@ -49,43 +53,78 @@
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
 
-            if (!this.saleOrderId) return
+            /**
+             * 获取导游列表
+             */
+            if (!this.saleOrderId) {
+                lf.nativeUI.showWaiting();
+                
+                lf.net.getJSON('/shoot/getOrders', {}, function(data) {
+                    console.log("##########");
+                    console.log(JSON.stringify(data));
+    
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
 
-            var params = {
-                id: this.saleOrderId
+                        data.data.forEach(function(v, i) {
+                            v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+                        })
+        
+                        vm.tours = data.data
+        
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
             }
 
-            lf.nativeUI.showWaiting();
-
-            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-                console.log(JSON.stringify(data));
-
-                if(data.code == 200) {
-                    lf.nativeUI.closeWaiting();
-    
-                    vm.orderNo = data.data.orderNo
-                    vm.nums = data.data.nums
-                    vm.amount = data.data.totalAmount
-                    vm.orderStatus = data.data.status
-                    vm.orderTime = data.data.orderTime
-                    vm.remark = data.data.remark
-                    vm.argDictName = data.data.argDictName
-                    vm.argDictId = data.data.argDictId
-                    vm.channelName = data.data.channelName
-                    vm.salePersonnelNum = data.data.salePersonnelNum
-
-                    vm.province = vm.province || data.data.province
-                    vm.city = vm.city || data.data.city
-    
-                } else {
-                    lf.nativeUI.closeWaiting();
-                    lf.nativeUI.toast(data.msg);
+            if (this.saleOrderId) {
+                var params = {
+                    id: this.saleOrderId
                 }
     
-            }, function(erro) {
-                lf.nativeUI.closeWaiting();
-                lf.nativeUI.toast(erro.msg);
-            })
+                lf.nativeUI.showWaiting();
+    
+                lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+                    console.log(JSON.stringify(data));
+    
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+        
+                        vm.orderNo = data.data.orderNo
+                        vm.nums = data.data.nums
+                        vm.amount = data.data.totalAmount
+                        vm.orderStatus = data.data.status
+                        vm.orderTime = data.data.orderTime
+                        vm.remark = data.data.remark
+                        vm.argDictName = data.data.argDictName
+                        vm.argDictId = data.data.argDictId
+                        vm.tourGuide = data.data.guideName
+                        vm.orderIndex = 1
+                        vm.saleDate = lf.util.timeStampToDate2(data.data.saleDate)
+                        vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
+    
+                        vm.channelName = data.data.channelName
+                        vm.salePersonnelNum = data.data.salePersonnelNum
+
+                        vm.province = vm.province || data.data.province
+                        vm.city = vm.city || data.data.city
+        
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
+            }
         },
         methods: {
             payStatus: function(status) {
@@ -113,6 +152,12 @@
             },
 
             handlePay: function(payType) {
+
+                if (vm.orderIndex < 0){
+                    lf.nativeUI.toast('请选择导游')
+                    return
+                }
+
                 if (!vm.nums){
                     lf.nativeUI.toast('请输入数量')
                     return
@@ -179,23 +224,47 @@
 
     // 发起支付请求
     function payment() {
-        var params = {
-            orderId: vm.orderId,
-            areaCode: vm.areaCode,
-            channelCode: vm.channelCode,
-            nums: vm.nums,
-            amount: vm.amount,
-            remark: vm.remark,
-            argDictId: vm.argDictId,
-            argDictName: vm.sizeOptions[vm.argDictId],
-            guideName: vm.guideName,
-            purchaser: vm.purchaser,
-            alias: vm.alias,
-            saleOrderId: vm.saleOrderId,
-            province: vm.province,
-            city: vm.city,
-            salePersonnelNum: vm.salePersonnelNum
+        if (!vm.saleOrderId) {
+            var orderData = vm.tours[vm.orderIndex]
+            console.log(JSON.stringify(orderData))
+            
+            var params = {
+                orderId: orderData.id,
+                areaCode: orderData.areaCode,
+                channelCode: vm.channelCode,
+                nums: vm.nums,
+                amount: vm.amount,
+                remark: vm.remark,
+                argDictId: vm.argDictId,
+                argDictName: vm.sizeOptions[vm.argDictId],
+                guideName: orderData.tourGuide,
+                purchaser: orderData.purchaser,
+                alias: orderData.aliasName,
+                saleDate: orderData.saleDate,
+                province: orderData.prodName,
+                city: orderData.cityName,
+                salePersonnelNum: vm.salePersonnelNum,
+            }
+        } else {
+            var params = {
+                orderId: vm.orderId,
+                areaCode: vm.areaCode,
+                channelCode: vm.channelCode,
+                nums: vm.nums,
+                amount: vm.amount,
+                remark: vm.remark,
+                argDictId: vm.argDictId,
+                argDictName: vm.sizeOptions[vm.argDictId],
+                guideName: vm.tourGuide,
+                purchaser: vm.purchaser,
+                alias: vm.alias,
+                saleOrderId: vm.saleOrderId,
+                province: vm.province,
+                city: vm.city,
+                salePersonnelNum: vm.salePersonnelNum,
+            }
         }
+        
 
         console.log(JSON.stringify(params));
 
@@ -275,11 +344,27 @@
             // lf.nativeUI.toast("支付失败");
         }
         
-        dispatchEvent()
-        lf.window.closeCurrentWebview();
+
+        if (vm.saleOrderId) {
+            dispatchEvent()
+            lf.window.closeCurrentWebview();
+        } else {
+            clearFormData()
+        }
+        
+    }
+
+    function clearFormData() {
+        vm.orderIndex = -1
+        vm.nums = ''
+        vm.amount = ''
     }
 
     function dispatchEvent() {
         lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
     }
+
+    mui('body').on('tap', '#quick-sale-list', function() {
+        lf.window.openWindow('quickOrderPayList', 'quick-order-pay-list.html', {}, {})
+    })
 })

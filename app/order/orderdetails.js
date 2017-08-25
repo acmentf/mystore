@@ -265,6 +265,8 @@ lf.ready(function() {
 			tourGuide: vm.orderInfo.tourGuide,
 			purchaser: vm.orderInfo.purchaser,
 			aliasName: vm.orderInfo.aliasName,
+			province: vm.orderInfo.province,
+			city: vm.orderInfo.city,
 		})
 	})
 
@@ -380,6 +382,10 @@ mui('body').on('tap', '.jidiao', function() { //点击计调
 
 mui('body').on('tap', '.summary', function() { //点击心得
 	if(!(vm.currentRoleId==3&&(vm.orderInfo.actionStatus!=0&&vm.orderInfo.actionStatus!=11))) {
+		return
+	}
+	if (vm.PhotographerExperienceFlage==1) {
+		lf.nativeUI.toast("您已录入过心得");
 		return
 	}
 	var orderid = this.getAttribute('data-no');

@@ -121,13 +121,21 @@
 			.orderlist-content-box .footer-order-text{
 				color: #31BA90;
 			}
+			.quick-sale-pay {
+				position: fixed;
+				bottom: 30px;
+				right: 10px;
+				z-index: 9999;
+				width: 50px;
+				height: 50px;
+			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
-
 	<body>
 		<div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
-
+		<div class="mui-off-canvas-wrap mui-draggable" id="app">
+			<img src="../../images/order/quick_icon.png" v-if="currentRoleId == 9" class="quick-sale-pay">
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
