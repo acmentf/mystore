@@ -258,6 +258,7 @@ lf.ready(function() {
 		if(!(vm.currentRoleId==9 && (vm.orderInfo.actionStatus==44||vm.orderInfo.actionStatus==33))) {
 			return
 		}
+		// console.log(JSON.stringify(vm.orderInfo));
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('order-pay/order-pay-list.html', '../order-pay/order-pay-list.html', {}, {
 			orderId: orderid,
