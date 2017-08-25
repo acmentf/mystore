@@ -71,6 +71,10 @@
                         })
         
                         vm.tours = data.data
+
+                        if (data.data.length == 1) {
+                            vm.orderIndex = 0
+                        }
         
                     } else {
                         lf.nativeUI.closeWaiting();
