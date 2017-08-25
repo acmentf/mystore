@@ -265,11 +265,14 @@
     // 支付回调
     function payCallback(data) {
         if (data == 2) {
-            lf.nativeUI.toast("支付成功");
+            mui.alert("支付成功")
+            // lf.nativeUI.toast("支付成功");
         } else if (data == 3) {
-            lf.nativeUI.toast("支付已取消");
+            mui.alert("支付已取消")
+            // lf.nativeUI.toast("支付已取消");
         } else if (data == 4) {
-            lf.nativeUI.toast("支付失败");
+            mui.alert("支付失败")
+            // lf.nativeUI.toast("支付失败");
         }
         
         dispatchEvent()
