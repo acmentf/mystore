@@ -29,6 +29,7 @@ function getStatusLogList() {
 	};
 	lf.net.getJSON('order/queryOrderLogs', params, function(data) {
 		if(data.code == 200) {
+			console.log(JSON.stringify(data.data))
 			if(data.data != '') {
 				vm.statusData0 = data.data.s0
 				vm.statusData1 = data.data.s1
