@@ -266,7 +266,7 @@
 
 					</div>
 					<div class="mui-card" style="margin-bottom: 0;">
-						<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="currentOrderId" style="padding: 0.2rem;">
+						<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="orderInfo.id" style="padding: 0.2rem;">
 							<span class="border-left">销售订单</span>
 							<span v-if="currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)" class="mui-icon mui-icon-arrowright"></span>
 						</div>
@@ -380,7 +380,7 @@
 				<!--销售-->
 				<div v-if="currentRoleId==9">
 					<div>
-						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" :data-no="currentOrderNo" class="mui-button colorlight genSale">生成销售</button>
+						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" :data-id="orderInfo.id" :data-no="currentOrderNo" class="mui-button colorlight genSale">生成销售</button>
 						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight saleOutOrder">销售输出</button>
 						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight" id="saleComplete">销售完成</button>
 

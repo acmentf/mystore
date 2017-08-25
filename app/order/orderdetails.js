@@ -451,7 +451,7 @@ mui('body').on('tap', '.saleOutOrder', function() { //点击销售输出
 })
 
 mui('.buttons').on('tap', '.genSale', function() { //点击生成销售
-	var orderid = this.getAttribute('data-no');
+	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	if(vm.currentOrderStatus != 3) {
 		lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
