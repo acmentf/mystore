@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
-
+		<link rel="stylesheet" href="../../css/common/common.css" />
 		<style>
 			html,
 			body {
@@ -114,12 +114,19 @@
 				background: #3DB391;
 				color: #CCECE1
 			}
+			.orderlist-content-box .footer-order-icon{
+			background: url(../../images/message/nav_order_green.png) no-repeat center;
+			background-size: 100%;
+			}
+			.orderlist-content-box .footer-order-text{
+				color: #31BA90;
+			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
 
 	<body>
-		<div class="mui-off-canvas-wrap mui-draggable" id="app">
+		<div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
 
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
@@ -285,9 +292,22 @@
 						</div>
 					</div>
 				</div>
-
+	
 				<div class="mui-off-canvas-backdrop"></div>
-			</div>
+				<div class="footer">
+					<div class="footer-order-btn">
+						<span class="footer-order-icon foot-icon"></span>
+						<span class="footer-order-text">订单</span>
+					</div>
+					<div class="footer-message-btn">
+						<span class="footer-message-icon foot-icon"></span>
+						<span class="footer-message-text">消息</span>
+					</div>
+					<div class="footer-personage-btn">
+						<span class="footer-personage-icon foot-icon"></span>
+						<span class="footer-personage-text">个人</span>
+					</div>
+				</div>
 		</div>
 
 		<script src="../../js/mui.min.js"></script>

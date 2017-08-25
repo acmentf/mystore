@@ -306,7 +306,12 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 mui('body').on('tap', '#search-order', function() {
 	lf.window.openWindow('search.html', 'search.html', {})
 })
-
+mui('body').on('tap', '.footer-message-btn', function() {
+	lf.window.openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+})
+mui('body').on('tap','.footer-personage-btn',function(){
+	lf.window.openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
+})
 function switchRolePostion(val) {
 	var params = {
 		positionId: val

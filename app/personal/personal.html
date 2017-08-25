@@ -5,8 +5,30 @@
     <title></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/common/common.css" />
     <link href="../../css/app.css" rel="stylesheet"/>
     <link href="../../css/personal/personal.css" rel="stylesheet"/>
+    <style>
+    	#offCanvasWrapper .personal-list-key{
+    		font-size: 0.32rem;
+    	}
+    	#offCanvasWrapper .personal-list-value{
+    		font-size: 0.26rem;
+    	}
+    	#offCanvasWrapper .mui-table-view:before{
+    		background-color: #fff;
+    	}
+    	#offCanvasWrapper .mui-table-view-cell:after{
+    		background-color: #f1f1f1;
+    	}
+    	#offCanvasWrapper .footer-personage-icon{
+			background: url(../../images/message/nav_mine_green.png) no-repeat center;
+			background-size: 100%;
+		}
+		#offCanvasWrapper .footer-personage-text{
+			color: #31BA90;
+		}
+    </style>
 </head>
 <body>
     <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
@@ -39,29 +61,29 @@
         <div class="mui-inner-wrap">
             <header id="personal-header" class="mui-bar mui-bar-nav">
                 <a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-                <h1 class="mui-title">个人</h1>
+                <h1 class="mui-title" style="color: #fff;">个人</h1>
             </header>
 
             <div class="mui-content mui-scroll-wrapper personal-content" id="offCanvasContentScroll">
                 <ul class="mui-table-view">
                     <li class="mui-table-view-cell">
-                        <div class="mui-pull-left personal-list-key" style="line-height: 60px">头像</div>
+                        <div class="mui-pull-left personal-list-key" style="line-height: 60px;">头像</div>
                         <img class="mui-pull-right personal-avatar" src="../../css/images/logo_login.png">
                     </li>
                     <li class="mui-table-view-cell">
                         <div class="mui-pull-left personal-list-key">姓名</div>
-                        <div class="mui-pull-right personal-list-value">倪术</div>
+                        <div v-text="name" class="mui-pull-right personal-list-value"></div>
                     </li>
                     <li class="mui-table-view-cell">
                         <div class="mui-pull-left personal-list-key">部门 / 职位</div>
-                        <div class="mui-pull-right personal-list-value">开发部 ／ 技术</div>
+                        <div v-text="section" class="mui-pull-right personal-list-value"></div>
                     </li>
                 </ul>
 
                 <ul class="mui-table-view">
                     <li class="mui-table-view-cell">
                         <div class="mui-pull-left personal-list-key">手机</div>
-                        <div class="mui-pull-right personal-list-value">15200878087</div>
+                        <div v-text="phone" class="mui-pull-right personal-list-value"></div>
                     </li>
                     <li class="mui-table-view-cell">
                         <div class="mui-pull-left personal-list-key">邮箱</div>
@@ -73,13 +95,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <ul class="mui-table-view setting-go">
-                    <li class="mui-table-view-cell">
-                        <div class="mui-pull-left personal-list-key">设置</div>
-                    </li>
-                </ul>
-
                 <ul class="mui-table-view logout">
                     <li class="mui-table-view-cell">
                         <div class="mui-pull-left personal-list-key">退出账号</div>
@@ -88,12 +103,28 @@
             </div>
 
             <div class="mui-off-canvas-backdrop"></div>
+            			<div class="footer">
+				<div class="footer-order-btn">
+					<span class="footer-order-icon foot-icon"></span>
+					<span class="footer-order-text">订单</span>
+				</div>
+				<div class="footer-message-btn">
+					<span class="footer-message-icon foot-icon"></span>
+					<span class="footer-message-text">消息</span>
+				</div>
+				<div class="footer-personage-btn">
+					<span class="footer-personage-icon foot-icon"></span>
+					<span class="footer-personage-text">个人</span>
+				</div>
+			</div>
+			
         </div>
     </div>
 
     <script src="../../js/mui.min.js"></script>
     <script src="../../js/mui.zoom.js"></script>
     <script src="../../js/mui.previewimage.js"></script>
+    <script src="../../js/framework/common.js"></script>
     <script src="../../js/framework/define.js"></script>
     <script src="../../js/framework/styles.js"></script>
     <script src="../../js/framework/lf.js"></script>

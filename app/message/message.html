@@ -12,13 +12,16 @@
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/message/message.css" />
-
+		<link rel="stylesheet" href="../../css/common/common.css" />
 		<style>
 			html,
 			body {
 				background-color: #efeff4;
 			}
-			
+			.mui-backdrop {
+				position: none;
+				background-color: transparent;
+			}
 			.mui-bar~.mui-content .mui-fullscreen {
 				top: 44px;
 				height: auto;
@@ -99,47 +102,96 @@
 				background-color: #efeff4;
 			}
 			
-			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {
-				top: 104px;
+			.mui-segmented-control .mui-control-item {
+				color: #CCECE1 !important;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 1px solid #fff !important;
+				color: #fff !important;
+			}
+			
+			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background: #3DB391;
+				color: #CCECE1
 			}
 		</style>
 		<script src="../../js/framework/common.js"></script>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">消息管理</h1>
-		</header>
-		<div id="app" class="mui-content message-content">
-			<div class="mui-input-row">
-				<input type="search" v-model="searchText" class="search" placeholder="">
-				<i id="searchBtn" class="mui-icon mui-icon-search"></i>
-			</div>
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell mui-media message-li" :data-id="data.data.orderId" v-for="data in msgList">
-							<div class="message-img mui-media-object mui-pull-left">
-								<img class="" src="../../images/message/icon_pending.png" v-if="data.type == 1">
-								<img class="" src="../../images/message/icon_pending.png" v-else>
+			<div class="mui-off-canvas-wrap mui-draggable message-content" id="app">
+
+			<!--侧滑菜单部分-->
+			<!--<aside id="offCanvasSide" class="mui-off-canvas-left">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="offCanvasSide-header">
+							<img src="../../css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+							<p class="offCanvasSide-header-name">{{username}}</p>
+						</div>
+
+						<form class="offCanvasSide-role-wrap mui-input-group">
+							<div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
+								<label>{{item.name}}</label>
+								<input type="radio" v-bind:value="item.id" v-model="rolePositionId">
 							</div>
-							<div class="mui-media-body">
-								<div class="mui-table">
-									<div class="mui-table-cell mui-col-xs-8">
-										<div class='title mui-ellipsis'>{{data.title}}</div>
-									</div>
-									<div class="mui-table-cell mui-col-xs-4">
-										<span class="time" v-text="dateChange(data.createdTime)"></span>
-									</div>
-								</div>
-								<p class='' v-text="data.descption" style="word-break:break-all; "></p>
-							</div>
-						</li>
-					</ul>
+						</form>
+
+						<div class="offCanvasSide-logout">
+							<button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+						</div>
+					</div>
+				</div>
+			</aside>-->
+
+			<div class="mui-inner-wrap" style="background:#efeff4">
+				<header class="mui-bar mui-bar-nav" style="background:#3db391;">
+					<a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 class="mui-title" style="color: #fff;">消息</h1>
+					<a id="menu" style="color: #fff;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
+				</header>
+				<!--消息列表-->
+				<div class="mui-content message">
+				 	<div v-for=" v in messageList" :data-msg="v.descption" :data-orderId="v.data.orderId" :data-id="v.id" class="message-list">
+				 		<div v-if="v.status == 0" class="point">
+				 			<div></div>
+				 		</div>
+				 		<div class="message-detail" >
+				 			<div v-text="v.title" class="message-detail-title"></div>
+				 			<div v-text="v.descption" class="message-detail-centent"></div>
+				 			<span v-text="v.createdTime" class="message-detail-time"></span>
+				 		</div>
+				 	</div>
 				</div>
 			</div>
+			<!--底部通栏-->
+			<div class="footer">
+				<div class="footer-order-btn">
+					<span class="footer-order-icon foot-icon"></span>
+					<span class="footer-order-text">订单</span>
+				</div>
+				<div class="footer-message-btn">
+					<span class="footer-message-icon foot-icon"></span>
+					<span class="footer-message-text">消息</span>
+				</div>
+				<div class="footer-personage-btn">
+					<span class="footer-personage-icon foot-icon"></span>
+					<span class="footer-personage-text">个人</span>
+				</div>
+			</div>
+			
 		</div>
+		<div id="topPopover" class="mui-popover" style="width: 1.6rem;">
+				<div class="mui-popover-arrow"></div>
+				<div class="" style="width: 1.6rem;">
+					<button style="width: 1.6rem;" class="mui-button cancle">清空</button>
+				</div>
+
+			</div>
+			
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>

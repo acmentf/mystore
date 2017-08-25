@@ -79,10 +79,12 @@ lf.ready(function() {
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback') // 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole = window.Role.userrole;
+	
 	if(window.Role.currentPositions.length > 0) {
 		vm.currentRoleId = window.Role.currentPositions[0].roleId;
 		console.log("当前用户的角色id" + vm.currentRoleId)
 	}
+	console.log(vm.currentRoleId, '2222222222222222222222')
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
@@ -236,12 +238,12 @@ lf.ready(function() {
 			}
 		});
 	})
-	/*mui('.topbar').on('tap', '.mod', function() { //点击顶部，跳转状态日志页面
+	mui('.topbar').on('tap', '.mod', function() { //点击顶部，跳转状态日志页面
 		console.log('状态日志订单id，，，。'+vm.currentOrderId)
 		lf.window.openWindow('order/statuslog.html','../order/statuslog.html',{},{
 			orderid: vm.currentOrderId
 		})
-	})*/
+	})
 	/*mui('.buttons').on('tap', '#allot', function() { //点击拍摄输出
 		var orderid = this.getAttribute('data-orderid');
 		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
