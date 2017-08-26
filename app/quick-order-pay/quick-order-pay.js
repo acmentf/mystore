@@ -37,6 +37,7 @@
             5: '6寸',
         },
         tours: [],
+        id: '',
 
         isPaying: false,
         payType: 0,
@@ -101,7 +102,8 @@
     
                     if(data.code == 200) {
                         lf.nativeUI.closeWaiting();
-        
+                        
+                        vm.id = data.data.id
                         vm.orderNo = data.data.orderNo
                         vm.nums = data.data.nums
                         vm.amount = data.data.totalAmount
@@ -198,6 +200,30 @@
                     this.isPaying = true
                     payment()
                 }
+            },
+
+            handleCancelPay: function() {
+                var params = {
+                    id: vm.id,
+                }
+
+                lf.net.getJSON('pay/cancelOrder', params, function(data) {
+                    console.log(JSON.stringify(data));
+        
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast("已取消订单");
+                        dispatchEvent()
+                        lf.window.closeCurrentWebview();
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
             },
 
             getPayName: function(type) {
