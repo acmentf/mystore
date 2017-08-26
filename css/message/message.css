@@ -49,7 +49,7 @@
 	font-size:0.26rem;
 	position:absolute;
 	right: 0.2rem;
-	bottom: 0.1rem;
+	top: 0.15rem;
 }
 .message-content .footer-message-icon{
 	background: url(../../images/message/nav_message_green.png) no-repeat center;

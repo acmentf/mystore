@@ -1,8 +1,10 @@
 lf.ready(function() {
 	update();
+	console.log('111111111111111111')
 })
 
 function update() {
+	console.log('22222222222222222222222')
 	var params = {
 		"app_id": plus.runtime.appid,
 		"version": plus.runtime.version,
@@ -11,6 +13,7 @@ function update() {
 	};
 	lf.net.getJSON("/app/validationversion", params, function(data) {
 		var update_desc = "发现新的版本，是否需要立即更新";
+		console.log('33333333333333333333333333333')
 		if(data.code == 200) {
 			var btns = null;
 			if(data.data.isMandatory == 1) {

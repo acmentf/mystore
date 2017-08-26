@@ -110,7 +110,6 @@ mui('body').on('tap','#message-goback', function(){
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 	lf.window.closeCurrentWebview();
 })
-message-goback
 //取消订单
 mui('body').on('tap','.order-btn-cancel', function(){
 	if(vm.orderMessage.orderInfo.status == 7) {

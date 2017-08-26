@@ -17,7 +17,8 @@ function readMessage () {
 			vm.messageList = res.data
 			
 			vm.messageList.forEach(function(v){
-				v.createdTime = new Date().format('hh:mm:ss')
+//				console.log(v.createdTime)
+				v.createdTime = new Date(v.createdTime).format('hh:mm:ss')
 				v.data = JSON.parse(v.data)
 			})
 			console.log(JSON.stringify(vm.messageList))
