@@ -22,7 +22,7 @@
 	<body>
 		<div class="message-order" id="app">
 			<header class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<a id="message-goback" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">消息</h1>
 			</header>
 			<div id="app" class="mui-content ">
@@ -77,12 +77,6 @@
 						<!--销售-->
 						<div v-if="currentRoleId==9" class="order-btn">
 							<button class="order-btn-sales item">生成销售</button>
-							<button class="order-btn-output item">输出</button>
-							<button class="order-btn-allocation item">分配</button>
-							<button class="order-btn-affirm item">确认完成</button>
-							<button class="order-btn-cancel item">取消订单</button>
-							<button class="order-btn-operator item">计调</button>
-							<button class="order-btn-designate item">指派</button>
 						</div>
 					</div>
 					

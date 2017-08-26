@@ -30,9 +30,9 @@ mui('body').on('tap', '.cancel-order',function(){
 	}
 	lf.net.getJSON('/information/delete',params,function(res){
 		if(res.code == 200){
-			console.log('删除成功')
 			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.closeCurrentWebview();
+			lf.nativeUI.toast('删除成功');
 		}
 	})
 })
@@ -106,7 +106,11 @@ mui('body').on('tap','.order-btn-allocation', function(){
 		status: 'edit'
 	})
 })
-
+mui('body').on('tap','#message-goback', function(){
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+	lf.window.closeCurrentWebview();
+})
+message-goback
 //取消订单
 mui('body').on('tap','.order-btn-cancel', function(){
 	if(vm.orderMessage.orderInfo.status == 7) {

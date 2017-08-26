@@ -50,10 +50,9 @@
 	z-index: 222;
 }
 .footer-order-btn,
-.footer-message-btn,
-.footer-personage-btn{
+.footer-message-btn{
 	margin-top: 0.14rem;
-	width:32%;
+	width:50%;
 	height: 100%;
 	float: left;
 	display: flex;

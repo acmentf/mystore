@@ -69,6 +69,7 @@ mui('#topPopover').on('tap', '.cancle', function() { //取消订单
 						lf.nativeUI.toast("已清空所有消息！");
 						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 //						lf.window.closeCurrentWebview();
+						readMessage()
 					} else {
 						lf.nativeUI.toast(data.msg);
 						lf.nativeUI.closeWaiting();
@@ -83,7 +84,6 @@ mui('#topPopover').on('tap', '.cancle', function() { //取消订单
 lf.event.listener('orderdetails', function(e) {
 	readMessage();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-	lf.nativeUI.toast("删除成功！");
 })
 mui('body').on('tap', '#search-order', function() {
 	lf.window.openWindow('../order/search.html', '../order/search.html', {})
