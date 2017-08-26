@@ -156,6 +156,10 @@
                     id: vm.id,
                 }
 
+                console.log(JSON.stringify(params));
+
+                lf.nativeUI.showWaiting();
+
                 lf.net.getJSON('pay/cancelOrder', params, function(data) {
                     console.log(JSON.stringify(data));
         
