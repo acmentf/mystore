@@ -67,10 +67,16 @@
                         lf.nativeUI.closeWaiting();
 
                         data.data.forEach(function(v, i) {
-                            v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+                            var data = v.saleDate || Date.now()
+                            
+                            v.saleDate = lf.util.timeStampToDate2(data)
                         })
         
                         vm.tours = data.data
+
+                        if (data.data.length == 1) {
+                            vm.orderIndex = 0
+                        }
         
                     } else {
                         lf.nativeUI.closeWaiting();
