@@ -58,3 +58,22 @@
 .message-content .footer-message-text{
 	color: #31BA90;
 }
+.message-content .images-box{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction:column ;
+}
+.message-content .bg-image{
+	display: inline-block;
+	width: 2.2rem;
+	height: 2.7rem;
+	background:url('../../images/message/background_img.png') center no-repeat;
+	background-size: 100%;
+}
+.message-content .bg-text{
+	margin-top: 0.2rem;
+	color: #666;
+}

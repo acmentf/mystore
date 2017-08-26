@@ -154,7 +154,7 @@
 					<a id="menu" style="color: #fff;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 				</header>
 				<!--消息列表-->
-				<div class="mui-content message">
+				<div v-if="messageList.length > 0 " class="mui-content message">
 				 	<div v-for=" v in messageList" :data-orderNo="v.data.orderNo" :data-msg="v.descption" :data-orderId="v.data.orderId" :data-id="v.id" class="message-list">
 				 		<div v-if="v.status == 0" class="point">
 				 			<div></div>
@@ -165,6 +165,10 @@
 				 			<span v-text="v.createdTime" class="message-detail-time"></span>
 				 		</div>
 				 	</div>
+				</div>
+				<div v-if="messageList.length==0" class="images-box">
+					<div class="bg-image"></div>
+					<div class="bg-text">对不起，目前没有消息</div>
 				</div>
 			</div>
 			<!--底部通栏-->
