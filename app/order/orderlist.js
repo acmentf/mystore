@@ -573,12 +573,14 @@ function update() {
 				if(btns.length == 1) {
 					if(0 == e.index) {
 						plus.runtime.openURL(data.data.releaseUrl);
+						lf.window.closeCurrentWebview();
 					} else {
 						plus.runtime.quit();
 					}
 				} else {
 					if(0 == e.index) {
 						plus.runtime.openURL(data.data.releaseUrl);
+						lf.window.closeCurrentWebview();
 					} else {}
 				}
 			});
