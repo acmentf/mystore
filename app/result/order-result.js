@@ -1,6 +1,7 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		userId:'',
 		id: '',                      //销售输出ID
 	    orderId: '',                //订单ID
 	    isOut: 1,                    //是否输出   1已输出   2未输出
@@ -29,7 +30,7 @@ var vm = new Vue({
 	}
 })
 lf.ready(function(){
-
+	vm.userId = window.Role.usercode
 	var opts = {"type": "date"};
 	picker = new mui.DtPicker(opts);
 	userPicker = new mui.PopPicker();
@@ -155,6 +156,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			}
 		}
 		params = {
+		userId:vm.userId,
 		id: vm.id,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
@@ -181,6 +183,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		}
 		params = {
 		id: vm.id,
+		userId:vm.userId,
 		orderId:vm.orderId,
 		isOut: vm.isOut,
 		noOutReason:vm.reason,

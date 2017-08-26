@@ -155,7 +155,7 @@
 				</header>
 				<!--消息列表-->
 				<div class="mui-content message">
-				 	<div v-for=" v in messageList" :data-msg="v.descption" :data-orderId="v.data.orderId" :data-id="v.id" class="message-list">
+				 	<div v-for=" v in messageList" :data-orderNo="v.data.orderNo" :data-msg="v.descption" :data-orderId="v.data.orderId" :data-id="v.id" class="message-list">
 				 		<div v-if="v.status == 0" class="point">
 				 			<div></div>
 				 		</div>

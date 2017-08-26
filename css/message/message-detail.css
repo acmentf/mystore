@@ -15,21 +15,21 @@
 	margin-top: 0.12rem;
 	font-size: 0.28rem;
 	color: #999;
+	padding:0 1rem;
 }
 .message-order .message-order-content{
 	border-radius: 0.2rem 0.2rem 0 0;
-	margin: 0.2rem;
 	padding: 0.25rem 0.2rem;
-	padding-bottom: 0;
 	margin-bottom: 0;
 	background-color: #fff;
+}
+.message-order-box{
+	margin: 0.2rem;
+
 }
 .message-order .order-num{
 	color: #999;
 	font-size:0.26rem;
-}
-.item{
-	
 }
 .message-order .order-describe{
 	padding: 0.2rem 0;
@@ -95,9 +95,31 @@
 	align-items: center;
 }
 .message-order .examine{
-	/*padding: 0.2rem;*/
-	/*margin-top: 0;*/
-	border:none;
-	width: 100%;
+	height: 0.6rem;
+	margin-top: 0;
+	border: none;
 	background-color: #31BA90;
+	color: #fff;
+	border-radius:0 0 0.2rem 0.2rem ;
+	width:100%;
+}
+.message-order .order-btn{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap:wrap ;
+}
+.message-order .item{
+	height: 0.5rem;
+	width:1.2rem;
+	background-color: #31BA90;
+	border:none;
+	color: #fff;
+	margin: 0.05rem 0.1rem ;
+	border-radius: 0.1rem;
+}
+.message-order .cancel-order{
+	float: right;
+	font-size: 0.6rem;
 }

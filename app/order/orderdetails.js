@@ -79,12 +79,11 @@ lf.ready(function() {
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback') // 拍摄输出按钮的key
 	renderOrderDetails();
 	vm.currentRole = window.Role.userrole;
-	
+	console.log(window.Role)
 	if(window.Role.currentPositions.length > 0) {
 		vm.currentRoleId = window.Role.currentPositions[0].roleId;
 		console.log("当前用户的角色id" + vm.currentRoleId)
 	}
-	console.log(vm.currentRoleId, '2222222222222222222222')
 	mui('.mind').on('tap', '.photpgrapher-name', function() { //点击摄影师名字
 		var id = this.getAttribute('data-id');
 		lf.event.fire(lf.window.currentWebview().opener(), 'addPhotographer', {
