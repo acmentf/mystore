@@ -350,6 +350,8 @@
             id: vm.loopOrderId
         }
 
+        if (!vm.isPaying) return
+
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
             if(data.code == 200) {
 
