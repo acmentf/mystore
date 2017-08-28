@@ -25,14 +25,18 @@ lf.ready(function(){
 })
 //删除消息
 mui('body').on('tap', '.cancel-order',function(){
-	var params = {
-		id:vm.id
-	}
-	lf.net.getJSON('/information/delete',params,function(res){
-		if(res.code == 200){
-			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-			lf.window.closeCurrentWebview();
-			lf.nativeUI.toast('删除成功');
+	lf.nativeUI.confirm("操作提示", "确定要删除该订单消息吗?", ["确定", "取消"], function(e) {
+		if(e.index == 0) {
+			var params = {
+				id:vm.id
+			}
+			lf.net.getJSON('/information/delete',params,function(res){
+				if(res.code == 200){
+					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+					lf.window.closeCurrentWebview();
+					lf.nativeUI.toast('删除成功');
+				}
+			})
 		}
 	})
 })
@@ -124,6 +128,7 @@ mui('body').on('tap','.order-btn-cancel', function(){
 					};
 					lf.net.getJSON('order/updateOrderState', params, function(data) {
 						if(data.code == 200) {
+							console.log(JSON.stringify(data))
 							lf.nativeUI.toast("订单取消成功！");
 							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 							lf.window.closeCurrentWebview();
