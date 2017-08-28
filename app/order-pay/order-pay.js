@@ -277,13 +277,12 @@
             id: vm.loopOrderId
         }
 
-        if (!vm.isPaying) return
-
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+            console.log(JSON.stringify(data.data));
+
             if(data.code == 200) {
 
                 console.log('looping');
-                console.log(JSON.stringify(data.data));
 
                 if (data.data.status != 1) {
                     vm.isPaying = false
