@@ -34,6 +34,7 @@
             5: '6寸',
         },
         id: '',
+        verificationStatus: '',
 
         isPaying: false,
         payType: 0,
@@ -75,6 +76,7 @@
                     vm.argDictId = data.data.argDictId
                     vm.channelName = data.data.channelName
                     vm.salePersonnelNum = data.data.salePersonnelNum
+                    vm.verificationStatus = data.data.verificationStatus
 
                     vm.province = vm.province || data.data.province
                     vm.city = vm.city || data.data.city

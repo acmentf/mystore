@@ -26,7 +26,7 @@
     <header id="order-pay-header" class="mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-title">销售订单</h1>
-        <a class="mui-pull-right" v-if="saleOrderId&&orderStatus!=3&&!(channelName == '微信支付'&&orderStatus == 2)" @click="handleCancelPay" id="quick-sale-list">取消订单</a>
+        <a class="mui-pull-right" v-if="saleOrderId&&verificationStatus!=2&&orderStatus!=3&&!(channelName == '微信支付'&&orderStatus == 2)" @click="handleCancelPay" id="quick-sale-list">取消订单</a>
     </header>
 
     <div class="mui-content order-pay-content">

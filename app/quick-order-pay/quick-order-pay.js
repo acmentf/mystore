@@ -38,6 +38,7 @@
         },
         tours: [],
         id: '',
+        verificationStatus: '',
 
         isPaying: false,
         payType: 0,
@@ -119,6 +120,7 @@
     
                         vm.channelName = data.data.channelName
                         vm.salePersonnelNum = data.data.salePersonnelNum
+                        vm.verificationStatus = data.data.verificationStatus
 
                         vm.province = vm.province || data.data.province
                         vm.city = vm.city || data.data.city
