@@ -56,26 +56,30 @@
 					</div>
 					<div class="order-btn-box">
 						<!--执行主管-->
-						<div v-if="currentRoleId ==4" class="order-btn">
+						<div v-if="currentRoleId ==4&&orderMessage.orderInfo.status!==3" class="order-btn">
 							<button class="order-btn-affirm item">确认完成</button>
 							<button class="order-btn-cancel item">取消订单</button>
 							<button class="order-btn-operator item">计调</button>
 							<button class="order-btn-designate item">指派</button>
 						</div>
+						<div v-if="orderMessage.orderInfo.status==3" class="order-btn">
+							<div style="color: #999;">该订单已取消</div>
+
+						</div>
 						<!--执行人-->
-						<div v-if="currentRoleId==2"  class="order-btn">
+						<div v-if="currentRoleId==2&&orderMessage.orderInfo.status!==3"  class="order-btn">
 							<button class="order-btn-operator item">计调</button>
 						</div>
 						<!--摄影主管-->
-						<div v-if="currentRoleId==5" class="order-btn">
+						<div v-if="currentRoleId==5&&orderMessage.orderInfo.status!==3" class="order-btn">
 							<button class="order-btn-allocation item">分配</button>
 						</div>
 						<!--输出-->
-						<div v-if="currentRoleId==8" class="order-btn">
+						<div v-if="currentRoleId==8&&orderMessage.orderInfo.status!==3" class="order-btn">
 							<button class="order-btn-output item">输出</button>
 						</div>
 						<!--销售-->
-						<div v-if="currentRoleId==9" class="order-btn">
+						<div v-if="currentRoleId==9&&orderMessage.orderInfo.status!==3" class="order-btn">
 							<button class="order-btn-sales item">生成销售</button>
 						</div>
 					</div>
