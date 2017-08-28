@@ -33,6 +33,8 @@
             6: '7寸',
             5: '6寸',
         },
+        id: '',
+        verificationStatus: '',
 
         isPaying: false,
         payType: 0,
@@ -62,7 +64,8 @@
 
                 if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
-    
+                    
+                    vm.id = data.data.id
                     vm.orderNo = data.data.orderNo
                     vm.nums = data.data.nums
                     vm.amount = data.data.totalAmount
@@ -73,6 +76,7 @@
                     vm.argDictId = data.data.argDictId
                     vm.channelName = data.data.channelName
                     vm.salePersonnelNum = data.data.salePersonnelNum
+                    vm.verificationStatus = data.data.verificationStatus
 
                     vm.province = vm.province || data.data.province
                     vm.city = vm.city || data.data.city
@@ -147,6 +151,34 @@
                     this.isPaying = true
                     payment()
                 }
+            },
+
+            handleCancelPay: function() {
+                var params = {
+                    id: vm.id,
+                }
+
+                console.log(JSON.stringify(params));
+
+                lf.nativeUI.showWaiting();
+
+                lf.net.getJSON('pay/cancelOrder', params, function(data) {
+                    console.log(JSON.stringify(data));
+        
+                    if(data.code == 200) {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast("已取消订单");
+                        dispatchEvent()
+                        lf.window.closeCurrentWebview();
+                    } else {
+                        lf.nativeUI.closeWaiting();
+                        lf.nativeUI.toast(data.msg);
+                    }
+        
+                }, function(erro) {
+                    lf.nativeUI.closeWaiting();
+                    lf.nativeUI.toast(erro.msg);
+                })
             },
 
             getPayName: function(type) {
@@ -244,6 +276,8 @@
         var params = {
             id: vm.loopOrderId
         }
+
+        if (!vm.isPaying) return
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
             if(data.code == 200) {
