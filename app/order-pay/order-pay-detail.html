@@ -70,7 +70,7 @@
                 </li>
             </ul>
 
-            <ul class="mui-table-view logout" v-if="orderStatus != 2">
+            <ul class="mui-table-view logout" v-if="orderStatus == 1">
                 <li class="mui-table-view-cell" @click="handlePay(0)">
                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_cash.png" alt=""> 现金支付</div>
                 </li>
