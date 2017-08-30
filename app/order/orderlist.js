@@ -30,6 +30,7 @@ var vm = new Vue({
 		rolePositionList: [],
 		rolePositionId: '',
 		currentRoleId:'',//当前用户角色id,
+		wgtVer: ''//版本号
 	},
 	watch: {
 		rolePositionId: function(val, oldVal) {
@@ -99,6 +100,8 @@ lf.ready(function() {
 			break;
 	}
 	update() 
+
+	getVersion()
 })
 /*document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
@@ -603,3 +606,10 @@ lf.event.listener('orderdetails', function(e) {
 lf.event.listener('selectAssignUser', function(e) {
 	console.log(JSON.stringify(e.detail, null, 2))
 })
+
+function getVersion() {
+	plus.runtime.getProperty(plus.runtime.appid,function(inf){
+        vm.wgtVer = inf.version;
+        console.log("当前应用版本：" + vm.wgtVer);
+    });
+}
