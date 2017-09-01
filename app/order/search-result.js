@@ -47,13 +47,14 @@ lf.ready(function() {
 	vm.saleOutOrder=window.Role.hasAuth('saleOutOrder'), // 销售输出
 	vm.genSale=window.Role.hasAuth('genSale'), // 生成销售
 	vm.summary=window.Role.hasAuth('summary'), // 录入心得
+	vm.confirmOrder = window.Role.hasAuth('confirmOrder'), // 确认完成
 	vm.currentRole = window.Role.userrole;
 
 	vm.currentRoleId = window.Role.currentPositions[0].roleId;
 	
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
-	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
+	// vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 
 	function findData() {

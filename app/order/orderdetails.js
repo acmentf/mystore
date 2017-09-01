@@ -77,6 +77,7 @@ lf.ready(function() {
 	vm.feedbackRole = window.Role.hasAuth('feedback') // 录入执行结果按钮的key
 	vm.handleRole = window.Role.hasAuth('handle') // 录入跟踪信息按钮的key
 	vm.shootFeedbackRole = window.Role.hasAuth('shootFeedback') // 拍摄输出按钮的key
+	vm.confirmOrder = window.Role.hasAuth('confirmOrder'), // 确认完成
 	renderOrderDetails();
 	vm.currentRole = window.Role.userrole;
 	console.log(window.Role)
