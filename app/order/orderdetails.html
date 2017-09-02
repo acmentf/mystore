@@ -311,6 +311,10 @@
 								<label>月结销售额：</label>
 								<span v-text="orderResult.payableAmount"></span>元
 							</div>
+							<div class="item">
+								<label>总金额：</label>
+								<span v-text="orderResult.salesAmt + orderResult.advanceAmount + orderResult.payableAmount"></span>元
+							</div>
 						</div>
 
 					</div>

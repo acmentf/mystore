@@ -25,7 +25,13 @@ var vm = new Vue({
 		salesAmt: '',
 		advanceAmount: '',
 		payableAmount: '',
-		buyers: ''
+		buyers: '',
+		total: ''
+	},
+	methods: {
+		computedTotal:function() {
+			this.total = Number(this.salesAmt) + Number(this.advanceAmount) + Number(this.payableAmount)
+		}
 	}
 })
 lf.ready(function(){
@@ -222,6 +228,9 @@ function loadResult(){
 				vm.salesAmt = res.data.orderX.salesAmt
 				vm.advanceAmount = res.data.orderX.advanceAmount
 				vm.payableAmount = res.data.orderX.payableAmount
+
+				vm.total = vm.salesAmt + vm.advanceAmount + vm.payableAmount
+	
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);

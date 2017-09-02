@@ -73,11 +73,15 @@
 		    	</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>预付销售额</label>
-					<input type="number"  style="text-align:right" v-model="advanceAmount"  placeholder="请填写预付销售额"/>
+					<input type="number"  style="text-align:right" @change="computedTotal" v-model="advanceAmount"  placeholder="请填写预付销售额"/>
 		    	</div>
 		    	<div class="mui-input-row  group-info">
 			        <label>月结销售额</label>
-					<input type="number"  style="text-align:right" v-model="payableAmount"  placeholder="请填写月结销售额"/>
+					<input type="number"  style="text-align:right" @change="computedTotal" v-model="payableAmount"  placeholder="请填写月结销售额"/>
+		    	</div>
+		    	<div class="mui-input-row  group-info">
+					<label>总金额</label>
+					<input type="number"  style="text-align:right" v-model="total" disabled/>
 		    	</div>
 			</div>
 		</div>
