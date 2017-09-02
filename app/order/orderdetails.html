@@ -300,8 +300,16 @@
 								<span v-text="orderResult.buyers"></span>
 							</div>
 							<div class="item">
-								<label>销售金额：</label>
+								<label>实时收银：</label>
 								<span v-text="orderResult.salesAmt"></span>元
+							</div>
+							<div class="item">
+								<label>预付销售额：</label>
+								<span v-text="orderResult.advanceAmount"></span>元
+							</div>
+							<div class="item">
+								<label>月结销售额：</label>
+								<span v-text="orderResult.payableAmount"></span>元
 							</div>
 						</div>
 

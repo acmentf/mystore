@@ -23,6 +23,8 @@ var vm = new Vue({
 			price: ''
 		}],
 		salesAmt: '',
+		advanceAmount: '',
+		payableAmount: '',
 		buyers: ''
 	}
 })
@@ -171,6 +173,8 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		userId: vm.userId,
 		orderId: vm.orderId,
 		salesAmt: vm.salesAmt,
+		advanceAmount: vm.advanceAmount,
+		payableAmount: vm.payableAmount,
 		buyers: vm.buyers,
 		orderXms: orderXms,
 		flag: 2
@@ -216,6 +220,8 @@ function loadResult(){
 				vm.id = res.data.orderX.id
 				vm.buyers = res.data.orderX.buyers
 				vm.salesAmt = res.data.orderX.salesAmt
+				vm.advanceAmount = res.data.orderX.advanceAmount
+				vm.payableAmount = res.data.orderX.payableAmount
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);

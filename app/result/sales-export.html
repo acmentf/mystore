@@ -68,8 +68,16 @@
 					<input type="number"  style="text-align:right" v-model="buyers"  placeholder="请填写购买人数"/>
 		    	</div>
 		    	<div class="mui-input-row  group-info">
-			        <label>销售金额</label>
-					<input type="number"  style="text-align:right" v-model="salesAmt"  placeholder="请填写销售总金额"/>
+			        <label>实时收银</label>
+					<input type="number"  style="text-align:right" v-model="salesAmt"  placeholder="请填写实时收银" disabled/>
+		    	</div>
+		    	<div class="mui-input-row  group-info">
+			        <label>预付销售额</label>
+					<input type="number"  style="text-align:right" v-model="advanceAmount"  placeholder="请填写预付销售额"/>
+		    	</div>
+		    	<div class="mui-input-row  group-info">
+			        <label>月结销售额</label>
+					<input type="number"  style="text-align:right" v-model="payableAmount"  placeholder="请填写月结销售额"/>
 		    	</div>
 			</div>
 		</div>

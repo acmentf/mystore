@@ -494,6 +494,7 @@ function renderOrderDetails() {
 	};
 	lf.net.getJSON('order/orderDetail', params, function(data) {
 		if(data.code == 200) {
+			console.log(JSON.stringify(data.data));
 			vm.orderInfo = data.data.orderInfo;
 			vm.tourGuidePhoneList = vm.orderInfo.tourGuidePhone.split(',')
 			vm.orderTrackInfo = data.data.orderTrackInfo;
