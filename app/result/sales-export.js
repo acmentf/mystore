@@ -30,7 +30,8 @@ var vm = new Vue({
 	},
 	methods: {
 		computedTotal:function() {
-			this.total = Number(this.salesAmt) + Number(this.advanceAmount) + Number(this.payableAmount)
+			var _total = Number(this.salesAmt) + Number(this.advanceAmount) + Number(this.payableAmount)
+			this.total = _total.toFixed(2)
 		}
 	}
 })
@@ -229,7 +230,7 @@ function loadResult(){
 				vm.advanceAmount = res.data.orderX.advanceAmount
 				vm.payableAmount = res.data.orderX.payableAmount
 
-				vm.total = vm.salesAmt + vm.advanceAmount + vm.payableAmount
+				vm.total = (vm.salesAmt + vm.advanceAmount + vm.payableAmount).toFixed(2)
 	
 			}
 		}else {

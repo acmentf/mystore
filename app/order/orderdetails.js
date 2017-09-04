@@ -48,6 +48,12 @@ var vm = new Vue({
 		photographerData: [],
 		summaryFlag: '',
 		tourGuidePhoneList: []
+	},
+	computed: {
+		getTotal: function() {
+			var total = this.orderResult.salesAmt + this.orderResult.advanceAmount + this.orderResult.payableAmount
+			return total.toFixed(2)
+		}
 	}
 })
 
