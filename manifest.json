@@ -339,7 +339,12 @@
 					"css/common/common.css",
 					"images/message/nav_message_gray.png",
 					"images/order/quick_icon.png",
+<<<<<<< HEAD
 					"images/message/nav_order_green.png"
+=======
+					"images/message/nav_order_green.png",
+					"images/order/sale_flash.png"
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -353,9 +358,15 @@
 					"app/operator/operator.html",
 					"app/designate/designate.html",
 					"app/result/order-result.html",
+<<<<<<< HEAD
 					"app/quick-order/quick-order.html",
 					"app/order/search.html",
 					"app/message/message.html"
+=======
+					"app/message/message.html",
+					"app/order/search.html",
+					"app/quick-order/quick-order.html"
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 				],
 				"priority": 0
 			},
@@ -377,13 +388,22 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					"images/message/icon_pending.png",
+<<<<<<< HEAD
+=======
+					"css/common/common.css",
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 					"images/message/nav_message_green.png",
 					"images/message/background_img.png",
 					"images/message/nav_order_gray.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
+<<<<<<< HEAD
 					"app/order/orderlist.html"
+=======
+					"app/order/orderlist.html",
+					"app/message/message-detail.html"
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 				],
 				"priority": 0
 			},
@@ -746,6 +766,7 @@
 				"refer": [],
 				"priority": 0
 			},
+<<<<<<< HEAD
 			"app/quick-order/quick-order.html": {
 				"resources": [
 					"js/mui.zoom.js",
@@ -755,10 +776,22 @@
 					"js/mui.min.js",
 					"css/app.css",
 					"fonts/mui.ttf",
+=======
+			"app/order/search.html": {
+				"resources": [
+					"css/order/search.css",
+					"js/mui.pullToRefresh.js",
+					"app/order/search.js",
+					"js/framework/define.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js",
+<<<<<<< HEAD
 					"app/quick-order/quick-order.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
@@ -774,15 +807,49 @@
 				"resources": [
 					"css/order/search.css",
 					"app/order/search.js"
+=======
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order/search-result.html"
+				],
+				"priority": 0
+			},
+			"app/order/search-result.html": {
+				"resources": [
+					"app/order/search-result.js",
+					"css/mui.min.css",
+					"css/order/search-result.css"
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 				],
 				"refer": [],
 				"priority": 0
 			},
+<<<<<<< HEAD
 			"app/order/statuslog.html": {
 				"resources": [
 					"app/order/statuslog.js",
 					"css/order/statuslog.css",
 					"images/order/dot.png"
+=======
+			"app/message/message-detail.html": {
+				"resources": [
+					"app/message/message-detai.js",
+					"css/mui.min.css",
+					"css/message/message-detail.css"
+				],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
+				"priority": 0
+			},
+			"app/quick-order/quick-order.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"css/quik-order/quik-order.css"
+>>>>>>> ddec8edd0e6fee07c7e41135ee7ef409c7049dd4
 				],
 				"refer": [],
 				"priority": 0
