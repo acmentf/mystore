@@ -143,13 +143,29 @@
 	top: 5px;
 }
 
-.orderlist-content .search-div {
-	height: 35px;
+#quickOrder{
+	box-sizing: content-box;
+	height: 24px;
+	line-height: 24px;
+	margin-right:0;
+}
+
+#quickOrder img{
+	height: 20px;
+	margin-top: 2px;
+}
+
+#search-order{
+	margin-left: 0;
 }
 
 .orderlist-content .search-div input {
 	padding-left: 30px;
 	padding-right: 30px;
+}
+
+.orderlist-content .quick-down-order img {
+	max-height: 100%;
 }
 
 .orderlist-content .search-div .mui-icon-search {

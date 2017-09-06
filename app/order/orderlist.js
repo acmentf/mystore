@@ -129,6 +129,7 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 		summary: summary
 	})
 })
+
 mui('.order-ul').on('tap', '.qdbtn', function() {
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')
@@ -311,6 +312,11 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 	}
 })
 
+
+// 快速下单
+mui('body').on('tap', '#quickOrder', function() {
+	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {})
+})
 /**
  * 搜索订单
  */

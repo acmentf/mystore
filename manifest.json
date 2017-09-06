@@ -335,7 +335,12 @@
 					"images/order/list_guide.png",
 					"images/order/list_day.png",
 					"images/order/list_way.png",
-					"css/images/logo_login.png"
+					"css/images/logo_login.png",
+					"css/common/common.css",
+					"images/message/nav_message_gray.png",
+					"images/order/quick_icon.png",
+					"images/message/nav_order_green.png",
+					"images/order/sale_flash.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -348,7 +353,10 @@
 					"app/schedule/summary.html",
 					"app/operator/operator.html",
 					"app/designate/designate.html",
-					"app/result/order-result.html"
+					"app/result/order-result.html",
+					"app/message/message.html",
+					"app/order/search.html",
+					"app/quick-order/quick-order.html"
 				],
 				"priority": 0
 			},
@@ -369,10 +377,16 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js",
-					"images/message/icon_pending.png"
+					"images/message/icon_pending.png",
+					"css/common/common.css",
+					"images/message/nav_message_green.png",
+					"images/message/background_img.png",
+					"images/message/nav_order_gray.png"
 				],
 				"refer": [
-					"app/order/orderdetails.html"
+					"app/order/orderdetails.html",
+					"app/order/orderlist.html",
+					"app/message/message-detail.html"
 				],
 				"priority": 0
 			},
@@ -730,6 +744,56 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order/search.html": {
+				"resources": [
+					"css/order/search.css",
+					"js/mui.pullToRefresh.js",
+					"app/order/search.js",
+					"js/framework/define.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order/search-result.html"
+				],
+				"priority": 0
+			},
+			"app/order/search-result.html": {
+				"resources": [
+					"app/order/search-result.js",
+					"css/mui.min.css",
+					"css/order/search-result.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/message/message-detail.html": {
+				"resources": [
+					"app/message/message-detai.js",
+					"css/mui.min.css",
+					"css/message/message-detail.css"
+				],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
+				"priority": 0
+			},
+			"app/quick-order/quick-order.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"css/quik-order/quik-order.css"
 				],
 				"refer": [],
 				"priority": 0
