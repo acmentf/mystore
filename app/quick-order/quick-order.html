@@ -6,39 +6,76 @@
     <title></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
     <link href="../../css/app.css" rel="stylesheet" />
     <link href="../../css/quik-order/quik-order.css" rel="stylesheet" />
 </head>
 
 <body>
-    <header id="personal-header-setting" class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title">设置</h1>
-    </header>
+    <div id="app">
+        <header id="personal-header-setting" class="mui-bar mui-bar-nav quikorder-header">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">快速下单</h1>
+        </header>
+        <footer class="mui-bar mui-bar-footer quikorder-footer">
+            <button type="button" class="mui-btn mui-btn-primary sure">确认下单</button>
+        </footer>
 
-    <div class="mui-content personal-content" id="app">
-        <ul class="mui-table-view">
-            <li class="mui-table-view-cell feedback-go">
-                <a href="javascript:;" class="mui-navigate-right">
-                    <div class="mui-pull-left personal-list-key">意见反馈</div>
-                </a>
-            </li>
-            <li class="mui-table-view-cell about-go">
-                <a href="javascript:;" class="mui-navigate-right">
-                    <div class="mui-pull-left personal-list-key">关于</div>
-                </a>
-            </li>
-        </ul>
+        <div class="mui-content quikorder-content">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell feedback-go">
+                    <a href="javascript:;" class="mui-navigate-right product-name">
+                        <div class="mui-pull-left">产品名称</div>
+                        <input class="mui-pull-right" placeholder="请选择产品" v-model="productName" readonly maxlength="20">
+                    </a>
+                </li>
+            </ul>
+            <ul class="mui-table-view mt15">
+                <li class="mui-table-view-cell feedback-go">
+                    <a href="javascript:;" class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">团号</div>
+                        <input class="mui-pull-right" placeholder="请输入团号" v-model="groupNo">
+                    </a>
+                </li>
+                <li class="mui-table-view-cell about-go">
+                    <a href="javascript:;" class="mui-navigate-right groupDate">
+                        <div class="mui-pull-left personal-list-key">出团日期</div>
+                        <input class="mui-pull-right" placeholder="请选择日期" v-model="groupDate" readonly>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell about-go">
+                    <a href="javascript:;" class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">导游</div>
+                        <input class="mui-pull-right" placeholder="请输入姓名" v-model="guidName">
+                    </a>
+                </li>
+                <li class="mui-table-view-cell about-go">
+                    <a href="javascript:;" class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">导游电话</div>
+                        <input class="mui-pull-right" placeholder="请输入电话" v-model="guidTel">
+                    </a>
+                </li>
+            </ul>
+            <ul class="mui-table-view mt15">
+                <li class="mui-table-view-cell feedback-go">
+                    <a href="javascript:;" class="mui-navigate-right designate">
+                        <div class="mui-pull-left personal-list-key">执行人</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
+
     <script src="../../js/mui.min.js"></script>
-    <script src="../../js/mui.zoom.js"></script>
-    <script src="../../js/mui.previewimage.js"></script>
+    <script src="../../js/mui.picker.min.js"></script>
     <script src="../../js/framework/define.js"></script>
     <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/common.js"></script>
     <script src="../../js/framework/lf.js"></script>
     <script src="../../libs/vue.min.js"></script>
-    <script src="./quik-order.js"></script>
+    <script src="quick-order.js"></script>
 </body>
 
 </html>
