@@ -1,104 +1,105 @@
-lf.ready(function () {
+lf.ready(function() {
     var pageParams = {
-        passBack:'',
+        passBack: '',
         //订单Id
         orderId: ''
     }
+
     function setPageParams(params) {
-        mui.each(pageParams,function (key) {
-            if(key in params){
-                pageParams[key] = params[key]||''
+        mui.each(pageParams, function(key) {
+            if (key in params) {
+                pageParams[key] = params[key] || ''
             }
         })
         init()
     }
-    mui.plusReady(function(){
+    mui.plusReady(function() {
         var currentWebview = lf.window.currentWebview();
         setPageParams(currentWebview)
     });
-    window.addEventListener('pageParams',function(event){
+    window.addEventListener('pageParams', function(event) {
         setPageParams(event.detail)
     });
 
     var vmTableView = new Vue({
         el: '#app-table-view',
-        data: function () {
+        data: function() {
             return {
-                indexedList:[
-                    {
-                        group:'A',
-                        text:'A'
+                indexedList: [{
+                        group: 'A',
+                        text: 'A'
                     },
                     {
-                        value:'AKU',
-                        tags:'AKeSu',
-                        text:'阿克苏机场',
-                        phone:'13264752368',
-                        area:'西北区',
-                        roleName:'执行人',
-                        state:true,
-                        selected:false
+                        value: 'AKU',
+                        tags: 'AKeSu',
+                        text: '阿克苏机场',
+                        phone: '13264752368',
+                        area: '西北区',
+                        roleName: '执行人',
+                        state: true,
+                        selected: false
                     },
                     {
-                        value:'BPL',
-                        tags:'ALaShanKou',
-                        text:'阿拉山口机场',
-                        phone:'13264752368',
-                        area:'西北区',
-                        roleName:'执行人',
-                        state:false,
-                        selected:true
+                        value: 'BPL',
+                        tags: 'ALaShanKou',
+                        text: '阿拉山口机场',
+                        phone: '13264752368',
+                        area: '西北区',
+                        roleName: '执行人',
+                        state: false,
+                        selected: true
                     }
                 ]
             }
         },
         methods: {
-            init:function (indexedList) {
+            init: function(indexedList) {
                 var c = ''
                 var list = [];
-                (indexedList || []).map(function (item) {
+                (indexedList || []).map(function(item) {
                     return {
-                        value:item.id+'',
-                        tags:(item.pyname || '').toUpperCase(),
-                        text:item.name || '',
-                        phone:item.phone || '',
-                        roleName:item.roleName || '',
-                        state:false,
-                        selected:!!item.assignState
+                        value: item.id + '',
+                        tags: (item.pyname || '').toUpperCase(),
+                        text: item.name || '',
+                        phone: item.phone || '',
+                        roleName: item.roleName || '',
+                        state: false,
+                        selected: !!item.assignState
                     }
-                }).sort(function (a, b) {
+                }).sort(function(a, b) {
                     return a.tags.localeCompare(b.tags)
-                }).forEach(function (item) {
-                    if(item.tags[0] !== c){
+                }).forEach(function(item) {
+                    if (item.tags[0] !== c) {
                         c = item.tags[0]
                         list.push({
-                            group:c,
-                            text:c
+                            group: c,
+                            text: c
                         })
                     }
                     list.push(item)
                 })
                 this.indexedList = list
-                this.$nextTick(function () {
+                this.$nextTick(function() {
                     initSelectIndexEvent()
                 })
             },
-            select:function (index) {
+            select: function(index) {
                 this.indexedList[index].selected = true
             },
-            cancel:function (index) {
+            cancel: function(index) {
                 this.indexedList[index].selected = false
             }
         },
-        mounted: function () {
+        mounted: function() {
             initTableViewEvent(this)
         }
     });
+
     function init() {
         lf.nativeUI.showWaiting()
         lf.net.getJSON('/order/getAllExecutor', {
-            orderId:pageParams.orderId
-        }, function (res) {
+            orderId: pageParams.orderId
+        }, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 // console.log(JSON.stringify(res,null,2))
@@ -106,34 +107,53 @@ lf.ready(function () {
             } else {
                 mui.toast(res.msg)
             }
-        }, function () {
+        }, function() {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg || '服务器异常')
         })
     }
+
     function save() {
+        if (lf.window.currentWebview().quikOrderTag) { //如果从快速下单页面进来的
+            lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
+                passBack: pageParams.passBack,
+                userList: vmTableView.indexedList.filter(function(item) {
+                    return item.selected
+                }).map(function(item) {
+                    return {
+                        id: item.value,
+                        name: item.text,
+                        phone: item.phone,
+                        roleName: item.roleName
+                    }
+                })
+            });
+            lf.window.closeCurrentWebview();
+            return
+        }
+
         lf.nativeUI.showWaiting()
         lf.net.getJSON('/order/assignOrderExecutor', {
-            orderId:pageParams.orderId,
-            assignId:vmTableView.indexedList.filter(function(item) {
-               return item.selected
-            }).map(function (item) {
+            orderId: pageParams.orderId,
+            assignId: vmTableView.indexedList.filter(function(item) {
+                return item.selected
+            }).map(function(item) {
                 return item.value
             }).join(',')
-        }, function (res) {
+        }, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 mui.toast('指派成功')
-                lf.event.fire(lf.window.currentWebview().opener(),'selectAllocationUser',{
-                    passBack:pageParams.passBack,
-                    userList:vmTableView.indexedList.filter(function (item) {
+                lf.event.fire(lf.window.currentWebview().opener(), 'selectAllocationUser', {
+                    passBack: pageParams.passBack,
+                    userList: vmTableView.indexedList.filter(function(item) {
                         return item.selected
-                    }).map(function (item) {
+                    }).map(function(item) {
                         return {
-                            id:item.value,
-                            name:item.text,
-                            phone:item.phone,
-                            roleName:item.roleName
+                            id: item.value,
+                            name: item.text,
+                            phone: item.phone,
+                            roleName: item.roleName
                         }
                     })
                 });
@@ -142,11 +162,12 @@ lf.ready(function () {
             } else {
                 mui.toast(res.msg || '服务器异常')
             }
-        }, function () {
+        }, function() {
             lf.nativeUI.closeWaiting()
             mui.toast(res.msg)
         })
     }
+
     function initSelectIndexEvent() {
         var header = document.querySelector('header.mui-bar');
         var list = document.getElementById('list');
@@ -155,7 +176,8 @@ lf.ready(function () {
         //create
         window.indexedList = new mui.IndexedList(list);
     }
-    function initTableViewEvent(vm){
+
+    function initTableViewEvent(vm) {
         var operate = document.getElementById('operate');
 
         operate.addEventListener('tap', function() {
@@ -168,10 +190,10 @@ lf.ready(function () {
                 mui.alert('你没选择任何员工');
             }
         }, false);
-        mui('.designate-select-staff').on('tap','.btn-select',function (e) {
+        mui('.designate-select-staff').on('tap', '.btn-select', function(e) {
             var index = +e.target.getAttribute('index')
             vm.select(index)
-        }).on('tap','.btn-cancel',function (e) {
+        }).on('tap', '.btn-cancel', function(e) {
             var index = +e.target.getAttribute('index')
             vm.cancel(index)
         })
