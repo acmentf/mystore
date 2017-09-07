@@ -810,7 +810,8 @@
 					"libs/vue.min.js"
 				],
 				"refer": [
-					"app/designate/designate.html"
+					"app/designate/designate.html",
+					"app/designate/allocation-staff.html"
 				],
 				"priority": 0
 			}
