@@ -78,6 +78,7 @@ lf.ready(function () {
             if (res.code === '200' && res.data && res.data.orderNo) {
                 vm.orderNo = res.data.orderNo
                 lf.nativeUI.toast('下单成功')
+                lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
                 lf.window.closeCurrentWebview()
             } else {
                 lf.nativeUI.toast(res.msg)
