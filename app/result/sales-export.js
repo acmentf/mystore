@@ -4,15 +4,7 @@ var vm = new Vue({
 		id: '',
 		userId: '',
 		orderId: '',
-		giveOrderXms: [{
-			fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''
-		}],
+		giveOrderXms: [],
 		saleOrderXms: [{
 			fType: '',
 			id: '',
@@ -128,18 +120,15 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 				}
 			}
 		})
-		vm.giveOrderXms.forEach(function(v){
-			if(v.picNum){
-				if(!v.picSize){
-					lf.nativeUI.toast('请选择赠送尺寸')
-					flag = false;
-				}
+		console.log(vm.giveOrderXms.length)
+		var tempGiveOrderXms=vm.giveOrderXms
+		tempGiveOrderXms.forEach(function(v,index,arr){
+			
+			if(v.picSize===''){
+				vm.giveOrderXms.splice(index,1)
 			}
-			if(v.picSize){
-				if(!v.picNum){
-					lf.nativeUI.toast('请输入赠送张数')
-				flag = false
-				}
+			if(v.picNum===''){
+				v.picNum=0
 			}
 		})
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)

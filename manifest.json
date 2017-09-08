@@ -356,7 +356,8 @@
 					"app/result/order-result.html",
 					"app/message/message.html",
 					"app/order/search.html",
-					"app/quick-order/quick-order.html"
+					"app/quick-order/quick-order.html",
+					"app/quick-order-pay/quick-order-pay.html"
 				],
 				"priority": 0
 			},
@@ -812,6 +813,21 @@
 				"refer": [
 					"app/designate/designate.html",
 					"app/designate/allocation-staff.html"
+				],
+				"priority": 0
+			},
+			"app/quick-order-pay/quick-order-pay.html": {
+				"resources": [
+					"css/order-pay/order-pay.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
+					"css/images/sell_cash.png",
+					"app/quick-order-pay/quick-order-pay.js"
+				],
+				"refer": [
+					"app/quick-order-pay/quick-order-pay-list.html"
 				],
 				"priority": 0
 			}
