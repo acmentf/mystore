@@ -11,6 +11,10 @@ var vm = new Vue({
 		pageNos: [
 
 		],
+		checkIcon:{
+			type: false,
+			url: '../../images/order/switch.png'
+		},
 		opType: 'list',//搜索类型
 		pageNum: 10,
 		pullObjects: [],
@@ -60,6 +64,13 @@ lf.ready(function() {
 			vm.currentRoleId = window.Role.currentPositions[0].roleId;
 			console.log("当前用户的角色id"+vm.currentRoleId)
 		}
+		if (vm.currentRoleId == 9) {
+			vm.orderHeader[0].name = '待销售'
+			vm.orderHeader[1].name = '销售完成'
+		} else {
+			vm.orderHeader[0].name = '待处理'
+			vm.orderHeader[1].name = '进行中'
+		}
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
 	// vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder') // 分配按钮的key
@@ -108,7 +119,7 @@ lf.ready(function() {
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
 })*/
 
-mui('.order-ul').on('tap', '.tourinfo', function() {
+mui('.order-ul').on('tap', '.link', function() {
 	var id = this.getAttribute('data-id');
 	var actionStatus = this.getAttribute('data-actionStatus');
 	var summary = this.getAttribute('data-summary');
@@ -122,12 +133,21 @@ mui('.order-ul').on('tap', '.tourinfo', function() {
 		index = 3
 	}
 	console.log('actionStatus....'+actionStatus+','+summary)
-	lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
-		orderNo: id,
-		index: index,
-		photographerId: window.Role.photograherId,
-		summary: summary
-	})
+	if (vm.currentRoleId!=9) {
+		lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
+			orderNo: id,
+			index: index,
+			photographerId: window.Role.photograherId,
+			summary: summary
+		})
+	} else {
+		lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
+			orderNo: id,
+			index: index,
+			photographerId: window.Role.photograherId,
+			summary: summary
+		})
+	}
 })
 
 mui('.order-ul').on('tap', '.qdbtn', function() {
@@ -277,11 +297,14 @@ mui('body').on('tap', '#logout', function() {
 	});
 })
 
-/**
- * 快速支付
- */
+
 mui('body').on('tap', '.quick-sale-pay', function() {
-	lf.window.openWindow('quickOrderPay', '../quick-order-pay/quick-order-pay.html', {}, {})
+	if (!vm.checkIcon.type){
+		vm.checkIcon.url = '../../images/order/switch_back.png'
+	} else {
+		vm.checkIcon.url = '../../images/order/switch.png'
+	}
+	vm.checkIcon.type = !vm.checkIcon.type
 })
 
 mui('body').on('tap', '#confirmComplete', function() { //确认完成
@@ -360,7 +383,13 @@ function switchRolePostion(val) {
 				vm.currentRoleId = window.Role.currentPositions[0].roleId;
 				console.log("当前用户的角色id"+vm.currentRoleId)
 			}
-
+			if (vm.currentRoleId == 9) {
+				vm.orderHeader[0].name = '待销售'
+				vm.orderHeader[1].name = '销售完成'
+			} else {
+				vm.orderHeader[0].name = '待处理'
+				vm.orderHeader[1].name = '进行中'
+			}
 			vm.orderList.forEach(function(v, i) { // 将数据制空
 				dodata('down', i, [])
 				vm.pageNos[i] = 0;
