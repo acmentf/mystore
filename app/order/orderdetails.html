@@ -1,352 +1,359 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>订单详情</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/order/orderdetails.css" />
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>订单详情</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/order/orderdetails.css" />
+</head>
 
-	<body class="orderdetails">
+<body class="orderdetails">
 
-		<div id="app" class="mui-content" style="margin-bottom:40px">
-			<header class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">订单详情</h1>
-				<a v-if="currentOrderStatus!=3&&currentRoleId == 4" id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
-			</header>
+	<div id="app" class="mui-content" style="margin-bottom:40px">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单详情</h1>
+			<a v-if="currentOrderStatus!=3&&currentRoleId == 4" id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more"
+			 href="#topPopover"></a>
+		</header>
 
-			<div class="topbar">
-				<!--actionStatus 0待处理 1 已完成计调  2 已分配摄影师  3 已完成拍照  4 已完成输出-->
-				<div v-show='orderInfo.actionStatus == 0' class="mod">
-					<span class="ico status1"></span>
-					<div class="title">待计调</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
-				<div v-show='orderInfo.actionStatus == 11' class="mod">
-					<span class="ico status2"></span>
-					<div class="title">待分配</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
-				<div v-show='orderInfo.actionStatus == 22' class="mod">
-					<span class="ico status3"></span>
-					<div class="title">待输出</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
-				<div v-show='orderInfo.actionStatus == 33' class="mod">
-					<span class="ico status4"></span>
-					<div class="title">待销售</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
-				<div v-show='orderInfo.actionStatus == 44' class="mod">
-					<span class="ico status4"></span>
-					<div class="title">待完成</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
-				<div v-show='orderInfo.actionStatus == 55' class="mod">
-					<span class="ico status5"></span>
-					<div class="title">已完成</div>
-					<div class="intro" v-text="orderInfo.msgRemark"></div>
-					<span class="mui-icon mui-icon-arrowright"></span>
-				</div>
+		<div class="topbar">
+			<!--actionStatus 0待处理 1 已完成计调  2 已分配摄影师  3 已完成拍照  4 已完成输出-->
+			<div v-show='orderInfo.actionStatus == 0' class="mod">
+				<span class="ico status1"></span>
+				<div class="title">待计调</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
 			</div>
-
-			<div style="margin-bottom: 0.2rem;">
-				<div id="segmentedControl" class="mui-segmented-control">
-					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 1}" href="#item1">订单信息</a>
-					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 2}" href="#item2">计调信息</a>
-					<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 3}" href="#item3">输出信息</a>
-				</div>
+			<div v-show='orderInfo.actionStatus == 11' class="mod">
+				<span class="ico status2"></span>
+				<div class="title">待分配</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
 			</div>
-			<div>
-				<div id="item1" class="mui-control-content" :class="{'mui-active':currentTabIndex == 1}">
-					<div id="scroll" class="mui-scroll-wrapper" style="overflow: visible;">
-						<div class="mui-scroll" style="background: #fff; padding: 0.2rem;">
-							<div class="item colorgray">
-								<label>订单号：</label>
-								<span v-text="orderInfo.orderNo"></span>
-							</div>
-							<div class="item" style="margin: 0.3rem 0;">
-								<div v-text="orderInfo.productName"></div>
-							</div>
-							<div class="sepline"></div>
-							<div class="item colorgray">
-								<label>下单时间：</label>
-								<span v-text="orderInfo.createTime"></span>
-							</div>
-							<div class="item colorgray">
-								<label>采购方：</label>
-								<span v-text="orderInfo.purchaser"></span>
-							</div>
-							<div class="sepline"></div>
-							<div class="item" style="font-size: 0.4rem;">
-								<label>总价：</label>
-								<span v-text="orderInfo.totalPrice"></span>元
-							</div>
+			<div v-show='orderInfo.actionStatus == 22' class="mod">
+				<span class="ico status3"></span>
+				<div class="title">待输出</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
+			</div>
+			<div v-show='orderInfo.actionStatus == 33' class="mod">
+				<span class="ico status4"></span>
+				<div class="title">待销售</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
+			</div>
+			<div v-show='orderInfo.actionStatus == 44' class="mod">
+				<span class="ico status4"></span>
+				<div class="title">待完成</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
+			</div>
+			<div v-show='orderInfo.actionStatus == 55' class="mod">
+				<span class="ico status5"></span>
+				<div class="title">已完成</div>
+				<div class="intro" v-text="orderInfo.msgRemark"></div>
+				<span class="mui-icon mui-icon-arrowright"></span>
+			</div>
+		</div>
+
+		<div style="margin-bottom: 0.2rem;">
+			<div id="segmentedControl" class="mui-segmented-control">
+				<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 1}" href="#item1">订单信息</a>
+				<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 2}" href="#item2">计调信息</a>
+				<a class="mui-control-item" :class="{'mui-active':currentTabIndex == 3}" href="#item3">输出信息</a>
+			</div>
+		</div>
+		<div>
+			<div id="item1" class="mui-control-content" :class="{'mui-active':currentTabIndex == 1}">
+				<div id="scroll" class="mui-scroll-wrapper" style="overflow: visible;">
+					<div class="mui-scroll" style="background: #fff; padding: 0.2rem;">
+						<div class="item colorgray">
+							<label>订单号：</label>
+							<span v-text="orderInfo.orderNo"></span>
 						</div>
-					</div>
-				</div>
-				<div id="item2" class="mui-control-content" :class="{'mui-active':currentTabIndex == 2}">
-					<div class="orderaction" style="background: #fff; padding: 0.2rem;">
-						<div class="item assignOrder">
-							执行人
-							<span v-if="currentRoleId == 4" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
-							<div v-if="!orderTrackInfo.assignNames" class="name">尚未指派</div>
-							<div v-if="orderTrackInfo.assignNames != ''" class="name assign-name" v-text="orderTrackInfo.assignNames"></div>
+						<div class="item" style="margin: 0.3rem 0;">
+							<div v-text="orderInfo.productName"></div>
 						</div>
 						<div class="sepline"></div>
-						<div class="item allotPhotoOrder">
-							摄影师
-							<span v-if="currentRoleId == 5" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
-							<div v-if="assignedPhotographersString == ''" class="name">尚未分配</div>
-							<div v-if="assignedPhotographersString != ''" class="name assign-name" v-text="assignedPhotographersString"></div>
+						<div class="item colorgray">
+							<label>下单时间：</label>
+							<span v-text="orderInfo.createTime"></span>
+						</div>
+						<div class="item colorgray">
+							<label>采购方：</label>
+							<span v-text="orderInfo.purchaser"></span>
+						</div>
+						<div class="sepline"></div>
+						<div class="item" style="font-size: 0.4rem;">
+							<label>总价：</label>
+							<span v-text="orderInfo.totalPrice"></span>元
 						</div>
 					</div>
+				</div>
+			</div>
+			<div id="item2" class="mui-control-content" :class="{'mui-active':currentTabIndex == 2}">
+				<div class="orderaction" style="background: #fff; padding: 0.2rem;">
+					<div class="item assignOrder">
+						执行人
+						<span v-if="currentRoleId == 4" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
+						<div v-if="!orderTrackInfo.assignNames" class="name">尚未指派</div>
+						<div v-if="orderTrackInfo.assignNames != ''" class="name assign-name" v-text="orderTrackInfo.assignNames"></div>
+					</div>
+					<div class="sepline"></div>
+					<div class="item allotPhotoOrder">
+						摄影师
+						<span v-if="currentRoleId == 5" class="mui-icon mui-icon-arrowright" style="float: right;"></span>
+						<div v-if="assignedPhotographersString == ''" class="name">尚未分配</div>
+						<div v-if="assignedPhotographersString != ''" class="name assign-name" v-text="assignedPhotographersString"></div>
+					</div>
+				</div>
 
-					<div class="mui-card">
-						<div class="mui-card-header jidiao" :data-type='0' :data-status="1">
-							<span class="border-left">团信息</span>
-							<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content">
-							<div class="mui-card-content-inner">
-								<div class="item">
-									<label>区域：</label>
-									<span v-text="orderTrackInfo.areaName"></span>
-								</div>
-								<div class="item">
-									<label>线路：</label>
-									<span v-text="orderTrackInfo.lineName"></span>
-								</div>
-								<div class="item">
-									<label>团队性质：</label>
-									<span v-text="orderTrackInfo.groupType"></span>
-								</div>
-								<div class="item">
-									<label>团队人数：</label>
-									<span v-text="orderTrackInfo.personCount"></span>人
-								</div>
-								<div class="item">
-									<label>导游：</label>
-									<span v-text="orderInfo.tourGuide"></span>
-									<a v-for="tp in tourGuidePhoneList" :href="'tel:'+tp" style="float:right; color: #FF8080; margin-left: 0.1rem;">
+				<div class="mui-card">
+					<div class="mui-card-header jidiao" :data-type='0' :data-status="1">
+						<span class="border-left">团信息</span>
+						<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							<div class="item">
+								<label>区域：</label>
+								<span v-text="orderTrackInfo.areaName"></span>
+							</div>
+							<div class="item">
+								<label>线路：</label>
+								<span v-text="orderTrackInfo.lineName"></span>
+							</div>
+							<div class="item">
+								<label>团队性质：</label>
+								<span v-text="orderTrackInfo.groupType"></span>
+							</div>
+							<div class="item">
+								<label>团队人数：</label>
+								<span v-text="orderTrackInfo.personCount"></span>人
+							</div>
+							<div class="item">
+								<label>导游：</label>
+								<span v-text="orderInfo.tourGuide"></span>
+								<a v-for="tp in tourGuidePhoneList" :href="'tel:'+tp" style="float:right; color: #FF8080; margin-left: 0.1rem;">
 										<span class="tel-ico"></span>
 										<span v-text="tp"></span>
 									</a>
 
-								</div>
-
 							</div>
+
 						</div>
 					</div>
-
-					<div class="mui-card">
-						<div class="mui-card-header jidiao" :data-type='1' :data-status="1">
-							<span class="border-left">行程信息</span>
-							<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content">
-							<div class="mui-card-content-inner">
-								<div class="item">
-									<label>出团日期：</label>
-									<span v-text="orderTrackInfo.startTime"></span>
-								</div>
-								<div class="item">
-									<label>行程天数：</label>
-									<span v-text="orderTrackInfo.groupDays"></span>
-								</div>
-								<div class="item">
-									<label>销售时间：</label>
-									<span v-text="orderTrackInfo.fetchPhotoTime"></span>
-								</div>
-								<div class="item">
-									<label>销售地点：</label>
-									<span v-text="orderTrackInfo.fetchPhotoScene"></span>
-								</div>
-								<div class="item">
-									<label>攝影師预留座位：</label>
-									<span v-text="orderTrackInfo.preReservedSeats"></span>
-								</div>
-								<div class="item">
-									<label>车牌号码：</label>
-									<span v-text="orderTrackInfo.busCardNo"></span>
-								</div>
-								<div class="sepline"></div>
-								<div class="detail">
-									行程详情
-									<button type="button" class="mui-btn view-detail">查看详情</button>
-								</div>
-
-							</div>
-						</div>
-						<div class="remark">
-							<div>备注</div>
-							<div v-text="orderTrackInfo.exeRemark"></div>
-						</div>
-					</div>
-
-					<div class="mui-card">
-						<div class="mui-card-header jidiao" :data-type='2' :data-status="1">
-							<span class="border-left">拍摄信息</span>
-							<span v-if="(currentRoleId ==4||currentRoleId==2||currentRoleId==5) && orderInfo.actionStatus!=55"  class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content">
-							<div class="mui-card-content-inner shootinfo">
-								<div class="item" v-for="(item,index ) in orderTrackInfo.lineSight">
-									<span class="ico-index" v-text="item.index"></span>
-									<div style="padding-left: 0.4rem;">
-										<div><span style="margin-right: 0.1rem;" v-text="item.shootTime"></span>
-											<span v-if="item.periodType == 0">全部</span>
-											<span v-if="item.periodType == 1">上午</span>
-											<span v-if="item.periodType == 2">下午</span>
-											<span v-if="item.periodType == 3">晚上</span>
-											<span style="margin-left: 0.1rem;" v-text="item.remark"></span></div>
-										<div v-text="item.journeyName"></div>
-										<div>摄影师：<span v-text="item.photographer"></span></div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
 				</div>
-				<div id="item3" class="mui-control-content" :class="{'mui-active':currentTabIndex == 3}">
-					<div class="mui-card">
-						<div class="mui-card-header outOrder" style="padding: 0.2rem;">
-							<span class="border-left">输出信息</span>
-							<span v-if="((currentRoleId==5||currentRoleId==4)&&(orderInfo.actionStatus==33||orderInfo.actionStatus==44)) || (currentRoleId==8 &&(orderInfo.actionStatus==33||orderInfo.actionStatus==44||orderInfo.actionStatus==22))" class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content">
-							<div v-if="orderResult.isOut ==1">
-								<div style="padding: 0.2rem;">
-									<div class="item">
-										<label>拍摄张数：</label>
-										<span v-text="orderResult.shootNum"></span>
-									</div>
-									<div class="item">
-										<label>选片张数：</label>
-										<span v-text="orderResult.selectsNum"></span>
-									</div>
-									<div class="item">
-										<label>打印张数：</label>
-										<div class="print" v-for="item in orderResult.printOrderXms">
-											<div><span class="ico-dot"></span>
-												<span v-text="item.picSizeName"></span>
-												<span v-text="item.picNum"></span>张
-											</div>
-										</div>
-									</div>
-									<div class="item">
-									<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-									<div style="text-indent:2em;" v-text="orderResult.saleRemark"></div>
-								</div>
-								</div>
-							</div>
-							<!--未输出-->
-							<div v-if="orderResult.isOut ==2" style="padding: 0.2rem;">
-								<div>未输出</div>
-								<div>原因</div>
-								<div v-text="orderResult.noOutReason"></div>
-								<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-								<div style="text-indent:2em;" v-text="orderResult.saleRemark"></div>
-							</div>
 
-						</div>
-
+				<div class="mui-card">
+					<div class="mui-card-header jidiao" :data-type='1' :data-status="1">
+						<span class="border-left">行程信息</span>
+						<span v-if="(currentRoleId ==4||currentRoleId==2) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
 					</div>
-					<div class="mui-card" style="margin-bottom: 0;">
-						<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="orderInfo.orderId" style="padding: 0.2rem;">
-							<span class="border-left">销售订单</span>
-							<span v-if="currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)" class="mui-icon mui-icon-arrowright"></span>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							<div class="item">
+								<label>出团日期：</label>
+								<span v-text="orderTrackInfo.startTime"></span>
+							</div>
+							<div class="item">
+								<label>行程天数：</label>
+								<span v-text="orderTrackInfo.groupDays"></span>
+							</div>
+							<div class="item">
+								<label>销售时间：</label>
+								<span v-text="orderTrackInfo.fetchPhotoTime"></span>
+							</div>
+							<div class="item">
+								<label>销售地点：</label>
+								<span v-text="orderTrackInfo.fetchPhotoScene"></span>
+							</div>
+							<div class="item">
+								<label>攝影師预留座位：</label>
+								<span v-text="orderTrackInfo.preReservedSeats"></span>
+							</div>
+							<div class="item">
+								<label>车牌号码：</label>
+								<span v-text="orderTrackInfo.busCardNo"></span>
+							</div>
+							<div class="sepline"></div>
+							<div class="detail">
+								行程详情
+								<button type="button" class="mui-btn view-detail">查看详情</button>
+							</div>
+
 						</div>
 					</div>
-					<div class="mui-card">
-						<div class="mui-card-header saleOutOrder" :data-id="currentOrderId" style="padding: 0.2rem;">
-							<span class="border-left">销售信息</span>
-							<span v-if="(currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)) || (currentRoleId==4 && orderInfo.actionStatus==44)"  class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content" style="padding: 0.2rem;">
-							<div class="item">
-								<label>赠送张数：</label>
-								<div class="print" v-for="item in orderResult.giveOrderXms">
-									<div><span class="ico-dot"></span>
-										<span v-text="item.picSizeName"></span>
-										<span v-text="item.picNum"></span>张
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<label>销售张数：</label>
-								<div class="print" v-for="item in orderResult.salesOrderXms">
-									<div><span class="ico-dot"></span>
-										<span v-text="item.picSizeName"></span>
-										<span v-text="item.picNum"></span>张
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<label>购买人数：</label>
-								<span v-text="orderResult.buyers"></span>
-							</div>
-							<div class="item">
-								<label>实时收银：</label>
-								<span v-text="orderResult.salesAmt"></span>元
-							</div>
-							<div class="item">
-								<label>预付销售额：</label>
-								<span v-text="orderResult.advanceAmount"></span>元
-							</div>
-							<div class="item">
-								<label>月结销售额：</label>
-								<span v-text="orderResult.payableAmount"></span>元
-							</div>
-							<div class="item">
-								<label>总金额：</label>
-								<span v-text="getTotal"></span>元
-							</div>
-						</div>
-
+					<div class="remark">
+						<div>备注</div>
+						<div v-text="orderTrackInfo.exeRemark"></div>
 					</div>
-					<div class="mui-card">
-						<div class="mui-card-header summary" style="padding: 0.2rem;">
-							<span class="border-left">摄影心得</span>
-							<span v-if="currentRoleId==3&&(orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11)" class="mui-icon mui-icon-arrowright"></span>
-						</div>
-						<div class="mui-card-content mind" style="padding: 0.2rem;">
-							<div class="item summary-item" v-for="item in photographerData" :data-userId="item.userId" :data-photographerId="item.photographerId">
-								<div class="name"><span v-text="item.photographerName"></span><span class="ico-pic"></span></div>
-								<div v-text="item.summary">
-								</div>
-								<div class="sepline"></div>
-							</div>
-							<div class="loadmore" v-if="photographerInfos.length!=photographerData.length">
-								查看更多心得
-							</div>
-						</div>
+				</div>
 
+				<div class="mui-card">
+					<div class="mui-card-header jidiao" :data-type='2' :data-status="1">
+						<span class="border-left">拍摄信息</span>
+						<span v-if="(currentRoleId ==4||currentRoleId==2||currentRoleId==5) && orderInfo.actionStatus!=55" class="mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner shootinfo">
+							<div class="item" v-for="(item,index ) in orderTrackInfo.lineSight">
+								<span class="ico-index" v-text="item.index"></span>
+								<div style="padding-left: 0.4rem;">
+									<div><span style="margin-right: 0.1rem;" v-text="item.shootTime"></span>
+										<span v-if="item.periodType == 0">全部</span>
+										<span v-if="item.periodType == 1">上午</span>
+										<span v-if="item.periodType == 2">下午</span>
+										<span v-if="item.periodType == 3">晚上</span>
+										<span style="margin-left: 0.1rem;" v-text="item.remark"></span></div>
+									<div v-text="item.journeyName"></div>
+									<div>摄影师：<span v-text="item.photographer"></span></div>
+								</div>
+							</div>
+
+						</div>
 					</div>
 				</div>
 
 			</div>
-		
-			<!--执行主管  计调 指派-->
-			<!--执行人  计调 -->
-			<!--摄影主管  修改拍摄信息  分配 -->
-			<!--填写输出信息   -->
-			<!--销售  生成销售  -->
-			<!--摄影师  录入心得  -->
-			<!--
+			<div id="item3" class="mui-control-content" :class="{'mui-active':currentTabIndex == 3}">
+				<div class="mui-card">
+					<div class="mui-card-header outOrder" style="padding: 0.2rem;">
+						<span class="border-left">输出信息</span>
+						<span v-if="((currentRoleId==5||currentRoleId==4)&&(orderInfo.actionStatus==33||orderInfo.actionStatus==44)) || (currentRoleId==8 &&(orderInfo.actionStatus==33||orderInfo.actionStatus==44||orderInfo.actionStatus==22))"
+						 class="mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-card-content">
+						<div v-if="orderResult.isOut ==1">
+							<div style="padding: 0.2rem;">
+								<div class="item">
+									<label>拍摄张数：</label>
+									<span v-text="orderResult.shootNum"></span>
+								</div>
+								<div class="item">
+									<label>选片张数：</label>
+									<span v-text="orderResult.selectsNum"></span>
+								</div>
+								<div class="item">
+									<label>打印张数：</label>
+									<div class="print" v-for="item in orderResult.printOrderXms">
+										<div><span class="ico-dot"></span>
+											<span v-text="item.picSizeName"></span>
+											<span v-text="item.picNum"></span>张
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+									<div style="text-indent:2em;" v-text="orderResult.saleRemark"></div>
+								</div>
+							</div>
+						</div>
+						<!--未输出-->
+						<div v-if="orderResult.isOut ==2" style="padding: 0.2rem;">
+							<div>未输出</div>
+							<div>原因</div>
+							<div v-text="orderResult.noOutReason"></div>
+							<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div style="text-indent:2em;" v-text="orderResult.saleRemark"></div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="mui-card" style="margin-bottom: 0;">
+					<div class="mui-card-header" id="order-pay-list-btn" :data-orderid="orderInfo.orderId" style="padding: 0.2rem;">
+						<span class="border-left">销售订单</span>
+						<span v-if="currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)" class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-header saleOutOrder" :data-id="currentOrderId" style="padding: 0.2rem;">
+						<span class="border-left">销售信息</span>
+						<span v-if="(currentRoleId==9 && (orderInfo.actionStatus==44||orderInfo.actionStatus==33)) || (currentRoleId==4 && orderInfo.actionStatus==44)"
+						 class="mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-card-content" style="padding: 0.2rem;">
+						<div class="item">
+							<label>赠送张数：</label>
+							<div v-if="isShowGivePhotos">
+								<div class="print" v-for="item in orderResult.giveOrderXms" v-if="item.picNum>0">
+									<div>
+										<span class="ico-dot"></span>
+										<span v-text="item.picSizeName"></span>
+										<span v-text="item.picNum"></span>张
+									</div>
+								</div>
+							</div>
+							<span v-else style="color:#ccc;">未赠送</span>
+						</div>
+						<div class="item">
+							<label>销售张数：</label>
+							<div class="print" v-for="item in orderResult.salesOrderXms">
+								<div><span class="ico-dot"></span>
+									<span v-text="item.picSizeName"></span>
+									<span v-text="item.picNum"></span>张
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<label>购买人数：</label>
+							<span v-text="orderResult.buyers"></span>
+						</div>
+						<div class="item">
+							<label>实时收银：</label>
+							<span v-text="orderResult.salesAmt"></span>元
+						</div>
+						<div class="item">
+							<label>预付销售额：</label>
+							<span v-text="orderResult.advanceAmount"></span>元
+						</div>
+						<div class="item">
+							<label>月结销售额：</label>
+							<span v-text="orderResult.payableAmount"></span>元
+						</div>
+						<div class="item">
+							<label>总金额：</label>
+							<span v-text="getTotal"></span>元
+						</div>
+					</div>
+
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-header summary" style="padding: 0.2rem;">
+						<span class="border-left">摄影心得</span>
+						<span v-if="currentRoleId==3&&(orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11)" class="mui-icon mui-icon-arrowright"></span>
+					</div>
+					<div class="mui-card-content mind" style="padding: 0.2rem;">
+						<div class="item summary-item" v-for="item in photographerData" :data-userId="item.userId" :data-photographerId="item.photographerId">
+							<div class="name"><span v-text="item.photographerName"></span><span class="ico-pic"></span></div>
+							<div v-text="item.summary">
+							</div>
+							<div class="sepline"></div>
+						</div>
+						<div class="loadmore" v-if="photographerInfos.length!=photographerData.length">
+							查看更多心得
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!--执行主管  计调 指派-->
+		<!--执行人  计调 -->
+		<!--摄影主管  修改拍摄信息  分配 -->
+		<!--填写输出信息   -->
+		<!--销售  生成销售  -->
+		<!--摄影师  录入心得  -->
+		<!--
 				计调主管 4 可指派 可计调
 				执行人 2 可计调
 				摄影主管 5 可分配
@@ -354,82 +361,83 @@
 				输出 8 可填写输出信息
 				销售  9 可生成销售 可销售输出
 			-->
-			<div v-if="currentOrderStatus!=3" class="buttons">
-				<!--计调主管-->
-				<div v-if="currentRoleId==4">
-					<div v-if="assignOrder&&orderInfo.actionStatus!=44&&orderInfo.actionStatus!=55">
-						<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
-						<button  class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
-					</div>
-					<div v-if="confirmOrder&&orderInfo.actionStatus==44">
-						<button class="mui-button colordark" :data-no="currentOrderNo" id="confirmComplete">确认完成</button>
-					</div>
+		<div v-if="currentOrderStatus!=3" class="buttons">
+			<!--计调主管-->
+			<div v-if="currentRoleId==4">
+				<div v-if="assignOrder&&orderInfo.actionStatus!=44&&orderInfo.actionStatus!=55">
+					<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">指派</button>
+					<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 				</div>
-				<!--执行人-->
-				<div v-if="currentRoleId==2">
-					<div v-if="assignOrder&&orderInfo.actionStatus!=55">
-						<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
-					</div>
-				</div>
-				<!--摄影主管-->
-				<div v-if="currentRoleId==5">
-					<div v-if="allotPhotoOrder&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=55">
-						<button class="mui-button colorlight allotPhotoOrder" :data-no="currentOrderNo">分配</button>
-					</div>
-				</div>
-				<!--摄影师-->
-				<div v-if="currentRoleId==3">
-					<div v-if="summary&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11">
-						<button class="mui-button colorlight summary" :data-no="currentOrderNo">录入心得</button>
-					</div>
-				</div>
-				<!--输出-->
-				<div v-if="currentRoleId==8">
-					<div v-if="outOrder&&orderInfo.actionStatus==22||orderInfo.actionStatus==33||orderInfo.actionStatus==44">
-						<button class="mui-button colorlight outOrder" :data-no="currentOrderNo">输出</button>
-					</div>
-				</div>
-				<!--销售-->
-				<div v-if="currentRoleId==9">
-					<div>
-						<button :data-no="currentOrderNo" v-if="genSale&&orderInfo.actionStatus==33" :data-id="orderInfo.orderId" :data-no="currentOrderNo" class="mui-button colorlight genSale">生成销售</button>
-						<button :data-no="currentOrderNo" v-if="saleOutOrder&&orderInfo.actionStatus==33" class="mui-button colorlight saleOutOrder">销售输出</button>
-						<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight" id="saleComplete">销售完成</button>
-
-						<button :data-no="currentOrderNo" v-if="saleOutOrder&&orderInfo.actionStatus==44" class="mui-button colorlight saleOutOrder">销售输出</button>
-					</div>
-				</div>
-
-			</div>
-
-			<div v-show="maskShow" class="mask"></div>
-			<div v-show='orderdetailShow' class="dialog-detail">
-				<div class="hd">
-					行程详情
-				</div>
-				<div class="cnt" v-html="orderTrackInfo.groupRoute">
-
-				</div>
-				<div class="close">
-					确定
+				<div v-if="confirmOrder&&orderInfo.actionStatus==44">
+					<button class="mui-button colordark" :data-no="currentOrderNo" id="confirmComplete">确认完成</button>
 				</div>
 			</div>
-			<div id="topPopover" class="mui-popover" style="width: 1.6rem;">
-				<div class="mui-popover-arrow"></div>
-				<div class="" style="width: 1.6rem;">
-					<button style="width: 1.6rem;" class="mui-button cancle">取消订单</button>
+			<!--执行人-->
+			<div v-if="currentRoleId==2">
+				<div v-if="assignOrder&&orderInfo.actionStatus!=55">
+					<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">计调</button>
 				</div>
+			</div>
+			<!--摄影主管-->
+			<div v-if="currentRoleId==5">
+				<div v-if="allotPhotoOrder&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=55">
+					<button class="mui-button colorlight allotPhotoOrder" :data-no="currentOrderNo">分配</button>
+				</div>
+			</div>
+			<!--摄影师-->
+			<div v-if="currentRoleId==3">
+				<div v-if="summary&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11">
+					<button class="mui-button colorlight summary" :data-no="currentOrderNo">录入心得</button>
+				</div>
+			</div>
+			<!--输出-->
+			<div v-if="currentRoleId==8">
+				<div v-if="outOrder&&orderInfo.actionStatus==22||orderInfo.actionStatus==33||orderInfo.actionStatus==44">
+					<button class="mui-button colorlight outOrder" :data-no="currentOrderNo">输出</button>
+				</div>
+			</div>
+			<!--销售-->
+			<div v-if="currentRoleId==9">
+				<div>
+					<button :data-no="currentOrderNo" v-if="genSale&&orderInfo.actionStatus==33" :data-id="orderInfo.orderId" :data-no="currentOrderNo"
+					 class="mui-button colorlight genSale">生成销售</button>
+					<button :data-no="currentOrderNo" v-if="saleOutOrder&&orderInfo.actionStatus==33" class="mui-button colorlight saleOutOrder">销售输出</button>
+					<button :data-no="currentOrderNo" v-if="orderInfo.actionStatus==33" class="mui-button colorlight" id="saleComplete">销售完成</button>
 
+					<button :data-no="currentOrderNo" v-if="saleOutOrder&&orderInfo.actionStatus==44" class="mui-button colorlight saleOutOrder">销售输出</button>
+				</div>
 			</div>
 
-			<script src="../../js/mui.min.js"></script>
-			<script src="../../js/mui.picker.min.js"></script>
-			<script src="../../js/framework/define.js"></script>
-			<script src="../../js/framework/styles.js"></script>
-			<script src="../../js/framework/lf.js"></script>
-			<script src="../../libs/vue.min.js"></script>
-			<script src="../../js/framework/common.js"></script>
-			<script src="orderdetails.js"></script>
-	</body>
+		</div>
+
+		<div v-show="maskShow" class="mask"></div>
+		<div v-show='orderdetailShow' class="dialog-detail">
+			<div class="hd">
+				行程详情
+			</div>
+			<div class="cnt" v-html="orderTrackInfo.groupRoute">
+
+			</div>
+			<div class="close">
+				确定
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover" style="width: 1.6rem;">
+			<div class="mui-popover-arrow"></div>
+			<div class="" style="width: 1.6rem;">
+				<button style="width: 1.6rem;" class="mui-button cancle">取消订单</button>
+			</div>
+
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script src="orderdetails.js"></script>
+</body>
 
 </html>
