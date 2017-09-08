@@ -52,7 +52,7 @@ var vm = new Vue({
 	computed: {
 		getTotal: function () {
 			var total = this.orderResult.salesAmt + this.orderResult.advanceAmount + this.orderResult.payableAmount
-			return total.toFixed(2)
+			return total ? total.toFixed(2) : ''
 		},
 		isShowGivePhotos: function () {
 			if (this.orderResult.giveOrderXms) {
@@ -497,6 +497,11 @@ mui('body').on('tap', '.loadmore', function () { //摄影心得点击加载更�
 })
 
 lf.event.listener('orderdetails', function (e) {
+	renderOrderDetails();
+	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+})
+
+lf.event.listener('orderPay', function (e) {
 	renderOrderDetails();
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
