@@ -1,4 +1,4 @@
-lf.ready(function() {
+lf.ready(function () {
     var vm = new Vue({
         el: '#app',
         data: {
@@ -9,19 +9,20 @@ lf.ready(function() {
             guidTel: '',
             pNo: '',
             orderNo: '',
-            operator:''
+            operator: '',
+            idString: ''
         }
     })
 
-    mui('#app').on('tap', '.product-name', function() { //选择产品名称
+    mui('#app').on('tap', '.product-name', function () { //选择产品名称
         var picker = new mui.PopPicker();
 
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('order/getProductByDept', {}, function(res) {
+        lf.net.getJSON('order/getProductByDept', {}, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 var data = []
-                res.data.forEach(function(item, index) {
+                res.data.forEach(function (item, index) {
                     var obj = {
                         value: item.pNo,
                         text: item.aliasName
@@ -29,7 +30,7 @@ lf.ready(function() {
                     data.push(obj)
                 })
                 picker.setData(data);
-                picker.show(function(selectItems) {
+                picker.show(function (selectItems) {
                     vm.productName = selectItems[0].text
                     vm.pNo = selectItems[0].value
                 })
@@ -39,22 +40,22 @@ lf.ready(function() {
         })
     })
 
-    mui('#app').on('tap', '.groupDate', function() { //选择出团日期
+    mui('#app').on('tap', '.groupDate', function () { //选择出团日期
         var opts = { "type": "date" };
         picker = new mui.DtPicker(opts);
-        picker.show(function(select) {
-            console.log(select)
+        picker.show(function (select) {
             vm.groupDate = select.value
         })
     })
 
-    mui('#app').on('tap', '.designate', function() { //选择执行人
-        lf.window.openWindow('designate', '../designate/designate.html', {}, {
-            quikOrderTag:true
+    mui('#app').on('tap', '.designate', function () { //选择执行人
+        vm.operator=''
+        lf.window.openWindow('allocation', '../designate/allocation-staff.html', {}, {
+            quikOrderTag: true
         })
     })
 
-    mui('#app').on('tap', '.sure', function() { //确认下单
+    mui('#app').on('tap', '.sure', function () { //确认下单
         if (!validate(vm.$data)) {
             return
         }
@@ -69,26 +70,27 @@ lf.ready(function() {
             tourGroups: {
                 tourNo: vm.groupNo
             },
-            assignId: window.Role.usercode + '|' + window.Role.userroleId
+            assignId: vm.idString
         }
         lf.nativeUI.showWaiting()
-        lf.net.getJSON('order/mobileQuickOrder', data, function(res) {
+        lf.net.getJSON('order/mobileQuickOrder', data, function (res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200' && res.data && res.data.orderNo) {
                 vm.orderNo = res.data.orderNo
                 lf.nativeUI.toast('下单成功')
+                lf.window.closeCurrentWebview()
             } else {
                 lf.nativeUI.toast(res.msg)
             }
-        }, function(res) {
+        }, function (res) {
             lf.nativeUI.closeWaiting()
             lf.nativeUI.toast(res.msg || '服务器异常')
         })
     })
 
-    window.addEventListener('quikOrder', function(event) {
-        console.log(event.detail.operatorNames)
-        vm.operator=event.detail.operatorNames
+    window.addEventListener('quikOrderSelectUsers', function (event) {
+        vm.operator = event.detail.nameString
+        vm.idString = event.detail.idString
     });
 })
 
@@ -108,7 +110,7 @@ function validate(formData) {
     if (!formData.guidName.trim()) {
         lf.nativeUI.toast('请填写姓名')
         return false
-    }else if(!/^([\u4e00-\u9fa5]){2,7}$/.test(formData.guidName.trim())){
+    } else if (!/^([\u4e00-\u9fa5]){2,7}$/.test(formData.guidName.trim())) {
         lf.nativeUI.toast("请填写正确的中文姓名")
         return false
     }
@@ -117,7 +119,11 @@ function validate(formData) {
         return false
     } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(formData.guidTel.trim()))) {
         lf.nativeUI.toast("请填写正确的手机号码")
-        return false;
+        return false
+    }
+    if (!formData.idString) {
+        lf.nativeUI.toast('请选择执行人')
+        return false
     }
     return true
 }

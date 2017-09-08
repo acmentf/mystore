@@ -115,18 +115,17 @@ lf.ready(function() {
 
     function save() {
         if (lf.window.currentWebview().quikOrderTag) { //如果从快速下单页面进来的
+            var names = []
+            var ids = []
+            vmTableView.indexedList.forEach(function (item) {
+                if(item.selected){
+                    names.push(item.text)
+                    ids.push(item.value)
+                }
+            })
             lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
-                passBack: pageParams.passBack,
-                userList: vmTableView.indexedList.filter(function(item) {
-                    return item.selected
-                }).map(function(item) {
-                    return {
-                        id: item.value,
-                        name: item.text,
-                        phone: item.phone,
-                        roleName: item.roleName
-                    }
-                })
+                nameString: names.length>0?names.join(' '):'',
+                idString: ids.length>0?ids.join(','):''
             });
             lf.window.closeCurrentWebview();
             return
