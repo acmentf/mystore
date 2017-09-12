@@ -341,9 +341,10 @@
 					"images/order/quick_icon.png",
 					"images/message/nav_order_green.png",
 					"images/order/sale_flash.png",
+					"app/login.html",
+					"images/order/switch.png",
 					"images/order/list_time.png",
 					"images/order/sale.png",
-					"images/order/switch.png",
 					"images/order/switch_back.png"
 				],
 				"refer": [
@@ -361,9 +362,7 @@
 					"app/message/message.html",
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
-					"app/quick-order-pay/quick-order-pay.html",
-					"app/order/quicksaledetails.html",
-					"app/order-pay/order-pay.html"
+					"app/order/quicksaledetails.html"
 				],
 				"priority": 0
 			},
@@ -822,26 +821,12 @@
 				],
 				"priority": 0
 			},
-			"app/quick-order-pay/quick-order-pay.html": {
-				"resources": [
-					"css/order-pay/order-pay.css",
-					"js/mui.zoom.js",
-					"js/mui.previewimage.js",
-					"css/images/sell_wechat.png",
-					"js/framework/qrcode.min.js",
-					"css/images/sell_cash.png",
-					"app/quick-order-pay/quick-order-pay.js"
-				],
-				"refer": [
-					"app/quick-order-pay/quick-order-pay-list.html"
-				],
-				"priority": 0
-			},
 			"app/order/quicksaledetails.html": {
 				"resources": [
 					"app/order/quicksaledetails.js",
 					"css/order/quicksaledetails.css",
 					"images/order/call_btn.png",
+					"css/common/common.css",
 					"js/framework/define.js",
 					"js/framework/common.js",
 					"js/mui.min.js",
@@ -850,12 +835,10 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"css/common/common.css",
 					"js/framework/styles.js"
 				],
 				"refer": [
-					"app/sale-detail/saledetail.html",
-					"app/result/sales-export.html"
+					"app/sale-detail/saledetail.html"
 				],
 				"priority": 0
 			},
@@ -863,32 +846,22 @@
 				"resources": [
 					"css/sale-detail/saledetail.css",
 					"app/sale-detail/saledetail.js",
+					"js/update.js",
 					"css/images/sell_alipay.png",
 					"css/images/sell_wechat.png",
 					"css/images/sell_cash.png",
+					"js/mui.pullToRefresh.js",
 					"js/framework/define.js",
 					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
 					"fonts/mui.ttf",
 					"css/common/common.css",
 					"js/framework/styles.js",
 					"css/app.css",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/framework/lf.js",
 					"libs/vue.min.js",
-					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"app/order-pay/order-pay.html": {
-				"resources": [
-					"css/order-pay/order-pay.css",
-					"js/mui.zoom.js",
-					"js/mui.previewimage.js",
-					"app/order-pay/order-pay.js",
-					"js/framework/qrcode.min.js"
+					"js/framework/lf.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -917,7 +890,6 @@
 				"images/qrcode.png",
 				"css/mui.dtpicker.css",
 				"css/mui.picker.all.css",
-				"js/update.js",
 				"js/feedback.js",
 				"js/arttmpl.js",
 				"css/summary/summary.scss",
