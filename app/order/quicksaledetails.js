@@ -4,10 +4,13 @@ var vm = new Vue({
         orderInfo: {},
         orderResult: {},
         orderTrackInfo: {},
-        totalPrice: ''
+        totalPrice: '',
+        actionStatus: ''
     }
 })
 lf.ready(function() {
+    vm.actionStatus = lf.window.currentWebview().actionStatus
+    console.log(vm.actionStatus)
     renderOrderDetails();
     // 销售明细
     mui('body').on('tap', '.sale-detail', function() {
@@ -17,7 +20,6 @@ lf.ready(function() {
     })
     // 修改信息
     mui('body').on('tap', '.modifyBtn', function(){
-        console.log(111)
         lf.window.openWindow('result/sales-export.html', '../result/sales-export.html', {}, {
 			orderId: vm.orderInfo.orderId,
 			userId: window.Role.usercode,
@@ -41,7 +43,6 @@ lf.ready(function() {
             orderId: orderId
         };
         lf.net.getJSON('order/orderDetail', params, function(data) {
-            console.log(11)
             if (data.code == 200) {
                 console.log(JSON.stringify(data.data));
                 vm.orderInfo = data.data.orderInfo

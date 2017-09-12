@@ -874,7 +874,9 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/framework/lf.js",
-					"libs/vue.min.js"
+					"libs/vue.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [],
 				"priority": 0

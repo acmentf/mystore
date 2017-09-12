@@ -20,7 +20,7 @@
 				<h1 class="mui-title">订单详情</h1>
 				<a id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 			</header>
-			<footer class="mui-bar mui-bar-footer">
+			<footer class="mui-bar mui-bar-footer" v-if="actionStatus==33">
 				<button type="button" class="mui-btn mui-btn-primary">销售</button>
 			</footer>
 			<main class="mui-content">
@@ -66,11 +66,11 @@
 							</li>
 							<li>
 								<span class="gray">销售张数：</span>
-								<span v-if="orderResult.salesOrderXms.length>0" v-for="item in orderResult.salesOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum"></span>张 &nbsp; </span>
+								<span v-if="orderResult.salesOrderXms.length>0" v-for="item in orderResult.salesOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum || 0"></span>张 &nbsp; </span>
 							</li>
 							<li>
 								<span class="gray">赠送张数：</span>
-								<span v-if="orderResult.giveOrderXms.length>0" v-for="item in orderResult.giveOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum"></span>张 &nbsp; </span>
+								<span v-if="orderResult.giveOrderXms.length>0" v-for="item in orderResult.giveOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum || 0"></span>张 &nbsp; </span>
 							</li>
 							<li>
 								<span class="gray">销售人数/家庭：</span>

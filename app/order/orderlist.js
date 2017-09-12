@@ -145,7 +145,8 @@ mui('.order-ul').on('tap', '.link', function() {
 			orderNo: id,
 			index: index,
 			photographerId: window.Role.photograherId,
-			summary: summary
+			summary: summary,
+			actionStatus: actionStatus
 		})
 	}
 })
