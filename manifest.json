@@ -362,7 +362,8 @@
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
 					"app/quick-order-pay/quick-order-pay.html",
-					"app/order/quicksaledetails.html"
+					"app/order/quicksaledetails.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},
@@ -877,6 +878,17 @@
 					"libs/vue.min.js",
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order-pay/order-pay.html": {
+				"resources": [
+					"css/order-pay/order-pay.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"app/order-pay/order-pay.js",
+					"js/framework/qrcode.min.js"
 				],
 				"refer": [],
 				"priority": 0
