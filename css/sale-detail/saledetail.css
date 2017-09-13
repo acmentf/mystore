@@ -1,17 +1,22 @@
 .mui-content .container{
-    background-color: #ffffff;
     margin-top: 10px;
     color:#343434;
     font-size: .3rem;
 }
 .mui-bar + main.mui-content {
-    padding-bottom: 70px;
+    padding-bottom: 100px;
 }
 .title {
-    height: 50px;
+    height: 60px;
+    border-top: 10px solid #EFEFF4;
     border-bottom: 1px solid #EEEEEE;
     display: flex;
     color:#888888;
+    background-color: #ffffff;
+    position: fixed;
+    top: 44px;
+    width: 100%;
+    z-index:999;
 }
 .title li {
     position: relative;
@@ -29,6 +34,14 @@
     padding: 0 10px!important;
     font-size: .32rem;
     color:#343434;
+    background-color: #ffffff;
+}
+#scroll-wrap{
+    min-height: calc( 100vh - 210px );
+    margin-top: 60px;
+}
+#scroll1{
+    position: relative;
 }
 .content li {
     display: flex;
@@ -92,4 +105,14 @@
 .mui-bar-footer div:last-child{
     font-size: .28rem;
     color: #999999;
+}
+.mui-pull-bottom-tips {
+    position: absolute;
+    left:0;
+    width: 100%;
+}
+.mui-pull-bottom-tips .mui-pull-loading{
+    display: block;
+    width: 100%;
+    text-align: center;
 }

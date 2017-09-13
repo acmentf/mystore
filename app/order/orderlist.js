@@ -477,7 +477,9 @@ function initPull() {
 								dodata('down', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
-									v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+									if(v.saleDate){
+										v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+									}
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
 
 									console.log(JSON.stringify(v.tourGuidePhone));
@@ -526,6 +528,9 @@ function initPull() {
 								dodata('up', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
+									if(v.saleDate){
+										v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+									}
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
 									console.log(JSON.stringify(v.tourGuidePhone));
 								})

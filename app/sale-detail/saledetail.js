@@ -13,7 +13,7 @@ lf.ready(function() {
 })
 function initPull() {
 	mui.ready(function() {
-        mui(".content").pullToRefresh({
+        mui("#scroll-wrap").pullToRefresh({
             up : {
                 auto:true,
                 callback: function(){
