@@ -362,7 +362,8 @@
 					"app/message/message.html",
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
-					"app/order/quicksaledetails.html"
+					"app/order/quicksaledetails.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},
@@ -838,7 +839,9 @@
 					"js/framework/styles.js"
 				],
 				"refer": [
-					"app/sale-detail/saledetail.html"
+					"app/sale-detail/saledetail.html",
+					"app/order-pay/order-pay.html",
+					"app/result/sales-export.html"
 				],
 				"priority": 0
 			},
@@ -862,6 +865,20 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order-pay/order-pay.html": {
+				"resources": [
+					"css/order-pay/order-pay.css",
+					"js/mui.zoom.js",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"app/order-pay/order-pay.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
+					"css/images/sell_cash.png"
 				],
 				"refer": [],
 				"priority": 0

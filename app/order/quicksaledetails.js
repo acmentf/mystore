@@ -25,6 +25,25 @@ lf.ready(function() {
 			userId: window.Role.usercode,
 		})
     })
+    mui('body').on('tap', '.genSale', function() { //点击生成销售
+        console.log(111)
+        var orderId = vm.orderInfo.orderId;
+        var areaCode = vm.orderInfo.areaCode;
+        var tourGuide = vm.orderInfo.tourGuide;
+        var purchaser = vm.orderInfo.purchaser;
+        var aliasName = vm.orderInfo.aliasName;
+        var province = this.getAttribute('data-province');
+        var city = this.getAttribute('data-city');
+        lf.window.openWindow('orderPay', '../order-pay/order-pay.html', {}, {
+            orderId: orderId,
+            areaCode: areaCode,
+            tourGuide: tourGuide,
+            purchaser: purchaser,
+            aliasName: aliasName,
+            province: province,
+            city: city
+        })
+    })
     lf.event.listener('orderdetails', function(e) {
         renderOrderDetails();
         lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
