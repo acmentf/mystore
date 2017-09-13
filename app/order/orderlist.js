@@ -141,13 +141,32 @@ mui('.order-ul').on('tap', '.link', function() {
 			summary: summary
 		})
 	} else {
-		lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
-			orderNo: id,
-			index: index,
-			photographerId: window.Role.photograherId,
-			summary: summary,
-			actionStatus: actionStatus
-		})
+		if(vm.checkIcon.type) {
+			var orderid = this.getAttribute('data-id');
+			var areaCode = this.getAttribute('data-areaCode');
+			var tourGuide = this.getAttribute('data-tourGuide');
+			var purchaser = this.getAttribute('data-purchaser');
+			var aliasName = this.getAttribute('data-aliasName');
+			var province = this.getAttribute('data-province');
+			var city = this.getAttribute('data-city');
+			lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
+				orderId: orderid,
+				areaCode: areaCode,
+				tourGuide: tourGuide,
+				purchaser: purchaser,
+				aliasName: aliasName,
+				province: province,
+				city: city
+			})
+		}else {
+			lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
+				orderNo: id,
+				index: index,
+				photographerId: window.Role.photograherId,
+				summary: summary,
+				actionStatus: actionStatus
+			})
+		}
 	}
 })
 
@@ -474,7 +493,6 @@ function initPull() {
 							console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.refresh(true);
-								dodata('down', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 									if(v.saleDate){
@@ -484,6 +502,7 @@ function initPull() {
 
 									console.log(JSON.stringify(v.tourGuidePhone));
 								})
+								dodata('down', index, res.data.result)
 								console.log("*******************");
 								console.log(res.data.result.length);
 								if(res.data.result.length > 0) {
@@ -525,7 +544,6 @@ function initPull() {
 							console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
-								dodata('up', index, res.data.result)
 								res.data.result.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
 									if(v.saleDate){
@@ -534,6 +552,7 @@ function initPull() {
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
 									console.log(JSON.stringify(v.tourGuidePhone));
 								})
+								dodata('up', index, res.data.result)
 								console.log("##############");
 								console.log(res.data.result.length);
 								if(res.data.result.length > 0) {

@@ -37,7 +37,7 @@
                     <div id="scroll1">
                         <ul class="content list-unstyle">
                             <li v-for="item in orderList" :key="item">
-                                <div v-text="item.salePersonnelNum"></div>
+                                <div>{{item.salePersonnelNum || "未填"}}</div>
                                 <div><span v-text="item.nums"></span>张</div>
                                 <div>
                                     <span v-if="item.channelId ==1"><img src="../../css/images/sell_wechat.png" alt="">微信</span>
