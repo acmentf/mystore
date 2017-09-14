@@ -211,8 +211,8 @@
 																<span class="dqr colorgreen" v-if="item.actionStatus ==55">已完成</span>
                                                             </span>
                                                             <span v-if="currentRoleId==9" class="dqr guideinfo">
-                                                                <span v-if="item.salesAmt">已售:￥{{item.salesAmt}}</span>
-                                                                <span v-if="!item.salesAmt">尚未销售</span>
+                                                                <span v-if="item.salesAmt || item.actionStatus>33">已售:￥{{item.salesAmt}}</span>
+                                                                <span v-if="!item.salesAmt&&item.actionStatus<=33">尚未销售</span>
                                                             </span>
                                                         </div>
                                                         <div class="item">
