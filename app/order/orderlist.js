@@ -675,6 +675,19 @@ lf.event.listener('orderdetails', function(e) {
 	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
 })
+lf.event.listener('orderPay', function(e) {
+	vm.orderList.forEach(function(v, i) { // 将数据制空
+		dodata('down', i, [])
+		vm.pageNos[i] = 0;
+		find(i);
+	})
+
+	vm.pullObjects.forEach(function(v) { // 将数据全部重新加载一次
+		mui(v).pullToRefresh().refresh(true);
+	})
+	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
+	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
+})
 lf.event.listener('selectAssignUser', function(e) {
 	console.log(JSON.stringify(e.detail, null, 2))
 })
