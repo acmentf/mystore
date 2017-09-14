@@ -880,7 +880,17 @@
 					"js/mui.zoom.js",
 					"js/mui.previewimage.js",
 					"app/order-pay/order-pay.js",
-					"js/framework/qrcode.min.js"
+					"js/framework/qrcode.min.js",
+					"js/framework/define.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/images/sell_wechat.png",
+					"css/images/sell_cash.png",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -595,6 +595,9 @@ function find(index) {
 
 			res.data.result.forEach(function(v, i) {
 				v.startTime = lf.util.timeStampToDate2(v.startTime)
+				if(v.saleDate){
+					v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+				}
 				v.tourGuidePhone = v.tourGuidePhone.split(',')
 				console.log(JSON.stringify(v.tourGuidePhone));
 			})
