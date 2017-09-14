@@ -840,7 +840,6 @@
 				],
 				"refer": [
 					"app/sale-detail/saledetail.html",
-					"app/order-pay/order-pay.html",
 					"app/result/sales-export.html"
 				],
 				"priority": 0
@@ -873,12 +872,9 @@
 				"resources": [
 					"css/order-pay/order-pay.css",
 					"js/mui.zoom.js",
-					"css/mui.min.css",
 					"js/mui.previewimage.js",
 					"app/order-pay/order-pay.js",
-					"css/images/sell_wechat.png",
-					"js/framework/qrcode.min.js",
-					"css/images/sell_cash.png"
+					"js/framework/qrcode.min.js"
 				],
 				"refer": [],
 				"priority": 0

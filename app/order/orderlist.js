@@ -141,14 +141,15 @@ mui('.order-ul').on('tap', '.link', function() {
 			summary: summary
 		})
 	} else {
-		if(vm.checkIcon.type) {
-			var orderid = this.getAttribute('data-id');
-			var areaCode = this.getAttribute('data-areaCode');
-			var tourGuide = this.getAttribute('data-tourGuide');
-			var purchaser = this.getAttribute('data-purchaser');
-			var aliasName = this.getAttribute('data-aliasName');
-			var province = this.getAttribute('data-province');
-			var city = this.getAttribute('data-city');
+		var orderid = this.getAttribute('data-id');
+		var areaCode = this.getAttribute('data-areaCode');
+		var tourGuide = this.getAttribute('data-tourGuide');
+		var purchaser = this.getAttribute('data-purchaser');
+		var aliasName = this.getAttribute('data-aliasName');
+		var province = this.getAttribute('data-province');
+		var city = this.getAttribute('data-city');
+		var actionStatus = this.getAttribute('data-actionStatus')
+		if(vm.checkIcon.type&&actionStatus==33) {
 			lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 				orderId: orderid,
 				areaCode: areaCode,
