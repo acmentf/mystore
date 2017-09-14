@@ -118,7 +118,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 					lf.nativeUI.toast('请输入销售张数')
 				flag = false
 				}else if(v.picNum<0){
-					lf.nativeUI.toast('销售参数不合法')
+					lf.nativeUI.toast('销售张数参数不合法')
 					flag = false
 				}
 			}
@@ -133,6 +133,9 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 			}
 			if(tempGiveOrderXms[i].picNum===''){
 				tempGiveOrderXms[i].picNum=0
+			} else if (tempGiveOrderXms[i].picNum<0){
+				lf.nativeUI.toast('赠送张数参数不合法')
+				flag = false
 			}
 		}
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
