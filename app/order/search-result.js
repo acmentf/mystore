@@ -252,6 +252,8 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 	var tourGuide = this.getAttribute('data-tourGuide');
 	var purchaser = this.getAttribute('data-purchaser');
 	var aliasName = this.getAttribute('data-aliasName');
+	var province = this.getAttribute('data-province');
+	var city = this.getAttribute('data-city');
 	console.log('id:' + orderid)
 	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 		orderId: orderid,
@@ -259,6 +261,8 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 		tourGuide: tourGuide,
 		purchaser: purchaser,
 		aliasName: aliasName,
+		province: province,
+		city: city
 	})
 })
 
