@@ -165,7 +165,9 @@ mui('.order-ul').on('tap', '.link', function() {
 				index: index,
 				photographerId: window.Role.photograherId,
 				summary: summary,
-				actionStatus: actionStatus
+				actionStatus: actionStatus,
+				province: province,
+				city: city
 			})
 		}
 	}

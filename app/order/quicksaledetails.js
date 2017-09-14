@@ -5,12 +5,16 @@ var vm = new Vue({
         orderResult: {},
         orderTrackInfo: {},
         totalPrice: '',
-        actionStatus: ''
+        actionStatus: '',
+        city: '',
+        province: ''
     }
 })
 lf.ready(function() {
     vm.actionStatus = lf.window.currentWebview().actionStatus
-    console.log(vm.actionStatus)
+    vm.city = lf.window.currentWebview().city
+    vm.province = lf.window.currentWebview().province
+    console.log(vm.city)
     renderOrderDetails();
     // 销售明细
     mui('body').on('tap', '.sale-detail', function() {
@@ -32,8 +36,8 @@ lf.ready(function() {
         var tourGuide = vm.orderInfo.tourGuide;
         var purchaser = vm.orderInfo.purchaser;
         var aliasName = vm.orderInfo.aliasName;
-        var province = this.getAttribute('data-province');
-        var city = this.getAttribute('data-city');
+        var province = vm.province;
+        var city = vm.city;
         lf.window.openWindow('orderPay', '../order-pay/order-pay.html', {}, {
             orderId: orderId,
             areaCode: areaCode,

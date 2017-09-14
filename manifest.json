@@ -846,7 +846,8 @@
 				],
 				"refer": [
 					"app/sale-detail/saledetail.html",
-					"app/result/sales-export.html"
+					"app/result/sales-export.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},

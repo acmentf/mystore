@@ -196,7 +196,7 @@
                                     <ul class="order-ul">
                                         <li class="order-li" v-for="item in data">
                                             <div v-if="currentRoleId!=9||!checkIcon.type">
-                                                <div class="link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus">
+                                                <div class="link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
                                                     <div class="mui-table title">
                                                         <div class="mui-clearfix" style="margin-bottom: 0.2rem;">
                                                             <span class="colorgray">
