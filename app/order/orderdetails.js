@@ -61,6 +61,9 @@ var vm = new Vue({
 				})
 				return arr.length > 0
 			}
+		},
+		groupDate:function(){
+			return lf.util.timeStampToDate(this.orderTrackInfo.startTime).split(' ')[0] 
 		}
 	}
 })
