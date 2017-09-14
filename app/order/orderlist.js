@@ -149,7 +149,7 @@ mui('.order-ul').on('tap', '.link', function() {
 		var province = this.getAttribute('data-province');
 		var city = this.getAttribute('data-city');
 		var actionStatus = this.getAttribute('data-actionStatus')
-		if(vm.checkIcon.type&&actionStatus==33) {
+		if(vm.checkIcon.type&&actionStatus<=33) {
 			lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 				orderId: orderid,
 				areaCode: areaCode,
