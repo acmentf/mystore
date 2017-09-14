@@ -67,7 +67,7 @@
 	background: #fff;
 	list-style: none;
 	margin: 0 5px;
-	margin-top: 0.3rem;
+	margin-top: 0.2rem;
 	border: 1px solid #eee;
 	border-radius: 10px;
 	box-shadow: 0 0 10px #EEEEEE;
@@ -153,6 +153,36 @@
 #quickOrder img{
 	height: 20px;
 	margin-top: 2px;
+}
+
+.saletime{
+	display: inline-block;
+	width: .28rem;
+	height: .28rem;
+	background: url("../../images/order/list_time.png") no-repeat center center;
+	background-size: contain;
+	vertical-align: middle;
+}
+
+.quickLook{
+	padding: .3rem .2rem;
+	position: relative;
+}
+.quickLook >div:first-child{
+	color:#343434;
+	font-size: .32rem;
+}
+.quickLook> div:nth-child(2){
+	color:#888888;
+	font-size: .3rem;
+}
+.quickLook > img {
+	position: absolute;
+	right: .2rem;
+	top: 50%;
+	width: 15px!important;
+	height: 15px;
+	margin-top: -7px;
 }
 
 #search-order{
@@ -242,8 +272,11 @@
 }
 
 .orderlist-content .guideinfo {
-	margin: 0.2rem 0;
 	color: #FF8458;
+}
+
+.orderlist-content .guideinfo.item{
+	margin: 0.2rem 0;
 }
 
 .orderlist-content .order-ul .ico-tourguide {
