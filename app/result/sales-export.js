@@ -114,7 +114,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 				}
 			}
 			if(v.picSize){
-				if(v.picNum!=0){
+				if(v.picNum!==0){
 					if(!v.picNum){
 						lf.nativeUI.toast('请输入销售张数')
 					flag = false
