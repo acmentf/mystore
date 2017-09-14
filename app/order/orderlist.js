@@ -118,7 +118,10 @@ lf.ready(function() {
 /*document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
 })*/
-
+mui(".order-ul").on('tap', ".guideinfo a", function(){
+	var tel = this.getAttribute('data-tel')
+	window.location.href= "tel:"+tel
+})
 mui('.order-ul').on('tap', '.link', function() {
 	var id = this.getAttribute('data-id');
 	var actionStatus = this.getAttribute('data-actionStatus');
