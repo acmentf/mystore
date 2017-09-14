@@ -114,12 +114,14 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 				}
 			}
 			if(v.picSize){
-				if(!v.picNum&&v.picNum!=0){
-					lf.nativeUI.toast('请输入销售张数')
-				flag = false
-				}else if(v.picNum<0){
-					lf.nativeUI.toast('销售张数参数不合法')
+				if(v.picNum!=0){
+					if(!v.picNum){
+						lf.nativeUI.toast('请输入销售张数')
 					flag = false
+					}else if(v.picNum<0){
+						lf.nativeUI.toast('销售张数参数不合法')
+						flag = false
+					}
 				}
 			}
 			console.log(v.picNum)

@@ -5,7 +5,6 @@ var vm = new Vue({
 		orderHeader: [{ name: '待处理', number: '' }, { name: '进行中', number: '' }],
 		orderList: [
 			[],
-			[],
 			[]
 		],
 		pageNos: [
