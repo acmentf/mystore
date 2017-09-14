@@ -2,7 +2,15 @@ var vm = new Vue({
     el: '#app',
     data: {
         orderInfo: {},
-        orderResult: {},
+        orderResult: {
+            saleDate: '',
+            salesOrderXms: [],
+            giveOrderXms: [],
+            buyers: '',
+            advanceAmount: '',
+            payableAmount: '',
+            salesAmt: ''
+        },
         orderTrackInfo: {},
         totalPrice: '',
         actionStatus: '',
@@ -14,7 +22,6 @@ lf.ready(function() {
     vm.actionStatus = lf.window.currentWebview().actionStatus
     vm.city = lf.window.currentWebview().city
     vm.province = lf.window.currentWebview().province
-    console.log(vm.city)
     renderOrderDetails();
     // 销售明细
     mui('body').on('tap', '.sale-detail', function() {
@@ -30,7 +37,6 @@ lf.ready(function() {
 		})
     })
     mui('body').on('tap', '.genSale', function() { //点击生成销售
-        console.log(111)
         var orderId = vm.orderInfo.orderId;
         var areaCode = vm.orderInfo.areaCode;
         var tourGuide = vm.orderInfo.tourGuide;
@@ -47,6 +53,33 @@ lf.ready(function() {
             province: province,
             city: city
         })
+    })
+    mui('body').on('tap', '.finish', function() {
+        lf.nativeUI.confirm("操作提示", "是否完成销售?", ["确定", "取消"], function (e) {
+			if (e.index == 0) {
+				saleFn()
+			}
+		});
+
+		function saleFn() {
+			var params = {
+				orderId: vm.orderInfo.orderId,
+                orderState: 1,
+                orderNo: vm.orderInfo.orderNo
+			};
+			lf.net.getJSON('order/updateOrderState', params, function (data) {
+				if (data.code == 200) {
+					lf.nativeUI.toast("已完成销售！");
+                    lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+                    vm.actionStatus = '44'
+                    mui.back();
+				} else {
+					lf.nativeUI.toast(data.msg);
+				}
+			}, function (erro) {
+				lf.nativeUI.toast(erro.msg);
+			});
+		}
     })
     lf.event.listener('orderdetails', function(e) {
         renderOrderDetails();
@@ -69,17 +102,19 @@ lf.ready(function() {
             if (data.code == 200) {
                 console.log(JSON.stringify(data.data));
                 vm.orderInfo = data.data.orderInfo
-                vm.orderResult = data.data.orderResult
                 vm.orderTrackInfo = data.data.orderTrackInfo
-                var time = new Date(vm.orderResult.saleDate);
-                var year = time.getFullYear();
-                var month = time.getMonth() + 1;
-                var date = time.getDate();
-                var hours = time.getHours();
-                var minutes = time.getMinutes();
-                var seconds = time.getSeconds();
-                vm.orderResult.saleDate = year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
-                vm.totalPrice = (parseFloat(vm.orderResult.advanceAmount) || 0) + (parseFloat(vm.orderResult.payableAmount) || 0) + (parseFloat(vm.orderResult.salesAmt) || 0)
+                if(data.data.orderResult){
+                    vm.orderResult = data.data.orderResult
+                    var time = new Date(vm.orderResult.saleDate);
+                    var year = time.getFullYear();
+                    var month = time.getMonth() + 1;
+                    var date = time.getDate();
+                    var hours = time.getHours();
+                    var minutes = time.getMinutes();
+                    var seconds = time.getSeconds();
+                    vm.orderResult.saleDate = year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+                    vm.totalPrice = (parseFloat(vm.orderResult.advanceAmount) || 0) + (parseFloat(vm.orderResult.payableAmount) || 0) + (parseFloat(vm.orderResult.salesAmt) || 0)
+                }
             } else {
                 lf.nativeUI.toast(data.msg);
             }

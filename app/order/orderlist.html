@@ -210,7 +210,10 @@
 																<span class="dqr coloryellow" v-if="item.actionStatus ==44">待完成</span>
 																<span class="dqr colorgreen" v-if="item.actionStatus ==55">已完成</span>
                                                             </span>
-                                                            <span v-if="currentRoleId==9" class="dqr guideinfo">已售:￥{{item.salesAmt}}</span>
+                                                            <span v-if="currentRoleId==9" class="dqr guideinfo">
+                                                                <span v-if="item.salesAmt">已售:￥{{item.salesAmt}}</span>
+                                                                <span v-if="!item.salesAmt">尚未销售</span>
+                                                            </span>
                                                         </div>
                                                         <div class="item">
                                                             {{item.productName}}
@@ -226,7 +229,7 @@
 																		<span>共{{item.groupDays}}天</span>
 																	</div>
 																	<div class="item">
-																		<span class="ico ico-linename"></span> 团名称: {{item.lineName}}
+																		<span class="ico ico-linename"></span> 线路名称: {{item.aliasName}}
 																	</div>
 																</div>
 																<div v-if="currentRoleId==9">

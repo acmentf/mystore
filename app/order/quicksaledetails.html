@@ -46,8 +46,10 @@
 									<span v-text="orderInfo.tourGuide"></span>
 								</div>
 								<div class="right">
-									<img src="../../images/order/call_btn.png" alt="">
-									<span class="orange" v-text="orderInfo.tourGuidePhone"></span>
+									<a :href="'tel:'+orderInfo.tourGuidePhone" style="display:block; color: #FF8458; margin-left: 0.1rem;">		
+										<img src="../../images/order/call_btn.png" alt="">
+										<span class="orange" v-text="orderInfo.tourGuidePhone"></span>
+									</a>
 								</div>
 							</li>
 						</ul>

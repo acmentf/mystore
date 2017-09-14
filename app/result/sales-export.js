@@ -107,30 +107,34 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 mui('.mui-bar').on('tap', '.save-btn', function(){
 		var flag = true 
 		vm.saleOrderXms.forEach(function(v){
-			if(v.picNum){
+			if(v.picNum>=0){
 				if(!v.picSize){
 					lf.nativeUI.toast('请选择销售尺寸')
 					flag = false;
 				}
 			}
 			if(v.picSize){
-				if(!v.picNum){
+				if(!v.picNum&&v.picNum!=0){
 					lf.nativeUI.toast('请输入销售张数')
 				flag = false
+				}else if(v.picNum<0){
+					lf.nativeUI.toast('销售参数不合法')
+					flag = false
 				}
 			}
+			console.log(v.picNum)
 		})
 		console.log(vm.giveOrderXms.length)
 		var tempGiveOrderXms=vm.giveOrderXms
-		tempGiveOrderXms.forEach(function(v,index,arr){
-			
-			if(v.picSize===''){
-				vm.giveOrderXms.splice(index,1)
+		for(var i=0;i<tempGiveOrderXms.length;i++){
+			if(tempGiveOrderXms[i].picSize===''){
+				vm.giveOrderXms.splice(i,1)
+				i--
 			}
-			if(v.picNum===''){
-				v.picNum=0
+			if(tempGiveOrderXms[i].picNum===''){
+				tempGiveOrderXms[i].picNum=0
 			}
-		})
+		}
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
 	// 校验 是否输入了相同的尺寸
 	var orderX = []
