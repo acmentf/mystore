@@ -60,6 +60,7 @@ lf.ready(function() {
         picker = new mui.DtPicker(opts);
         picker.show(function(select) {
             vm.groupDate = select.value
+            vm.shootTime=select.value+' 全天'
         })
     })
 
