@@ -341,7 +341,11 @@
 					"images/order/quick_icon.png",
 					"images/message/nav_order_green.png",
 					"images/order/sale_flash.png",
-					"app/login.html"
+					"app/login.html",
+					"images/order/switch.png",
+					"images/order/list_time.png",
+					"images/order/sale.png",
+					"images/order/switch_back.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -357,7 +361,8 @@
 					"app/result/order-result.html",
 					"app/message/message.html",
 					"app/order/search.html",
-					"app/quick-order/quick-order.html"
+					"app/quick-order/quick-order.html",
+					"app/order/quicksaledetails.html"
 				],
 				"priority": 0
 			},
@@ -815,6 +820,51 @@
 					"app/designate/allocation-staff.html"
 				],
 				"priority": 0
+			},
+			"app/order/quicksaledetails.html": {
+				"resources": [
+					"app/order/quicksaledetails.js",
+					"css/order/quicksaledetails.css",
+					"images/order/call_btn.png",
+					"css/common/common.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/sale-detail/saledetail.html"
+				],
+				"priority": 0
+			},
+			"app/sale-detail/saledetail.html": {
+				"resources": [
+					"css/sale-detail/saledetail.css",
+					"app/sale-detail/saledetail.js",
+					"js/update.js",
+					"css/images/sell_alipay.png",
+					"css/images/sell_wechat.png",
+					"css/images/sell_cash.png",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -840,7 +890,6 @@
 				"images/qrcode.png",
 				"css/mui.dtpicker.css",
 				"css/mui.picker.all.css",
-				"js/update.js",
 				"js/feedback.js",
 				"js/arttmpl.js",
 				"css/summary/summary.scss",
