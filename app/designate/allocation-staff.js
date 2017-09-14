@@ -96,13 +96,28 @@ lf.ready(function() {
     });
 
     function init() {
+        if(lf.window.currentWebview().type==2){
+            lf.nativeUI.showWaiting()
+            lf.net.getJSON('/order/getAllPhotographer',{deptId:lf.window.currentWebview().deptId}, function(res) {
+                lf.nativeUI.closeWaiting()
+                if (res.code === '200') {
+                    vmTableView.init(res.data)
+                } else {
+                    mui.toast(res.msg)
+                }
+            }, function() {
+                lf.nativeUI.closeWaiting()
+                mui.toast(res.msg || '服务器异常')
+            })
+            return
+        }
+
         lf.nativeUI.showWaiting()
         lf.net.getJSON('/order/getAllExecutor', {
             orderId: pageParams.orderId
         }, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                // console.log(JSON.stringify(res,null,2))
                 vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
@@ -125,7 +140,8 @@ lf.ready(function() {
             })
             lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
                 nameString: names.length>0?names.join(' '):'',
-                idString: ids.length>0?ids.join(','):''
+                idString: ids.length>0?ids.join(','):'',
+                type:lf.window.currentWebview().type
             });
             lf.window.closeCurrentWebview();
             return

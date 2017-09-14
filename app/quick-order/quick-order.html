@@ -25,44 +25,89 @@
         <div class="mui-content quikorder-content">
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell feedback-go">
-                    <a href="javascript:;" class="mui-navigate-right product-name">
+                    <div class="mui-navigate-right product-name">
                         <div class="mui-pull-left">产品名称</div>
                         <input class="mui-pull-right" placeholder="请选择产品" v-model="productName" readonly maxlength="20">
-                    </a>
+                    </div>
                 </li>
             </ul>
             <ul class="mui-table-view mt15">
                 <li class="mui-table-view-cell feedback-go">
-                    <a href="javascript:;" class="mui-navigate-right">
+                    <div class="mui-navigate-right">
                         <div class="mui-pull-left personal-list-key">团号</div>
                         <input class="mui-pull-right" placeholder="请输入团号" v-model="groupNo">
-                    </a>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell feedback-go">
+                    <div class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">团人数</div>
+                        <input class="mui-pull-right" placeholder="请输入人数" v-model="groupMemberNum">
+                    </div>
                 </li>
                 <li class="mui-table-view-cell about-go">
-                    <a href="javascript:;" class="mui-navigate-right groupDate">
+                    <div class="mui-navigate-right groupDate">
                         <div class="mui-pull-left personal-list-key">出团日期</div>
                         <input class="mui-pull-right" placeholder="请选择日期" v-model="groupDate" readonly>
-                    </a>
+                    </div>
                 </li>
                 <li class="mui-table-view-cell about-go">
-                    <a href="javascript:;" class="mui-navigate-right">
+                    <div class="mui-navigate-right">
                         <div class="mui-pull-left personal-list-key">导游</div>
                         <input class="mui-pull-right" placeholder="请输入姓名" v-model="guidName">
-                    </a>
+                </ddiv>
                 </li>
                 <li class="mui-table-view-cell about-go">
-                    <a href="javascript:;" class="mui-navigate-right">
+                    <div class="mui-navigate-right">
                         <div class="mui-pull-left personal-list-key">导游电话</div>
                         <input class="mui-pull-right" placeholder="请输入电话" v-model="guidTel">
-                    </a>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell feedback-go">
+                    <div class="mui-navigate-right designate">
+                        <div class="mui-pull-left personal-list-key">指派人</div>
+                        <input class="mui-pull-right" placeholder="请选择指派人" v-model="operator" readonly>
+                    </div>
                 </li>
             </ul>
             <ul class="mui-table-view mt15">
+                <li class="mui-table-view-cell about-go">
+                    <div class="mui-navigate-right shootPlance">
+                        <div class="mui-pull-left personal-list-key">拍摄景点</div>
+                        <input class="mui-pull-right" placeholder="请输入景点" v-model="shootPlance">
+                    </div>
+                </li>
                 <li class="mui-table-view-cell feedback-go">
-                    <a href="javascript:;" class="mui-navigate-right designate">
-                        <div class="mui-pull-left personal-list-key">指派人</div>
-                        <input class="mui-pull-right" placeholder="请选择指派人" v-model="operator">
-                    </a>
+                    <div class="mui-navigate-right shootTime">
+                        <div class="mui-pull-left personal-list-key">拍摄时间</div>
+                        <input class="mui-pull-right" placeholder="请选择时间" v-model="shootTime" readonly>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell feedback-go">
+                    <div class="mui-navigate-right shooter">
+                        <div class="mui-pull-left personal-list-key">摄影师</div>
+                        <input class="mui-pull-right" placeholder="请选择摄影师" v-model="shooter" readonly>
+                    </div>
+                </li>
+            </ul>
+            <ul class="mui-table-view mt15 mb15">
+                <li class="mui-table-view-cell about-go">
+                    <div class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">拍摄张数</div>
+                        <input class="mui-pull-right" placeholder="请输入拍摄张数(非必填)" v-model="shootNums">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell about-go">
+                    <div class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">选片张数</div>
+                        <input class="mui-pull-right" placeholder="请输入选片张数(非必填)" v-model="selectPhotoNums">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell feedback-go">
+                    <div class="mui-navigate-right">
+                        <div class="mui-pull-left personal-list-key">打印张数</div>
+                        <input class="mui-pull-right print-nums" placeholder="请输入张数" v-model="printNums">
+                        <input class="mui-pull-right print-size" placeholder="请选择尺寸" readonly v-model="size">
+                    </div>
                 </li>
             </ul>
         </div>
