@@ -7,6 +7,7 @@
 .sass-cache/
 *.css.map
 *.apk
+launch.json
 unpackage/.*
 src/app/test
 src/js/framework/define.js
