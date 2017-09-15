@@ -115,6 +115,10 @@ mui('#app').on('tap', '.saleDate', function () { //选择销售日期
 })
 mui('.mui-bar').on('tap', '.save-btn', function(){
 		var flag = true 
+		if(!vm.saleDate){
+			lf.nativeUI.toast('请选择销售时间')
+			flag = false;
+		}
 		vm.saleOrderXms.forEach(function(v){
 			if(v.picNum>=0){
 				if(!v.picSize){
