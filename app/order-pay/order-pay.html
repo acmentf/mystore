@@ -41,7 +41,6 @@
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">选择尺寸</label>
                     <select class="order-pay-list-value" v-model="argDictId">
-                        <option value="">请选择尺寸</option>
                         <option v-for="(value, key) in sizeOptions" :value="key">{{value}}</option>
                     </select>
                 </div>
@@ -56,7 +55,6 @@
                 <div class="mui-input-row">
                     <label class="order-pay-list-key">销售类型</label>
                     <select class="order-pay-list-value" v-model="remark">
-                        <option value="">请选择销售类型</option>
                         <option value="相片">相片</option>
                         <option value="相框">相框</option>
                         <option value="相片+相框">相片+相框</option>
