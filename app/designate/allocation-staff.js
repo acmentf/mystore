@@ -25,31 +25,7 @@ lf.ready(function() {
         el: '#app-table-view',
         data: function() {
             return {
-                indexedList: [{
-                        group: 'A',
-                        text: 'A'
-                    },
-                    {
-                        value: 'AKU',
-                        tags: 'AKeSu',
-                        text: '阿克苏机场',
-                        phone: '13264752368',
-                        area: '西北区',
-                        roleName: '执行人',
-                        state: true,
-                        selected: false
-                    },
-                    {
-                        value: 'BPL',
-                        tags: 'ALaShanKou',
-                        text: '阿拉山口机场',
-                        phone: '13264752368',
-                        area: '西北区',
-                        roleName: '执行人',
-                        state: false,
-                        selected: true
-                    }
-                ]
+                indexedList: []
             }
         },
         methods: {
