@@ -14,6 +14,7 @@ var vm = new Vue({
 			picSizeName: '',
 			price: ''
 		}],
+		saleDate: '',
 		salesAmt: '',
 		advanceAmount: '',
 		payableAmount: '',
@@ -104,6 +105,14 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 	vm.giveOrderXms.splice(index,1)
 
 })
+mui('#app').on('tap', '.saleDate', function () { //选择销售日期
+	var opts = { "type": "datetime" };
+	picker = new mui.DtPicker(opts);
+	picker.setSelectedValue(vm.saleDate)
+	picker.show(function (select) {
+		vm.saleDate = select.value
+	})
+})
 mui('.mui-bar').on('tap', '.save-btn', function(){
 		var flag = true 
 		vm.saleOrderXms.forEach(function(v){
@@ -133,9 +142,9 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 				vm.giveOrderXms.splice(i,1)
 				i--
 			}
-			if(tempGiveOrderXms[i].picNum===''){
+			if(tempGiveOrderXms[i]&&tempGiveOrderXms[i].picSize&&tempGiveOrderXms[i].picNum===''){
 				tempGiveOrderXms[i].picNum=0
-			} else if (tempGiveOrderXms[i].picNum<0){
+			} else if (tempGiveOrderXms[i]&&tempGiveOrderXms[i].picNum<0){
 				lf.nativeUI.toast('赠送张数参数不合法')
 				flag = false
 			}
@@ -182,7 +191,8 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		payableAmount: vm.payableAmount,
 		buyers: vm.buyers,
 		orderXms: orderXms,
-		flag: 2
+		flag: 2,
+		saleDate:new Date(vm.saleDate)
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
@@ -202,6 +212,19 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 	}
 			
 })
+function timeStampToDate(timestamp) { //时间戳转换成正常日期格式
+	function add0(m) {
+		return m < 10 ? '0' + m : m
+	}
+	//timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+	var time = new Date(timestamp);
+	var year = time.getFullYear();
+	var month = time.getMonth() + 1;
+	var date = time.getDate();
+	var hours = time.getHours();
+	var minutes = time.getMinutes();
+	return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes);
+}
 function loadResult(){
 	var params={
 		orderId:vm.orderId
@@ -227,7 +250,9 @@ function loadResult(){
 				vm.salesAmt = res.data.orderX.salesAmt
 				vm.advanceAmount = res.data.orderX.advanceAmount
 				vm.payableAmount = res.data.orderX.payableAmount
-
+				if(res.data.orderX.saleDate){
+					vm.saleDate = timeStampToDate(res.data.orderX.saleDate)
+				}
 				vm.total = (vm.salesAmt + vm.advanceAmount + vm.payableAmount).toFixed(2)
 	
 			}

@@ -54,6 +54,22 @@ lf.ready(function() {
             city: city
         })
     })
+    /**
+	 * 查看销售订单
+	 */
+    mui('body').on('tap', '#order-pay-list-btn', function () {
+		// console.log(JSON.stringify(vm.orderInfo));
+		var orderid = this.getAttribute('data-orderid');
+		lf.window.openWindow('order-pay/order-pay-list.html', '../order-pay/order-pay-list.html', {}, {
+			orderId: orderid,
+			areaCode: vm.orderInfo.areaCode,
+			tourGuide: vm.orderInfo.tourGuide,
+			purchaser: vm.orderInfo.purchaser,
+			aliasName: vm.orderInfo.aliasName,
+			province: vm.orderInfo.province,
+			city: vm.orderInfo.city,
+		})
+	})
     mui('body').on('tap', '.finish', function() {
         lf.nativeUI.confirm("操作提示", "是否完成销售?", ["确定", "取消"], function (e) {
 			if (e.index == 0) {
@@ -105,14 +121,16 @@ lf.ready(function() {
                 vm.orderTrackInfo = data.data.orderTrackInfo
                 if(data.data.orderResult){
                     vm.orderResult = data.data.orderResult
-                    var time = new Date(vm.orderResult.saleDate);
-                    var year = time.getFullYear();
-                    var month = time.getMonth() + 1;
-                    var date = time.getDate();
-                    var hours = time.getHours();
-                    var minutes = time.getMinutes();
-                    var seconds = time.getSeconds();
-                    vm.orderResult.saleDate = year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+                    if(vm.orderResult.saleDate){
+                        var time = new Date(vm.orderResult.saleDate);
+                        var year = time.getFullYear();
+                        var month = time.getMonth() + 1;
+                        var date = time.getDate();
+                        var hours = time.getHours();
+                        var minutes = time.getMinutes();
+                        var seconds = time.getSeconds();
+                        vm.orderResult.saleDate = year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+                    }
                     vm.totalPrice = (parseFloat(vm.orderResult.advanceAmount) || 0) + (parseFloat(vm.orderResult.payableAmount) || 0) + (parseFloat(vm.orderResult.salesAmt) || 0)
                 }
             } else {

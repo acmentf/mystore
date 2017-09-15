@@ -6,6 +6,7 @@
 .project
 .sass-cache/
 *.css.map
+*.apk
 unpackage/.*
 src/app/test
 src/js/framework/define.js

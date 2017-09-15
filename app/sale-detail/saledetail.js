@@ -20,9 +20,9 @@ function initPull() {
                     var orderId = lf.window.currentWebview().orderId;
                     var params = {
                         orderId: orderId,
+                        status: 2,
                         curPage: vm.curPage
                     };
-                    console.log(orderId)
                     var _this = this;
                     lf.net.getJSON('pay/getOrderList', params, function(res) {
                         console.log(JSON.stringify(res))
