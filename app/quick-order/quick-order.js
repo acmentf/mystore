@@ -171,7 +171,7 @@ lf.ready(function() {
                 selectsNum: vm.selectPhotoNums,
             },
             orderXmList: [{
-                picSize: sizeValue,
+                picSize: vm.sizeValue,
                 picNum: vm.printNums,
                 fType:'1'
             }]
