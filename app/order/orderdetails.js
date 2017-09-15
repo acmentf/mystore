@@ -61,6 +61,9 @@ var vm = new Vue({
 				})
 				return arr.length > 0
 			}
+		},
+		groupDate:function(){
+			return lf.util.timeStampToDate(this.orderTrackInfo.startTime).split(' ')[0] 
 		}
 	}
 })
@@ -542,7 +545,9 @@ function renderOrderDetails() {
 				vm.orderTrackInfo.fetchPhotoTime = ''
 			}
 			vm.shotOrderOutput.forEach(function (v, i) {
-				vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+				if(vm.orderTrackInfo.lineSight[i]){//此处报错，加个判断
+					vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+				}
 				vm.temp.push(v.photographerNames)
 			})
 
