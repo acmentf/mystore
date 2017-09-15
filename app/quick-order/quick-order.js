@@ -28,6 +28,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.product-name', function() { //选择产品名称
+        blur()
         var picker = new mui.PopPicker();
 
         lf.nativeUI.showWaiting()
@@ -57,6 +58,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.groupDate', function() { //选择出团日期
+        blur()
         var opts = { "type": "date" };
         picker = new mui.DtPicker(opts);
         picker.show(function(select) {
@@ -66,6 +68,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.designate', function() { //选择执行人1
+        blur()
         vm.operator = ''
         lf.window.openWindow('allocation', '../designate/allocation-staff.html', {}, {
             quikOrderTag: true,
@@ -74,6 +77,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.shooter', function() { //选择摄影师2
+        blur()
         vm.shooter = ''
         lf.window.openWindow('allocation', '../designate/allocation-staff.html', {}, {
             quikOrderTag: true,
@@ -83,6 +87,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.shootTime', function() { //选择拍摄日期
+        blur()
         var opts = {
             "type": "hour",
             "customData": {
@@ -101,6 +106,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.print-size', function() { //选择打印尺寸
+        blur()
         var picker = new mui.PopPicker();
         picker.setData([
             { value: '5', text: '6寸' },
@@ -117,6 +123,7 @@ lf.ready(function() {
     })
 
     mui('#app').on('tap', '.sure', function() { //确认下单
+        blur()
         if (!validate(vm,vm.$data)) {
             return
         }
@@ -205,6 +212,12 @@ lf.ready(function() {
         }
     });
 })
+
+function blur(){
+    for(var i=0,length=document.getElementsByTagName('input').length;i<length;i++){
+        document.getElementsByTagName('input')[i].blur()
+    }
+}
 
 function validate(vm,formData) {
     if (!formData.productName.trim()) {
