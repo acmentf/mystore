@@ -20,6 +20,7 @@ lf.ready(function() {
             shootNums: '',
             selectPhotoNums: '',
             size: '',
+            sizeValue:'',
             printNums: '',
             photographerIdStr: [],
             deptId:''//部门id
@@ -102,15 +103,16 @@ lf.ready(function() {
     mui('#app').on('tap', '.print-size', function() { //选择打印尺寸
         var picker = new mui.PopPicker();
         picker.setData([
-            { value: '6', text: '6寸' },
-            { value: '7', text: '7寸' },
-            { value: '8', text: '8寸' },
-            { value: '10', text: '10寸' },
-            { value: '12', text: '12寸' },
-            { value: '16', text: '16寸' },
+            { value: '5', text: '6寸' },
+            { value: '6', text: '7寸' },
+            { value: '4', text: '8寸' },
+            { value: '3', text: '10寸' },
+            { value: '2', text: '12寸' },
+            { value: '1', text: '16寸' },
         ]);
         picker.show(function(select) {
             vm.size = select[0].text
+            vm.sizeValue = select[0].value
         })
     })
 
@@ -169,8 +171,9 @@ lf.ready(function() {
                 selectsNum: vm.selectPhotoNums,
             },
             orderXmList: [{
-                picSize: vm.size.trim()?parseFloat(vm.size):'',
-                picNum: vm.printNums
+                picSize: sizeValue,
+                picNum: vm.printNums,
+                fType:'1'
             }]
         }
         console.log('摄影师id',photographerIdStr)
