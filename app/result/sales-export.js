@@ -106,6 +106,10 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 
 })
 mui('#app').on('tap', '.saleDate', function () { //选择销售日期
+	var inputs = document.getElementsByTagName("input")
+	for(var i=0;i<inputs.length;i++){
+		inputs[i].blur();
+	}
 	var opts = { "type": "datetime" };
 	picker = new mui.DtPicker(opts);
 	picker.setSelectedValue(vm.saleDate)
