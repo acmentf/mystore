@@ -100,8 +100,8 @@
 }
 .account-list>li>span{
 	position: absolute;
-	right: 0;
-	width: 30px;
+	right: 10px;
+	width: 42px;
 	height: 42px;
 	text-align: right;
 	border-radius: 50%;
@@ -110,11 +110,12 @@
 }
 .account-list > li{
 	position: relative;
-	left: 15px;
-	width: calc(100% - 30px);
+	left: 5px;
+	width: calc(100% - 10px);
 	height: 42px;
 	line-height: 42px;
 	border-bottom: 1px solid rgba(0,0,0,.2);
+	padding-left: 10px;
 	margin:0;
 }
 .login-container .login-input-code .mui-icon-clear{
