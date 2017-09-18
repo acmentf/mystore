@@ -345,7 +345,8 @@
 					"images/order/switch.png",
 					"images/order/list_time.png",
 					"images/order/sale.png",
-					"images/order/switch_back.png"
+					"images/order/switch_back.png",
+					"images/order/call_btn.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -362,8 +363,7 @@
 					"app/message/message.html",
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
-					"app/order/quicksaledetails.html",
-					"app/order-pay/order-pay.html"
+					"app/order/quicksaledetails.html"
 				],
 				"priority": 0
 			},
@@ -840,7 +840,8 @@
 				],
 				"refer": [
 					"app/sale-detail/saledetail.html",
-					"app/result/sales-export.html"
+					"app/result/sales-export.html",
+					"app/order-pay/order-pay-list.html"
 				],
 				"priority": 0
 			},
@@ -864,17 +865,6 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"app/order-pay/order-pay.html": {
-				"resources": [
-					"css/order-pay/order-pay.css",
-					"js/mui.zoom.js",
-					"js/mui.previewimage.js",
-					"app/order-pay/order-pay.js",
-					"js/framework/qrcode.min.js"
 				],
 				"refer": [],
 				"priority": 0
