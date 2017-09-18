@@ -76,6 +76,8 @@ mui('body').on('tap','.order-btn-sales', function(){
 		tourGuide: vm.orderMessage.orderInfo.tourGuide,
 		purchaser: vm.orderMessage.orderInfo.purchaser,
 		aliasName: vm.orderMessage.orderInfo.aliasName,
+		province: vm.orderMessage.orderInfo.province,
+		city: vm.orderMessage.orderInfo.city
 	})
 })
 

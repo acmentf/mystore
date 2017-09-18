@@ -196,7 +196,7 @@
                                     <ul class="order-ul">
                                         <li class="order-li" v-for="item in data">
                                             <div v-if="currentRoleId!=9||!checkIcon.type">
-                                                <div class="link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus">
+                                                <div>
                                                     <div class="mui-table title">
                                                         <div class="mui-clearfix" style="margin-bottom: 0.2rem;">
                                                             <span class="colorgray">
@@ -210,7 +210,10 @@
 																<span class="dqr coloryellow" v-if="item.actionStatus ==44">待完成</span>
 																<span class="dqr colorgreen" v-if="item.actionStatus ==55">已完成</span>
                                                             </span>
-                                                            <span v-if="currentRoleId==9" class="dqr guideinfo">已售:￥{{item.salesAmt}}</span>
+                                                            <span v-if="currentRoleId==9" class="dqr guideinfo">
+                                                                <span v-if="item.salesAmt || item.actionStatus>33">已售:￥{{item.salesAmt}}</span>
+                                                                <span v-if="!item.salesAmt&&item.actionStatus<=33">尚未销售</span>
+                                                            </span>
                                                         </div>
                                                         <div class="item">
                                                             {{item.productName}}
@@ -218,7 +221,7 @@
                                                     </div>
                                                     <div class="nr">
                                                         <div class="imgbody">
-                                                            <div class="tourinfo">
+                                                            <div class="tourinfo link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
                                                                 <div v-if="currentRoleId!=9">
 																	<div class="item">
 																		<span class="ico ico-starttime"></span>
@@ -226,7 +229,7 @@
 																		<span>共{{item.groupDays}}天</span>
 																	</div>
 																	<div class="item">
-																		<span class="ico ico-linename"></span> 线路名称: {{item.lineName}}
+																		<span class="ico ico-linename"></span> 线路名称: {{item.aliasName}}
 																	</div>
 																</div>
 																<div v-if="currentRoleId==9">
@@ -244,7 +247,7 @@
                                                             </div>
                                                             <div class="item guideinfo">
                                                                 <span class="ico ico-tourguide"></span> 导游: {{item.tourGuide}}
-                                                                <a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;"> <span v-text="tp"></span> </a>
+                                                                <a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;" :data-tel="tp"> <span v-text="tp"></span> </a>
 
                                                             </div>
                                                         </div>
@@ -277,7 +280,7 @@
 																	计调
 																</button>
 
-                                                            <button v-if="item.actionStatus==33 || item.actionStatus==44" type="button" class="mui-btn tourinfo" :data-id="item.id" :data-no="item.orderNo">
+                                                            <button v-if="item.actionStatus==33 || item.actionStatus==44" type="button" class="mui-btn tourinfo link" :data-id="item.id" :data-no="item.orderNo">
 																	修改信息
 																</button>
 
@@ -310,14 +313,14 @@
 															</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 9">
-                                                            <button v-if="genSale&&item.actionStatus==33" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName">
-																	销售
-															</button>
+                                                            <button v-if="genSale&&item.actionStatus<=33" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+                                                                生成销售
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div v-if="(currentRoleId==9)&&checkIcon.type" class="link quickLook" :data-aliasName="item.aliasName" :data-purchaser="item.purchaser" :data-tourGuide="item.tourGuide" :data-id="item.id" :data-areaCode="item.areaCode" :data-summary="item.summary" :data-actionStatus="item.actionStatus">
+                                            <div v-if="(currentRoleId==9)&&checkIcon.type" class="link quickLook" :data-aliasName="item.aliasName" :data-purchaser="item.purchaser" :data-tourGuide="item.tourGuide" :data-id="item.id" :data-areaCode="item.areaCode" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
                                                 <div>{{item.productName}}</div>
                                                 <div>{{item.tourGuide}} {{item.startTime}}</div>
                                                 <img src="../../images/order/sale.png" alt="">

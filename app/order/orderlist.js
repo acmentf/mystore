@@ -5,7 +5,6 @@ var vm = new Vue({
 		orderHeader: [{ name: '待处理', number: '' }, { name: '进行中', number: '' }],
 		orderList: [
 			[],
-			[],
 			[]
 		],
 		pageNos: [
@@ -118,7 +117,10 @@ lf.ready(function() {
 /*document.getElementById('searchDiv').addEventListener('tap',function(){
 	lf.window.openWindow('ordersearch.html', 'ordersearch.html')
 })*/
-
+mui(".order-ul").on('tap', ".guideinfo a", function(){
+	var tel = this.getAttribute('data-tel')
+	window.location.href= "tel:"+tel
+})
 mui('.order-ul').on('tap', '.link', function() {
 	var id = this.getAttribute('data-id');
 	var actionStatus = this.getAttribute('data-actionStatus');
@@ -149,7 +151,7 @@ mui('.order-ul').on('tap', '.link', function() {
 		var province = this.getAttribute('data-province');
 		var city = this.getAttribute('data-city');
 		var actionStatus = this.getAttribute('data-actionStatus')
-		if(vm.checkIcon.type&&actionStatus==33) {
+		if(vm.checkIcon.type&&actionStatus<=33) {
 			lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 				orderId: orderid,
 				areaCode: areaCode,
@@ -165,7 +167,9 @@ mui('.order-ul').on('tap', '.link', function() {
 				index: index,
 				photographerId: window.Role.photograherId,
 				summary: summary,
-				actionStatus: actionStatus
+				actionStatus: actionStatus,
+				province: province,
+				city: city
 			})
 		}
 	}
@@ -595,6 +599,9 @@ function find(index) {
 
 			res.data.result.forEach(function(v, i) {
 				v.startTime = lf.util.timeStampToDate2(v.startTime)
+				if(v.saleDate){
+					v.saleDate = lf.util.timeStampToDate2(v.saleDate)
+				}
 				v.tourGuidePhone = v.tourGuidePhone.split(',')
 				console.log(JSON.stringify(v.tourGuidePhone));
 			})
@@ -658,6 +665,19 @@ function update() {
 	}, function(res) {});
 }
 lf.event.listener('orderdetails', function(e) {
+	vm.orderList.forEach(function(v, i) { // 将数据制空
+		dodata('down', i, [])
+		vm.pageNos[i] = 0;
+		find(i);
+	})
+
+	vm.pullObjects.forEach(function(v) { // 将数据全部重新加载一次
+		mui(v).pullToRefresh().refresh(true);
+	})
+	lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
+	//mui(vm.pullObjects[vm.index]).pullToRefresh().pullDownLoading();
+})
+lf.event.listener('orderPay', function(e) {
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
 		vm.pageNos[i] = 0;

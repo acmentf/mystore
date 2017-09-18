@@ -18,9 +18,9 @@
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">订单详情</h1>
-				<a id="menu" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
+				<a id="menu" v-if="actionStatus<=33" style="color: #191919;" class="mui-action-menu mui-icon  mui-pull-right mui-icon-more" href="#topPopover"></a>
 			</header>
-			<footer class="mui-bar mui-bar-footer" v-if="actionStatus==33">
+			<footer class="mui-bar mui-bar-footer" v-if="actionStatus<=33">
 				<button type="button" class="mui-btn mui-btn-primary genSale">销售</button>
 			</footer>
 			<main class="mui-content">
@@ -46,8 +46,10 @@
 									<span v-text="orderInfo.tourGuide"></span>
 								</div>
 								<div class="right">
-									<img src="../../images/order/call_btn.png" alt="">
-									<span class="orange" v-text="orderInfo.tourGuidePhone"></span>
+									<a :href="'tel:'+orderInfo.tourGuidePhone" style="display:block; color: #FF8458; margin-left: 0.1rem;">		
+										<img src="../../images/order/call_btn.png" alt="">
+										<span class="orange" v-text="orderInfo.tourGuidePhone"></span>
+									</a>
 								</div>
 							</li>
 						</ul>
@@ -92,9 +94,15 @@
 					</div>
 					<div class="total clearfix">
 						<span class="left gray">销售总额</span>
-						<span class="orange right">￥<span v-text="totalPrice"></span>元</span>
+						<span class="orange right">￥{{totalPrice ||0}}元</span>
 					</div>
 				</section>
+				<div class="container">
+					<div class="title clearfix border-none" id="order-pay-list-btn" :data-orderid="orderInfo.orderId">
+						<span class="left border-left">销售订单</span>
+						<span class="right mui-icon mui-icon-arrowright"></span>
+					</div>
+				</div>
 				<section class="container">
 					<div class="title clearfix border-none sale-detail">
 						<span class="left border-left">销售明细</span>

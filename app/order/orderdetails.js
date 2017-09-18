@@ -61,6 +61,9 @@ var vm = new Vue({
 				})
 				return arr.length > 0
 			}
+		},
+		groupDate:function(){
+			return lf.util.timeStampToDate(this.orderTrackInfo.startTime).split(' ')[0] 
 		}
 	}
 })
@@ -477,6 +480,8 @@ mui('.buttons').on('tap', '.genSale', function () { //点击生成销售
 			tourGuide: vm.orderInfo.tourGuide,
 			purchaser: vm.orderInfo.purchaser,
 			aliasName: vm.orderInfo.aliasName,
+			province: vm.orderInfo.province,
+			city: vm.orderInfo.city
 		})
 	}
 })
@@ -540,7 +545,9 @@ function renderOrderDetails() {
 				vm.orderTrackInfo.fetchPhotoTime = ''
 			}
 			vm.shotOrderOutput.forEach(function (v, i) {
-				vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+				if(vm.orderTrackInfo.lineSight[i]){//此处报错，加个判断
+					vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
+				}
 				vm.temp.push(v.photographerNames)
 			})
 

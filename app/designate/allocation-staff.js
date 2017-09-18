@@ -25,31 +25,7 @@ lf.ready(function() {
         el: '#app-table-view',
         data: function() {
             return {
-                indexedList: [{
-                        group: 'A',
-                        text: 'A'
-                    },
-                    {
-                        value: 'AKU',
-                        tags: 'AKeSu',
-                        text: '阿克苏机场',
-                        phone: '13264752368',
-                        area: '西北区',
-                        roleName: '执行人',
-                        state: true,
-                        selected: false
-                    },
-                    {
-                        value: 'BPL',
-                        tags: 'ALaShanKou',
-                        text: '阿拉山口机场',
-                        phone: '13264752368',
-                        area: '西北区',
-                        roleName: '执行人',
-                        state: false,
-                        selected: true
-                    }
-                ]
+                indexedList: []
             }
         },
         methods: {
@@ -96,13 +72,28 @@ lf.ready(function() {
     });
 
     function init() {
+        if(lf.window.currentWebview().type==2){
+            lf.nativeUI.showWaiting()
+            lf.net.getJSON('/order/getAllPhotographer',{deptId:lf.window.currentWebview().deptId}, function(res) {
+                lf.nativeUI.closeWaiting()
+                if (res.code === '200') {
+                    vmTableView.init(res.data)
+                } else {
+                    mui.toast(res.msg)
+                }
+            }, function() {
+                lf.nativeUI.closeWaiting()
+                mui.toast(res.msg || '服务器异常')
+            })
+            return
+        }
+
         lf.nativeUI.showWaiting()
         lf.net.getJSON('/order/getAllExecutor', {
             orderId: pageParams.orderId
         }, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
-                // console.log(JSON.stringify(res,null,2))
                 vmTableView.init(res.data)
             } else {
                 mui.toast(res.msg)
@@ -125,7 +116,8 @@ lf.ready(function() {
             })
             lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
                 nameString: names.length>0?names.join(' '):'',
-                idString: ids.length>0?ids.join(','):''
+                idString: ids.length>0?ids.join(','):'',
+                type:lf.window.currentWebview().type
             });
             lf.window.closeCurrentWebview();
             return
