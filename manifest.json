@@ -887,7 +887,10 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"images/order/operator_delete.png",
+					"css/images/sell_alipay.png",
+					"images/order/sale_choosed_corner.png"
 				],
 				"refer": [],
 				"priority": 0

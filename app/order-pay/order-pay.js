@@ -21,7 +21,7 @@
         channelCode: '',
         salePersonnelNum: '',
         nums: '',
-        amount: '',
+        amount: '12',
         remark: '相片',
         argDictId: 6,
         argDictName: '',
@@ -92,6 +92,10 @@
             })
         },
         methods: {
+            hideDialog: function() {
+                vm.isPaying = false
+                clearInterval(vm.timer)
+            },
             payStatus: function(status) {
                 switch (status) {
                     case 1:
@@ -258,9 +262,16 @@
             lf.nativeUI.toast(erro.msg);
         })
     }
-
+    // 删除所有子元素
+    function clearAllNode(parentNode){
+        while (parentNode.firstChild) {
+            var oldNode = parentNode.removeChild(parentNode.firstChild);
+            oldNode = null;
+        }
+    }
     // 生成二维码
     function generateQrcode(url) {
+        clearAllNode(document.getElementById("qrcode-img"))
         new QRCode(document.getElementById("qrcode-img"), {
             text: url,
             width: 200,
