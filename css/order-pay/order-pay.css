@@ -72,10 +72,17 @@ p{
 .pay-content .radio-box label{
   position: relative;
   display: inline-block;
-  padding: 3px 15px;
-  border: 1px solid #cccccc;
+  padding: 5px 15px;
   color: #999;
   font-size: 14px;
+}
+.pay-content .radio-box label span{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #cccccc;
   border-radius: 3px;
 }
 .pay-content .radio-box label img{
@@ -85,11 +92,11 @@ p{
   width: 16px;
   display: none;
 }
-.pay-content .radio-box label.active{
-  border-color:#F66C70;
-}
-.pay-content .radio-box label.active img{
+.pay-content .radio-box label input:checked + img{
   display: block;
+}
+.pay-content .radio-box label input:checked ~ span{
+  border-color:#F66C70;
 }
 .pay-content input[type="radio"]{
   display: none;
@@ -156,7 +163,83 @@ p{
 .order-pay-clear {
   clear: both;
   overflow: hidden; }
-
+.price-dialog-content{
+  width: 300px;
+  height: 190px;
+  margin-top: -125px;
+  margin-left: -150px;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  position: fixed;
+  z-index: 999999;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.price-dialog-title{
+  padding: 10px 15px;
+  font-size: 17px;
+  color: #333;
+}
+.price-dialog-main{
+  background-color: #F9F9F9;
+  margin:5px 15px 15px 15px;
+  padding: 5px 0 15px;
+}
+.input-title{
+  padding:0 15px;
+  color:#333;
+}
+.input{
+  border-bottom: 1px solid #F2F2F4;
+  height: 50px;
+  line-height: 50px;
+}
+.input span{
+  color:#333;
+  padding-left: 15px;
+  font-weight: bold;
+}
+.input input{
+  display: inline-block!important;
+  border:none;
+  color:#979797;
+  font-size: 22px;
+  background-color: #F9F9F9;
+  margin:0;
+  width: 235px;
+  padding-left:0;
+  height: 49px;
+}
+.price-dialog-foot{
+  height: 38px;
+  border-top: 1px solid #CFCFCF;
+}
+.price-dialog-foot button{
+  float: left;
+  width: 50%;
+  height: 38px;
+  border:none;
+}
+.price-dialog-foot button:active{
+  background-color: #fff;
+}
+.price-dialog-foot button:first-child{
+  color:#BEBEBE;
+}
+.price-dialog-foot button:last-child{
+  color:#3DB391;
+  position: relative;
+}
+.price-dialog-foot button:last-child::before{
+  content:'';
+  position: absolute;
+  left:0;
+  top:0;
+  width: 1px;
+  height: 100%;
+  background-color: #E7E7E7;
+}
 .order-pay-dialog {
   width: 300px;
   height: 400px;

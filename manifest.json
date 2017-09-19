@@ -259,7 +259,8 @@
 					"images/img_login.jpg",
 					"css/images/img_login.jpg",
 					"css/images/logo_login.png",
-					"images/index/bg.png"
+					"images/index/bg.png",
+					"images/order/operator_delete.png"
 				],
 				"refer": [
 					"app/index.html",
@@ -842,8 +843,7 @@
 				"refer": [
 					"app/sale-detail/saledetail.html",
 					"app/result/sales-export.html",
-					"app/order-pay/order-pay-list.html",
-					"app/order-pay/order-pay.html"
+					"app/order-pay/order-pay-list.html"
 				],
 				"priority": 0
 			},
@@ -874,23 +874,23 @@
 			"app/order-pay/order-pay.html": {
 				"resources": [
 					"css/order-pay/order-pay.css",
-					"js/mui.zoom.js",
-					"js/mui.previewimage.js",
-					"app/order-pay/order-pay.js",
-					"css/images/sell_wechat.png",
-					"js/framework/qrcode.min.js",
-					"css/images/sell_cash.png",
 					"js/framework/define.js",
 					"fonts/mui.ttf",
 					"js/framework/styles.js",
+					"css/images/sell_cash.png",
+					"js/mui.zoom.js",
 					"css/app.css",
 					"js/mui.min.js",
 					"css/mui.min.css",
+					"js/mui.previewimage.js",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
+					"app/order-pay/order-pay.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
 					"images/order/operator_delete.png",
-					"css/images/sell_alipay.png",
-					"images/order/sale_choosed_corner.png"
+					"images/order/sale_choosed_corner.png",
+					"css/images/sell_alipay.png"
 				],
 				"refer": [],
 				"priority": 0

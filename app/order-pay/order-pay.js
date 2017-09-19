@@ -21,7 +21,7 @@
         channelCode: '',
         salePersonnelNum: '',
         nums: '',
-        amount: '12',
+        amount: '',
         remark: '相片',
         argDictId: 6,
         argDictName: '',
@@ -41,7 +41,9 @@
         payName: '',
         loopTime: 1000,
         loopOrderId: '',
-        timer: null
+        timer: null,
+        price:'',
+        isPrice:false
     }
 
     var vm = new Vue({
@@ -92,6 +94,19 @@
             })
         },
         methods: {
+            showPriceDialog: function() {
+                vm.isPrice = true
+                vm.price = ''
+            },
+            offBtn: function() {
+                vm.isPrice = false
+            },
+            sureBtn: function() {
+                if(vm.price>0){
+                    vm.amount = vm.price
+                }
+                vm.isPrice = false
+            },
             hideDialog: function() {
                 vm.isPaying = false
                 clearInterval(vm.timer)

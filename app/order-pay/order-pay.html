@@ -38,35 +38,52 @@
         <div class="pay-content bgwhite">
             <div class="price-container">
                 <p class="price">￥<span>{{amount||0}}</span></p>
-                <button type="button" class="mui-btn mui-btn-success mui-btn-outlined">自定义金额</button>
+                <button type="button" @click="showPriceDialog" class="mui-btn mui-btn-success mui-btn-outlined">自定义金额</button>
             </div>
             <div class="type">
                 <div class="title">类型</div>
                 <div class="radio-box">
                     <label>
                         相片
+                        <input name="radio1" type="radio" value="相片" v-model="remark" checked>
                         <img src="../../images/order/sale_choosed_corner.png">
+                        <span></span>
                     </label>
-                    <input name="radio1" type="radio" value="相片" v-model="remark">
                 </div> 
                 <div class="radio-box">
-                    <label>相框</label>
-                    <input name="radio1" type="radio" value="相框" v-model="remark">
+                    <label>
+                        相框
+                        <input name="radio1" type="radio" value="相框" v-model="remark">
+                        <img src="../../images/order/sale_choosed_corner.png">
+                        <span></span>
+                    </label>
                 </div> 
                 <div class="radio-box">
-                    <label>相片+相框</label>
-                    <input name="radio1" type="radio" value="相片+相框" v-model="remark">
+                    <label>
+                        相片+相框
+                        <input name="radio1" type="radio" value="相片+相框" v-model="remark">
+                        <img src="../../images/order/sale_choosed_corner.png">
+                        <span></span>
+                    </label>
                 </div> 
                 <div class="radio-box">
-                    <label>电子片</label>
-                    <input name="radio1" type="radio" value="电子片" v-model="remark">
+                    <label>
+                        电子片
+                        <input name="radio1" type="radio" value="电子片" v-model="remark">
+                        <img src="../../images/order/sale_choosed_corner.png">
+                        <span></span>
+                    </label>
                 </div>
             </div>
             <div class="type">
                 <div class="title">尺寸</div>
                 <div class="radio-box" v-for="(value, key) in sizeOptions" :key="value">
-                    <label>{{value}}</label>
-                    <input type="radio" v-model="argDictId" :value="key">
+                    <label>
+                        {{value}}
+                        <input type="radio" v-model="argDictId" :value="key">
+                        <img src="../../images/order/sale_choosed_corner.png">
+                        <span></span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -125,7 +142,25 @@
                 </li>
             </ul>
         </div> -->
-
+        <!-- 自定义金额弹窗 -->
+        <div class="price-dialog" v-show="isPrice">
+            <div style="position: fixed; top:0; bottom:0; left:0; right:0; z-index:20; background: rgba(0,0,0,.3)">
+                <div class="price-dialog-content">
+                    <p class="price-dialog-title">自定义金额</p>
+                    <div class="price-dialog-main">
+                        <p class="input-title">输入金额:</p>
+                        <p class="input">
+                            <span>￥</span>
+                            <input type="text" v-model="price" autocomplete="off" placeholder="0.00">
+                        </p>
+                    </div>
+                    <div class="price-dialog-foot">
+                        <button @click="offBtn">取消</button>
+                        <button @click="sureBtn">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- 支付弹窗 -->
         <div class="order-pay-dialog hide" id="pay-dialog" v-show="isPaying">
             <div class="order-pay-dialog-header">
@@ -141,7 +176,7 @@
             </div>
         </div>
 
-        <div class="pay-mask hide" id="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:20; background: rgba(0,0,0,.3)"></div>
+        <div class="pay-mask hide" id="pay-mask" v-show="isPaying" style="position: fixed; top:0; bottom:0; left:0; right:0; z-index:20; background: rgba(0,0,0,.3)"></div>
     </div>
 
     
