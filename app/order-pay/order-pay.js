@@ -7,9 +7,12 @@
  lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
+        tourNo: lf.window.currentWebview().tourNo,
+        productName: lf.window.currentWebview().productName,
         areaCode: lf.window.currentWebview().areaCode,
         saleOrderId: lf.window.currentWebview().saleOrderId,
         guideName: lf.window.currentWebview().tourGuide,
+        tourGuidePhone: lf.window.currentWebview().tourGuidePhone,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
         province: lf.window.currentWebview().province,
@@ -38,6 +41,7 @@
 
         isPaying: false,
         payType: 0,
+        payTypeUrl: '../../css/images/sell_cash.png',
         payName: '',
         loopTime: 1000,
         loopOrderId: '',
@@ -163,6 +167,7 @@
 
                 this.payType = payType
                 this.payName = this.getPayName(this.payType)
+                this.payTypeUrl = this.getPayTypeUrl(this.payType)
 
                 if (payType == 0) {
                     cashPay()
@@ -211,6 +216,20 @@
                     case 2:
                         this.channelCode = 'alipay'
                         return '支付宝'
+                }
+            },
+
+            getPayTypeUrl: function(type) {
+                switch (type) {
+                    case 0:
+                        this.channelCode = 'cash'
+                        return '../../css/images/sell_cash.png'
+                    case 1:
+                        this.channelCode = 'wechat'
+                        return '../../css/images/sell_wechat.png'
+                    case 2:
+                        this.channelCode = 'alipay'
+                        return '../../css/images/sell_alipay.png'
                 }
             },
 

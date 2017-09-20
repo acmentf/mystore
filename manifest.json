@@ -783,9 +783,25 @@
 				"resources": [
 					"app/order/search-result.js",
 					"css/mui.min.css",
-					"css/order/search-result.css"
+					"css/order/search-result.css",
+					"js/mui.pullToRefresh.js",
+					"images/order/list_number.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"images/order/list_day.png",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"images/order/list_guide.png",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/list_way.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order-pay/order-pay.html"
+				],
 				"priority": 0
 			},
 			"app/message/message-detail.html": {
@@ -843,7 +859,8 @@
 				"refer": [
 					"app/sale-detail/saledetail.html",
 					"app/result/sales-export.html",
-					"app/order-pay/order-pay-list.html"
+					"app/order-pay/order-pay-list.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},

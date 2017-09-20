@@ -144,8 +144,11 @@ mui('.order-ul').on('tap', '.link', function() {
 		})
 	} else {
 		var orderid = this.getAttribute('data-id');
+		var tourNo = this.getAttribute('data-tourNo');
+		var productName = this.getAttribute('data-productName');
 		var areaCode = this.getAttribute('data-areaCode');
 		var tourGuide = this.getAttribute('data-tourGuide');
+		var tourGuidePhone = this.getAttribute('data-tourGuidePhone');
 		var purchaser = this.getAttribute('data-purchaser');
 		var aliasName = this.getAttribute('data-aliasName');
 		var province = this.getAttribute('data-province');
@@ -154,6 +157,9 @@ mui('.order-ul').on('tap', '.link', function() {
 		if(vm.checkIcon.type&&actionStatus<=33) {
 			lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 				orderId: orderid,
+				tourNo: tourNo,
+				productName: productName,
+				tourGuidePhone: tourGuidePhone,
 				areaCode: areaCode,
 				tourGuide: tourGuide,
 				purchaser: purchaser,
@@ -299,6 +305,9 @@ mui('.order-ul').on('tap', '.saleOutOrder', function() { //点击销售输出
 
 mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 	var orderid = this.getAttribute('data-id');
+	var tourNo = this.getAttribute('data-tourNo');
+	var productName = this.getAttribute('data-productName');
+	var tourGuidePhone = this.getAttribute('data-tourGuidePhone');
 	var areaCode = this.getAttribute('data-areaCode');
 	var tourGuide = this.getAttribute('data-tourGuide');
 	var purchaser = this.getAttribute('data-purchaser');
@@ -308,6 +317,9 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 	console.log('id:' + orderid)
 	lf.window.openWindow('order-pay/order-pay.html', '../order-pay/order-pay.html', {}, {
 		orderId: orderid,
+		tourNo: tourNo,
+		productName: productName,
+		tourGuidePhone: tourGuidePhone,
 		areaCode: areaCode,
 		tourGuide: tourGuide,
 		purchaser: purchaser,

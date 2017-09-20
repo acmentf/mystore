@@ -31,9 +31,9 @@
             </div>
         </div> -->
         <div class="order-pay-header">
-            <p class="title">阳朔大印文化园</p>
-            <p>团号:201708243324</p>
-            <p>导游:张三三(18958582586)</p>
+            <p class="title" v-text="productName"></p>
+            <p>团号:<span v-text="tourNo"></span></p>
+            <p>导游:<span v-text="guideName"></span>(<a :href="'tel:'+tourGuidePhone" v-text="tourGuidePhone"></a>)</p>
         </div>
         <div class="pay-content bgwhite">
             <div class="price-container">
@@ -164,7 +164,7 @@
         <!-- 支付弹窗 -->
         <div class="order-pay-dialog hide" id="pay-dialog" v-show="isPaying">
             <div class="order-pay-dialog-header">
-                <p class="mui-pull-left"><img class="pay-icon" src="../../css/images/sell_alipay.png" alt=""></p>
+                <p class="mui-pull-left"><img class="pay-icon" :src="payTypeUrl" alt=""></p>
                 <p class="mui-pull-left">{{payName}}</p>
                 <p class="mui-pull-right" @click="hideDialog"><img src="../../images/order/operator_delete.png"></p>
             </div>
