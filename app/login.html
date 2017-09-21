@@ -57,7 +57,11 @@
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
 					plus.navigator.closeSplashscreen();
-					lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					if(){
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					} else {
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					}
 				}else{
 					var hisAccount = lf.storage.get("LFACCOUNT");
 					if(hisAccount){

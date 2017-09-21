@@ -783,25 +783,9 @@
 				"resources": [
 					"app/order/search-result.js",
 					"css/mui.min.css",
-					"css/order/search-result.css",
-					"js/mui.pullToRefresh.js",
-					"images/order/list_number.png",
-					"js/framework/define.js",
-					"js/framework/common.js",
-					"js/mui.pullToRefresh.material.js",
-					"fonts/mui.ttf",
-					"images/order/list_day.png",
-					"js/framework/styles.js",
-					"css/app.css",
-					"js/mui.min.js",
-					"images/order/list_guide.png",
-					"js/framework/lf.js",
-					"libs/vue.min.js",
-					"images/order/list_way.png"
+					"css/order/search-result.css"
 				],
-				"refer": [
-					"app/order-pay/order-pay.html"
-				],
+				"refer": [],
 				"priority": 0
 			},
 			"app/message/message-detail.html": {
@@ -859,8 +843,7 @@
 				"refer": [
 					"app/sale-detail/saledetail.html",
 					"app/result/sales-export.html",
-					"app/order-pay/order-pay-list.html",
-					"app/order-pay/order-pay.html"
+					"app/order-pay/order-pay-list.html"
 				],
 				"priority": 0
 			},
@@ -904,10 +887,7 @@
 					"js/framework/lf.js",
 					"app/order-pay/order-pay.js",
 					"css/images/sell_wechat.png",
-					"js/framework/qrcode.min.js",
-					"images/order/operator_delete.png",
-					"images/order/sale_choosed_corner.png",
-					"css/images/sell_alipay.png"
+					"js/framework/qrcode.min.js"
 				],
 				"refer": [],
 				"priority": 0

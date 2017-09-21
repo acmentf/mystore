@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--cwj-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/daily-manage/daily-manage.css" />
+    <link rel="stylesheet" href="../../css/common/common.css" />
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        .version {
+            text-align: center
+        }
+    </style>
+    <script src="../../js/framework/common.js"></script>
+</head>
+
+<body>
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="offCanvasSide-header">
+                        <img src="../../css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <p class="offCanvasSide-header-name">{{username}}</p>
+                    </div>
+
+                    <form class="offCanvasSide-role-wrap mui-input-group">
+                        <div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
+                            <label>{{item.name}}</label>
+                            <input type="radio" v-bind:value="item.id" v-model="rolePositionId">
+                        </div>
+                    </form>
+
+                    <div class="offCanvasSide-logout">
+                        <button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+                    </div>
+
+                    <p class="version">v{{wgtVer}}</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap" style="background:#efeff4">
+            <header class="mui-bar mui-bar-nav" style="background:#3db391;">
+                <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title" style="color: #fff;">日报管理</h1>
+                <a style="color:#fff" id="search-order" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
+                <a class="mui-icon mui-action-menu mui-pull-right">
+                    <img src="../../images/order/sale_flash.png" alt="">
+                </a>
+            </header>
+            <div class="mui-content orderlist-content">
+
+            </div>
+        </div>
+
+        <script src="../../js/mui.min.js"></script>
+        <script src="../../js/mui.pullToRefresh.js"></script>
+        <script src="../../js/mui.pullToRefresh.material.js"></script>
+        <script src="../../js/framework/define.js"></script>
+        <script src="../../js/framework/styles.js"></script>
+        <script src="../../js/framework/lf.js"></script>
+        <script src="../../libs/vue.min.js"></script>
+        <script src="../../update.js"></script>
+        <script src="daily-manage.js"></script>
+</body>
+
+</html>
