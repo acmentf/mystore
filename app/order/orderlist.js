@@ -424,6 +424,9 @@ function switchRolePostion(val) {
 				vm.currentRoleId = window.Role.currentPositions[0].roleId;
 				console.log("当前用户的角色id"+vm.currentRoleId)
 			}
+			if (window.Role.currentPositions[0].roleId==12) {
+                lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
+            }
 			if (vm.currentRoleId == 9) {
 				vm.orderHeader[0].name = '待销售'
 				vm.orderHeader[1].name = '销售完成'

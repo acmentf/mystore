@@ -366,7 +366,8 @@
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
 					"app/order/quicksaledetails.html",
-					"app/order-pay/order-pay.html"
+					"app/order-pay/order-pay.html",
+					"app/daily-manage/daily-manage.html"
 				],
 				"priority": 0
 			},
@@ -913,9 +914,13 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"images/order/refresh.png",
+					"images/order/search.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderlist.html"
+				],
 				"priority": 0
 			}
 		},
