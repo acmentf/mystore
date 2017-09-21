@@ -57,8 +57,8 @@
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
 					plus.navigator.closeSplashscreen();
-					if(){
-						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					if(window.Role.currentPositions[0].roleId==12){
+						lf.window.openWindow('order','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
 					} else {
 						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 					}
@@ -162,7 +162,11 @@
 							photograherId: res.data.photograherId
 						}
 						window.Role.save(obj)
-						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+						if(window.Role.currentPositions[0].roleId==12){
+							lf.window.openWindow('order','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
+						} else {
+							lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+						}
 					}else{
 						lf.nativeUI.toast(res.msg)
 					}
