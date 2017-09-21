@@ -329,5 +329,8 @@ mui('body').on('tap', '#saleComplete', function() { //销售完成
 		lf.nativeUI.toast(erro.msg);
 	});
 })
-
+mui(".order-ul").on('tap', ".guideinfo a", function(){
+	var tel = this.getAttribute('data-tel')
+	window.location.href= "tel://"+tel+"#mp.weixin.qq.com"
+})
 })
