@@ -39,7 +39,7 @@ lf.ready(function() {
                 res.data.forEach(function(item, index) {
                     var obj = {
                         value: item.pNo,
-                        text: item.aliasName
+                        text: item.pName
                     }
                     data.push(obj)
                 })
