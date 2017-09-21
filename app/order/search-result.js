@@ -120,6 +120,7 @@ lf.ready(function() {
 	mui('.order-ul').on('tap', '.tourinfo', function() {
 		var id = this.getAttribute('data-id');
 		var actionStatus = this.getAttribute('data-actionStatus');
+		var summary = this.getAttribute('data-summary');
 		var index = 1;
 		//待处理0 已完成计调1 已分配摄影师2 状态，跳到详情页默认展示计调信息tab
 		//正在拍摄中 3  已完成输出4 跳到详情页默认展示输出信息tab
@@ -130,11 +131,27 @@ lf.ready(function() {
 			index = 3
 		}
 		console.log('actionStatus....'+actionStatus)
-		lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
-			orderNo: id,
-			index: index,
-			photographerId: window.Role.photograherId
-		})
+		if (vm.currentRoleId!=9) {
+			lf.window.openWindow('orderdetails.html', 'orderdetails.html', {}, {
+				orderNo: id,
+				index: index,
+				photographerId: window.Role.photograherId,
+				summary: summary
+			})
+		} else {
+			var province = this.getAttribute('data-province');
+			var city = this.getAttribute('data-city');
+			var actionStatus = this.getAttribute('data-actionStatus')
+			lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
+				orderNo: id,
+				index: index,
+				photographerId: window.Role.photograherId,
+				summary: summary,
+				actionStatus: actionStatus,
+				province: province,
+				city: city
+			})
+		}
 	})
 	mui('.order-ul').on('tap', '.qdbtn', function() {
 		var id = this.getAttribute('data-id')

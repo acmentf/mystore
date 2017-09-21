@@ -46,7 +46,7 @@
 
 						<div class="nr">
 							<div class="imgbody">
-								<div class="tourinfo" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus">
+								<div class="tourinfo" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
 									<div class="item">
 										<span class="ico ico-starttime"></span>
 										<span>出团日期: {{item.startTime}}</span>
@@ -127,7 +127,7 @@
 								</button>
 								</div>
 								<div v-if="currentRoleId == 9">
-									<button v-if="genSale&&item.actionStatus==33" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+									<button v-if="genSale&&item.actionStatus<=33" type="button" class="mui-btn genSale" :data-id="item.id" :data-no="item.orderNo" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
 										生成销售
 								</button>
 								</div>
