@@ -5,7 +5,8 @@ var vm = new Vue({
         rolePositionList: [],
         rolePositionId: '',
         currentRoleId: '', //当前用户角色id,
-        wgtVer: '' //版本号
+		wgtVer: '', //版本号
+		hide: true
     },
     watch: {
 		rolePositionId: function(val, oldVal) {
@@ -36,7 +37,10 @@ lf.ready(function() {
 		indicators: true, //是否显示滚动条
 		deceleration: deceleration
 	});
-	
+	// 点击更多信息
+	mui("body").on("tap", ".more", function() {
+		vm.hide = false
+	})
 	// 填报计划
 	mui("body").on('tap', ".planBtn", function() {
 		lf.window.openWindow('daily-plan', "daily-plan.html",{},{})
