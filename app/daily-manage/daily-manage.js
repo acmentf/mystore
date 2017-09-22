@@ -30,7 +30,12 @@ lf.ready(function() {
     })
     update()
 	getVersion()
-	
+	var deceleration = mui.os.ios ? 0.003 : 0.0009;
+	mui('.mui-scroll-wrapper').scroll({
+		bounce: false,
+		indicators: true, //是否显示滚动条
+		deceleration: deceleration
+	});
 })
 mui('body').on('tap', '#logout', function() {
     lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {

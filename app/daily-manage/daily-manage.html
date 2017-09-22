@@ -18,6 +18,7 @@
         body {
             background-color: #efeff4;
         }
+        
         .version {
             text-align: center
         }
@@ -64,89 +65,150 @@
                 </a>
             </header>
             <footer class="mui-bar mui-bar-footer" v-if="currentRoleId==12">
-				<button type="button" class="mui-btn mui-btn-primary">填报计划</button>
-			</footer>
-            <div class="mui-content">
-                <section class="today-data bgwhite">
-                    <div class="title">
-                        <div>
-                            <p class="head">今日数据播报</p>
-                            <p class="badge">计划被改</p>
-                        </div>
-                        <div>
-                            <p class="plan"><span></span>计划</p>
-                            <p class="fact"><span></span>实际</p>
-                        </div>
+                <button type="button" class="mui-btn mui-btn-primary">填报计划</button>
+            </footer>
+            <div class="mui-scroll-wrapper mui-content">
+                <div class="mui-scroll">
+                    <div class="daily-content">
+                        <section class="today-data bgwhite">
+                            <div class="title">
+                                <div>
+                                    <p class="head">今日数据播报</p>
+                                    <p class="badge">计划被改</p>
+                                </div>
+                                <div>
+                                    <p class="plan"><span></span>计划</p>
+                                    <p class="fact"><span></span>实际</p>
+                                </div>
+                            </div>
+                            <div class="progress-container">
+                                <p class="title">销售额</p>
+                                <div class="progressbar">
+                                    <span class="progress"></span>
+                                </div>
+                                <div class="proportion">
+                                    <p><span>360</span>/1500</p>
+                                    <p>完成率: <span>26.32%</span></p>
+                                </div>
+                            </div>
+                            <div class="progress-container">
+                                <p class="title">拍摄人数</p>
+                                <div class="progressbar">
+                                    <span class="progress yellow"></span>
+                                </div>
+                                <div class="proportion">
+                                    <p><span>10060</span>/9600</p>
+                                    <p>完成率: <span>104.32%</span></p>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <p>
+                                    <span>实销售额: <span>2568</span></span>
+                                    <span>预销售额: <span>8456</span></span>
+                                    <em>28.85%</em>
+                                </p>
+                                <p>
+                                    <span>实拍人数: <span>2568</span></span>
+                                    <span>预拍人数: <span>8456</span></span>
+                                    <em>28.85%</em>
+                                </p>
+                                <p>
+                                    <span>实发团人数: <span>2568</span></span>
+                                    <span>预发团人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>前置销售额: <span>12568</span></span>
+                                    <span>二销售额: <span>5456</span></span>
+                                </p>
+                                <div class="remark">
+                                    <p>备注</p>
+                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="deature-data">
+                            <p>未来三天日报计划</p>
+                            <div class="info bgwhite">
+                                <div class="date">
+                                    <img src="../../images/order/date.png">
+                                    <span>2017-09-15</span>
+                                </div>
+                                <p>
+                                    <span>实销售额: <span>2568</span></span>
+                                    <span>预销售额: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实拍人数: <span>2568</span></span>
+                                    <span>预拍人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实发团人数: <span>2568</span></span>
+                                    <span>预发团人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>前置销售额: <span>12568</span></span>
+                                    <span>二销售额: <span>5456</span></span>
+                                </p>
+                                <div class="remark">
+                                    <p>备注</p>
+                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
+                            </div>
+                            <div class="info bgwhite">
+                                <div class="date">
+                                    <img src="../../images/order/date.png">
+                                    <span>2017-09-15</span>
+                                </div>
+                                <p>
+                                    <span>实销售额: <span>2568</span></span>
+                                    <span>预销售额: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实拍人数: <span>2568</span></span>
+                                    <span>预拍人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实发团人数: <span>2568</span></span>
+                                    <span>预发团人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>前置销售额: <span>12568</span></span>
+                                    <span>二销售额: <span>5456</span></span>
+                                </p>
+                                <div class="remark">
+                                    <p>备注</p>
+                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
+                            </div>
+                            <div class="info bgwhite">
+                                <div class="date">
+                                    <img src="../../images/order/date.png">
+                                    <span>2017-09-15</span>
+                                </div>
+                                <p>
+                                    <span>实销售额: <span>2568</span></span>
+                                    <span>预销售额: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实拍人数: <span>2568</span></span>
+                                    <span>预拍人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>实发团人数: <span>2568</span></span>
+                                    <span>预发团人数: <span>8456</span></span>
+                                </p>
+                                <p>
+                                    <span>前置销售额: <span>12568</span></span>
+                                    <span>二销售额: <span>5456</span></span>
+                                </p>
+                                <div class="remark">
+                                    <p>备注</p>
+                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                    <div class="progress-container"> 
-                        <p class="title">销售额</p>
-                        <div class="progressbar">
-                            <span class="progress"></span>
-                        </div>
-                        <div class="proportion">
-                            <p><span>360</span>/1500</p>
-                            <p>完成率: <span>26.32%</span></p>
-                        </div>
-                    </div>
-                    <div class="progress-container"> 
-                        <p class="title">拍摄人数</p>
-                        <div class="progressbar">
-                            <span class="progress yellow"></span>
-                        </div>
-                        <div class="proportion">
-                            <p><span>10060</span>/9600</p>
-                            <p>完成率: <span>104.32%</span></p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <p>
-                            <span>实销售额: <span>2568</span></span>
-                            <span>预销售额: <span>8456</span></span>
-                            <em>28.85%</em>
-                        </p>
-                        <p>
-                            <span>实拍人数: <span>2568</span></span>
-                            <span>预拍人数: <span>8456</span></span>
-                            <em>28.85%</em>
-                        </p>
-                        <p>
-                            <span>实发团人数: <span>2568</span></span>
-                            <span>预发团人数: <span>8456</span></span>
-                        </p>
-                        <p>
-                            <span>前置销售额: <span>12568</span></span>
-                            <span>二销售额: <span>5456</span></span>
-                        </p>
-                        <div>
-                            <p>备注</p>
-                            <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                        </div>
-                    </div>
-                </section>
-                <section class="deature-data">
-                    <div class="info bgwhite">
-                        <p>
-                            <span>实销售额: <span>2568</span></span>
-                            <span>预销售额: <span>8456</span></span>
-                        </p>
-                        <p>
-                            <span>实拍人数: <span>2568</span></span>
-                            <span>预拍人数: <span>8456</span></span>
-                        </p>
-                        <p>
-                            <span>实发团人数: <span>2568</span></span>
-                            <span>预发团人数: <span>8456</span></span>
-                        </p>
-                        <p>
-                            <span>前置销售额: <span>12568</span></span>
-                            <span>二销售额: <span>5456</span></span>
-                        </p>
-                        <div>
-                            <p>备注</p>
-                            <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
             <div class="mui-off-canvas-backdrop"></div>
         </div>

@@ -21,9 +21,6 @@
 p{
     margin: 0;
 }
-.today-data{
-    
-}
 .today-data>.title {
     display: flex;
     padding: 10px;
@@ -104,7 +101,7 @@ p{
     color: #FF6A6A;
 }
 .info{
-    margin: 15px 0;
+    margin-top: 15px;
     padding-top: 10px;
     border-top: 1px solid #eeeeee;
 }
@@ -132,13 +129,15 @@ p{
     height: 24px;
     line-height: 24px;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     padding-left: 8px;
     background-color: #3EB392;
     color :#fff;
+    font-size: 14px;
     border-radius: 24px 0 0 24px;
 }
-.info >div {
-    padding:10px;
+.info >.remark {
+    padding:12px 10px;
     border-top: 1px solid #eeeeee;
     display: flex;
     justify-content: space-between;
@@ -149,12 +148,45 @@ p{
 }
 .info >div > p:last-child{
     font-size: 13px;
+    color: #999;
 }
 .info .mui-icon-arrowright{
     font-size: 16px;
 }
-.deature-data{
+.deature-data .info{
+    padding-top:0;
     margin-top: 10px;
+}
+.deature-data>p{
+    padding: 0 10px;
+    font-size: 14px;
+    position: relative;
+    top: 5px;
+    margin-top: 5px;
+}
+.deature-data>p::before{
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background-color: #3EB392;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+}
+.info .date{
+    padding: 12px 10px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 16px;
+    color: #555;
+}
+.info .date img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -3px;
 }
 .mui-bar-footer{
     height: 54px;
