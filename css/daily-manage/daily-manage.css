@@ -4,14 +4,14 @@
     position: relative;
     left: -20px;
 }
-#refresh img,#search-order img{
+#refresh img,#search img{
     width: 18px;
     height: 18px;
     vertical-align: middle;
     position: relative;
     top: 2px;
 }
-#search-order{
+#search{
     width: 44px;
     height: 44px;
 }
@@ -20,6 +20,9 @@
 }
 p{
     margin: 0;
+}
+.mui-bar-footer ~ .mui-content{
+    margin-bottom: 20px;
 }
 .today-data>.title {
     display: flex;
@@ -119,6 +122,9 @@ p{
 .info > p >span{
     display: inline-block;
     width: 40%;
+}
+.info > p >span.plan-info{
+    color: #999;
 }
 .info > p > em{
     font-style: normal;

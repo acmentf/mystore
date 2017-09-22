@@ -57,7 +57,7 @@
             <header class="mui-bar mui-bar-nav" style="background:#fff;">
                 <a href="#offCanvasSide" style="color:#333" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
                 <h1 class="mui-title" style="color: #333;">日报管理</h1>
-                <a id="search-order" class="mui-icon mui-action-menu mui-pull-right">
+                <a id="search" class="mui-icon mui-action-menu mui-pull-right">
                     <img src="../../images/order/search.png" alt="">
                 </a>
                 <a id="refresh" class="mui-icon mui-action-menu mui-pull-right">
@@ -65,7 +65,7 @@
                 </a>
             </header>
             <footer class="mui-bar mui-bar-footer" v-if="currentRoleId==12">
-                <button type="button" class="mui-btn mui-btn-primary">填报计划</button>
+                <button type="button" class="mui-btn mui-btn-primary planBtn">填报计划</button>
             </footer>
             <div class="mui-scroll-wrapper mui-content">
                 <div class="mui-scroll">
@@ -104,17 +104,17 @@
                             <div class="info">
                                 <p>
                                     <span>实销售额: <span>2568</span></span>
-                                    <span>预销售额: <span>8456</span></span>
+                                    <span class="plan-info">预销售额: <span>8456</span></span>
                                     <em>28.85%</em>
                                 </p>
                                 <p>
                                     <span>实拍人数: <span>2568</span></span>
-                                    <span>预拍人数: <span>8456</span></span>
+                                    <span class="plan-info">预拍人数: <span>8456</span></span>
                                     <em>28.85%</em>
                                 </p>
                                 <p>
                                     <span>实发团人数: <span>2568</span></span>
-                                    <span>预发团人数: <span>8456</span></span>
+                                    <span class="plan-info">预发团人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>前置销售额: <span>12568</span></span>
@@ -135,15 +135,15 @@
                                 </div>
                                 <p>
                                     <span>实销售额: <span>2568</span></span>
-                                    <span>预销售额: <span>8456</span></span>
+                                    <span class="plan-info">预销售额: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实拍人数: <span>2568</span></span>
-                                    <span>预拍人数: <span>8456</span></span>
+                                    <span class="plan-info">预拍人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实发团人数: <span>2568</span></span>
-                                    <span>预发团人数: <span>8456</span></span>
+                                    <span class="plan-info">预发团人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>前置销售额: <span>12568</span></span>
@@ -161,15 +161,15 @@
                                 </div>
                                 <p>
                                     <span>实销售额: <span>2568</span></span>
-                                    <span>预销售额: <span>8456</span></span>
+                                    <span class="plan-info">预销售额: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实拍人数: <span>2568</span></span>
-                                    <span>预拍人数: <span>8456</span></span>
+                                    <span class="plan-info">预拍人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实发团人数: <span>2568</span></span>
-                                    <span>预发团人数: <span>8456</span></span>
+                                    <span class="plan-info">预发团人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>前置销售额: <span>12568</span></span>
@@ -187,15 +187,15 @@
                                 </div>
                                 <p>
                                     <span>实销售额: <span>2568</span></span>
-                                    <span>预销售额: <span>8456</span></span>
+                                    <span class="plan-info">预销售额: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实拍人数: <span>2568</span></span>
-                                    <span>预拍人数: <span>8456</span></span>
+                                    <span class="plan-info">预拍人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>实发团人数: <span>2568</span></span>
-                                    <span>预发团人数: <span>8456</span></span>
+                                    <span class="plan-info">预发团人数: <span>8456</span></span>
                                 </p>
                                 <p>
                                     <span>前置销售额: <span>12568</span></span>

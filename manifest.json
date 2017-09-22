@@ -366,7 +366,8 @@
 					"app/order/search.html",
 					"app/quick-order/quick-order.html",
 					"app/order/quicksaledetails.html",
-					"app/order-pay/order-pay.html"
+					"app/order-pay/order-pay.html",
+					"app/daily-manage/daily-manage.html"
 				],
 				"priority": 0
 			},
@@ -964,6 +965,74 @@
 					"js/framework/lf.js",
 					null,
 					"images/order/date.png"
+				],
+				"refer": [
+					"app/order/orderlist.html",
+					"app/daily-manage/daily-plan.html",
+					"app/daily-manage/daily-search.html",
+					"app/daily-manage/daily-remark.html"
+				],
+				"priority": 0
+			},
+			"app/daily-manage/daily-plan.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"app/daily-manage/daily-plan.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/common/common.css",
+					"css/daily-manage/daily-plan.css",
+					"images/order/date.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/daily-manage/daily-search.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"app/daily-manage/daily-search.js",
+					"js/mui.min.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/daily-manage/daily-search.css",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/common/common.css",
+					"images/order/date.png",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css"
+				],
+				"refer": [
+					"app/daily-manage/daily-remark.html"
+				],
+				"priority": 0
+			},
+			"app/daily-manage/daily-remark.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"images/order/date.png",
+					"app/daily-manage/daily-remark.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/daily-manage/daily-remark.css",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"css/app.css",
+					"css/mui.min.css",
+					null
 				],
 				"refer": [],
 				"priority": 0

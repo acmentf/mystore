@@ -26,7 +26,7 @@ lf.ready(function() {
 
     console.log(JSON.stringify(vm.rolePositionList))
     Vue.nextTick(function() {
-        // initPull();
+        init();
     })
     update()
 	getVersion()
@@ -36,15 +36,45 @@ lf.ready(function() {
 		indicators: true, //是否显示滚动条
 		deceleration: deceleration
 	});
+	
+	// 填报计划
+	mui("body").on('tap', ".planBtn", function() {
+		lf.window.openWindow('daily-plan', "daily-plan.html",{},{})
+	})
+	// 搜索日报
+	mui("body").on("tap", "#search", function(){
+		lf.window.openWindow('daily-search', "daily-search.html",{},{})
+	})
+	// 点击备注
+	mui("body").on("tap", ".remark", function(){
+		lf.window.openWindow('daily-remark', "daily-remark.html",{},{})
+	})
+	// 退出登录
+	mui('body').on('tap', '#logout', function() {
+		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+			if (e.index == 0) {
+				window.Role.logout();
+				plus.runtime.restart();
+			}
+		});
+	})
 })
-mui('body').on('tap', '#logout', function() {
-    lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
-        if (e.index == 0) {
-            window.Role.logout();
-            plus.runtime.restart();
-        }
-    });
-})
+// 初始化数据
+function init() {
+	var params = {
+		searchType:"today"
+	}
+	lf.net.getJSON('plan/getDailyPlan.htm', params, function(res) {
+		if (data.code == 200) {
+			console.log(JSON.stringify(res.data));
+			
+		} else {
+			lf.nativeUI.toast(res.msg);
+		}
+	}, function(error) {
+		lf.nativeUI.toast(error.msg);
+	});
+}
 // 岗位切换
 function switchRolePostion(val) {
 	var params = {
