@@ -105,6 +105,7 @@ p{
 }
 .info{
     margin: 15px 0;
+    padding-top: 10px;
     border-top: 1px solid #eeeeee;
 }
 .info > p{
@@ -112,6 +113,11 @@ p{
     color: #666;
     font-size: 15px;
     position: relative;
+}
+@media screen and (max-width: 320px) { 
+    .info > p{
+        font-size: 13px;
+    }
 }
 .info > p >span{
     display: inline-block;
@@ -130,6 +136,25 @@ p{
     background-color: #3EB392;
     color :#fff;
     border-radius: 24px 0 0 24px;
+}
+.info >div {
+    padding:10px;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+}
+.info >div > p {
+    font-size: 15px;
+    color:#666;
+}
+.info >div > p:last-child{
+    font-size: 13px;
+}
+.info .mui-icon-arrowright{
+    font-size: 16px;
+}
+.deature-data{
+    margin-top: 10px;
 }
 .mui-bar-footer{
     height: 54px;

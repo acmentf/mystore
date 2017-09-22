@@ -937,7 +937,8 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"images/order/refresh.png",
-					"images/order/search.png"
+					"images/order/search.png",
+					null
 				],
 				"refer": [
 					"app/order/orderlist.html"

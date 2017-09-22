@@ -29,9 +29,9 @@ lf.ready(function() {
         // initPull();
     })
     update()
-    getVersion()
+	getVersion()
+	
 })
-
 mui('body').on('tap', '#logout', function() {
     lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
         if (e.index == 0) {
@@ -40,6 +40,7 @@ mui('body').on('tap', '#logout', function() {
         }
     });
 })
+// 岗位切换
 function switchRolePostion(val) {
 	var params = {
 		positionId: val
@@ -78,6 +79,7 @@ function switchRolePostion(val) {
 		lf.nativeUI.toast(erro.msg);
 	})
 }
+// 检测版本是否更新
 function update() {
 	var params = {
 		"app_id": plus.runtime.appid,
@@ -117,6 +119,7 @@ function update() {
 		}
 	}, function(res) {});
 }
+// 得到版本
 function getVersion() {
 	plus.runtime.getProperty(plus.runtime.appid,function(inf){
         vm.wgtVer = inf.version;
