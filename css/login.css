@@ -86,7 +86,7 @@
 	left:10%;
 	width: 80%;
 	min-height: 200px;
-	z-index: 9;
+	z-index: 9999;
 	color: #666;
 }
 .account-list::before{
