@@ -4,7 +4,9 @@ var vm = new Vue({
         username: '',
         rolePositionList: [],
         rolePositionId: '',
-        currentRoleId: '', //当前用户角色id,
+		currentRoleId: '', //当前用户角色id,
+		todayData: {},
+		futureData: [{},{},{}],
 		wgtVer: '', //版本号
 		hide: true
     },
@@ -69,9 +71,8 @@ function init() {
 		searchType:"today"
 	}
 	lf.net.getJSON('plan/getDailyPlan.htm', params, function(res) {
-		if (data.code == 200) {
+		if (res.code == 200) {
 			console.log(JSON.stringify(res.data));
-			
 		} else {
 			lf.nativeUI.toast(res.msg);
 		}

@@ -39,11 +39,12 @@ p{
     color:#3eb392;
     font-size: 18px;
 }
-.today-data .title > div .badge{
+.badge{
+    display: inline-block;
     font-size: 12px;
     padding: 0 6px;
-    height: 20px;
-    line-height: 20px;
+    height: 19px;
+    line-height: 18px;
     margin-left: 5px;
     border: 1px solid #E5E7EA;
     border-radius: 16px;
@@ -84,6 +85,7 @@ p{
     height: 14px;
     background-color: #E8EAEF;
     border-radius: 14px;
+    overflow: hidden;
 }
 .progress{
     position: absolute;
@@ -95,7 +97,7 @@ p{
     background-color: #FF6A6A;
 }
 .yellow{
-    width: 100%;
+    width: 104.32%;
     background-color: #FFA11B;
 }
 .proportion{
@@ -182,18 +184,18 @@ p{
 .info .mui-icon-arrowright{
     font-size: 16px;
 }
-.deature-data .info{
+.future-data .info{
     padding-top:0;
     margin-top: 10px;
 }
-.deature-data>p{
+.future-data>p{
     padding: 0 10px;
     font-size: 14px;
     position: relative;
-    top: 5px;
-    margin-top: 5px;
+    top: 7px;
+    margin-top: 7px;
 }
-.deature-data>p::before{
+.future-data>p::before{
     content: '';
     display: inline-block;
     width: 2px;
