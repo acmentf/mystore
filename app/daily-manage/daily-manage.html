@@ -74,7 +74,7 @@
                             <div class="title">
                                 <div>
                                     <p class="head">今日数据播报</p>
-                                    <p class="badge">计划被改</p>
+                                    <p class="badge" v-if="todayData.flag==1">计划被改</p>
                                 </div>
                                 <div>
                                     <p class="plan"><span></span>计划</p>
@@ -84,136 +84,80 @@
                             <div class="progress-container">
                                 <p class="title">销售额</p>
                                 <div class="progressbar">
-                                    <span class="progress"></span>
+                                    <span class="progress" :style="{ width: todayData.proportionAmount}"></span>
                                 </div>
                                 <div class="proportion">
-                                    <p><span>360</span>/1500</p>
-                                    <p>完成率: <span>26.32%</span></p>
+                                    <p><span v-text="todayData.realityAmount"></span>/<span v-text="todayData.planAmount"></span></p>
+                                    <p>完成率: <span v-text="todayData.proportionAmount"></span></p>
                                 </div>
                             </div>
                             <div class="progress-container">
                                 <p class="title">拍摄人数</p>
                                 <div class="progressbar">
-                                    <span class="progress yellow"></span>
+                                    <span class="progress yellow" :style="{ width: todayData.proportionShootNums}"></span>
                                 </div>
                                 <div class="proportion">
-                                    <p><span>10060</span>/9600</p>
-                                    <p>完成率: <span>104.32%</span></p>
+                                    <p><span v-text="todayData.realityShootNums"></span>/<span v-text="todayData.planShootNums"></span></p>
+                                    <p>完成率: <span v-text="todayData.proportionShootNums"></span></p>
                                 </div>
                             </div>
                             <div class="info">
                                 <a class="more" :class="hide? '': 'hide'">显示更多信息</a>
                                 <article :class="hide? 'hide': ''">
                                     <p>
-                                        <span>实销售额: <span>2568</span></span>
-                                        <span class="plan-info">预销售额: <span>8456</span></span>
-                                        <em>28.85%</em>
+                                        <span>实销售额: <span v-text="todayData.realityAmount || '待销售'"></span></span>
+                                        <span class="plan-info">预销售额: <span v-text="todayData.planAmount || '未填报'"></span></span>
+                                        <em v-text="todayData.proportionAmount"></em>
                                     </p>
                                     <p>
-                                        <span>实拍人数: <span>2568</span></span>
-                                        <span class="plan-info">预拍人数: <span>8456</span></span>
-                                        <em>28.85%</em>
+                                        <span>实拍人数: <span v-text="todayData.realityShootNums || '待拍摄'"></span></span>
+                                        <span class="plan-info">预拍人数: <span v-text="todayData.planShootNums || '未填报'"></span></span>
+                                        <em v-text="todayData.proportionShootNums"></em>
                                     </p>
                                     <p>
-                                        <span>实发团人数: <span>2568</span></span>
-                                        <span class="plan-info">预发团人数: <span>8456</span></span>
+                                        <span>实发团人数: <span v-text="todayData.realityPersons || '未发团'"></span></span>
+                                        <span class="plan-info">预发团人数: <span v-text="todayData.planPersons || '未填报'"></span></span>
                                     </p>
                                     <p>
-                                        <span>前置销售额: <span>12568</span></span>
-                                        <span>二销售额: <span>5456</span></span>
+                                        <span>前置销售额: <span v-text="todayData.advanceAmt || '待销售'"></span></span>
+                                        <span>二销售额: <span v-text="todayData.appAmt || '待销售'"></span></span>
                                     </p>
-                                    <div class="remark">
+                                    <div class="remark" :data-planDate="todayData.planDate" :data-planPersons="todayData.planPersons" :data-planAmount="todayData.planAmount" :data-planShootNums="todayData.planShootNums" :data-remark="todayData.remark">
                                         <p>备注</p>
-                                        <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                        <p><span class="placeholder" v-text="todayData.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
                                     </div>
                                 </article>
                             </div>
                         </section>
                         <section class="future-data">
                             <p>未来三天日报计划</p>
-                            <div class="info bgwhite">
+                            <div class="info bgwhite" v-for="item in futureData" :key="item">
                                 <div class="date">
                                     <img src="../../images/order/date.png">
-                                    <span>2017-09-15</span>
-                                    <span class="badge">计划被改</span>
+                                    <span v-text="item.planDate"></span>
+                                    <span class="badge" v-if="item.flag==1">计划被改</span>
                                 </div>
                                 <article>
                                     <p>
-                                        <span>实销售额: <span>2568</span></span>
-                                        <span class="plan-info">预销售额: <span>8456</span></span>
+                                        <span>实销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
+                                        <span class="plan-info">预销售额: <span v-text="item.planAmount || '未填报'"></span></span>
                                     </p>
                                     <p>
-                                        <span>实拍人数: <span>2568</span></span>
-                                        <span class="plan-info">预拍人数: <span>8456</span></span>
+                                        <span>实拍人数: <span v-text="item.realityShootNums || '待拍摄'"></span></span>
+                                        <span class="plan-info">预拍人数: <span v-text="item.planShootNums || '未填报'"></span></span>
                                     </p>
                                     <p>
-                                        <span>实发团人数: <span>2568</span></span>
-                                        <span class="plan-info">预发团人数: <span>8456</span></span>
+                                        <span>实发团人数: <span v-text="item.realityPersons || '未发团'"></span></span>
+                                        <span class="plan-info">预发团人数: <span v-text="item.planPersons || '未填报'"></span></span>
                                     </p>
                                     <p>
-                                        <span>前置销售额: <span>12568</span></span>
-                                        <span>二销售额: <span>5456</span></span>
+                                        <span>前置销售额: <span v-text="item.advanceAmt || '待销售'"></span></span>
+                                        <span>二销售额: <span v-text="item.appAmt || '待销售'"></span></span>
                                     </p>
                                 </article>
-                                <div class="remark">
+                                <div class="remark" :data-planDate="item.planDate" :data-planPersons="item.planPersons" :data-planAmount="item.planAmount" :data-planShootNums="item.planShootNums" :data-remark="item.remark">
                                     <p>备注</p>
-                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                                </div>
-                            </div>
-                            <div class="info bgwhite">
-                                <div class="date">
-                                    <img src="../../images/order/date.png">
-                                    <span>2017-09-15</span>
-                                </div>
-                                <article>
-                                    <p>
-                                        <span>实销售额: <span>2568</span></span>
-                                        <span class="plan-info">预销售额: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>实拍人数: <span>2568</span></span>
-                                        <span class="plan-info">预拍人数: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>实发团人数: <span>2568</span></span>
-                                        <span class="plan-info">预发团人数: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>前置销售额: <span>12568</span></span>
-                                        <span>二销售额: <span>5456</span></span>
-                                    </p>
-                                </article>
-                                <div class="remark">
-                                    <p>备注</p>
-                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                                </div>
-                            </div>
-                            <div class="info bgwhite">
-                                <div class="date">
-                                    <img src="../../images/order/date.png">
-                                    <span>2017-09-15</span>
-                                </div>
-                                <article>
-                                    <p>
-                                        <span>实销售额: <span>2568</span></span>
-                                        <span class="plan-info">预销售额: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>实拍人数: <span>2568</span></span>
-                                        <span class="plan-info">预拍人数: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>实发团人数: <span>2568</span></span>
-                                        <span class="plan-info">预发团人数: <span>8456</span></span>
-                                    </p>
-                                    <p>
-                                        <span>前置销售额: <span>12568</span></span>
-                                        <span>二销售额: <span>5456</span></span>
-                                    </p>
-                                </article>
-                                <div class="remark">
-                                    <p>备注</p>
-                                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                    <p><span class="placeholder" v-text="item.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
                                 </div>
                             </div>
                         </section>

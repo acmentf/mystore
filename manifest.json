@@ -917,7 +917,8 @@
 					"js/framework/qrcode.min.js",
 					"css/images/sell_alipay.png",
 					"images/order/operator_delete.png",
-					"images/order/sale_choosed_corner.png"
+					"images/order/sale_choosed_corner.png",
+					"css/order-pay/order-list.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -5,8 +5,9 @@ var vm = new Vue({
         rolePositionList: [],
         rolePositionId: '',
 		currentRoleId: '', //当前用户角色id,
+		todayDate: '',
 		todayData: {},
-		futureData: [{},{},{}],
+		futureData: [],
 		wgtVer: '', //版本号
 		hide: true
     },
@@ -39,6 +40,10 @@ lf.ready(function() {
 		indicators: true, //是否显示滚动条
 		deceleration: deceleration
 	});
+	// 刷新
+	mui("body").on("tap", "#refresh", function(){
+		init()
+	})
 	// 点击更多信息
 	mui("body").on("tap", ".more", function() {
 		vm.hide = false
@@ -49,11 +54,19 @@ lf.ready(function() {
 	})
 	// 搜索日报
 	mui("body").on("tap", "#search", function(){
-		lf.window.openWindow('daily-search', "daily-search.html",{},{})
+		lf.window.openWindow('daily-search', "daily-search.html",{},{
+			todayDate: vm.todayDate
+		})
 	})
 	// 点击备注
 	mui("body").on("tap", ".remark", function(){
-		lf.window.openWindow('daily-remark', "daily-remark.html",{},{})
+		lf.window.openWindow('daily-remark', "daily-remark.html",{},{
+			planDate: this.getAttribute('data-planDate'),
+			planPersons: this.getAttribute('data-planPersons'),
+			planAmount: this.getAttribute('data-planAmount'),
+			planShootNums: this.getAttribute('data-planShootNums'),
+			remark: this.getAttribute('data-remark')
+		})
 	})
 	// 退出登录
 	mui('body').on('tap', '#logout', function() {
@@ -64,19 +77,46 @@ lf.ready(function() {
 			}
 		});
 	})
+	lf.event.listener('dailyManage', function(e) {
+        init();
+        lf.event.fire(lf.window.currentWebview().opener(), 'dailyManage', {})
+    })
 })
 // 初始化数据
 function init() {
 	var params = {
 		searchType:"today"
 	}
+	lf.nativeUI.showWaiting()
 	lf.net.getJSON('plan/getDailyPlan.htm', params, function(res) {
+		lf.nativeUI.closeWaiting()
 		if (res.code == 200) {
 			console.log(JSON.stringify(res.data));
+			var list = res.data
+			vm.todayDate = list[0].planDate
+			list.sort(function(a,b){
+                return a.planDate - b.planDate
+            })
+			for(var i=0;i<list.length;i++){
+				list[i].planDate = lf.util.timeStampToDate2(list[i].planDate)
+				if (list[i].planAmount>0) {
+                    list[i]["proportionAmount"] = toPercent(list[i].realityAmount / list[i].planAmount)
+                } else {
+                    list[i]["proportionAmount"] = '0.00%'
+                }
+                if (list[i].planShootNums>0) {
+                    list[i]["proportionShootNums"] = toPercent(list[i].realityShootNums / list[i].planShootNums)
+                } else {
+                    list[i]["proportionShootNums"] = '0.00%'
+                }
+			}
+			vm.todayData = list.shift()
+			vm.futureData = list
 		} else {
 			lf.nativeUI.toast(res.msg);
 		}
 	}, function(error) {
+		lf.nativeUI.closeWaiting()
 		lf.nativeUI.toast(error.msg);
 	});
 }
@@ -165,4 +205,10 @@ function getVersion() {
         vm.wgtVer = inf.version;
         console.log("当前应用版本：" + vm.wgtVer);
     });
+}
+// 小数转为百分比
+function toPercent(point){
+    var str=Number(point*100).toFixed(2);
+    str+="%";
+    return str;
 }

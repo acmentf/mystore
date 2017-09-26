@@ -40,32 +40,33 @@
                 <button class="only">只看昨天</button>
                 <button class="search">搜索</button>
             </div>
-            <div class="info bgwhite">
+            <div class="info bgwhite" v-for="item in searhList" :key="item">
                 <div class="date">
                     <img src="../../images/order/date.png">
-                    <span>2017-09-15</span>
+                    <span v-text="item.planDate"></span>
+                    <span class="badge" v-if="item.flag==1">计划被改</span>
                 </div>
                 <p>
-                    <span>实销售额: <span>2568</span></span>
-                    <span class="plan-info">预销售额: <span>8456</span></span>
-                    <em>28.85%</em>
+                    <span>实销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
+                    <span class="plan-info">预销售额: <span v-text="item.planAmount || '未填报'"></span></span>
+                    <em v-text="item.proportionAmount"></em>
                 </p>
                 <p>
-                    <span>实拍人数: <span>2568</span></span>
-                    <span class="plan-info">预拍人数: <span>8456</span></span>
-                    <em>28.85%</em>
+                    <span>实拍人数: <span v-text="item.realityShootNums || '待拍摄'"></span></span>
+                    <span class="plan-info">预拍人数: <span v-text="item.planShootNums || '未填报'"></span></span>
+                    <em v-text="item.proportionShootNums"></em>
                 </p>
                 <p>
-                    <span>实发团人数: <span>2568</span></span>
-                    <span class="plan-info">预发团人数: <span>8456</span></span>
+                    <span>实发团人数: <span v-text="item.realityPersons || '未发团'"></span></span>
+                    <span class="plan-info">预发团人数: <span v-text="item.planPersons || '未填报'"></span></span>
                 </p>
                 <p>
-                    <span>前置销售额: <span>12568</span></span>
-                    <span>二销售额: <span>5456</span></span>
+                    <span>前置销售额: <span v-text="item.advanceAmt || '待销售'"></span></span>
+                    <span>二销售额: <span v-text="item.appAmt || '待销售'"></span></span>
                 </p>
-                <div class="remark">
+                <div class="remark" :data-planDate="item.planDate" :data-planPersons="item.planPersons" :data-planAmount="item.planAmount" :data-planShootNums="item.planShootNums" :data-remark="item.remark">
                     <p>备注</p>
-                    <p><span class="placeholder">请输入缺填或数据偏差大的原因</span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                    <p><span class="placeholder" v-text="item.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
                 </div>
             </div>
         </main>

@@ -91,13 +91,13 @@ p{
     position: absolute;
     top: 0;
     left: 0;
-    width: 26.32%;
+    width: 0%;
     height: 14px;
     border-radius: 14px;
     background-color: #FF6A6A;
 }
 .yellow{
-    width: 104.32%;
+    width: 0%;
     background-color: #FFA11B;
 }
 .proportion{
