@@ -155,6 +155,8 @@
                     lf.nativeUI.toast('销售人数不合法')
                     return
                 }
+
+                var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
                 
                 if (!vm.amount){
                     lf.nativeUI.toast('请输入金额')
@@ -163,6 +165,11 @@
 
                 if (vm.amount < 0.01){
                     lf.nativeUI.toast('金额不能小于0.01')
+                    return
+                }
+
+                if (!amountReg.test(vm.amount)){
+                    lf.nativeUI.toast('金额只能精确到两位小数')
                     return
                 }
                 

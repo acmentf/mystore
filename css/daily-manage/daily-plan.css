@@ -27,7 +27,7 @@ p{
     font-size: 14px;
     padding: 3px 10px!important;
 }
-.save-btn > button:active{
+.save-btn > button:hover,.save-btn > button:active{
     color: #3eb392!important;
     border-color: #3eb392;
     background-color: #fff;

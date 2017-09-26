@@ -61,16 +61,6 @@ function init() {
             })
 			for(var i=0;i<list.length;i++){
 				list[i].planDate = lf.util.timeStampToDate2(list[i].planDate)
-				if (list[i].planAmount>0) {
-                    list[i]["proportionAmount"] = toPercent(list[i].realityAmount / list[i].planAmount)
-                } else {
-                    list[i]["proportionAmount"] = '0.00%'
-                }
-                if (list[i].planShootNums>0) {
-                    list[i]["proportionShootNums"] = toPercent(list[i].realityShootNums / list[i].planShootNums)
-                } else {
-                    list[i]["proportionShootNums"] = '0.00%'
-                }
             }
             vm.planList = list
 		} else {
@@ -79,10 +69,4 @@ function init() {
 	}, function(error) {
 		lf.nativeUI.toast(error.msg);
 	});
-}
-// 小数转为百分比
-function toPercent(point){
-    var str=Number(point*100).toFixed(2);
-    str+="%";
-    return str;
 }

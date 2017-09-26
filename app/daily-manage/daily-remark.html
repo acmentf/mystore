@@ -31,8 +31,8 @@
                     <span v-text="planDate"></span>
                 </div>
                 <div class="remark">
-                    <textarea id="remark" maxlength="100" v-model="remark" placeholder="请输入缺填或数据偏差大的原因"></textarea>
-                    <p><span>0</span>/100</p>
+                    <textarea @input="changeText($event)" id="remark" maxlength="100" v-model="remark" placeholder="请输入缺填或数据偏差大的原因"></textarea>
+                    <p><span v-text="textLenth"></span>/100</p>
                 </div>
             </div>
         </main>

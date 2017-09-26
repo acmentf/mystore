@@ -84,21 +84,21 @@
                             <div class="progress-container">
                                 <p class="title">销售额</p>
                                 <div class="progressbar">
-                                    <span class="progress" :style="{ width: todayData.proportionAmount}"></span>
+                                    <span class="progress" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
                                 </div>
                                 <div class="proportion">
                                     <p><span v-text="todayData.realityAmount"></span>/<span v-text="todayData.planAmount"></span></p>
-                                    <p>完成率: <span v-text="todayData.proportionAmount"></span></p>
+                                    <p>完成率: <span v-text="todayData.planAmount==0?'- -':todayData.proportionAmount"></span></p>
                                 </div>
                             </div>
                             <div class="progress-container">
                                 <p class="title">拍摄人数</p>
                                 <div class="progressbar">
-                                    <span class="progress yellow" :style="{ width: todayData.proportionShootNums}"></span>
+                                    <span class="progress yellow" :style="{ width:todayData.planShootNums==0&&todayData.realityShootNums!=0?'55%':todayData.proportionShootNums}"></span>
                                 </div>
                                 <div class="proportion">
                                     <p><span v-text="todayData.realityShootNums"></span>/<span v-text="todayData.planShootNums"></span></p>
-                                    <p>完成率: <span v-text="todayData.proportionShootNums"></span></p>
+                                    <p>完成率: <span v-text="todayData.planShootNums==0?'- -':todayData.proportionShootNums"></span></p>
                                 </div>
                             </div>
                             <div class="info">
@@ -107,12 +107,10 @@
                                     <p>
                                         <span>实销售额: <span v-text="todayData.realityAmount || '待销售'"></span></span>
                                         <span class="plan-info">预销售额: <span v-text="todayData.planAmount || '未填报'"></span></span>
-                                        <em v-text="todayData.proportionAmount"></em>
                                     </p>
                                     <p>
                                         <span>实拍人数: <span v-text="todayData.realityShootNums || '待拍摄'"></span></span>
                                         <span class="plan-info">预拍人数: <span v-text="todayData.planShootNums || '未填报'"></span></span>
-                                        <em v-text="todayData.proportionShootNums"></em>
                                     </p>
                                     <p>
                                         <span>实发团人数: <span v-text="todayData.realityPersons || '未发团'"></span></span>
@@ -155,10 +153,10 @@
                                         <span>二销售额: <span v-text="item.appAmt || '待销售'"></span></span>
                                     </p>
                                 </article>
-                                <div class="remark" :data-planDate="item.planDate" :data-planPersons="item.planPersons" :data-planAmount="item.planAmount" :data-planShootNums="item.planShootNums" :data-remark="item.remark">
+                                <!-- <div class="remark" :data-planDate="item.planDate" :data-planPersons="item.planPersons" :data-planAmount="item.planAmount" :data-planShootNums="item.planShootNums" :data-remark="item.remark">
                                     <p>备注</p>
                                     <p><span class="placeholder" v-text="item.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                                </div>
+                                </div> -->
                             </div>
                         </section>
                     </div>

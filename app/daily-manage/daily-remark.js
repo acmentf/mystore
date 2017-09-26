@@ -5,7 +5,13 @@ var vm = new Vue({
         planPersons: '',
         planAmount: '',
         planShootNums: '',
+        textLenth: 0,
         remark: ''
+    },
+    methods: {
+        changeText: function(e){
+            vm.textLenth = e.target.value.length
+        }
     }
 })
 lf.ready(function() {
@@ -14,6 +20,7 @@ lf.ready(function() {
     vm.planAmount = lf.window.currentWebview().planAmount
     vm.planShootNums = lf.window.currentWebview().planShootNums
     vm.remark = lf.window.currentWebview().remark
+    vm.textLenth = vm.remark? vm.remark.length:0
     // 保存
     mui("body").on("tap", ".save-btn", function() {
         var params = {
