@@ -7,9 +7,12 @@
  lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
+        tourNo: lf.window.currentWebview().tourNo,
+        productName: lf.window.currentWebview().productName,
         areaCode: lf.window.currentWebview().areaCode,
         saleOrderId: lf.window.currentWebview().saleOrderId,
         guideName: lf.window.currentWebview().tourGuide,
+        tourGuidePhone: lf.window.currentWebview().tourGuidePhone,
         purchaser: lf.window.currentWebview().purchaser,
         alias: lf.window.currentWebview().aliasName,
         province: lf.window.currentWebview().province,
@@ -38,10 +41,13 @@
 
         isPaying: false,
         payType: 0,
+        payTypeUrl: '../../css/images/sell_cash.png',
         payName: '',
         loopTime: 1000,
         loopOrderId: '',
-        timer: null
+        timer: null,
+        price:'',
+        isPrice:false
     }
 
     var vm = new Vue({
@@ -92,6 +98,23 @@
             })
         },
         methods: {
+            showPriceDialog: function() {
+                vm.isPrice = true
+                vm.price = ''
+            },
+            offBtn: function() {
+                vm.isPrice = false
+            },
+            sureBtn: function() {
+                if(vm.price>0){
+                    vm.amount = vm.price
+                }
+                vm.isPrice = false
+            },
+            hideDialog: function() {
+                vm.isPaying = false
+                clearInterval(vm.timer)
+            },
             payStatus: function(status) {
                 switch (status) {
                     case 1:
@@ -128,11 +151,25 @@
                     return
                 }
                 
+<<<<<<< HEAD
+=======
+                var reg = /^[1-9]\d*$/
+                if (!reg.test(vm.nums)){
+                    lf.nativeUI.toast('销售数量不合法')
+                    return
+                }
+                
+>>>>>>> 1.4.3
                 if(!reg.test(vm.salePersonnelNum)&&vm.salePersonnelNum){
                     lf.nativeUI.toast('销售人数不合法')
                     return
                 }
 
+<<<<<<< HEAD
+=======
+                var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
+                
+>>>>>>> 1.4.3
                 if (!vm.amount){
                     lf.nativeUI.toast('请输入金额')
                     return
@@ -140,6 +177,11 @@
 
                 if (vm.amount < 0.01){
                     lf.nativeUI.toast('金额不能小于0.01')
+                    return
+                }
+
+                if (!amountReg.test(vm.amount)){
+                    lf.nativeUI.toast('金额只能精确到两位小数')
                     return
                 }
                 
@@ -155,6 +197,7 @@
 
                 this.payType = payType
                 this.payName = this.getPayName(this.payType)
+                this.payTypeUrl = this.getPayTypeUrl(this.payType)
 
                 if (payType == 0) {
                     cashPay()
@@ -203,6 +246,20 @@
                     case 2:
                         this.channelCode = 'alipay'
                         return '支付宝'
+                }
+            },
+
+            getPayTypeUrl: function(type) {
+                switch (type) {
+                    case 0:
+                        this.channelCode = 'cash'
+                        return '../../css/images/sell_cash.png'
+                    case 1:
+                        this.channelCode = 'wechat'
+                        return '../../css/images/sell_wechat.png'
+                    case 2:
+                        this.channelCode = 'alipay'
+                        return '../../css/images/sell_alipay.png'
                 }
             },
 
@@ -269,9 +326,16 @@
             lf.nativeUI.toast(erro.msg);
         })
     }
-
+    // 删除所有子元素
+    function clearAllNode(parentNode){
+        while (parentNode.firstChild) {
+            var oldNode = parentNode.removeChild(parentNode.firstChild);
+            oldNode = null;
+        }
+    }
     // 生成二维码
     function generateQrcode(url) {
+        clearAllNode(document.getElementById("qrcode-img"))
         new QRCode(document.getElementById("qrcode-img"), {
             text: url,
             width: 200,

@@ -38,6 +38,9 @@ lf.ready(function() {
     })
     mui('body').on('tap', '.genSale', function() { //点击生成销售
         var orderId = vm.orderInfo.orderId;
+        var tourNo = vm.orderInfo.tourNo;
+        var productName = vm.orderInfo.productName;
+        var tourGuidePhone = vm.orderInfo.tourGuidePhone;
         var areaCode = vm.orderInfo.areaCode;
         var tourGuide = vm.orderInfo.tourGuide;
         var purchaser = vm.orderInfo.purchaser;
@@ -46,6 +49,9 @@ lf.ready(function() {
         var city = vm.city;
         lf.window.openWindow('orderPay', '../order-pay/order-pay.html', {}, {
             orderId: orderId,
+            tourNo: tourNo,
+            productName: productName,
+            tourGuidePhone: tourGuidePhone,
             areaCode: areaCode,
             tourGuide: tourGuide,
             purchaser: purchaser,

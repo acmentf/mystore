@@ -1,0 +1,124 @@
+#order-pay-header {
+    background-color: #fff;
+    color: #333; }
+    #order-pay-header .mui-title, #order-pay-header .mui-action-back {
+      color: #333 !important; }
+  
+  .order-pay-content .order-pay-paying, .order-pay-content .order-pay-paid {
+    margin-top: 20px; }
+  .order-pay-content.order-pay-list {
+    margin-bottom: 80px; }
+  .order-pay-content .mui-table-view {
+    margin-bottom: 20px; }
+  .order-pay-content .order-pay-avatar {
+    width: 60px;
+    height: 60px; }
+  .order-pay-content .order-pay-list-key {
+    color: #666; }
+  .order-pay-content .order-pay-list-value {
+    color: #bbb; }
+  .order-pay-content .mui-btn-block {
+    background-color: #3db391;
+    color: #fff;
+    border: none; }
+  .order-pay-content .order-pay-cell-title {
+    margin: 20px 0; }
+  .order-pay-content i {
+    font-style: normal; }
+  .order-pay-content ::placeholder {
+    color: #bbb; }
+  .order-pay-content .pay-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: top; }
+  .order-pay-content .order-pay-card {
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 10px; }
+    .order-pay-content .order-pay-card .order-pay-card-header {
+      overflow: hidden;
+      background-color: #3db391;
+      color: #fff;
+      padding: 10px;
+      box-sizing: border-box; }
+    .order-pay-content .order-pay-card .order-pay-card-content {
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #333; }
+      .order-pay-content .order-pay-card .order-pay-card-content p {
+        font-size: 16px; }
+  
+  .order-pay-clear {
+    clear: both;
+    overflow: hidden; }
+  
+  .order-pay-dialog {
+    width: 300px;
+    height: 400px;
+    margin-top: -200px;
+    margin-left: -150px;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    position: fixed;
+    z-index: 999999;
+    overflow: hidden;
+    border-radius: 10px; }
+    .order-pay-dialog .order-pay-dialog-header {
+      height: 100px;
+      background-color: #3eb392;
+      color: #fff;
+      text-align: center;
+      padding-top: 25px; }
+      .order-pay-dialog .order-pay-dialog-header > h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 24px;
+        font-weight: normal; }
+      .order-pay-dialog .order-pay-dialog-header > p {
+        margin-top: 5px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: normal; }
+    .order-pay-dialog .order-pay-dialog-qrcode {
+      text-align: center; }
+      .order-pay-dialog .order-pay-dialog-qrcode .qrcode-img {
+        margin: 50px auto 0;
+        width: 200px;
+        height: 200px; }
+  
+  .order-pay-generate {
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    padding: 10px; }
+    .order-pay-generate .mui-btn-block {
+      background-color: #3eb392;
+      color: #fff;
+      border: none;
+      margin-bottom: 0; }
+  
+  .empty-tips {
+    text-align: center;
+    color: #bbb; }
+  
+  .pay-status-paying {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 20px;
+    display: inline-block;
+    background: #ff7039;
+    color: #fff;
+    font-size: 14px; }
+  
+  .pay-status-paid {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 20px;
+    display: inline-block;
+    background: #30d3a4;
+    color: #fff;
+    font-size: 14px; }
+  
