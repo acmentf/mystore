@@ -151,25 +151,19 @@
                     return
                 }
                 
-<<<<<<< HEAD
-=======
                 var reg = /^[1-9]\d*$/
                 if (!reg.test(vm.nums)){
                     lf.nativeUI.toast('销售数量不合法')
                     return
                 }
                 
->>>>>>> 1.4.3
                 if(!reg.test(vm.salePersonnelNum)&&vm.salePersonnelNum){
                     lf.nativeUI.toast('销售人数不合法')
                     return
                 }
 
-<<<<<<< HEAD
-=======
                 var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
                 
->>>>>>> 1.4.3
                 if (!vm.amount){
                     lf.nativeUI.toast('请输入金额')
                     return
