@@ -16,19 +16,19 @@ lf.ready(function() {
         for(var i=0;i<vm.planList.length;i++) {
             var reg = /^[1-9]\d*$/
             var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
-            if(vm.planList[i].planPersons&&!reg.test(vm.planList[i].planPersons)){
+            if(vm.planList[i].planPersons!=0&&!reg.test(vm.planList[i].planPersons)){
                 lf.nativeUI.toast('请输入正确的预发团人数');
                 return false
             }
-            if(vm.planList[i].planAmount&&vm.planList[i].planAmount<0.01){
-                lf.nativeUI.toast('预销售额不能小于0.01')
+            if(vm.planList[i].planAmount!=0&&vm.planList[i].planAmount<0){
+                lf.nativeUI.toast('预销售额不能小于0')
                 return false
             }
-            if(vm.planList[i].planAmount&&!amountReg.test(vm.planList[i].planAmount)){
+            if(vm.planList[i].planAmount!=0&&!amountReg.test(vm.planList[i].planAmount)){
                 lf.nativeUI.toast('预销售额只能精确到两位小数');
                 return false
             }
-            if(vm.planList[i].planShootNums&&!reg.test(vm.planList[i].planShootNums)){
+            if(vm.planList[i].planShootNums!=0&&!reg.test(vm.planList[i].planShootNums)){
                 lf.nativeUI.toast('请输入正确的预拍人数');
                 return false
             }

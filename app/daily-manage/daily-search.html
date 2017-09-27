@@ -48,17 +48,17 @@
                 </div>
                 <p>
                     <span>实销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
-                    <span class="plan-info">预销售额: <span v-text="item.planAmount || '未填报'"></span></span>
+                    <span class="plan-info">预销售额: <span v-text="item.planAmount"></span></span>
                     <em v-if="item.planAmount!=0" v-text="item.proportionAmount"></em>
                 </p>
                 <p>
                     <span>实拍人数: <span v-text="item.realityShootNums || '待拍摄'"></span></span>
-                    <span class="plan-info">预拍人数: <span v-text="item.planShootNums || '未填报'"></span></span>
+                    <span class="plan-info">预拍人数: <span v-text="item.planShootNums"></span></span>
                     <em v-if="item.planShootNums!=0" v-text="item.proportionShootNums"></em>
                 </p>
                 <p>
                     <span>实发团人数: <span v-text="item.realityPersons || '未发团'"></span></span>
-                    <span class="plan-info">预发团人数: <span v-text="item.planPersons || '未填报'"></span></span>
+                    <span class="plan-info">预发团人数: <span v-text="item.planPersons"></span></span>
                 </p>
                 <p>
                     <span>前置销售额: <span v-text="item.advanceAmt || '待销售'"></span></span>
