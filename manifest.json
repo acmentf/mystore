@@ -976,7 +976,18 @@
 			"app/daily-manage/daily-plan.html": {
 				"resources": [
 					"app/daily-manage/daily-plan.js",
-					"css/daily-manage/daily-plan.css"
+					"css/daily-manage/daily-plan.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"images/order/date.png",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"css/common/common.css",
+					"js/framework/styles.js"
 				],
 				"refer": [],
 				"priority": 0
