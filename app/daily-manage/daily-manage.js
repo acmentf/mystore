@@ -5,9 +5,9 @@ var vm = new Vue({
         rolePositionList: [],
         rolePositionId: '',
 		currentRoleId: '', //当前用户角色id,
-		todayDate: '',
-		todayData: {},
-		futureData: [],
+		todayDate: '', // 今天的日期
+		todayData: {}, // 今天的数据
+		futureData: [], // 未来三天的数据
 		wgtVer: '', //版本号
 		hide: true
     },
