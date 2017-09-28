@@ -10,7 +10,7 @@ var vm = new Vue({
 		futureData: [], // 未来三天的数据
 		wgtVer: '', //版本号
 		hide: true,
-		btnText: '更多信息'
+		btnText: '显示更多信息'
     },
     watch: {
 		rolePositionId: function(val, oldVal) {
@@ -48,9 +48,9 @@ lf.ready(function() {
 	// 点击更多信息
 	mui("body").on("tap", ".more", function() {
 		if (vm.hide) {
-			vm.btnText = "收起信息"
+			vm.btnText = "隐藏更多信息"
 		} else {
-			vm.btnText = "更多信息"
+			vm.btnText = "显示更多信息"
 		}
 		vm.hide = !vm.hide
 	})
