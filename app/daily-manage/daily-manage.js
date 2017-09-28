@@ -155,7 +155,8 @@ function switchRolePostion(val) {
 			lf.nativeUI.toast('切换岗位成功');
             if (window.Role.currentPositions[0].roleId!=12) {
                 lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
-            }
+			}
+			init()
 		} else {
 			lf.nativeUI.closeWaiting();
 			lf.nativeUI.toast(data.msg);
