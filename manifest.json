@@ -264,8 +264,7 @@
 				],
 				"refer": [
 					"app/index.html",
-					"app/order/orderlist.html",
-					"app/daily-manage/daily-manage.html"
+					"app/order/orderlist.html"
 				],
 				"priority": 0
 			},
@@ -916,8 +915,7 @@
 					"app/order-pay/order-pay.js",
 					"css/images/sell_wechat.png",
 					"js/framework/qrcode.min.js",
-					"css/images/sell_alipay.png",
-					"css/order-pay/order-list.css"
+					"css/images/sell_alipay.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -936,66 +934,12 @@
 					"js/framework/styles.js",
 					"css/images/logo_login.png",
 					"app/daily-manage/daily-manage.js",
-					"js/mui.min.js",
 					"css/app.css",
+					"js/mui.min.js",
 					"images/order/refresh.png",
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js"
-				],
-				"refer": [
-					"app/daily-manage/daily-search.html",
-					"app/daily-manage/daily-plan.html",
-					"app/order/orderlist.html",
-					"app/daily-manage/daily-remark.html"
-				],
-				"priority": 0
-			},
-			"app/daily-manage/daily-search.html": {
-				"resources": [
-					"js/framework/define.js",
-					"js/mui.picker.min.js",
-					"js/framework/common.js",
-					"images/order/date.png",
-					"fonts/mui.ttf",
-					"css/common/common.css",
-					"js/framework/styles.js",
-					"app/daily-manage/daily-search.js",
-					"css/app.css",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"libs/vue.min.js",
-					"js/framework/lf.js",
-					"css/mui.picker.min.css",
-					"css/mui.poppicker.css",
-					"css/daily-manage/daily-search.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"app/daily-manage/daily-plan.html": {
-				"resources": [
-					"app/daily-manage/daily-plan.js",
-					"css/daily-manage/daily-plan.css",
-					"js/framework/define.js",
-					"js/framework/common.js",
-					"js/mui.min.js",
-					"images/order/date.png",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"libs/vue.min.js",
-					"js/framework/lf.js",
-					"css/common/common.css",
-					"js/framework/styles.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"app/daily-manage/daily-remark.html": {
-				"resources": [
-					"app/daily-manage/daily-remark.js",
-					"css/daily-manage/daily-remark.css"
 				],
 				"refer": [],
 				"priority": 0

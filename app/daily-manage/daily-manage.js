@@ -9,7 +9,8 @@ var vm = new Vue({
 		todayData: {}, // 今天的数据
 		futureData: [], // 未来三天的数据
 		wgtVer: '', //版本号
-		hide: true
+		hide: true,
+		btnText: '更多信息'
     },
     watch: {
 		rolePositionId: function(val, oldVal) {
@@ -46,7 +47,12 @@ lf.ready(function() {
 	})
 	// 点击更多信息
 	mui("body").on("tap", ".more", function() {
-		vm.hide = false
+		if (vm.hide) {
+			vm.btnText = "收起信息"
+		} else {
+			vm.btnText = "更多信息"
+		}
+		vm.hide = !vm.hide
 	})
 	// 填报计划
 	mui("body").on('tap', ".planBtn", function() {
