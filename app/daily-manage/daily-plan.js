@@ -4,6 +4,16 @@ var vm = new Vue({
         planList: []
     },
     methods: {
+        clearValue: function (e,i,key) {
+            if (e.target.value == 0) {
+                this.planList[i][key] = ''
+            }
+        },
+        inputValue: function (e,i,key) {
+            if (e.target.value == '') {
+                this.planList[i][key] = 0
+            }
+        },
         formChange: function(e,i,key){
             this.planList[i][key] = e.target.value
         }
@@ -32,18 +42,18 @@ lf.ready(function() {
                 lf.nativeUI.toast('请输入正确的预拍人数');
                 return false
             }
-            if(!vm.planList[i].planPersons&&(vm.planList[i].planShootNums||vm.planList[i].planAmount)) {
-                lf.nativeUI.toast('请输入预发团人数');
-                return false
-            }
-            if((vm.planList[i].planPersons||vm.planList[i].planShootNums)&&!vm.planList[i].planAmount) {
-                lf.nativeUI.toast('请输入预销售额');
-                return false
-            }
-            if((vm.planList[i].planPersons||vm.planList[i].planAmount)&&!vm.planList[i].planShootNums) {
-                lf.nativeUI.toast('请输入预拍人数');
-                return false
-            }
+            // if(!vm.planList[i].planPersons&&vm.planList[i].planPersons!=0&&(vm.planList[i].planShootNums||vm.planList[i].planAmount)) {
+            //     lf.nativeUI.toast('请输入预发团人数');
+            //     return false
+            // }
+            // if((vm.planList[i].planPersons||vm.planList[i].planShootNums)&&!vm.planList[i].planAmount&&vm.planList[i].planAmount!=0) {
+            //     lf.nativeUI.toast('请输入预销售额');
+            //     return false
+            // }
+            // if((vm.planList[i].planPersons||vm.planList[i].planAmount)&&!vm.planList[i].planShootNums&&vm.planList[i].planShootNums!=0) {
+            //     lf.nativeUI.toast('请输入预拍人数');
+            //     return false
+            // }
         }
         var params = {
             dailyPlan: vm.planList
