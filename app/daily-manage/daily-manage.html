@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="info">
-                                <a class="more" :class="hide? '': 'hide'">显示更多信息</a>
+                                <a class="more" v-text="btnText"></a>
                                 <article :class="hide? 'hide': ''">
                                     <p>
                                         <span>实销售额: <span v-text="todayData.realityAmount || '待销售'"></span></span>
