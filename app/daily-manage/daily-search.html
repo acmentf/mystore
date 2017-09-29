@@ -47,7 +47,7 @@
                     <span class="badge" v-if="item.flag==1">计划被改</span>
                 </div>
                 <p>
-                    <span>实销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
+                    <span>总销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
                     <span class="plan-info">预销售额: <span v-text="item.planAmount"></span></span>
                     <em v-if="item.planAmount!=0" v-text="item.proportionAmount"></em>
                 </p>
