@@ -84,7 +84,7 @@
                             <div class="progress-container">
                                 <p class="title">销售额</p>
                                 <div class="progressbar">
-                                    <span class="progress" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
+                                    <span class="progress" :class="todayData.realityAmount/todayData.planAmount<1?'yellow':''" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
                                 </div>
                                 <div class="proportion">
                                     <p><span v-text="todayData.realityAmount"></span>/<span v-text="todayData.planAmount"></span></p>
@@ -94,7 +94,7 @@
                             <div class="progress-container">
                                 <p class="title">拍摄人数</p>
                                 <div class="progressbar">
-                                    <span class="progress yellow" :style="{ width:todayData.planShootNums==0&&todayData.realityShootNums!=0?'55%':todayData.proportionShootNums}"></span>
+                                    <span class="progress" :class="todayData.realityShootNums/todayData.planShootNums<1?'yellow':''" :style="{ width:todayData.planShootNums==0&&todayData.realityShootNums!=0?'55%':todayData.proportionShootNums}"></span>
                                 </div>
                                 <div class="proportion">
                                     <p><span v-text="todayData.realityShootNums"></span>/<span v-text="todayData.planShootNums"></span></p>
