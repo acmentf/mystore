@@ -264,7 +264,8 @@
 				],
 				"refer": [
 					"app/index.html",
-					"app/order/orderlist.html"
+					"app/order/orderlist.html",
+					"app/daily-manage/daily-manage.html"
 				],
 				"priority": 0
 			},
@@ -812,7 +813,9 @@
 					"libs/vue.min.js",
 					"images/order/list_way.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/quicksaledetails.html"
+				],
 				"priority": 0
 			},
 			"app/message/message-detail.html": {
@@ -915,7 +918,8 @@
 					"app/order-pay/order-pay.js",
 					"css/images/sell_wechat.png",
 					"js/framework/qrcode.min.js",
-					"css/images/sell_alipay.png"
+					"css/images/sell_alipay.png",
+					"css/order-pay/order-list.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -941,7 +945,9 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderlist.html"
+				],
 				"priority": 0
 			}
 		},
