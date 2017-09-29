@@ -47,8 +47,8 @@ lf.ready(function(){
             lf.nativeUI.toast("填报时间间隔不正确")
             return false
         }
-        if(stamp>7*24*60*60*1000){
-            lf.nativeUI.toast("填报时间间隔应小于7天")
+        if(stamp>=7*24*60*60*1000){
+            lf.nativeUI.toast("填报时间间隔应小于或等于7天")
             return false
         }
         search(vm.startTime, vm.finishTime)
