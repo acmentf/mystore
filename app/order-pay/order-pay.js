@@ -307,11 +307,15 @@
             } else {
                 lf.nativeUI.closeWaiting();
                 lf.nativeUI.toast(data.msg);
+                dispatchEvent()
+                lf.window.closeCurrentWebview();
             }
 
         }, function(erro) {
             lf.nativeUI.closeWaiting();
             lf.nativeUI.toast(erro.msg);
+            dispatchEvent()
+            lf.window.closeCurrentWebview();
         })
     }
     // 删除所有子元素
