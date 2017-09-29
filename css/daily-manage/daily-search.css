@@ -53,16 +53,16 @@ p{
     font-size: 16px;
 }
 .btn-group button.only{
-    border-color: #5EC590;
-    color: #5EC590;
+    border-color: #3eb392;
+    color: #3eb392;
 }
 .btn-group button.only:active{
     background-color: #fff;
 }
 .btn-group button.search{
-    border-color: #5EC590;
+    border-color: #3eb392;
     color: #fff;
-    background-color: #5EC590;
+    background-color: #3eb392;
 }
 .info{
     border-top: 1px solid #eeeeee;

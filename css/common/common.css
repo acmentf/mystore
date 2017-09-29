@@ -83,3 +83,7 @@
 	background: url(../../images/message/nav_mine_gray.png) no-repeat center;
 	background-size: 100%;
 }
+.mui-btn-blue, .mui-btn-primary, input[type=submit]{
+  background-color:#3eb392;
+  border-color:#3eb392;
+}
