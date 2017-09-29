@@ -10,7 +10,7 @@ var vm = new Vue({
 		futureData: [], // 未来三天的数据
 		wgtVer: '', //版本号
 		hide: true,
-		btnText: '显示更多信息'
+		btnText: '显示更多'
     },
     watch: {
 		rolePositionId: function(val, oldVal) {
@@ -48,9 +48,9 @@ lf.ready(function() {
 	// 点击更多信息
 	mui("body").on("tap", ".more", function() {
 		if (vm.hide) {
-			vm.btnText = "隐藏更多信息"
+			vm.btnText = "隐藏更多"
 		} else {
-			vm.btnText = "显示更多信息"
+			vm.btnText = "显示更多"
 		}
 		vm.hide = !vm.hide
 	})
@@ -131,6 +131,7 @@ function switchRolePostion(val) {
 	var params = {
 		positionId: val
 	};
+	console.log(val)
 	lf.nativeUI.showWaiting();
 	lf.net.getJSON('user/switchPosition', params, function(data) {
 		console.log(JSON.stringify(data));
