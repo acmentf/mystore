@@ -946,8 +946,20 @@
 					"js/framework/lf.js"
 				],
 				"refer": [
-					"app/order/orderlist.html"
+					"app/order/orderlist.html",
+					"app/daily-manage/daily-search.html"
 				],
+				"priority": 0
+			},
+			"app/daily-manage/daily-search.html": {
+				"resources": [
+					"app/daily-manage/daily-search.js",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"css/daily-manage/daily-search.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
