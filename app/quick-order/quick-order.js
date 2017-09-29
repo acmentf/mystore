@@ -6,6 +6,7 @@ lf.ready(function() {
             groupNo: '',
             groupMemberNum: '',
             groupDate: '',
+            saleDate: '',
             guidName: '',
             guidTel: '',
             pNo: '',
@@ -64,6 +65,15 @@ lf.ready(function() {
         picker.show(function(select) {
             vm.groupDate = select.value
             vm.shootTime=select.value+' 全天'
+        })
+    })
+
+    mui('#app').on('tap', '.saleDate', function() { //选择销售日期
+        blur()
+        var opts = { "type": "date" };
+        picker = new mui.DtPicker(opts);
+        picker.show(function(select) {
+            vm.saleDate = select.value
         })
     })
 
@@ -174,6 +184,7 @@ lf.ready(function() {
                 periodType: periodType
             }],
             orderX: {
+                saleDate: vm.saleDate,
                 shootNum: vm.shootNums,
                 selectsNum: vm.selectPhotoNums,
             },
