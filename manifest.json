@@ -1026,7 +1026,9 @@
 					"js/framework/lf.js"
 				],
 				"refer": [
-					"app/correlate-order/search.html"
+					"app/correlate-order/search.html",
+					"app/order-pay/order-pay-detail.html",
+					"app/order/orderlist.html"
 				],
 				"priority": 0
 			},
@@ -1047,6 +1049,32 @@
 				],
 				"refer": [
 					"app/correlate-order/search-result.html"
+				],
+				"priority": 0
+			},
+			"app/correlate-order/editSaleOrder.html": {
+				"resources": [
+					"css/correlate-order/editSaleOrder.css",
+					"app/correlate-order/editSaleOrder.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order-pay/order-pay-detail.html": {
+				"resources": [
+					"css/correlate-order/order-details.css",
+					"js/mui.zoom.js",
+					"css/order-pay/order-list.css",
+					"js/mui.previewimage.js",
+					"css/images/sell_alipay.png",
+					"images/order/call_btn.png",
+					"app/order-pay/order-pay.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
+					"css/images/sell_cash.png"
+				],
+				"refer": [
+					"app/correlate-order/editSaleOrder.html"
 				],
 				"priority": 0
 			}

@@ -24,7 +24,8 @@ lf.ready(function() {
             sizeValue:'',
             printNums: '',
             photographerIdStr: [],
-            deptId:''//部门id
+            deptId:'',//部门id
+            lineName: lf.window.currentWebview().lineName
         }
     })
 
@@ -93,6 +94,37 @@ lf.ready(function() {
             quikOrderTag: true,
             deptId:vm.deptId,
             type: 2
+        })
+    })
+    
+    mui('#app').on('tap', '.shootPlance', function() { //选择拍摄景点
+        //拍摄景点
+        blur()
+        var picker = new mui.PopPicker();
+        var params = {
+            pageSize: 1000,
+            currPage: 1,
+            pageCount: 0,
+            lineNameLike: vm.lineName
+        } 
+        lf.nativeUI.showWaiting()
+        lf.net.getJSON('/sight/list', params, function(res) {
+            lf.nativeUI.closeWaiting()
+            if (res.code === '200') {
+                var data = []
+                res.data.data.forEach(function(item, index) {
+                    var obj = {
+                        text: item.sightName,
+                    }
+                    data.push(obj)
+                })
+                picker.setData(data)
+                picker.show(function(selectItems) {
+                    vm.shootPlance = selectItems[0].text
+                })
+            } else {
+                mui.alert(res.msg)
+            }
         })
     })
 
