@@ -169,11 +169,15 @@ mui('.order-ul').on('tap', '.link', function() {
 			})
 		}else {
 			lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
-				orderNo: id,
-				index: index,
-				photographerId: window.Role.photograherId,
-				summary: summary,
-				actionStatus: actionStatus,
+				orderId: orderid,
+				tourNo: tourNo,
+				productName: productName,
+				tourGuidePhone: tourGuidePhone,
+				areaCode: areaCode,
+				tourGuide: tourGuide,
+				purchaser: purchaser,
+				aliasName: aliasName,
+				actionStatus:actionStatus,
 				province: province,
 				city: city
 			})
@@ -250,7 +254,8 @@ mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: orderNo,
 		type: 2,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
@@ -379,7 +384,9 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 
 // 快速下单
 mui('body').on('tap', '#quickOrder', function() {
-	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {})
+	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {}, {
+		lineName: vm.orderList[0][0].lineName
+	})
 })
 /**
  * 搜索订单
@@ -389,6 +396,9 @@ mui('body').on('tap', '#search-order', function() {
 })
 mui('body').on('tap', '.footer-message-btn', function() {
 	lf.window.openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+})
+mui('body').on('tap', '.footer-order-contact-btn', function() {
+	lf.window.openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
 })
 mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window.openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())

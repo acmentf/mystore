@@ -235,10 +235,10 @@ function validate(vm,formData) {
         lf.nativeUI.toast('请选择产品')
         return false
     }
-    if (!formData.groupNo.trim()) {
-        lf.nativeUI.toast('请填写团号')
-        return false
-    }
+    // if (!formData.groupNo.trim()) {
+    //     lf.nativeUI.toast('请填写团号')
+    //     return false
+    // }
     if (!formData.groupMemberNum.trim()) {
         lf.nativeUI.toast('请填写团人数')
         return false

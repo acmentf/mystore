@@ -348,7 +348,8 @@
 					"images/order/list_time.png",
 					"images/order/sale.png",
 					"images/order/switch_back.png",
-					"images/order/call_btn.png"
+					"images/order/call_btn.png",
+					"images/message/nav_order_contact_gray.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -367,7 +368,8 @@
 					"app/quick-order/quick-order.html",
 					"app/order/quicksaledetails.html",
 					"app/order-pay/order-pay.html",
-					"app/daily-manage/daily-manage.html"
+					"app/daily-manage/daily-manage.html",
+					"app/correlate-order/correlate-order.html"
 				],
 				"priority": 0
 			},
@@ -653,7 +655,13 @@
 					"js/mui.pullToRefresh.material.js",
 					"images/order/operator_delete.png",
 					"css/app.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/framework/define.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"js/mui.min.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"
@@ -991,6 +999,55 @@
 					"js/framework/lf.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"app/correlate-order/correlate-order.html": {
+				"resources": [
+					"images/message/sale_date.png",
+					"images/message/guide.png",
+					"css/correlate-order/correlate-order.css",
+					"images/message/nav_order_contact_green.png",
+					"app/correlate-order/correlate-order.js",
+					"images/message/nav_order_gray.png",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"images/message/nav_message_gray.png",
+					"images/order/list_time.png",
+					"js/framework/styles.js",
+					"css/images/logo_login.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
+				],
+				"refer": [
+					"app/correlate-order/search.html"
+				],
+				"priority": 0
+			},
+			"app/correlate-order/search-result.html": {
+				"resources": [
+					"app/correlate-order/search-result.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/correlate-order/search.html": {
+				"resources": [
+					"css/order/search.css",
+					"js/mui.picker.min.js",
+					"app/correlate-order/search.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/correlate-order/search-result.html"
+				],
 				"priority": 0
 			}
 		},
