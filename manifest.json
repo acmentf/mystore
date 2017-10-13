@@ -349,7 +349,8 @@
 					"images/order/sale.png",
 					"images/order/switch_back.png",
 					"images/order/call_btn.png",
-					"images/message/nav_order_contact_gray.png"
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_order_gray.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -655,13 +656,7 @@
 					"js/mui.pullToRefresh.material.js",
 					"images/order/operator_delete.png",
 					"css/app.css",
-					"css/mui.min.css",
-					"js/framework/define.js",
-					"fonts/mui.ttf",
-					"js/framework/styles.js",
-					"js/mui.min.js",
-					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"css/mui.min.css"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"
@@ -1027,8 +1022,7 @@
 				],
 				"refer": [
 					"app/correlate-order/search.html",
-					"app/order-pay/order-pay-detail.html",
-					"app/order/orderlist.html"
+					"app/order-pay/order-pay-detail.html"
 				],
 				"priority": 0
 			},
@@ -1052,14 +1046,6 @@
 				],
 				"priority": 0
 			},
-			"app/correlate-order/editSaleOrder.html": {
-				"resources": [
-					"css/correlate-order/editSaleOrder.css",
-					"app/correlate-order/editSaleOrder.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
 			"app/order-pay/order-pay-detail.html": {
 				"resources": [
 					"css/correlate-order/order-details.css",
@@ -1076,6 +1062,17 @@
 				"refer": [
 					"app/correlate-order/editSaleOrder.html"
 				],
+				"priority": 0
+			},
+			"app/correlate-order/editSaleOrder.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"css/correlate-order/editSaleOrder.css",
+					"app/correlate-order/editSaleOrder.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
