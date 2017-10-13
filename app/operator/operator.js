@@ -34,6 +34,39 @@ var vm = new Vue({
 		timeName1: '上午',
 		timeName2: '下午',
 		timeName3: '晚上',
+		lineName: ''
+	},
+	methods: {
+		selectJourneyName: function(e, i){
+			//拍摄景点
+			blur()
+			var picker = new mui.PopPicker();
+			var params = {
+				pageSize: 1000,
+				currPage: 1,
+				pageCount: 0,
+				lineNameLike: vm.lineName
+			} 
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('/sight/list', params, function(res) {
+				lf.nativeUI.closeWaiting()
+				if (res.code === '200') {
+					var data = []
+					res.data.data.forEach(function(item, index) {
+						var obj = {
+							text: item.sightName,
+						}
+						data.push(obj)
+					})
+					picker.setData(data)
+					picker.show(function(selectItems) {
+						vm.shootInfos[i].journeyName = selectItems[0].text
+					})
+				} else {
+					mui.alert(res.msg)
+				}
+			})
+		}
 	}
 })
 
@@ -264,6 +297,7 @@ function renderTrackInfo(){
 	vm.orderNo = lf.window.currentWebview().orderNo;
 	vm.forindex = lf.window.currentWebview().type;
 	vm.forStatus = lf.window.currentWebview().status;
+	vm.lineName = lf.window.currentWebview().lineName
 	console.log('orderNo111-=='+vm.orderNo)
 	var params = {
 		orderNo: vm.orderNo

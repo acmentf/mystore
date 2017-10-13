@@ -254,7 +254,8 @@ mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: orderNo,
 		type: 2,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
@@ -383,7 +384,9 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 
 // 快速下单
 mui('body').on('tap', '#quickOrder', function() {
-	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {})
+	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {}, {
+		lineName: vm.orderList[0][0].lineName
+	})
 })
 /**
  * 搜索订单

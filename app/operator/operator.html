@@ -232,9 +232,10 @@
 								<li class="mui-table-view-cell">
 									<span>拍摄景点</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请输入景点名称" class="forinput mui-pull-right" />
-										<input type="text" v-else  v-model='item.journeyName' class="forinput mui-pull-right"  placeholder="请输入景点名称"/>
+										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请输入景点名称" class="journeyName forinput mui-pull-right" />
+										<input type="text" @click="selectJourneyName($event,index)" readonly v-else  v-model='item.journeyName' class="journeyName forinput mui-pull-right"  placeholder="请输入景点名称"/>
 									</span>
+									<span v-if="forStatus != 'check'" class="mui-icon mui-icon-arrowright"></span>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>拍摄日期</span>
