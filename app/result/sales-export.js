@@ -119,6 +119,7 @@ mui('#app').on('tap', '.saleDate', function () { //选择销售日期
 })
 mui('.mui-bar').on('tap', '.save-btn', function(){
 		var flag = true 
+		console.log(vm.saleDate)
 		if(!vm.saleDate){
 			lf.nativeUI.toast('请选择销售时间')
 			flag = false;
@@ -200,7 +201,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		buyers: vm.buyers,
 		orderXms: orderXms,
 		flag: 2,
-		saleDate:new Date(vm.saleDate)
+		saleDate:vm.saleDate
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()

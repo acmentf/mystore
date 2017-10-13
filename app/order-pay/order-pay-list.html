@@ -54,6 +54,9 @@
             aliasName: '',
             province: '',
             city: '',
+            tourNo: '',
+            tourGuidePhone: '',
+            productName: '',
             orderPayList: [],
             curPage: 0,
             pageSize: 10,
@@ -100,7 +103,9 @@
             vm.aliasName = lf.window.currentWebview().aliasName
             vm.province = lf.window.currentWebview().province
             vm.city = lf.window.currentWebview().city
-
+            vm.tourGuidePhone = lf.window.currentWebview().tourGuidePhone
+            vm.tourNo = lf.window.currentWebview().tourNo
+            vm.productName = lf.window.currentWebview().productName
             function getOrderPayList() {
                 vm.curPage++
 
@@ -177,6 +182,9 @@
                     areaCode: vm.areaCode, // 区域code
                     province: vm.province,
                     city: vm.city,
+                    tourGuidePhone: vm.tourGuidePhone,
+                    tourNo:vm.tourNo,
+                    productName: vm.productName,
                     saleOrderId: id
                 })
             }

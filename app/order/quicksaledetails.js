@@ -73,7 +73,10 @@ lf.ready(function() {
 			purchaser: vm.orderInfo.purchaser,
 			aliasName: vm.orderInfo.aliasName,
 			province: vm.orderInfo.province,
-			city: vm.orderInfo.city,
+            city: vm.orderInfo.city,
+            tourNo: vm.orderInfo.tourNo,
+            tourGuidePhone: vm.orderInfo.tourGuidePhone,
+            productName: vm.orderInfo.productName
 		})
 	})
     mui('body').on('tap', '.finish', function() {
@@ -116,7 +119,8 @@ lf.ready(function() {
         return m < 10 ? '0' + m : m
     }
     function renderOrderDetails() {
-        var orderId = lf.window.currentWebview().orderNo;
+        var orderId = lf.window.currentWebview().orderId;
+        console.log(orderId)
         var params = {
             orderId: orderId
         };

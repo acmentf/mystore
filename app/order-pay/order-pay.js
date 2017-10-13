@@ -7,7 +7,6 @@
  lf.ready(function() {
     var data = {
         orderId: lf.window.currentWebview().orderId,
-        tourNo: lf.window.currentWebview().tourNo,
         productName: lf.window.currentWebview().productName,
         areaCode: lf.window.currentWebview().areaCode,
         saleOrderId: lf.window.currentWebview().saleOrderId,
@@ -19,10 +18,14 @@
         city: lf.window.currentWebview().city,
         orderStatus: '',
         orderNo: '',
+        pOrderNo: '',
         channelName: '',
         orderTime: '',
+        orderSaleDate: '',
+        guidePhone: '',
         channelCode: '',
         salePersonnelNum: '',
+        givesNum: '',
         nums: '',
         amount: '',
         remark: '相片',
@@ -73,19 +76,22 @@
                     
                     vm.id = data.data.id
                     vm.orderNo = data.data.orderNo
+                    vm.pOrderNo = data.data.pOrderNo
                     vm.nums = data.data.nums
                     vm.amount = data.data.totalAmount
                     vm.orderStatus = data.data.status
                     vm.orderTime = data.data.orderTime
+                    vm.orderSaleDate = data.data.orderSaleDate
                     vm.remark = data.data.remark
                     vm.argDictName = data.data.argDictName
                     vm.argDictId = data.data.argDictId
                     vm.channelName = data.data.channelName
                     vm.salePersonnelNum = data.data.salePersonnelNum
                     vm.verificationStatus = data.data.verificationStatus
-
+                    vm.givesNum = data.data.givesNum
                     vm.province = vm.province || data.data.province
                     vm.city = vm.city || data.data.city
+                    vm.guidePhone = data.data.guidePhone
     
                 } else {
                     lf.nativeUI.closeWaiting();
@@ -114,6 +120,19 @@
             hideDialog: function() {
                 vm.isPaying = false
                 clearInterval(vm.timer)
+            },
+            edit: function() {
+                mui.back();
+                lf.window.openWindow('../correlate-order/editSaleOrder.html','../correlate-order/editSaleOrder.html',{},{
+                    orderId: vm.orderId,
+                    productName: vm.productName,
+                    tourNo: vm.tourNo,
+                    saleTime: vm.orderSaleDate,
+                    amount: vm.amount,
+                    channelName: vm.channelName,
+                    saleOrderId: vm.saleOrderId,
+                    tourGuide: vm.guideName
+                },lf.window.currentWebview())
             },
             payStatus: function(status) {
                 switch (status) {
@@ -293,7 +312,9 @@
             console.log(JSON.stringify(data));
 
             if(data.code == 200) {
-                lf.nativeUI.closeWaiting();
+                if(vm.channelCode != 'cash'){
+                    lf.nativeUI.closeWaiting();
+                }
 
                 vm.loopOrderId = data.data.saleOrderId
 
@@ -343,7 +364,9 @@
         var params = {
             id: vm.loopOrderId
         }
-
+        if(vm.channelCode == 'cash'){
+            lf.nativeUI.showWaiting();
+        }
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
             console.log(JSON.stringify(data.data));
 
@@ -358,6 +381,7 @@
                     clearInterval(vm.timer)
                     payCallback(data.data.status)
                 }
+                lf.nativeUI.closeWaiting();
             }
         })
     }
@@ -382,4 +406,47 @@
     function dispatchEvent() {
         lf.event.fire(lf.window.currentWebview().opener(), 'orderPay', {})
     }
+
+    lf.event.listener('orderdetails', function(e) {
+        var params = {
+            id: this.saleOrderId
+        }
+
+        lf.nativeUI.showWaiting();
+
+        lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+            console.log(JSON.stringify(data));
+
+            if(data.code == 200) {
+                lf.nativeUI.closeWaiting();
+                
+                vm.id = data.data.id
+                vm.orderNo = data.data.orderNo
+                vm.pOrderNo = data.data.pOrderNo
+                vm.nums = data.data.nums
+                vm.amount = data.data.totalAmount
+                vm.orderStatus = data.data.status
+                vm.orderTime = data.data.orderTime
+                vm.orderSaleDate = data.data.orderSaleDate
+                vm.remark = data.data.remark
+                vm.argDictName = data.data.argDictName
+                vm.argDictId = data.data.argDictId
+                vm.channelName = data.data.channelName
+                vm.salePersonnelNum = data.data.salePersonnelNum
+                vm.verificationStatus = data.data.verificationStatus
+                vm.givesNum = data.data.givesNum
+                vm.province = vm.province || data.data.province
+                vm.city = vm.city || data.data.city
+                vm.guidePhone = data.data.guidePhone
+
+            } else {
+                lf.nativeUI.closeWaiting();
+                lf.nativeUI.toast(data.msg);
+            }
+
+        }, function(erro) {
+            lf.nativeUI.closeWaiting();
+            lf.nativeUI.toast(erro.msg);
+        })
+    })
 })

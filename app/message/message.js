@@ -1,13 +1,16 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
-		messageList:[]
+		messageList:[],
+		currentRoleId: ''
 	}
 })
 lf.ready(function(){
 	readMessage()
-	console.log(window.Role.userroleId) // 岗位id
-	
+	if(window.Role.currentPositions.length>0){
+		vm.currentRoleId = window.Role.currentPositions[0].roleId;
+		console.log("当前用户的角色id"+vm.currentRoleId)
+	}
 })
 
 function readMessage () {
@@ -34,7 +37,9 @@ lf.event.listener('orderdetails', function(e) {
 mui('body').on('tap','.footer-order-btn',function() {
 	lf.window.openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
 })
-
+mui('body').on('tap', '.footer-order-contact-btn', function() {
+	lf.window.openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
+})
 mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window.openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
 })
