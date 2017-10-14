@@ -105,6 +105,10 @@ mui('.mui-content').on('tap', '.team-date-end', function(){
 
 //点击搜索
 mui('.mui-content').on('tap','#search-btn', function(){
+	if(new Date(vm.startTime) >= new Date(vm.endTime) ){
+		lf.nativeUI.toast("开始时间应该小于结束时间")
+		return
+	}
 	lf.window.openWindow('search-result.html','search-result.html',{},{
 		searchText: vm.searchText,
 		status: vm.state.value,

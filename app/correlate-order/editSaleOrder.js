@@ -99,19 +99,22 @@ lf.ready(function() {
                     lf.nativeUI.toast("请选择销售")
                     return
                 }
+                console.log(vm.orderId)
                 var params = {
                     argDictId:vm.argDictId,
                     argDictName: vm.argDictName,
                     remark:vm.remark,
                     createTimeStr:vm.createTime,
                     id:vm.id,
+                    orderId: vm.orderId,
+                    guideName: vm.tourGuide,
                     nums:vm.nums,
                     saleId:vm.saleId,
                     saleName:vm.saleName,
                     salePersonnelNum:vm.salePersonnelNum,
                     salePositionId:vm.salePositionId
                 };
-                console.log(vm.argDictName)
+                console.log(vm.argDictdName)
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('pay/editOrderInfo', params, function(res) {
                     lf.nativeUI.closeWaiting()
@@ -185,6 +188,7 @@ lf.ready(function() {
                 lf.net.getJSON('order/queryGuideByProductAndSaleDate', params, function(res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
+                        console.log(JSON.stringify(res.data))
                         var data = []
                         if (res.data.length ==0){
                             lf.nativeUI.toast('暂无导游');
@@ -193,7 +197,7 @@ lf.ready(function() {
                         res.data.forEach(function(item, index) {
                             var obj = {
                                 text: item.tourGuide,
-                                value: item.orderNo
+                                value: item.orderNo + " " + item.orderId
                             }
                             data.push(obj)
                         })
@@ -201,7 +205,8 @@ lf.ready(function() {
                         picker.setData(data)
                         picker.show(function(selectItems) {
                             vm.tourGuide = selectItems[0].text
-                            vm.pOrderNo = selectItems[0].value
+                            vm.pOrderNo = selectItems[0].value.split(" ")[0]
+                            vm.orderId = selectItems[0].value.split(" ")[1]
                         })
                     } else {
                         mui.alert(res.msg)

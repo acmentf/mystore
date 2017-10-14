@@ -105,6 +105,19 @@ mui('.mui-content').on('tap', '.team-date-end', function(){
 	});
 })
 
+// 点击重置
+mui('.mui-content').on('tap', '#reset-btn', function() {
+	vm.searchText = ''
+	vm.state.value = ''
+	vm.state.text = '请选择'
+	vm.orderTimeBegin = ''
+	vm.orderTimeEnd = ''
+	vm.startBeginTime = ''
+	vm.startEndTime = ''
+	vm.stateAction.value = ''
+	vm.stateAction.text = '请选择'
+})
+
 //点击搜索
 mui('.mui-content').on('tap','#search-btn', function(){
 	lf.window.openWindow('search-result.html','search-result.html',{},{
