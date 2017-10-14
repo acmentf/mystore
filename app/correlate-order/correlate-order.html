@@ -170,7 +170,7 @@
         <div class="mui-inner-wrap" style="background:#efeff4">
             <header class="mui-bar mui-bar-nav" style="background:#3db391;">
                 <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-                <h1 class="mui-title" style="color: #fff;">订单列表</h1>
+                <h1 class="mui-title" style="color: #fff;">关联订单</h1>
                 <a style="color:#fff" id="search-order" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
             </header>
             <div class="mui-content orderlist-content">
@@ -205,7 +205,7 @@
                                             </div>
                                             <div class="middle">
                                                 <div class="guide">导游:<span v-text="item.guideName"></span></div>
-                                                <div class="sale-time">预计销售日期:<span v-text="item.orderTime"></span></div>
+                                                <div class="sale-time">预计销售日期:<span v-text="item.saleDate"></span></div>
                                             </div>
                                             <div class="bottom">
                                                 <p>生成时间:<span v-text="item.createTime"></span></p>
@@ -228,7 +228,7 @@
                 </div>
                 <div class="footer-order-contact-btn" v-if="currentRoleId==9">
                     <span class="footer-order-contact-icon foot-icon"></span>
-                    <span class="footer-order-contact-text">订单</span>
+                    <span class="footer-order-contact-text">关联</span>
                 </div>
                 <div class="footer-message-btn">
                     <span class="footer-message-icon foot-icon"></span>
