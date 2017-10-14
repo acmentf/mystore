@@ -27,6 +27,7 @@
         salePersonnelNum: '',
         givesNum: '',
         nums: '',
+        salesNums: '',
         amount: '',
         remark: '相片',
         argDictId: 6,
@@ -78,6 +79,7 @@
                     vm.orderNo = data.data.orderNo
                     vm.pOrderNo = data.data.pOrderNo
                     vm.nums = data.data.nums
+                    vm.salesNums = data.data.salesNums
                     vm.amount = data.data.totalAmount
                     vm.orderStatus = data.data.status
                     vm.orderTime = data.data.orderTime

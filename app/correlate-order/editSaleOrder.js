@@ -20,7 +20,7 @@ lf.ready(function() {
             orderSaleDate: '',
             remark: '相片',
             argDictId: 6,
-            argDictName: '',
+            argDictName: '7寸',
             salePersonnelNum: '',
             verificationStatus: '',
             givesNum: '',
@@ -37,15 +37,15 @@ lf.ready(function() {
             salePositionId: '',
             pNo:''
         },
-        watch: {
-            argDictId: function(val) {
-                for(var key in sizeOptions){
-                    if(key==val){
-                        this.argDictName = sizeOptions[key]
-                    }
-                }
-            }
-        },
+        // watch: {
+        //     argDictId: function(val) {
+        //         for(var key in sizeOptions){
+        //             if(key==val){
+        //                 this.argDictName = sizeOptions[key]
+        //             }
+        //         }
+        //     }
+        // },
         methods: {
             channelTyle: function(channelName){
                 switch (channelName) {
@@ -102,7 +102,7 @@ lf.ready(function() {
                 console.log(vm.orderId)
                 var params = {
                     argDictId:vm.argDictId,
-                    argDictName: vm.argDictName,
+                    argDictName: vm.sizeOptions[vm.argDictId],
                     remark:vm.remark,
                     createTimeStr:vm.createTime,
                     id:vm.id,
