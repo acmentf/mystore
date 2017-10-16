@@ -82,12 +82,10 @@
                     vm.salesNums = data.data.salesNums
                     vm.amount = data.data.totalAmount
                     vm.orderStatus = data.data.status
-                    vm.orderTime = data.data.orderTime
-                    if(data.data.orderSaleDate){
-                        vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
-                    } else {
-                        vm.orderSaleDate = ''
-                    }
+
+                    vm.orderTime = data.data.orderTime && lf.util.timeStampToDate(data.data.orderTime)
+                    vm.orderSaleDate = data.data.orderSaleDate && lf.util.timeStampToDate2(data.data.orderSaleDate)
+
                     vm.remark = data.data.remark
                     vm.argDictName = data.data.argDictName
                     vm.argDictId = data.data.argDictId
@@ -432,12 +430,10 @@
                 vm.nums = data.data.nums
                 vm.amount = data.data.totalAmount
                 vm.orderStatus = data.data.status
-                vm.orderTime = data.data.orderTime
-                if(data.data.orderSaleDate){
-                    vm.orderSaleDate = lf.util.timeStampToDate2(data.data.orderSaleDate)
-                } else {
-                    vm.orderSaleDate = ''
-                }
+               
+                vm.orderTime = data.data.orderTime && lf.util.timeStampToDate(data.data.orderTime)
+                vm.orderSaleDate = data.data.orderSaleDate && lf.util.timeStampToDate2(data.data.orderSaleDate)
+                
                 vm.remark = data.data.remark
                 vm.argDictName = data.data.argDictName
                 vm.argDictId = data.data.argDictId
