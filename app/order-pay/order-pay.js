@@ -96,6 +96,8 @@
                     vm.province = vm.province || data.data.province
                     vm.city = vm.city || data.data.city
                     vm.guidePhone = data.data.guidePhone
+                    vm.guideName = data.data.guideName
+                    vm.salesNums = data.data.salesNums
     
                 } else {
                     lf.nativeUI.closeWaiting();
@@ -136,7 +138,7 @@
                     channelName: vm.channelName,
                     saleOrderId: vm.saleOrderId,
                     tourGuide: vm.guideName
-                },lf.window.currentWebview())
+                })
             },
             payStatus: function(status) {
                 switch (status) {
@@ -413,9 +415,9 @@
 
     lf.event.listener('orderdetails', function(e) {
         var params = {
-            id: this.saleOrderId
+            id: vm.saleOrderId
         }
-
+        console.log("2222222")
         lf.nativeUI.showWaiting();
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
@@ -444,6 +446,8 @@
                 vm.province = vm.province || data.data.province
                 vm.city = vm.city || data.data.city
                 vm.guidePhone = data.data.guidePhone
+                vm.guideName = data.data.guideName
+                vm.salesNums = data.data.salesNums
 
             } else {
                 lf.nativeUI.closeWaiting();

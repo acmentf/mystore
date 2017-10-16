@@ -400,7 +400,8 @@
 				"refer": [
 					"app/order/orderdetails.html",
 					"app/order/orderlist.html",
-					"app/message/message-detail.html"
+					"app/message/message-detail.html",
+					"app/correlate-order/correlate-order.html"
 				],
 				"priority": 0
 			},
@@ -1029,7 +1030,8 @@
 					"app/correlate-order/search.html",
 					"app/order-pay/order-pay-detail.html",
 					"app/correlate-order/editSaleOrder.html",
-					"app/order/orderlist.html"
+					"app/order/orderlist.html",
+					"app/message/message.html"
 				],
 				"priority": 0
 			},
