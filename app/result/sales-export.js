@@ -201,7 +201,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		buyers: vm.buyers,
 		orderXms: orderXms,
 		flag: 2,
-		saleDate:vm.saleDate
+		saleDate:new Date(vm.saleDate.replace(/-/g, '/'))
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
