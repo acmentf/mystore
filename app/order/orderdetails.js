@@ -393,7 +393,8 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 			orderNo: vm.currentOrderNo,
 			type: type,
-			status: status
+			status: status,
+			lineName: lf.window.currentWebview().lineName
 		})
 	}
 })

@@ -636,7 +636,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"css/order-pay/order-list.css"
 				],
 				"refer": [
 					"app/order-pay/order-pay-detail.html"
@@ -879,7 +880,8 @@
 				"refer": [
 					"app/sale-detail/saledetail.html",
 					"app/result/sales-export.html",
-					"app/order-pay/order-pay-list.html"
+					"app/order-pay/order-pay-list.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},

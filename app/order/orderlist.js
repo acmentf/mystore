@@ -140,7 +140,8 @@ mui('.order-ul').on('tap', '.link', function() {
 			orderNo: id,
 			index: index,
 			photographerId: window.Role.photograherId,
-			summary: summary
+			summary: summary,
+			lineName: this.getAttribute('data-aliasName')
 		})
 	} else {
 		var orderid = this.getAttribute('data-id');
@@ -264,7 +265,8 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: orderid,
 		type: 0,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 

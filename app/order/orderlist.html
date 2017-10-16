@@ -221,7 +221,7 @@
                                                     </div>
                                                     <div class="nr">
                                                         <div class="imgbody">
-                                                            <div class="tourinfo link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
+                                                            <div class="tourinfo link" :data-id="item.id" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city" :data-aliasName="item.aliasName">
                                                                 <div v-if="currentRoleId!=9">
 																	<div class="item">
 																		<span class="ico ico-starttime"></span>
@@ -276,7 +276,7 @@
 															</button> 
 															</div>-->
                                                         <div v-if="currentRoleId == 4">
-                                                            <button v-if="assignOrder&&item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+                                                            <button v-if="assignOrder&&item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName">
 																	计调
 																</button>
 
@@ -289,7 +289,7 @@
 																</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 2">
-                                                            <button v-if="assignOrder&&item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo">
+                                                            <button v-if="assignOrder&&item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName">
 																	计调
 																</button>
                                                         </div>

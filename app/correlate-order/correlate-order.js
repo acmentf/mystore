@@ -487,6 +487,7 @@ function update() {
 	}, function(res) {});
 }
 lf.event.listener('orderdetails', function(e) {
+	console.log(2222)
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
 		vm.pageNos[i] = 0;
