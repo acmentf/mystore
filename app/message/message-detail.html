@@ -72,7 +72,7 @@
 						</div>
 						<!--摄影主管-->
 						<div v-if="currentRoleId==5&&orderMessage.orderInfo.status!==3" class="order-btn">
-							<button class="order-btn-allocation item">分配</button>
+							<button class="order-btn-allocation item" :data-lineName="orderMessage.orderInfo.lineName">分配</button>
 						</div>
 						<!--输出-->
 						<div v-if="currentRoleId==8&&orderMessage.orderInfo.status!==3" class="order-btn">
