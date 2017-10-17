@@ -38,7 +38,7 @@ lf.ready(function() {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 var data = []
-                res.data || [].forEach(function(item, index) {
+                res.data.forEach(function(item, index) {
                     var obj = {
                         value: item.pNo + ' ' + item.aliasName,
                         text: item.pName
@@ -114,7 +114,7 @@ lf.ready(function() {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 var data = []
-                res.data.data || [].forEach(function(item, index) {
+                res.data.data.forEach(function(item, index) {
                     var obj = {
                         text: item.sightName,
                     }
