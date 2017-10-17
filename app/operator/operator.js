@@ -45,6 +45,7 @@ var vm = new Vue({
 				pageSize: 1000,
 				currPage: 1,
 				pageCount: 0,
+				isShoot: 1,
 				lineNameLike: vm.lineName
 			} 
 			lf.nativeUI.showWaiting()
