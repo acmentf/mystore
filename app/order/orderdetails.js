@@ -365,7 +365,7 @@ mui('body').on('tap', '.allotPhotoOrder', function () { //点击分配
 			orderNo: vm.currentOrderNo,
 			type: 2,
 			status: 'edit',
-			lineName: vm.orderInfo.lineName
+			lineName: vm.orderInfo.aliasName
 		})
 	}
 })
@@ -395,7 +395,7 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 			orderNo: vm.currentOrderNo,
 			type: type,
 			status: status,
-			lineName: vm.orderInfo.lineName
+			lineName: vm.orderInfo.aliasName
 		})
 	}
 })
