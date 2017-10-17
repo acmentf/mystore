@@ -97,7 +97,7 @@
                     vm.city = vm.city || data.data.city
                     vm.guidePhone = data.data.guidePhone
                     vm.guideName = data.data.guideName
-    
+                    vm.productName = data.data.productName
                 } else {
                     lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(data.msg);
@@ -448,12 +448,12 @@
                 vm.salePersonnelNum = data.data.salePersonnelNum
                 vm.verificationStatus = data.data.verificationStatus
                 vm.givesNum = data.data.givesNum
-                vm.province = vm.province || data.data.province
-                vm.city = vm.city || data.data.city
+                vm.province = data.data.province
+                vm.city =  data.data.city
                 vm.guidePhone = data.data.guidePhone
                 vm.guideName = data.data.guideName
                 vm.salesNums = data.data.salesNums
-
+                vm.productName = data.data.productName
             } else {
                 lf.nativeUI.closeWaiting();
                 lf.nativeUI.toast(data.msg);

@@ -119,13 +119,13 @@ mui('body').on('tap', '#logout', function() {
  * 搜索订单
  */
 mui('body').on('tap', '#search-order', function() {
-	lf.window.openWindow('search.html', 'search.html', {})
+	lf.window._openWindow('search.html', 'search.html', {})
 })
 mui('body').on('tap', '.footer-message-btn', function() {
-	lf.window.openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+	lf.window._openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
 })
 mui('body').on('tap', '.footer-order-btn', function() {
-	lf.window.openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
+	lf.window._openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
 })
 mui("body").on("tap", ".correlate", function() {
 	var orderid = this.getAttribute('data-id');

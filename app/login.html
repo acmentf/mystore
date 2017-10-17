@@ -60,7 +60,7 @@
 					if(window.Role.currentPositions[0].roleId==12){
 						lf.window.openWindow('daily-manage','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
 					} else {
-						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+						lf.window._openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 					}
 				}else{
 					var hisAccount = lf.storage.get("LFACCOUNT");
@@ -163,7 +163,7 @@
 						if(window.Role.currentPositions[0].roleId==12){
 							lf.window.openWindow('daily-manage','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
 						} else {
-							lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+							lf.window._openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 						}
 					}else{
 						lf.nativeUI.toast(res.msg)

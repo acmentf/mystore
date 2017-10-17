@@ -35,13 +35,13 @@ lf.event.listener('orderdetails', function(e) {
 	lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 })
 mui('body').on('tap','.footer-order-btn',function() {
-	lf.window.openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
+	lf.window._openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
 })
 mui('body').on('tap', '.footer-order-contact-btn', function() {
-	lf.window.openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
+	lf.window._openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
 })
 mui('body').on('tap','.footer-personage-btn',function(){
-	lf.window.openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
+	lf.window._openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
 })
 //查看消息详情
 mui('body').on('tap','.message-list',function(){
