@@ -153,8 +153,15 @@ lf.ready(function() {
                         var picker = new mui.PopPicker();
                         picker.setData(data)
                         picker.show(function(selectItems) {
-                            vm.productName = selectItems[0].text
-                            vm.pNo = selectItems[0].value
+                            if(selectItems[0].text != vm.productName){
+                                vm.productName = selectItems[0].text
+                                vm.pNo = selectItems[0].value
+                                vm.orderSaleDate = ''
+                                vm.tourGuide = ''
+                                vm.pOrderNo = ''
+                                vm.nums = ''
+                                vm.saleName = ''
+                            }
                         })
                     } else {
                         mui.alert(res.msg)
