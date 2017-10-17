@@ -59,7 +59,7 @@
 						<div v-if="currentRoleId ==4&&orderMessage.orderInfo.status!==3" class="order-btn">
 							<button class="order-btn-affirm item">确认完成</button>
 							<button class="order-btn-cancel item">取消订单</button>
-							<button class="order-btn-operator item">计调</button>
+							<button class="order-btn-operator item" :data-lineName="orderMessage.orderInfo.lineName">计调</button>
 							<button class="order-btn-designate item">指派</button>
 						</div>
 						<div v-if="orderMessage.orderInfo.status==3" class="order-btn">
@@ -68,7 +68,7 @@
 						</div>
 						<!--执行人-->
 						<div v-if="currentRoleId==2&&orderMessage.orderInfo.status!==3"  class="order-btn">
-							<button class="order-btn-operator item">计调</button>
+							<button class="order-btn-operator item" :data-lineName="orderMessage.orderInfo.lineName">计调</button>
 						</div>
 						<!--摄影主管-->
 						<div v-if="currentRoleId==5&&orderMessage.orderInfo.status!==3" class="order-btn">

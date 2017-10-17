@@ -25,7 +25,7 @@ lf.ready(function() {
             printNums: '',
             photographerIdStr: [],
             deptId:'',//部门id
-            lineName: lf.window.currentWebview().lineName
+            lineName: ''
         }
     })
 
@@ -38,7 +38,7 @@ lf.ready(function() {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 var data = []
-                res.data.forEach(function(item, index) {
+                res.data || [].forEach(function(item, index) {
                     var obj = {
                         value: item.pNo + ' ' + item.aliasName,
                         text: item.pName
@@ -108,13 +108,13 @@ lf.ready(function() {
             pageCount: 0,
             isShoot: 1,
             lineNameLike: vm.lineName
-        } 
+        }
         lf.nativeUI.showWaiting()
         lf.net.getJSON('/sight/list', params, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200') {
                 var data = []
-                res.data.data.forEach(function(item, index) {
+                res.data.data || [].forEach(function(item, index) {
                     var obj = {
                         text: item.sightName,
                     }

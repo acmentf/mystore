@@ -222,7 +222,8 @@ mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: orderNo,
 		type: 2,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-lineName')
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
@@ -231,7 +232,8 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: orderid,
 		type: 0,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-lineName')
 	})
 })
 

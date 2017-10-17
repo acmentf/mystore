@@ -93,7 +93,8 @@ mui('body').on('tap','.order-btn-operator', function(){
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: vm.orderNo,
 		type: 0,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-lineName')
 	})
 })
 
@@ -109,7 +110,8 @@ mui('body').on('tap','.order-btn-allocation', function(){
 	lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 		orderNo: vm.orderNo,
 		type: 2,
-		status: 'edit'
+		status: 'edit',
+		lineName: this.getAttribute('data-lineName')
 	})
 })
 mui('body').on('tap','#message-goback', function(){
