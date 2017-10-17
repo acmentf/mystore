@@ -223,7 +223,7 @@ mui('.order-ul').on('tap', '.allotPhotoOrder', function() { //点击分配
 		orderNo: orderNo,
 		type: 2,
 		status: 'edit',
-		lineName: this.getAttribute('data-lineName')
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
@@ -233,7 +233,7 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 		orderNo: orderid,
 		type: 0,
 		status: 'edit',
-		lineName: this.getAttribute('data-lineName')
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 

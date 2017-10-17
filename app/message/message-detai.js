@@ -94,7 +94,7 @@ mui('body').on('tap','.order-btn-operator', function(){
 		orderNo: vm.orderNo,
 		type: 0,
 		status: 'edit',
-		lineName: this.getAttribute('data-lineName')
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 
@@ -111,7 +111,7 @@ mui('body').on('tap','.order-btn-allocation', function(){
 		orderNo: vm.orderNo,
 		type: 2,
 		status: 'edit',
-		lineName: this.getAttribute('data-lineName')
+		lineName: this.getAttribute('data-aliasName')
 	})
 })
 mui('body').on('tap','#message-goback', function(){
