@@ -1737,7 +1737,7 @@ var lf = (function(document, undefined) {
 		 * @param {plus.webview.WebviewObject} wv 若操作Webview窗口对象显示，则无任何效果。 使用窗口id时，则查找对应id的窗口，如果有多个相同id的窗口则操作最先创建的窗口，若没有查找到对应id的WebviewObject对象，则无任何效果。
 		 */
 		show: function(wv) {
-			wv.show(STYLE.animation.getOpenAnimation());
+			wv.show();
 		},
 		/**
 		 * @description 隐藏Webview窗口
@@ -1771,7 +1771,7 @@ var lf = (function(document, undefined) {
 		 * @param {plus.webview.WebviewObject} id 窗口标识可用于在其它页面中通过getWebviewById来查找指定的窗口，为了保持窗口标识的唯一性，应该避免使用相同的标识来创建多个Webview窗口。 如果传入无效的字符串则使用url参数作为WebviewObject窗口的id值。
 		 */
 		close: function(wv) {
-			wv.close(STYLE.animation.getCloseAnimation())
+			wv.close()
 		},
 		/**
 		 * @description 获取当前窗口的WebviewObject对象
