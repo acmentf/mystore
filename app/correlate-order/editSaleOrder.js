@@ -288,7 +288,7 @@ lf.ready(function() {
                     vm.saleName = data.data.saleName
                     vm.createTime = lf.util.timeStampToDate2(data.data.createTime)
                     vm.guideName = data.data.guideName
-                    vm.salesNums = data.data.salesNums
+                    vm.nums = data.data.salesNums
     
                 } else {
                     lf.nativeUI.closeWaiting();
