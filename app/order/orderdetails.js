@@ -364,7 +364,8 @@ mui('body').on('tap', '.allotPhotoOrder', function () { //点击分配
 		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 			orderNo: vm.currentOrderNo,
 			type: 2,
-			status: 'edit'
+			status: 'edit',
+			lineName: vm.orderInfo.lineName
 		})
 	}
 })
@@ -394,7 +395,7 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 			orderNo: vm.currentOrderNo,
 			type: type,
 			status: status,
-			lineName: lf.window.currentWebview().lineName
+			lineName: vm.orderInfo.lineName
 		})
 	}
 })

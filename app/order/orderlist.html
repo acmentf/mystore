@@ -276,7 +276,7 @@
 															</button> 
 															</div>-->
                                                         <div v-if="currentRoleId == 4">
-                                                            <button v-if="assignOrder&&item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName">
+                                                            <button v-if="assignOrder&&item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
 																	计调
 																</button>
 
@@ -289,7 +289,7 @@
 																</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 2">
-                                                            <button v-if="assignOrder&&item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName">
+                                                            <button v-if="assignOrder&&item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
 																	计调
 																</button>
                                                         </div>
