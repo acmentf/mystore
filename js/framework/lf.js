@@ -1719,6 +1719,35 @@ var lf = (function(document, undefined) {
 			});
 			return wv;
 		},
+		_openWindow: function(id, url, styles, extras, closeWV) {
+			if(!$.os.plus) {
+				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
+				if($.os.ios || $.os.android) {
+					window.top.location.href = url;
+				} else {
+					window.parent.location.href = url;
+				}
+				return;
+			}
+			
+			// var settings = $.extend({}, STYLE.webviewStyle, styles);
+			var wv = $.window.getWebviewById(id);
+			// if(!$.util.isUndefined(wv)) {
+			// 	wv.setStyle(settings);
+			// } else {
+			// 	wv = plus.webview.create(url, id, settings, extras);
+			// }
+			wv = plus.webview.create(url, id, styles, extras);
+			wv.addEventListener("loaded", function() {
+				wv.show();
+				if(closeWV) {
+					setTimeout(function() {
+						closeWV.close()
+					}, 500);
+				}
+			});
+			return wv;
+		},
 		/**
 		 * @description 打开Webview窗口
 		 * @param {String} id_wvobj 若操作Webview窗口对象显示，则无任何效果。 使用窗口id时，则查找对应id的窗口，如果有多个相同id的窗口则操作最先创建的窗口，若没有查找到对应id的WebviewObject对象，则无任何效果。
@@ -1737,7 +1766,7 @@ var lf = (function(document, undefined) {
 		 * @param {plus.webview.WebviewObject} wv 若操作Webview窗口对象显示，则无任何效果。 使用窗口id时，则查找对应id的窗口，如果有多个相同id的窗口则操作最先创建的窗口，若没有查找到对应id的WebviewObject对象，则无任何效果。
 		 */
 		show: function(wv) {
-			wv.show();
+			wv.show(STYLE.animation.getOpenAnimation());
 		},
 		/**
 		 * @description 隐藏Webview窗口
@@ -1771,7 +1800,7 @@ var lf = (function(document, undefined) {
 		 * @param {plus.webview.WebviewObject} id 窗口标识可用于在其它页面中通过getWebviewById来查找指定的窗口，为了保持窗口标识的唯一性，应该避免使用相同的标识来创建多个Webview窗口。 如果传入无效的字符串则使用url参数作为WebviewObject窗口的id值。
 		 */
 		close: function(wv) {
-			wv.close()
+			wv.close(STYLE.animation.getCloseAnimation())
 		},
 		/**
 		 * @description 获取当前窗口的WebviewObject对象
