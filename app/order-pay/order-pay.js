@@ -97,7 +97,6 @@
                     vm.city = vm.city || data.data.city
                     vm.guidePhone = data.data.guidePhone
                     vm.guideName = data.data.guideName
-                    vm.salesNums = data.data.salesNums
     
                 } else {
                     lf.nativeUI.closeWaiting();
