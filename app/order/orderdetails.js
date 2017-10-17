@@ -393,7 +393,8 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 		lf.window.openWindow('operator/operator.html', '../operator/operator.html', {}, {
 			orderNo: vm.currentOrderNo,
 			type: type,
-			status: status
+			status: status,
+			lineName: lf.window.currentWebview().lineName
 		})
 	}
 })
@@ -544,19 +545,20 @@ function renderOrderDetails() {
 			} else {
 				vm.orderTrackInfo.fetchPhotoTime = ''
 			}
+			let _photographerNamesTemp = []
 			vm.shotOrderOutput.forEach(function (v, i) {
 				if(vm.orderTrackInfo.lineSight[i]){//此处报错，加个判断
 					vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
 				}
-				vm.temp.push(v.photographerNames)
+				_photographerNamesTemp.push(v.photographerNames)
 			})
 
-			for (var i = 0; i < vm.temp.length; i++) {
-				if (vm.assignedPhotographers.indexOf(vm.temp[i]) == -1) {
-					vm.assignedPhotographers.push(vm.temp[i])
-				}
-			}
-			vm.assignedPhotographersString = vm.assignedPhotographers.toString()
+			// for (var i = 0; i < vm.temp.length; i++) {
+			// 	if (vm.assignedPhotographers.indexOf(vm.temp[i]) == -1) {
+			// 		vm.assignedPhotographers.push(vm.temp[i])
+			// 	}
+			// }
+			vm.assignedPhotographersString = _photographerNamesTemp.toString()
 
 			vm.orderTrackInfo.lineSight.forEach(function (v, i) { // 拍摄信息数据
 				v.index = i + 1

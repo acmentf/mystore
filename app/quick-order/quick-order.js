@@ -40,7 +40,7 @@ lf.ready(function() {
                 var data = []
                 res.data.forEach(function(item, index) {
                     var obj = {
-                        value: item.pNo,
+                        value: item.pNo + ' ' + item.aliasName,
                         text: item.pName
                     }
                     data.push(obj)
@@ -51,7 +51,8 @@ lf.ready(function() {
                 vm.deptId=res.data[0].deptId
                 picker.show(function(selectItems) {
                     vm.productName = selectItems[0].text
-                    vm.pNo = selectItems[0].value
+                    vm.pNo = selectItems[0].value.split(' ')[0]
+                    vm.lineName = selectItems[0].value.split(' ')[1]
                 })
             } else {
                 mui.alert(res.msg)
