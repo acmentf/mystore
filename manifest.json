@@ -1077,7 +1077,8 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					null
 				],
 				"refer": [
 					"app/correlate-order/editSaleOrder.html"
