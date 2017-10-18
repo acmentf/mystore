@@ -546,7 +546,7 @@ function renderOrderDetails() {
 			} else {
 				vm.orderTrackInfo.fetchPhotoTime = ''
 			}
-			let _photographerNamesTemp = []
+			var _photographerNamesTemp = []
 			vm.shotOrderOutput.forEach(function (v, i) {
 				if(vm.orderTrackInfo.lineSight[i]){//此处报错，加个判断
 					vm.orderTrackInfo.lineSight[i].photographer = v.photographerNames
