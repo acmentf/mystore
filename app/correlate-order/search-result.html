@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/correlate-order/correlate-order.css" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<style>
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.order-li{
+				padding: 20px 15px;
+				background: #fff;
+				list-style: none;
+				margin: 0 5px;
+				margin-top: 0.2rem;
+				border: 1px solid #eee;
+				border-radius: 10px;
+				box-shadow: 0 0 10px #EEEEEE;
+			}
+			.no-correlate:after,.bottom:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.no-correlate > p, .bottom > p{
+				float: left;
+				margin: 0;
+				color: #333;
+				font-size: 14px;
+			}
+			.no-correlate > strong, .bottom > strong {
+				float: right;
+				color: #F76C73;
+				font-size: 14px;
+			}
+			.product-name{
+				border-bottom: 1px solid #eee;
+				padding-bottom: 20px;
+				font-size: 16px;
+			}
+			.product-name > span:first-child{
+				color: #666;
+			}
+			.product-name > span:last-child{
+				color:#333;
+			}
+			.middle{
+				border-bottom: 1px solid #eee;
+				font-size: 14px;
+			}
+			.middle>div{
+				margin: 15px 0;
+				color: #999;
+				padding-left: 20px;
+			}
+			.guide{
+				background: url("../../images/message/guide.png") no-repeat left center;
+				background-size: 20px auto;
+				position: relative;
+				left: -2px;
+			}
+			.sale-time{
+				background: url("../../images/message/sale_date.png") no-repeat left center;
+				background-size: 16px auto;
+			}
+			.bottom {
+				padding-top: 20px;
+				padding-left: 20px;
+				background: url("../../images/order/list_time.png") no-repeat left 22px;
+				background-size: 16px auto;
+			}
+			.footer-order-contact-btn .footer-order-contact-icon{
+				background: url(../../images/message/nav_order_contact_green.png) no-repeat center;
+				background-size: auto 100%;
+			}
+			.footer-order-contact-btn .footer-order-contact-text{
+				color: #31BA90;
+			}
+			.footer-order-btn .footer-order-icon{
+				background: url(../../images/message/nav_order_gray.png) no-repeat center !important;
+				background-size: 100% !important;
+			}
+			.footer-order-btn .footer-order-text{
+				color: #666 !important;
+			}
+		</style>
+		<script src="../../js/framework/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav search-header" style="background-color:#3EB392;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title" style="color: #fff;">搜索结果</h1>
+			<!-- <span class="mui-icon mui-icon-search" style="color: #fff; float: right;"></span> -->
+		</header>
+		<div id="app" class="mui-content search-result mui-scroll-wrapper">
+			
+			<div class="mui-scroll">
+				<ul class="order-ul">
+					<li class="order-li" v-for="item in orderList">
+						<div class="no-correlate" v-if="item.orderId == null" :data-saleTime="item.orderTime" :data-price="item.totalAmount" :data-saleId="item.id" :data-id="item.orderId" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.guideName" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+							<p>生成时间:<span v-text="item.createTime"></span></p>
+							<strong>金额:<span>￥<span v-text="item.totalAmount"></span></span></strong>
+						</div>
+						<div class="correlate" v-if="item.orderId != null"  :data-saleTime="item.orderTime" :data-price="item.totalAmount" :data-saleId="item.id" :data-id="item.orderId" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.guideName" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+							<div class="product-name">
+								<span>产品名称：</span>
+								<span v-text="item.productName"></span>
+							</div>
+							<div class="middle">
+								<div class="guide">导游:<span v-text="item.guideName"></span></div>
+								<div class="sale-time">预计销售日期:<span v-text="item.orderTime"></span></div>
+							</div>
+							<div class="bottom">
+								<p>生成时间:<span v-text="item.createTime"></span></p>
+								<strong>金额:<span>￥<span v-text="item.totalAmount"></span></span></strong>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<!-- <div class="empty-tips" v-show="currPage == 1 && isEmpty">查询不到数据</div> -->
+
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="./search-result.js"></script>
+	</body>
+
+</html>

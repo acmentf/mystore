@@ -1,0 +1,233 @@
+#refresh{
+    width: 44px;
+    height: 44px;
+    position: relative;
+    left: -20px;
+}
+#refresh img,#search img{
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    position: relative;
+    top: 2px;
+}
+#search{
+    width: 44px;
+    height: 44px;
+}
+.bgwhite{
+    background-color: #fff;
+}
+p{
+    margin: 0;
+}
+.mui-bar-footer ~ .mui-content{
+    margin-bottom: 20px;
+}
+.today-data{
+    padding-bottom: 10px;
+}
+.today-data>.title {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+.today-data .title > div{
+    display: flex;
+}
+.today-data .title > div .head{
+    color:#3eb392;
+    font-size: 18px;
+}
+.badge{
+    display: inline-block;
+    font-size: 12px;
+    padding: 0 6px;
+    height: 19px;
+    line-height: 18px;
+    margin-left: 5px;
+    border: 1px solid #E5E7EA;
+    border-radius: 16px;
+    background-color: #F4F6F9;
+    color: #C3C4C5;
+}
+.today-data .title > div .plan{
+    margin-right: 20px;
+    font-size: 15px;
+}
+.today-data .title > div p span{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: #E8EAEF;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    left: -5px;
+}
+.today-data .title > div .fact{
+    font-size: 15px;
+}
+.today-data .title > div .fact span{
+    background-color: #FFA11B;
+}
+.progress-container{
+    padding: 0 10px;
+}
+.progress-container .title{
+    font-size: 16px;
+    color: #555;
+    margin: 15px 0 5px 0;
+}
+.progressbar{
+    position: relative;
+    width: 100%;
+    height: 14px;
+    background-color: #E8EAEF;
+    border-radius: 14px;
+    overflow: hidden;
+}
+.progress{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 14px;
+    border-radius: 14px;
+    background-color: #FF6A6A;
+}
+.yellow{
+    width: 0%;
+    background-color: #FFA11B;
+}
+.proportion{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.proportion span{
+    color: #FF6A6A;
+}
+.info{
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eeeeee;
+    position: relative;
+}
+.hide{
+    display: none;
+}
+.info > .more{
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    font-size: 13px;
+    color: #3eb392;
+    border-radius: 3px;
+    padding: 2px 10px;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    background-color: #fff;
+}
+.info > article > p{
+    padding: 10px;
+    color: #666;
+    font-size: 15px;
+    position: relative;
+}
+@media screen and (max-width: 320px) { 
+    .info > article > p{
+        font-size: 13px;
+    }
+}
+.info > article > p >span{
+    display: inline-block;
+    width: 40%;
+}
+.info > article > p >span.plan-info{
+    color: #999;
+}
+.info > article > p > em{
+    font-style: normal;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 70px;
+    height: 24px;
+    line-height: 24px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    padding-left: 8px;
+    background-color: #3EB392;
+    color :#fff;
+    font-size: 14px;
+    border-radius: 24px 0 0 24px;
+}
+.info .remark {
+    padding:12px 10px;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+}
+.today-data .info .remark{
+    padding-bottom: 0;
+}
+.info >div > p {
+    font-size: 15px;
+    color:#666;
+}
+.info >div > p:last-child{
+    font-size: 13px;
+    color: #999;
+}
+.info .mui-icon-arrowright{
+    font-size: 16px;
+}
+.future-data .info{
+    padding-top:0;
+    margin-top: 10px;
+}
+.future-data>p{
+    padding: 0 10px;
+    font-size: 14px;
+    position: relative;
+    top: 7px;
+    margin-top: 7px;
+}
+.future-data>p::before{
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background-color: #3EB392;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+}
+.info .date{
+    padding: 12px 10px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 16px;
+    color: #555;
+}
+.info .date img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -3px;
+}
+.mui-bar-footer{
+    height: 54px;
+}
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+.mui-btn-primary:active{
+    background-color: #3eb392;
+    border-color:#3eb392;
+}

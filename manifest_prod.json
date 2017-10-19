@@ -1,0 +1,627 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "com.jdytrip.shoot",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "途忆旅拍",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.2.0",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "app/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		"Accelerometer": {
+			"description": "访问加速度感应器"
+		},
+
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+		"Camera": {},
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+
+
+		"Downloader": {
+			"description": "文件下载管理"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {
+			"description": "访问本地文件系统"
+		},
+		"Gallery": {
+			"description": "访问系统相册"
+		},
+
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
+		"Storage": {
+			"description": "管理应用本地数据"
+		},
+
+		"Uploader": {
+			"description": "管理文件上传任务"
+		},
+		"Runtime": {
+			"description": "访问运行期环境"
+		},
+		"XMLHttpRequest": {
+			"description": "跨域网络访问"
+		},
+		"Zip": {
+			"description": "文件压缩与解压缩"
+		},
+
+
+
+		"Webview": {
+			"description": "窗口管理"
+		},
+		"NativeUI": {
+			"description": "原生UI控件"
+		},
+		"Navigator": {
+			"description": "浏览器信息"
+		},
+		"NativeObj": {
+			"description": "原生对象"
+		},
+		"Push": {},
+		"Contacts": {},
+		"Speech": {},"Device":{}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,
+			"delay": "0"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"push": {
+					"igexin": {
+						"appid": "jcui04rxSV7G6uPdAFPfB5",
+						"appkey": "jleqO4IMaxA8iti81TAL08",
+						"appsecret": "gaKXrKcJ0sANalNKAqq7B3"
+					}
+				}
+			},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+			},
+			"orientation": ["portrait-primary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "unpackage/res/icons/180x180.png",
+						"settings-retina8": "unpackage/res/icons/87x87.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
+					}
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "unpackage/qdy/640_960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "unpackage/qdy/640_1136.png",
+						"retina55": "unpackage/qdy/1242_2208.png",
+						"retina47": "unpackage/qdy/750_1334.png",
+						"retina55l": "unpackage/qdy/1242_2208.png"
+					},
+					"ipad": {
+						"portrait": "unpackage/qdy/768_1004.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "unpackage/qdy/1536_2008.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "unpackage/qdy/720_1280.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "unpackage/qdy/1536_2008.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "unpackage/qdy/768_1024.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "unpackage/qdy/1536_2048.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "unpackage/qdy/768_1024.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "unpackage/qdy/1536_2048.png"
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "unpackage/qdy/480_800.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "unpackage/qdy/720_1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "unpackage/qdy/1080_1920.png"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"app/common/plancamera.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"app/common/plancamera.js",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/common/chooseuser.js"
+				],
+				"refer": [
+					"app/common/chooseuser.html"
+				],
+				"priority": 0
+			},
+			"app/common/chooseuser.html": {
+				"resources": [
+					"app/common/chooseuser.js",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"css/common/common.css",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/login.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/login.css",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					null,
+					"fonts/mui.ttf",
+					"images/timg.jpg",
+					"images/logo.png",
+					"images/logo_login.png",
+					"images/img_login.jpg",
+					"css/images/img_login.jpg",
+					"css/images/logo_login.png",
+					"images/index/bg.png"
+				],
+				"refer": [
+					"app/index.html"
+				],
+				"priority": 0
+			},
+			"app/index.html": {
+				"resources": [
+					"images/index/bg.jpg",
+					"images/index/u775.png",
+					"images/index/message.png",
+					"images/index/u783.png",
+					"images/index/u80.png",
+					"app/index.js",
+					"images/index/u771.png",
+					"images/index/u773.png",
+					"css/index/index.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/index/icon_distribute.png",
+					"images/index/icon_cancel.png",
+					"images/index/icon_pending.png",
+					"images/index/orderbg.png",
+					"images/index/icon_messige_off.png",
+					"images/index/bg.png",
+					"images/index/icon_done.png",
+					"images/index/icon_search.png",
+					"app/push.js",
+					"images/index/icon_messige_on.png",
+					"fonts/iconfont.ttf",
+					"images/1.jpg",
+					"images/2.jpg",
+					"images/3.jpg",
+					"images/4.png",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"fonts/mui.ttf",
+					"app/update.js"
+				],
+				"refer": [
+					"app/order/orderlist.html",
+					"app/message/message.html",
+					"app/order/ordersearch.html"
+				],
+				"priority": 0
+			},
+			"app/order/orderlist.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"app/order/orderlist.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/order/order.css",
+					"fonts/mui.ttf",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					null,
+					"images/60x60.gif"
+				],
+				"refer": [
+					"app/order/orderdetails.html",
+					"app/order/trackinfo.html",
+					"app/order-entering/result.html",
+					"app/order/ordersearch.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html"
+				],
+				"priority": 0
+			},
+			"app/message/message.html": {
+				"resources": [
+					"images/yuantiao.jpg",
+					"fonts/mui.ttf",
+					"images/shuijiao.jpg",
+					"app/message/message.js",
+					"css/message/message.css",
+					"js/mui.pullToRefresh.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.min.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"images/message/icon_pending.png"
+				],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
+				"priority": 0
+			},
+			"app/order/ordersearch.html": {
+				"resources": [
+					"app/order/ordersearch.js",
+					"images/60x60.gif",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"css/order/order.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
+				"priority": 0
+			},
+			"app/order/orderdetails.html": {
+				"resources": [
+					"css/order/orderdetails.css",
+					"js/mui.picker.min.js",
+					"app/order/orderdetails.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"images/order/u402.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/img_distubute.png",
+					"images/order/order_operation.png",
+					"images/order/img_done.png",
+					"images/order/img_cancel.png"
+				],
+				"refer": [
+					"app/order-entering/result.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html",
+					"app/order/trackinfo.html",
+					"app/summary/summary.html",
+					"app/summary/details.html",
+					"app/result/order-result.html",
+					"app/order-entering/photo-output.html"
+				],
+				"priority": 0
+			},
+			"app/order/trackinfo.html": {
+				"resources": [
+					"css/order/trackinfo.css",
+					"app/order/trackinfo.js",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"images/order/icon_add.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/icon_delete.png"
+				],
+				"refer": [
+					"app/common/chooseuser.html"
+				],
+				"priority": 0
+			},
+			"app/order-entering/result.html": {
+				"resources": [
+					"css/order-entering/result.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order-entering/add-detail.html"
+				],
+				"priority": 0
+			},
+			"app/push.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"app/push.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/message/message.html"
+				],
+				"priority": 0
+			},
+			"app/order-entering/add-detail.html": {
+				"resources": [
+					"css/order-entering/add-detail.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order-entering/result.html"
+				],
+				"priority": 0
+			},
+			"app/summary/summary.html": {
+				"resources": [
+					"js/framework/define.js",
+					"app/summary/summary.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"css/summary/summary.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/summary/details.html"
+				],
+				"priority": 0
+			},
+			"app/summary/details.html": {
+				"resources": [
+					"app/summary/details.js",
+					"css/summary/details.css",
+					"js/framework/define.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/result/order-result.html": {
+				"resources": [
+					"css/result/order-rusult.css",
+					"app/result/order-result.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/order-entering/photo-output.html": {
+				"resources": [
+					"app/order-entering/photo-output.js",
+					"css/order-entering/photo-output.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"images/cbd.jpg",
+				"css/feedback.css",
+				"css/summary/details.scss",
+				"js/mui.dtpicker.js",
+				"css/message/message.scss",
+				"js/mui.poppicker.js",
+				"js/city.data.js",
+				"js/mui.js",
+				"css/mui.imageviewer.css",
+				"js/mui.view.js",
+				"README.md",
+				"js/beecloud.js",
+				"css/order/order.scss",
+				"js/mui.picker.js",
+				"css/mui.listpicker.css",
+				"js/mui.lazyload.js",
+				"app/test/muban2.html",
+				"js/city.data-3.js",
+				"js/95516.js",
+				"images/qrcode.png",
+				"css/mui.dtpicker.css",
+				"css/mui.picker.all.css",
+				"js/update.js",
+				"js/feedback.js",
+				"js/arttmpl.js",
+				"css/summary/summary.scss",
+				"js/mui.imageViewer.js",
+				"images/muwu.jpg",
+				"app/test/muban1.html",
+				"app/order/lf2.0_test.html",
+				"libs/echarts-all.js",
+				"js/ad.js",
+				"js/mui.lazyload.img.js",
+				"css/common/common.css.map",
+				"js/mui.listpicker.js",
+				"js/webviewGroup.js",
+				"images/login-1.png",
+				"js/mui.indexedlist.js",
+				"css/summary/mui-preview.scss",
+				"css/message/message.css.map",
+				"css/summary/finger-uploader.scss",
+				"css/mui.picker.css",
+				"images/order/u414.png",
+				"css/mui.indexedlist.css",
+				"js/mui.picker.all.js",
+				"images/order/u408.png",
+				"css/order/order.css.map",
+				"css/common/common.scss",
+				"js/mui.locker.js",
+				"app/test/lf2.0_test.html"
+			]
+		}
+	}
+}

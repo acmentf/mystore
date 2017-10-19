@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order-entering/photo-output.css" />
+	</head>
+	<style type="text/css">
+		html,
+			body {
+				background-color: #fff;
+			}
+			.mui-btn.mui-active:enabled, .mui-btn:enabled:active, button.mui-active:enabled, button:enabled:active, input[type=button].mui-active:enabled, input[type=button]:enabled:active, input[type=reset].mui-active:enabled, input[type=reset]:enabled:active, input[type=submit].mui-active:enabled, input[type=submit]:enabled:active{
+				background: #ff3064;
+			}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">摄影输出</h1>
+		</header>
+		<div id="app" class="mui-content photo-output">
+			<div class="mui-table pho-title">
+				<div class="mui-table-cell mui-col-xs-6">
+					<p>拍摄景点</p>
+				</div>
+				<div class="mui-table-cell mui-col-xs-6">
+					<p>拍摄张数</p>
+				</div>
+			</div>
+			<div class="pho-table">
+				<div class="mui-table" v-for="item in photoOutList">
+					<div class="mui-table-cell mui-col-xs-6 left-cell">
+						{{item.journeyName}}
+					</div>
+					<div class="mui-table-cell mui-col-xs-6 right-cell">
+						<div class="mui-input-row">
+							<input type="text" placeholder="请输入拍摄张数" v-model="item.shootNum">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div>
+				<div class="bz">备注</div>
+				<textarea v-model="remark" rows="5" class="mui-input-clear bz-textarea" ></textarea>
+			</div>-->
+			<div class="login-btn-box">
+				<button type="button" id="saveBtn" class="mui-btn login-pass-btn">保存</button>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="photo-output.js"></script>
+	</body>
+</html>

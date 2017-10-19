@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+	</head>
+
+	<body>
+		<div id="app" class="ctest">
+			test
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/framework/define.js"></script>
+	<script src="../../js/framework/styles.js"></script>
+	<script src="../../js/framework/lf.js"></script>
+	<script src="../../libs/vue.min.js"></script>
+	<script>
+		lf(function($) {
+			console.trace();
+			console.log("my ready");
+			var old = {
+				a: 1,
+				l: {
+					la: 3
+				}
+			};
+			var newData = lf.extend(true, old, {
+				b: 2,
+				l: {
+					la: 4
+				}
+			});
+			console.log(newData);
+			lf.log.log("test:%s-", "1");
+			lf.nativeUI.toast("1");
+			//确认，取消
+			lf.nativeUI.confirm("nativeUI", "Are you sure ready?", ["Yes", "No"], function(e) {
+				console.log((e.index == 0) ? "Yes!" : "No!");
+			});
+			//确认框
+			lf.nativeUI.alert("nativeUI", "Are you sure ready?", function() {});
+			var params = {
+				phone: '13612345678',
+				password: '123456'
+			}
+
+			lf.net.getJSON("/user/login", params, function(res) {
+				if(res.code == 0) {} else {
+					lf.nativeUI.toast(res.msg);
+				}
+			}, function(res) {
+				lf.nativeUI.toast(res.msg);
+			});
+			//			return;
+			lf.log.group("日志级别");
+			lf.log.log("log");
+			lf.log.debug("debug");
+			lf.log.info("info");
+			lf.log.warn("warn");
+			lf.log.error("error");
+			lf.log.groupEnd();
+
+			lf.log.group("平台判断测试");
+			lf.log.log(lf.os);
+			lf.log.groupEnd();
+
+			lf.log.group("待序列化对象");
+			var t = {
+				id: "1",
+				name: "张三",
+				url: "http://www.baidu.com",
+				obj: {
+					age: 18,
+					age2: 99,
+					obj: {
+						value: "test"
+					}
+				},
+				list: [{
+						"value": 1
+					},
+					{
+						"value": 2
+					}
+				],
+				list2: [
+					"1", "2", "3"
+				]
+			};
+			lf.log.log(t);
+			lf.log.groupEnd();
+
+			lf.log.group("序列化对象");
+			var urlParams = lf.param(t);
+			lf.log.log(urlParams);
+			lf.log.groupEnd();
+
+			lf.log.group("反向序列化对象");
+			lf.log.log(lf.parsingParam(urlParams));
+			lf.log.groupEnd();
+
+			lf.log.group("storage");
+			var obj = {
+				tile: "",
+				content: "",
+				piclist: [
+					"url1",
+					"url1"
+				]
+			};
+			var cpid = "";
+			var p = lf.window.getParams();
+			console.log(p);
+			lf.storage.put("mykey", JSON.stringify(obj));
+			//			lf.storage.removeItem("mykey");
+			var r = lf.storage.get("mykey");
+			if(!r) {
+				console.log("is null");
+			} else {
+				lf.storage.removeItem("mykey");
+			}
+			console.log(r);
+			lf.log.groupEnd();
+		})
+	</script>
+
+</html>

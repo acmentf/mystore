@@ -197,12 +197,14 @@ var lf = (function(document, undefined) {
 	 * @returns {_L6.$}
 	 */
 	$.ready = function(callback) {
-		if (readyRE.test(document.readyState)) {
-			callback($);
-		} else {
-			document.addEventListener('DOMContentLoaded', function() {
+		if($.os.plus){
+			mui.plusReady(function(){
 				callback($);
-			}, false);
+			})
+		}else{
+			mui.ready(function(){
+				callback($);
+			})
 		}
 		return this;
 	};
@@ -864,6 +866,34 @@ var lf = (function(document, undefined) {
 		strToJson: function(jsonStr) {
 			return JSON.parse(jsonStr);
 		},
+		timeStampToDate: function(timestamp) { //时间戳转换成正常日期格式
+			function add0(m) {
+				return m < 10 ? '0' + m : m
+			}
+			//timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+			var time = new Date(timestamp);
+			var year = time.getFullYear();
+			var month = time.getMonth() + 1;
+			var date = time.getDate();
+			var hours = time.getHours();
+			var minutes = time.getMinutes();
+			var seconds = time.getSeconds();
+			return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+		},
+		timeStampToDate2: function(timestamp) { //时间戳转换成年月日
+			function add0(m) {
+				return m < 10 ? '0' + m : m
+			}
+			//timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+			var time = new Date(timestamp);
+			var year = time.getFullYear();
+			var month = time.getMonth() + 1;
+			var date = time.getDate();
+//			var hours = time.getHours();
+//			var minutes = time.getMinutes();
+//			var seconds = time.getSeconds();
+			return year + '-' + add0(month) + '-' + add0(date);
+		},
 		jsonToStr: function(jsonObj) {
 			return JSON.stringify(jsonObj);
 		},
@@ -1411,7 +1441,7 @@ var lf = (function(document, undefined) {
 				options.data = {};
 			}
 			if(!options.timeout) {
-				options.timeout = 10000;
+				options.timeout = 30000;
 			}
 			if(!options.crossDomain) {
 				options.crossDomain = true;
@@ -1435,8 +1465,13 @@ var lf = (function(document, undefined) {
 			var error = options.error;
 			var _success = function(data, textStatus, xhr) {
 				$.log.debug("received[" + action + "]：" + JSON.stringify(data));
-				if(!(success === undefined)) {
-					success(data);
+				if(data.code == '401') {
+					window.Role.logout();
+					plus.runtime.restart();
+				} else {
+					if(!(success === undefined)) {
+						success(data);
+					}
 				}
 			};
 			var _error = function(xhr, type, errorThrown) {
@@ -1458,14 +1493,14 @@ var lf = (function(document, undefined) {
 			options.data = $.util.jsonToStr(options.data);
 			options.success = _success;
 			options.error = _error;
-			$.ajax(url, options);
+			mui.ajax(url, options);
 		},
 		getJSON: function(url, data, success, error, async) {
 			if(!async){
 				async = true
 			}
 			var type = "post";
-			var timeout = 10000;
+			var timeout = 30000;
 			var defaule = $.util.strToJson($.util.jsonToStr(REQUESTDATA));
 			var tempData = {
 				data: data
@@ -1666,6 +1701,7 @@ var lf = (function(document, undefined) {
 				}
 				return;
 			}
+			
 			var settings = $.extend({}, STYLE.webviewStyle, styles);
 			var wv = $.window.getWebviewById(id);
 			if(!$.util.isUndefined(wv)) {
@@ -1678,6 +1714,35 @@ var lf = (function(document, undefined) {
 				if(closeWV) {
 					setTimeout(function() {
 						closeWV.close();
+					}, 500);
+				}
+			});
+			return wv;
+		},
+		_openWindow: function(id, url, styles, extras, closeWV) {
+			if(!$.os.plus) {
+				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
+				if($.os.ios || $.os.android) {
+					window.top.location.href = url;
+				} else {
+					window.parent.location.href = url;
+				}
+				return;
+			}
+			
+			// var settings = $.extend({}, STYLE.webviewStyle, styles);
+			var wv = $.window.getWebviewById(id);
+			// if(!$.util.isUndefined(wv)) {
+			// 	wv.setStyle(settings);
+			// } else {
+			// 	wv = plus.webview.create(url, id, settings, extras);
+			// }
+			wv = plus.webview.create(url, id, styles, extras);
+			wv.addEventListener("loaded", function() {
+				wv.show();
+				if(closeWV) {
+					setTimeout(function() {
+						closeWV.close()
 					}, 500);
 				}
 			});
@@ -2320,7 +2385,16 @@ var lf = (function(document, undefined) {
 	var Role = $.Role = $.Class.extend({
 		usercode:"",
 		username:"",
+		userrole:"",
+		userroleName:"",
+		userroleId:"",
+		phone:"",
+		companyId:"",
 		loginsign:"",
+		auths:[],
+		positions:[],
+		photograherId:'',
+		currentPositions: [],
 		init:function(){
 			this._init();
 		},
@@ -2332,30 +2406,76 @@ var lf = (function(document, undefined) {
 					l = $.util.strToJson(k);
 					this.usercode = l.usercode;
 					this.username = l.username;
+					this.userrole = l.userrole;
+					this.userroleName = l.userroleName;
+					this.userroleId = l.userroleId;
+					this.phone = l.phone;
+					this.companyId = l.companyId;
 					this.loginsign = l.loginsign;
+					this.auths = l.auths;
+					this.positions = l.positions;
+					this.currentPositions = l.currentPositions;
+					this.photograherId = l.photograherId;
 				} catch(e) {
 					this.loginsign = "";
 					this.username = "";
+					this.userrole = "";
+					this.userroleName = "";
+					this.userroleId = "";
 					this.usercode = "";
+					this.phone = "";
+					this.companyId = "";
+					this.auths = [];
+					this.positions = [];
+					this.currentPositions = [];
+					this.photograherId = '';
 				}
 			} else {
 				this.loginsign = "";
 				this.username = "";
+				this.userrole = "";
+				this.userroleName = "";
+				this.userroleId = "";
 				this.usercode = "";
+				this.phone = "";
+				this.companyId = "";
+				this.auths = [];
+				this.positions = [];
+				this.currentPositions = [];
+				this.photograherId = '';
 			}
 			$.log.info("complete loading role data is ："+k);
 		},
 		save:function(k){
 			this.usercode = k.usercode;
 			this.username = k.username;
+			this.userrole = k.userrole;
+			this.userroleName = k.userroleName;
+			this.userroleId = k.userroleId;
+			this.phone = k.phone;
+			this.companyId = k.companyId;
 			this.loginsign = k.loginsign;
+			this.auths = k.auths;
+			this.positions = k.positions;
+			this.currentPositions = k.currentPositions;
+			this.photograherId = k.photograherId;
 			$.storage.put(j, JSON.stringify(k));
-			$.storage.put(s, k.signaturePwd);
+			$.storage.put(s, k.tonken);
 		},
 		logout:function(){
 			$.storage.removeItem(s);
 			$.storage.removeItem(j);
 			this._init();
+		},
+		hasAuth:function(key){
+			var flag = false;
+			for(var i in this.auths){
+				if(this.auths[i] == key){
+					flag = true;
+					break;
+				}
+			}
+			return flag
 		},
 		getSignature:function(){
 			var signaturePwd = $.storage.get(s);

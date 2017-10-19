@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--cwj-->
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/message/message-detail.css" />
+
+		<style>
+		
+		</style>
+		<script src="../../js/framework/common.js"></script>
+	</head>
+
+	<body>
+		<div class="message-order" id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a id="message-goback" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">消息</h1>
+			</header>
+			<div id="app" class="mui-content ">
+				<div class="message-order-title">
+					<div class="message-order-title-text">新订单详情</div>
+					<div v-text="descption" class="message-order-title-detail">
+					</div>
+				</div>
+				<div class="message-order-box">
+					<div class="message-order-content">
+					<div class="order-num">订单号: <span v-text="orderMessage.orderInfo.orderNo"></span>
+						<span class="mui-icon mui-icon-closeempty cancel-order"></span>
+					</div>
+					<div v-text="orderMessage.orderInfo.productName" class="order-describe"></div>
+					<div class="order-time">
+						<span class="icon ico-starttime"></span>
+						<span>出团日期:<span v-text="orderMessage.orderTrackInfo.startTime"></span></span>
+						<span class="total-time">共<span v-text="orderMessage.orderInfo.groupDays"></span>天</span>
+					</div>
+					<div class="order-linename">
+						<span class="icon ico-linename"></span>
+						<span>团名称:<span v-text="orderMessage.orderInfo.lineName"></span></span>
+					</div>
+					<div class="order-personcount">
+						<span class="icon ico-personcount"></span>
+						<span>团队人数:<span v-text="orderMessage.orderInfo.personCount"></span>人</span>
+					</div>
+					<div class="order-guide">
+						<span class="icon ico-tourguide"></span>
+						<span>导游:<span v-text="orderMessage.orderInfo.tourGuide"></span>(<span v-text="orderMessage.orderInfo.tourGuidePhone"></span>)</span>
+					</div>
+					<div class="order-btn-box">
+						<!--执行主管-->
+						<div v-if="currentRoleId ==4&&orderMessage.orderInfo.status!==3" class="order-btn">
+							<button class="order-btn-affirm item">确认完成</button>
+							<button class="order-btn-cancel item">取消订单</button>
+							<button class="order-btn-operator item" :data-aliasName="orderMessage.orderInfo.aliasName">计调</button>
+							<button class="order-btn-designate item">指派</button>
+						</div>
+						<div v-if="orderMessage.orderInfo.status==3" class="order-btn">
+							<div style="color: #999;">该订单已取消</div>
+
+						</div>
+						<!--执行人-->
+						<div v-if="currentRoleId==2&&orderMessage.orderInfo.status!==3"  class="order-btn">
+							<button class="order-btn-operator item" :data-aliasName="orderMessage.orderInfo.aliasName">计调</button>
+						</div>
+						<!--摄影主管-->
+						<div v-if="currentRoleId==5&&orderMessage.orderInfo.status!==3" class="order-btn">
+							<button class="order-btn-allocation item" :data-aliasName="orderMessage.orderInfo.aliasName">分配</button>
+						</div>
+						<!--输出-->
+						<div v-if="currentRoleId==8&&orderMessage.orderInfo.status!==3" class="order-btn">
+							<button class="order-btn-output item">输出</button>
+						</div>
+						<!--销售-->
+						<div v-if="currentRoleId==9&&orderMessage.orderInfo.status!==3" class="order-btn">
+							<button class="order-btn-sales item">生成销售</button>
+						</div>
+					</div>
+					
+				</div>
+				<div><button class="examine">查看</button></div>
+				</div>
+				
+			</div>
+
+		</div> 
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="message-detai.js"></script>
+	</body>
+
+</html>

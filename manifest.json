@@ -1,31 +1,41 @@
 {
-	"@platforms": ["android", "iPhone", "iPad"],
-	"id": "H5C8F39A5",/*必选，应用的标识*/
-	"name": "shoot-app",/*必选，应用名称*/
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "com.jdytrip.shoot",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "途忆旅拍",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0",/*必选，版本名称*/
-		"code": ""
+		"name": "1.2.0",/*应用版本名称*/
+		"code": "83"
 	},
-	"description": "",/*可选，应用描述信息*/
+	"description": "",/*应用描述信息*/
 	"icons": {
 		"72": "icon.png"
 	},
-	"fullscreen":true,
-	"launch_path": "index.html",/*必选，应用的入口页面，默认为根目录下的index.html；也可以是网络地址，网络地址必须以http://或https://开头*/
+	"launch_path": "app/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
-		"email": "",/*可选，开发者名称*/
-		"name": "",/*可选，开发者邮箱地址*/
-		"url": ""/*可选，开发者自定义地址*/
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
 	},
 	"permissions": {
-		"Audio": {
-			"description": "访问麦克风"
+		"Accelerometer": {
+			"description": "访问加速度感应器"
 		},
-		"Camera": {
-			"description": "访问摄像头"
+
+		"Cache": {
+			"description": "管理应用缓存"
 		},
-		"Device": {
-			"description": "访问设备信息"
+		"Camera": {},
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+
+
+		"Downloader": {
+			"description": "文件下载管理"
 		},
 		"Events": {
 			"description": "应用扩展事件"
@@ -36,8 +46,23 @@
 		"Gallery": {
 			"description": "访问系统相册"
 		},
+
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
 		"Storage": {
 			"description": "管理应用本地数据"
+		},
+
+		"Uploader": {
+			"description": "管理文件上传任务"
 		},
 		"Runtime": {
 			"description": "访问运行期环境"
@@ -45,980 +70,1038 @@
 		"XMLHttpRequest": {
 			"description": "跨域网络访问"
 		},
-		"Speech": {
-			"description": "管理语音识别插件"
-		},
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
-		"Webview":{
+
+
+
+		"Webview": {
 			"description": "窗口管理"
 		},
-		"NativeUI":{
+		"NativeUI": {
 			"description": "原生UI控件"
 		},
-		"Navigator":{
+		"Navigator": {
 			"description": "浏览器信息"
 		},
-		"Payment":{},
-		"Uploader": {},
-		"Share":{},
-		"NativeObj": {},
-		"Invocation":{}
+		"NativeObj": {
+			"description": "原生对象"
+		},
+		"Push": {},
+		"Contacts": {},
+		"Speech": {},"Device":{}
 	},
 	"plus": {
-		"launchwebview": {
-            "navigationbar": {
-               "backgroundcolor": "#f7f7f7",
-               "titletext": "首页",
-               "titlecolor": "#000000"
-            }
-        },
-        "statusbar": {
-            "immersed": "supportedDevice",
-            "style":"dark"
-        },
-		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，none为无侧滑返回功能，hide为侧滑隐藏Webview窗口。参考ask.dcloud.net.cn/article/102*/
 		"splashscreen": {
-			"autoclose": false,/*如果为true，程序启动的图片可以自动关闭，如果为false，开发者需要手动关闭*/
-			"waiting": true/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,
+			"delay": "0"
 		},
-		"runmode": "normal",/*两个值，liberate或normal，前者在应用安装时释放资源，后者不需要释放资源*/
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
-			"debug": "",/*可选，是否为debug模式，可取值：true表示debug模式运行，false表示release模式运行，默认值为false*/
+			"plugins": {
+				"push": {
+					"igexin": {
+						"appid": "jcui04rxSV7G6uPdAFPfB5",
+						"appkey": "jleqO4IMaxA8iti81TAL08",
+						"appsecret": "gaKXrKcJ0sANalNKAqq7B3"
+					}
+				}
+			},
 			"apple": {
-				"appid": "",/*iOS必选，苹果开发网站申请的appid，如io.dcloud.HelloMUI*/
-				"mobileprovision": "",/*iOS必选，打包配置文件*/
-				"password": "",/*iOS必选，导入配置文件密码*/
-				"p12": "",/*iOS必选，打包配置文件关联的个人证书*/
-				"devices": "universal",/*iphone，可取值iphone/ipad/universal*/
-				"frameworks":[]/*用户在调用 Native.js 或开发第三方插件时使用到的 FrameWork 名*/
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
 			},
 			"google": {
-				"packagename": "",/*Android必选，程序包名，如io.dcloud.HelloMUI*/
-				"keystore": "",/*Android必选，打包证书文件*/
-				"password": "",/*Android必选，打包证书密码*/
-				"aliasname": "",/*Android必选，打包证书别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
-				/*使用 Native.js 调用原生安卓 API 需要申请的系统权限，用户可以添加多个权限的字符串*/
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 			},
-			"orientation": ["portrait-primary", "landscape-primary", "portrait-secondary", "landscape-secondary"],/*必选*/
+			"orientation": ["portrait-primary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
 				"ios": {
-					"prerendered": "", /*必选，是否高亮显示*/
-					"auto": "", /*可选，512x512，用于自动生成各种尺寸图标的大分辨率程序图标*/
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
-						"normal": "",/*可选，57x57，iPhone普通屏幕程序图标*/
-						"retina": "",/*可选，114x114，iPhone高分屏程序图标*/
-						"retina7": "",/*可选，120x120，iPhone iOS7高分屏程序图标*/
-						"spotlight-normal": "", /*可选，29x29，iPhone Spotlight搜索程序图标*/
-						"spotlight-retina": "", /*可选，58x58，iPhone高分屏Spotlight搜索程序图标*/
-						"spotlight-retina7": "",/*可选，80x80，iPhone iOS7高分屏Spotlight搜索程序图标*/
-						"settings-normal": "", /*可选，29x29，iPhone设置页面程序图标*/
-						"settings-retina": "" /*iPhone 高分屏设置页面程序图标*/
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "unpackage/res/icons/180x180.png",
+						"settings-retina8": "unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
-						"normal": "", /*可选，72x72，iPad普通屏幕程序图标*/
-						"retina": "", /*可选，144x144，iPad高分屏程序图标*/
-						"normal7": "", /*可选，76x76，iPad iOS7程序图标*/
-						"retina7": "", /*可选，152x152，iPad iOS7高分屏程序图标*/
-						"spotlight-normal": "", /*可选，50x50，iPad Spotlight搜索程序图标*/
-						"spotlight-retina": "", /*可选，100x100，iPad高分屏Spotlight搜索程序图标*/
-						"spotlight-normal7": "",/*可选，40x40，iPad iOS7 Spotlight搜索程序图标*/
-						"spotlight-retina7": "",/*可选，80x80，iPad iOS7高分屏Spotlight搜索程序图标*/
-						"settings-normal": "",/*可选，29x29，iPad设置页面程序图标*/
-						"settings-retina": "" /*iPad 高分屏设置页面程序图标*/
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*必选，48x48，普通屏程序图标*/
-					"ldpi": "", /*必选，48x48，大屏程序图标*/
-					"hdpi": "", /*必选，72x72，高分屏程序图标*/
-					"xhdpi": "",/*必选，96x96，720P高分屏程序图标*/
-					"xxhdpi": "" /*1080P 高分屏程序图标*/
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "", /*必选，320x480，iPhone3启动图片*/
-						"retina35": "",/*必选，640x960，3.5英寸设备(iPhone4)启动图片*/
-						"retina40": "" /*4.0 英寸设备(iPhone5)启动图片*/
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "unpackage/qdy/640_960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "unpackage/qdy/640_1136.png",
+						"retina55": "unpackage/qdy/1242_2208.png",
+						"retina47": "unpackage/qdy/750_1334.png",
+						"retina55l": "unpackage/qdy/1242_2208.png"
 					},
 					"ipad": {
-						"portrait": "", /*可选，768x1004，需支持iPad时必选，iPad竖屏启动图片*/
-						"portrait-retina": "",/*可选，1536x2008，需支持iPad时必选，iPad高分屏竖屏图片*/
-						"landscape": "", /*可选，1024x748，需支持iPad时必选，iPad横屏启动图片*/
-						"landscape-retina": "", /*可选 ，2048x1496，需支持iPad时必选，iPad高分屏横屏启动图片*/
-						"portrait7": "", /*可选，768x1024，需支持iPad iOS7时必选，iPad竖屏启动图片*/
-						"portrait-retina7": "",/*可选，1536x2048，需支持iPad iOS7时必选，iPad高分屏竖屏图片*/
-						"landscape7": "", /*可选，1024x768，需支持iPad iOS7时必选，iPad横屏启动图片*/
-						"landscape-retina7": "" /*需支持 iPad iOS7 时必选，iPad 高分屏横屏启动*/
+						"portrait": "unpackage/qdy/768_1004.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "unpackage/qdy/1536_2008.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "unpackage/qdy/720_1280.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "unpackage/qdy/1536_2008.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "unpackage/qdy/768_1024.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "unpackage/qdy/1536_2048.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "unpackage/qdy/768_1024.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "unpackage/qdy/1536_2048.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*必选，240x282，普通屏启动图片*/
-					"ldpi": "", /*必选，320x442，大屏启动图片*/
-					"hdpi": "", /*必选，480x762，高分屏启动图片*/
-					"xhdpi": "", /*必选，720x1242，720P高分屏启动图片*/
-					"xxhdpi": "" /*1080p 高分屏启动图片*/
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "unpackage/qdy/480_800.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "unpackage/qdy/720_1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "unpackage/qdy/1080_1920.png"
 				}
 			}
 		}
 	},
-	"dependencies" : {
+	"dependencies": {
 		"pages": {
-			"index.html": {
+			"app/common/plancamera.html": {
 				"resources": [
-					"js/mui.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
 					"fonts/mui.ttf",
+					"app/common/plancamera.js",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/app.css",
+					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/update.js",
-					"list.html"
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/common/chooseuser.js"
 				],
 				"refer": [
-					"index-menu.html"
+					"app/common/chooseuser.html"
 				],
 				"priority": 0
 			},
-			"examples/tab-webview-subpage-contact.html": {
+			"app/common/chooseuser.html": {
 				"resources": [
+					"app/common/chooseuser.js",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"css/common/common.css",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/login.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/login.css",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					null,
+					"fonts/mui.ttf",
+					"images/timg.jpg",
+					"images/logo.png",
+					"images/logo_login.png",
+					"images/img_login.jpg",
+					"css/images/img_login.jpg",
+					"css/images/logo_login.png",
+					"images/index/bg.png",
+					"images/order/operator_delete.png"
+				],
+				"refer": [
+					"app/index.html",
+					"app/order/orderlist.html",
+					"app/daily-manage/daily-manage.html"
+				],
+				"priority": 0
+			},
+			"app/index.html": {
+				"resources": [
+					"images/index/bg.jpg",
+					"images/index/u775.png",
+					"images/index/message.png",
+					"images/index/u783.png",
+					"images/index/u80.png",
+					"app/index.js",
+					"images/index/u771.png",
+					"images/index/u773.png",
+					"css/index/index.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/index/icon_distribute.png",
+					"images/index/icon_cancel.png",
+					"images/index/icon_pending.png",
+					"images/index/orderbg.png",
+					"images/index/icon_messige_off.png",
+					"images/index/bg.png",
+					"images/index/icon_done.png",
+					"images/index/icon_search.png",
+					"app/push.js",
+					"images/index/icon_messige_on.png",
+					"fonts/iconfont.ttf",
+					"images/1.jpg",
+					"images/2.jpg",
+					"images/3.jpg",
+					"images/4.png",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"fonts/mui.ttf",
+					"app/update.js"
+				],
+				"refer": [
+					"app/order/orderlist.html",
+					"app/message/message.html",
+					"app/order/ordersearch.html"
+				],
+				"priority": 0
+			},
+			"app/order/orderlist.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"app/order/orderlist.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/order/order.css",
+					"fonts/mui.ttf",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					null,
 					"images/60x60.gif",
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-webview-main.html": {
-				"resources": [
-					"examples/tab-webview-subpage-setting.html",
-					"examples/tab-webview-subpage-chat.html",
-					"examples/tab-webview-subpage-contact.html",
-					"examples/tab-webview-subpage-about.html",
-					"fonts/mui.ttf",
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"list.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"images/order/list_number.png",
+					"images/order/list_guide.png",
+					"images/order/list_day.png",
+					"images/order/list_way.png",
+					"css/images/logo_login.png",
+					"css/common/common.css",
+					"images/message/nav_message_gray.png",
+					"images/order/quick_icon.png",
+					"images/message/nav_order_green.png",
+					"images/order/sale_flash.png",
+					"app/login.html",
+					"images/order/switch.png",
+					"images/order/list_time.png",
+					"images/order/sale.png",
+					"images/order/switch_back.png",
+					"images/order/call_btn.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_order_gray.png"
 				],
 				"refer": [
-					"examples/template.html",
-					"examples/tab-webview-main.html",
-					"examples/pullrefresh_main.html",
-					"examples/ajax.html",
-					"examples/accordion.html",
-					"examples/buttons.html",
-					"examples/guide.html",
-					"examples/badges.html",
-					"examples/actionsheet.html",
-					"examples/actionsheet-plus.html",
-					"examples/ad.html",
-					"examples/buttons-with-icons.html",
-					"examples/buttons-with-badges.html",
-					"examples/buttons-with-block.html",
-					"examples/checkbox.html",
-					"examples/clouddb_wilddog.html",
-					"examples/dtpicker.html",
-					"examples/date.html",
-					"examples/dialog.html",
-					"examples/slider-default.html",
-					"examples/slider-with-title.html",
-					"examples/slider-table-default.html",
-					"examples/slider-table-pagination.html",
-					"examples/grid-default.html",
-					"examples/grid-pagination.html",
-					"examples/icons.html",
-					"examples/input.html",
-					"examples/echarts.html",
-					"examples/imageviewer.html",
-					"examples/indexed-list.html",
-					"examples/indexed-list-select.html",
-					"examples/lazyload-image.html",
-					"examples/locker-dom.html",
-					"examples/login.html",
-					"examples/setting.html",
-					"examples/offcanvas-drag-right-plus-main.html",
-					"examples/offcanvas-drag-left-plus-main.html",
-					"examples/offcanvas-drag-right.html",
-					"examples/offcanvas-drag-left.html",
-					"examples/offcanvas-drag-down.html",
-					"examples/picker.html",
-					"examples/pagination.html",
-					"examples/popovers.html",
-					"examples/pullrefresh_with_tab.html",
-					"examples/radio.html",
-					"examples/range.html",
-					"examples/switches.html",
-					"examples/tabbar.html",
-					"examples/tabbar-with-submenus.html",
-					"examples/tab-with-viewpagerindicator.html",
-					"examples/tab-with-segmented-control.html",
-					"examples/tab-with-segmented-control-vertical.html",
-					"examples/typography.html",
-					"examples/im-chat.html",
-					"examples/info.html",
-					"examples/tableviews.html",
-					"examples/tableviews-with-badges.html",
-					"examples/list-with-input.html",
-					"examples/list-triplex-row.html",
-					"examples/tableviews-with-collapses.html",
-					"examples/tableviews-with-swipe.html",
-					"examples/media-list.html",
-					"examples/nav.html",
-					"examples/numbox.html"
+					"app/order/orderdetails.html",
+					"app/order/trackinfo.html",
+					"app/order-entering/result.html",
+					"app/order/ordersearch.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html",
+					"app/designate/assign-staff.html",
+					"app/schedule/summary.html",
+					"app/operator/operator.html",
+					"app/designate/designate.html",
+					"app/result/order-result.html",
+					"app/message/message.html",
+					"app/order/search.html",
+					"app/quick-order/quick-order.html",
+					"app/order/quicksaledetails.html",
+					"app/order-pay/order-pay.html",
+					"app/daily-manage/daily-manage.html",
+					"app/correlate-order/correlate-order.html"
 				],
 				"priority": 0
 			},
-			"examples/pullrefresh_main.html": {
+			"app/message/message.html": {
 				"resources": [
-					"examples/pullrefresh_sub.html",
-					"fonts/mui.ttf",
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/ajax.html": {
-				"resources": [
-					"css/app.css",
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/accordion.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/muwu.jpg",
 					"images/yuantiao.jpg",
+					"fonts/mui.ttf",
 					"images/shuijiao.jpg",
-					"js/mui.min.js",
+					"app/message/message.js",
+					"css/message/message.css",
+					"js/mui.pullToRefresh.js",
 					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-webview-subpage-setting.html": {
-				"resources": [
-					"fonts/mui.ttf",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.min.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
 					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"index-menu.html": {
-				"resources": [
-					"fonts/mui.ttf",
-					"js/mui.min.js",
-					"css/mui.min.css"
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"images/message/icon_pending.png",
+					"css/common/common.css",
+					"images/message/nav_message_green.png",
+					"images/message/background_img.png",
+					"images/message/nav_order_gray.png"
 				],
 				"refer": [
-					"examples/offcanvas-drag-left.html"
+					"app/order/orderdetails.html",
+					"app/order/orderlist.html",
+					"app/message/message-detail.html",
+					"app/correlate-order/correlate-order.html"
 				],
 				"priority": 0
 			},
-			"examples/template.html": {
+			"app/order/ordersearch.html": {
 				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-webview-subpage-about.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/guide.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/badges.html": {
-				"resources": [
+					"app/order/ordersearch.js",
+					"images/60x60.gif",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
 					"js/mui.min.js",
 					"css/app.css",
-					"css/mui.min.css",
-					"fonts/mui.ttf"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/actionsheet.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/actionsheet-plus.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/ad.html": {
-				"resources": [
-					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/order/order.css",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"js/ad.js"
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
 				"priority": 0
 			},
-			"examples/buttons.html": {
+			"app/order/orderdetails.html": {
 				"resources": [
-					"js/mui.min.js",
+					"css/order/orderdetails.css",
+					"js/mui.picker.min.js",
+					"app/order/orderdetails.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"images/order/u402.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
 					"css/app.css",
+					"js/mui.min.js",
 					"css/mui.min.css",
-					"fonts/mui.ttf"
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/img_distubute.png",
+					"images/order/order_operation.png",
+					"images/order/img_done.png",
+					"images/order/img_cancel.png",
+					"images/order/order_jidiao.png",
+					"images/order/order_shooting.png",
+					"images/order/dot.png",
+					"images/order/order_assigned.png",
+					"images/order/order_pending.png",
+					"images/order/order_outputed.png",
+					"images/order/corner.png",
+					"images/order/call_btn.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order-entering/result.html",
+					"app/common/chooseuser.html",
+					"app/common/plancamera.html",
+					"app/order/trackinfo.html",
+					"app/summary/summary.html",
+					"app/summary/details.html",
+					"app/result/order-result.html",
+					"app/order-entering/photo-output.html",
+					"app/order-pay/order-pay-list.html",
+					"app/operator/operator.html",
+					"app/result/sales-export.html",
+					"app/schedule/summary.html",
+					"app/schedule/details.html",
+					"app/designate/designate.html",
+					"app/order/statuslog.html"
+				],
 				"priority": 0
 			},
-			"examples/buttons-with-icons.html": {
+			"app/order/trackinfo.html": {
 				"resources": [
+					"css/order/trackinfo.css",
+					"app/order/trackinfo.js",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"images/order/icon_add.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
 					"css/app.css",
 					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/icon_delete.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/common/chooseuser.html"
+				],
 				"priority": 0
 			},
-			"examples/buttons-with-badges.html": {
+			"app/order-entering/result.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/buttons-with-block.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/checkbox.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-webview-subpage-chat.html": {
-				"resources": [
-					"fonts/mui.ttf",
-					"js/mui.min.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/clouddb_wilddog.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/dtpicker.html": {
-				"resources": [
+					"css/order-entering/result.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
 					"js/mui.picker.min.js",
 					"js/mui.min.js",
 					"css/app.css",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order-entering/add-detail.html"
+				],
+				"priority": 0
+			},
+			"app/push.html": {
+				"resources": [
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"app/push.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/message/message.html"
+				],
+				"priority": 0
+			},
+			"app/order-entering/add-detail.html": {
+				"resources": [
+					"css/order-entering/add-detail.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/order-entering/result.html"
+				],
+				"priority": 0
+			},
+			"app/summary/summary.html": {
+				"resources": [
+					"js/framework/define.js",
+					"app/summary/summary.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"css/summary/summary.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/summary/details.html"
+				],
+				"priority": 0
+			},
+			"app/summary/details.html": {
+				"resources": [
+					"app/summary/details.js",
+					"css/summary/details.css",
+					"js/framework/define.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/result/order-result.html": {
+				"resources": [
+					"css/result/order-rusult.css",
+					"app/result/order-result.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
 					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/date.html": {
+			"app/order-entering/photo-output.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css",
-					"fonts/mui.ttf"
+					"app/order-entering/photo-output.js",
+					"css/order-entering/photo-output.css"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/dialog.html": {
+			"app/order-pay/order-pay-list.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/slider-default.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/muwu.jpg",
-					"images/yuantiao.jpg",
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css",
-					"images/shuijiao.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/slider-with-title.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/yuantiao.jpg",
-					"images/muwu.jpg",
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css",
-					"images/shuijiao.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/slider-table-default.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/yuantiao.jpg",
-					"images/muwu.jpg",
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"images/shuijiao.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/slider-table-pagination.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/muwu.jpg",
-					"images/yuantiao.jpg",
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"images/shuijiao.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/grid-default.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/grid-pagination.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/icons.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/input.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/pullrefresh_sub.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/echarts.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"libs/echarts-all.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/imageviewer.html": {
-				"resources": [
+					"css/order-pay/order-pay.css",
 					"js/mui.zoom.js",
-					"images/muwu.jpg",
-					"images/yuantiao.jpg",
+					"js/mui.previewimage.js",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
 					"js/mui.min.js",
+					"css/app.css",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/order-pay/order-list.css"
+				],
+				"refer": [
+					"app/order-pay/order-pay-detail.html"
+				],
+				"priority": 0
+			},
+			"app/operator/operator.html": {
+				"resources": [
+					"images/order/corner.png",
+					"app/operator/operator.js",
+					"css/operator/operator.css",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/mui.pullToRefresh.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"images/order/operator_delete.png",
+					"css/app.css",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"app/designate/assign-staff.html"
+				],
+				"priority": 0
+			},
+			"app/designate/assign-staff.html": {
+				"resources": [
+					"css/designate/select-staff.css",
+					"css/mui.indexedlist.css",
+					"app/designate/assign-staff.js",
+					"js/mui.indexedlist.js",
+					"js/framework/define.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/schedule/summary.html": {
+				"resources": [
+					"css/schedule/summary.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"app/schedule/summary.js",
+					"js/framework/define.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/schedule/details.html"
+				],
+				"priority": 0
+			},
+			"app/designate/designate.html": {
+				"resources": [
+					"app/designate/designate.js",
+					"css/designate/designate.css",
+					"js/framework/define.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [
+					"app/designate/allocation-staff.html"
+				],
+				"priority": 0
+			},
+			"app/designate/allocation-staff.html": {
+				"resources": [
+					"css/designate/select-staff.css",
+					"js/mui.js",
+					"css/mui.indexedlist.css",
+					"app/designate/allocation-staff.js",
+					"js/mui.indexedlist.js",
+					"js/framework/define.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/result/sales-export.html": {
+				"resources": [
+					"css/result/sales-export.css",
+					"app/result/sales-export.js",
+					"js/framework/define.js",
+					"js/mui.picker.min.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/schedule/details.html": {
+				"resources": [
+					"app/schedule/details.js",
+					"css/schedule/details.css",
+					"js/framework/define.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/app.css",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/mui.previewimage.js",
-					"images/shuijiao.jpg"
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/indexed-list.html": {
+			"app/order/search.html": {
 				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/mui.indexedlist.css",
-					"js/mui.indexedlist.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/indexed-list-select.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/mui.indexedlist.css",
-					"js/mui.indexedlist.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/lazyload-image.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"images/60x60.gif",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"js/mui.lazyload.js",
-					"js/mui.lazyload.img.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/locker-dom.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"js/mui.locker.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/login.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css",
-					"images/login-1.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/setting.html": {
-				"resources": [
-					"images/logo.png",
-					"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"libs/easymob-webim-sdk/json2.js",
-					"libs/easymob-webim-sdk/jquery-1.11.1.js",
-					"js/feedback.js",
-					"css/feedback-page.css",
-					"js/feedback-page.js",
-					"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
-					"js/mui.view.js",
-					"images/iconfont-tianjia.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-right-plus-main.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [
-					"examples/offcanvas-drag-right-plus-menu.html"
-				],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-right-plus-menu.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-left-plus-menu.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-left-plus-main.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [
-					"examples/offcanvas-drag-left-plus-menu.html"
-				],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-right.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-left.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/offcanvas-drag-down.html": {
-				"resources": [
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/picker.html": {
-				"resources": [
-					"js/mui.picker.js",
-					"js/mui.min.js",
-					"css/app.css",
-					"js/mui.poppicker.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"js/city.data.js",
-					"css/mui.poppicker.css",
-					"css/mui.picker.css",
-					"js/city.data-3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/pagination.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/popovers.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/pullrefresh_with_tab.html": {
-				"resources": [
+					"css/order/search.css",
 					"js/mui.pullToRefresh.js",
+					"app/order/search.js",
+					"js/framework/define.js",
+					"js/mui.picker.min.js",
 					"js/mui.min.js",
 					"js/mui.pullToRefresh.material.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/framework/common.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/app.css"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/search-result.html"
+				],
 				"priority": 0
 			},
-			"examples/radio.html": {
+			"app/order/search-result.html": {
 				"resources": [
-					"css/app.css",
-					"js/mui.min.js",
+					"app/order/search-result.js",
+					"css/mui.min.css",
+					"css/order/search-result.css",
+					"js/mui.pullToRefresh.js",
+					"images/order/list_number.png",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"images/order/list_day.png",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"images/order/list_guide.png",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"images/order/list_way.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/quicksaledetails.html"
+				],
 				"priority": 0
 			},
-			"examples/range.html": {
+			"app/message/message-detail.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
+					"app/message/message-detai.js",
+					"css/mui.min.css",
+					"css/message/message-detail.css"
 				],
-				"refer": [],
+				"refer": [
+					"app/order/orderdetails.html"
+				],
 				"priority": 0
 			},
-			"examples/switches.html": {
+			"app/quick-order/quick-order.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tabbar.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"css/quik-order/quik-order.css",
+					"js/mui.picker.min.js",
+					"app/quick-order/quick-order.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
 					"fonts/mui.ttf",
-					"images/60x60.gif",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tabbar-with-submenus.html": {
-				"resources": [
-					"js/mui.min.js",
+					"js/framework/styles.js",
 					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-with-viewpagerindicator.html": {
-				"resources": [
 					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"app/designate/designate.html",
+					"app/designate/allocation-staff.html"
+				],
 				"priority": 0
 			},
-			"examples/tab-with-segmented-control.html": {
+			"app/order/quicksaledetails.html": {
 				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tab-with-segmented-control-vertical.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/typography.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/im-chat.html": {
-				"resources": [
-					"js/mui.imageViewer.js",
-					"images/logo.png",
+					"app/order/quicksaledetails.js",
+					"css/order/quicksaledetails.css",
+					"images/order/call_btn.png",
+					"css/common/common.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
 					"js/mui.min.js",
 					"css/app.css",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"css/mui.imageviewer.css",
-					"js/arttmpl.js"
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
 				],
-				"refer": [],
+				"refer": [
+					"app/sale-detail/saledetail.html",
+					"app/result/sales-export.html",
+					"app/order-pay/order-pay-list.html",
+					"app/order-pay/order-pay.html"
+				],
 				"priority": 0
 			},
-			"examples/info.html": {
+			"app/sale-detail/saledetail.html": {
 				"resources": [
-					"js/mui.min.js",
+					"css/sale-detail/saledetail.css",
+					"app/sale-detail/saledetail.js",
+					"js/update.js",
+					"css/images/sell_alipay.png",
+					"css/images/sell_wechat.png",
+					"css/images/sell_cash.png",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"js/framework/styles.js",
 					"css/app.css",
+					"js/mui.min.js",
 					"css/mui.min.css",
-					"images/qrcode.png"
+					"libs/vue.min.js",
+					"js/framework/lf.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/beecloud.html": {
+			"app/order-pay/order-pay.html": {
 				"resources": [
-					"js/mui.min.js",
-					"js/beecloud.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tableviews.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
+					"css/order-pay/order-pay.css",
+					"js/framework/define.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tableviews-with-badges.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/list-with-input.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/list-triplex-row.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tableviews-with-collapses.html": {
-				"resources": [
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/tableviews-with-swipe.html": {
-				"resources": [
+					"js/framework/styles.js",
+					"css/images/sell_cash.png",
+					"js/mui.zoom.js",
 					"css/app.css",
 					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"examples/media-list.html": {
-				"resources": [
-					"images/cbd.jpg",
-					"images/yuantiao.jpg",
-					"images/muwu.jpg",
-					"js/mui.min.js",
-					"css/app.css",
-					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/shuijiao.jpg"
+					"js/mui.previewimage.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"app/order-pay/order-pay.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
+					"css/images/sell_alipay.png",
+					"css/order-pay/order-list.css"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/nav.html": {
+			"app/daily-manage/daily-manage.html": {
 				"resources": [
-					"js/mui.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"css/daily-manage/daily-manage.css",
+					"js/framework/common.js",
+					"images/order/date.png",
+					"js/mui.pullToRefresh.material.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"images/order/search.png",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/images/logo_login.png",
+					"app/daily-manage/daily-manage.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"images/order/refresh.png",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
+				],
+				"refer": [
+					"app/order/orderlist.html",
+					"app/daily-manage/daily-search.html",
+					"app/daily-manage/daily-remark.html"
+				],
+				"priority": 0
+			},
+			"app/daily-manage/daily-search.html": {
+				"resources": [
+					"app/daily-manage/daily-search.js",
+					"js/mui.picker.min.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"css/daily-manage/daily-search.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"images/order/date.png",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"examples/numbox.html": {
+			"app/daily-manage/daily-remark.html": {
 				"resources": [
+					"app/daily-manage/daily-remark.js",
+					"css/daily-manage/daily-remark.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"images/order/date.png",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"js/framework/styles.js",
 					"css/app.css",
+					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/mui.js"
+					"libs/vue.min.js",
+					"js/framework/lf.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/correlate-order/correlate-order.html": {
+				"resources": [
+					"images/message/sale_date.png",
+					"images/message/guide.png",
+					"css/correlate-order/correlate-order.css",
+					"images/message/nav_order_contact_green.png",
+					"app/correlate-order/correlate-order.js",
+					"images/message/nav_order_gray.png",
+					"js/mui.pullToRefresh.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"images/message/nav_message_gray.png",
+					"images/order/list_time.png",
+					"js/framework/styles.js",
+					"css/images/logo_login.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
+				],
+				"refer": [
+					"app/correlate-order/search.html",
+					"app/order-pay/order-pay-detail.html",
+					"app/correlate-order/editSaleOrder.html",
+					"app/order/orderlist.html",
+					"app/message/message.html"
+				],
+				"priority": 0
+			},
+			"app/correlate-order/search-result.html": {
+				"resources": [
+					"app/correlate-order/search-result.js"
+				],
+				"refer": [
+					"app/order-pay/order-pay-detail.html",
+					"app/correlate-order/editSaleOrder.html"
+				],
+				"priority": 0
+			},
+			"app/correlate-order/search.html": {
+				"resources": [
+					"css/order/search.css",
+					"js/mui.picker.min.js",
+					"app/correlate-order/search.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"app/correlate-order/search-result.html"
+				],
+				"priority": 0
+			},
+			"app/order-pay/order-pay-detail.html": {
+				"resources": [
+					"css/correlate-order/order-details.css",
+					"js/mui.zoom.js",
+					"css/order-pay/order-list.css",
+					"js/mui.previewimage.js",
+					"css/images/sell_alipay.png",
+					"images/order/call_btn.png",
+					"app/order-pay/order-pay.js",
+					"css/images/sell_wechat.png",
+					"js/framework/qrcode.min.js",
+					"css/images/sell_cash.png",
+					"js/framework/define.js",
+					"fonts/mui.ttf",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"css/order-pay/order-pay.css"
+				],
+				"refer": [
+					"app/correlate-order/editSaleOrder.html"
+				],
+				"priority": 0
+			},
+			"app/correlate-order/editSaleOrder.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"css/correlate-order/editSaleOrder.css",
+					"app/correlate-order/editSaleOrder.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"js/framework/styles.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"libs/vue.min.js",
+					"js/framework/lf.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -1026,18 +1109,53 @@
 		},
 		"idle": {
 			"resources": [
+				"images/cbd.jpg",
+				"css/feedback.css",
+				"css/summary/details.scss",
 				"js/mui.dtpicker.js",
+				"css/message/message.scss",
+				"js/mui.poppicker.js",
+				"js/city.data.js",
+				"css/mui.imageviewer.css",
+				"js/mui.view.js",
+				"README.md",
+				"js/beecloud.js",
+				"css/order/order.scss",
+				"js/mui.picker.js",
 				"css/mui.listpicker.css",
+				"js/mui.lazyload.js",
+				"app/test/muban2.html",
+				"js/city.data-3.js",
+				"js/95516.js",
+				"images/qrcode.png",
 				"css/mui.dtpicker.css",
 				"css/mui.picker.all.css",
-				"examples/modals.html",
-				"examples/tabbar-labels-only.html",
+				"js/feedback.js",
+				"js/arttmpl.js",
+				"css/summary/summary.scss",
+				"js/mui.imageViewer.js",
+				"images/muwu.jpg",
+				"app/test/muban1.html",
+				"app/order/lf2.0_test.html",
+				"libs/echarts-all.js",
+				"js/ad.js",
+				"js/mui.lazyload.img.js",
+				"css/common/common.css.map",
 				"js/mui.listpicker.js",
-				"libs/easymob-webim-sdk/quickstart.md",
-				"js/mui.picker.all.js"
+				"js/webviewGroup.js",
+				"images/login-1.png",
+				"css/summary/mui-preview.scss",
+				"css/message/message.css.map",
+				"css/summary/finger-uploader.scss",
+				"css/mui.picker.css",
+				"images/order/u414.png",
+				"js/mui.picker.all.js",
+				"images/order/u408.png",
+				"css/order/order.css.map",
+				"css/common/common.scss",
+				"js/mui.locker.js",
+				"app/test/lf2.0_test.html"
 			]
 		}
 	}
-
-	
 }
