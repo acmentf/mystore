@@ -524,6 +524,11 @@ function renderOrderDetails() {
 			vm.orderInfo = data.data.orderInfo;
 			vm.tourGuidePhoneList = vm.orderInfo.tourGuidePhone.split(',')
 			vm.orderTrackInfo = data.data.orderTrackInfo;
+			if(vm.orderTrackInfo.isPreTour === null) {
+				vm.orderTrackInfo.isPreTour = ''
+			} else {
+				vm.orderTrackInfo.isPreTour = vm.orderTrackInfo.isPreTour === 0 ? '非前置团' : '前置团'
+			}
 			vm.photographerInfos = data.data.photographerInfos;
 			var totalLength = vm.photographerInfos.length > 3 ? 3 : vm.photographerInfos.length
 			for (i = 0; i < totalLength; i++) {
