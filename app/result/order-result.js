@@ -8,7 +8,8 @@ var vm = new Vue({
 	    saleRemark: '',        //备注
 	    reason: '',   	//原因
 	    noOutRemark: '',   // 为输出
-	    saleDate: '',      //销售时间
+		saleDate: '',      //销售时间
+		serverPerNum: '', // 实际服务人数
 	    buyers: '',                 //购买人数
 		salesAmt: '',                //销售额
 		selectsNum: '',				//选片张数
@@ -123,6 +124,11 @@ mui('.order-result').on('tap', '.save-btn', function(){
 //			flag = false
 //			return
 //		}
+		if(vm.serverPerNum ==''){
+			lf.nativeUI.toast('请填写实际服务到达人数')
+			flag = false
+			return
+		}
 		vm.printOrderXms.forEach(function(v){
 			if(v.picNum){
 				if(!v.picSize){
@@ -164,6 +170,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		selectsNum: vm.selectsNum,			
 		shootNum: vm.shootNum,
 		saleRemark:vm.saleRemark,
+		serverPerNum: vm.serverPerNum,
 		flag: 1
 	}
 		
@@ -226,6 +233,7 @@ function loadResult(){
 				}
 				vm.selectsNum = res.data.orderX.selectsNum
 				vm.shootNum = res.data.orderX.shootNum
+				vm.serverPerNum = res.data.orderX.serverPerNum
 				vm.id = res.data.orderX.id
 				vm.reason = res.data.orderX.noOutReason
 				vm.saleRemark = res.data.orderX.saleRemark
