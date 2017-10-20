@@ -19,6 +19,8 @@ var vm = new Vue({
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
 			groupTypeValue:'',//团队性质的value
+			preProps:'',//前置属性,
+			prePropsValue: ''
 		},
 		// 行程信息
 		marchInfo:{
@@ -87,6 +89,27 @@ mui('#app').on('tap', '#showUserPicker', function() {
 		userPicker.show(function(items) {
 			vm.groupInfo.groupType = items[0].text
 			vm.groupInfo.groupTypeValue = items[0].value
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		}, false);
+	}
+})
+
+//前置属性
+mui('#app').on('tap', '#showPropsPicker', function() {
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: 0,
+			text: '非前置团'
+		}, {
+			value: 1,
+			text: '前置团'
+		}]);
+		userPicker.show(function(items) {
+			vm.groupInfo.preProps = items[0].text
+			vm.groupInfo.prePropsValue = items[0].value
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		}, false);
@@ -242,6 +265,11 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		return
 	}
 
+	if(vm.groupInfo.prePropsValue === null) {
+		lf.nativeUI.toast('前置属性必填');
+		return
+	}
+
 	var params = {
 		orderId: vm.orderId,
 		lineSightList : vm.shootInfos,
@@ -252,7 +280,9 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				fetchPhotoTime :vm.marchInfo.fetchPhotoTime,//取片日期
 				fetchPhotoScene :vm.marchInfo.fetchPhotoScene,//取片地点
 				tourGuide : vm.groupInfo.tourGuide,//导游姓名
-				tourGuidePhone : vm.groupInfo.tourGuidePhone//导游电话
+				tourGuidePhone : vm.groupInfo.tourGuidePhone,//导游电话
+				isPreTour :vm.groupInfo.prePropsValue,//前置属性
+				prePrice :vm.groupInfo.prePrice,//前置金额
 		},
 		tourGroups: {
 				id: vm.marchInfo.id,
@@ -266,6 +296,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				exeRemark : vm.marchInfo.exeRemark//备注信息
 		}
 	};
+	console.log(JSON.stringify(params.order))
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 		lf.nativeUI.closeWaiting()
@@ -316,6 +347,14 @@ function renderTrackInfo(){
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
+			console.log(JSON.stringify(data.data))
+
+			if (data.data.isPreTour !== null) {
+				var _pre = data.data.isPreTour == 0 ? '非前置团' : '前置团'
+			} else {
+				var _pre = ''
+			}
+
 			vm.orderId = data.data.orderId
 			vm.groupInfo={
 				areaName :data.data.areaName,//区域
@@ -323,6 +362,9 @@ function renderTrackInfo(){
 				lineName :data.data.lineName,//线路名称
 				groupType :data.data.groupType,//团性质
 				personCount : data.data.personCount,//团人数
+				preProps : _pre,//前置属性
+				prePropsValue : data.data.isPreTour,//前置属性
+				prePrice :data.data.prePrice || data.data.unitPrice,//前置金额
 				tourGuide : data.data.tourGuide,//导游姓名
 				tourGuidePhone : data.data.tourGuidePhone//导游电话
 			}
