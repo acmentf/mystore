@@ -282,7 +282,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				tourGuide : vm.groupInfo.tourGuide,//导游姓名
 				tourGuidePhone : vm.groupInfo.tourGuidePhone,//导游电话
 				isPreTour :vm.groupInfo.prePropsValue,//前置属性
-				prePrice :vm.groupInfo.prePrice,//前置金额
+				prePrice :vm.groupInfo.prePrice * 100,//前置金额
 		},
 		tourGroups: {
 				id: vm.marchInfo.id,
@@ -354,7 +354,12 @@ function renderTrackInfo(){
 			} else {
 				var _pre = ''
 			}
-
+			var _prePrice = ''
+			if (data.data.prePrice) {
+				_prePrice = (data.data.prePrice / 100).toFixed(2)
+			} else {
+				_prePrice = data.data.unitPrice
+			}
 			vm.orderId = data.data.orderId
 			vm.groupInfo={
 				areaName :data.data.areaName,//区域
@@ -364,7 +369,7 @@ function renderTrackInfo(){
 				personCount : data.data.personCount,//团人数
 				preProps : _pre,//前置属性
 				prePropsValue : data.data.isPreTour,//前置属性
-				prePrice :data.data.prePrice || data.data.unitPrice,//前置金额
+				prePrice : _prePrice,//前置金额
 				tourGuide : data.data.tourGuide,//导游姓名
 				tourGuidePhone : data.data.tourGuidePhone//导游电话
 			}
