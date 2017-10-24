@@ -358,7 +358,7 @@ function renderTrackInfo(){
 			if (data.data.prePrice) {
 				_prePrice = (data.data.prePrice / 100).toFixed(2)
 			} else {
-				_prePrice = data.data.unitPrice
+				_prePrice = (data.data.unitPrice / 100).toFixed(2)
 			}
 			vm.orderId = data.data.orderId
 			vm.groupInfo={
