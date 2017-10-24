@@ -529,7 +529,13 @@ function renderOrderDetails() {
 			} else {
 				vm.orderTrackInfo.isPreTour = vm.orderTrackInfo.isPreTour === 0 ? '非前置团' : '前置团'
 			}
-			vm.orderTrackInfo.prePrice = (vm.orderTrackInfo.prePrice / 100).toFixed(2)
+		
+			if (vm.orderTrackInfo.prePrice) {
+				vm.orderTrackInfo.prePrice = (vm.orderTrackInfo.prePrice / 100).toFixed(2)
+			} else {
+				vm.orderTrackInfo.prePrice = vm.orderTrackInfo.unitPrice
+			}
+
 			vm.photographerInfos = data.data.photographerInfos;
 			var totalLength = vm.photographerInfos.length > 3 ? 3 : vm.photographerInfos.length
 			for (i = 0; i < totalLength; i++) {
