@@ -533,7 +533,7 @@ function renderOrderDetails() {
 			if (vm.orderTrackInfo.prePrice) {
 				vm.orderTrackInfo.prePrice = (vm.orderTrackInfo.prePrice / 100).toFixed(2)
 			} else {
-				vm.orderTrackInfo.prePrice = vm.orderTrackInfo.unitPrice
+				vm.orderTrackInfo.prePrice = (vm.orderTrackInfo.unitPrice / 100).toFixed(2)
 			}
 
 			vm.photographerInfos = data.data.photographerInfos;
