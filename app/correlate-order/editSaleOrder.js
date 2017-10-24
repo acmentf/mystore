@@ -174,7 +174,13 @@ lf.ready(function() {
                 picker = new mui.DtPicker(opts);
                 picker.setSelectedValue(vm.saleTime)
                 picker.show(function(select) {
-                    vm.orderSaleDate = select.value
+                    if(select.value != vm.orderSaleDate){
+                        vm.orderSaleDate = select.value
+                        vm.tourGuide = ''
+                        vm.pOrderNo = ''
+                        vm.nums = ''
+                        vm.saleName = ''
+                    }
                 })
             },
             selectGuide: function() {
@@ -211,9 +217,12 @@ lf.ready(function() {
                         var picker = new mui.PopPicker();
                         picker.setData(data)
                         picker.show(function(selectItems) {
-                            vm.tourGuide = selectItems[0].text
-                            vm.pOrderNo = selectItems[0].value.split(" ")[0]
-                            vm.orderId = selectItems[0].value.split(" ")[1]
+                            if(selectItems[0].text != vm.tourGuide){
+                                vm.tourGuide = selectItems[0].text
+                                vm.pOrderNo = selectItems[0].value.split(" ")[0]
+                                vm.orderId = selectItems[0].value.split(" ")[1]
+                                vm.saleName = ''
+                            }
                         })
                     } else {
                         mui.alert(res.msg)
