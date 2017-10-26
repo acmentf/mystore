@@ -1,0 +1,12 @@
+.statistics-daily-paper .mui-bar-nav #income, .statistics-daily-paper .mui-bar-nav #flow, .statistics-daily-paper .mui-bar-nav #history {
+  width: 44px;
+  height: 44px;
+}
+
+.statistics-daily-paper .mui-bar-nav #income img, .statistics-daily-paper .mui-bar-nav #flow img, .statistics-daily-paper .mui-bar-nav #history img {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  position: relative;
+  top: 2px;
+}
