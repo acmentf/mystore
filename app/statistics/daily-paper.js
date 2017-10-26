@@ -174,7 +174,7 @@ lf.ready(function() {
                 return getRegionProvince(this.regionProvinceMap.flowShootRegion, '大区拍摄人数') + '收入 （实时）'
             },
             historyThreeMonthIncomeTitle: function () {
-                return '近三月收入统计'
+                return '近3月收入统计'
             },
             incomeLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
@@ -673,6 +673,13 @@ lf.ready(function() {
             }
         },
         methods: {
+            isSign: function(value) {
+                value = value + ''
+                return value[0] !== '-'
+            },
+            getNumberClassName: function (value) {
+                return [this.isSign(value) ? 'number-sign' : 'number-lose']
+            },
             /*下拉数据*/
             //初始化大区省份列表
             initRegionProvince: function (cb) {

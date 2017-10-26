@@ -71,7 +71,155 @@
         <div class="mui-scroll-wrapper mui-content">
             <div class="mui-scroll">
                 <div class="daily-content">
-                    日报
+                    <div class="income-page" v-if="true || pageTypeActive === pageTypeConstant.income">
+                        <div class="info-box clearfix">
+                            <div class="lf">
+                                今日收入: <span class="number-large" v-text="incomeTotal.saleAmt"></span>
+                            </div>
+                            <div class="rt" >
+                                <span class="number-large"
+                                      :class="getNumberClassName(incomeTotal.saleAmtRate)"
+                                      v-text="incomeTotal.saleAmtRate"></span>
+                            </div>
+                        </div>
+                        <div class="info-box clearfix">
+                            <div class="lf">
+                                前置: <span v-text="incomeTotal.saleAmtPer"></span>
+                            </div>
+                            <div class="rt" >
+                                <span :class="getNumberClassName(incomeTotal.saleAmtPerRate)"
+                                      v-text="incomeTotal.saleAmtPerRate"></span>
+                            </div>
+                        </div>
+                        <div class="info-box clearfix">
+                            <div class="lf">
+                                销售: <span v-text="incomeTotal.appAmt"></span>
+                            </div>
+                            <div class="rt" >
+                                <span :class="getNumberClassName(incomeTotal.appAmtRate)"
+                                      v-text="incomeTotal.appAmtRate"></span>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">全国收入（实时）</div>
+                                <div class="tool">
+                                    <i class="icon mui-icon mui-icon-more" id="incomeAll_RP"></i>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="incomeAllChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">各大区收入（实时排行）</div>
+                                <div class="tool">
+                                    <i class="icon mui-icon mui-icon-more" id="incomeRegion_RP"></i>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="incomeRegionChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">线路产品收入（实时排行）</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="incomeLineChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">旅行社收入转化（实时排行）</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="incomeTravelChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-page" v-if="true || pageTypeActive === pageTypeConstant.flow">
+                        <div class="info-box clearfix">
+                            <div class="lf">
+                                今日拍摄人数: <span class="number-large" v-text="flowShootInfo.shootPerples"></span>
+                            </div>
+                            <div class="rt" >
+                                <span class="number-large"
+                                      :class="getNumberClassName(flowShootInfo.shootPerplesRate)"
+                                      v-text="flowShootInfo.shootPerplesRate"></span>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">全国拍摄人数（实时）</div>
+                                <div class="tool">
+                                    <i class="icon mui-icon mui-icon-more" id="flowShootAll_RP"></i>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="flowShootAllChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">各大区拍摄人数（实时排行）</div>
+                                <div class="tool">
+                                    <i class="icon mui-icon mui-icon-more" id="flowShootRegion_RP"></i>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="flowShootRegionChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">线路产品拍摄人数（实时排行）</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="flowShootLineChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">旅行社拍摄人数（实时排行）</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="flowShootTravelChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-page" v-if="true || pageTypeActive === pageTypeConstant.history">
+                        <div class="info-box center">
+                            累积收入: <span class="number-large" v-text="historyIncomeTotal.saleAmt"></span>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">前置&销售收入对比</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="historyIncomeTotalChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                        <div class="sep-line"></div>
+                        <div class="section-box">
+                            <div class="section-title clearfix">
+                                <div class="text">近30天每日收入</div>
+                            </div>
+                            <div class="section-content">
+                                <e-charts :options="historyIncomeDayChart" auto-resize></e-charts>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

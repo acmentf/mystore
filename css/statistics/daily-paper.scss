@@ -1,4 +1,29 @@
 .statistics-daily-paper{
+  .clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+  }
+  .clearfix:after {
+    clear: both;
+  }
+  .lf{
+    float: left;
+  }
+  .rt{
+    float: right;
+  }
+  .number-large{
+    font-size: 18px;
+  }
+  .number-sign{
+    color: #56F3E7;
+  }
+  .number-lose{
+    color: #F7739D;
+  }
+  .sep-line{
+    border-bottom: 1px solid #333;
+  }
   .mui-bar-nav{
     #income,#flow,#history{
       width: 44px;
@@ -9,6 +34,40 @@
         vertical-align: middle;
         position: relative;
         top: 2px;
+      }
+    }
+  }
+  .daily-content{
+    color: #fff;
+    .section-box{
+      .section-title {
+        padding: 18px 18px 16px;
+        .text {
+          float: left;
+          color: #1f2d3d;
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .tool {
+          float: right;
+          .icon + .icon {
+            cursor: pointer;
+            margin-left: 10px;
+          }
+        }
+      }
+      .section-content{
+        .echarts{
+          width: 100%;
+          height: 310px;
+        }
+      }
+    }
+    .info-box{
+      background-color: #1f2d3d;
+      color: #fff;
+      &.center{
+        text-align: center;
       }
     }
   }

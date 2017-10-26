@@ -1,3 +1,32 @@
+.statistics-daily-paper .clearfix:before, .statistics-daily-paper .clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.statistics-daily-paper .clearfix:after {
+  clear: both;
+}
+
+.statistics-daily-paper .lf {
+  float: left;
+}
+
+.statistics-daily-paper .rt {
+  float: right;
+}
+
+.statistics-daily-paper .number-large {
+  font-size: 18px;
+}
+
+.statistics-daily-paper .number-sign {
+  color: #56F3E7;
+}
+
+.statistics-daily-paper .number-lose {
+  color: #F7739D;
+}
+
 .statistics-daily-paper .mui-bar-nav #income, .statistics-daily-paper .mui-bar-nav #flow, .statistics-daily-paper .mui-bar-nav #history {
   width: 44px;
   height: 44px;
@@ -9,4 +38,41 @@
   vertical-align: middle;
   position: relative;
   top: 2px;
+}
+
+.statistics-daily-paper .daily-content {
+  color: #fff;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title {
+  padding: 18px 18px 16px;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .text {
+  float: left;
+  color: #1f2d3d;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool {
+  float: right;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool .icon + .icon {
+  margin-left: 10px;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-content .echarts {
+  width: 100%;
+  height: 310px;
+}
+
+.statistics-daily-paper .daily-content .info-box {
+  background-color: #1f2d3d;
+  color: #fff;
+}
+
+.statistics-daily-paper .daily-content .info-box.center {
+  text-align: center;
 }
