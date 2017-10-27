@@ -12,17 +12,75 @@
   .rt{
     float: right;
   }
-  .number-large{
-    font-size: 18px;
+  .currency:before{
+    content: '￥';
+    font-size: 12px;
   }
+  .number-large{
+    font-size: 28px;
+    .currency:before{
+      font-size: 16px;
+    }
+  }
+  .number-sign,.number-lose{
+    position: relative;
+    padding-left: 10px;
+    &.number-large{
+      padding-left: 14px;
+    }
+    .sign{
+      overflow: hidden;
+      left: 0;
+      position: absolute;
+    }
+    .number:after{
+      content: '%';
+    }
+  }
+
   .number-sign{
-    color: #56F3E7;
+    color: #F17175;
+    &.number-large{
+      .sign{
+        width: 14px;
+        height: 14px;
+        top: 2px;
+      }
+    }
+    .sign{
+      width: 14px;
+      height: 12px;
+      top: 3px;
+    }
+    .sign:before{
+      position: absolute;
+      top: -2px;
+      content: '↑';
+    }
   }
   .number-lose{
-    color: #F7739D;
+    color: #81D6BB;
+    &.number-large{
+      .sign{
+        width: 14px;
+        height: 14px;
+        top: 2px;
+      }
+    }
+    .sign{
+      width: 14px;
+      height: 12px;
+      top: 6px;
+    }
+    .sign:before{
+      position: absolute;
+      top: -12px;
+      content: '↓';
+    }
   }
   .sep-line{
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #ddd;
+    margin: 5px 0;
   }
   .mui-bar-nav{
     #income,#flow,#history{
@@ -38,13 +96,15 @@
     }
   }
   .daily-content{
-    color: #fff;
+    padding-bottom: 20px;
     .section-box{
+      margin-bottom: 5px;
+      background-color: #fff;
       .section-title {
         padding: 18px 18px 16px;
+        color: #919191;
         .text {
           float: left;
-          color: #1f2d3d;
           font-size: 14px;
           font-weight: bold;
         }
@@ -64,10 +124,23 @@
       }
     }
     .info-box{
-      background-color: #1f2d3d;
-      color: #fff;
+      color: #363636;
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 5px;
       &.center{
         text-align: center;
+      }
+      .title{
+        margin-bottom: 10px;
+      }
+      .content{
+
+      }
+    }
+    .list-show-wrap{
+      .item{
+        padding: 10px;
       }
     }
   }

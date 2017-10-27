@@ -6,7 +6,7 @@ lf.ready(function() {
         history: 'history'
     }
     //大区省份选择
-    var cityPicker = new $.PopPicker({
+    var cityPicker = new mui.PopPicker({
         layer: 2
     })
     var EACH_SCREEN_COUNT = 6
@@ -25,7 +25,7 @@ lf.ready(function() {
             //版本号
             wgtVer: '',
             //激活模块
-            pageTypeActive: pageTypeConstant.income && 'test',
+            pageTypeActive: pageTypeConstant.income,
             //定时器
             intervalMap: {
                 timeout: null,
@@ -43,7 +43,7 @@ lf.ready(function() {
                 }
             },
             //大区省份code
-            regionProvinceActive: '',
+            //regionProvinceActive: '',
             regionProvinceMap: {
                 incomeAll: {
                     areaCode: '',
@@ -69,7 +69,19 @@ lf.ready(function() {
                     provinceCode: '',
                     provinceName: ''
                 },
+                historyIncomeDay: {
+                    areaCode: '',
+                    areaName: '',
+                    provinceCode: '',
+                    provinceName: ''
+                },
                 historyThreeMonthIncome: {
+                    areaCode: '',
+                    areaName: '',
+                    provinceCode: '',
+                    provinceName: ''
+                },
+                historyShootDay: {
                     areaCode: '',
                     areaName: '',
                     provinceCode: '',
@@ -80,15 +92,15 @@ lf.ready(function() {
             /*收入模块 start*/
             // 统计汇总
             incomeTotal: {
-                saleAmt: '',//	今日收入
-                saleAmtRate: '',//	今日收入涨幅
-                saleAmtPer: '',//	前置金额
-                saleAmtPerRate: '',//	前置金额涨幅
-                appAmt: '',//	销售金额
-                appAmtRate: ''//	销售金额涨幅
+                saleAmt: '777',//	今日收入
+                saleAmtRate: '-545',//	今日收入涨幅
+                saleAmtPer: '5454',//	前置金额
+                saleAmtPerRate: '-44',//	前置金额涨幅
+                appAmt: '555',//	销售金额
+                appAmtRate: '444'//	销售金额涨幅
             },
             //线路产品收入
-            /*lineName	线路名称
+            /*productName	线路名称
              saleAmt	收入金额*/
             incomeLine: [],
             //旅行社收入转化
@@ -107,11 +119,11 @@ lf.ready(function() {
             /*流量模块 start*/
             //拍摄统计
             flowShootInfo: {
-                shootPerples: '',//	今日拍摄人数
-                shootPerplesRate: ''//	拍摄人数涨幅
+                shootPerples: '666656',//	今日拍摄人数
+                shootPerplesRate: '666'//	拍摄人数涨幅
             },
             //线路产品拍摄人数
-            /*lineName	线路名称
+            /*productName	线路名称
              shootPerples	拍摄人数*/
             flowShootLine: [],
             //旅行社拍摄人数
@@ -130,9 +142,9 @@ lf.ready(function() {
             /*历史模块 start*/
             //累计收入
             historyIncomeTotal: {
-                saleAmt: '',//	累计收入
-                saleAmtPer: '',//	前置收入
-                appAmt: ''//	销售收入
+                saleAmt: '6666',//	累计收入
+                saleAmtPer: '66666',//	前置收入
+                appAmt: '66666'//	销售收入
             },
             //近30天每日收入
             /*date	日期
@@ -142,19 +154,22 @@ lf.ready(function() {
             /*date	日期
              totalAmt	总收入
              amtRate	涨幅*/
-            historyThreeMonthIncome: [],
+            historyThreeMonthIncome: [
+                {date: '2017-10',totalAmt: 13548794,amtRate: 58},
+                {date: '2017-10',totalAmt: 13548794,amtRate: -61}
+                ],
             //累计拍摄人数
             historyShootCount: {
-                shoot: ''//	累计拍摄人数
+                shoot: '66666'//	累计拍摄人数
             },
             //近30天拍摄人数
-            /*date	日期
-             shoot	拍摄人数*/
+            /*hour	日期
+             shootPerples	拍摄人数*/
             historyShootDay: [],
             //旅行社发团人数排行
             /*travelName	旅行社名称
-             peoples	人数*/
-            historyTravelRanking: []
+             total	人数*/
+            historyTravelRanking: [{travelName: '旅行社名称',total: 113568}]
             /*历史模块 end*/
         },
         computed:{
@@ -173,18 +188,26 @@ lf.ready(function() {
             flowShootRegionTitle: function () {
                 return getRegionProvince(this.regionProvinceMap.flowShootRegion, '大区拍摄人数') + '收入 （实时）'
             },
+            historyIncomeDayTitle: function () {
+                return '近30天每日收入'
+            },
             historyThreeMonthIncomeTitle: function () {
                 return '近3月收入统计'
+            },
+            historyShootDayTitle: function () {
+                return '近30天每日拍摄人数'
             },
             incomeLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.incomeLine, this.intervalMap.startIndex.incomeLine)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
-                    xAxisData.push(item.lineName)
+                    xAxisData.push(item.productName)
                     seriesData.push(value)
                 })
                 series.push({
@@ -227,6 +250,8 @@ lf.ready(function() {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.incomeTravel, this.intervalMap.startIndex.incomeTravel)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
@@ -273,6 +298,8 @@ lf.ready(function() {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.incomeAll, this.intervalMap.startIndex.incomeAll)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
@@ -312,6 +339,8 @@ lf.ready(function() {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.incomeRegion, this.intervalMap.startIndex.incomeRegion)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
@@ -349,14 +378,16 @@ lf.ready(function() {
                 }
             },
             flowShootLineChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.flow) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.flowShootLine, this.intervalMap.startIndex.flowShootLine)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
-                    xAxisData.push(item.lineName)
+                    xAxisData.push(item.productName)
                     seriesData.push(value)
                 })
                 series.push({
@@ -395,10 +426,12 @@ lf.ready(function() {
                 }
             },
             flowShootTravelChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.flow) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.flowShootTravel, this.intervalMap.startIndex.flowShootTravel)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
@@ -441,10 +474,12 @@ lf.ready(function() {
                 }
             },
             flowShootAllChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.flow) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.flowShootAll, this.intervalMap.startIndex.flowShootAll)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
@@ -480,10 +515,12 @@ lf.ready(function() {
                 }
             },
             flowShootRegionChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.flow) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.flowShootRegion, this.intervalMap.startIndex.flowShootRegion)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
@@ -521,10 +558,12 @@ lf.ready(function() {
                 }
             },
             historyIncomeDayChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.history) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.historyIncomeDay, this.intervalMap.startIndex.historyIncomeDay)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
@@ -560,14 +599,16 @@ lf.ready(function() {
                 }
             },
             historyShootDayChart: function () {
-                if (this.pageTypeActive !== pageTypeConstant.income) {
+                if (this.pageTypeActive !== pageTypeConstant.history) {
                     return emptyChart
                 }
                 var list = dynamicSequenceValue(this.historyShootDay, this.intervalMap.startIndex.historyShootDay)
+                var xAxisData = []
+                var series = []
                 var seriesData = []
                 list.forEach(function(item) {
-                    var value = +item.shoot
-                    xAxisData.push(item.date)
+                    var value = +item.shootPerples
+                    xAxisData.push(item.hour)
                     seriesData.push(value)
                 })
                 series.push({
@@ -599,6 +640,9 @@ lf.ready(function() {
                 }
             },
             historyIncomeTotalChart: function () {
+                if (this.pageTypeActive !== pageTypeConstant.history) {
+                    return emptyChart
+                }
                 var income = this.historyIncomeTotal
                 return {
                     tooltip: {
@@ -665,10 +709,22 @@ lf.ready(function() {
                     this.refreshDataByShootRegion()
                 }
             },
+            'regionProvinceMap.historyIncomeDay': {
+                deep: true,
+                handler: function () {
+                    this.refreshDataByThirtyIncome()
+                }
+            },
             'regionProvinceMap.historyThreeMonthIncome': {
                 deep: true,
                 handler: function () {
                     this.refreshDataByThreeMonthIncome()
+                }
+            },
+            'regionProvinceMap.historyShootDay': {
+                deep: true,
+                handler: function () {
+                    this.refreshDataByThirtyShoot()
                 }
             }
         },
@@ -685,11 +741,22 @@ lf.ready(function() {
             initRegionProvince: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/queryRegion.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/queryRegionAndProvince.htm', {}, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.regionProvinceList = res.data || []
+                        self.regionProvinceList = (res.data || []).map(function (item) {
+                            return {
+                                value: item.areaCode,
+                                text: item.areaName,
+                                children: (item.province || []).map(function (chd) {
+                                    return {
+                                        value: chd.provinceCode,
+                                        text: chd.provinceName
+                                    }
+                                })
+                            }
+                        })
                         cityPicker.setData(self.regionProvinceList);
                     } else {
                         lf.nativeUI.toast(res.msg);
@@ -702,9 +769,10 @@ lf.ready(function() {
             },
             /*收入模块 start*/
             initIncome: function () {
-                this.refreshDataByIncome(function () {
-                    this.refreshDataByIncomeAll(function () {
-                        this.refreshDataByIncomeRegion()
+                var self = this
+                self.refreshDataByIncome(function () {
+                    self.refreshDataByIncomeAll(function () {
+                        self.refreshDataByIncomeRegion()
                     })
                 })
             },
@@ -718,7 +786,7 @@ lf.ready(function() {
                     cb && cb()
                     if (res.code === '200') {
                         self.incomeTotal = data.incomeTotal || {}
-                        self.incomeLine = data.incomeLine || []
+                        self.incomeLine = data.incomeProduct || []
                         self.incomeTravel = data.incomeTravel || []
 
                         self.intervalMap.startIndex.incomeLine = 0
@@ -768,7 +836,10 @@ lf.ready(function() {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.incomeRegion = res.data || []
+                        self.incomeRegion = (res.data || []).map(function (item) {
+                            item.areaName = item.areaName || item.provinceName || item.lineName
+                            return item
+                        })
 
                         self.intervalMap.startIndex.incomeRegion = 0
                     } else {
@@ -783,12 +854,12 @@ lf.ready(function() {
             /*收入模块 end*/
             /*流量模块 start*/
             initFlow: function () {
-                this.refreshDataByShoot(function () {
-                    this.refreshDataByShootAll(function () {
-                        this.refreshDataByShootRegion()
+                var self = this
+                self.refreshDataByShoot(function () {
+                    self.refreshDataByShootAll(function () {
+                        self.refreshDataByShootRegion()
                     })
                 })
-
             },
             //拍摄信息统计
             refreshDataByShoot: function (cb) {
@@ -800,7 +871,7 @@ lf.ready(function() {
                     cb && cb()
                     if (res.code === '200') {
                         self.flowShootInfo = data.shootInfo || {}
-                        self.flowShootLine = data.shootLine || []
+                        self.flowShootLine = data.shootProduct || []
                         self.flowShootTravel = data.shootTravel || []
 
                         self.intervalMap.startIndex.flowShootLine = 0
@@ -850,7 +921,11 @@ lf.ready(function() {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.flowShootRegion = res.data || []
+                        self.flowShootRegion = (res.data || []).map(function (item) {
+                            item.areaName = item.areaName || item.provinceName || item.lineName
+                            return item
+                        })
+
                         self.intervalMap.startIndex.flowShootRegion = 0
                     } else {
                         lf.nativeUI.toast(res.msg);
@@ -864,9 +939,16 @@ lf.ready(function() {
             /*流量模块 end*/
             /*历史模块 start*/
             initHistory: function () {
-                this.refreshDataByHistoryIncome(function () {
-                    this.refreshDataByThreeMonthIncome(function () {
-                        this.refreshDataByHistoryShoot()
+                var self = this
+                self.refreshDataByHistoryIncome(function () {
+                    self.refreshDataByThirtyIncome(function () {
+                        self.refreshDataByThreeMonthIncome(function () {
+                            self.refreshDataByHistoryShoot(function () {
+                                self.refreshDataByThirtyShoot(function () {
+                                    self.refreshDataByTravelRanking()
+                                })
+                            })
+                        })
                     })
                 })
             },
@@ -880,7 +962,28 @@ lf.ready(function() {
                     cb && cb()
                     if (res.code === '200') {
                         self.historyIncomeTotal = data.incomeTotal || {}
-                        self.historyIncomeDay = data.incomeDay || []
+                    } else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg);
+                });
+            },
+            //近30天每日收入
+            refreshDataByThirtyIncome: function (cb) {
+                var self = this
+                var regionProvince = this.regionProvinceMap.historyIncomeDay
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/thirtyIncome.htm', {
+                    areaCode: regionProvince.areaCode,
+                    provinceCode: regionProvince.provinceCode
+                }, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    if (res.code === '200') {
+                        self.historyIncomeDay = res.data || []
 
                         self.intervalMap.startIndex.historyIncomeDay = 0
                     } else {
@@ -901,10 +1004,17 @@ lf.ready(function() {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
+                    var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyThreeMonthIncome = res.data || []
+                        self.historyThreeMonthIncome = ['1','2','3'].map(function (index) {
+                            return {
+                                date: data['date' + index],
+                                totalAmt: data['totalAmt' + index],
+                                amtRate: data['amtRate' + index]
+                            }
+                        })
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -918,16 +1028,55 @@ lf.ready(function() {
             refreshDataByHistoryShoot: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/historyShoot.htm', {}, function(res) {
-                    var data = res.data || {}
+                lf.net.getJSON('newReport/analysisMobile/totalShoot.htm', {}, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyShootCount = data.shootCount || {}
-                        self.historyShootDay = data.shootDay || []
-                        self.historyTravelRanking = data.travelRanking || []
+                        self.historyShootCount = {
+                            shoot: isDef(res.data) ? res.data : 0
+                        }
+                    } else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg);
+                });
+            },
+            //近30天每日拍摄人数
+            refreshDataByThirtyShoot: function (cb) {
+                var self = this
+                var regionProvince = this.regionProvinceMap.historyShootDay
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/thirtyShoot.htm', {
+                    areaCode: regionProvince.areaCode,
+                    provinceCode: regionProvince.provinceCode
+                }, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    if (res.code === '200') {
+                        self.historyShootDay = res.data || []
 
                         self.intervalMap.startIndex.historyShootDay = 0
+                    } else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg);
+                });
+            },
+            //旅行社发团人数排行
+            refreshDataByTravelRanking: function (cb) {
+                var self = this
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/travelRanking.htm', {}, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    if (res.code === '200') {
+                        self.historyTravelRanking = res.data || []
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -982,8 +1131,9 @@ lf.ready(function() {
 
     // 获取大区省份
     function getRegionProvince(options, text) {
-        var ret = options.areaName || ''
-        if (ret && options.provinceName) {
+        var all = '全部'
+        var ret = options.areaName && options.areaName !== all ? options.areaName : ''
+        if (ret && options.provinceName && options.provinceName !==  all) {
             ret += options.provinceName
         }
         return ret || text
@@ -1013,6 +1163,10 @@ lf.ready(function() {
             }
         }
         return ret
+    }
+    //
+    function isDef(v) {
+        return v !== undefined && v !== null
     }
     // 小数转为百分比
     function toPercent(point){
@@ -1047,7 +1201,7 @@ lf.ready(function() {
     // 收入
     mui('body').on('tap', '#income', function(){
         vm.pageTypeActive = pageTypeConstant.income
-        vm.init()
+        init()
     })
     mui('body').on('tap', '#incomeAll_RP', function(){
         cityPicker.show(function(items) {
@@ -1062,7 +1216,7 @@ lf.ready(function() {
     // 流量
     mui('body').on('tap', '#flow', function(){
         vm.pageTypeActive = pageTypeConstant.flow
-        vm.init()
+        init()
     })
     mui('body').on('tap', '#flowShootAll_RP', function(){
         cityPicker.show(function(items) {
@@ -1077,11 +1231,21 @@ lf.ready(function() {
     // 历史
     mui('body').on('tap', '#history', function(){
         vm.pageTypeActive = pageTypeConstant.history
-        vm.init()
+        init()
+    })
+    mui('body').on('tap', '#historyIncomeDay_RP', function(){
+        cityPicker.show(function(items) {
+            setRegionProvince(vm.regionProvinceMap.historyIncomeDay, items)
+        });
     })
     mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
         cityPicker.show(function(items) {
             setRegionProvince(vm.regionProvinceMap.historyThreeMonthIncome, items)
+        });
+    })
+    mui('body').on('tap', '#historyShootDay_RP', function(){
+        cityPicker.show(function(items) {
+            setRegionProvince(vm.regionProvinceMap.historyShootDay, items)
         });
     })
 
