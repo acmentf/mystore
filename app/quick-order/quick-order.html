@@ -14,6 +14,34 @@
 
 <body>
     <div id="app">
+        <!-- 选择景点弹窗 -->
+        <div class="select-journey-wrapper">
+            <header class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">选择景点</h1>
+                <a @click='confirmSelectJourney' class="mui-btn mui-pull-right confirm-btn">确定</a>
+            </header>
+            <div class="journey-select-inner">
+                <ul class="mui-table-view">
+                    <template v-for="(item,index) in journeyList">
+                        <li
+                            class="mui-table-view-cell mui-indexed-list-item"
+                            :data-value="item.value">
+                            <div class="item-wrap">
+                                <span class="text-name" v-text="item.text"></span>
+                                <div class="btn-wrap">
+                                    <template>
+                                        <button v-if="!item.selected" :index="index" type="button" class="mui-btn btn-select btn-select" @click='selectSingleJourney(item.text,index)'>选择</button>
+                                        <button v-else :index="index" type="button" class="mui-btn btn-cancel" @click='cancelSingleJourney(item.text, index)'>取消</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+        <!-- 选择景点弹窗 -->
+
         <header id="personal-header-setting" class="mui-bar mui-bar-nav quikorder-header">
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
             <h1 class="mui-title">快速下单</h1>
@@ -73,9 +101,9 @@
             </ul>
             <ul class="mui-table-view mt15">
                 <li class="mui-table-view-cell about-go">
-                    <div class="mui-navigate-right shootPlance">
+                    <div class="mui-navigate-right" @click="selectJourneyName($event)">
                         <div class="mui-pull-left personal-list-key">拍摄景点</div>
-                        <input class="mui-pull-right" placeholder="请输入景点" v-model="shootPlance" readonly>
+                        <input class="mui-pull-right" placeholder="请输入景点" v-model="shootPlance" readonly="readonly" disabled="disabled">
                     </div>
                 </li>
                 <li class="mui-table-view-cell feedback-go">

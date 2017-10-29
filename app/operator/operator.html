@@ -87,69 +87,6 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background: #FFFFFF;
 			}
-
-			.select-journey-wrapper {
-				display: none;
-				position: absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				z-index: 99999;
-				width: 100%;
-				height: 100%;
-				border: none;
-			}
-
-			.journey-select-inner {
-				background: #fff;
-				position: fixed;
-				top: 44px;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				z-index: 99999;
-				overflow-y: auto;
-			}
-
-			.journey-select-inner .item-wrap {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-			}
-
-			#confirmBtn {
-				color:#3DB391
-			}
-			
-			.journey-select-inner .text-name{
-				color: #444
-			}
-
-			.journey-select-inner .text-name{
-				color: #444
-			}
-
-			.btn-wrap .btn-select {
-				font-size: 14px;
-				color:#3DB391;
-				border: 1px solid #3DB391
-			}
-
-			.confirm-btn {
-				border: none;
-				color:#3DB391;
-			}
-
-			.btn-wrap .btn-cancel {
-				font-size: 14px;
-				color:#666;
-				border: 1px solid #666
-			}
-
-			.journey-select-inner .item-wrap.selected {
-				background: #f0f0f0
-			}
 		</style>
 	</head>
 
@@ -343,9 +280,9 @@
 								</li>
 								<li class="mui-table-view-cell">
 									<span>拍摄景点</span>
-									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请输入景点名称" class="journeyName forinput mui-pull-right" />
-										<input type="text" @click="selectJourneyName($event,index,item.journeyName)" readonly v-else  v-model='item.journeyName' class="journeyName forinput mui-pull-right"  placeholder="请输入景点名称"/>
+									<span class="show-on-right" @click="selectJourneyName($event,index,item.journeyName)">
+										<!-- <input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请选择景点" class="journeyName forinput mui-pull-right" /> -->
+										<input type="text" disabled="disabled" readonly="readonly" v-model='item.journeyName' class="journeyName forinput mui-pull-right"  placeholder="请选择景点"/>
 									</span>
 									<span v-if="forStatus != 'check'" class="mui-icon mui-icon-arrowright"></span>
 								</li>
