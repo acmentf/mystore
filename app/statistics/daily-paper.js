@@ -1291,9 +1291,25 @@ lf.ready(function() {
                 }
                 window.Role.save(obj)
                 lf.nativeUI.toast('切换岗位成功');
-                if (window.Role.currentPositions[0].roleId!=12) {
-                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
+
+                var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
+                
+                if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
+                    // 城市经理
+                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{});
+                } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
+                    // 渠道 
+                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{});
+                } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
+                    //总经办
+                    // lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
+                } else {
+                    lf.window.openWindow('order','../order/orderlist.html',{},{});
                 }
+
+                // if (window.Role.currentPositions[0].roleId!=12) {
+                //     lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
+                // }
                 init()
             } else {
                 lf.nativeUI.closeWaiting();

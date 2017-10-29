@@ -1,1 +1,258 @@
-null
+{
+  "app/designate/assign-staff.html": {
+    "href": "app/designate/assign-staff.html",
+    "resources": [],
+    "priority": 0
+  },
+  "app/operator/operator.html": {
+    "href": "app/operator/operator.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "app/correlate-order/editSaleOrder.html": {
+    "href": "app/correlate-order/editSaleOrder.html",
+    "resources": [],
+    "priority": 1
+  },
+  "app/order-pay/order-pay.html": {
+    "href": "app/order-pay/order-pay.html",
+    "resources": [],
+    "refer": [],
+    "priority": 1
+  },
+  "app/schedule/details.html": {
+    "href": "app/schedule/details.html",
+    "resources": [],
+    "priority": 2
+  },
+  "app/schedule/summary.html": {
+    "href": "app/schedule/summary.html",
+    "resources": [],
+    "refer": [],
+    "priority": 2
+  },
+  "app/result/order-result.html": {
+    "href": "app/result/order-result.html",
+    "resources": [],
+    "priority": 4
+  },
+  "app/order-pay/order-pay-detail.html": {
+    "href": "app/order-pay/order-pay-detail.html",
+    "resources": [],
+    "priority": 6
+  },
+  "app/order-pay/order-pay-list.html": {
+    "href": "app/order-pay/order-pay-list.html",
+    "resources": [],
+    "refer": [],
+    "priority": 5
+  },
+  "app/summary/details.html": {
+    "href": "app/summary/details.html",
+    "resources": [],
+    "priority": 6
+  },
+  "app/order-entering/add-detail.html": {
+    "href": "app/order-entering/add-detail.html",
+    "resources": [],
+    "priority": 8
+  },
+  "app/order-entering/result.html": {
+    "href": "app/order-entering/result.html",
+    "resources": [],
+    "refer": [],
+    "priority": 8
+  },
+  "app/common/chooseuser.html": {
+    "href": "app/common/chooseuser.html",
+    "resources": [],
+    "priority": 10
+  },
+  "app/summary/summary.html": {
+    "href": "app/summary/summary.html",
+    "resources": [],
+    "refer": [],
+    "priority": 12
+  },
+  "app/result/sales-export.html": {
+    "href": "app/result/sales-export.html",
+    "resources": [],
+    "priority": 13
+  },
+  "app/common/plancamera.html": {
+    "href": "app/common/plancamera.html",
+    "resources": [],
+    "refer": [],
+    "priority": 16
+  },
+  "app/order/statuslog.html": {
+    "href": "app/order/statuslog.html",
+    "resources": [],
+    "priority": 17
+  },
+  "app/designate/allocation-staff.html": {
+    "href": "app/designate/allocation-staff.html",
+    "resources": [],
+    "priority": 18
+  },
+  "app/designate/designate.html": {
+    "href": "app/designate/designate.html",
+    "resources": [],
+    "refer": [],
+    "priority": 18
+  },
+  "app/order-entering/photo-output.html": {
+    "href": "app/order-entering/photo-output.html",
+    "resources": [],
+    "priority": 19
+  },
+  "app/order/trackinfo.html": {
+    "href": "app/order/trackinfo.html",
+    "resources": [],
+    "refer": [],
+    "priority": 20
+  },
+  "app/order/orderdetails.html": {
+    "href": "app/order/orderdetails.html",
+    "resources": [],
+    "refer": [],
+    "priority": 5
+  },
+  "app/sale-detail/saledetail.html": {
+    "href": "app/sale-detail/saledetail.html",
+    "resources": [],
+    "priority": 9
+  },
+  "app/order/quicksaledetails.html": {
+    "href": "app/order/quicksaledetails.html",
+    "resources": [],
+    "refer": [],
+    "priority": 7
+  },
+  "app/order/search-result.html": {
+    "href": "app/order/search-result.html",
+    "resources": [],
+    "refer": [],
+    "priority": 3
+  },
+  "app/order/search.html": {
+    "href": "app/order/search.html",
+    "resources": [],
+    "refer": [],
+    "priority": 3
+  },
+  "app/personal/feedback.html": {
+    "href": "app/personal/feedback.html",
+    "resources": [],
+    "priority": 7
+  },
+  "app/personal/about.html": {
+    "href": "app/personal/about.html",
+    "resources": [],
+    "priority": 9
+  },
+  "app/personal/password.html": {
+    "href": "app/personal/password.html",
+    "resources": [],
+    "priority": 10
+  },
+  "app/personal/personal.html": {
+    "href": "app/personal/personal.html",
+    "resources": [],
+    "refer": [],
+    "priority": 7
+  },
+  "app/message/message-detail.html": {
+    "href": "app/message/message-detail.html",
+    "resources": [],
+    "refer": [],
+    "priority": 9
+  },
+  "app/message/message.html": {
+    "href": "app/message/message.html",
+    "resources": [],
+    "refer": [],
+    "priority": 7
+  },
+  "app/correlate-order/search-result.html": {
+    "href": "app/correlate-order/search-result.html",
+    "resources": [],
+    "refer": [],
+    "priority": 10
+  },
+  "app/correlate-order/search.html": {
+    "href": "app/correlate-order/search.html",
+    "resources": [],
+    "refer": [],
+    "priority": 10
+  },
+  "app/correlate-order/correlate-order.html": {
+    "href": "app/correlate-order/correlate-order.html",
+    "resources": [],
+    "refer": [],
+    "priority": 6
+  },
+  "app/quick-order/quick-order.html": {
+    "href": "app/quick-order/quick-order.html",
+    "resources": [],
+    "refer": [],
+    "priority": 10
+  },
+  "app/order/orderlist.html": {
+    "href": "app/order/orderlist.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "app/statistics/daily-paper.html": {
+    "href": "app/statistics/daily-paper.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "app/daily-manage/daily-remark.html": {
+    "href": "app/daily-manage/daily-remark.html",
+    "resources": [],
+    "priority": 1
+  },
+  "app/daily-manage/daily-search.html": {
+    "href": "app/daily-manage/daily-search.html",
+    "resources": [],
+    "refer": [],
+    "priority": 3
+  },
+  "app/daily-manage/daily-plan.html": {
+    "href": "app/daily-manage/daily-plan.html",
+    "resources": [],
+    "priority": 4
+  },
+  "app/daily-manage/daily-manage.html": {
+    "href": "app/daily-manage/daily-manage.html",
+    "resources": [],
+    "refer": [],
+    "priority": 1
+  },
+  "app/market-expansion/group-plan-completion.html": {
+    "href": "app/market-expansion/group-plan-completion.html",
+    "resources": [],
+    "priority": 2
+  },
+  "app/market-expansion/expansion-plan.html": {
+    "href": "app/market-expansion/expansion-plan.html",
+    "resources": [],
+    "priority": 5
+  },
+  "app/market-expansion/market-expansion.html": {
+    "href": "app/market-expansion/market-expansion.html",
+    "resources": [],
+    "refer": [],
+    "priority": 2
+  },
+  "app/login.html": {
+    "href": "app/login.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  }
+}
