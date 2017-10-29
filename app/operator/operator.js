@@ -8,7 +8,7 @@ var vm = new Vue({
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
 		journeyList: [], // 拍摄景点多选列表
-		journeyListed: [], // 拍摄景点多选列表
+		journeyListed: [], // 已选择拍摄景点列表
 		currentJourneyIndex: '', // 当前选择的景点
 		shootInfos:[{
 			id:null,
@@ -43,10 +43,14 @@ var vm = new Vue({
 	},
 	methods: {
 		selectJourneyName: function(e, i, journeyName){
-			vm.currentJourneyIndex = i
-			
-			if (vm.shootInfos[i].isConfirmShot == 1) return
+			e.preventDefault()
+			e.stopPropagation()
 
+			if(vm.forStatus == 'check') return
+
+			if (vm.shootInfos[i].isConfirmShot == 1) return
+			
+			vm.currentJourneyIndex = i
 			var _selectedList = journeyName.split(',')
 			
 			var params = {
@@ -64,13 +68,17 @@ var vm = new Vue({
 
 				if (res.code === '200') {
 					document.querySelector('.select-journey-wrapper').style.display = 'block'
-
+					document.getElementsByTagName("body")[0].setAttribute("style","overflow:hidden")
+					
 					res.data.data.forEach(function(item, index) {
+						if (!item.sightName) return
+
 						var isSelected = _selectedList.indexOf(item.sightName) != -1
+
 						if (isSelected) {
 							vm.journeyListed.push(item.sightName)
 						}
-
+						
 						var obj = {
 							text: item.sightName,
 							selected: isSelected
@@ -98,6 +106,8 @@ var vm = new Vue({
 		},
 		confirmSelectJourney: function() {
 			document.querySelector('.select-journey-wrapper').style.display = 'none'
+			document.getElementsByTagName("body")[0].setAttribute("style","")
+
 			this.shootInfos[this.currentJourneyIndex].journeyName = this.journeyListed.toString()
 
 			this.journeyListed = []
