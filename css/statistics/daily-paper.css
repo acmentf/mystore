@@ -1,0 +1,164 @@
+@charset "UTF-8";
+.statistics-daily-paper .clearfix:before, .statistics-daily-paper .clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.statistics-daily-paper .clearfix:after {
+  clear: both;
+}
+
+.statistics-daily-paper .lf {
+  float: left;
+}
+
+.statistics-daily-paper .rt {
+  float: right;
+}
+
+.statistics-daily-paper .currency:before {
+  content: '￥';
+  font-size: 12px;
+}
+
+.statistics-daily-paper .number-large {
+  font-size: 28px;
+}
+
+.statistics-daily-paper .number-large .currency:before {
+  font-size: 16px;
+}
+
+.statistics-daily-paper .number-sign, .statistics-daily-paper .number-lose {
+  position: relative;
+  padding-left: 10px;
+}
+
+.statistics-daily-paper .number-sign.number-large, .statistics-daily-paper .number-lose.number-large {
+  padding-left: 14px;
+}
+
+.statistics-daily-paper .number-sign .sign, .statistics-daily-paper .number-lose .sign {
+  overflow: hidden;
+  left: 0;
+  position: absolute;
+}
+
+.statistics-daily-paper .number-sign .number:after, .statistics-daily-paper .number-lose .number:after {
+  content: '%';
+}
+
+.statistics-daily-paper .number-sign {
+  color: #F17175;
+}
+
+.statistics-daily-paper .number-sign.number-large .sign {
+  width: 14px;
+  height: 14px;
+  top: 2px;
+}
+
+.statistics-daily-paper .number-sign .sign {
+  width: 12px;
+  height: 12px;
+  top: 3px;
+}
+
+.statistics-daily-paper .number-sign .sign:before {
+  position: absolute;
+  top: -2px;
+  content: '↑';
+}
+
+.statistics-daily-paper .number-lose {
+  color: #81D6BB;
+}
+
+.statistics-daily-paper .number-lose.number-large .sign {
+  width: 14px;
+  height: 14px;
+  top: 2px;
+}
+
+.statistics-daily-paper .number-lose .sign {
+  width: 12px;
+  height: 12px;
+  top: 6px;
+}
+
+.statistics-daily-paper .number-lose .sign:before {
+  position: absolute;
+  top: -12px;
+  content: '↓';
+}
+
+.statistics-daily-paper .sep-line {
+  border-bottom: 1px solid #ddd;
+  margin: 5px 0;
+}
+
+.statistics-daily-paper .mui-bar-nav #income, .statistics-daily-paper .mui-bar-nav #flow, .statistics-daily-paper .mui-bar-nav #history {
+  width: 44px;
+  height: 44px;
+}
+
+.statistics-daily-paper .mui-bar-nav #income img, .statistics-daily-paper .mui-bar-nav #flow img, .statistics-daily-paper .mui-bar-nav #history img {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  position: relative;
+  top: 2px;
+}
+
+.statistics-daily-paper .daily-content {
+  padding-bottom: 20px;
+}
+
+.statistics-daily-paper .daily-content .section-box {
+  margin-bottom: 5px;
+  background-color: #fff;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title {
+  padding: 18px 18px 16px;
+  color: #919191;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .text {
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool {
+  float: right;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool .icon + .icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-content .echarts {
+  width: 100%;
+  height: 310px;
+}
+
+.statistics-daily-paper .daily-content .info-box {
+  color: #363636;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 5px;
+}
+
+.statistics-daily-paper .daily-content .info-box.center {
+  text-align: center;
+}
+
+.statistics-daily-paper .daily-content .info-box .title {
+  margin-bottom: 10px;
+}
+
+.statistics-daily-paper .daily-content .list-show-wrap .item {
+  padding: 10px;
+}

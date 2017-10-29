@@ -7,6 +7,9 @@ var vm = new Vue({
 		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
+		journeyList: [], // 拍摄景点多选列表
+		journeyListed: [], // 已选择拍摄景点列表
+		currentJourneyIndex: '', // 当前选择的景点
 		shootInfos:[{
 			id:null,
 			photographers:[],
@@ -39,10 +42,17 @@ var vm = new Vue({
 		lineName: ''
 	},
 	methods: {
-		selectJourneyName: function(e, i){
-			//拍摄景点
-			blur()
-			var picker = new mui.PopPicker();
+		selectJourneyName: function(e, i, journeyName){
+			e.preventDefault()
+			e.stopPropagation()
+
+			if(vm.forStatus == 'check') return
+
+			if (vm.shootInfos[i].isConfirmShot == 1) return
+			
+			vm.currentJourneyIndex = i
+			var _selectedList = journeyName.split(',')
+			
 			var params = {
 				pageSize: 1000,
 				currPage: 1,
@@ -50,25 +60,58 @@ var vm = new Vue({
 				isShoot: 1,
 				lineNameLike: vm.lineName
 			} 
+
 			lf.nativeUI.showWaiting()
+
 			lf.net.getJSON('/sight/list', params, function(res) {
 				lf.nativeUI.closeWaiting()
+
 				if (res.code === '200') {
-					var data = []
+					document.querySelector('.select-journey-wrapper').style.display = 'block'
+					document.getElementsByTagName("body")[0].setAttribute("style","overflow:hidden")
+					
 					res.data.data.forEach(function(item, index) {
+						if (!item.sightName) return
+
+						var isSelected = _selectedList.indexOf(item.sightName) != -1
+
+						if (isSelected) {
+							vm.journeyListed.push(item.sightName)
+						}
+						
 						var obj = {
 							text: item.sightName,
+							selected: isSelected
 						}
-						data.push(obj)
+						vm.journeyList.push(obj)
 					})
-					picker.setData(data)
-					picker.show(function(selectItems) {
-						vm.shootInfos[i].journeyName = selectItems[0].text
-					})
+
 				} else {
 					mui.alert(res.msg)
 				}
 			})
+		},
+		selectSingleJourney: function(name, index) {
+			this.journeyListed.push(name)
+			this.journeyList[index].selected = true
+
+		},
+		cancelSingleJourney: function(name, index) {
+			var i = this.journeyListed.indexOf(name);
+			if(i != -1) {
+				this.journeyListed.splice(i, 1);
+				this.journeyList[index].selected = false
+			}
+
+		},
+		confirmSelectJourney: function() {
+			document.querySelector('.select-journey-wrapper').style.display = 'none'
+			document.getElementsByTagName("body")[0].setAttribute("style","")
+
+			this.shootInfos[this.currentJourneyIndex].journeyName = this.journeyListed.toString()
+
+			this.journeyListed = []
+			this.journeyList = []
 		}
 	}
 })
@@ -147,6 +190,8 @@ mui('#app').on('tap', '#qupian', function() {
 
 //拍摄日期
 mui('#app').on('tap', '.psrq', function() {
+	var index = this.getAttribute('data-index');
+	if (vm.shootInfos[index].isConfirmShot == 1) return
 	if(vm.forStatus == 'edit'){
 		var index = this.getAttribute('data-index');
 		var optionsJson = this.getAttribute('data-options') || '{}';
@@ -161,6 +206,8 @@ mui('#app').on('tap', '.psrq', function() {
 
 //拍摄时段
 mui('#app').on('tap', '.pssd', function() {
+	var index = this.getAttribute('data-index');
+	if (vm.shootInfos[index].isConfirmShot == 1) return
 	if(vm.forStatus == 'edit'){
 		var index = this.getAttribute('data-index');
 		var userPicker = new mui.PopPicker();
@@ -193,6 +240,8 @@ mui('#app').on('tap', '.addshootinfo', function() {
 		shootTime : '',
 		periodType :'',
 		remark :'',
+		shootState: '尚未拍摄',
+		isConfirmShot: -1,
 		photographerNames :''}
 		vm.shootInfos.push(shootObj)
 	}
@@ -210,6 +259,8 @@ mui('#app').on('tap', '.superscript-xx', function() {
 }, false);
 //选择摄影师
 mui('#app').on('tap', '.fpsys', function() {
+	var index = this.getAttribute('data-index');
+	if (vm.shootInfos[index].isConfirmShot == 1) return
 	if(vm.currentRoleId!==5){
 		return
 	}
@@ -387,6 +438,15 @@ function renderTrackInfo(){
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}
+			var getShootState = function (state) {
+				if (state == 0) {
+					return '尚未确认'
+				} else if (state == 1) {
+					return '确认拍摄'
+				} else if (state == 2) {
+					return '无法拍摄'
+				}
+			}
 			data.data.lineSight.forEach(function(v){
 				v.shootTime = lf.util.timeStampToDate2(v.shootTime)
 				var forLine = {
@@ -395,6 +455,7 @@ function renderTrackInfo(){
 					shootTime : v.shootTime,
 					periodType :v.periodType,
 					remark :v.remark,
+					isConfirmShot :v.isConfirmShot
 				}
 				var forGrapherName = []
 				var forGrapherId = []
@@ -404,6 +465,7 @@ function renderTrackInfo(){
 				})
 				forLine.photographers = forGrapherId
 				forLine.photographerNames = forGrapherName
+				forLine.shootState = getShootState(v.isConfirmShot)
 				vm.shootInfos.push(forLine)
 			})
 		} else {

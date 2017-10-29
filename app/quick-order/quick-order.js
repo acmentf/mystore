@@ -2,6 +2,8 @@ lf.ready(function() {
     var vm = new Vue({
         el: '#app',
         data: {
+            journeyList: [], // 拍摄景点多选列表
+            journeyListed: [], // 已选择拍摄景点列表
             productName: '',
             groupNo: '',
             groupMemberNum: '',
@@ -26,6 +28,74 @@ lf.ready(function() {
             photographerIdStr: [],
             deptId:'',//部门id
             lineName: ''
+        },
+        methods: {
+            selectJourneyName: function(e){
+                e.preventDefault()
+                e.stopPropagation()
+
+                var _selectedList = vm.shootPlance.split(',')
+
+                var params = {
+                    pageSize: 1000,
+                    currPage: 1,
+                    pageCount: 0,
+                    isShoot: 1,
+                    lineNameLike: vm.lineName
+                } 
+    
+                lf.nativeUI.showWaiting()
+    
+                lf.net.getJSON('/sight/list', params, function(res) {
+                    lf.nativeUI.closeWaiting()
+    
+                    if (res.code === '200') {
+                        document.querySelector('.select-journey-wrapper').style.display = 'block'
+                        document.getElementsByTagName("body")[0].setAttribute("style","overflow:hidden")
+    
+                        res.data.data.forEach(function(item, index) {
+                            if (!item.sightName) return
+
+                            var isSelected = _selectedList.indexOf(item.sightName) != -1
+
+                            if (isSelected) {
+                                vm.journeyListed.push(item.sightName)
+                            }
+    
+                            var obj = {
+                                text: item.sightName,
+                                selected: isSelected
+                            }
+
+                            vm.journeyList.push(obj)
+                        })
+    
+                    } else {
+                        mui.alert(res.msg)
+                    }
+                })
+            },
+            selectSingleJourney: function(name, index) {
+                this.journeyListed.push(name)
+                this.journeyList[index].selected = true
+    
+            },
+            cancelSingleJourney: function(name, index) {
+                var i = this.journeyListed.indexOf(name);
+                if(i != -1) {
+                    this.journeyListed.splice(i, 1);
+                    this.journeyList[index].selected = false
+                }
+    
+            },
+            confirmSelectJourney: function() {
+                document.querySelector('.select-journey-wrapper').style.display = 'none'
+                document.getElementsByTagName("body")[0].setAttribute("style","")
+                this.shootPlance = this.journeyListed.toString()
+    
+                this.journeyListed = []
+                this.journeyList = []
+            }
         }
     })
 
@@ -98,37 +168,37 @@ lf.ready(function() {
         })
     })
     
-    mui('#app').on('tap', '.shootPlance', function() { //选择拍摄景点
-        //拍摄景点
-        blur()
-        var picker = new mui.PopPicker();
-        var params = {
-            pageSize: 1000,
-            currPage: 1,
-            pageCount: 0,
-            isShoot: 1,
-            lineNameLike: vm.lineName
-        }
-        lf.nativeUI.showWaiting()
-        lf.net.getJSON('/sight/list', params, function(res) {
-            lf.nativeUI.closeWaiting()
-            if (res.code === '200') {
-                var data = []
-                res.data.data.forEach(function(item, index) {
-                    var obj = {
-                        text: item.sightName,
-                    }
-                    data.push(obj)
-                })
-                picker.setData(data)
-                picker.show(function(selectItems) {
-                    vm.shootPlance = selectItems[0].text
-                })
-            } else {
-                mui.alert(res.msg)
-            }
-        })
-    })
+    // mui('#app').on('tap', '.shootPlance', function() { //选择拍摄景点
+    //     //拍摄景点
+    //     blur()
+    //     var picker = new mui.PopPicker();
+    //     var params = {
+    //         pageSize: 1000,
+    //         currPage: 1,
+    //         pageCount: 0,
+    //         isShoot: 1,
+    //         lineNameLike: vm.lineName
+    //     }
+    //     lf.nativeUI.showWaiting()
+    //     lf.net.getJSON('/sight/list', params, function(res) {
+    //         lf.nativeUI.closeWaiting()
+    //         if (res.code === '200') {
+    //             var data = []
+    //             res.data.data.forEach(function(item, index) {
+    //                 var obj = {
+    //                     text: item.sightName,
+    //                 }
+    //                 data.push(obj)
+    //             })
+    //             picker.setData(data)
+    //             picker.show(function(selectItems) {
+    //                 vm.shootPlance = selectItems[0].text
+    //             })
+    //         } else {
+    //             mui.alert(res.msg)
+    //         }
+    //     })
+    // })
 
     mui('#app').on('tap', '.shootTime', function() { //选择拍摄日期
         blur()
