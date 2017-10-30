@@ -168,6 +168,12 @@
                     lf.nativeUI.toast('请输入数量')
                     return
                 }
+
+                var reg = /^[1-9]\d*$/
+                if (!reg.test(vm.nums)){
+                    lf.nativeUI.toast('销售数量不合法')
+                    return
+                }
                 
                 var reg = /^[1-9]\d*$/
                 if (!reg.test(vm.nums)){
