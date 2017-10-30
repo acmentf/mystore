@@ -35,7 +35,7 @@ Vue.filter('lengthTo8', function(value){
 
 var vm = new Vue({
     el: '#app',
-    data() {
+    data: function() {
         return {
             date: {
                 dateText: new Date().format('yyyy-MM-dd'),
@@ -106,7 +106,9 @@ var planCompletedRatio = {
             endDate: date
         };
         var that = this;
+        lf.nativeUI.showWaiting();
         lf.net.getJSON('/report/newAnalysis/dtPlannedComletionRate', params, function(res){
+            lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 var resData = res.data.dataList[0].list[0];
                 if(resData) {
@@ -203,9 +205,8 @@ function switchRolePostion(val) {
     };
     lf.nativeUI.showWaiting();
     lf.net.getJSON('user/switchPosition', params, function(data) {
-        console.log(JSON.stringify(data));
+        lf.nativeUI.closeWaiting();
         if(data.code == 200) {
-            lf.nativeUI.closeWaiting();
             var obj = {
                 usercode: data.data.id,
                 username: data.data.name,
@@ -228,15 +229,15 @@ function switchRolePostion(val) {
             
             if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
                 // 城市经理
-                lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+                lf.window._openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
             } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
                 // 渠道 
-                // lf.window.openWindow(ROLE_EMUN.commissioner.windowId, ROLE_EMUN.commissioner.pageUrl,{},{});
+                // lf.window._openWindow(ROLE_EMUN.commissioner.windowId, ROLE_EMUN.commissioner.pageUrl,{},{});
             } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
                 //总经办
-                lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
+                lf.window._openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
             } else {
-                lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
+                lf.window._openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
             }
 
             // if (window.Role.currentPositions[0].roleId!=12) {

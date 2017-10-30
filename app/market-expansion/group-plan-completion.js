@@ -1,6 +1,6 @@
 var vm = new Vue({
     el: '#app',
-    data() {
+    data: function() {
         return {
             date: '',
             detailList: [

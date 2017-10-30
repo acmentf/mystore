@@ -19,7 +19,7 @@ Vue.filter('toFixed2', function(value) {
 
 var vm = new Vue({
     el: '#app',
-    data() {
+    data: function() {
         return {
             planList: [
             ]

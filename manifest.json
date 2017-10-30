@@ -388,7 +388,8 @@
 					"app/correlate-order/correlate-order.html",
 					"app/result/sales-export.html",
 					"app/schedule/details.html",
-					"app/statistics/daily-paper.html"
+					"app/statistics/daily-paper.html",
+					"app/market-expansion/market-expansion.html"
 				],
 				"priority": 0
 			},
@@ -1153,7 +1154,8 @@
 					"app/correlate-order/editSaleOrder.html",
 					"app/order/orderlist.html",
 					"app/message/message.html",
-					"app/login.html"
+					"app/login.html",
+					"app/market-expansion/market-expansion.html"
 				],
 				"priority": 0
 			},
@@ -1412,10 +1414,14 @@
 					"css/images/logo_login.png",
 					"images/statistics/history.png",
 					"images/statistics/income-active.png",
-					"images/statistics/flow.png"
+					"images/statistics/flow.png",
+					"images/statistics/income.png",
+					"images/statistics/flow-active.png",
+					"images/statistics/history-active.png"
 				],
 				"refer": [
-					"app/order/orderlist.html"
+					"app/order/orderlist.html",
+					"app/market-expansion/market-expansion.html"
 				],
 				"priority": 0
 			},
@@ -1464,7 +1470,8 @@
 					"libs/vue.min.js",
 					"app/market-expansion/group-plan-completion.js"
 				],
-				"priority": 2
+				"priority": 2,
+				"refer": []
 			},
 			"app/market-expansion/expansion-plan.html": {
 				"href": "app/market-expansion/expansion-plan.html",
@@ -1520,7 +1527,8 @@
 					"app/market-expansion/group-plan-completion.html",
 					"app/order/orderlist.html",
 					"app/login.html",
-					"app/market-expansion/expansion-plan.html"
+					"app/market-expansion/expansion-plan.html",
+					"app/statistics/daily-paper.html"
 				],
 				"priority": 2
 			}
@@ -1579,7 +1587,6 @@
 				"js/mui.imageViewer.js",
 				"manifest_prod.json",
 				"css/images/order/u414.png",
-				"images/statistics/income.png",
 				"css/result/order-result-noexport.css",
 				"app/test/muban1.html",
 				"images/message/icon_voice.png",
@@ -1601,7 +1608,6 @@
 				"app/quick-order-pay/quick-order-pay.html",
 				"css/images/timg.jpg",
 				"css/designate/designate.scss",
-				"images/statistics/history-active.png",
 				"css/summary/finger-uploader.scss",
 				"css/images/shuijiao.jpg",
 				"css/designate/select-staff.scss",
@@ -1612,7 +1618,6 @@
 				"css/images/index/u775.png",
 				"app/quick-order-pay/quick-order-pay-list.html",
 				"css/statistics/daily-paper.scss",
-				"images/statistics/flow-active.png",
 				"css/common/common.scss",
 				"css/accountlogin.css",
 				"js/mui.locker.js",
