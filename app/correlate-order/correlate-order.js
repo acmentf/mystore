@@ -29,7 +29,7 @@ var vm = new Vue({
 		rolePositionList: [],
 		rolePositionId: '',
 		currentRoleId:'',//当前用户角色id,
-		wgtVer: ''//版本号
+		wgtVer: '1.4.6'//版本号
 	},
 	watch: {
 		rolePositionId: function(val, oldVal) {
@@ -81,34 +81,34 @@ lf.ready(function() {
 		vm.index = event.detail.slideNumber;
 	});
 
-	var status = lf.window.currentWebview().status;
-	var gallery = mui('.mui-slider');
-	switch(status) {
-		case '1':
-			gallery.slider().gotoItem(1, 0);
-			break;
-		case '2':
-			gallery.slider().gotoItem(2, 0);
-			break;
-		case '3':
-			gallery.slider().gotoItem(4, 0);
-			break;
-		case '4':
-			gallery.slider().gotoItem(3, 0);
-			break;
-		default:
-			break;
-	}
-	update() 
+	// var status = lf.window.currentWebview().status;
+	// var gallery = mui('.mui-slider');
+	// switch(status) {
+	// 	case '1':
+	// 		gallery.slider().gotoItem(1, 0);
+	// 		break;
+	// 	case '2':
+	// 		gallery.slider().gotoItem(2, 0);
+	// 		break;
+	// 	case '3':
+	// 		gallery.slider().gotoItem(4, 0);
+	// 		break;
+	// 	case '4':
+	// 		gallery.slider().gotoItem(3, 0);
+	// 		break;
+	// 	default:
+	// 		break;
+	// }
+	// update() 
 
-	getVersion()
+	// getVersion()
 })	
 
 mui('body').on('tap', '#logout', function() {
 	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 		if(e.index == 0) {
 			window.Role.logout();
-			plus.runtime.restart();
+			lf.window.openWindow('login','../login.html',{},{})
 		}
 	});
 })
@@ -119,13 +119,13 @@ mui('body').on('tap', '#logout', function() {
  * 搜索订单
  */
 mui('body').on('tap', '#search-order', function() {
-	lf.window._openWindow('search.html', 'search.html', {})
+	lf.window.openWindow('search.html', 'search.html', {})
 })
 mui('body').on('tap', '.footer-message-btn', function() {
-	lf.window._openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+	lf.window.openWindow('../message/message.html','../message/message.html',{},{})
 })
 mui('body').on('tap', '.footer-order-btn', function() {
-	lf.window._openWindow('../order/orderlist.html','../order/orderlist.html',{},{},lf.window.currentWebview())
+	lf.window.openWindow('../order/orderlist.html','../order/orderlist.html',{},{})
 })
 mui("body").on("tap", ".correlate", function() {
 	var orderid = this.getAttribute('data-id');
@@ -154,6 +154,19 @@ mui("body").on("tap", ".correlate", function() {
 		province: province,
 		city: city
 	})
+	lf.window.setPageParams("orderPay",{
+		orderId: orderid,
+		saleOrderId: saleOrderId,
+		tourNo: tourNo,
+		productName: productName,
+		tourGuidePhone: tourGuidePhone,
+		areaCode: areaCode,
+		tourGuide: tourGuide,
+		purchaser: purchaser,
+		aliasName: aliasName,
+		province: province,
+		city: city
+	})
 })
 mui("body").on("tap", ".no-correlate", function() {
 	var orderid = this.getAttribute('data-id');
@@ -170,6 +183,19 @@ mui("body").on("tap", ".no-correlate", function() {
 	var summary = this.getAttribute('data-summary');
 	var saleOrderId = this.getAttribute('data-saleId');
 	lf.window.openWindow('editSaleOrder.html','editSaleOrder.html',{},{
+		orderId: orderid,
+		saleOrderId: saleOrderId,
+		tourNo: tourNo,
+		productName: productName,
+		tourGuidePhone: tourGuidePhone,
+		areaCode: areaCode,
+		tourGuide: tourGuide,
+		purchaser: purchaser,
+		aliasName: aliasName,
+		province: province,
+		city: city
+	})
+	lf.window.setPageParams("editSaleOrder",{
 		orderId: orderid,
 		saleOrderId: saleOrderId,
 		tourNo: tourNo,
@@ -214,11 +240,28 @@ function switchRolePostion(val) {
 				vm.currentRoleId = window.Role.currentPositions[0].roleId;
 				console.log("当前用户的角色id"+vm.currentRoleId)
 			}
-			if (window.Role.currentPositions[0].roleId==12) {
-                lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
-            } else if(window.Role.currentPositions[0].roleId!=9){
-                lf.window.openWindow('order-list','../order/orderlist.html',{},{},lf.window.currentWebview())
-            }
+
+			var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
+			
+			if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
+				// 城市经理
+				lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+			} else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
+				// 渠道 
+				lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
+			} else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
+				//总经办
+				lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
+			} else if (windowCurrentPositionRoleId == 9) {
+
+			} else {
+				lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
+			}
+			// if (window.Role.currentPositions[0].roleId==12) {
+            //     lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{})
+            // } else if(window.Role.currentPositions[0].roleId!=9){
+            //     lf.window.openWindow('order-list','../order/orderlist.html',{},{})
+            // }
 			vm.orderList.forEach(function(v, i) { // 将数据制空
 				dodata('down', i, [])
 				vm.pageNos[i] = 0;
@@ -487,7 +530,6 @@ function update() {
 	}, function(res) {});
 }
 window.addEventListener('orderdetails', function(e) {
-	console.log(2222)
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
 		vm.pageNos[i] = 0;

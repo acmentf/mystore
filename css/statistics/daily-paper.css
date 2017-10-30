@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.statistics-daily-paper #flow, .statistics-daily-paper #history {
+  margin-left: 0;
+}
+
 .statistics-daily-paper .clearfix:before, .statistics-daily-paper .clearfix:after {
   content: " ";
   display: table;

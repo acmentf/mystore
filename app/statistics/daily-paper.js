@@ -1,16 +1,17 @@
-
-lf.ready(function() {
+(function () {
     var pageTypeConstant = {
         income: 'income',
         flow: 'flow',
         history: 'history'
     }
-    //大区省份选择
+   //大区省份选择
     var cityPicker = new mui.PopPicker({
         layer: 2
     })
     var EACH_SCREEN_COUNT = 6
     var emptyChart = {series: []}
+    var ALL_RP = 'all'
+    var ALL_NAME_RP = '全部'
     var vm = new Vue({
         el: '#app',
         components: {
@@ -46,58 +47,58 @@ lf.ready(function() {
             //regionProvinceActive: '',
             regionProvinceMap: {
                 incomeAll: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 incomeRegion: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 flowShootAll: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 flowShootRegion: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 historyIncomeDay: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 historyThreeMonthIncome: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 },
                 historyShootDay: {
-                    areaCode: '',
-                    areaName: '',
-                    provinceCode: '',
-                    provinceName: ''
+                    areaCode: ALL_RP,
+                    areaName: ALL_NAME_RP,
+                    provinceCode: ALL_RP,
+                    provinceName: ALL_NAME_RP
                 }
             },
             regionProvinceList: [],
             /*收入模块 start*/
             // 统计汇总
             incomeTotal: {
-                saleAmt: '777',//	今日收入
-                saleAmtRate: '-545',//	今日收入涨幅
-                saleAmtPer: '5454',//	前置金额
-                saleAmtPerRate: '-44',//	前置金额涨幅
-                appAmt: '555',//	销售金额
-                appAmtRate: '444'//	销售金额涨幅
+                saleAmt: '',//	今日收入
+                saleAmtRate: '',//	今日收入涨幅
+                saleAmtPer: '',//	前置金额
+                saleAmtPerRate: '',//	前置金额涨幅
+                appAmt: '',//	销售金额
+                appAmtRate: ''//	销售金额涨幅
             },
             //线路产品收入
             /*productName	线路名称
@@ -119,8 +120,8 @@ lf.ready(function() {
             /*流量模块 start*/
             //拍摄统计
             flowShootInfo: {
-                shootPerples: '666656',//	今日拍摄人数
-                shootPerplesRate: '666'//	拍摄人数涨幅
+                shootPerples: '',//	今日拍摄人数
+                shootPerplesRate: ''//	拍摄人数涨幅
             },
             //线路产品拍摄人数
             /*productName	线路名称
@@ -142,9 +143,9 @@ lf.ready(function() {
             /*历史模块 start*/
             //累计收入
             historyIncomeTotal: {
-                saleAmt: '6666',//	累计收入
-                saleAmtPer: '66666',//	前置收入
-                appAmt: '66666'//	销售收入
+                saleAmt: '',//	累计收入
+                saleAmtPer: '',//	前置收入
+                appAmt: ''//	销售收入
             },
             //近30天每日收入
             /*date	日期
@@ -154,13 +155,10 @@ lf.ready(function() {
             /*date	日期
              totalAmt	总收入
              amtRate	涨幅*/
-            historyThreeMonthIncome: [
-                {date: '2017-10',totalAmt: 13548794,amtRate: 58},
-                {date: '2017-10',totalAmt: 13548794,amtRate: -61}
-                ],
+            historyThreeMonthIncome: [],
             //累计拍摄人数
             historyShootCount: {
-                shoot: '66666'//	累计拍摄人数
+                shoot: ''//	累计拍摄人数
             },
             //近30天拍摄人数
             /*hour	日期
@@ -169,7 +167,7 @@ lf.ready(function() {
             //旅行社发团人数排行
             /*travelName	旅行社名称
              total	人数*/
-            historyTravelRanking: [{travelName: '旅行社名称',total: 113568}]
+            historyTravelRanking: []
             /*历史模块 end*/
         },
         computed:{
@@ -1085,55 +1083,47 @@ lf.ready(function() {
                     cb && cb()
                     lf.nativeUI.toast(error.msg);
                 });
-            }
+            },
             /*历史模块 end*/
+            init: function () {
+                var self = this
+                this.initRegionProvince(init)
+                setTimeout(function () {
+                    self.intervalMap.timeout = setInterval(function () {
+                        var startIndex = self.intervalMap.startIndex
+                        switch (self.pageTypeActive){
+                            case pageTypeConstant.income:
+                                startIndex.incomeLine += 1
+                                startIndex.incomeTravel += 1
+                                startIndex.incomeAll += 1
+                                startIndex.incomeRegion += 1
+                                break
+                            case pageTypeConstant.flow:
+                                startIndex.flowShootLine += 1
+                                startIndex.flowShootTravel += 1
+                                startIndex.flowShootAll += 1
+                                startIndex.flowShootRegion += 1
+                                break
+                            case pageTypeConstant.history:
+                                startIndex.historyIncomeDay += 1
+                                startIndex.historyShootDay += 1
+                                break
+                        }
+                    }, 1000);
+                }, 300)
+            }
         },
         created: function () {
-            var self = this
-            this.initRegionProvince(init)
-            setTimeout(function () {
-                self.intervalMap.timeout = setInterval(function () {
-                    var startIndex = self.intervalMap.startIndex
-                    switch (self.pageTypeActive){
-                        case pageTypeConstant.income:
-                            startIndex.incomeLine += 1
-                            startIndex.incomeTravel += 1
-                            startIndex.incomeAll += 1
-                            startIndex.incomeRegion += 1
-                            break
-                        case pageTypeConstant.flow:
-                            startIndex.flowShootLine += 1
-                            startIndex.flowShootTravel += 1
-                            startIndex.flowShootAll += 1
-                            startIndex.flowShootRegion += 1
-                            break
-                        case pageTypeConstant.history:
-                            startIndex.historyIncomeDay += 1
-                            startIndex.historyShootDay += 1
-                            break
-                    }
-                }, 1000);
-            }, 300)
         },
         beforeDestroy: function () {
             clearInterval(self.intervalMap.timeout)
         }
     })
 
-    if (window.Role.currentPositions.length > 0) {
-        vm.currentRoleId = window.Role.currentPositions[0].roleId;
-        console.log("当前用户的角色id" + vm.currentRoleId)
-    }
-    vm.rolePositionId = window.Role.userroleId // 岗位id
-    vm.username = window.Role.username // 用户昵称
-    vm.rolePositionList = window.Role.positions // 岗位列表
-    console.log(JSON.stringify(vm.rolePositionList))
-
     // 获取大区省份
     function getRegionProvince(options, text) {
-        var all = '全部'
-        var ret = options.areaName && options.areaName !== all ? options.areaName : ''
-        if (ret && options.provinceName && options.provinceName !==  all) {
+        var ret = options.areaName && options.areaName !== ALL_NAME_RP ? options.areaName : ''
+        if (ret && options.provinceName && options.provinceName !==  ALL_NAME_RP) {
             ret += options.provinceName
         }
         return ret || text
@@ -1188,81 +1178,92 @@ lf.ready(function() {
                 break
         }
     }
+    lf.ready(function() {
+        if (window.Role.currentPositions.length > 0) {
+            vm.currentRoleId = window.Role.currentPositions[0].roleId;
+            console.log("当前用户的角色id" + vm.currentRoleId)
+        }
+        vm.rolePositionId = window.Role.userroleId // 岗位id
+        vm.username = window.Role.username // 用户昵称
+        vm.rolePositionList = window.Role.positions // 岗位列表
+        console.log(JSON.stringify(vm.rolePositionList))
+        Vue.nextTick(function() {
+            vm.init()
+        })
+        mui.os.plus && update()
+        mui.os.plus && getVersion()
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        mui('.mui-scroll-wrapper').scroll({
+            bounce: false,
+            indicators: true, //是否显示滚动条
+            deceleration: deceleration
+        });
 
-    mui.os.plus && update()
-    mui.os.plus && getVersion()
-    var deceleration = mui.os.ios ? 0.003 : 0.0009;
-    mui('.mui-scroll-wrapper').scroll({
-        bounce: false,
-        indicators: true, //是否显示滚动条
-        deceleration: deceleration
-    });
+        // 收入
+        mui('body').on('tap', '#income', function(){
+            vm.pageTypeActive = pageTypeConstant.income
+            init()
+        })
+        mui('body').on('tap', '#incomeAll_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.incomeAll, items)
+            });
+        })
+        mui('body').on('tap', '#incomeRegion_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.incomeRegion, items)
+            });
+        })
+        // 流量
+        mui('body').on('tap', '#flow', function(){
+            vm.pageTypeActive = pageTypeConstant.flow
+            init()
+        })
+        mui('body').on('tap', '#flowShootAll_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.flowShootAll, items)
+            });
+        })
+        mui('body').on('tap', '#flowShootRegion_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.flowShootRegion, items)
+            });
+        })
+        // 历史
+        mui('body').on('tap', '#history', function(){
+            vm.pageTypeActive = pageTypeConstant.history
+            init()
+        })
+        mui('body').on('tap', '#historyIncomeDay_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.historyIncomeDay, items)
+            });
+        })
+        mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.historyThreeMonthIncome, items)
+            });
+        })
+        mui('body').on('tap', '#historyShootDay_RP', function(){
+            cityPicker.show(function(items) {
+                setRegionProvince(vm.regionProvinceMap.historyShootDay, items)
+            });
+        })
 
-    // 收入
-    mui('body').on('tap', '#income', function(){
-        vm.pageTypeActive = pageTypeConstant.income
-        init()
+        // 退出登录
+        mui('body').on('tap', '#logout', function() {
+            lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+                if (e.index == 0) {
+                    window.Role.logout();
+                    plus && plus.runtime.restart();
+                }
+            });
+        })
+        lf.event.listener('dailyPaper', function(e) {
+            init();
+            lf.event.fire(lf.window.currentWebview().opener(), 'dailyPaper', {})
+        })
     })
-    mui('body').on('tap', '#incomeAll_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.incomeAll, items)
-        });
-    })
-    mui('body').on('tap', '#incomeRegion_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.incomeRegion, items)
-        });
-    })
-    // 流量
-    mui('body').on('tap', '#flow', function(){
-        vm.pageTypeActive = pageTypeConstant.flow
-        init()
-    })
-    mui('body').on('tap', '#flowShootAll_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.flowShootAll, items)
-        });
-    })
-    mui('body').on('tap', '#flowShootRegion_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.flowShootRegion, items)
-        });
-    })
-    // 历史
-    mui('body').on('tap', '#history', function(){
-        vm.pageTypeActive = pageTypeConstant.history
-        init()
-    })
-    mui('body').on('tap', '#historyIncomeDay_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.historyIncomeDay, items)
-        });
-    })
-    mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.historyThreeMonthIncome, items)
-        });
-    })
-    mui('body').on('tap', '#historyShootDay_RP', function(){
-        cityPicker.show(function(items) {
-            setRegionProvince(vm.regionProvinceMap.historyShootDay, items)
-        });
-    })
-
-    // 退出登录
-    mui('body').on('tap', '#logout', function() {
-        lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
-            if (e.index == 0) {
-                window.Role.logout();
-                plus && plus.runtime.restart();
-            }
-        });
-    })
-    lf.event.listener('dailyPaper', function(e) {
-        init();
-        lf.event.fire(lf.window.currentWebview().opener(), 'dailyPaper', {})
-    })
-
     // 岗位切换
     function switchRolePostion(val) {
         var params = {
@@ -1291,9 +1292,25 @@ lf.ready(function() {
                 }
                 window.Role.save(obj)
                 lf.nativeUI.toast('切换岗位成功');
-                if (window.Role.currentPositions[0].roleId!=12) {
-                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
+
+                var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
+
+                if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
+                    // 城市经理
+                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+                } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
+                    // 渠道
+                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
+                } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
+                    //总经办
+                    // lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
+                } else {
+                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
                 }
+
+                // if (window.Role.currentPositions[0].roleId!=12) {
+                //     lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
+                // }
                 init()
             } else {
                 lf.nativeUI.closeWaiting();
@@ -1304,7 +1321,7 @@ lf.ready(function() {
             lf.nativeUI.toast(erro.msg);
         })
     }
-   // 检测版本是否更新
+    // 检测版本是否更新
     function update() {
         var params = {
             "app_id": plus.runtime.appid,
@@ -1344,11 +1361,11 @@ lf.ready(function() {
             }
         }, function(res) {});
     }
-   // 得到版本
+    // 得到版本
     function getVersion() {
         plus.runtime.getProperty(plus.runtime.appid,function(inf){
             vm.wgtVer = inf.version;
             console.log("当前应用版本：" + vm.wgtVer);
         });
     }
-})
+})()

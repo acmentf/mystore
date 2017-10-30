@@ -214,7 +214,12 @@
 					"css/mui.min.css",
 					"js/framework/lf.js",
 					"libs/vue.min.js",
-					"app/common/chooseuser.js"
+					"app/common/chooseuser.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [
 					"app/common/chooseuser.html"
@@ -235,7 +240,12 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"css/common/common.css",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -260,12 +270,15 @@
 					"css/images/img_login.jpg",
 					"css/images/logo_login.png",
 					"images/index/bg.png",
-					"images/order/operator_delete.png"
+					"images/order/operator_delete.png",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/index.html",
 					"app/order/orderlist.html",
-					"app/daily-manage/daily-manage.html"
+					"app/daily-manage/daily-manage.html",
+					"app/statistics/daily-paper.html",
+					"app/market-expansion/market-expansion.html"
 				],
 				"priority": 0
 			},
@@ -350,7 +363,9 @@
 					"images/order/switch_back.png",
 					"images/order/call_btn.png",
 					"images/message/nav_order_contact_gray.png",
-					"images/message/nav_order_gray.png"
+					"images/message/nav_order_gray.png",
+					"fonts/iconfont.ttf",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
@@ -370,7 +385,10 @@
 					"app/order/quicksaledetails.html",
 					"app/order-pay/order-pay.html",
 					"app/daily-manage/daily-manage.html",
-					"app/correlate-order/correlate-order.html"
+					"app/correlate-order/correlate-order.html",
+					"app/result/sales-export.html",
+					"app/schedule/details.html",
+					"app/statistics/daily-paper.html"
 				],
 				"priority": 0
 			},
@@ -395,13 +413,19 @@
 					"css/common/common.css",
 					"images/message/nav_message_green.png",
 					"images/message/background_img.png",
-					"images/message/nav_order_gray.png"
+					"images/message/nav_order_gray.png",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [
 					"app/order/orderdetails.html",
 					"app/order/orderlist.html",
 					"app/message/message-detail.html",
-					"app/correlate-order/correlate-order.html"
+					"app/correlate-order/correlate-order.html",
+					"app/personal/personal.html",
+					"app/order/search.html"
 				],
 				"priority": 0
 			},
@@ -455,7 +479,8 @@
 					"images/order/order_pending.png",
 					"images/order/order_outputed.png",
 					"images/order/corner.png",
-					"images/order/call_btn.png"
+					"images/order/call_btn.png",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/order-entering/result.html",
@@ -472,7 +497,8 @@
 					"app/schedule/summary.html",
 					"app/schedule/details.html",
 					"app/designate/designate.html",
-					"app/order/statuslog.html"
+					"app/order/statuslog.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},
@@ -493,7 +519,8 @@
 					"css/mui.min.css",
 					"js/framework/lf.js",
 					"libs/vue.min.js",
-					"images/order/icon_delete.png"
+					"images/order/icon_delete.png",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/common/chooseuser.html"
@@ -514,7 +541,8 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/order-entering/add-detail.html"
@@ -550,7 +578,8 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/order-entering/result.html"
@@ -570,7 +599,8 @@
 					"css/summary/summary.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/summary/details.html"
@@ -590,7 +620,8 @@
 					"js/mui.previewimage.js",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -610,7 +641,8 @@
 					"js/framework/lf.js",
 					"js/framework/styles.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -618,7 +650,16 @@
 			"app/order-entering/photo-output.html": {
 				"resources": [
 					"app/order-entering/photo-output.js",
-					"css/order-entering/photo-output.css"
+					"css/order-entering/photo-output.css",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -638,10 +679,12 @@
 					"libs/vue.min.js",
 					"js/framework/lf.js",
 					"js/framework/styles.js",
-					"css/order-pay/order-list.css"
+					"css/order-pay/order-list.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
-					"app/order-pay/order-pay-detail.html"
+					"app/order-pay/order-pay-detail.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},
@@ -658,7 +701,14 @@
 					"js/mui.pullToRefresh.material.js",
 					"images/order/operator_delete.png",
 					"css/app.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
 				"refer": [
 					"app/designate/assign-staff.html"
@@ -678,7 +728,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -696,7 +747,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/schedule/details.html"
@@ -714,7 +766,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/designate/allocation-staff.html"
@@ -734,7 +787,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -754,7 +808,8 @@
 					"js/framework/lf.js",
 					"libs/vue.min.js",
 					"css/mui.picker.min.css",
-					"css/mui.poppicker.css"
+					"css/mui.poppicker.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -772,7 +827,8 @@
 					"js/mui.previewimage.js",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -794,7 +850,8 @@
 					"css/mui.picker.min.css",
 					"js/framework/common.js",
 					"fonts/mui.ttf",
-					"css/app.css"
+					"css/app.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/order/search-result.html"
@@ -819,10 +876,18 @@
 					"images/order/list_guide.png",
 					"js/framework/lf.js",
 					"libs/vue.min.js",
-					"images/order/list_way.png"
+					"images/order/list_way.png",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
-					"app/order/quicksaledetails.html"
+					"app/order/quicksaledetails.html",
+					"app/operator/operator.html",
+					"app/result/order-result.html",
+					"app/order/orderdetails.html",
+					"app/order-pay/order-pay.html",
+					"app/schedule/summary.html",
+					"app/designate/designate.html",
+					"app/result/sales-export.html"
 				],
 				"priority": 0
 			},
@@ -830,10 +895,29 @@
 				"resources": [
 					"app/message/message-detai.js",
 					"css/mui.min.css",
-					"css/message/message-detail.css"
+					"css/message/message-detail.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"images/order/list_day.png",
+					"images/order/list_way.png",
+					"images/order/list_number.png",
+					"images/order/list_guide.png",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
 				"refer": [
-					"app/order/orderdetails.html"
+					"app/order/orderdetails.html",
+					"app/designate/designate.html",
+					"app/operator/operator.html",
+					"app/result/order-result.html",
+					"app/order-pay/order-pay.html"
 				],
 				"priority": 0
 			},
@@ -854,7 +938,8 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/framework/lf.js",
-					"libs/vue.min.js"
+					"libs/vue.min.js",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/designate/designate.html",
@@ -876,7 +961,12 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"js/framework/styles.js"
+					"js/framework/styles.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [
 					"app/sale-detail/saledetail.html",
@@ -905,7 +995,12 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -928,9 +1023,12 @@
 					"css/images/sell_wechat.png",
 					"js/framework/qrcode.min.js",
 					"css/images/sell_alipay.png",
-					"css/order-pay/order-list.css"
+					"css/order-pay/order-list.css",
+					"fonts/iconfont.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"app/correlate-order/editSaleOrder.html"
+				],
 				"priority": 0
 			},
 			"app/daily-manage/daily-manage.html": {
@@ -952,12 +1050,19 @@
 					"images/order/refresh.png",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [
 					"app/order/orderlist.html",
 					"app/daily-manage/daily-search.html",
-					"app/daily-manage/daily-remark.html"
+					"app/daily-manage/daily-remark.html",
+					"app/daily-manage/daily-plan.html",
+					"app/login.html"
 				],
 				"priority": 0
 			},
@@ -978,9 +1083,16 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
-				"refer": [],
+				"refer": [
+					"app/daily-manage/daily-remark.html"
+				],
 				"priority": 0
 			},
 			"app/daily-manage/daily-remark.html": {
@@ -997,7 +1109,12 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -1024,20 +1141,43 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_mine_gray.png",
+					"images/message/nav_order_green.png"
 				],
 				"refer": [
 					"app/correlate-order/search.html",
 					"app/order-pay/order-pay-detail.html",
 					"app/correlate-order/editSaleOrder.html",
 					"app/order/orderlist.html",
-					"app/message/message.html"
+					"app/message/message.html",
+					"app/login.html"
 				],
 				"priority": 0
 			},
 			"app/correlate-order/search-result.html": {
 				"resources": [
-					"app/correlate-order/search-result.js"
+					"app/correlate-order/search-result.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/correlate-order/correlate-order.css",
+					"images/message/guide.png",
+					"images/message/sale_date.png",
+					"images/order/list_time.png",
+					"images/message/nav_order_contact_green.png",
+					"images/message/nav_order_gray.png",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
 				"refer": [
 					"app/order-pay/order-pay-detail.html",
@@ -1051,7 +1191,19 @@
 					"js/mui.picker.min.js",
 					"app/correlate-order/search.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js"
 				],
 				"refer": [
 					"app/correlate-order/search-result.html"
@@ -1078,7 +1230,8 @@
 					"css/mui.min.css",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"css/order-pay/order-pay.css"
+					"css/order-pay/order-pay.css",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [
 					"app/correlate-order/editSaleOrder.html"
@@ -1101,60 +1254,371 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"libs/vue.min.js",
-					"js/framework/lf.js"
+					"js/framework/lf.js",
+					"fonts/iconfont.ttf",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"css/images/sell_wechat.png",
+					"css/images/sell_cash.png",
+					"css/images/sell_alipay.png"
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"app/order/statuslog.html": {
+				"href": "app/order/statuslog.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/order/statuslog.css",
+					"images/order/dot.png",
+					"images/order/dot_gray.png",
+					"js/mui.min.js",
+					"js/mui.picker.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"js/framework/common.js",
+					"app/order/statuslog.js"
+				],
+				"priority": 17
+			},
+			"app/personal/feedback.html": {
+				"href": "app/personal/feedback.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/personal/personal.css",
+					"js/mui.min.js",
+					"js/mui.zoom.js",
+					"js/framework/common.js",
+					"js/mui.previewimage.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/personal/personal.js"
+				],
+				"priority": 7
+			},
+			"app/personal/about.html": {
+				"href": "app/personal/about.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/personal/personal.css",
+					"js/mui.min.js",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/personal/personal.js"
+				],
+				"priority": 9
+			},
+			"app/personal/password.html": {
+				"href": "app/personal/password.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/personal/personal.css",
+					"js/mui.min.js",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/personal/personal.js"
+				],
+				"priority": 10
+			},
+			"app/personal/personal.html": {
+				"href": "app/personal/personal.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/personal/personal.css",
+					"images/message/nav_mine_green.png",
+					"js/mui.min.js",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/framework/common.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/personal/personal.js",
+					"css/images/logo_login.png"
+				],
+				"refer": [
+					"app/personal/feedback.html",
+					"app/message/message.html",
+					"app/personal/about.html",
+					"app/personal/password.html",
+					"app/order/orderlist.html"
+				],
+				"priority": 7
+			},
+			"app/statistics/daily-paper.html": {
+				"href": "app/statistics/daily-paper.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/mui.picker.css",
+					"css/mui.poppicker.css",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/statistics/daily-paper.css",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"js/mui.min.js",
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"libs/vue-echarts.js",
+					"app/statistics/daily-paper.js",
+					"css/images/logo_login.png",
+					"images/statistics/history.png",
+					"images/statistics/income-active.png",
+					"images/statistics/flow.png"
+				],
+				"refer": [
+					"app/order/orderlist.html"
+				],
+				"priority": 0
+			},
+			"app/daily-manage/daily-plan.html": {
+				"href": "app/daily-manage/daily-plan.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/daily-manage/daily-plan.css",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/daily-manage/daily-plan.js",
+					"images/order/date.png"
+				],
+				"priority": 4
+			},
+			"app/market-expansion/group-plan-completion.html": {
+				"href": "app/market-expansion/group-plan-completion.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/market-expansion/group-plan-completion.css",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/market-expansion/group-plan-completion.js"
+				],
+				"priority": 2
+			},
+			"app/market-expansion/expansion-plan.html": {
+				"href": "app/market-expansion/expansion-plan.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/market-expansion/expansion-plan.css",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/market-expansion/expansion-plan.js"
+				],
+				"priority": 5
+			},
+			"app/market-expansion/market-expansion.html": {
+				"href": "app/market-expansion/market-expansion.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/app.css",
+					"fonts/iconfont.ttf",
+					"css/market-expansion/market-expansion.css",
+					"css/common/common.css",
+					"images/message/nav_order_gray.png",
+					"images/message/nav_order_contact_gray.png",
+					"images/message/nav_message_gray.png",
+					"images/message/nav_mine_gray.png",
+					"css/mui.dtpicker.css",
+					"css/mui.picker.min.css",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"js/mui.picker.min.js",
+					"js/mui.dtpicker.js",
+					"js/framework/define.js",
+					"js/framework/styles.js",
+					"js/framework/lf.js",
+					"libs/vue.min.js",
+					"app/update.js",
+					"app/market-expansion/market-expansion.js",
+					"css/images/logo_login.png"
+				],
+				"refer": [
+					"app/market-expansion/group-plan-completion.html",
+					"app/order/orderlist.html",
+					"app/login.html",
+					"app/market-expansion/expansion-plan.html"
+				],
+				"priority": 2
 			}
 		},
 		"idle": {
 			"resources": [
-				"images/cbd.jpg",
+				"css/fonts/mui-icons-extra.ttf",
+				"images/order/list_location.png",
 				"css/feedback.css",
+				"css/order-pay/order-pay.scss",
+				"images/order/nocnt.png",
+				"css/images/index/u773.png",
+				"images/message/icon_emoticon.png",
+				"css/schedule/mui-preview.scss",
+				"css/images/login-1.png",
 				"css/summary/details.scss",
-				"js/mui.dtpicker.js",
-				"css/message/message.scss",
-				"js/mui.poppicker.js",
+				"css/images/cbd.jpg",
+				"css/schedule/summary.scss",
+				"css/images/order/u408.png",
+				"images/order/sale_choosed_corner.png",
+				"images/message/icon_distrite.png",
 				"js/city.data.js",
 				"css/mui.imageviewer.css",
-				"js/mui.view.js",
+				"images/index/icon_set.png",
 				"README.md",
+				"js/mui.view.js",
 				"js/beecloud.js",
 				"css/order/order.scss",
 				"js/mui.picker.js",
+				"manifest_uat.json",
+				"css/images/logo.png",
+				"images/message/icon_done.png",
+				"app/personal/setting.html",
 				"css/mui.listpicker.css",
 				"js/mui.lazyload.js",
+				"css/images/index/u80.png",
 				"app/test/muban2.html",
 				"js/city.data-3.js",
+				"app/quick-order-pay/quick-order-pay.js",
 				"js/95516.js",
-				"images/qrcode.png",
-				"css/mui.dtpicker.css",
+				"css/personal/personal.scss",
+				"css/images/index/u771.png",
+				"app/order/orderlist2.html",
+				"css/schedule/details.scss",
+				"css/images/index/u783.png",
+				"css/images/muwu.jpg",
+				"images/order/pic_icon.png",
 				"css/mui.picker.all.css",
+				"css/result/shoot-export.css",
+				"css/fonts/mui.ttf",
 				"js/feedback.js",
+				"css/images/order/u402.png",
 				"js/arttmpl.js",
+				"css/operator/operator.scss",
 				"css/summary/summary.scss",
 				"js/mui.imageViewer.js",
-				"images/muwu.jpg",
+				"manifest_prod.json",
+				"css/images/order/u414.png",
+				"images/statistics/income.png",
+				"css/result/order-result-noexport.css",
 				"app/test/muban1.html",
+				"images/message/icon_voice.png",
 				"app/order/lf2.0_test.html",
 				"libs/echarts-all.js",
 				"js/ad.js",
 				"js/mui.lazyload.img.js",
-				"css/common/common.css.map",
+				"images/message/icon_cancel.png",
 				"js/mui.listpicker.js",
 				"js/webviewGroup.js",
-				"images/login-1.png",
+				"css/images/logo_login2.png",
+				"images/order/order_img.png",
+				"css/order-entering/photo-output.scss",
 				"css/summary/mui-preview.scss",
-				"css/message/message.css.map",
+				"app/quick-order-pay/quick-order-pay-detail.html",
+				"css/images/index/message.png",
+				"css/images/yuantiao.jpg",
+				"images/message/icon_img.png",
+				"app/quick-order-pay/quick-order-pay.html",
+				"css/images/timg.jpg",
+				"css/designate/designate.scss",
+				"images/statistics/history-active.png",
 				"css/summary/finger-uploader.scss",
-				"css/mui.picker.css",
-				"images/order/u414.png",
+				"css/images/shuijiao.jpg",
+				"css/designate/select-staff.scss",
 				"js/mui.picker.all.js",
-				"images/order/u408.png",
-				"css/order/order.css.map",
+				"css/schedule/finger-uploader.scss",
+				"css/images/qrcode.png",
+				"images/message/icon_search.png",
+				"css/images/index/u775.png",
+				"app/quick-order-pay/quick-order-pay-list.html",
+				"css/statistics/daily-paper.scss",
+				"images/statistics/flow-active.png",
 				"css/common/common.scss",
+				"css/accountlogin.css",
 				"js/mui.locker.js",
-				"app/test/lf2.0_test.html"
+				"app/test/lf2.0_test.html",
+				"css/images/60x60.gif",
+				"css/images/index/bg.jpg"
 			]
 		}
 	}
