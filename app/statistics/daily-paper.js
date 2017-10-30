@@ -727,6 +727,9 @@
             }
         },
         methods: {
+            getAbs: function (value) {
+                return isDef(value) ? Math.abs(value) : 0
+            },
             isSign: function(value) {
                 value = value + ''
                 return value[0] !== '-'
@@ -739,7 +742,7 @@
             initRegionProvince: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/queryRegionAndProvince.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/queryRegionAndProvince', {}, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
@@ -778,7 +781,7 @@
             refreshDataByIncome: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/income.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/income', {}, function(res) {
                     var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
@@ -803,7 +806,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.incomeAll
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/incomeAll.htm', {
+                lf.net.getJSON('newReport/analysisMobile/incomeAll', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -827,7 +830,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.incomeRegion
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/incomeRegion.htm', {
+                lf.net.getJSON('newReport/analysisMobile/incomeRegion', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -863,7 +866,7 @@
             refreshDataByShoot: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/shoot.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/shoot', {}, function(res) {
                     var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
@@ -888,7 +891,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.flowShootAll
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/shootAll.htm', {
+                lf.net.getJSON('newReport/analysisMobile/shootAll', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -912,7 +915,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.flowShootRegion
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/shootRegion.htm', {
+                lf.net.getJSON('newReport/analysisMobile/shootRegion', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -954,7 +957,7 @@
             refreshDataByHistoryIncome: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/historyIncome.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/historyIncome', {}, function(res) {
                     var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
@@ -974,7 +977,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.historyIncomeDay
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/thirtyIncome.htm', {
+                lf.net.getJSON('newReport/analysisMobile/thirtyIncome', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -998,7 +1001,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.historyThreeMonthIncome
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/threeMonthIncome.htm', {
+                lf.net.getJSON('newReport/analysisMobile/threeMonthIncome', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -1026,7 +1029,7 @@
             refreshDataByHistoryShoot: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalShoot.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/totalShoot', {}, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
@@ -1047,7 +1050,7 @@
                 var self = this
                 var regionProvince = this.regionProvinceMap.historyShootDay
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/thirtyShoot.htm', {
+                lf.net.getJSON('newReport/analysisMobile/thirtyShoot', {
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -1070,7 +1073,7 @@
             refreshDataByTravelRanking: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/travelRanking.htm', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/travelRanking', {}, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {

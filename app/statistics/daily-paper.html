@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="rt" :class="getNumberClassName(incomeTotal.saleAmtPerRate)">
                                     <span class="sign"></span>
-                                    <span class="number" v-text="Math.abs(incomeTotal.saleAmtPerRate)"></span>
+                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtPerRate)"></span>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="rt" :class="getNumberClassName(incomeTotal.appAmtRate)">
                                     <span class="sign"></span>
-                                    <span class="number" v-text="Math.abs(incomeTotal.appAmtRate)"></span>
+                                    <span class="number" v-text="getAbs(incomeTotal.appAmtRate)"></span>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="rt number-large" :class="getNumberClassName(flowShootInfo.shootPerplesRate)">
                                     <span class="sign"></span>
-                                    <span class="number" v-text="Math.abs(flowShootInfo.shootPerplesRate)"></span>
+                                    <span class="number" v-text="getAbs(flowShootInfo.shootPerplesRate)"></span>
                                 </div>
                             </div>
                         </div>
@@ -246,11 +246,11 @@
                                     <div class="clearfix content">
                                         <div class="lf">
                                             <span class="currency"></span>
-                                            <span class="number" v-text="item.totalAmt"></span>
+                                            <span class="number" v-text="item.totalAmt || 0"></span>
                                         </div>
                                         <div class="rt" :class="getNumberClassName(item.amtRate)">
                                             <span class="sign"></span>
-                                            <span class="number" v-text="Math.abs(item.amtRate)"></span>
+                                            <span class="number" v-text="getAbs(item.amtRate)"></span>
                                         </div>
                                     </div>
                                 </div>

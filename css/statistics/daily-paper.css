@@ -130,7 +130,7 @@
 
 .statistics-daily-paper .daily-content .section-box .section-title .text {
   float: left;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -165,4 +165,5 @@
 
 .statistics-daily-paper .daily-content .list-show-wrap .item {
   padding: 10px;
+  font-size: 14px;
 }
