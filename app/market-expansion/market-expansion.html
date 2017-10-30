@@ -35,12 +35,16 @@
         .version {
             text-align: center
         }
+
+        [v-cloak] {
+            display: none !important;
+        }
     </style>
     <script src="../../js/framework/common.js"></script>
 </head>
 
 <body>
-    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app" v-cloak>
         <!--侧滑菜单部分-->
         <aside id="offCanvasSide" class="mui-off-canvas-left">
             <div id="offCanvasSideScroll" class="mui-scroll-wrapper">

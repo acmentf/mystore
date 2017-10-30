@@ -170,12 +170,12 @@ function switchRolePostion(val) {
 				// lf.window.openWindow(ROLE_EMUN.cityManager.windowId, ROLE_EMUN.cityManager.pageUrl,{},{});
 			} else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
 				// 渠道 
-				lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{});
+				lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{}, lf.window.currentWebview());
 			} else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
 				//总经办
-				lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
+				lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
 			} else {
-				lf.window.openWindow('order','../order/orderlist.html',{},{});
+				lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
 			}
 
             // if (window.Role.currentPositions[0].roleId!=12) {
