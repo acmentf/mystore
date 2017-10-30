@@ -4,7 +4,7 @@
         flow: 'flow',
         history: 'history'
     }
-   //大区省份选择
+    //大区省份选择
     var cityPicker = new mui.PopPicker({
         layer: 2
     })
@@ -958,11 +958,10 @@
                 var self = this
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/historyIncome', {}, function(res) {
-                    var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyIncomeTotal = data.incomeTotal || {}
+                        self.historyIncomeTotal = res.data || {}
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -1300,15 +1299,15 @@
 
                 if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
                     // 城市经理
-                    lf.window._openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
                     // 渠道
-                    lf.window._openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
                     //总经办
-                    // lf.window._openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
+                    // lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
                 } else {
-                    lf.window._openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
+                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
                 }
 
                 // if (window.Role.currentPositions[0].roleId!=12) {
