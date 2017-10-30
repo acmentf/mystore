@@ -4,8 +4,8 @@
 
 
 //开发服务器路径
-//    var SERVER_BAS_URL = "http://tuyi.uat.fingercrm.cn/shoot-mobile-web";//开发
-var SERVER_BAS_URL = "http://tuyi.sit.fingercrm.cn/shoot-mobile-web";//开发
+   var SERVER_BAS_URL = "http://tuyi.uat.fingercrm.cn/shoot-mobile-web";//开发
+// var SERVER_BAS_URL = "http://tuyi.sit.fingercrm.cn/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "http://115.29.7.193:8091/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "http://120.26.37.73:8091/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "http://192.168.0.207:8091/shoot-mobile-web";//开发
