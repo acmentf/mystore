@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/market-expansion/group-plan-completion.css" />
+		<link rel="stylesheet" href="../../css/common/common.css" />
+		<script src="../../js/framework/common.js"></script>
+    </head>
+    <body>
+        <div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="#backToLast"></a>
+				<h1 class="mui-title">计划完成详情</h1>
+			</header>
+			<main class="mui-content">
+				<section>
+					<div class="block">
+						<div class="block-date" v-show="detailList.length !== 0">
+							<span class="mui-icon mui-icon-flag"></span>
+							<span>{{date}}</span>
+						</div>
+						
+						<div class="block-content">
+							<ul>
+								<li v-for="item in detailList" :key="item.index">
+									<h4>{{item.purchaser}}</h4>
+									<div class="detail-wrap">
+										<div class="per-count">
+											<div class="label">到达人数：</div>
+											<div class="value">{{item.server_per_num}}人</div>
+										</div>
+										<div class="pre-price">
+											<div class="label">前置金额：</div>
+											<div class="value">{{item.pre_price}}元</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="group-plan-completion.js"></script>
+    </body>
+</html>

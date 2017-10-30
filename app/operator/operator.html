@@ -92,6 +92,34 @@
 
 	<body>
 		<div id="app">
+			<!-- 选择景点弹窗 -->
+			<div class="select-journey-wrapper">
+				<header class="mui-bar mui-bar-nav">
+					<h1 class="mui-title">选择景点</h1>
+					<a @click='confirmSelectJourney' class="mui-btn mui-pull-right confirm-btn">确定</a>
+				</header>
+				<div class="journey-select-inner">
+					<ul class="mui-table-view">
+						<template v-for="(item,index) in journeyList">
+							<li
+								class="mui-table-view-cell mui-indexed-list-item"
+								:data-value="item.value">
+								<div class="item-wrap">
+									<span class="text-name" v-text="item.text"></span>
+									<div class="btn-wrap">
+										<template>
+											<button v-if="!item.selected" :index="index" type="button" class="mui-btn btn-select btn-select" @click='selectSingleJourney(item.text,index)'>选择</button>
+											<button v-else :index="index" type="button" class="mui-btn btn-cancel" @click='cancelSingleJourney(item.text, index)'>取消</button>
+										</template>
+									</div>
+								</div>
+							</li>
+						</template>
+					</ul>
+				</div>
+			</div>
+			<!-- 选择景点弹窗 -->
+
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">计调信息</h1>
@@ -245,10 +273,16 @@
 									</div>
 								</li>
 								<li class="mui-table-view-cell">
-									<span>拍摄景点</span>
+									<span>拍摄状态</span>
 									<span class="show-on-right">
-										<input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请输入景点名称" class="journeyName forinput mui-pull-right" />
-										<input type="text" @click="selectJourneyName($event,index)" readonly v-else  v-model='item.journeyName' class="journeyName forinput mui-pull-right"  placeholder="请输入景点名称"/>
+										<span class="mui-pull-right" v-text='item.shootState'></span>
+									</span>
+								</li>
+								<li class="mui-table-view-cell">
+									<span>拍摄景点</span>
+									<span class="show-on-right" @click="selectJourneyName($event,index,item.journeyName)">
+										<!-- <input type="text" v-if="forStatus == 'check'" readonly="readonly"  v-model='item.journeyName' placeholder="请选择景点" class="journeyName forinput mui-pull-right" /> -->
+										<input type="text" disabled="disabled" readonly="readonly" v-model='item.journeyName' class="journeyName forinput mui-pull-right"  placeholder="请选择景点"/>
 									</span>
 									<span v-if="forStatus != 'check'" class="mui-icon mui-icon-arrowright"></span>
 								</li>
@@ -273,8 +307,9 @@
 								</li>
 								<li class="mui-table-view-cell ">
 									<span>时段备注</span>
-									<span class="show-on-right ">
-										<input  type="text" :data-index="index"  v-model="item.remark"  class="forinput mui-pull-right "  placeholder="备注准确拍摄时段" />
+									<span class="show-on-right">
+										<span v-if="forStatus == 'check' || item.isConfirmShot == 1" v-text='item.remark' class="mui-pull-right"></span>
+										<input v-else type="text" :data-index="index"  v-model="item.remark"  class="forinput mui-pull-right"  placeholder="备注准确拍摄时段" />
 									</span>
 								</li>
 								<li class="mui-table-view-cell ">
