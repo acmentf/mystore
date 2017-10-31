@@ -19,7 +19,7 @@
     var GRID_LEFT = 70
     var GRID_RIGHT = 10
     var GRID_BOTTOM = 30
-    var AXIS_LABEL_BOTTOM = 80
+    var AXIS_LABEL_BOTTOM = 70
     var ALL_RP = 'all'
     var ALL_NAME_RP = '全部'
     var vm = new Vue({
@@ -679,7 +679,7 @@
                     },
                     legend: {
                         orient: 'vertical',
-                        left: 'center',
+                        left: 'right',
                         data: ['前置收入','销售收入']
                     },
                     series: [
