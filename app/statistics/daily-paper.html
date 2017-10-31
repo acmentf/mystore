@@ -81,8 +81,8 @@
                                     <span class="number" v-text="incomeTotal.saleAmt"></span>
                                 </div>
                                 <div class="rt number-large" :class="getNumberClassName(incomeTotal.saleAmtRate)">
-                                    <span class="sign"></span>
-                                    <span class="number" v-text="Math.abs(incomeTotal.saleAmtRate)"></span>
+                                    <span class="sign" v-if="incomeTotal.saleAmtRate"></span>
+                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtRate)"></span>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                     <span class="number" v-text="incomeTotal.saleAmtPer"></span>
                                 </div>
                                 <div class="rt" :class="getNumberClassName(incomeTotal.saleAmtPerRate)">
-                                    <span class="sign"></span>
+                                    <span class="sign" v-if="incomeTotal.saleAmtPerRate"></span>
                                     <span class="number" v-text="getAbs(incomeTotal.saleAmtPerRate)"></span>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                     <span class="number" v-text="incomeTotal.appAmt"></span>
                                 </div>
                                 <div class="rt" :class="getNumberClassName(incomeTotal.appAmtRate)">
-                                    <span class="sign"></span>
+                                    <span class="sign" v-if="incomeTotal.appAmtRate"></span>
                                     <span class="number" v-text="getAbs(incomeTotal.appAmtRate)"></span>
                                 </div>
                             </div>
@@ -158,10 +158,10 @@
                             <div class="title">今日拍摄人数</div>
                             <div class="clearfix content">
                                 <div class="lf number-large">
-                                    <span class="number" v-text="flowShootInfo.shootPerples"></span>
+                                    <span class="number" v-text="flowShootInfo.shootPerples || 0"></span>
                                 </div>
                                 <div class="rt number-large" :class="getNumberClassName(flowShootInfo.shootPerplesRate)">
-                                    <span class="sign"></span>
+                                    <span class="sign" v-if="flowShootInfo.shootPerplesRate"></span>
                                     <span class="number" v-text="getAbs(flowShootInfo.shootPerplesRate)"></span>
                                 </div>
                             </div>
@@ -248,7 +248,7 @@
                                             <span class="number" v-text="item.totalAmt || 0"></span>
                                         </div>
                                         <div class="rt" :class="getNumberClassName(item.amtRate)">
-                                            <span class="sign"></span>
+                                            <span class="sign" v-if="item.amtRate"></span>
                                             <span class="number" v-text="getAbs(item.amtRate)"></span>
                                         </div>
                                     </div>

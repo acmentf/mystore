@@ -4,12 +4,22 @@
         flow: 'flow',
         history: 'history'
     }
-   //大区省份选择
+    //大区省份选择
     var cityPicker = new mui.PopPicker({
         layer: 2
     })
-    var EACH_SCREEN_COUNT = 6
-    var emptyChart = {series: []}
+    var EACH_SCREEN_COUNT = 8
+    var X_AXIS_NAME_COUNT = 7
+    var EMPTY_CHART = {series: []}
+    var AXIS_LABEL = {
+        interval: 0,
+        rotate: 30
+    }
+    var GRID_TOP = 20
+    var GRID_LEFT = 70
+    var GRID_RIGHT = 10
+    var GRID_BOTTOM = 30
+    var AXIS_LABEL_BOTTOM = 80
     var ALL_RP = 'all'
     var ALL_NAME_RP = '全部'
     var vm = new Vue({
@@ -30,6 +40,7 @@
             //定时器
             intervalMap: {
                 timeout: null,
+                interval: null,
                 startIndex: {
                     incomeLine: 0,
                     incomeTravel: 0,
@@ -43,6 +54,7 @@
                     historyShootDay: 0
                 }
             },
+            queryDate: new Date(/*new Date() - 1000*60*60*24*/),
             //大区省份code
             //regionProvinceActive: '',
             regionProvinceMap: {
@@ -197,7 +209,7 @@
             },
             incomeLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.incomeLine, this.intervalMap.startIndex.incomeLine)
                 var xAxisData = []
@@ -205,7 +217,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
-                    xAxisData.push(item.productName)
+                    xAxisData.push(truncationStr(item.productName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -215,7 +227,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -225,8 +237,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5,
-                        bottom: 120
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -234,10 +248,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        axisLabel: {
-                            interval: 0,
-                            rotate: 30
-                        },
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -245,7 +256,7 @@
             },
             incomeTravelChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.incomeTravel, this.intervalMap.startIndex.incomeTravel)
                 var xAxisData = []
@@ -253,7 +264,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
-                    xAxisData.push(item.travelName)
+                    xAxisData.push(truncationStr(item.travelName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -263,7 +274,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -273,8 +284,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5,
-                        bottom: 120
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -282,10 +295,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        axisLabel: {
-                            interval: 0,
-                            rotate: 30
-                        },
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -293,7 +303,7 @@
             },
             incomeAllChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.incomeAll, this.intervalMap.startIndex.incomeAll)
                 var xAxisData = []
@@ -319,7 +329,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: GRID_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -334,7 +347,7 @@
             },
             incomeRegionChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.incomeRegion, this.intervalMap.startIndex.incomeRegion)
                 var xAxisData = []
@@ -342,7 +355,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.saleAmt
-                    xAxisData.push(item.areaName)
+                    xAxisData.push(truncationStr(item.areaName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -352,7 +365,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -362,7 +375,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -370,6 +386,7 @@
                     },
                     xAxis: {
                         type: 'category',
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -377,7 +394,7 @@
             },
             flowShootLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.flow) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.flowShootLine, this.intervalMap.startIndex.flowShootLine)
                 var xAxisData = []
@@ -385,7 +402,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
-                    xAxisData.push(item.productName)
+                    xAxisData.push(truncationStr(item.productName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -395,7 +412,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -405,8 +422,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5,
-                        bottom: 120
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -414,10 +433,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        axisLabel: {
-                            interval: 0,
-                            rotate: 30
-                        },
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -425,7 +441,7 @@
             },
             flowShootTravelChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.flow) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.flowShootTravel, this.intervalMap.startIndex.flowShootTravel)
                 var xAxisData = []
@@ -433,7 +449,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
-                    xAxisData.push(item.travelName)
+                    xAxisData.push(truncationStr(item.travelName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -443,7 +459,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -453,8 +469,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5,
-                        bottom: 120
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -462,10 +480,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        axisLabel: {
-                            interval: 0,
-                            rotate: 30
-                        },
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -473,7 +488,7 @@
             },
             flowShootAllChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.flow) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.flowShootAll, this.intervalMap.startIndex.flowShootAll)
                 var xAxisData = []
@@ -499,7 +514,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: GRID_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -514,7 +532,7 @@
             },
             flowShootRegionChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.flow) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.flowShootRegion, this.intervalMap.startIndex.flowShootRegion)
                 var xAxisData = []
@@ -522,7 +540,7 @@
                 var seriesData = []
                 list.forEach(function(item) {
                     var value = +item.shootPerples
-                    xAxisData.push(item.areaName)
+                    xAxisData.push(truncationStr(item.areaName, X_AXIS_NAME_COUNT))
                     seriesData.push(value)
                 })
                 series.push({
@@ -532,7 +550,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -542,7 +560,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -550,6 +571,7 @@
                     },
                     xAxis: {
                         type: 'category',
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -557,7 +579,7 @@
             },
             historyIncomeDayChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.history) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.historyIncomeDay, this.intervalMap.startIndex.historyIncomeDay)
                 var xAxisData = []
@@ -583,7 +605,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -591,6 +616,7 @@
                     },
                     xAxis: {
                         type: 'category',
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -598,7 +624,7 @@
             },
             historyShootDayChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.history) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var list = dynamicSequenceValue(this.historyShootDay, this.intervalMap.startIndex.historyShootDay)
                 var xAxisData = []
@@ -624,7 +650,10 @@
                         trigger: 'axis'
                     },
                     grid: {
-                        top: 5
+                        top: GRID_TOP,
+                        left: GRID_LEFT,
+                        right:GRID_RIGHT,
+                        bottom: AXIS_LABEL_BOTTOM
                     },
                     yAxis: {
                         name: '',
@@ -632,6 +661,7 @@
                     },
                     xAxis: {
                         type: 'category',
+                        axisLabel: AXIS_LABEL,
                         data: xAxisData
                     },
                     series: series
@@ -639,7 +669,7 @@
             },
             historyIncomeTotalChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.history) {
-                    return emptyChart
+                    return EMPTY_CHART
                 }
                 var income = this.historyIncomeTotal
                 return {
@@ -649,7 +679,7 @@
                     },
                     legend: {
                         orient: 'vertical',
-                        left: 'left',
+                        left: 'center',
                         data: ['前置收入','销售收入']
                     },
                     series: [
@@ -781,14 +811,20 @@
             refreshDataByIncome: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/income', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/income', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd')
+                }, function(res) {
                     var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
                         self.incomeTotal = data.incomeTotal || {}
-                        self.incomeLine = data.incomeProduct || []
-                        self.incomeTravel = data.incomeTravel || []
+                        self.incomeLine = (data.incomeProduct || []).filter(function (item) {
+                            return isValidValue(item.saleAmt)
+                        })
+                        self.incomeTravel = (data.incomeTravel || []).filter(function (item) {
+                            return isValidValue(item.saleAmt)
+                        })
 
                         self.intervalMap.startIndex.incomeLine = 0
                         self.intervalMap.startIndex.incomeTravel = 0
@@ -807,13 +843,16 @@
                 var regionProvince = this.regionProvinceMap.incomeAll
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/incomeAll', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd'),
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.incomeAll = res.data || []
+                        self.incomeAll = (res.data || []).filter(function (item) {
+                            return isValidValue(item.saleAmt)
+                        })
 
                         self.intervalMap.startIndex.incomeAll = 0
                     } else {
@@ -831,6 +870,7 @@
                 var regionProvince = this.regionProvinceMap.incomeRegion
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/incomeRegion', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd'),
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -840,6 +880,8 @@
                         self.incomeRegion = (res.data || []).map(function (item) {
                             item.areaName = item.areaName || item.provinceName || item.lineName
                             return item
+                        }).filter(function (item) {
+                            return isValidValue(item.saleAmt)
                         })
 
                         self.intervalMap.startIndex.incomeRegion = 0
@@ -866,14 +908,20 @@
             refreshDataByShoot: function (cb) {
                 var self = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/shoot', {}, function(res) {
+                lf.net.getJSON('newReport/analysisMobile/shoot', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd')
+                }, function(res) {
                     var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
                         self.flowShootInfo = data.shootInfo || {}
-                        self.flowShootLine = data.shootProduct || []
-                        self.flowShootTravel = data.shootTravel || []
+                        self.flowShootLine = (data.shootProduct || []).filter(function (item) {
+                            return isValidValue(item.shootPerples)
+                        })
+                        self.flowShootTravel = (data.shootTravel || []).filter(function (item) {
+                            return isValidValue(item.shootPerples)
+                        })
 
                         self.intervalMap.startIndex.flowShootLine = 0
                         self.intervalMap.startIndex.flowShootTravel = 0
@@ -892,13 +940,16 @@
                 var regionProvince = this.regionProvinceMap.flowShootAll
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/shootAll', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd'),
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.flowShootAll = res.data || []
+                        self.flowShootAll = (res.data || []).filter(function (item) {
+                            return isValidValue(item.shootPerples)
+                        })
 
                         self.intervalMap.startIndex.flowShootAll = 0
                     } else {
@@ -916,6 +967,7 @@
                 var regionProvince = this.regionProvinceMap.flowShootRegion
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/shootRegion', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd'),
                     areaCode: regionProvince.areaCode,
                     provinceCode: regionProvince.provinceCode
                 }, function(res) {
@@ -925,6 +977,8 @@
                         self.flowShootRegion = (res.data || []).map(function (item) {
                             item.areaName = item.areaName || item.provinceName || item.lineName
                             return item
+                        }).filter(function (item) {
+                            return isValidValue(item.shootPerples)
                         })
 
                         self.intervalMap.startIndex.flowShootRegion = 0
@@ -958,11 +1012,10 @@
                 var self = this
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/historyIncome', {}, function(res) {
-                    var data = res.data || {}
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyIncomeTotal = data.incomeTotal || {}
+                        self.historyIncomeTotal = res.data || {}
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -984,7 +1037,9 @@
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyIncomeDay = res.data || []
+                        self.historyIncomeDay = (res.data || []).filter(function (item) {
+                            return isValidValue(item.saleAmt)
+                        })
 
                         self.intervalMap.startIndex.historyIncomeDay = 0
                     } else {
@@ -1057,7 +1112,9 @@
                     lf.nativeUI.closeWaiting()
                     cb && cb()
                     if (res.code === '200') {
-                        self.historyShootDay = res.data || []
+                        self.historyShootDay = (res.data || []).filter(function (item) {
+                            return isValidValue(item.shootPerples)
+                        })
 
                         self.intervalMap.startIndex.historyShootDay = 0
                     } else {
@@ -1089,37 +1146,46 @@
             },
             /*历史模块 end*/
             init: function () {
-                var self = this
                 this.initRegionProvince(init)
-                setTimeout(function () {
-                    self.intervalMap.timeout = setInterval(function () {
+                this.startTiming()
+            },
+            startTiming: function () {
+                var self = this
+                self.clearTiming()
+                self.intervalMap.timeout = setTimeout(function () {
+                    self.intervalMap.interval = setInterval(function () {
+                        var interval = EACH_SCREEN_COUNT
                         var startIndex = self.intervalMap.startIndex
                         switch (self.pageTypeActive){
                             case pageTypeConstant.income:
-                                startIndex.incomeLine += 1
-                                startIndex.incomeTravel += 1
-                                startIndex.incomeAll += 1
-                                startIndex.incomeRegion += 1
+                                startIndex.incomeLine += interval
+                                startIndex.incomeTravel += interval
+                                startIndex.incomeAll += interval
+                                startIndex.incomeRegion += interval
                                 break
                             case pageTypeConstant.flow:
-                                startIndex.flowShootLine += 1
-                                startIndex.flowShootTravel += 1
-                                startIndex.flowShootAll += 1
-                                startIndex.flowShootRegion += 1
+                                startIndex.flowShootLine += interval
+                                startIndex.flowShootTravel += interval
+                                startIndex.flowShootAll += interval
+                                startIndex.flowShootRegion += interval
                                 break
                             case pageTypeConstant.history:
-                                startIndex.historyIncomeDay += 1
-                                startIndex.historyShootDay += 1
+                                startIndex.historyIncomeDay += interval
+                                startIndex.historyShootDay += interval
                                 break
                         }
-                    }, 1000);
+                    }, 8000);
                 }, 300)
+            },
+            clearTiming: function () {
+                clearTimeout(this.intervalMap.timeout)
+                clearInterval(this.intervalMap.interval)
             }
         },
         created: function () {
         },
         beforeDestroy: function () {
-            clearInterval(self.intervalMap.timeout)
+            this.clearTiming()
         }
     })
 
@@ -1135,8 +1201,8 @@
     function setRegionProvince(regionProvince, items) {
         regionProvince.areaCode = items[0].value
         regionProvince.areaName = items[0].text
-        regionProvince.provinceCode = items[1].value
-        regionProvince.provinceName = items[1].text
+        regionProvince.provinceCode = items[1].value || ALL_RP
+        regionProvince.provinceName = items[1].text || ALL_NAME_RP
     }
     // 动态序列取值
     function dynamicSequenceValue(list, startIndex, count) {
@@ -1158,8 +1224,18 @@
         return ret
     }
     //
+    function isValidValue(v) {
+        v = +v
+        return !!v && !isNaN(v)
+    }
+    //
     function isDef(v) {
         return v !== undefined && v !== null
+    }
+    // 截断字符串
+    function truncationStr(str, count) {
+        str = str + ''
+        return str.length > count ? str.slice(0, count - 1) + '...' : str
     }
     // 小数转为百分比
     function toPercent(point){
@@ -1295,20 +1371,22 @@
                 }
                 window.Role.save(obj)
                 lf.nativeUI.toast('切换岗位成功');
+                vm.clearTiming()
 
                 var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
 
                 if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
                     // 城市经理
-                    lf.window._openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
                     // 渠道
-                    lf.window._openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
                     //总经办
-                    // lf.window._openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
+                    vm.startTiming()
+                    // lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
                 } else {
-                    lf.window._openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
+                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
                 }
 
                 // if (window.Role.currentPositions[0].roleId!=12) {
