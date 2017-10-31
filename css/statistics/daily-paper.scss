@@ -15,9 +15,13 @@
   .rt{
     float: right;
   }
-  .currency:before{
-    content: '￥';
-    font-size: 12px;
+  .currency{
+    top: -2px;
+    position: relative;
+    &:before{
+      content: '￥';
+      font-size: 14px;
+    }
   }
   .number-large{
     font-size: 28px;
@@ -27,14 +31,20 @@
   }
   .number-sign,.number-lose{
     position: relative;
-    padding-left: 10px;
+    padding-left: 14px;
     &.number-large{
-      padding-left: 14px;
+      .sign{
+        height: 15px;
+      }
     }
     .sign{
-      overflow: hidden;
-      left: 0;
       position: absolute;
+      left: 0;
+      bottom: 4px;
+      width:12px;
+      height: 14px;
+      background-repeat: no-repeat;
+      background-position: center;
     }
     .number:after{
       content: '%';
@@ -43,42 +53,14 @@
 
   .number-sign{
     color: #F17175;
-    &.number-large{
-      .sign{
-        width: 14px;
-        height: 14px;
-        top: 2px;
-      }
-    }
     .sign{
-      width: 12px;
-      height: 12px;
-      top: 3px;
-    }
-    .sign:before{
-      position: absolute;
-      top: 2px;
-      content: '↑';
+      background-image: url("../../images/statistics/arrow-up.png");
     }
   }
   .number-lose{
     color: #81D6BB;
-    &.number-large{
-      .sign{
-        width: 14px;
-        height: 14px;
-        top: 2px;
-      }
-    }
     .sign{
-      width: 12px;
-      height: 12px;
-      top: 6px;
-    }
-    .sign:before{
-      position: absolute;
-      top: -12px;
-      content: '↓';
+      background-image: url("../../images/statistics/arrow-down.png");
     }
   }
   .sep-line{
@@ -138,7 +120,7 @@
         margin-bottom: 10px;
       }
       .content{
-
+        font-size: 24px;
       }
     }
     .list-show-wrap{
