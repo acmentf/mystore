@@ -67,11 +67,16 @@ lf.ready(function(){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 lf.nativeUI.toast('保存成功');
+                refreshParentView();
             } else {
                 lf.nativeUI.toast(res.msg);
             }
         })
     })
+
+    function refreshParentView() {
+        lf.event.fire(lf.window.currentWebview().opener(), 'refreshData', {})
+    }
 
     function validateData(data) {
         // debugger

@@ -108,6 +108,7 @@ var planCompletedRatio = {
         var that = this;
         lf.nativeUI.showWaiting();
         lf.net.getJSON('/report/newAnalysis/dtPlannedComletionRate', params, function(res){
+            console.log("8777777777777777/report/newAnalysis/dtPlannedComletionRatej", JSON.stringify(res));
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 var resData = res.data.dataList[0].list[0];
@@ -291,7 +292,11 @@ lf.ready(function() {
 				// plus.runtime.restart();
 			}
 		});
-	})
+    })
+    
+    lf.event.listener('refreshData', function(e) {
+        lf.window.currentWebview().reload()
+    })
 
 
     
