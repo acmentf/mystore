@@ -412,7 +412,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -459,7 +459,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
@@ -550,7 +550,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'inside'
+                            position: 'top'
                         }
                     },
                     data: seriesData
