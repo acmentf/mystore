@@ -20,9 +20,14 @@
   float: right;
 }
 
+.statistics-daily-paper .currency {
+  top: -2px;
+  position: relative;
+}
+
 .statistics-daily-paper .currency:before {
   content: '￥';
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .statistics-daily-paper .number-large {
@@ -35,17 +40,21 @@
 
 .statistics-daily-paper .number-sign, .statistics-daily-paper .number-lose {
   position: relative;
-  padding-left: 10px;
-}
-
-.statistics-daily-paper .number-sign.number-large, .statistics-daily-paper .number-lose.number-large {
   padding-left: 14px;
 }
 
+.statistics-daily-paper .number-sign.number-large .sign, .statistics-daily-paper .number-lose.number-large .sign {
+  height: 15px;
+}
+
 .statistics-daily-paper .number-sign .sign, .statistics-daily-paper .number-lose .sign {
-  overflow: hidden;
-  left: 0;
   position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 12px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .statistics-daily-paper .number-sign .number:after, .statistics-daily-paper .number-lose .number:after {
@@ -56,44 +65,16 @@
   color: #F17175;
 }
 
-.statistics-daily-paper .number-sign.number-large .sign {
-  width: 14px;
-  height: 14px;
-  top: 2px;
-}
-
 .statistics-daily-paper .number-sign .sign {
-  width: 12px;
-  height: 12px;
-  top: 3px;
-}
-
-.statistics-daily-paper .number-sign .sign:before {
-  position: absolute;
-  top: -2px;
-  content: '↑';
+  background-image: url("../../images/statistics/arrow-up.png");
 }
 
 .statistics-daily-paper .number-lose {
   color: #81D6BB;
 }
 
-.statistics-daily-paper .number-lose.number-large .sign {
-  width: 14px;
-  height: 14px;
-  top: 2px;
-}
-
 .statistics-daily-paper .number-lose .sign {
-  width: 12px;
-  height: 12px;
-  top: 6px;
-}
-
-.statistics-daily-paper .number-lose .sign:before {
-  position: absolute;
-  top: -12px;
-  content: '↓';
+  background-image: url("../../images/statistics/arrow-down.png");
 }
 
 .statistics-daily-paper .sep-line {
@@ -161,6 +142,10 @@
 
 .statistics-daily-paper .daily-content .info-box .title {
   margin-bottom: 10px;
+}
+
+.statistics-daily-paper .daily-content .info-box .content {
+  font-size: 24px;
 }
 
 .statistics-daily-paper .daily-content .list-show-wrap .item {
