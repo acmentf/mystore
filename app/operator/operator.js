@@ -198,13 +198,8 @@ mui('#app').on('tap', '.psrq', function() {
 		var options = JSON.parse(optionsJson);
 		var picker = new mui.DtPicker(options);
 		picker.show(function(rs) {
-			function getNowDate() {
-				var t = new Date()
-				return t.getFullYear() + '/' + t.getMonth() + '/' + t.getDay()
-			}
-			
 			// 无法拍摄状态下，不能选今天以前的日期
-			var isChangeDate = new Date(rs.text.replace(/-/g, '/')) >= new Date(getNowDate())
+			var isChangeDate = new Date(rs.text.replace(/-/g, '/')) >= new Date(new Date().toLocaleDateString())
 
 			if (vm.shootInfos[index].isConfirmShot == 2) {
 				if (isChangeDate) {
