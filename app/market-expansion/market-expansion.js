@@ -60,7 +60,7 @@ var vm = new Vue({
             rolePositionList: [],
             rolePositionId: '',
             currentRoleId:'',//当前用户角色id,
-            wgtVer: '1.4.6'
+            wgtVer: ''
         }
     },
     watch: {
@@ -70,6 +70,8 @@ var vm = new Vue({
 		}
 	}
 });
+
+
 
 function Watcher() {
     this._subs = [];
@@ -298,6 +300,13 @@ lf.ready(function() {
         lf.window.currentWebview().reload()
     })
 
+    function getVersion() {
+        plus.runtime.getProperty(plus.runtime.appid,function(inf){
+            vm.wgtVer = inf.version;
+            console.log("当前应用版本：" + vm.wgtVer);
+        });
+    }
+    getVersion()
 
     
     initPage();
