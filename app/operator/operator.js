@@ -368,6 +368,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 			vm.forStatus = 'check'
 
 			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+			lf.window.currentWebview().reload()
 		} else {
 //			lf.nativeUI.toast(data.msg);
 			lf.nativeUI.toast(data.code);
