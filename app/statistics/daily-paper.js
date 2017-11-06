@@ -10,6 +10,15 @@
     })
     var EACH_SCREEN_COUNT = 8
     var X_AXIS_NAME_COUNT = 7
+    var DATA_ZOOM_INSIDE = {
+        show: true,
+        realtime: true,
+        type: 'inside',
+        orient: 'horizontal',
+        zoomOnMouseWheel: false,
+        startValue: 0,
+        endValue: EACH_SCREEN_COUNT - 1
+    }
     var EMPTY_CHART = {series: []}
     var AXIS_LABEL = {
         interval: 0,
@@ -236,6 +245,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -283,6 +293,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -328,6 +339,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -374,6 +386,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -421,6 +434,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -468,6 +482,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -513,6 +528,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -559,6 +575,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -604,6 +621,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -649,6 +667,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
+                    dataZoom: DATA_ZOOM_INSIDE,
                     grid: {
                         top: GRID_TOP,
                         left: GRID_LEFT,
@@ -1147,7 +1166,7 @@
             /*历史模块 end*/
             init: function () {
                 this.initRegionProvince(init)
-                this.startTiming()
+                // this.startTiming()
             },
             startTiming: function () {
                 var self = this
@@ -1185,7 +1204,7 @@
         created: function () {
         },
         beforeDestroy: function () {
-            this.clearTiming()
+            // this.clearTiming()
         }
     })
 
@@ -1206,22 +1225,24 @@
     }
     // 动态序列取值
     function dynamicSequenceValue(list, startIndex, count) {
-        count = count || EACH_SCREEN_COUNT
-        var len = list.length
-        var sum
-        var ret = []
-        if (len <= count) {
-            ret = list
-        } else {
-            startIndex = startIndex % len
-            sum = startIndex + count
-            if (sum > len) {
-                ret = list.slice(startIndex).concat(list.slice(0, sum - len))
-            } else {
-                ret = list.slice(startIndex, sum)
-            }
-        }
-        return ret
+        /*count = count || EACH_SCREEN_COUNT
+         var len = list.length
+         var sum
+         var ret = []
+         if (len <= count) {
+         ret = list
+         } else {
+         startIndex = startIndex % len
+         sum = startIndex + count
+         if (sum > len) {
+         ret = list.slice(startIndex).concat(list.slice(0, sum - len))
+         } else {
+         ret = list.slice(startIndex, sum)
+         }
+         }
+         return ret*/
+        // 注释动态取值，直接返回所有
+        return list
     }
     //
     function isValidValue(v) {
@@ -1269,8 +1290,8 @@
         Vue.nextTick(function() {
             vm.init()
         })
-        mui.os.plus && update()
-        mui.os.plus && getVersion()
+        GLOBAL_SHOOT.update()
+        GLOBAL_SHOOT.setVersion(vm)
         var deceleration = mui.os.ios ? 0.003 : 0.0009;
         mui('.mui-scroll-wrapper').scroll({
             bounce: false,
@@ -1375,22 +1396,22 @@
                 }
                 window.Role.save(obj)
                 lf.nativeUI.toast('切换岗位成功');
-                vm.clearTiming()
+                // vm.clearTiming()
 
                 var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
 
                 if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
                     // 城市经理
-                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{});
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
                     // 渠道
-                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
+                    lf.window.openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{});
                 } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
                     //总经办
-                    vm.startTiming()
+                    // vm.startTiming()
                     // lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
                 } else {
-                    lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
+                    lf.window.openWindow('order','../order/orderlist.html',{},{});
                 }
 
                 // if (window.Role.currentPositions[0].roleId!=12) {
@@ -1405,52 +1426,5 @@
             lf.nativeUI.closeWaiting();
             lf.nativeUI.toast(erro.msg);
         })
-    }
-    // 检测版本是否更新
-    function update() {
-        var params = {
-            "app_id": plus.runtime.appid,
-            "version": plus.runtime.version,
-            "imei": plus.device.imei,
-            "platform": plus.os.name
-        };
-        lf.net.getJSON("/app/validationversion", params, function(data) {
-            var update_desc = "发现新的版本，是否需要立即更新";
-            if(data.code == 200) {
-                var btns = null;
-                console.log(data.data.releaseUrl)
-                if(data.data.isMandatory == 1) {
-                    update_desc = "发现新的版本，请立即更新";
-                    btns = ["立即更新"];
-                } else {
-                    btns = ["立即更新", "取　　消"];
-                }
-                if(data.data.upgrade_desc) {
-                    update_desc = update_desc + "\n" + data.data.releaseRemark;
-                }
-                lf.nativeUI.confirm("", update_desc, btns, function(e) {
-                    if(btns.length == 1) {
-                        if(0 == e.index) {
-                            plus.runtime.openURL(data.data.releaseUrl);
-                            lf.window.closeCurrentWebview();
-                        } else {
-                            plus.runtime.quit();
-                        }
-                    } else {
-                        if(0 == e.index) {
-                            plus.runtime.openURL(data.data.releaseUrl);
-                            lf.window.closeCurrentWebview();
-                        } else {}
-                    }
-                });
-            }
-        }, function(res) {});
-    }
-    // 得到版本
-    function getVersion() {
-        plus.runtime.getProperty(plus.runtime.appid,function(inf){
-            vm.wgtVer = inf.version;
-            console.log("当前应用版本：" + vm.wgtVer);
-        });
     }
 })()
