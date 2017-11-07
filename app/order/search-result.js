@@ -143,7 +143,7 @@ lf.ready(function() {
 			var city = this.getAttribute('data-city');
 			var actionStatus = this.getAttribute('data-actionStatus')
 			lf.window.openWindow('quicksaledetails.html', 'quicksaledetails.html', {}, {
-				orderNo: id,
+				orderId: id,
 				index: index,
 				photographerId: window.Role.photograherId,
 				summary: summary,
