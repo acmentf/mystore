@@ -125,7 +125,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 //			return
 //		}
 		if(vm.serverPerNum ==''){
-			lf.nativeUI.toast('请填写实际服务到达人数')
+			lf.nativeUI.toast('请填写前置人数')
 			flag = false
 			return
 		}
