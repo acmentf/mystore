@@ -381,6 +381,9 @@ function initPull() {
 								}
 								res.data.forEach(function(v, i) {
 									v.startTime = lf.util.timeStampToDate2(v.startTime)
+									if(v.orderSaleDate){
+										v.orderSaleDate = lf.util.timeStampToDate2(v.orderSaleDate)
+									}
 									if(v.orderTime){
 										v.orderTime = lf.util.timeStampToDate2(v.orderTime)
 									}
@@ -434,6 +437,9 @@ function find(index) {
 
 			res.data.forEach(function(v, i) {
 				v.startTime = lf.util.timeStampToDate2(v.startTime)
+				if(v.orderSaleDate){
+					v.orderSaleDate = lf.util.timeStampToDate2(v.orderSaleDate)
+				}
 				if(v.orderTime){
 					v.orderTime = lf.util.timeStampToDate2(v.orderTime)
 				}
