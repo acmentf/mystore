@@ -1,7 +1,5 @@
 .statistics-daily-paper{
-  #flow,#history{
-    margin-left: 0;
-  }
+  $primary-color: #3CB493;
   .clearfix:before, .clearfix:after {
     content: " ";
     display: table;
@@ -67,16 +65,38 @@
     border-bottom: 1px solid #ddd;
     margin: 5px 0;
   }
-  .mui-bar-nav{
-    #income,#flow,#history{
-      width: 44px;
-      height: 44px;
-      img{
-        width: 18px;
-        height: 18px;
-        vertical-align: middle;
-        position: relative;
-        top: 2px;
+  .mui-bar-tab{
+    .mui-tab-item{
+      height: 62px;
+      color: #AAB0B1;
+      &.mui-active{
+        color: $primary-color;
+      }
+      .mui-icon{
+        width: 24px;
+        height: 24px;
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+  .mui-segmented-control{
+    &.mui-segmented-control-inverted{
+      background-color: #fff;
+      margin-bottom: 5px;
+      .mui-control-item {
+        color: #333;
+        &.mui-active{
+          color: inherit;
+          border-bottom: none;
+          .text{
+            display: inline-block;
+            width: 90px;
+            color: $primary-color;
+            border-bottom: 2px solid $primary-color;
+          }
+        }
       }
     }
   }
@@ -86,18 +106,30 @@
       margin-bottom: 5px;
       background-color: #fff;
       .section-title {
-        padding: 18px 18px 16px;
+        padding: 18px 14px 16px;
         color: #919191;
         .text {
           float: left;
-          font-size: 17px;
-          color: #3db391;
+          font-size: 15px;
+          color: #666;
         }
         .tool {
           float: right;
+          height: 21px;
+          .icon{
+            display: inline-block;
+            height: 21px;
+          }
           .icon + .icon {
             cursor: pointer;
             margin-left: 10px;
+          }
+          .icon-more-select{
+            width: 26px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-image: url("../../images/statistics/more.png");
           }
         }
       }
@@ -119,8 +151,18 @@
       &.center{
         text-align: center;
       }
+      .single-value{
+        display: block;
+        padding-top: 10px;
+        color: #F17175;
+        font-size: 15px;
+        font-weight: bold;
+        &.currency:before{
+          font-size: 12px;
+        }
+      }
       .title{
-        font-size: 17px;
+        font-size: 15px;
         margin-bottom: 10px;
       }
       .content{
@@ -131,6 +173,40 @@
       .item{
         padding: 10px;
         font-size: 14px;
+        .content{
+          .currency{
+            top: 0;
+          }
+        }
+      }
+    }
+    .list-num-icon-wrap{
+      padding-top: 10px;
+      .item{
+        color: #333;
+        padding: 8px 14px;
+        font-size: 14px;
+        line-height: 54px;
+        .num,.num-icon{
+          width: 24px;//36px;
+          height: 54px;
+          text-align: center;
+          margin-right: 20px;
+        }
+        .num-icon {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          &.num-icon-1{
+            background-image: url("../../images/statistics/ranking-first.png");
+          }
+          &.num-icon-2{
+            background-image: url("../../images/statistics/ranking-second.png");
+          }
+          &.num-icon-3{
+            background-image: url("../../images/statistics/ranking-third.png");
+          }
+        }
       }
     }
   }

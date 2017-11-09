@@ -386,9 +386,7 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 
 // 快速下单
 mui('body').on('tap', '#quickOrder', function() {
-	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {}, {
-		lineName: vm.orderList[0][0].aliasName
-	})
+	lf.window.openWindow('quick-order/quick-order.html', '../quick-order/quick-order.html', {}, {})
 })
 /**
  * 搜索订单
