@@ -1,8 +1,4 @@
 @charset "UTF-8";
-.statistics-daily-paper #flow, .statistics-daily-paper #history {
-  margin-left: 0;
-}
-
 .statistics-daily-paper .clearfix:before, .statistics-daily-paper .clearfix:after {
   content: " ";
   display: table;
@@ -82,17 +78,43 @@
   margin: 5px 0;
 }
 
-.statistics-daily-paper .mui-bar-nav #income, .statistics-daily-paper .mui-bar-nav #flow, .statistics-daily-paper .mui-bar-nav #history {
-  width: 44px;
-  height: 44px;
+.statistics-daily-paper .mui-bar-tab .mui-tab-item {
+  height: 62px;
+  color: #AAB0B1;
 }
 
-.statistics-daily-paper .mui-bar-nav #income img, .statistics-daily-paper .mui-bar-nav #flow img, .statistics-daily-paper .mui-bar-nav #history img {
-  width: 18px;
-  height: 18px;
-  vertical-align: middle;
-  position: relative;
-  top: 2px;
+.statistics-daily-paper .mui-bar-tab .mui-tab-item.mui-active {
+  color: #3CB493;
+}
+
+.statistics-daily-paper .mui-bar-tab .mui-tab-item .mui-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.statistics-daily-paper .mui-bar-tab .mui-tab-item .mui-icon img {
+  width: 100%;
+}
+
+.statistics-daily-paper .mui-segmented-control.mui-segmented-control-inverted {
+  background-color: #fff;
+  margin-bottom: 5px;
+}
+
+.statistics-daily-paper .mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+  color: #333;
+}
+
+.statistics-daily-paper .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+  color: inherit;
+  border-bottom: none;
+}
+
+.statistics-daily-paper .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active .text {
+  display: inline-block;
+  width: 90px;
+  color: #3CB493;
+  border-bottom: 2px solid #3CB493;
 }
 
 .statistics-daily-paper .daily-content {
@@ -105,23 +127,37 @@
 }
 
 .statistics-daily-paper .daily-content .section-box .section-title {
-  padding: 18px 18px 16px;
+  padding: 18px 14px 16px;
   color: #919191;
 }
 
 .statistics-daily-paper .daily-content .section-box .section-title .text {
   float: left;
-  font-size: 17px;
-  color: #3db391;
+  font-size: 15px;
+  color: #666;
 }
 
 .statistics-daily-paper .daily-content .section-box .section-title .tool {
   float: right;
+  height: 21px;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool .icon {
+  display: inline-block;
+  height: 21px;
 }
 
 .statistics-daily-paper .daily-content .section-box .section-title .tool .icon + .icon {
   cursor: pointer;
   margin-left: 10px;
+}
+
+.statistics-daily-paper .daily-content .section-box .section-title .tool .icon-more-select {
+  width: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("../../images/statistics/more.png");
 }
 
 .statistics-daily-paper .daily-content .section-box .section-content .echarts {
@@ -144,8 +180,20 @@
   text-align: center;
 }
 
+.statistics-daily-paper .daily-content .info-box .single-value {
+  display: block;
+  padding-top: 10px;
+  color: #F17175;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.statistics-daily-paper .daily-content .info-box .single-value.currency:before {
+  font-size: 12px;
+}
+
 .statistics-daily-paper .daily-content .info-box .title {
-  font-size: 17px;
+  font-size: 15px;
   margin-bottom: 10px;
 }
 
@@ -156,4 +204,44 @@
 .statistics-daily-paper .daily-content .list-show-wrap .item {
   padding: 10px;
   font-size: 14px;
+}
+
+.statistics-daily-paper .daily-content .list-show-wrap .item .content .currency {
+  top: 0;
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap {
+  padding-top: 10px;
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item {
+  color: #333;
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 54px;
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item .num, .statistics-daily-paper .daily-content .list-num-icon-wrap .item .num-icon {
+  width: 24px;
+  height: 54px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item .num-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item .num-icon.num-icon-1 {
+  background-image: url("../../images/statistics/ranking-first.png");
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item .num-icon.num-icon-2 {
+  background-image: url("../../images/statistics/ranking-second.png");
+}
+
+.statistics-daily-paper .daily-content .list-num-icon-wrap .item .num-icon.num-icon-3 {
+  background-image: url("../../images/statistics/ranking-third.png");
 }
