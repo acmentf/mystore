@@ -114,7 +114,6 @@
         Object.keys(baseMap).forEach(function (key) {
             ret.push(baseMap[key])
         })
-        console.log(ret)
         return ret
     }
     // 过滤（或）
@@ -932,7 +931,7 @@
                         self.flowShootTravel = mergeSeriesData({
                             toList: data.shootTravel,
                             fromList:data.yesterdayShootTravel,
-                            categoryKey: 'productName',
+                            categoryKey: 'travelName',
                             valueKey: 'shootPerples'
                         }).filter(filterSeriesByOr).sort(baseSortSeries)
                     } else {
