@@ -420,8 +420,16 @@
             /*收入模块 start*/
             // 统计汇总
             incomeTotal: {
-                saleAmt: '',//	今日收入
-                saleAmtRate: '',//	今日收入涨幅
+                saleAmt: '',//	收入
+                saleAmtRate: '',//	收入涨幅
+                saleAmtPer: '',//	前置金额
+                saleAmtPerRate: '',//	前置金额涨幅
+                appAmt: '',//	销售金额
+                appAmtRate: ''//	销售金额涨幅
+            },
+            incomeYesterdayTotal: {
+                saleAmt: '',//	收入
+                saleAmtRate: '',//	收入涨幅
                 saleAmtPer: '',//	前置金额
                 saleAmtPerRate: '',//	前置金额涨幅
                 appAmt: '',//	销售金额
@@ -447,7 +455,11 @@
             /*流量模块 start*/
             //拍摄统计
             flowShootInfo: {
-                shootPerples: '',//	今日拍摄人数
+                shootPerples: '',//	拍摄人数
+                shootPerplesRate: ''//	拍摄人数涨幅
+            },
+            flowYesterdayShootInfo: {
+                shootPerples: '',//	拍摄人数
                 shootPerplesRate: ''//	拍摄人数涨幅
             },
             //线路产品拍摄人数
@@ -514,7 +526,7 @@
                 return getRegionProvince(this.regionProvinceMap.flowShootAll, '全国拍摄人数') + '（' + this.realTitleExplainText + '）'
             },
             flowShootRegionTitle: function () {
-                return getRegionProvince(this.regionProvinceMap.flowShootRegion, '大区拍摄人数') + '收入（' + this.realTitleExplainText + '）'
+                return getRegionProvince(this.regionProvinceMap.flowShootRegion, '大区拍摄人数') + '（' + this.realTitleExplainText + '）'
             },
             historyIncomeDayTitle: function () {
                 return '近30天每日收入'
@@ -773,11 +785,12 @@
                 });
             },
             /*收入模块 start*/
-            initIncome: function () {
+            initIncome: function (cb) {
                 var self = this
                 self.refreshDataByIncome(function () {
                     self.refreshDataByIncomeAll(function () {
                         self.refreshDataByIncomeRegion(function () {
+                            cb && cb()
                             self.refreshChart('income')
                         })
                     })
@@ -794,6 +807,7 @@
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                         self.incomeTotal = data.incomeTotal || {}
+                        self.incomeYesterdayTotal = data.yesterdayIncomeTotal || {}
                         self.incomeLine = mergeSeriesData({
                             toList: data.incomeProduct,
                             fromList:data.yesterdayIncomeProduct,
@@ -885,11 +899,12 @@
             },
             /*收入模块 end*/
             /*流量模块 start*/
-            initFlow: function () {
+            initFlow: function (cb) {
                 var self = this
                 self.refreshDataByShoot(function () {
                     self.refreshDataByShootAll(function () {
                         self.refreshDataByShootRegion(function () {
+                            cb && cb()
                             self.refreshChart('flow')
                         })
                     })
@@ -906,6 +921,7 @@
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                         self.flowShootInfo = data.shootInfo || {}
+                        self.flowYesterdayShootInfo = data.yesterdayShootInfo || {}
                         self.flowShootLine = mergeSeriesData({
                             toList: data.shootProduct,
                             fromList:data.yesterdayShootProduct,
@@ -997,14 +1013,16 @@
             },
             /*流量模块 end*/
             /*历史模块 start*/
-            initHistory: function () {
+            initHistory: function (cb) {
                 var self = this
                 self.refreshDataByHistoryIncome(function () {
                     self.refreshDataByThirtyIncome(function () {
                         self.refreshDataByThreeMonthIncome(function () {
                             self.refreshDataByHistoryShoot(function () {
                                 self.refreshDataByThirtyShoot(function () {
-                                    self.refreshDataByTravelRanking()
+                                    self.refreshDataByTravelRanking(function () {
+                                        cb && cb()
+                                    })
                                 })
                             })
                         })
@@ -1153,8 +1171,10 @@
                 });
             },
             /*历史模块 end*/
-            init: function () {
-                this.initRegionProvince(init)
+            init: function (cb) {
+                this.initRegionProvince(function () {
+                    init(cb)
+                })
             }
         },
         created: function () {
@@ -1162,16 +1182,16 @@
     })
 
     // 初始化数据
-    function init() {
+    function init(cb) {
         switch (vm.pageTypeActive){
             case pageTypeConstant.income:
-                vm.initIncome()
+                vm.initIncome(cb)
                 break
             case pageTypeConstant.flow:
-                vm.initFlow()
+                vm.initFlow(cb)
                 break
             case pageTypeConstant.history:
-                vm.initHistory()
+                vm.initHistory(cb)
                 break
         }
     }
@@ -1185,7 +1205,7 @@
         vm.rolePositionList = window.Role.positions // 岗位列表
         console.log(JSON.stringify(vm.rolePositionList))
         Vue.nextTick(function() {
-            vm.init()
+            vm.init(refreshSlider)
         })
         GLOBAL_SHOOT.update()
         GLOBAL_SHOOT.setVersion(vm)
@@ -1195,12 +1215,18 @@
             indicators: true, //是否显示滚动条
             deceleration: deceleration
         });
+        refreshSlider()
         function goPageTop() {
             mui('#page-scroll').scroll().scrollTo(0,0,0)
         }
+        function refreshSlider() {
+            Vue.nextTick(function() {
+                mui('.info-box-mui-slider').slider();
+            })
+        }
         function switchTab() {
             goPageTop()
-            init()
+            init(refreshSlider)
         }
 
         // 收入

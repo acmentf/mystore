@@ -23,30 +23,11 @@
 
 .statistics-daily-paper .currency:before {
   content: '￥';
-  font-size: 14px;
-}
-
-.statistics-daily-paper .number-large {
-  font-size: 28px;
-}
-
-.statistics-daily-paper .number-large .currency:before {
-  font-size: 16px;
-}
-
-.statistics-daily-paper .number-sign, .statistics-daily-paper .number-lose {
-  position: relative;
-  padding-left: 14px;
-}
-
-.statistics-daily-paper .number-sign.number-large .sign, .statistics-daily-paper .number-lose.number-large .sign {
-  height: 15px;
+  font-size: 12px;
 }
 
 .statistics-daily-paper .number-sign .sign, .statistics-daily-paper .number-lose .sign {
-  position: absolute;
-  left: 0;
-  bottom: 4px;
+  display: inline-block;
   width: 12px;
   height: 14px;
   background-repeat: no-repeat;
@@ -61,6 +42,10 @@
   color: #F17175;
 }
 
+.statistics-daily-paper .number-sign .r-box {
+  border-color: #F17175;
+}
+
 .statistics-daily-paper .number-sign .sign {
   background-image: url("../../images/statistics/arrow-up.png");
 }
@@ -69,8 +54,28 @@
   color: #81D6BB;
 }
 
+.statistics-daily-paper .number-lose .r-box {
+  border-color: #81D6BB;
+}
+
 .statistics-daily-paper .number-lose .sign {
   background-image: url("../../images/statistics/arrow-down.png");
+}
+
+.statistics-daily-paper .ring-wrap {
+  text-align: center;
+}
+
+.statistics-daily-paper .ring-wrap .r-box {
+  border-radius: 18px;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-block;
+  padding: 2px 12px;
+}
+
+.statistics-daily-paper .ring-wrap .r-box .number {
+  font-size: 18px;
 }
 
 .statistics-daily-paper .sep-line {
@@ -169,6 +174,10 @@
   height: 280px;
 }
 
+.statistics-daily-paper .daily-content .info-box-mui-slider {
+  margin-bottom: 5px;
+}
+
 .statistics-daily-paper .daily-content .info-box {
   color: #363636;
   background-color: #fff;
@@ -178,6 +187,24 @@
 
 .statistics-daily-paper .daily-content .info-box.center {
   text-align: center;
+}
+
+.statistics-daily-paper .daily-content .info-box .title {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.statistics-daily-paper .daily-content .info-box .value-wrap {
+  color: #333;
+  height: 24px;
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+
+.statistics-daily-paper .daily-content .info-box .value-wrap .number {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .statistics-daily-paper .daily-content .info-box .single-value {
@@ -190,11 +217,6 @@
 
 .statistics-daily-paper .daily-content .info-box .single-value.currency:before {
   font-size: 12px;
-}
-
-.statistics-daily-paper .daily-content .info-box .title {
-  font-size: 15px;
-  margin-bottom: 10px;
 }
 
 .statistics-daily-paper .daily-content .info-box .content {
