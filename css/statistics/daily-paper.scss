@@ -18,47 +18,53 @@
     position: relative;
     &:before{
       content: '￥';
-      font-size: 14px;
-    }
-  }
-  .number-large{
-    font-size: 28px;
-    .currency:before{
-      font-size: 16px;
+      font-size: 12px;
     }
   }
   .number-sign,.number-lose{
-    position: relative;
-    padding-left: 14px;
-    &.number-large{
-      .sign{
-        height: 15px;
-      }
-    }
     .sign{
-      position: absolute;
-      left: 0;
-      bottom: 4px;
-      width:12px;
+      display: inline-block;
+      width: 12px;
       height: 14px;
       background-repeat: no-repeat;
       background-position: center;
     }
-    .number:after{
-      content: '%';
+    .number{
+      &:after{
+        content: '%';
+      }
     }
   }
 
   .number-sign{
     color: #F17175;
+    .r-box{
+      border-color: #F17175;
+    }
     .sign{
       background-image: url("../../images/statistics/arrow-up.png");
     }
   }
   .number-lose{
     color: #81D6BB;
+    .r-box{
+      border-color: #81D6BB;
+    }
     .sign{
       background-image: url("../../images/statistics/arrow-down.png");
+    }
+  }
+  .ring-wrap{
+    text-align: center;
+    .r-box{
+      border-radius: 18px;
+      border-width: 1px;
+      border-style: solid;
+      display: inline-block;
+      padding: 2px 12px;
+      .number{
+        font-size: 18px;
+      }
     }
   }
   .sep-line{
@@ -143,6 +149,9 @@
         }
       }
     }
+    .info-box-mui-slider{
+      margin-bottom: 5px;
+    }
     .info-box{
       color: #363636;
       background-color: #fff;
@@ -150,6 +159,21 @@
       margin-bottom: 5px;
       &.center{
         text-align: center;
+      }
+      .title{
+        color: #666;
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+      .value-wrap{
+        color: #333;
+        height: 24px;
+        line-height: 24px;
+        margin-bottom: 4px;
+        .number{
+          font-size: 20px;
+          font-weight: bold;
+        }
       }
       .single-value{
         display: block;
@@ -160,10 +184,6 @@
         &.currency:before{
           font-size: 12px;
         }
-      }
-      .title{
-        font-size: 15px;
-        margin-bottom: 10px;
       }
       .content{
         font-size: 24px;
