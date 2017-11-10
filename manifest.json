@@ -1420,7 +1420,11 @@
 					"images/statistics/flow-active.png",
 					"images/statistics/history-active.png",
 					"images/statistics/arrow-down.png",
-					"images/statistics/arrow-up.png"
+					"images/statistics/arrow-up.png",
+					"images/statistics/more.png",
+					"images/statistics/ranking-second.png",
+					"images/statistics/ranking-first.png",
+					"images/statistics/ranking-third.png"
 				],
 				"refer": [
 					"app/order/orderlist.html",

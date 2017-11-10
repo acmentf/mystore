@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--cwj-->
 <html>
 
 <head>
@@ -55,229 +54,419 @@
     </aside>
 
     <div class="mui-inner-wrap" style="background:#efeff4">
-        <header class="mui-bar mui-bar-nav" style="background:#3DB391;">
-            <a href="#offCanvasSide" style="color:#fff"
+        <header class="mui-bar mui-bar-nav" style="background:#fff;">
+            <a href="#offCanvasSide" style="color:#333"
                class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-            <h1 class="mui-title" style="color: #fff;">日报</h1>
-            <a id="history" class="mui-icon mui-action-menu mui-pull-right">
-                <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
-            </a>
-            <a id="flow" class="mui-icon mui-action-menu mui-pull-right">
-                <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.flow ? 'flow-active.png' : 'flow.png')">
-            </a>
-            <a id="income" class="mui-icon mui-action-menu mui-pull-right">
-                <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.income ? 'income-active.png' : 'income.png')">
-            </a>
+            <h1 class="mui-title" style="color: #333;" v-text="showTitle"></h1>
         </header>
-        <div class="mui-scroll-wrapper mui-content">
+        <nav class="mui-bar mui-bar-tab">
+            <a class="mui-tab-item mui-active" href="#tab-income" id="income">
+                <span class="mui-icon">
+                    <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.income ? 'income-active.png' : 'income.png')">
+                </span>
+                <span class="mui-tab-label">收入</span>
+            </a>
+            <a class="mui-tab-item" href="#tab-flow" id="flow">
+                <span class="mui-icon">
+                     <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.flow ? 'flow-active.png' : 'flow.png')">
+                </span>
+                <span class="mui-tab-label">流量</span>
+            </a>
+            <a class="mui-tab-item" href="#tab-history" id="history">
+                <span class="mui-icon">
+                     <img :src="'../../images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
+                </span>
+                <span class="mui-tab-label">历史数据</span>
+            </a>
+        </nav>
+        <div class="mui-scroll-wrapper mui-content" id="page-scroll">
             <div class="mui-scroll">
                 <div class="daily-content">
-                    <div class="income-page" v-if="pageTypeActive === pageTypeConstant.income">
-                        <div class="info-box ">
-                            <div class="title">今日收入</div>
-                            <div class="clearfix content">
-                                <div class="lf number-large">
-                                    <span class="currency"></span>
-                                    <span class="number" v-text="incomeTotal.saleAmt"></span>
-                                </div>
-                                <div class="rt number-large" :class="getNumberClassName(incomeTotal.saleAmtRate)">
-                                    <span class="sign" v-if="incomeTotal.saleAmtRate"></span>
-                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtRate)"></span>
-                                </div>
+                    <div id="tab-income" class="mui-control-content mui-active">
+                        <div class="income-page" v-if="pageTypeActive === pageTypeConstant.income">
+                            <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                                <a class="mui-control-item mui-active" href="#tab-income-area">
+                                    <span class="text">全国与大区</span>
+                                </a>
+                                <a class="mui-control-item" href="#tab-income-line">
+                                    <span class="text">线路产品</span>
+                                </a>
+                                <a class="mui-control-item" href="#tab-income-travel">
+                                    <span class="text">旅行社</span>
+                                </a>
                             </div>
-                        </div>
-                        <div class="info-box">
-                            <div class="title">前置</div>
-                            <div class="clearfix content">
-                                <div class="lf">
-                                    <span class="currency"></span>
-                                    <span class="number" v-text="incomeTotal.saleAmtPer"></span>
-                                </div>
-                                <div class="rt" :class="getNumberClassName(incomeTotal.saleAmtPerRate)">
-                                    <span class="sign" v-if="incomeTotal.saleAmtPerRate"></span>
-                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtPerRate)"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-box">
-                            <div class="title">销售</div>
-                            <div class="clearfix content">
-                                <div class="lf">
-                                    <span class="currency"></span>
-                                    <span class="number" v-text="incomeTotal.appAmt"></span>
-                                </div>
-                                <div class="rt" :class="getNumberClassName(incomeTotal.appAmtRate)">
-                                    <span class="sign" v-if="incomeTotal.appAmtRate"></span>
-                                    <span class="number" v-text="getAbs(incomeTotal.appAmtRate)"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--全国收入（实时）-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="incomeAllTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="incomeAll_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts :options="incomeAllChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <!--各大区收入（实时排行）-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="incomeRegionTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="incomeRegion_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="incomeRegionChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">线路产品收入（实时排行）</div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="incomeLineChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">旅行社收入转化（实时排行）</div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="incomeTravelChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flow-page" v-if="pageTypeActive === pageTypeConstant.flow">
-                        <div class="info-box">
-                            <div class="title">今日拍摄人数</div>
-                            <div class="clearfix content">
-                                <div class="lf number-large">
-                                    <span class="number" v-text="flowShootInfo.shootPerples || 0"></span>
-                                </div>
-                                <div class="rt number-large" :class="getNumberClassName(flowShootInfo.shootPerplesRate)">
-                                    <span class="sign" v-if="flowShootInfo.shootPerplesRate"></span>
-                                    <span class="number" v-text="getAbs(flowShootInfo.shootPerplesRate)"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--全国拍摄人数（实时）-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="flowShootAllTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="flowShootAll_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts :options="flowShootAllChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <!--各大区拍摄人数（实时排行）-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="flowShootRegionTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="flowShootRegion_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="flowShootRegionChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">线路产品拍摄人数（实时排行）</div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="flowShootLineChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">旅行社拍摄人数（实时排行）</div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="flowShootTravelChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="history-page" v-if="pageTypeActive === pageTypeConstant.history">
-                        <div class="info-box center" style="position: relative;top: 3px;">
-                            累积收入: <span class="number-large" v-text="historyIncomeTotal.saleAmt"></span>
-                        </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">前置&销售收入对比</div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts :options="historyIncomeTotalChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <!--近30天每日收入-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="historyIncomeDayTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="historyIncomeDay_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="historyIncomeDayChart" auto-resize></e-charts>
-                            </div>
-                        </div>
-                        <!--近3月收入统计-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="historyThreeMonthIncomeTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="historyThreeMonthIncome_RP"></i>
-                                </div>
-                            </div>
-                            <div class="section-content list-show-wrap">
-                                <div class="item" v-for="item in historyThreeMonthIncome">
-                                    <div class="title" v-text="item.date"></div>
-                                    <div class="clearfix content">
-                                        <div class="lf">
-                                            <span class="currency"></span>
-                                            <span class="number" v-text="item.totalAmt || 0"></span>
+                            <div id="tab-income-area" class="mui-slider-item mui-control-content mui-active">
+                                <div class="mui-slider info-box-mui-slider">
+                                    <div class="mui-slider-group">
+                                        <div class="mui-slider-item">
+                                            <ul class="mui-table-view mui-grid-view">
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">今日收入</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeTotal.saleAmt"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeTotal.saleAmtRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeTotal.saleAmtRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">昨日收入</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeYesterdayTotal.saleAmt"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeYesterdayTotal.saleAmtRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeYesterdayTotal.saleAmtRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeYesterdayTotal.saleAmtRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="rt" :class="getNumberClassName(item.amtRate)">
-                                            <span class="sign" v-if="item.amtRate"></span>
-                                            <span class="number" v-text="getAbs(item.amtRate)"></span>
+                                        <div class="mui-slider-item">
+                                            <ul class="mui-table-view mui-grid-view">
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">今日销售</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeTotal.appAmt"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeTotal.appAmtRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeTotal.appAmtRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeTotal.appAmtRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">昨日销售</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeYesterdayTotal.appAmt"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeYesterdayTotal.appAmtRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeYesterdayTotal.appAmtRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeYesterdayTotal.appAmtRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
+                                        <div class="mui-slider-item">
+                                            <ul class="mui-table-view mui-grid-view">
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">今日前置</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeTotal.saleAmtPer"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeTotal.saleAmtPerRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeTotal.saleAmtPerRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeTotal.saleAmtPerRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                    <a href="#">
+                                                        <div class="info-box">
+                                                            <div class="title">昨日前置</div>
+                                                            <div class="value-wrap">
+                                                                <span class="currency"></span>
+                                                                <span class="number" v-text="incomeYesterdayTotal.saleAmtPer"></span>
+                                                            </div>
+                                                            <div class="ring-wrap" :class="getNumberClassName(incomeYesterdayTotal.saleAmtPerRate)">
+                                                                <div class="r-box">
+                                                                    <span class="sign" v-if="incomeYesterdayTotal.saleAmtPerRate"></span>
+                                                                    <span class="number" v-text="getAbs(incomeYesterdayTotal.saleAmtPerRate)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--全国收入（实时）-->
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text" v-text="incomeAllTitle"></div>
+                                        <div class="tool">
+                                            <i class="icon icon-more-select" id="incomeAll_RP"></i>
+                                        </div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts ref="incomeChart_1" :options="incomeAllChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
+                                <!--各大区收入（今日实时/昨日）-->
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text" v-text="incomeRegionTitle"></div>
+                                        <div class="tool">
+                                            <i class="icon icon-more-select" id="incomeRegion_RP"></i>
+                                        </div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(incomeRegionChart)"
+                                                  ref="incomeChart_2" class="axis-label-long" :options="incomeRegionChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-income-line" class="mui-slider-item mui-control-content">
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text">线路产品收入（{{realTitleExplainText}}）</div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(incomeLineChart)"
+                                                  ref="incomeChart_3" class="axis-label-long" :options="incomeLineChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-income-travel" class="mui-slider-item mui-control-content">
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text">旅行社收入转化（{{realTitleExplainText}}）</div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(incomeTravelChart)"
+                                                  ref="incomeChart_4" class="axis-label-long" :options="incomeTravelChart" auto-resize></e-charts>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="info-box center">
-                            累积拍摄人数: <span class="number-large" v-text="historyShootCount.shoot"></span>
-                        </div>
-                        <!--近30天每日拍摄人数-->
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text" v-text="historyShootDayTitle"></div>
-                                <div class="tool">
-                                    <i class="icon mui-icon mui-icon-more" id="historyShootDay_RP"></i>
+                    </div>
+                    <div id="tab-flow" class="mui-control-content">
+                        <div class="flow-page" v-if="pageTypeActive === pageTypeConstant.flow">
+                            <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                                <a class="mui-control-item mui-active" href="#tab-flow-area">
+                                    <span class="text">全国与大区</span>
+                                </a>
+                                <a class="mui-control-item" href="#tab-flow-line">
+                                    <span class="text">线路产品</span>
+                                </a>
+                                <a class="mui-control-item" href="#tab-flow-travel">
+                                    <span class="text">旅行社</span>
+                                </a>
+                            </div>
+                            <div id="tab-flow-area" class="mui-slider-item mui-control-content mui-active">
+                                <ul class="mui-table-view mui-grid-view">
+                                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                        <a href="#">
+                                            <div class="info-box">
+                                                <div class="title">今日拍摄人数</div>
+                                                <div class="value-wrap">
+                                                    <span class="number" v-text="flowShootInfo.shootPerples || 0"></span>
+                                                </div>
+                                                <div class="ring-wrap" :class="getNumberClassName(flowShootInfo.shootPerplesRate)">
+                                                    <div class="r-box">
+                                                        <span class="sign" v-if="flowShootInfo.shootPerplesRate"></span>
+                                                        <span class="number" v-text="getAbs(flowShootInfo.shootPerplesRate)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                        <a href="#">
+                                            <div class="info-box">
+                                                <div class="title">昨日拍摄人数</div>
+                                                <div class="value-wrap">
+                                                    <span class="number" v-text="flowYesterdayShootInfo.shootPerples || 0"></span>
+                                                </div>
+                                                <div class="ring-wrap" :class="getNumberClassName(flowYesterdayShootInfo.shootPerplesRate)">
+                                                    <div class="r-box">
+                                                        <span class="sign" v-if="flowYesterdayShootInfo.shootPerplesRate"></span>
+                                                        <span class="number" v-text="getAbs(flowYesterdayShootInfo.shootPerplesRate)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--全国拍摄人数（实时）-->
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text" v-text="flowShootAllTitle"></div>
+                                        <div class="tool">
+                                            <i class="icon icon-more-select" id="flowShootAll_RP"></i>
+                                        </div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts ref="flowChart_1" :options="flowShootAllChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
+                                <!--各大区拍摄人数（今日实时/昨日）-->
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text" v-text="flowShootRegionTitle"></div>
+                                        <div class="tool">
+                                            <i class="icon icon-more-select" id="flowShootRegion_RP"></i>
+                                        </div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(flowShootRegionChart)"
+                                                  ref="flowChart_2" class="axis-label-long" :options="flowShootRegionChart" auto-resize></e-charts>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="section-content">
-                                <e-charts class="axis-label-long" :options="historyShootDayChart" auto-resize></e-charts>
+                            <div id="tab-flow-line" class="mui-slider-item mui-control-content">
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text">线路产品拍摄人数（{{realTitleExplainText}}）</div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(flowShootLineChart)"
+                                                  ref="flowChart_3" class="axis-label-long" :options="flowShootLineChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-flow-travel" class="mui-slider-item mui-control-content">
+                                <div class="section-box">
+                                    <div class="section-title clearfix">
+                                        <div class="text">旅行社拍摄人数（{{realTitleExplainText}}）</div>
+                                    </div>
+                                    <div class="section-content">
+                                        <e-charts :style="calcBarChartStyle(flowShootTravelChart)"
+                                                  ref="flowChart_4" class="axis-label-long" :options="flowShootTravelChart" auto-resize></e-charts>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="section-box">
-                            <div class="section-title clearfix">
-                                <div class="text">旅行社累积发团人数排行</div>
+                    </div>
+                    <div id="tab-history" class="mui-control-content">
+                        <div class="history-page" v-if="pageTypeActive === pageTypeConstant.history">
+                            <div class="info-box center" style="position: relative;top: 3px;">
+                                累积收入<span class="currency single-value" v-text="historyIncomeTotal.saleAmt"></span>
                             </div>
-                            <div class="section-content list-show-wrap">
-                                <div class="item clearfix" v-for="item in historyTravelRanking">
-                                    <span class="lf" v-text="item.travelName"></span>
-                                    <span class="rt" v-text="item.total"></span>
+                            <div class="section-box">
+                                <div class="section-title clearfix">
+                                    <div class="text">前置&销售收入对比</div>
+                                </div>
+                                <div class="section-content">
+                                    <e-charts :options="historyIncomeTotalChart" auto-resize></e-charts>
+                                </div>
+                            </div>
+                            <!--近30天每日收入-->
+                            <div class="section-box">
+                                <div class="section-title clearfix">
+                                    <div class="text" v-text="historyIncomeDayTitle"></div>
+                                    <div class="tool">
+                                        <i class="icon icon-more-select" id="historyIncomeDay_RP"></i>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <e-charts class="axis-label-long" :options="historyIncomeDayChart" auto-resize></e-charts>
+                                </div>
+                            </div>
+                            <!--近3月收入统计-->
+                            <div class="section-box">
+                                <div class="section-title clearfix">
+                                    <div class="text" v-text="historyThreeMonthIncomeTitle"></div>
+                                    <div class="tool">
+                                        <i class="icon icon-more-select" id="historyThreeMonthIncome_RP"></i>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="mui-slider info-box-mui-slider">
+                                        <div class="mui-slider-group">
+                                            <div class="mui-slider-item"  v-for="(item,index) in historyThreeMonthIncome" v-if="index % 2 === 0">
+                                                <ul class="mui-table-view mui-grid-view">
+                                                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                                                        <a href="#">
+                                                            <div class="info-box">
+                                                                <div class="title" v-text="item.date"></div>
+                                                                <div class="value-wrap">
+                                                                    <span class="currency"></span>
+                                                                    <span class="number" v-text="item.totalAmt || 0"></span>
+                                                                </div>
+                                                                <div class="ring-wrap" :class="getNumberClassName(item.amtRate)">
+                                                                    <div class="r-box">
+                                                                        <span class="sign" v-if="item.amtRate"></span>
+                                                                        <span class="number" v-text="getAbs(item.amtRate)"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="mui-table-view-cell mui-media mui-col-xs-6" v-if="index + 1 < historyThreeMonthIncome.length">
+                                                        <a href="#">
+                                                            <div class="info-box">
+                                                                <div class="title" v-text="historyThreeMonthIncome[index + 1].date"></div>
+                                                                <div class="value-wrap">
+                                                                    <span class="currency"></span>
+                                                                    <span class="number" v-text="historyThreeMonthIncome[index + 1].totalAmt || 0"></span>
+                                                                </div>
+                                                                <div class="ring-wrap" :class="getNumberClassName(historyThreeMonthIncome[index + 1].amtRate)">
+                                                                    <div class="r-box">
+                                                                        <span class="sign" v-if="historyThreeMonthIncome[index + 1].amtRate"></span>
+                                                                        <span class="number" v-text="getAbs(historyThreeMonthIncome[index + 1].amtRate)"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-box center">
+                                累积拍摄人数
+                                <span class="single-value" v-text="historyShootCount.shoot"></span>
+                            </div>
+                            <!--近30天每日拍摄人数-->
+                            <div class="section-box">
+                                <div class="section-title clearfix">
+                                    <div class="text" v-text="historyShootDayTitle"></div>
+                                    <div class="tool">
+                                        <i class="icon icon-more-select" id="historyShootDay_RP"></i>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <e-charts class="axis-label-long" :options="historyShootDayChart" auto-resize></e-charts>
+                                </div>
+                            </div>
+                            <div class="section-box">
+                                <div class="section-title clearfix" style="border-bottom: 1px solid #F5F5F5">
+                                    <div class="text">旅行社累积发团人数排行</div>
+                                </div>
+                                <div class="section-content list-num-icon-wrap">
+                                    <div class="item clearfix" v-for="(item, index) in historyTravelRanking">
+                                        <span class="lf num-icon" v-if="index < 3" :class="['num-icon-' + (index + 1)]"></span>
+                                        <span class="lf num" v-else v-text="index + 1"></span>
+                                        <span class="lf" v-text="item.travelName"></span>
+                                        <span class="rt" v-text="item.total" style="color: #6666"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
