@@ -1063,7 +1063,8 @@
 					"app/daily-manage/daily-search.html",
 					"app/daily-manage/daily-remark.html",
 					"app/daily-manage/daily-plan.html",
-					"app/login.html"
+					"app/login.html",
+					"app/daily-manage/daily-detail.html"
 				],
 				"priority": 0
 			},
@@ -1530,9 +1531,17 @@
 					"app/order/orderlist.html",
 					"app/login.html",
 					"app/market-expansion/expansion-plan.html",
-					"app/statistics/daily-paper.html"
+					"app/statistics/daily-paper.html",
+					"app/daily-manage/daily-manage.html"
 				],
 				"priority": 2
+			},
+			"app/daily-manage/daily-detail.html": {
+				"resources": [],
+				"refer": [
+					"app/daily-manage/daily-order.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

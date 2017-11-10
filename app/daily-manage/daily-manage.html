@@ -73,16 +73,15 @@
                         <section class="today-data bgwhite">
                             <div class="title">
                                 <div>
-                                    <p class="head">今日数据播报</p>
+                                    <p class="head">今日数据</p>
                                     <p class="badge" v-if="todayData.flag==1">计划被改</p>
-                                </div>
-                                <div>
                                     <p class="plan"><span></span>计划</p>
                                     <p class="fact"><span></span>实际</p>
                                 </div>
+                                <span class="detail" id="detail">查看详情</span>
                             </div>
                             <div class="progress-container">
-                                <p class="title">销售额</p>
+                                <p class="title">销售完成率</p>
                                 <div class="progressbar">
                                     <span class="progress" :class="todayData.realityAmount/todayData.planAmount<1?'yellow':''" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
                                 </div>
@@ -92,40 +91,39 @@
                                 </div>
                             </div>
                             <div class="progress-container">
-                                <p class="title">拍摄人数</p>
+                                <p class="title">服务覆盖率</p>
                                 <div class="progressbar">
-                                    <span class="progress" :class="todayData.realityShootNums/todayData.planShootNums<1?'yellow':''" :style="{ width:todayData.planShootNums==0&&todayData.realityShootNums!=0?'55%':todayData.proportionShootNums}"></span>
+                                    <span class="progress" :class="todayData.realityPersons/todayData.planPersons<1?'yellow':''" :style="{ width: todayData.planPersons==0&&todayData.realityPersons!=0?'55%':todayData.proportionCoverage}"></span>
                                 </div>
                                 <div class="proportion">
-                                    <p><span v-text="todayData.realityShootNums"></span>/<span v-text="todayData.planShootNums"></span></p>
-                                    <p>完成率: <span v-text="todayData.planShootNums==0?'- -':todayData.proportionShootNums"></span></p>
+                                    <p><span v-text="todayData.realityPersons"></span>/<span v-text="todayData.planPersons"></span></p>
+                                    <p>完成率: <span v-text="todayData.planPersons==0?'- -':todayData.proportionCoverage"></span></p>
                                 </div>
                             </div>
-                            <div class="info">
-                                <a class="more" v-text="btnText"></a>
-                                <article :class="hide? 'hide': ''">
-                                    <p>
-                                        <span>总销售额: <span v-text="todayData.realityAmount || '待销售'"></span></span>
-                                        <span class="plan-info">预销售额: <span v-text="todayData.planAmount"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>实拍人数: <span v-text="todayData.realityShootNums || '待拍摄'"></span></span>
-                                        <span class="plan-info">预拍人数: <span v-text="todayData.planShootNums"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>实发团人数: <span v-text="todayData.realityPersons || '未发团'"></span></span>
-                                        <span class="plan-info">预发团人数: <span v-text="todayData.planPersons"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>前置销售额: <span v-text="todayData.advanceAmt || '待销售'"></span></span>
-                                        <span>二销售额: <span v-text="todayData.appAmt || '待销售'"></span></span>
-                                    </p>
-                                    <div class="remark" :data-planDate="todayData.planDate" :data-planPersons="todayData.planPersons" :data-planAmount="todayData.planAmount" :data-planShootNums="todayData.planShootNums" :data-remark="todayData.remark">
-                                        <p>备注</p>
-                                        <p><span class="placeholder" v-text="todayData.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                <div class="mui-content data-table bgwhite">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3"></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">预期</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">计划</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">实际</div>
                                     </div>
-                                </article>
-                            </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3 title">销售额</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.expectAmount"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.planAmount"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.realityAmount"></span></div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3 title">开发人数</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.expectPersons"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.planPersons"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.realityPersons"></span></div>
+                                    </div>
+                                </div>
+                                <div class="remark" :data-planDate="todayData.planDate" :data-planPersons="todayData.planPersons" :data-planAmount="todayData.planAmount" :data-planShootNums="todayData.planShootNums" :data-remark="todayData.remark">
+                                    <p class="title">备注</p>
+                                    <p class="title"><span class="placeholder" v-text="todayData.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
                         </section>
                         <section class="future-data">
                             <p>未来三天日报计划</p>
@@ -135,28 +133,20 @@
                                     <span v-text="item.planDate"></span>
                                     <span class="badge" v-if="item.flag==1">计划被改</span>
                                 </div>
-                                <article>
-                                    <p>
-                                        <span>总销售额: <span v-text="item.realityAmount || '待销售'"></span></span>
-                                        <span class="plan-info">预销售额: <span v-text="item.planAmount"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>实拍人数: <span v-text="item.realityShootNums || '待拍摄'"></span></span>
-                                        <span class="plan-info">预拍人数: <span v-text="item.planShootNums"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>实发团人数: <span v-text="item.realityPersons || '未发团'"></span></span>
-                                        <span class="plan-info">预发团人数: <span v-text="item.planPersons"></span></span>
-                                    </p>
-                                    <p>
-                                        <span>前置销售额: <span v-text="item.advanceAmt || '待销售'"></span></span>
-                                        <span>二销售额: <span v-text="item.appAmt || '待销售'"></span></span>
-                                    </p>
-                                </article>
-                                <!-- <div class="remark" :data-planDate="item.planDate" :data-planPersons="item.planPersons" :data-planAmount="item.planAmount" :data-planShootNums="item.planShootNums" :data-remark="item.remark">
-                                    <p>备注</p>
-                                    <p><span class="placeholder" v-text="item.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
-                                </div> -->
+                                <div class="mui-content">
+                                    <div class="mui-row bgwhite">
+                                        <div class="mui-col-xs-4 title">预期销售额</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.expectAmount"></span></div>
+                                        <div class="mui-col-xs-4 title">计划销售额</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.planAmount"></span></div>
+                                    </div>
+                                    <div class="mui-row bgwhite">
+                                        <div class="mui-col-xs-4 title">预期发团人数</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.expectPersons"></span></div>
+                                        <div class="mui-col-xs-4 title">计划发团人数</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.planPersons"></span></div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </div>

@@ -1,0 +1,18 @@
+.mui-card-header{
+    color: #3eb392;
+    font-size: 17px;
+}
+.mui-card-header > .status{
+    color: #666;
+    font-size: 15px;
+}
+
+.mui-card-content {
+    padding: 15px;
+    font-size: 15px;
+}
+
+.mui-card-content .mui-row{
+    font-size: 15px;
+    margin-bottom: 5px;
+}

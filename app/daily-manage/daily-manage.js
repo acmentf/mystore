@@ -9,8 +9,6 @@ var vm = new Vue({
 		todayData: {}, // 今天的数据
 		futureData: [], // 未来三天的数据
 		wgtVer: '', //版本号
-		hide: true,
-		btnText: '显示更多'
     },
     watch: {
 		rolePositionId: function(val, oldVal) {
@@ -29,7 +27,7 @@ lf.ready(function() {
     vm.username = window.Role.username // 用户昵称
     vm.rolePositionList = window.Role.positions // 岗位列表
 
-    console.log(JSON.stringify(vm.rolePositionList))
+	console.log(vm.rolePositionList)
     Vue.nextTick(function() {
         init();
     })
@@ -45,18 +43,14 @@ lf.ready(function() {
 	mui("body").on("tap", "#refresh", function(){
 		init()
 	})
-	// 点击更多信息
-	mui("body").on("tap", ".more", function() {
-		if (vm.hide) {
-			vm.btnText = "隐藏更多"
-		} else {
-			vm.btnText = "显示更多"
-		}
-		vm.hide = !vm.hide
+	mui("body").on("tap", "#detail", function(){
+		lf.window.openWindow('daily-detail', "daily-detail.html", {}, {
+			todayDate: vm.todayDate
+		});
 	})
 	// 填报计划
 	mui("body").on('tap', ".planBtn", function() {
-		lf.window.openWindow('daily-plan', "daily-plan.html",{},{})
+		lf.window.openWindow('daily-plan', "daily-plan.html", {}, {});
 	})
 	// 搜索日报
 	mui("body").on("tap", "#search", function(){
@@ -97,7 +91,7 @@ function init() {
 	lf.net.getJSON('plan/getDailyPlan.htm', params, function(res) {
 		lf.nativeUI.closeWaiting()
 		if (res.code == 200) {
-			console.log(JSON.stringify(res.data));
+			console.log(res.data);
 			var list = res.data
 			vm.todayDate = list[0].planDate
 			list.sort(function(a,b){
@@ -105,16 +99,17 @@ function init() {
             })
 			for(var i=0;i<list.length;i++){
 				list[i].planDate = lf.util.timeStampToDate2(list[i].planDate)
-				if (list[i].planAmount>0) {
-                    list[i]["proportionAmount"] = toPercent(list[i].realityAmount / list[i].planAmount)
+				if (list[i].planAmount > 0) {
+                    list[i]["proportionAmount"] = toPercent(list[i].realityAmount / list[i].planAmount);
                 } else {
-                    list[i]["proportionAmount"] = '0.00%'
-                }
-                if (list[i].planShootNums>0) {
-                    list[i]["proportionShootNums"] = toPercent(list[i].realityShootNums / list[i].planShootNums)
-                } else {
-                    list[i]["proportionShootNums"] = '0.00%'
-                }
+                    list[i]["proportionAmount"] = '0.00%';
+				}
+				
+                if( list[i].planPersons > 0 ){
+					list[i]["proportionCoverage"] = toPercent(list[i].realityPersons / list[i].planPersons);
+				} else {
+					list[i]["proportionCoverage"] = '0.00%';
+				}
 			}
 			vm.todayData = list.shift()
 			vm.futureData = list
@@ -134,7 +129,7 @@ function switchRolePostion(val) {
 	console.log(val)
 	lf.nativeUI.showWaiting();
 	lf.net.getJSON('user/switchPosition', params, function(data) {
-		console.log(JSON.stringify(data));
+		console.log(data);
 		if(data.code == 200) {
 			lf.nativeUI.closeWaiting();
 			var obj = {
