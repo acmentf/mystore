@@ -1064,7 +1064,8 @@
 					"app/daily-manage/daily-remark.html",
 					"app/daily-manage/daily-plan.html",
 					"app/login.html",
-					"app/daily-manage/daily-detail.html"
+					"app/daily-manage/daily-detail.html",
+					"app/market-expansion/market-expansion.html"
 				],
 				"priority": 0
 			},

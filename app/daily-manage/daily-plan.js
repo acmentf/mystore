@@ -79,8 +79,11 @@ lf.ready(function() {
 function init() {
 	var params = {
 		searchType:"default"
-	}
+    }
+    
+    lf.nativeUI.showWaiting();
 	lf.net.getJSON('plan/getDailyPlan.htm', params, function(res) {
+        lf.nativeUI.closeWaiting()
 		if (res.code == 200) {
             console.log(JSON.stringify(res.data));
             var list = res.data
@@ -95,6 +98,7 @@ function init() {
 			lf.nativeUI.toast(res.msg);
 		}
 	}, function(error) {
+        lf.nativeUI.closeWaiting()
 		lf.nativeUI.toast(error.msg);
 	});
 }

@@ -21,7 +21,7 @@
         </header>
         <div class="mui-content">
             <div class="detail-item" v-for="(item, index) in groupList" :key="item">
-                <div class="mui-card" @click="showOrder(item.orderid)">
+                <div class="mui-card" @click="showOrder(item.orderId)">
                     <div class="mui-card-header mui-card-media"><span v-text="item.purchaser"></span></div>
                     <div class="mui-card-content">
                         <div class="basic">
@@ -57,11 +57,11 @@
                         </div>
                         <div class="mui-col-xs-4">
                             <div class="text">前置销售金额</div>
-                            <div class="text num" v-text="item.advanceAmt"></div>
+                            <div class="text num" v-text="item.payableAmount"></div>
                         </div>
                         <div class="mui-col-xs-4">
                             <div class="text">实销金额</div>
-                            <div class="text num" v-text="item.payableAmount">0</div>
+                            <div class="text num" v-text="item.saleAmt">0</div>
                         </div>
                     </div>
                 </div>
