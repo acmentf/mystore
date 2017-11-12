@@ -39,6 +39,10 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
+	// 检查版本更新
+    GLOBAL_SHOOT.update()
+    // 设置版本号
+    GLOBAL_SHOOT.setVersion(vm)
 	//assignOrder 计调、指派
 	//allotPhotoOrder 分配
 	//outOrder 填写输出信息
@@ -99,9 +103,6 @@ lf.ready(function() {
 		default:
 			break;
 	}
-	update() 
-
-	getVersion()
 })	
 
 mui('body').on('tap', '#logout', function() {
@@ -183,79 +184,40 @@ mui("body").on("tap", ".no-correlate", function() {
 		city: city
 	})
 })
+
+// 岗位切换
 function switchRolePostion(val) {
-	var params = {
-		positionId: val
-	};
-	lf.nativeUI.showWaiting();
-	lf.net.getJSON('user/switchPosition', params, function(data) {
-		console.log(JSON.stringify(data));
-		if(data.code == 200) {
-			lf.nativeUI.closeWaiting();
-			var obj = {
-				usercode: data.data.id,
-				username: data.data.name,
-				phone: data.data.phone,
-				companyId: data.data.companyId,
-				userrole: data.data.positions[0].type,
-				userroleName: data.data.positions[0].name,
-				userroleId: data.data.positions[0].id,
-				tonken: data.data.token,
-				loginsign: '1',
-				auths: data.data.auths,
-				positions: data.data.userPositionList,
-				currentPositions: data.data.positions,
-				photograherId: data.data.photograherId
-			}
-			window.Role.save(obj)
-			lf.nativeUI.toast('切换岗位成功');
-
-			if(window.Role.currentPositions.length>0){
-				vm.currentRoleId = window.Role.currentPositions[0].roleId;
-				console.log("当前用户的角色id"+vm.currentRoleId)
-			}
-			
-			var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
-			
-			if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
-				// 城市经理
-				lf.window._openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
-			} else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
-				// 渠道 
-				lf.window._openWindow(ROLE_EMUN.commissioner.windowId, '../' + ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
-			} else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
-				//总经办
-				lf.window._openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
-			} else if (windowCurrentPositionRoleId == 9) {
-
-			} else {
-				lf.window.openWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
-			}
-
-			// if (window.Role.currentPositions[0].roleId==12) {
-   //              lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
-   //          } else if(window.Role.currentPositions[0].roleId!=9){
-   //              lf.window.openWindow('order-list','../order/orderlist.html',{},{},lf.window.currentWebview())
-   //          }
-			vm.orderList.forEach(function(v, i) { // 将数据制空
-				dodata('down', i, [])
-				vm.pageNos[i] = 0;
-				find(i);
-			})
-		
-			vm.pullObjects.forEach(function(v) { // 将数据全部重新加载一次
-				mui(v).pullToRefresh().refresh(true);
-			})
-
-			lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
-		} else {
-			lf.nativeUI.closeWaiting();
-			lf.nativeUI.toast(data.msg);
+    GLOBAL_SHOOT.switchPosition(val, function() {
+        if(window.Role.currentPositions.length>0){
+			vm.currentRoleId = window.Role.currentPositions[0].roleId;
+			console.log("当前用户的角色id"+vm.currentRoleId)
 		}
-	}, function(erro) {
-		lf.nativeUI.closeWaiting();
-		lf.nativeUI.toast(erro.msg);
-	})
+
+		var roleId = window.Role.currentPositions[0].roleId;
+		var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 1);
+		if(windowParams) {
+			GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{},,lf.window.currentWebview())
+		} else if(roleId != 9) {
+			GLOBAL_SHOOT.switchPositionOpenWindow('order-list','../order/orderlist.html',{},{},,lf.window.currentWebview())
+		}
+
+		// if (window.Role.currentPositions[0].roleId==12) {
+		//     lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{})
+		// } else if(window.Role.currentPositions[0].roleId!=9){
+		//     lf.window.openWindow('order-list','../order/orderlist.html',{},{})
+		// }
+
+		vm.orderList.forEach(function(v, i) { // 将数据制空
+			dodata('down', i, [])
+			vm.pageNos[i] = 0;
+			find(i);
+		})
+		vm.pullObjects.forEach(function(v) { // 将数据全部重新加载一次
+			mui(v).pullToRefresh().refresh(true);
+		})
+
+		lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
+    })
 }
 
 function dodata(type, index, data) {

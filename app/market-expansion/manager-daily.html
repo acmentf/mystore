@@ -4,19 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <title>渠道专员日报</title>
+    <title>渠道经理日报</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <link rel="stylesheet" href="../../css/mui.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/app.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/market-expansion/market-expansion.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/market-expansion/manager-daily.css" />
     <link rel="stylesheet" href="../../css/common/common.css" />
     <link rel="stylesheet" href="../../css/mui.dtpicker.css">
     <link rel="stylesheet" href="../../css/mui.picker.min.css">
     <style>
-        
         .mui-bar-footer{
             height: 54px;
         }
@@ -35,7 +34,6 @@
         .version {
             text-align: center
         }
-
         [v-cloak] {
             display: none !important;
         }
@@ -74,7 +72,7 @@
             <header class="mui-bar mui-bar-nav" style="background:#3db391;">
                 <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
                 <h1 class="mui-title" style="color: #fff;">
-                    渠道人员日报
+                    渠道经理日报
                 </h1>
             </header>
             
@@ -82,7 +80,10 @@
                 <div class="mui-scroll">
                     <section class="section-0">
                         <div>本月预期销售额任务：</div>
-                        <div id="missionProgress" class="num">{{monthAmount}}/{{monthPlanAmt}}</div>
+                        <div id="missionProgress" class="num" :data-date="date.dateText">
+                            {{monthAmount}}/{{monthPlanAmt}}
+                            <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
                     </section>
                     <section class="section-1 section-container">
                         <div>
@@ -91,66 +92,41 @@
                             </div>
                             <div class="date" id="dateSelected" v-text="">{{date.dateText|dayFormatter}}</div>
                             <div class="day" id="nextDay">
-                                <span class="mui-icon mui-icon-arrowright">
-                                </span>
+                                <span class="mui-icon mui-icon-arrowright"></span>
                             </div>
                         </div>
                     </section>
-                    <section class="section-2 section-container" 
-                        :data-userid="planCompletedListPerson.userId" 
-                        :data-date="planCompletedListPerson.dateText" 
-                        :data-user-name="planCompletedListPerson.userName">
-                        <expansion-completed-summary :item="planCompletedListPerson">
-                        </expansion-completed-summary>
-                    </section>
-                    <div class="remark" style="display: none;">
-                        <p>备注</p>
-                        <p>
-                            <span class="placeholder" v-text="planCompletedListPerson.remark ? planCompletedListPerson.remark : '请输入缺填或数据偏差大的原因'"></span>
-                            <span class="right mui-icon mui-icon-arrowright"></span>
-                        </p>
-                    </div>
-                    <section class="section-3 section-container">
-                        <div class="title">未来到团计划</div>                        
-                        <ul class="mui-table-view">
-                            <li class="mui-table-view-cell" v-for="(item, key) in planList" :key="key">
-                                <div class="date">{{item.planTime|dateFormatter}}</div>
-                                <div class="content">
-                                    <div>
-                                        <div>预期销售额</div>
-                                        <div>{{expectAmount}}</div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                    <div>
-                                        <div>计划销售额</div>
-                                        <div>{{item.planPreNum|toFixed2}}</div>
-                                        <div>计划流量数</div>
-                                        <div v-text="item.planPreAmount"></div>
-                                    </div>
+                    <section class="section-2 section-container">
+                        <div class="section-2-block" v-for="(item, key) in planCompletedList" :key="key">
+                            <div class="person-wrap">
+                                <div class="name">{{item.userName}}</div>
+                                <div class="btn-wrap check-section-2" :data-userid="item.userId" :data-date="date.dateText" :data-user-name="item.userName">
+                                    <span>查看详情</span>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                            <div class="border">
+                                <div class="border-line"></div>
+                            </div>
+                            <expansion-completed-summary :item="item">
+                            </expansion-completed-summary>
+                        </div>
                     </section>
                 </div>
             </div>
             <div class="mui-off-canvas-backdrop"></div>            
-            <footer class="mui-bar mui-bar-footer">
-				<button type="button" id="toExpansionPlan" class="mui-btn mui-btn-primary">填报计划</button>
-			</footer>
         </div>
     </div>
-        <script src="../../js/mui.min.js"></script>
-        <script src="../../js/mui.picker.min.js"></script>
-        <script src="../../js/mui.dtpicker.js"></script>
-        <script src="../../js/framework/define.js"></script>
-        <script src="../../js/framework/styles.js"></script>
-        <script src="../../js/framework/lf.js"></script>
-        <script src="../../libs/vue.min.js"></script>
-        <script src="./component/less.min.js"></script>
-        <script src="./minix/userPositionInfo.js"></script>
-        <script src="./component/expansion-completed-summary.js"></script>
-        <script src="market-expansion.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/mui.picker.min.js"></script>
+    <script src="../../js/mui.dtpicker.js"></script>
+    <script src="../../js/framework/define.js"></script>
+    <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/lf.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="./component/less.min.js"></script>
+    <script src="./minix/userPositionInfo.js"></script>
+    <script src="./component/expansion-completed-summary.js"></script>
+    <script src="manager-daily.js"></script>
 </body>
 
 </html>

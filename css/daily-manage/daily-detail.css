@@ -1,0 +1,29 @@
+.detail-item .mui-card-header, .mui-card-footer .num{
+    color:#3eb392;
+    font-size: 16px;
+}
+
+.mui-card-content .block{
+    margin: 10px 15px 0;
+    padding-bottom: 10px;
+}
+.mui-card-content .block:first-child{
+    border-bottom: 1px solid #c8c7cc;
+}
+.mui-card-content .block > .mui-row{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.mui-card-content .block .title{
+    flex: 1;
+}
+
+.mui-card-footer .text{
+    padding: 5px 0;
+    text-align: center;
+}
+
+.mui-card{
+    cursor: pointer;
+}

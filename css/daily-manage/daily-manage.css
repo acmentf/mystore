@@ -24,20 +24,29 @@ p{
 .mui-bar-footer ~ .mui-content{
     margin-bottom: 20px;
 }
-.today-data{
-    padding-bottom: 10px;
-}
 .today-data>.title {
     display: flex;
+    height: 45px;
     padding: 10px;
     justify-content: space-between;
 }
 .today-data .title > div{
     display: flex;
+    flex: 1;
+    line-height: 25px;
 }
 .today-data .title > div .head{
     color:#3eb392;
-    font-size: 18px;
+    font-size: 16px;
+}
+.today-data .title .detail {
+    height: 100%;
+    line-height: 25px;
+    padding: 0 5px;
+    font-size: 12px;
+    color: #3eb392;
+    border: 1px solid #3eb392;
+    border-radius: 4px;
 }
 .badge{
     display: inline-block;
@@ -45,14 +54,14 @@ p{
     padding: 0 6px;
     height: 19px;
     line-height: 18px;
-    margin-left: 5px;
+    margin: 4px 0 0 8px;
     border: 1px solid #E5E7EA;
     border-radius: 16px;
     background-color: #F4F6F9;
     color: #C3C4C5;
 }
 .today-data .title > div .plan{
-    margin-right: 20px;
+    margin: 0 12px 0 15px;
     font-size: 15px;
 }
 .today-data .title > div p span{
@@ -110,12 +119,43 @@ p{
 }
 .info{
     margin-top: 15px;
-    padding-top: 10px;
+    padding-bottom: 15px;
     border-top: 1px solid #eeeeee;
     position: relative;
 }
 .hide{
     display: none;
+}
+.data-table{
+    position: relative;
+    margin-top: 15px;
+    padding: 5px 0 15px 20px;
+    border-top: 1px solid #eee;
+}
+.data-table > .mui-row{
+    font-size: 15px;
+    color: #555;
+    padding-top: 10px;
+}
+.data-table > .mui-row > div:not(.title){
+    text-align: center;
+}
+.data-table > .mui-row .num{
+    color: #999;
+}
+.remark {
+    display: flex;
+    padding: 10px 5px 10px 20px;
+    border-top: 1px solid #eeeeee;
+    justify-content: space-between;
+}
+.remark > .title {
+    display: flex;
+    height: 24px;
+    line-height: 24px;
+}
+.remark .placeholder{
+    line-height: 24px;
 }
 .info > .more{
     position: absolute;
@@ -163,15 +203,6 @@ p{
     font-size: 14px;
     border-radius: 24px 0 0 24px;
 }
-.info .remark {
-    padding:12px 10px;
-    border-top: 1px solid #eeeeee;
-    display: flex;
-    justify-content: space-between;
-}
-.today-data .info .remark{
-    padding-bottom: 0;
-}
 .info >div > p {
     font-size: 15px;
     color:#666;
@@ -182,10 +213,6 @@ p{
 }
 .info .mui-icon-arrowright{
     font-size: 16px;
-}
-.future-data .info{
-    padding-top:0;
-    margin-top: 10px;
 }
 .future-data>p{
     padding: 0 10px;
@@ -205,6 +232,11 @@ p{
     margin-right: 5px;
     position: relative;
     top: -1px;
+}
+.future-data .mui-content > .mui-row{
+    padding: 15px 0 0 10px;
+    font-size: 15px;
+    color: #555;
 }
 .info .date{
     padding: 12px 10px;

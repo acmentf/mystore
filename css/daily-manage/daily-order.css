@@ -1,0 +1,28 @@
+.mui-card-header{
+    color: #3eb392;
+    font-size: 17px;
+}
+.status{
+    flex: 1;
+    color: #666;
+    font-size: 15px;
+    text-align: right;
+}
+
+.mui-card-content {
+    padding: 15px;
+    font-size: 15px;
+}
+
+.mui-card-content > .flex{
+    display: flex;
+}
+
+.mui-card-content .mui-row{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.mui-card-content .mui-row:last-child{
+    margin-bottom: 0;
+}
