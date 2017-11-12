@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>重设本月预期销售额任务</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/market-expansion/allocate-task.css" />
+		<link rel="stylesheet" href="../../css/common/common.css" />
+		<script src="../../js/framework/common.js"></script>
+    </head>
+    <body>
+        <div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+                <h1 class="mui-title">重设本月销售额任务</h1>
+                <section class="section-1 section-container">
+                    <div>本月待分配任务：<span v-text="restAmount"></span></div>
+                    <!-- <div class="text">10000</div> -->
+                </section>
+            </header>
+            <footer class="mui-bar mui-bar-footer">
+                <button type="button" id="save" class="mui-btn mui-btn-primary genSale">保存</button>
+            </footer>
+			<main class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="blank-div" style="height: 88px;"></div>
+                    
+                    <section class="section-2">
+                        <div class="section-2-block" v-for="(item, key) in list" :key="key">
+                            <div class="name-label" v-text="item.userName">
+                            </div>
+                            <div class="mui-input-row">
+                                <label>设定本月销售额预期：</label>
+                                <input type="text" class="mui-input-clear" v-model="item.monthPlanAmt" placeholder="请输入本月预期" v-on:blur="inputBlur(item.userName, item.monthPlanAmt)"/>
+                            </div>
+                            <div class="data-table">
+                                <div class="column">
+                                    <div>上月预期</div>
+                                    <div v-text="item.lastMonthPlanAmt"></div>
+                                </div>
+                                <div class="column">
+                                    <div>上月完成</div>
+                                    <div v-text="item.lastMonthAmount"></div>
+                                </div>
+                                <div class="column">
+                                    <div>本月已完成</div>
+                                    <div v-text="item.monthAmount ? item.monthAmount : 0"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="blank-div" style="height: 54px;"></div>
+                    
+                </div>
+			</main>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/framework/define.js"></script>
+		<script src="../../js/framework/styles.js"></script>
+		<script src="../../js/framework/common.js"></script>
+		<script src="../../js/framework/lf.js"></script>
+		<script src="../../libs/vue.min.js"></script>
+		<script src="./allocate-task.js"></script>
+    </body>
+</html>

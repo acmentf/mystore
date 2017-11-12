@@ -58,19 +58,12 @@
 				if(loginsign){
 					plus.navigator.closeSplashscreen();
 
-					var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
-
-					if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
-						// 城市经理
-						lf.window._openWindow(ROLE_EMUN.cityManager.windowId, ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
-					} else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
-						// 渠道 
-						lf.window._openWindow(ROLE_EMUN.commissioner.windowId, ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
-					} else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
-						//总经办
-						lf.window._openWindow(ROLE_EMUN.officeManager.windowId, ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
+					var roleId = window.Role.currentPositions[0].roleId;
+					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
+					if(windowParams) {
+						lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
 					} else {
-						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview());
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 					}
 
 					// if(window.Role.currentPositions[0].roleId==12){
@@ -108,6 +101,10 @@
 					vm.account = this.getAttribute('data-account')
 					vm.hidden=true
 					vm.rotate=false
+				})
+				mui("body").on("tap", ".login-header", function(e){
+					e.stopPropagation();
+					lf.window._openWindow(ROLE_EMUN.cityManager.windowId, './market-expansion/manager-daily.html',{},{},lf.window.currentWebview());
 				})
 				mui("body").on("tap", ".account-item>span", function(e){
 					e.stopPropagation();
@@ -177,21 +174,12 @@
 						}
 						window.Role.save(obj)
 
-						
-						
-						var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
-
-						if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
-							// 城市经理
-							lf.window._openWindow(ROLE_EMUN.cityManager.windowId, ROLE_EMUN.cityManager.pageUrl,{},{},lf.window.currentWebview());
-						} else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
-							// 渠道 
-							lf.window._openWindow(ROLE_EMUN.commissioner.windowId, ROLE_EMUN.commissioner.pageUrl,{},{},lf.window.currentWebview());
-						} else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
-							//总经办
-							lf.window._openWindow(ROLE_EMUN.officeManager.windowId, ROLE_EMUN.officeManager.pageUrl,{},{},lf.window.currentWebview());
+						var roleId = window.Role.currentPositions[0].roleId;
+						var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
+						if(windowParams) {
+							lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
 						} else {
-							lf.window._openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview());
+							lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 						}
 
 						// if(window.Role.currentPositions[0].roleId==12){

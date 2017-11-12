@@ -17,7 +17,7 @@
         <div id="app">
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
-				<h1 class="mui-title">填报拉新计划</h1>
+				<h1 class="mui-title">填报计划</h1>
 			</header>
 			<footer class="mui-bar mui-bar-footer">
 				<button type="button" id="save" class="mui-btn mui-btn-primary genSale">保存</button>
@@ -30,17 +30,21 @@
 							<span>{{item.planTime | dateFormatter}}</span>
 						</div>
 						<form class="mui-input-group">
-							<div class="mui-input-row">
-								<label>团人数：</label>
-								<input type="text" class="mui-input-clear" v-model="item.planPreNum" placeholder="请输入计划团人数" >
+							<div>
+								<div class="mui-input-row color888">
+									<label>预期销售额：</label>
+									<input type="text" disabled class="mui-input-clear" v-model="expectAmount">
+								</div>
+								<div class="mui-input-row">
+									<label>计划销售额：</label>
+									<input type="text" class="mui-input-clear" v-model="item.planPreNum" placeholder="请输入计划销售额" >
+								</div>
 							</div>
-							<div class="mui-input-row">
-								<label>前置金额：</label>
-								<input type="text" class="mui-input-clear" v-model="item.planPreAmount" placeholder="请输入计划前置金额">
-							</div>
-							<div class="mui-input-row">
-								<label>计划备注：</label>
-								<input type="text" class="mui-input-clear" v-model="item.remark" placeholder="请输入备注，仅限15字">
+							<div>
+								<div class="mui-input-row">
+									<label>计划流量数：</label>
+									<input type="text" class="mui-input-clear" v-model="item.planPreAmount" placeholder="请输入计划流量数" >
+								</div>
 							</div>
 						</form>
 					</div>

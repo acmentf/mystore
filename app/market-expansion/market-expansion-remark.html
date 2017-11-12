@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/market-expansion/market-expansion-remark.css" />
+    <link rel="stylesheet" href="../../css/common/common.css" />
+    <script src="../../js/framework/common.js"></script>
+</head>
+
+<body class="bgwhite">
+    <div id="app">
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">备注</h1>
+            <span class="save-btn mui-pull-right">
+				<button type="button" class="mui-btn mui-btn-success mui-btn-outlined">保存</button>
+			</span>
+        </header>
+        <main class="mui-content">
+            <div class="info bgwhite">
+                <div class="date">
+                    <img src="../../images/order/date.png">
+                    <span v-text="planDate"></span>
+                </div>
+                <div class="remark">
+                    <textarea @input="changeText($event)" id="remark" maxlength="100" v-model="remark" placeholder="请输入缺填或数据偏差大的原因"></textarea>
+                    <p><span v-text="textLenth"></span>/100</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/framework/define.js"></script>
+    <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/common.js"></script>
+    <script src="../../js/framework/lf.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="./market-expansion-remark.js"></script>
+</body>
+
+</html>

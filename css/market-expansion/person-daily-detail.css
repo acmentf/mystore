@@ -1,0 +1,67 @@
+.mui-scroll-wrapper {
+  /* background: #fff; */ }
+
+.mui-bar-footer {
+  height: 54px; }
+
+.mui-btn-primary {
+  width: 100%;
+  background-color: #3eb392;
+  border-color: #3eb392;
+  padding: 10px 12px 10px !important; }
+
+main {
+  padding-bottom: 54px; }
+
+.section-1 ul {
+  padding: 0 15px;
+  list-style: none; }
+  .section-1 ul li {
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden; }
+    .section-1 ul li .travel-agency {
+      padding: 8px 15px;
+      background: #3eb392;
+      color: #fff;
+      font-size: 0.32rem; }
+    .section-1 ul li .detail-content-wrap {
+      font-size: 0.3rem;
+      color: #888888; }
+      .section-1 ul li .detail-content-wrap .content-top {
+        padding: 0 15px; }
+        .section-1 ul li .detail-content-wrap .content-top .detail-section {
+          position: relative; }
+          .section-1 ul li .detail-content-wrap .content-top .detail-section::after {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: #efeff4; }
+          .section-1 ul li .detail-content-wrap .content-top .detail-section > div {
+            display: flex; }
+            .section-1 ul li .detail-content-wrap .content-top .detail-section > div > div {
+              height: 0.65rem;
+              line-height: 0.65rem; }
+            .section-1 ul li .detail-content-wrap .content-top .detail-section > div > div:nth-child(1) {
+              flex: 2; }
+            .section-1 ul li .detail-content-wrap .content-top .detail-section > div > div:nth-child(2) {
+              flex: 1;
+              text-align: right; }
+        .section-1 ul li .detail-content-wrap .content-top .detail-section-1 .part-1 {
+          display: flex; }
+          .section-1 ul li .detail-content-wrap .content-top .detail-section-1 .part-1 div {
+            flex: 1; }
+      .section-1 ul li .detail-content-wrap .content-bottom {
+        display: flex;
+        padding: 6px 15px; }
+        .section-1 ul li .detail-content-wrap .content-bottom > div {
+          flex: 1; }
+          .section-1 ul li .detail-content-wrap .content-bottom > div > div {
+            height: 0.65rem;
+            line-height: 0.65rem;
+            text-align: center; }
+
+/*# sourceMappingURL=person-daily-detail.css.map */
