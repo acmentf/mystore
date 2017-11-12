@@ -278,7 +278,7 @@ lf.ready(function() {
         var date = this.getAttribute('data-date');
         var userName = this.getAttribute('data-user-name');
         // 个人日报数据详情
-        lf.window.openWindow('group-plan-completion','../market-expansion/group-plan-completion.html',{},{
+        lf.window.openWindow('person-daily-detail', './person-daily-detail.html', {}, {
             userId: userId,
             date: date,
             userName: userName
