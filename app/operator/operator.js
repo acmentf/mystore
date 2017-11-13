@@ -7,6 +7,7 @@ var vm = new Vue({
 		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
+		shootTypeArr: ['跟团', '驻点', '散团'],
 		journeyList: [], // 拍摄景点多选列表
 		journeyListed: [], // 已选择拍摄景点列表
 		currentJourneyIndex: '', // 当前选择的景点
@@ -22,6 +23,8 @@ var vm = new Vue({
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
 			groupTypeValue:'',//团队性质的value
+			shootType:'',//团队性质
+			shootTypeValue:'',//团队性质的value
 			preProps:'',//前置属性,
 			prePropsValue: ''
 		},
@@ -137,6 +140,31 @@ mui('#app').on('tap', '#showUserPicker', function() {
 		}, false);
 	}
 })
+
+//拍摄类型
+mui('#app').on('tap', '#selectShootType', function() {
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: '1',
+			text: '跟团'
+		}, {
+			value: '2',
+			text: '驻点'
+		}, {
+			value: '3',
+			text: '散团'
+		}]);
+		userPicker.show(function(items) {
+			vm.groupInfo.shootType = items[0].text
+			vm.groupInfo.shootTypeValue = items[0].value
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		}, false);
+	}
+})
+
 
 //前置属性
 mui('#app').on('tap', '#showPropsPicker', function() {
@@ -350,6 +378,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		tourGroups: {
 				id: vm.marchInfo.id,
 				groupType :vm.groupInfo.groupType,//团性质
+				shootType :vm.groupInfo.shootTypeValue,//拍摄类型
 				personCount : vm.groupInfo.personCount,//团人数
 				startTime :vm.marchInfo.startTime,//出团日期
 				groupDays : vm.marchInfo.groupDays,//行程天数
@@ -430,6 +459,7 @@ function renderTrackInfo(){
 				assignNames : data.data.assignNames,//导游姓名
 				lineName :data.data.lineName,//线路名称
 				groupType :data.data.groupType,//团性质
+				shootType :vm.shootTypeArr[data.data.shootType],//拍摄类型
 				personCount : data.data.personCount,//团人数
 				preProps : _pre,//前置属性
 				prePropsValue : data.data.isPreTour,//前置属性
