@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--cwj-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>渠道经理日报</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/market-expansion/manager-daily.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+    <link rel="stylesheet" href="../../assets/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../../assets/css/mui.picker.min.css">
+    <style>
+        .mui-bar-footer{
+            height: 54px;
+        }
+        
+        .mui-btn-primary{
+            width: 100%;
+            background-color: #3eb392;
+            border-color:#3eb392;
+            padding: 10px 12px 10px !important;
+        }
+
+        .mui-bar + main.mui-content {
+            padding-bottom: 70px;
+        }
+        
+        .version {
+            text-align: center
+        }
+        [v-cloak] {
+            display: none !important;
+        }
+    </style>
+    <script src="../../assets/js/framework/common.js"></script>
+</head>
+
+<body>
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app" v-cloak>
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="offCanvasSide-header">
+                        <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <p class="offCanvasSide-header-name">{{username}}</p>
+                    </div>
+
+                    <form class="offCanvasSide-role-wrap mui-input-group">
+                        <div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
+                            <label>{{item.name}}</label>
+                            <input type="radio" v-bind:value="item.id" v-model="rolePositionId">
+                        </div>
+                    </form>
+
+                    <div class="offCanvasSide-logout">
+                        <button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+                    </div>
+
+                    <p class="version">v{{wgtVer}}</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap" style="background:#efeff4">
+            <header class="mui-bar mui-bar-nav" style="background:#3db391;">
+                <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title" style="color: #fff;">
+                    渠道经理日报
+                </h1>
+            </header>
+            
+            <div class="mui-scroll-wrapper mui-content">
+                <div class="mui-scroll">
+                    <section class="section-0">
+                        <div>本月预期销售额任务：</div>
+                        <div id="missionProgress" class="num" :data-date="date.dateText">
+                            {{monthAmount}}/{{monthPlanAmt}}
+                            <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                    </section>
+                    <section class="section-1 section-container">
+                        <div>
+                            <div class="day" id="preDay">
+                                <span class="mui-icon mui-icon-arrowleft"></span>
+                            </div>
+                            <div class="date" id="dateSelected" v-text="">{{date.dateText|dayFormatter}}</div>
+                            <div class="day" id="nextDay">
+                                <span class="mui-icon mui-icon-arrowright"></span>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section-2 section-container">
+                        <div class="section-2-block" v-for="(item, key) in planCompletedList" :key="key">
+                            <div class="person-wrap">
+                                <div class="name">{{item.userName}}</div>
+                                <div class="btn-wrap check-section-2" :data-userid="item.userId" :data-date="date.dateText" :data-user-name="item.userName">
+                                    <span>查看详情</span>
+                                </div>
+                            </div>
+                            <div class="border">
+                                <div class="border-line"></div>
+                            </div>
+                            <expansion-completed-summary :item="item">
+                            </expansion-completed-summary>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="mui-off-canvas-backdrop"></div>            
+        </div>
+    </div>
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/mui.picker.min.js"></script>
+    <script src="../../assets/js/mui.dtpicker.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    <script src="./component/less.min.js"></script>
+    <script src="./minix/userPositionInfo.js"></script>
+    <script src="./component/expansion-completed-summary.js"></script>
+    <script src="manager-daily.js"></script>
+</body>
+
+</html>

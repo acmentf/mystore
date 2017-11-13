@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../assets/css/mui.min.css" rel="stylesheet" />
+    <link href="../../assets/css/app.css" rel="stylesheet"/>
+    <link href="../../assets/css/schedule/summary.css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">拍摄输出</h1>
+    <a id='operate' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue">确定</a>
+</header>
+<div class="mui-content schedule-summary" id="app">
+    <div class="item">
+        <div class="title">
+            <span class="text">上传照片( 最多3张 )</span>
+        </div>
+        <div class="uploader-wrap">
+            <div class="finger-uploader">
+                <div class="finger-uploader__bd">
+                    <ul class="finger-uploader__files">
+                        <li v-for="(file,index) in uploaderFiles" class="finger-uploader__file">
+                            <span class="remove" :index="index">✖</span>
+                            <img class="preview" :src="file.fileUrl" data-preview-src="" data-preview-group="1">
+                        </li>
+                    </ul>
+                    <div class="finger-uploader__input-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="title">
+            <span class="text">填写心得 :</span>
+        </div>
+        <div class="form-item">
+            <textarea v-model="remark" maxlength="500" class="text-area" placeholder="简要总结跟团拍摄过程，500字以内"></textarea>
+        </div>
+    </div>
+</div>
+<script src="../../assets/js/mui.min.js"></script>
+<script src="../../assets/js/mui.zoom.js"></script>
+<script src="../../assets/js/mui.previewimage.js"></script>
+<script src="../../assets/js/framework/define.js"></script>
+<script src="../../assets/js/framework/styles.js"></script>
+<script src="../../assets/js/framework/lf.js"></script>
+<script src="../../assets/libs/vue.min.js"></script>
+<script src="./summary.js"></script>
+</body>
+
+</html>

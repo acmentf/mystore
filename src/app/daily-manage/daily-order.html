@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/daily-manage/daily-order.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+    <script src="../../assets/js/framework/common.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">订单详情</h1>
+        </header>
+        <div class="mui-content" v-if="orderInfo.orderId">
+            <!-- <ul class="mui-table-view">
+                <li class="mui-table-view-cell flex-row">
+                    <div class="left">计调</div>
+                    <div class="right">已完成</div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="left"></div>
+                </li>
+            </ul> -->
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    计调
+                    <div class="status" v-text="orderInfo.actionStatus ? orderInfo.actionStatus == 0 ? '待计调' : '已完成' : ''"></div>
+                </div>
+                <div class="mui-card-content">执行人: <span v-text="orderInfo.executeRole"></span></div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    分配摄影师
+                    <div class="status" v-text="orderInfo.actionStatus ? orderInfo.actionStatus <= 11 ? '待分配' : '已分配' : ''"></div>
+                </div>
+                <div class="mui-card-content">摄影主管: <span v-text="orderInfo.photoManagerRole"></span></div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-header">拍摄</div>
+                <div class="mui-card-content">
+                    <div class="mui-row flex" v-for="item in orderInfo.photographerList">
+                        <div>摄影师: <span v-text="item.name"></span></div>
+                        <div class="status" v-if="item.isConfirmShot == 0">待确认</div>
+                        <div class="status" v-if="item.isConfirmShot == 1">确认拍摄</div>
+                        <div class="status" v-if="item.isConfirmShot == 2">无法拍摄</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    输出
+                    <div class="status" v-text="orderInfo.actionStatus ? orderInfo.actionStatus <= 22 ? '待输出' : '已完成' : ''"></div>
+                </div>
+                <div class="mui-card-content">
+                    <div class="mui-row">输出: <span v-text="orderInfo.outputRole"></span></div>
+                    <div class="mui-row">实际服务人数: <span v-text="orderInfo.serverPerNum"></span></div>
+                    <div class="mui-row">
+                        <div class="mui-col-xs-6">拍摄张数: <span v-text="orderInfo.shootNum"></span></div>
+                        <div class="mui-col-xs-6">选片张数: <span v-text="orderInfo.selectNum"></span></div>
+                    </div>
+                    <div class="mui-row">打印张数: <span v-text="orderInfo.printNum"></span></div>
+                </div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    销售
+                    <div class="status" v-text="orderInfo.actionStatus ? orderInfo.actionStatus <= 33 ? '待销售' : '已完成' : ''"></div>
+                </div>
+                <div class="mui-card-content">
+                    <div class="mui-row">销售: <span v-text="orderInfo.saleRole"></span></div>
+                    <div class="mui-row">
+                        <div class="mui-col-xs-6">实销张数: <span v-text="orderInfo.salesNum"></span></div>
+                        <div class="mui-col-xs-6">实销人数: <span v-text="orderInfo.salesPerNum"></span></div>
+                    </div>
+                    <div class="mui-row">实销金额: <span v-text="orderInfo.salesAmt"></span></div>
+                    <div class="mui-row">
+                        <div class="mui-col-xs-6">应收金额: <span v-text="orderInfo.payableAmount"></span></div>
+                        <div class="mui-col-xs-6">预付金额: <span v-text="orderInfo.advanceAmount"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/common.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    <script src="daily-order.js"></script>
+</body>
+</html>

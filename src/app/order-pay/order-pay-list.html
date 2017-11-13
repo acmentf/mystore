@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../assets/css/mui.min.css" rel="stylesheet" />
+    <link href="../../assets/css/app.css" rel="stylesheet"/>
+    <link href="../../assets/css/order-pay/order-list.css" rel="stylesheet"/>
+</head>
+<body>
+    <header id="order-pay-header" class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">销售订单</h1>
+    </header>
+
+    <div class="mui-content order-pay-content order-pay-list mui-scroll-wrapper" id="app">
+        <div class="mui-scroll">
+        
+            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id">
+                <div class="order-pay-card-header">
+                    <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
+                </div>
+                <div class="order-pay-card-content">
+                    <p>生成时间：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
+                    <p>照片张数：{{item.argDictName}} {{item.nums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
+                    <p>{{item.province}} {{item.city}}</p>
+                </div>
+            </div>
+
+            <div></div>
+        </div>
+    </div>
+
+    <!-- <div class="order-pay-generate">
+        <button type="button" class="mui-btn mui-btn-block">生成销售</button>
+    </div> -->
+   
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/mui.zoom.js"></script>
+    <script src="../../assets/js/mui.pullToRefresh.js"></script>
+    <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+    <script src="../../assets/js/mui.previewimage.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    <script>
+         var data = {
+            currentId: '',
+            areaCode: '',
+            tourGuide: '',
+            purchaser: '',
+            aliasName: '',
+            province: '',
+            city: '',
+            tourNo: '',
+            tourGuidePhone: '',
+            productName: '',
+            orderPayList: [],
+            curPage: 0,
+            pageSize: 10,
+            isEmpty: false
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                payStatus: function(status) {
+                    switch (status) {
+                        case 1:
+                            return "待支付"
+                        case 2:
+                            return "已支付"
+                        case 3:
+                            return "已取消"
+                        case 4:
+                            return "支付失败"
+                    }
+                },
+                formatterTime: function(time) {
+                    return lf.util.timeStampToDate(time)
+                },
+                payStatusClass: function(status) {
+                    switch (status) {
+                        case 2:
+                            return "pay-status-paid"
+                        case 1:
+                        case 3:
+                        case 4:
+                            return "pay-status-paying"
+                    }
+                }
+            }
+        })
+
+        lf.ready(function() {
+            vm.currentId = lf.window.currentWebview().orderId
+            vm.areaCode = lf.window.currentWebview().areaCode
+            vm.tourGuide = lf.window.currentWebview().tourGuide
+            vm.purchaser = lf.window.currentWebview().purchaser
+            vm.aliasName = lf.window.currentWebview().aliasName
+            vm.province = lf.window.currentWebview().province
+            vm.city = lf.window.currentWebview().city
+            vm.tourGuidePhone = lf.window.currentWebview().tourGuidePhone
+            vm.tourNo = lf.window.currentWebview().tourNo
+            vm.productName = lf.window.currentWebview().productName
+            function getOrderPayList() {
+                vm.curPage++
+
+                var self = this
+
+                var params = {
+                    orderId: vm.currentId,
+                    curPage: vm.curPage,
+                    pageSize: vm.pageSize
+                }
+
+                console.log(JSON.stringify(params));
+
+                lf.net.getJSON('pay/getOrderList', params, function(data) {
+
+                    console.log(JSON.stringify(data));
+
+                    if(data.code == 200) {
+                        self.refresh(true);
+                        if (data.data.length) {
+                            data.data.forEach(function(item) {
+                                vm.orderPayList.push(item)
+                            })
+
+                            self.endPullupToRefresh(false)
+                        } else {
+                            vm.isEmpty = true
+                            self.endPullupToRefresh(true)
+                        }
+
+                    } else {
+                        lf.nativeUI.toast(data.msg);
+                    }
+                }, function(erro) {
+                    lf.nativeUI.toast(erro.msg);
+                })
+            }
+
+            mui.init({
+                pullRefresh : {
+                    container: '.order-pay-content',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+                    up : {
+                        height:50,//可选.默认50.触发上拉加载拖动距离
+                        auto:true,//可选,默认false.自动上拉加载一次
+                        contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                        contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                        callback : getOrderPayList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                    }
+                }
+            });
+
+            // 生成销售
+            var handleGoOrderPayGenerate = function() {
+                lf.window.openWindow('order-pay.html', 'order-pay.html', {}, {
+                    tourGuide: vm.tourGuide,
+                    purchaser: vm.purchaser,
+                    aliasName: vm.aliasName,
+                    orderId: vm.currentId, // 订单ID
+                    areaCode: vm.areaCode, // 区域code
+                    province: vm.province,
+                    city: vm.city
+                })
+            }
+
+            // 销售详情
+            var handleGoOrderPayDetail = function() {
+                var id = this.getAttribute('data-id');
+           
+                lf.window.openWindow('order-pay-detail.html', 'order-pay-detail.html', {}, {
+                    tourGuide: vm.tourGuide,
+                    purchaser: vm.purchaser,
+                    aliasName: vm.aliasName,
+                    orderId: vm.currentId, // 订单ID
+                    areaCode: vm.areaCode, // 区域code
+                    province: vm.province,
+                    city: vm.city,
+                    tourGuidePhone: vm.tourGuidePhone,
+                    tourNo:vm.tourNo,
+                    productName: vm.productName,
+                    saleOrderId: id
+                })
+            }
+
+            // Add listener
+            mui('body').on('tap', '.order-pay-generate', handleGoOrderPayGenerate)
+            mui('body').on('tap', '.order-pay-card', handleGoOrderPayDetail)
+
+            lf.event.listener('orderPay', function(e) {
+                vm.curPage = 0
+                vm.orderPayList = []
+                vm.isEmpty = false
+                mui('.order-pay-content').pullRefresh().refresh(true)
+                lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+                lf.window.currentWebview().reload()
+            })
+        })
+    </script> 
+</body>
+</html>

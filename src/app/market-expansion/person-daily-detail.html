@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>重新分配本月任务</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../assets/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/market-expansion/person-daily-detail.css" />
+		<link rel="stylesheet" href="../../assets/css/common/common.css" />
+		<script src="../../assets/js/framework/common.js"></script>
+    </head>
+    <body>
+        <div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+                <h1 class="mui-title"> <span v-text="userName"></span>日报数据详情</h1>
+            </header>
+            <!-- <footer class="mui-bar mui-bar-footer">
+                <button type="button" id="save" class="mui-btn mui-btn-primary genSale">确认业绩</button>
+            </footer> -->
+			<main class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="blank-div" style="height: 44px;"></div>
+                    <section class="section-1 section-container">
+                        <ul>
+                            <li class="section-1-block" v-for="(item, key) in purchaserOrderList" :key="key" :data-orderid="item.orderId">
+                                <div class="travel-agency" v-text="item.purchaser"></div>
+                                <div class="detail-content-wrap">
+                                    <div class="content-top">
+                                        <div class="detail-section detail-section-1">
+                                            <div class="part-1">
+                                                <div>
+                                                    订单号：<span v-text="item.orderNo"></span>
+                                                </div>
+                                                <div>
+                                                    {{item.actionStatus | actionStatusFormat}}
+                                                </div>
+                                            </div>
+                                            <div class="part-2">
+                                                <div v-text="item.productName">
+                                                </div>
+                                                <div>
+                                                    {{item.isPreTour == "1" ? '前置团' : '非前置团'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-section detail-section-2">
+                                            <div class="part-1">
+                                                <div>出团日期：</div>
+                                                <div>{{item.createTime | dateFormatter}}</div>
+                                            </div>
+                                            <div class="part-2">
+                                                <div>团人数：</div>
+                                                <div v-text="item.personCount"> 人</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content-bottom">
+                                        <div>
+                                            <div>实际服务人数</div>
+                                            <div v-text="item.serverPerNum"></div>
+                                        </div>
+                                        <div>
+                                            <div>前置销售金额</div>
+                                            <div v-text="item.payableAmount"></div>
+                                        </div>
+                                        <div>
+                                            <div>实销金额</div>
+                                            <div v-text="item.saleAmt"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="section-2">
+                        
+                    </section>
+                </div>
+			</main>
+		</div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+		<script src="./person-daily-detail.js"></script>
+    </body>
+</html>

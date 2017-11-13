@@ -1,0 +1,108 @@
+.mui-scroll-wrapper {
+    /* background: #fff; */
+}
+.mui-bar-footer{
+    height: 54px;
+}
+
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+main {
+    padding-bottom: 54px;
+}
+.section-1 {
+    ul {
+        padding: 0 15px;
+        list-style: none;
+        li {
+            margin-bottom: 15px;
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            .travel-agency {
+                padding: 8px 15px;
+                background: #3eb392;
+                color: #fff;
+                font-size: 0.32rem;
+            }
+            .detail-content-wrap {
+                font-size: 0.3rem;
+                color: #888888;
+                .content-top {
+                    padding: 0 15px;
+                    // background: #efeff4;
+                    .detail-section {
+                        position: relative;
+                        &::after {
+                            position: absolute;
+                            content: '';
+                            bottom: 0;
+                            width: 100%;
+                            height: 1px;
+                            background: #efeff4;
+                        }
+                        &>div {
+                            display: flex;
+                            &>div {
+                                height: 0.65rem;
+                                line-height: 0.65rem;
+                            }
+                            &>div:nth-child(1) {
+                                flex: 2;
+                            }
+                            &>div:nth-child(2) {
+                                flex: 1;
+                                text-align: right;
+                            }
+                        }
+                        .part-1 {
+                            
+                        }
+                    }
+                    .detail-section-1 {
+                        .part-1 {
+                            display: flex;
+                            div {
+                                flex: 1;
+                            }
+                        }
+                        .part-2 {
+                            div {
+    
+                            }
+                        }
+                    }
+                    .detail-section-2 {
+                        
+                        .part-1 {
+                            div {
+    
+                            }
+                        }
+                        .part-2 {
+                            div {
+    
+                            }
+                        }
+                    }
+                }
+                .content-bottom {
+                    display: flex;
+                    padding: 6px 15px;
+                    &> div {
+                        flex: 1;
+                        &> div {
+                            height: 0.65rem;
+                            line-height: 0.65rem;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

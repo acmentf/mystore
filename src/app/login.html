@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../assets/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../assets/css/login.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/css/app.css" />
+	</head>
+
+	<body>
+		<div id="login" class="mui-content login-container">
+			<div class="login-header">
+				<div></div>
+			</div>	
+			<div v-show="type==1">
+				<div class="mui-input-row login-input-tel">
+					<input type="text" class="mui-input-clear" v-model='account' placeholder="请输入账号" autocomplete="off">
+					<span class="mui-navigate-right down" data-down="down" :class="rotate? 'up':''"></span>
+					<ul :class="hidden ? 'mui-hidden' : ''" class="mui-table-view account-list">
+						<li class="account-item" v-for="item in accountList" :key="item" :data-account="item">{{item}} <span>&times;</span></li>
+					</ul>
+				</div>
+				<div class="mui-input-row login-input-code">
+					<input type="password" v-model="passWord" class="mui-input-clear" placeholder="请输入密码">
+				</div>
+				<div class="login-btn-box"><button type="button"id="accountlogin" class="mui-btn login-pass-btn">登 录</button></div>
+				<!--<div class="bottom_text">登录你的旅拍，留下最美瞬间</div>-->
+			</div>
+
+			
+			</div>
+		<script src="../assets/js/framework/common.js"></script>
+		<script src="../assets/js/mui.min.js"></script>
+		<script src="../assets/js/framework/define.js"></script>
+		<script src="../assets/js/framework/styles.js"></script>
+		<script src="../assets/js/framework/lf.js"></script>
+		<script src="../assets/libs/vue.min.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#login',
+				data: {
+				    code:false,
+					tel:'',
+					type:0,
+					account:'',
+					accountList:[],
+					passWord:'',
+					hidden: true,
+					rotate: false
+				}
+			});
+
+			lf.ready(function(){
+				var loginsign = window.Role.loginsign;
+				if(loginsign){
+					plus.navigator.closeSplashscreen();
+
+					var roleId = window.Role.currentPositions[0].roleId;
+					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
+					if(windowParams) {
+						lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
+					} else {
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					}
+
+					// if(window.Role.currentPositions[0].roleId==12){
+					// 	lf.window.openWindow('daily-manage','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
+					// } else {
+					// 	lf.window._openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+					// }
+				}else{
+					var hisAccount = lf.storage.get("LFACCOUNT");
+					if(hisAccount){
+						vm.accountList = hisAccount.split(",")
+						vm.account = hisAccount.split(",")[0]
+					}
+					vm.type = 1
+					plus.navigator.closeSplashscreen();
+				}
+				document.getElementById('login').addEventListener('tap', function(e){
+					if(e.target.getAttribute("data-down")) return
+					vm.hidden = true
+					vm.rotate = false
+				})
+				mui("body").on("tap", ".down", function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					if(vm.hidden){
+						vm.hidden = false
+						vm.rotate = true
+					}else{
+						vm.hidden = true
+						vm.rotate = false
+					}
+				})
+				mui("body").on("tap", ".account-item", function(e){
+					e.stopPropagation();
+					vm.account = this.getAttribute('data-account')
+					vm.hidden=true
+					vm.rotate=false
+				})
+				mui("body").on("tap", ".login-header", function(e){
+					e.stopPropagation();
+					lf.window._openWindow(ROLE_EMUN.cityManager.windowId, './market-expansion/manager-daily.html',{},{},lf.window.currentWebview());
+				})
+				mui("body").on("tap", ".account-item>span", function(e){
+					e.stopPropagation();
+					var account = this.parentNode.getAttribute('data-account')
+					lf.nativeUI.confirm("提示","确定删除账号"+account+"吗?",["确定","取消"],function(e){
+						if((e.index==0)){
+							var i = vm.accountList.indexOf(account)
+							vm.accountList.splice(i,1)
+							lf.storage.put("LFACCOUNT",vm.accountList.join(","));
+							if(vm.account == account){
+								vm.account = ''
+							}
+						}
+					} )
+				})
+			})
+			document.getElementById('accountlogin').addEventListener('tap',function(){
+			    if (!vm.account){
+                    lf.nativeUI.toast('请输入您的账号');
+                    return
+				}
+				if (!vm.passWord){
+			        lf.nativeUI.toast('请输入您的密码')
+					return
+				}
+                var info = plus.push.getClientInfo();
+                var params = {
+                    phone : vm.account,
+                    password: vm.passWord,
+                    clientId:info.clientid
+				}
+                lf.nativeUI.showWaiting();
+				lf.net.getJSON('/user/login',params,function (res) {
+					lf.nativeUI.closeWaiting();
+					if(res.code == 200) {
+						console.log(JSON.stringify(res.data));
+						if(!res.data.positions || (res.data.positions&&res.data.positions.length <= 0)){
+							lf.nativeUI.toast('无效的用户')
+							return ;
+						}
+						var accountList ;
+						if(lf.storage.get("LFACCOUNT")){
+							accountList = lf.storage.get("LFACCOUNT").split(",")
+						} else{
+							accountList = []
+						}
+						var flag = accountList.indexOf(vm.account)
+						if(flag>=0){
+							accountList.splice(flag,1)
+						}
+						accountList.unshift(vm.account)
+						lf.storage.put("LFACCOUNT",accountList.join(","));
+						var obj = {
+							usercode:res.data.id,
+							username:res.data.name,
+							phone:res.data.phone,
+							companyId:res.data.companyId,
+							userrole:res.data.positions[0].type,
+							userroleName: res.data.positions[0].name,
+							userroleId: res.data.positions[0].id,
+							tonken:res.data.token,
+							loginsign: '1',
+							auths: res.data.auths,
+							positions: res.data.userPositionList,
+							currentPositions: res.data.positions,
+							photograherId: res.data.photograherId
+						}
+						window.Role.save(obj)
+
+						var roleId = window.Role.currentPositions[0].roleId;
+						var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
+						if(windowParams) {
+							lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
+						} else {
+							lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+						}
+
+						// if(window.Role.currentPositions[0].roleId==12){
+						// 	lf.window.openWindow('daily-manage','daily-manage/daily-manage.html',{},{},lf.window.currentWebview())
+						// } else {
+						// 	lf.window._openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
+						// }
+					}else{
+						lf.nativeUI.toast(res.msg)
+					}
+                },function(res){
+                	lf.nativeUI.closeWaiting();
+                	lf.nativeUI.toast(res.msg)
+                })
+			})
+		</script>
+	</body>
+
+</html>

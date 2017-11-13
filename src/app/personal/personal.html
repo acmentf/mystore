@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../assets/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+    <link href="../../assets/css/app.css" rel="stylesheet"/>
+    <link href="../../assets/css/personal/personal.css" rel="stylesheet"/>
+    <style>
+    	#offCanvasWrapper .personal-list-key{
+    		font-size: 0.32rem;
+    	}
+    	#offCanvasWrapper .personal-list-value{
+    		font-size: 0.26rem;
+    	}
+    	#offCanvasWrapper .mui-table-view:before{
+    		background-color: #fff;
+    	}
+    	#offCanvasWrapper .mui-table-view-cell:after{
+    		background-color: #f1f1f1;
+    	}
+    	#offCanvasWrapper .footer-personage-icon{
+			background: url(../../images/message/nav_mine_green.png) no-repeat center;
+			background-size: 100%;
+		}
+		#offCanvasWrapper .footer-personage-text{
+			color: #31BA90;
+		}
+    </style>
+</head>
+<body>
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="offCanvasSide-header">
+                        <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <p class="offCanvasSide-header-name">欧阳筱筱</p>
+                    </div>
+
+                    <div class="offCanvasSide-role-wrap">
+                        <form>
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell mui-radio mui-left">
+                                    <input name="radio" type="radio">长沙研发部 执行主管 <span class="mui-badge mui-badge-danger">14</span>
+                                </li>
+                                <li class="mui-table-view-cell mui-radio mui-left">
+                                    <input name="radio" type="radio">长沙研发部 执行主管 <span class="mui-badge mui-badge-danger">14</span>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap">
+            <header id="personal-header" class="mui-bar mui-bar-nav">
+                <a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title" style="color: #fff;">个人</h1>
+            </header>
+
+            <div class="mui-content mui-scroll-wrapper personal-content" id="offCanvasContentScroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key" style="line-height: 60px;">头像</div>
+                        <img class="mui-pull-right personal-avatar" src="../../assets/css/images/logo_login.png">
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key">姓名</div>
+                        <div v-text="name" class="mui-pull-right personal-list-value"></div>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key">部门 / 职位</div>
+                        <div v-text="section" class="mui-pull-right personal-list-value"></div>
+                    </li>
+                </ul>
+
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key">手机</div>
+                        <div v-text="phone" class="mui-pull-right personal-list-value"></div>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key">邮箱</div>
+                        <div class="mui-pull-right personal-list-value">nishu@foxmail.com</div>
+                    </li>
+                    <li class="mui-table-view-cell reset-password">
+                        <a href="">
+                            <div class="mui-pull-left personal-list-key">修改密码</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view logout">
+                    <li class="mui-table-view-cell">
+                        <div class="mui-pull-left personal-list-key">退出账号</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mui-off-canvas-backdrop"></div>
+            			<div class="footer">
+				<div class="footer-order-btn">
+					<span class="footer-order-icon foot-icon"></span>
+					<span class="footer-order-text">订单</span>
+				</div>
+				<div class="footer-message-btn">
+					<span class="footer-message-icon foot-icon"></span>
+					<span class="footer-message-text">消息</span>
+				</div>
+				<div class="footer-personage-btn">
+					<span class="footer-personage-icon foot-icon"></span>
+					<span class="footer-personage-text">个人</span>
+				</div>
+			</div>
+			
+        </div>
+    </div>
+
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/mui.zoom.js"></script>
+    <script src="../../assets/js/mui.previewimage.js"></script>
+    <script src="../../assets/js/framework/common.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    <script src="./personal.js"></script> 
+</body>
+</html>

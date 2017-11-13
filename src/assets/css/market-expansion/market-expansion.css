@@ -1,0 +1,124 @@
+.mui-bar-footer{
+    height: 54px;
+}
+
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+
+.mui-bar + main.mui-content {
+    padding-bottom: 70px;
+}
+
+.version {
+    text-align: center
+}
+
+.section-container {
+    margin-top: 10px;
+}
+.section-0 {
+    display: flex;
+    padding: 0 25px;
+    background: #fff;
+    font-size: 0.32rem;
+}
+
+.section-0 div {
+    flex: 1;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.section-0 .num {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+}
+
+.remark {
+    padding:12px 10px;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
+.section-1 {
+    background: #fff;
+}
+.section-1>div {
+    padding: 11px 15px;
+    display: flex;
+}
+.section-1 div {
+    text-align: center;
+    /* border-right: 1px solid red; */
+}
+.section-1 .day {
+    flex: 1;
+}
+.section-1 .date {
+    flex: 4;
+    font-size: 0.3rem;
+}
+
+.section-2 {
+    /* border: 1px solid blue; */
+}
+.section-2 .table-item {
+    display: flex;
+    /* border: 1px solid red; */
+}
+.section-2 .table-item .left-part {
+    display: flex;
+    align-items: center;
+    flex: 3;
+    font-size: 0.3rem;
+    /* border: 1px solid red; */
+}
+.section-2 .table-item .right-part {
+    flex: 2;
+    font-size: 0.28rem;
+    /* border: 1px solid red; */
+    text-align: right;
+    padding-right: 30px;
+}
+.section-2 .table-item .right-part .summary {
+    color: #3eb392;
+}
+
+.section-3 {
+    margin-top: 0;
+    padding-bottom: 54px;
+}
+.section-3 .title {
+    background: #fff;
+    padding: 10px;
+    color: #3eb392;
+}
+.section-3 .mui-table-view-cell.mui-active {
+    background-color: #fff;
+}
+.section-3 .mui-table-view .mui-table-view-cell:after {
+    right: 15px;
+}
+.section-3 .mui-table-view-cell .date {
+    height: 0.6rem;
+    line-height: 0.6rem;
+}
+/* .section-3 .mui-table-view-cell .content {
+
+} */
+.section-3 .mui-table-view-cell .content>div {
+    display: flex;
+    font-size: 0.3rem;
+}
+.section-3 .mui-table-view-cell .content>div>div {
+    flex: 1;
+    height: 0.6rem;
+    line-height: 0.6rem;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--cwj-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/daily-manage/daily-manage.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        
+        .version {
+            text-align: center
+        }
+    </style>
+    <script src="../../assets/js/framework/common.js"></script>
+</head>
+
+<body>
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="offCanvasSide-header">
+                        <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <p class="offCanvasSide-header-name">{{username}}</p>
+                    </div>
+
+                    <form class="offCanvasSide-role-wrap mui-input-group">
+                        <div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
+                            <label>{{item.name}}</label>
+                            <input type="radio" v-bind:value="item.id" v-model="rolePositionId">
+                        </div>
+                    </form>
+
+                    <div class="offCanvasSide-logout">
+                        <button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+                    </div>
+
+                    <p class="version">v{{wgtVer}}</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap" style="background:#efeff4">
+            <header class="mui-bar mui-bar-nav" style="background:#fff;">
+                <a href="#offCanvasSide" style="color:#333" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title" style="color: #333;">日报管理</h1>
+                <a id="search" class="mui-icon mui-action-menu mui-pull-right">
+                    <img src="../../assets/images/order/search.png" alt="">
+                </a>
+                <a id="refresh" class="mui-icon mui-action-menu mui-pull-right">
+                    <img src="../../assets/images/order/refresh.png" alt="">
+                </a>
+            </header>
+            <footer class="mui-bar mui-bar-footer" v-if="currentRoleId==12">
+                <button type="button" class="mui-btn mui-btn-primary planBtn">填报计划</button>
+            </footer>
+            <div class="mui-scroll-wrapper mui-content">
+                <div class="mui-scroll">
+                    <div class="daily-content">
+                        <section class="today-data bgwhite">
+                            <div class="title">
+                                <div>
+                                    <p class="head">今日数据</p>
+                                    <p class="badge" v-if="todayData.flag==1">计划被改</p>
+                                    <p class="plan"><span></span>计划</p>
+                                    <p class="fact"><span></span>实际</p>
+                                </div>
+                                <span class="detail" id="detail">查看详情</span>
+                            </div>
+                            <div class="progress-container">
+                                <p class="title">销售完成率</p>
+                                <div class="progressbar">
+                                    <span class="progress" :class="todayData.realityAmount/todayData.planAmount<1?'yellow':''" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
+                                </div>
+                                <div class="proportion">
+                                    <p><span v-text="todayData.realityAmount"></span>/<span v-text="todayData.planAmount"></span></p>
+                                    <p>完成率: <span v-text="todayData.planAmount==0?'- -':todayData.proportionAmount"></span></p>
+                                </div>
+                            </div>
+                            <div class="progress-container">
+                                <p class="title">服务覆盖率</p>
+                                <div class="progressbar">
+                                    <span class="progress" :class="todayData.planPersons!==0&&todayData.realityPersons/todayData.planPersons<1?'yellow':''" :style="{width:todayData.planPersons==0&&todayData.realityPersons!=0?'55%':todayData.proportionCoverage}"></span>
+                                </div>
+                                <div class="proportion">
+                                    <p><span v-text="todayData.realityPersons"></span>/<span v-text="todayData.planPersons"></span></p>
+                                    <p>完成率: <span v-text="todayData.planPersons==0?'- -':todayData.proportionCoverage"></span></p>
+                                </div>
+                            </div>
+                                <div class="mui-content data-table bgwhite">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3"></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">预期</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">计划</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3">实际</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3 title">销售额</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.expectAmount"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.planAmount"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.realityAmount"></span></div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-3 mui-col-sm-3 title">开发人数</div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.expectPersons"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.planPersons"></span></div>
+                                        <div class="mui-col-xs-3 mui-col-sm-3"><span class="num" v-text="todayData.realityPersons"></span></div>
+                                    </div>
+                                </div>
+                                <div class="remark" :data-planDate="todayData.planDate" :data-planPersons="todayData.planPersons" :data-planAmount="todayData.planAmount" :data-planShootNums="todayData.planShootNums" :data-remark="todayData.remark">
+                                    <p class="title">备注</p>
+                                    <p class="title"><span class="placeholder" v-text="todayData.remark || '请输入缺填或数据偏差大的原因'"></span><span class="right mui-icon mui-icon-arrowright"></span></p>
+                                </div>
+                        </section>
+                        <section class="future-data">
+                            <p>未来三天日报计划</p>
+                            <div class="info bgwhite" v-for="item in futureData" :key="item">
+                                <div class="date">
+                                    <img src="../../assets/images/order/date.png">
+                                    <span v-text="item.planDate"></span>
+                                    <span class="badge" v-if="item.flag==1">计划被改</span>
+                                </div>
+                                <div class="mui-content">
+                                    <div class="mui-row bgwhite">
+                                        <div class="mui-col-xs-4 title">预期销售额</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.expectAmount"></span></div>
+                                        <div class="mui-col-xs-4 title">计划销售额</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.planAmount"></span></div>
+                                    </div>
+                                    <div class="mui-row bgwhite">
+                                        <div class="mui-col-xs-4 title">预期发团人数</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.expectPersons"></span></div>
+                                        <div class="mui-col-xs-4 title">计划发团人数</div>
+                                        <div class="mui-col-xs-2"><span class="num" v-text="item.planPersons"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+
+        <script src="../../assets/js/mui.min.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+        <script src="../../assets/js/framework/define.js"></script>
+        <script src="../../assets/js/framework/styles.js"></script>
+        <script src="../../assets/js/framework/lf.js"></script>
+        <script src="../../assets/libs/vue.min.js"></script>
+        <script src="../../assets/update.js"></script>
+        <script src="daily-manage.js"></script>
+</body>
+
+</html>

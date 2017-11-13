@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../assets/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../assets/css/order-entering/result.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.poppicker.css" />
+		<style>
+			html,body,.mui-content{
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">执行结果</h1>
+		</header>
+		<div id="resultData" class="mui-content result-login-container">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<label>拍摄人次：</label>
+					<input v-model="shootPeoNum" type="number" class="mui-input-clear" placeholder="请输入拍摄人次">
+				</div>
+				<div class="mui-input-row">
+					<label>拍摄张数：</label>
+					<input v-model="shootNum" type="number" class="mui-input-clear" placeholder="请输入拍摄张数">
+				</div>
+				<div class="mui-input-row">
+					<label>选片张数：</label>
+					<input v-model="selectsNum" type="number" class="mui-input-clear" placeholder="请输入选片张数">
+				</div>
+				<div class="mui-input-row">
+					<label>打印张数：</label>
+					<input v-model="printsNum" type="number" class="mui-input-clear" placeholder="请输入打印张数">
+				</div>
+				<div class="mui-input-row give-number group-info">
+					<label>赠送张数：</label>
+					<div class="select">
+						<span class="mui-icon mui-icon-arrowdown size-icon"></span>
+						<input type="text" v-model="givesPicSize" class="select-size" readonly="readonly" placeholder="尺寸" />
+					</div>
+					<input v-model="givesNum" type="number" class="mui-input-clear select-number" placeholder="请输入赠送张数">
+				</div>
+				<div class="mui-input-row add-detail-box">
+					<label class="add-detail-btn">销售明细：</label>
+					<span id="add-detail" class="add-detail-icon mui-icon mui-icon-plus">增加</span>
+				</div>
+				<table class="table-box" border="1" bordercolor="#808080">
+					<tr>
+						<th>照片尺寸</th>
+						<th>单价</th>
+						<th>数量</th>
+						<th>合计</th>
+						<th></th>
+					</tr>
+					<tr class="listchange" v-for="(v, index ) in orderXms">
+						<td>{{v.picSizeName}}</td>
+						<td>{{v.price}}</td>
+						<td>{{v.picNum}}</td>
+						<td v-text="addNum(v.price,v.picNum)"></td>
+						<td><span :data-index="index" class="mui-icon mui-icon-minus deleteBtn"></span></td>
+					</tr>
+				</table>
+				<div class="mui-input-row">
+					<label>销售总额：</label>
+					<input v-model="salesAmt" type="number" class="mui-input-clear" placeholder="请输入销售总额">
+				</div>
+				<div class="mui-input-row">
+					<label>购买人数：</label>
+					<input v-model="buyers" type="number" class="mui-input-clear" placeholder="请输入购买人数">
+				</div>
+				<div class="mui-input-row">
+					<label>接待人数：</label>
+					<input v-model="receiveNum" type="number" class="mui-input-clear" placeholder="请输入接待人数">
+				</div>
+				<div class="mui-input-row  group-info">
+			        <label>销售时间：</label>
+					<input type="text" v-model="saleDate"  class="mui-input-clear selectDate" readonly="readonly" placeholder="请选择销售时间"/>
+			        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
+		    	</div>
+			</div>
+			<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>
+		</div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/mui.picker.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#resultData',
+				data: {
+					orderId: '',
+					id: '',
+					shootPeoNum: '',
+					shootNum: '',
+					selectsNum: '',
+					printsNum: '',
+					givesNum: '',
+					givesPicSize: '',
+					salesNum: '',
+					salesAmt: '',
+					buyers: '',
+					receiveNum: '',
+					saleDate: '',
+					orderXms: [
+					]
+				},
+				methods: {
+					addNum: function(num1, num2) {
+						var num = lf.util.multNum(num1, num2)
+						return num
+					}
+				}
+			})
+			lf.ready(function() {
+				var opts = {
+					"type": "date"
+				}
+				picker = new mui.DtPicker(opts);
+				userPicker = new mui.PopPicker();
+				userPicker.setData([{
+					value: '1',
+					text: '16寸'
+				}, {
+					value: '2',
+					text: '12寸'
+				}, {
+					value: '3',
+					text: '10寸'
+				}, {
+					value: '4',
+					text: '8寸'
+				}, {
+					value: '5',
+					text: '6寸'
+				}]);
+				var wv = lf.window.currentWebview()
+				vm.orderId = wv.orderNo
+				vm.orderXms.picSize = wv.picSize
+				vm.orderXms.price = wv.price
+				vm.orderXms.picNum = wv.picNum
+				loadResult()
+			})
+			mui('.group-info').on('tap', '.select', function() {
+				userPicker.show(function(items) {
+					vm.givesPicSize = items[0].text
+				});
+			})
+			mui('.group-info').on('tap', '.selectDate', function(){
+						initDateChoose();
+			})
+			mui('.mui-content').on('tap', '.deleteBtn', function() {
+				var index = this.getAttribute('data-index')
+				var old = 0;
+				var temp = 0;
+				var rs = 0;
+				vm.orderXms.forEach(function(v) {
+					old = lf.util.addNum(old, lf.util.multNum(v.picNum, v.price))
+				})
+
+				if(vm.salesAmt) {
+					temp = vm.salesAmt
+				}
+				vm.orderXms.splice(index, 1)
+				if(old == temp) {
+					vm.orderXms.forEach(function(v) {
+						rs = lf.util.addNum(rs, lf.util.multNum(v.picNum, v.price))
+					})
+					vm.salesAmt = rs;
+				}
+				
+			})
+
+			function loadResult() {
+
+				var params = {
+					orderId: vm.orderId
+				}
+				lf.nativeUI.showWaiting()
+				lf.net.getJSON('/order/getOrderResult', params, function(res) {
+					lf.nativeUI.closeWaiting()
+					if(res.code == 200) {
+						if(!res.data) {
+							return;
+						}
+						vm.shootPeoNum = res.data.orderX.shootPeoNum
+						vm.shootNum = res.data.orderX.shootNum
+						vm.receiveNum = res.data.orderX.receiveNum
+						vm.buyers = res.data.orderX.buyers
+						vm.givesNum = res.data.orderX.givesNum
+						vm.givesPicSize = res.data.orderX.givesPicSize
+						vm.id = res.data.orderX.id
+						vm.orderId = res.data.orderX.orderId
+						vm.printsNum = res.data.orderX.printsNum
+						vm.salesAmt = res.data.orderX.salesAmt
+						vm.salesNum = res.data.orderX.salesNum
+						vm.selectsNum = res.data.orderX.selectsNum
+						vm.orderXms = res.data.orderXms
+						if(res.data.orderX.saleDate){
+							vm.saleDate = new Date(res.data.orderX.saleDate).format('yyyy-MM-dd')
+						}
+						switch(res.data.orderX.givesPicSize) {
+							case '1':
+								vm.givesPicSize = '16寸'
+								break
+							case '2':
+								vm.givesPicSize = '12寸'
+								break
+							case '3':
+								vm.givesPicSize = '10寸'
+								break
+							case '4':
+								vm.givesPicSize = '8寸'
+								break
+							case '5':
+								vm.givesPicSize = '6寸'
+								break
+						}
+						vm.orderXms.forEach(function(v){
+							switch(v.picSizeName) {
+								case '16寸':
+									v.picSize = '1';
+									break
+								case '12寸':
+									v.picSize = '2';
+									break
+								case '10寸':
+									v.picSize = '3';
+									break
+								case '8寸':
+									v.picSize = '4';
+									break
+								case '6寸':
+									v.picSize = '5';
+									break
+							}
+						})
+					} else {
+						lf.nativeUI.toast(res.msg);
+					}
+				}, function(res) {
+					lf.nativeUI.closeWaiting()
+					lf.nativeUI.toast(res.msg)
+				})
+			}
+			document.getElementById('save').addEventListener('tap', function() {
+				vm.salesNum = 0;
+				vm.orderXms.forEach(function(v) {
+					vm.salesNum = lf.util.addNum(vm.salesNum, v.picNum)
+				})
+				var params = {
+					orderId: vm.orderId,
+					id: vm.id,
+					selectsNum: vm.selectsNum,
+					printsNum: vm.printsNum,
+					givesNum: vm.givesNum,
+					givesPicSize: vm.givesPicSize,
+					salesNum: vm.salesNum,
+					salesAmt: vm.salesAmt,
+					buyers: vm.buyers,
+					orderXms: vm.orderXms,
+					shootPeoNum: vm.shootPeoNum,
+					shootNum: vm.shootNum,
+					saleDate: vm.saleDate,
+					receiveNum: vm.receiveNum
+				}
+				switch(params.givesPicSize) {
+					case '16寸':
+						params.givesPicSize = '1'
+						break
+					case '12寸':
+						params.givesPicSize = '2'
+						break
+					case '10寸':
+						params.givesPicSize = '3'
+						break
+					case '8寸':
+						params.givesPicSize = '4'
+						break
+					case '6寸':
+						params.givesPicSize = '5'
+						break
+				}
+				lf.nativeUI.showWaiting()
+				lf.net.getJSON('order/saveOrderResult', params, function(res) {
+					lf.nativeUI.closeWaiting()
+					if(res.code == 200) {
+						lf.nativeUI.toast('保存成功！');
+						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+						lf.window.closeCurrentWebview();
+					} else {
+						lf.nativeUI.toast(res.msg);
+					}
+				}, function(res) {
+					lf.nativeUI.closeWaiting()
+					lf.nativeUI.toast(res.msg)
+				})
+			})
+			document.getElementById('add-detail').addEventListener('tap', function() {
+				lf.window.openWindow('add-detail', 'add-detail.html')
+			})
+			function initDateChoose() {
+					picker.show(function(rs) {
+					vm.saleDate = rs.value
+				});
+			}
+			lf.event.listener('listchange', function(e) {
+				var old = 0
+				var temp = 0;
+				var rs = 0;
+				vm.orderXms.forEach(function(v) {
+					old = lf.util.addNum(old, lf.util.multNum(v.picNum, v.price))
+				})
+
+				if(vm.salesAmt) {
+					temp = vm.salesAmt
+				}
+				vm.orderXms.push(e.detail)
+				if(old == temp) {
+					rs = lf.util.addNum(old, lf.util.multNum(e.detail.price, e.detail.picNum))
+					vm.salesAmt = rs;
+				}
+			})
+		
+
+		</script>
+	</body>
+
+</html>

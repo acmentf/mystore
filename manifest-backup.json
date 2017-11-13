@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "dist/app/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "app/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -1601,42 +1601,6 @@
 					"js/framework/styles.js"
 				],
 				"refer": [],
-				"priority": 0
-			},
-			"dist/app/statistics/daily-paper.html": {
-				"resources": [
-					"dist/assets/js/mui.poppicker.js",
-					"dist/assets/css/mui.picker.css",
-					"dist/assets/css/mui.poppicker.css",
-					"dist/assets/js/mui.pullToRefresh.js",
-					"dist/assets/images/statistics/more.png",
-					"dist/js/statistics/daily-paper.js",
-					"dist/assets/js/mui.pullToRefresh.material.js",
-					"dist/assets/css/statistics/daily-paper.css",
-					"dist/assets/libs/vue-echarts.js",
-					"dist/assets/css/common/common.css",
-					"dist/assets/js/mui.picker.min.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"dist/app/login.html": {
-				"resources": [
-					"dist/assets/css/mui.min.css",
-					"dist/assets/js/framework/define.js",
-					"dist/assets/js/mui.min.js",
-					"dist/assets/css/app.css",
-					"dist/assets/css/images/logo_login.png",
-					"dist/assets/css/login.css",
-					"dist/assets/libs/vue.min.js",
-					"dist/assets/js/framework/styles.js",
-					"dist/assets/js/framework/common.js",
-					"dist/assets/js/framework/lf.js",
-					"dist/assets/fonts/mui.ttf"
-				],
-				"refer": [
-					"dist/app/statistics/daily-paper.html"
-				],
 				"priority": 0
 			}
 		},

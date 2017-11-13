@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../assets/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/order/order.css" />
+
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+
+				margin: 0;
+			}
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+		</style>
+		<script src="../../assets/js/framework/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单列表</h1>
+		</header>
+		<div id="app" class="mui-content orderlist-content" >
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-input-row search">
+					<!--<div class="searchspan" v-model="seachTest">搜索订单</div>-->
+					<!--<input class="searchspan" style="width: 100%;" v-model="searchText" placeholder="订单编号/导游姓名/团号">-->
+					<input type="search" style="width: 100%;" v-model="searchText" class="searchspan" placeholder="订单编号/导游姓名/团号">
+					<span id="searchBtn" class="searchicon">搜索</span>
+				</div>
+				<div class="seach-history" v-show="!showAnswer">
+					<div class="search-jilu-title">
+						<div>搜索记录</div>
+						<div id="clearBtn">清除记录</div>
+					</div>
+					<div class="search-jilu-neirong">
+						<div class="hisbtn" v-for="data in his" v-text="data"></div>
+					</div>
+				</div>
+				<div style="background: #fff;padding: 10px;height: .8rem;" v-show="showAnswer">搜索结果</div>
+				<div class="mui-scroll">
+					<ul class="order-ul" v-show="showAnswer">
+						<li class="order-li" v-for="item in orderList">
+							<div class="mui-table title">
+								<div class="mui-table-cell mui-col-xs-8">
+									订单编号:<span v-text="item.orderNo"></span>
+								</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right dqr" v-if="item.status ==1" >已支付</div>
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==2" >已确认</div>-->
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right yqx" v-else-if="item.status ==3" >已取消</div>
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==4" >已指派</div>
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right ylr" v-else-if="item.status ==5" >已录入</div>-->
+								<!--<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else-if="item.status ==6" >已分配</div>-->
+								<div class="mui-table-cell mui-col-xs-4 mui-text-right" v-else>已完成</div>
+							</div>
+							<div class="nr" :data-id="item.id">
+								<div class="imgbody">
+									<div class="item" style="color: green;">
+										执行状态: <span v-if="item.actionStatus == 0">待处理</span>
+										<span v-if="item.actionStatus == 1">已完成计调</span>
+										<span v-if="item.actionStatus == 2">已分配摄影师</span>
+										<span v-if="item.actionStatus == 3">已完成拍照</span>
+										<span v-if="item.actionStatus == 4">已完成输出</span>
+									</div>
+									<div class="item">
+										导游: {{item.tourGuide}}
+									</div>
+									<div class="item">
+										团号: {{item.tourNo}}
+									</div>
+									<div class="item">
+										产品: {{item.productName}}
+									</div>
+									<div class="item">
+										采购方: {{item.purchaser}}
+									</div>
+									<div class="item">
+										<span class="jespan">金额: <span>￥{{(item.totalPrice/100).toFixed(2)}}</span></span>
+									</div>
+								</div>
+							</div>
+							<div class="mui-table bottom">
+								<!--<div class="mui-table-cell mui-col-xs-4">
+									<span class="jespan">金额: <span>￥{{item.totalPrice}}</span></span>
+								</div>-->
+								<!--<div class="mui-table-cell mui-col-xs-8 mui-text-right">
+									<div class="btns" v-show="item.status==1">
+										<button type="button" class="mui-btn mui-btn-danger" :data-id="item.orderNo">
+											确认
+										</button>
+										<button type="button" class="mui-btn mui-btn-danger" :data-id="item.orderNo">
+											取消
+										</button>
+									</div>
+
+									<div class="btns" v-show="item.status==5">
+										<button type="button" class="mui-btn mui-btn-danger gzxx" :data-id="item.orderNo">
+											跟踪信息
+										</button>
+										<button type="button" class="mui-btn mui-btn-danger zxxx" :data-id="item.orderNo">
+											执行结果
+										</button>
+									</div>-->
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/mui.pullToRefresh.js"></script>
+		<script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+		<script src="ordersearch.js"></script>
+	</body>
+
+</html>

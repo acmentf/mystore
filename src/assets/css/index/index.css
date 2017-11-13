@@ -1,0 +1,125 @@
+.app-index #app{
+	position: fixed;
+	z-index: 998;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../../images/index/bg.png) no-repeat center top;
+  background-size: 100% 100%;
+}
+.app-index .toolbar {
+  text-align: right;
+  padding: 0.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.app-index .toolbar .rolename{
+	float: left;
+	text-align: left;
+    font-size: 0.28rem;
+    color: #999;
+    width: 50%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.app-index .toolbar .search, .app-index .toolbar .message {
+  background: url(../../images/index/icon_search.png) no-repeat;
+  background-size: 100% 100%;
+  width: 0.6rem;
+  height: 0.6rem;
+  display: inline-block;
+  margin: 0 0.1rem;
+  vertical-align: middle;
+}
+
+.app-index .toolbar .message {
+  background: url(../../images/index/icon_messige_off.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .toolbar .hasmessage {
+  background: url(../../images/index/icon_messige_on.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.app-index .content {
+  color: #fff;
+  font-size: 0.06rem;
+  overflow: hidden;
+  width: 5.6rem;
+  margin: 45% auto 0;
+}
+
+.app-index .content .mod {
+  float: left;
+  width: 2.1rem;
+  height: 2.4rem;
+  margin:0 0  0.4rem 0;
+
+}
+.app-index .content .mod .info {
+   height:2.1rem;
+   width: 100%;
+}
+
+.app-index .content .mod .number {
+  font-size:0.36rem;
+  float: right;
+   width: 2.1rem;
+  height: 2.1rem;
+  background:url(../../images/index/orderbg.png) no-repeat;
+  background-size:100% 100%;
+   text-align: center;
+   line-height: 2.1rem;
+   display: block;
+}
+.app-index .content .mod .title{
+	font-size: 0.3rem;
+}
+.app-index .content .mod .ico {
+  background:url(../../images/index/icon_pending.png) no-repeat;
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
+  background-size: 100% 100%;
+  margin-right: 0.1rem;
+  vertical-align: middle;
+}
+.app-index .content .mod .ico-completed {
+  background:url(../../images/index/icon_done.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .mod .ico-cancled {
+  background:url(../../images/index/icon_cancel.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .mod .ico-assigned {
+  background:url(../../images/index/icon_distribute.png) no-repeat;
+  background-size: 100% 100%;
+}
+.app-index .content .pending{
+	margin-right: 1.4rem;
+}
+.app-index .content .cancled{
+	margin-right: 1.4rem;
+}
+.app-index  .bottom_text{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 1rem;
+	letter-spacing:0.08rem;
+	font-size: 0.28rem;
+	color: #9f9f9f;
+	text-align: center;
+}
+.app-index  .icon-tuichu,.app-index  .ico-loop{
+	color: #fff;
+	font-size: 0.6rem;
+	margin: 0 0.1rem;
+    vertical-align: middle;
+}
+
