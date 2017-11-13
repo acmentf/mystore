@@ -83,10 +83,10 @@
                             <div class="progress-container">
                                 <p class="title">销售完成率</p>
                                 <div class="progressbar">
-                                    <span class="progress" :class="todayData.realityAmount/todayData.planAmount<1?'yellow':''" :style="{ width: todayData.planAmount==0&&todayData.realityAmount!=0?'55%':todayData.proportionAmount}"></span>
+                                    <span class="progress" :class="todayData.appAmt/todayData.planAmount<1?'yellow':''" :style="{ width: todayData.planAmount==0&&todayData.appAmt!=0?'55%':todayData.proportionAmount}"></span>
                                 </div>
                                 <div class="proportion">
-                                    <p><span v-text="todayData.realityAmount"></span>/<span v-text="todayData.planAmount"></span></p>
+                                    <p><span v-text="todayData.appAmt"></span>/<span v-text="todayData.planAmount"></span></p>
                                     <p>完成率: <span v-text="todayData.planAmount==0?'- -':todayData.proportionAmount"></span></p>
                                 </div>
                             </div>
