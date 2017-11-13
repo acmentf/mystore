@@ -374,11 +374,11 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				tourGuidePhone : vm.groupInfo.tourGuidePhone,//导游电话
 				isPreTour :vm.groupInfo.prePropsValue,//前置属性
 				prePrice :vm.groupInfo.prePrice * 100,//前置金额
+				shootType :vm.groupInfo.shootTypeValue,//拍摄类型
 		},
 		tourGroups: {
 				id: vm.marchInfo.id,
 				groupType :vm.groupInfo.groupType,//团性质
-				shootType :vm.groupInfo.shootTypeValue,//拍摄类型
 				personCount : vm.groupInfo.personCount,//团人数
 				startTime :vm.marchInfo.startTime,//出团日期
 				groupDays : vm.marchInfo.groupDays,//行程天数
@@ -459,7 +459,7 @@ function renderTrackInfo(){
 				assignNames : data.data.assignNames,//导游姓名
 				lineName :data.data.lineName,//线路名称
 				groupType :data.data.groupType,//团性质
-				shootType :vm.shootTypeArr[data.data.shootType],//拍摄类型
+				shootType :vm.shootTypeArr[data.data.shootType - 1],//拍摄类型
 				personCount : data.data.personCount,//团人数
 				preProps : _pre,//前置属性
 				prePropsValue : data.data.isPreTour,//前置属性
