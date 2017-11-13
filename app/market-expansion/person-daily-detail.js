@@ -12,7 +12,18 @@ Vue.filter('actionStatusFormat', function(val){
         0: "待计调", 11: "待分配", 22: "待输出", 33: "待销售", 44: "已确认销售", 55: "已完成"
     }
     return emum[val];
-})
+});
+
+Vue.filter('lengthTo8', function(value, length){
+    if(value) {
+        if(value.length > length) {
+            return value.substr(0, length) +'...'
+        } else {
+            return value
+        }
+    }
+});
+
 var vm = new Vue({
     el: '#app',
     data: function() {

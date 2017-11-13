@@ -12,15 +12,28 @@ var vm = new Vue({
     },
     computed: {
         completeRate: function() {
-            if(this.monthPlanAmt == 0) {
+            if(this.monthPlanAmt == 0 || this.monthAmount == null) {
+                return "0.00%";
+            }
+            if(this.monthAmount == 0 || this.monthAmount == null) {
                 return "0.00%";
             }
             return (this.monthAmount/this.monthPlanAmt * 100).toFixed(2) + "%";
         },
         chartOptions: function() {
             var that = this;
+            var completeAmount = this.monthAmount;
             var restAmount = this.monthPlanAmt - this.monthAmount;
-            restAmount = restAmount > 0? restAmount : 0;
+            if(completeAmount > 0) {
+                if(restAmount < 0) {
+                    // 超额完成
+                    restAmount = 0;
+                }
+            } else {
+                // 完成数 为0
+                restAmount = 1;
+                completeAmount = 0;
+            }
             return {
                 series: [
                     {
@@ -34,11 +47,7 @@ var vm = new Vue({
                                 position: 'center'
                             },
                             emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '30',
-                                    fontWeight: 'bold'
-                                }
+                                show: false,
                             }
                         },
                         labelLine: {
@@ -47,9 +56,24 @@ var vm = new Vue({
                             }
                         },
                         data:[
-                            // TODO: 颜色
-                            {value: that.monthAmount, name:'已完成'},
-                            {value: restAmount, name:'未完成'},
+                            {
+                                value: completeAmount,
+                                name:'已完成',
+                                itemStyle: {
+                                    normal: {
+                                        color: "#3eb392"
+                                    }
+                                }
+                            },
+                            {
+                                value: restAmount,
+                                name:'未完成',
+                                itemStyle: {
+                                    normal: {
+                                        color: "#b5b5b5"
+                                    }
+                                }
+                            }
                         ]
                     }
                 ]
@@ -70,9 +94,9 @@ lf.ready(function() {
                 if(resData.dailyList.length == 0) {
                     lf.nativeUI.toast('没有详细数据');
                 }
-                vm.monthAmount = resData.monthAmount;
+                vm.monthAmount = resData.monthAmount || 0;
                 vm.planCompletedList = resData.dailyList;
-                vm.monthPlanAmt = resData.monthPlanAmt;
+                vm.monthPlanAmt = resData.monthPlanAmt || 0;
             } else {
             }
         } else {
