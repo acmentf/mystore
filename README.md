@@ -41,14 +41,10 @@ npm start
 ├── config                   # 项目配置文件
 │   ├── webpack.config.js    # webpack 配置文件
 ├── src                      # 程序源文件
-│   └── js                   # 页面js入口
-│   ├   └── index.js         # 匹配 app/index.html
-│   ├   └── user
-│   ├   ├    ├── index.js    # 匹配 app/user/index.html
 │   └── app                  # 页面入口
 │   ├    └── index.html       # 对应 js/index.js
 │   ├    └── user
-│   ├        ├── index.html   # 对应 js/user/index.js
+│   ├        ├── index.html   # 对应 js/user/index.js html文件名和js文件名需相同
 │   └── component             # 组件
 │   ├    └── other
 │   └── template              # html 模板目录
