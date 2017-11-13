@@ -1,3 +1,4 @@
+
 Vue.filter('dateFormatter', function(date){
     var reg = /^NaN/;
     var result = new Date(date).format('yyyy-MM-dd');
@@ -277,12 +278,19 @@ lf.ready(function() {
         var userId = this.getAttribute('data-userid');
         var date = this.getAttribute('data-date');
         var userName = this.getAttribute('data-user-name');
-        // 个人日报数据详情
-        lf.window.openWindow('person-daily-detail', './person-daily-detail.html', {}, {
-            userId: userId,
-            date: date,
-            userName: userName
-        })
+
+        if(userId == undefined || userName == undefined) {
+            lf.nativeUI.toast("没有更多详情");
+        } else {
+            // 个人日报数据详情
+            lf.window.openWindow('person-daily-detail', './person-daily-detail.html', {}, {
+                userId: userId,
+                date: date,
+                userName: userName
+            })
+        }
+        
+        
     });
     mui('body').on('tap', '.remark', function(){
         lf.window.openWindow('market-expansion-remark', './remark.html', {}, {
@@ -304,6 +312,8 @@ lf.ready(function() {
 			}
 		});
     })
+
+    initPage();
     
     lf.event.listener('refreshData', function(e) {
         lf.window.currentWebview().reload()

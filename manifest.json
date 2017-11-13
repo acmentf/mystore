@@ -278,7 +278,8 @@
 					"app/order/orderlist.html",
 					"app/daily-manage/daily-manage.html",
 					"app/statistics/daily-paper.html",
-					"app/market-expansion/market-expansion.html"
+					"app/market-expansion/market-expansion.html",
+					"app/market-expansion/manager-daily.html"
 				],
 				"priority": 0
 			},
@@ -389,7 +390,8 @@
 					"app/result/sales-export.html",
 					"app/schedule/details.html",
 					"app/statistics/daily-paper.html",
-					"app/market-expansion/market-expansion.html"
+					"app/market-expansion/market-expansion.html",
+					"app/market-expansion/manager-daily.html"
 				],
 				"priority": 0
 			},
@@ -1529,7 +1531,11 @@
 					"libs/vue.min.js",
 					"app/update.js",
 					"app/market-expansion/market-expansion.js",
-					"css/images/logo_login.png"
+					"css/images/logo_login.png",
+					"app/market-expansion/component/expansion-completed-summary.js",
+					"app/market-expansion/minix/userPositionInfo.js",
+					"app/market-expansion/component/expansion-completed-summary.tpl",
+					"app/market-expansion/component/less.min.js"
 				],
 				"refer": [
 					"app/market-expansion/group-plan-completion.html",
@@ -1537,7 +1543,9 @@
 					"app/login.html",
 					"app/market-expansion/expansion-plan.html",
 					"app/statistics/daily-paper.html",
-					"app/daily-manage/daily-manage.html"
+					"app/daily-manage/daily-manage.html",
+					"app/market-expansion/person-daily-detail.html",
+					"app/market-expansion/manager-daily.html"
 				],
 				"priority": 2
 			},
@@ -1546,6 +1554,53 @@
 				"refer": [
 					"app/daily-manage/daily-order.html"
 				],
+				"priority": 0
+			},
+			"app/market-expansion/manager-daily.html": {
+				"resources": [
+					"app/market-expansion/component/expansion-completed-summary.js",
+					"app/market-expansion/minix/userPositionInfo.js",
+					"js/mui.picker.min.js",
+					"css/market-expansion/manager-daily.css",
+					"css/app.css",
+					"css/mui.dtpicker.css",
+					"css/mui.min.css",
+					"app/market-expansion/manager-daily.js",
+					"css/common/common.css",
+					"css/mui.picker.min.css",
+					"app/market-expansion/component/less.min.js",
+					"js/mui.dtpicker.js",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/framework/styles.js",
+					"css/images/logo_login.png",
+					"js/mui.min.js",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/daily-manage/daily-manage.html",
+					"app/order/orderlist.html"
+				],
+				"priority": 0
+			},
+			"app/market-expansion/person-daily-detail.html": {
+				"resources": [
+					"app/market-expansion/person-daily-detail.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"css/common/common.css",
+					"css/market-expansion/person-daily-detail.css",
+					"js/framework/define.js",
+					"js/framework/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"libs/vue.min.js",
+					"js/framework/lf.js",
+					"js/framework/styles.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

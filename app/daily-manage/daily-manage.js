@@ -129,9 +129,9 @@ function switchRolePostion(val) {
         var roleId = window.Role.currentPositions[0].roleId;
 		var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 1);
 		if(windowParams) {
-			GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{},,lf.window.currentWebview());
+			GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview());
 		} else {
-			GLOBAL_SHOOT.switchPositionOpenWindow('order','../order/orderlist.html',{},{},,lf.window.currentWebview());
+			GLOBAL_SHOOT.switchPositionOpenWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview());
 		}
 		init()		
     })
