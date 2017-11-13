@@ -17,9 +17,8 @@ var vm = new Vue({
 })
 
 lf.ready(function() {
-	vm.currentOrderId = lf.window.currentWebview().orderid
+	vm.currentOrderId = Utils.getPageParams("statuslog").orderid
 	getStatusLogList()
-
 })
 
 function getStatusLogList() {

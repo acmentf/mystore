@@ -93,8 +93,9 @@
         })
 
         lf.ready(function() {
-            vm.currentId = lf.window.currentWebview().orderId
-            vm.areaCode = lf.window.currentWebview().areaCode
+            var query = Utils.getPageParams("quickOrderPayList");
+            vm.currentId = query.orderId
+            vm.areaCode = query.areaCode
 
             function getOrderPayList() {
                 vm.curPage++

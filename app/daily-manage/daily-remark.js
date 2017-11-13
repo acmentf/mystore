@@ -15,11 +15,12 @@ var vm = new Vue({
     }
 })
 lf.ready(function() {
-    vm.planDate = lf.window.currentWebview().planDate
-    vm.planPersons = lf.window.currentWebview().planPersons
-    vm.planAmount = lf.window.currentWebview().planAmount
-    vm.planShootNums = lf.window.currentWebview().planShootNums
-    vm.remark = lf.window.currentWebview().remark
+    var query = Utils.getPageParams("dailyRemark")
+    vm.planDate = query.planDate
+    vm.planPersons = query.planPersons
+    vm.planAmount = query.planAmount
+    vm.planShootNums = query.planShootNums
+    vm.remark = query.remark
     vm.textLenth = vm.remark? vm.remark.length:0
     // 保存
     mui("body").on("tap", ".save-btn", function() {

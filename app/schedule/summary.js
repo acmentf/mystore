@@ -6,20 +6,12 @@ lf.ready(function () {
         userId:'',
         photographerId: ''
     }
-    function setPageParams(params) {
-        mui.each(pageParams,function (key) {
-            if(key in params){
-                pageParams[key] = params[key]||''
-            }
-        })
-    }
-    mui.plusReady(function(){
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
-    window.addEventListener('pageParams',function(event){
-        setPageParams(event.detail)
-    });
+
+    var query = Utils.getPageParams('scheduleSummary')
+    pageParams.tourId = query.tourId;
+    pageParams.orderId = query.orderId;
+    pageParams.userId = query.userId;
+    pageParams.photographerId = query.photographerId;
 
    var vm = new Vue({
         el: '#app',

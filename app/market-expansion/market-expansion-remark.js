@@ -15,12 +15,7 @@ var vm = new Vue({
     }
 })
 lf.ready(function() {
-    var query;
-    if(mui.os.plus) {
-        query = lf.window.currentWebView();
-    } else {
-        query = lf.window.getPageParams("dailyRemark");
-    }
+    var query = Utils.getPageParams("market-expansion-remark");
     vm.planDate = query.planDate
     vm.planPersons = query.planPersons
     vm.planAmount = query.planAmount

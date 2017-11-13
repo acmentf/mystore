@@ -6,7 +6,7 @@ var vm = new Vue({
 	}
 })
 lf.ready(function(){
-	vm.orderId = lf.window.currentWebview().orderNo;
+	vm.orderId = Utils.getPageParams("photoOutput").orderNo;
 	init();
 })
 mui('.mui-content').on('tap','#saveBtn',function(){

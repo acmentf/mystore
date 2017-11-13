@@ -13,11 +13,6 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
-	/*var a = lf.window.currentWebview().a
-	var b =lf.window.currentWebview().b
-	lf.event.fire(lf.window.currentWebview().opener(),'test',{
-		a:1,b:2
-	})*/
 
 	getStaticList();
 	vm.currentStationName = window.Role.userroleName

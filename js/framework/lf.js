@@ -1807,6 +1807,9 @@ var lf = (function(document, undefined) {
 		 * @return {plus.webview.WebviewObject}
 		 */
 		currentWebview: function() {
+			if(!$.os.plus) {
+				return;
+			}
 			return plus.webview.currentWebview();
 		},
 		/**

@@ -56,10 +56,9 @@ lf.ready(function(){
 	}]);
 	reasonPicker = new mui.PopPicker();
 	reasonPicker.setData(['天气原因','道路中断','旅行团未到指定地点','其他']);
-	var wv = lf.window.currentWebview()
+	var wv = Utils.getPageParams("orderResult")
 	vm.orderId = wv.orderId
 	loadResult()
-	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 //尺寸选择器S
 mui('.mui-content').on('tap', '.printsSize', function() {

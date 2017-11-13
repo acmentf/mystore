@@ -12,7 +12,18 @@ Vue.filter('actionStatusFormat', function(val){
         0: "待计调", 11: "待分配", 22: "待输出", 33: "待销售", 44: "已确认销售", 55: "已完成"
     }
     return emum[val];
-})
+});
+
+Vue.filter('lengthTo8', function(value, length){
+    if(value) {
+        if(value.length > length) {
+            return value.substr(0, length) +'...'
+        } else {
+            return value
+        }
+    }
+});
+
 var vm = new Vue({
     el: '#app',
     data: function() {
@@ -34,15 +45,10 @@ lf.ready(function() {
     });
     
     var date, userId, userName;
-    if(mui.os.plus) {
-        date = lf.window.currentWebview().date;
-        userId = lf.window.currentWebview().userId;
-        userName = lf.window.currentWebview().userName;
-    } else {
-        date = lf.window.getPageParams('person-daily-detail').date;
-        userId = lf.window.getPageParams('person-daily-detail').userId;
-        userName = lf.window.getPageParams('person-daily-detail').userName;
-    }
+    var query = Utils.getPageParams("person-daily-detail");
+    date = query.date;
+    userId = query.userId;
+    userName = query.userName;
     vm.userName = userName;
     
     vm.date = date;

@@ -4,22 +4,9 @@ lf.ready(function () {
         orderId: ''
     }
 
-    function setPageParams(params) {
-        mui.each(pageParams, function (key) {
-            if (key in params) {
-                pageParams[key] = params[key] || ''
-            }
-        })
-        //后台接口无法初始化执行人
-        vm.init()
-    }
-    mui.plusReady(function () {
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
-    window.addEventListener('pageParams', function (event) {
-        setPageParams(event.detail)
-    });
+    var query = Utils.getPageParams('designate');
+    pageParams.orderId = query.orderId;
+
     window.addEventListener('selectAllocationUser', function (event) {
         var detail = event.detail
         if (detail && detail.passBack && detail.userList) {

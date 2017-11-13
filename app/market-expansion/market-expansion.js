@@ -293,7 +293,7 @@ lf.ready(function() {
         
     });
     mui('body').on('tap', '.remark', function(){
-        lf.window.openWindow('market-expansion-remark', './remark.html', {}, {
+        lf.window.openWindow('market-expansion-remark', './market-expansion-remark.html', {}, {
             planDate: this.getAttribute('data-planDate'),
 			planPersons: this.getAttribute('data-planPersons'),
 			planAmount: this.getAttribute('data-planAmount'),

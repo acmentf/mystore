@@ -102,7 +102,7 @@ function init() {
 			for(var i=0;i<list.length;i++){
 				list[i].planDate = lf.util.timeStampToDate2(list[i].planDate)
 				if (list[i].planAmount > 0) {
-                    list[i]["proportionAmount"] = toPercent(list[i].realityAmount / list[i].planAmount);
+                    list[i]["proportionAmount"] = toPercent(list[i].appAmt / list[i].planAmount);
                 } else {
                     list[i]["proportionAmount"] = '0.00%';
 				}

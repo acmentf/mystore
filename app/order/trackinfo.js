@@ -169,7 +169,7 @@ function initFetchTimeChoose() {
 }
 
 function renderTrackInfo(){
-	var orderNo = lf.window.currentWebview().orderNo;
+	var orderNo = Utils.getPageParams("tackinfo").orderNo;
 	var params = {
 		orderNo: orderNo
 	};

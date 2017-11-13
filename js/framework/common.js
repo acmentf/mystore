@@ -187,3 +187,16 @@ var GLOBAL_SHOOT = {
         }
     }
 }
+
+var Utils = {
+    isApp: (function(){
+        return !!mui.os.plus;
+    }()),
+    getPageParams: function(windowId) {
+        if(Utils.isApp) {
+            return lf.window.currentWebview();
+        } else {
+            return lf.window.getPageParams("getPageParams");
+        }
+    }
+}
