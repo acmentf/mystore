@@ -32,11 +32,11 @@
 
 			
 			</div>
-		<script src="../assets/js/framework/common.js"></script>
 		<script src="../assets/js/mui.min.js"></script>
 		<script src="../assets/js/framework/define.js"></script>
 		<script src="../assets/js/framework/styles.js"></script>
 		<script src="../assets/js/framework/lf.js"></script>
+		<script src="../assets/js/framework/common.js"></script>
 		<script src="../assets/libs/vue.min.js"></script>
 		<script type="text/javascript">
 			var vm = new Vue({
@@ -78,7 +78,7 @@
 						vm.account = hisAccount.split(",")[0]
 					}
 					vm.type = 1
-					plus.navigator.closeSplashscreen();
+					Utils.closeSplashscreen();
 				}
 				document.getElementById('login').addEventListener('tap', function(e){
 					if(e.target.getAttribute("data-down")) return
