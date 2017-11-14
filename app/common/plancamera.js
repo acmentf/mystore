@@ -105,7 +105,7 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 	lf.net.getJSON('/order/assignOrderPhotographer',params,function (res) {
 		lf.nativeUI.closeWaiting();
 		if(res.code == 200) {
-			if(Utils.isApp) {
+			if(Utils.isApp()) {
 				lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
 				lf.window.closeCurrentWebview();
 			}

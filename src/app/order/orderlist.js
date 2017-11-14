@@ -96,7 +96,7 @@ lf.ready(function() {
 		vm.index = event.detail.slideNumber;
 	});
 
-	if(Utils.isApp) {
+	if(Utils.isApp()) {
 		var status = Utils.getPageParams('orderlist').status;
 		var gallery = mui('.mui-slider');
 		switch(status) {

@@ -1748,6 +1748,13 @@ var lf = (function(document, undefined) {
 			});
 			return wv;
 		},
+		setPageParams: function(key, params) {
+			localStorage.removeItem(key)
+			localStorage.setItem(key, JSON.stringify(params))
+		},
+		getPageParams: function(key) {
+			return JSON.parse(localStorage.getItem(key))
+		},
 		/**
 		 * @description 打开Webview窗口
 		 * @param {String} id_wvobj 若操作Webview窗口对象显示，则无任何效果。 使用窗口id时，则查找对应id的窗口，如果有多个相同id的窗口则操作最先创建的窗口，若没有查找到对应id的WebviewObject对象，则无任何效果。
