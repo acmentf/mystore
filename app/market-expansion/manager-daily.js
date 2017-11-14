@@ -209,8 +209,9 @@ lf.ready(function() {
 	mui('body').on('tap', '#logout', function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if(e.index == 0) {
-                window.Role.logout();
-                Utils.RoleLogout();
+				window.Role.logout();
+				// lf.window.openWindow('login','../login.html',{},{})
+				GLOBAL_SHOOT.restart();
 			}
 		});
     })

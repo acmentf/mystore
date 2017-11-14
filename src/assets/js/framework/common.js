@@ -7,6 +7,7 @@ window.onresize = function() {
 	document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px'
 }
 
+
 // 全局共用对象
 var GLOBAL_SHOOT = {
     // 得到版本
@@ -173,18 +174,6 @@ var GLOBAL_SHOOT = {
         }
     },
     /**
-     * 登录系统后，打开页面，由于，closeW 在 app 和 h5 里，要 关闭的closeW 不一样
-     */
-    loginOpenPage: function(windowId, pageUrl, styleConfig, windowParams) {
-        var closeW;
-        if(mui.os.plus) {
-            closeW = lf.window.currentWebview();
-        } else {
-            closeW = 'login';
-        }
-        this.switchPositionOpenWindow(windowId, pageUrl, styleConfig, windowParams, closeW);
-    },
-    /**
      * 切换岗位，打开新页面
      * app 端在切换岗位时需要关闭当前的 WebView
      * h5 端在登录时要关闭掉 'login'
@@ -197,39 +186,12 @@ var GLOBAL_SHOOT = {
             // h5 端
             lf.window.openWindow(windowId, pageUrl, styleConfig || {}, windowParams || {}, closeW);
         }
-    }
-}
-
-var Utils = {
-    isApp: function(){
-        return !!mui.os.plus;
     },
-    getPageParams: function(windowId) {
-        if(Utils.isApp()) {
-            return lf.window.currentWebview();
-        } else {
-            return lf.window.getPageParams("getPageParams");
-        }
-    },
-    RoleLogout: function() {
-        if(Utils.isApp()) {
-            plus.runtime.restart();
+    restart: function() {
+        if(mui.os.plus) {
+            plus.runtime.restart()
         } else {
             lf.window.openWindow('login','../login.html',{},{});
-        }
-    },
-    getClientId: function() {
-        if(Utils.isApp()) {
-            return plus.push.getClientInfo().clientid;
-        } else {
-            return 'H5';
-        }
-    },
-    closeSplashscreen: function() {
-        if(Utils.isApp()) {
-            plus.plus.navigator.closeSplashscreen();
-        } else {
-            return ;
         }
     }
 }

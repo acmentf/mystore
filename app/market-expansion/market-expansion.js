@@ -127,7 +127,7 @@ var planCompleted = {
         lf.net.getJSON('/report/newAnalysis/channelPlanDetail', params, function(res){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
-                var resData = res.data.dataList[0].list[0];
+                var resData = res.data;
                 if(resData) {
                     that.setData(resData);
                 } else {
@@ -293,7 +293,7 @@ lf.ready(function() {
         
     });
     mui('body').on('tap', '.remark', function(){
-        lf.window.openWindow('market-expansion-remark', './market-expansion-remark.html', {}, {
+        lf.window.openWindow('market-expansion-remark', './remark.html', {}, {
             planDate: this.getAttribute('data-planDate'),
 			planPersons: this.getAttribute('data-planPersons'),
 			planAmount: this.getAttribute('data-planAmount'),
@@ -307,7 +307,7 @@ lf.ready(function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if(e.index == 0) {
 				window.Role.logout();
-				Utils.RoleLogout();
+				GLOBAL_SHOOT.restart();
 			}
 		});
     })
@@ -317,4 +317,11 @@ lf.ready(function() {
     lf.event.listener('refreshData', function(e) {
         lf.window.currentWebview().reload()
     })
+
+    function getVersion() {
+        plus.runtime.getProperty(plus.runtime.appid,function(inf){
+            vm.wgtVer = inf.version;
+            console.log("当前应用版本：" + vm.wgtVer);
+        });
+    }
 })

@@ -96,17 +96,16 @@
         })
 
         lf.ready(function() {
-            var query = Utils.getPageParams("orderPayList");
-            vm.currentId = query.orderId
-            vm.areaCode = query.areaCode
-            vm.tourGuide = query.tourGuide
-            vm.purchaser = query.purchaser
-            vm.aliasName = query.aliasName
-            vm.province = query.province
-            vm.city = query.city
-            vm.tourGuidePhone = query.tourGuidePhone
-            vm.tourNo = query.tourNo
-            vm.productName = query.productName
+            vm.currentId = lf.window.currentWebview().orderId
+            vm.areaCode = lf.window.currentWebview().areaCode
+            vm.tourGuide = lf.window.currentWebview().tourGuide
+            vm.purchaser = lf.window.currentWebview().purchaser
+            vm.aliasName = lf.window.currentWebview().aliasName
+            vm.province = lf.window.currentWebview().province
+            vm.city = lf.window.currentWebview().city
+            vm.tourGuidePhone = lf.window.currentWebview().tourGuidePhone
+            vm.tourNo = lf.window.currentWebview().tourNo
+            vm.productName = lf.window.currentWebview().productName
             function getOrderPayList() {
                 vm.curPage++
 

@@ -1290,7 +1290,7 @@
             lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
                 if (e.index == 0) {
                     window.Role.logout();
-                    Utils.RoleLogout();
+                    GLOBAL_SHOOT.restart();
                 }
             });
         })
@@ -1315,12 +1315,7 @@ function switchRolePostion(val) {
 			GLOBAL_SHOOT.switchPositionOpenWindow('order-list','../order/orderlist.html',{},{})
 		}
 
-		// if (window.Role.currentPositions[0].roleId==12) {
-		//     lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{})
-		// } else if(window.Role.currentPositions[0].roleId!=9){
-		//     lf.window.openWindow('order-list','../order/orderlist.html',{},{})
-		// }
-		init()
+		init();
     })
 }
 })()

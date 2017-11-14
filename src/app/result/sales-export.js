@@ -50,11 +50,11 @@ lf.ready(function(){
 		value: '5',
 		text: '6寸'
 	}]);
-	var query = Utils.getPageParams('salesExport')
-	
-	vm.orderId = query.orderId
+	var wv = lf.window.currentWebview()
+	vm.orderId = wv.orderId
 	loadResult()
-	vm.userId = query.userId
+	vm.userId = wv.userId
+	console.log(JSON.stringify(lf.window.currentWebview()))
 })
 mui('.mui-content').on('tap', '.givesSize', function() {
 	var index = this.getAttribute('data-index');

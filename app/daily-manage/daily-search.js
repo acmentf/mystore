@@ -9,7 +9,7 @@ var vm = new Vue({
     }
 })
 lf.ready(function(){
-    var today = Utils.getPageParams("dailySearch").todayDate
+    var today = lf.window.currentWebview().todayDate
     vm.yesterday = lf.util.timeStampToDate2(today-24*60*60*1000)
     mui('#app').on('tap', '.startTime', function () { //选择日报开始日期
         var opts = { "type": "date" };

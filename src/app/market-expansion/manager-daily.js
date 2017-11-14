@@ -1,5 +1,3 @@
-import ExpansionCompletedSummary from "./component/expansion-completed-summary.vue"
-
 Vue.filter('dayFormatter', function(date){
     var dayArr = ['日', '一', '二', '三', '四', '五', '六'];
     var timeStamp = new Date(date);
@@ -8,9 +6,6 @@ Vue.filter('dayFormatter', function(date){
 var vm = new Vue({
     el: "#app",
     mixins: [userPositionInfoMinix],
-    components: {
-        ExpansionCompletedSummary
-    },
     data: function() {
         return {
             date: {
@@ -215,7 +210,8 @@ lf.ready(function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if(e.index == 0) {
 				window.Role.logout();
-				Utils.RoleLogout();
+				// lf.window.openWindow('login','../login.html',{},{})
+				GLOBAL_SHOOT.restart();
 			}
 		});
     })

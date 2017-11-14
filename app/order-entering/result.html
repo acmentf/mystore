@@ -144,7 +144,7 @@
 					value: '5',
 					text: '6寸'
 				}]);
-				var wv = Utils.getPageParams("orderEnteringResult");
+				var wv = lf.window.currentWebview()
 				vm.orderId = wv.orderNo
 				vm.orderXms.picSize = wv.picSize
 				vm.orderXms.price = wv.price

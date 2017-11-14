@@ -19,11 +19,9 @@ var vm = new Vue({
     }
 })
 lf.ready(function() {
-    var query = Utils.getPageParams("quicksaledetails");
-    
-    vm.actionStatus = query.actionStatus
-    vm.city = query.city
-    vm.province = query.province
+    vm.actionStatus = lf.window.currentWebview().actionStatus
+    vm.city = lf.window.currentWebview().city
+    vm.province = lf.window.currentWebview().province
     renderOrderDetails();
     // 销售明细
     mui('body').on('tap', '.sale-detail', function() {
@@ -121,7 +119,7 @@ lf.ready(function() {
         return m < 10 ? '0' + m : m
     }
     function renderOrderDetails() {
-        var orderId = query.orderId;
+        var orderId = lf.window.currentWebview().orderId;
         console.log(orderId)
         var params = {
             orderId: orderId

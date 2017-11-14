@@ -1692,9 +1692,28 @@ var lf = (function(document, undefined) {
 		 * @return {plus.webview.WebviewObject}
 		 */
 		openWindow: function(id, url, styles, extras, closeWV) {
-			if(!$.os.plus) {
+			if(!$.os.plus) { // 判断 web 或 app
+				var ignoreList = [
+					'orderlist',
+					'daily-paper',
+					'daily-manage',
+					'market-expansion'
+				]
+				
+				if (!/login.html/.test(window.location.href)) {
+					// 防止 web访问 在 login.html 回退
+					ignoreList.forEach(function(item) {
+						if (url.indexOf(item) > -1) {
+							window.history.replaceState(null, '', url)
+						}
+					})
+				}
+				var keyReg = /(\w+-?\w+\.html)/g;
+				keyReg.test(url);
+				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+				this.setPageParams(localStorageKey, extras)
 				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
-				if($.os.ios || $.os.android) {
+				if($.os.ios || $.os.android) { // 判断平台
 					window.top.location.href = url;
 				} else {
 					window.parent.location.href = url;
@@ -1814,8 +1833,19 @@ var lf = (function(document, undefined) {
 		 * @return {plus.webview.WebviewObject}
 		 */
 		currentWebview: function() {
-			if(!$.os.plus) {
-				return;
+			if(!$.os.plus) {   // web 访问 直接返回带参对象
+				var href = window.location.href;
+				var keyReg = /(\w+-?\w+\.html)/;
+				keyReg.test(href);
+				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+				var result = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+				result.opener = function() {
+					return;
+				}
+				result.reload = function() {
+					return;
+				}
+				return result;
 			}
 			return plus.webview.currentWebview();
 		},

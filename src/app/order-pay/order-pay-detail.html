@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link href="../../assets/css/mui.min.css" rel="stylesheet" />
-    <link href="../../assets/css/app.css" rel="stylesheet"/>
-    <link href="../../assets/css/order-pay/order-list.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../../assets/css/correlate-order/order-details.css">
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link href="../../css/app.css" rel="stylesheet"/>
+    <link href="../../css/order-pay/order-list.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/correlate-order/order-details.css">
     <style>
         .hide {
             display: none
@@ -51,7 +51,7 @@
                         </div>
                         <div class="right">
                             <a v-if="guidePhone" style="display:block; color: #FF8458; margin-left: 0.1rem;">		
-                                <img src="../../assets/images/order/call_btn.png" alt="">
+                                <img src="../../images/order/call_btn.png" alt="">
                                 <span class="orange">{{guidePhone}}</span>
                             </a>
                         </div>
@@ -101,13 +101,13 @@
         <section class="container" v-if="orderStatus == 1">
             <ul class="mui-table-view logout">
                 <li class="mui-table-view-cell" @click="handlePay(0)">
-                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_cash.png" alt=""> 现金支付</div>
+                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_cash.png" alt=""> 现金支付</div>
                 </li>
                 <li class="mui-table-view-cell" @click="handlePay(1)">
-                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_wechat.png" alt=""> 微信支付</div>
+                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_wechat.png" alt=""> 微信支付</div>
                 </li>
                 <li class="mui-table-view-cell" @click="handlePay(2)">
-                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_alipay.png" alt=""> 支付宝支付</div>
+                    <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../css/images/sell_alipay.png" alt=""> 支付宝支付</div>
                 </li>
             </ul>
         </section>
@@ -130,14 +130,14 @@
         <div class="pay-mask hide" id="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:2; background: rgba(0,0,0,.5)"></div>
     </div>
 </div>
-    <script src="../../assets/js/mui.min.js"></script>
-    <script src="../../assets/js/mui.zoom.js"></script>
-    <script src="../../assets/js/mui.previewimage.js"></script>
-    <script src="../../assets/js/framework/define.js"></script>
-    <script src="../../assets/js/framework/styles.js"></script>
-    <script src="../../assets/js/framework/lf.js"></script>
-    <script src="../../assets/js/framework/qrcode.min.js"></script>
-    <script src="../../assets/libs/vue.min.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/mui.zoom.js"></script>
+    <script src="../../js/mui.previewimage.js"></script>
+    <script src="../../js/framework/define.js"></script>
+    <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/lf.js"></script>
+    <script src="../../js/framework/qrcode.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
     <script src="./order-pay.js"></script> 
 </body>
 </html>

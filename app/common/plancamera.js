@@ -25,7 +25,7 @@ var vm = new Vue({
 })
 lf.ready(function() {
 	initPull();
-	var wv = Utils.getPageParams('plancamera');
+	var wv = lf.window.currentWebview();
 	vm.orderId = wv.orderNo;
 	var params = {
 		orderId: vm.orderId
@@ -105,10 +105,8 @@ document.getElementById('saveBtn').addEventListener('tap',function(){
 	lf.net.getJSON('/order/assignOrderPhotographer',params,function (res) {
 		lf.nativeUI.closeWaiting();
 		if(res.code == 200) {
-			if(Utils.isApp()) {
-				lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
-				lf.window.closeCurrentWebview();
-			}
+			lf.event.fire(lf.window.currentWebview().opener(),'orderdetails');
+			lf.window.closeCurrentWebview();
 		}else{
 			if(!res.msg){
 				lf.nativeUI.toast("请求失败")

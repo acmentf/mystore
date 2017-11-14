@@ -14,7 +14,7 @@ lf.ready(function(){
 		vm.currentRoleId = window.Role.currentPositions[0].roleId;
 		console.log("当前用户的角色id" + vm.currentRoleId)
 	}
-	var wv = Utils.getPageParams("message-detail");
+	var wv = lf.window.currentWebview()
 	vm.orderNo = wv.orderNo
 	vm.orderId = wv.orderId
 	vm.id = wv.Id

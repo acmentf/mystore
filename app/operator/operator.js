@@ -419,11 +419,10 @@ lf.ready(function() {
 
 //读取页面信息
 function renderTrackInfo(){
-	var query = Utils.getPageParams('operator');
-	vm.orderNo = query.orderNo;
-	vm.forindex = query.type;
-	vm.forStatus = query.status;
-	vm.lineName = query.lineName
+	vm.orderNo = lf.window.currentWebview().orderNo;
+	vm.forindex = lf.window.currentWebview().type;
+	vm.forStatus = lf.window.currentWebview().status;
+	vm.lineName = lf.window.currentWebview().lineName
 	console.log('orderNo111-=='+vm.orderNo)
 	var params = {
 		orderNo: vm.orderNo

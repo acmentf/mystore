@@ -4,6 +4,9 @@ lf.ready(function(){
 })
 
 document.addEventListener( "plusready", function(){
+	if(mui.os.plus) {
+		return;
+	}
     // 监听点击消息事件
     plus.push.addEventListener( "click", function( msg ) {
         // 判断是从本地创建还是离线推送的消息

@@ -22,8 +22,7 @@ lf.ready(function() {
 
 function init(){
     lf.nativeUI.showWaiting();
-
-    var stamp  = Utils.getPageParams('daily-detail').todayDate,
+    var stamp  = lf.window.currentWebview().todayDate,
         params = { saleDate: lf.util.timeStampToDate2(stamp) };
 
 	lf.net.getJSON('plan/queryPurchaserOrderList', params, function(data) {

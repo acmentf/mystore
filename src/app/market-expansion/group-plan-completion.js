@@ -11,7 +11,7 @@ var vm = new Vue({
 });
 
 lf.ready(function() {
-    var date = Utils.getPageParams("group-plan-completion").date;
+    var date = lf.window.currentWebview().date;
     vm.date = date;
     lf.nativeUI.showWaiting();
     lf.net.getJSON('/purchaser/getPurchaserPlanDetail', {

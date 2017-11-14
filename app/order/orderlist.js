@@ -96,25 +96,23 @@ lf.ready(function() {
 		vm.index = event.detail.slideNumber;
 	});
 
-	if(Utils.isApp()) {
-		var status = Utils.getPageParams('orderlist').status;
-		var gallery = mui('.mui-slider');
-		switch(status) {
-			case '1':
-				gallery.slider().gotoItem(1, 0);
-				break;
-			case '2':
-				gallery.slider().gotoItem(2, 0);
-				break;
-			case '3':
-				gallery.slider().gotoItem(4, 0);
-				break;
-			case '4':
-				gallery.slider().gotoItem(3, 0);
-				break;
-			default:
-				break;
-		}
+	var status = lf.window.currentWebview().status;
+	var gallery = mui('.mui-slider');
+	switch(status) {
+		case '1':
+			gallery.slider().gotoItem(1, 0);
+			break;
+		case '2':
+			gallery.slider().gotoItem(2, 0);
+			break;
+		case '3':
+			gallery.slider().gotoItem(4, 0);
+			break;
+		case '4':
+			gallery.slider().gotoItem(3, 0);
+			break;
+		default:
+			break;
 	}
 })
 /*document.getElementById('searchDiv').addEventListener('tap',function(){
@@ -343,7 +341,7 @@ mui('body').on('tap', '#logout', function() {
 	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 		if(e.index == 0) {
 			window.Role.logout();
-			Utils.RoleLogout();
+			GLOBAL_SHOOT.restart();
 		}
 	});
 })
@@ -633,7 +631,45 @@ function find(index) {
 		lf.nativeUI.toast(res.msg)
 	})
 }
-
+function update() {
+	var params = {
+		"app_id": plus.runtime.appid,
+		"version": plus.runtime.version,
+		"imei": plus.device.imei,
+		"platform": plus.os.name
+	};
+	lf.net.getJSON("/app/validationversion", params, function(data) {
+		var update_desc = "发现新的版本，是否需要立即更新";
+		if(data.code == 200) {
+			var btns = null;
+			console.log(data.data.releaseUrl)
+			if(data.data.isMandatory == 1) {
+				update_desc = "发现新的版本，请立即更新";
+				btns = ["立即更新"];
+			} else {
+				btns = ["立即更新", "取　　消"];
+			}
+			if(data.data.upgrade_desc) {
+				update_desc = update_desc + "\n" + data.data.releaseRemark;
+			}
+			lf.nativeUI.confirm("", update_desc, btns, function(e) {
+				if(btns.length == 1) {
+					if(0 == e.index) {
+						plus.runtime.openURL(data.data.releaseUrl);
+						lf.window.closeCurrentWebview();
+					} else {
+						plus.runtime.quit();
+					}
+				} else {
+					if(0 == e.index) {
+						plus.runtime.openURL(data.data.releaseUrl);
+						lf.window.closeCurrentWebview();
+					} else {}
+				}
+			});
+		}
+	}, function(res) {});
+}
 lf.event.listener('orderdetails', function(e) {
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
@@ -663,3 +699,10 @@ lf.event.listener('orderPay', function(e) {
 lf.event.listener('selectAssignUser', function(e) {
 	console.log(JSON.stringify(e.detail, null, 2))
 })
+
+function getVersion() {
+	plus.runtime.getProperty(plus.runtime.appid,function(inf){
+        vm.wgtVer = inf.version;
+        console.log("当前应用版本：" + vm.wgtVer);
+    });
+}

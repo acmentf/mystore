@@ -8,7 +8,7 @@ var vm = new Vue({
 lf.ready(function() {
     lf.nativeUI.showWaiting();
     var params = {
-		orderId: Utils.getPageParams('daily-order').orderId
+		orderId: lf.window.currentWebview().orderId
 	};
 	lf.net.getJSON('order/purchaserOrderDetail', params, function(res){
 		lf.nativeUI.closeWaiting();

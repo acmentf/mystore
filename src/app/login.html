@@ -5,9 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../assets/css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../assets/css/login.css" />
-		<link rel="stylesheet" type="text/css" href="../assets/css/app.css" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/login.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
 	</head>
 
 	<body>
@@ -32,12 +32,12 @@
 
 			
 			</div>
-		<script src="../assets/js/mui.min.js"></script>
-		<script src="../assets/js/framework/define.js"></script>
-		<script src="../assets/js/framework/styles.js"></script>
-		<script src="../assets/js/framework/lf.js"></script>
-		<script src="../assets/js/framework/common.js"></script>
-		<script src="../assets/libs/vue.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/framework/define.js"></script>
+		<script src="../js/framework/styles.js"></script>
+		<script src="../js/framework/lf.js"></script>
+		<script src="../js/framework/common.js"></script>
+		<script src="../libs/vue.min.js"></script>
 		<script type="text/javascript">
 			var vm = new Vue({
 				el:'#login',
@@ -56,14 +56,16 @@
 			lf.ready(function(){
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
-					Utils.closeSplashscreen();
+					if(mui.os.plus) {
+						plus.navigator.closeSplashscreen();
+					}
 
 					var roleId = window.Role.currentPositions[0].roleId;
 					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
 					if(windowParams) {
-						GLOBAL_SHOOT.loginOpenPage(windowParams.windowId,windowParams.pageUrl,{},{})
+						lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
 					} else {
-						GLOBAL_SHOOT.loginOpenPage('order','order/orderlist.html',{},{})
+						lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 					}
 
 					// if(window.Role.currentPositions[0].roleId==12){
@@ -78,7 +80,9 @@
 						vm.account = hisAccount.split(",")[0]
 					}
 					vm.type = 1
-					Utils.closeSplashscreen();
+					if(mui.os.plus) {
+						plus.navigator.closeSplashscreen();
+					}
 				}
 				document.getElementById('login').addEventListener('tap', function(e){
 					if(e.target.getAttribute("data-down")) return
@@ -129,7 +133,12 @@
                 var params = {
                     phone : vm.account,
                     password: vm.passWord,
-                    clientId: Utils.getClientId()
+                    clientId: (function() {
+						if(mui.os.plus) {
+							return plus.push.getClientInfo().clientId;
+						}
+						return "h5";
+					}())
 				}
                 lf.nativeUI.showWaiting();
 				lf.net.getJSON('/user/login',params,function (res) {
@@ -172,9 +181,9 @@
 						var roleId = window.Role.currentPositions[0].roleId;
 						var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
 						if(windowParams) {
-							GLOBAL_SHOOT.loginOpenPage(windowParams.windowId,windowParams.pageUrl,{},{})
+							lf.window.openWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
 						} else {
-							GLOBAL_SHOOT.loginOpenPage('order','order/orderlist.html',{},{})
+							lf.window.openWindow('order','order/orderlist.html',{},{},lf.window.currentWebview())
 						}
 
 						// if(window.Role.currentPositions[0].roleId==12){

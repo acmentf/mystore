@@ -34,6 +34,16 @@ var vm = new Vue({
             ],
             userName: ''
         }
+    },
+    methods: {
+<<<<<<< HEAD
+        formatDate(date) {
+            return new Date(date).format("yyyy-MM-dd");
+=======
+        formatDate: function(date) {
+            return new Date(date).format('yyyy-MM-dd');
+>>>>>>> dev
+        }
     }
 });
 
@@ -45,10 +55,9 @@ lf.ready(function() {
     });
     
     var date, userId, userName;
-    var query = Utils.getPageParams("person-daily-detail");
-    date = query.date;
-    userId = query.userId;
-    userName = query.userName;
+    date = lf.window.currentWebview().date;
+    userId = lf.window.currentWebview().userId;
+    userName = lf.window.currentWebview().userName;
     vm.userName = userName;
     
     vm.date = date;

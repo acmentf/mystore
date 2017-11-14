@@ -75,7 +75,7 @@ lf.ready(function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if (e.index == 0) {
 				window.Role.logout();
-				Utils.RoleLogout();
+				GLOBAL_SHOOT.restart();
 			}
 		});
 	})
@@ -108,7 +108,7 @@ function init() {
 				}
 				
                 if( list[i].planPersons > 0 ){
-					list[i]["proportionCoverage"] = toPercent(list[i].realityPersons / list[i].planPersons);
+					list[i]["proportionCoverage"] = toPercent(list[i].realityShootNums / list[i].planPersons);
 				} else {
 					list[i]["proportionCoverage"] = '0.00%';
 				}
