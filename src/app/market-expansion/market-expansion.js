@@ -307,8 +307,7 @@ lf.ready(function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if(e.index == 0) {
 				window.Role.logout();
-				lf.window.openWindow('login','../login.html',{},{})
-				// plus.runtime.restart();
+				Utils.RoleLogout();
 			}
 		});
     })
@@ -318,11 +317,4 @@ lf.ready(function() {
     lf.event.listener('refreshData', function(e) {
         lf.window.currentWebview().reload()
     })
-
-    function getVersion() {
-        plus.runtime.getProperty(plus.runtime.appid,function(inf){
-            vm.wgtVer = inf.version;
-            console.log("当前应用版本：" + vm.wgtVer);
-        });
-    }
 })
