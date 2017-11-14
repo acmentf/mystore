@@ -208,7 +208,7 @@ var Utils = {
     },
     getClientId: function() {
         if(Utils.isApp) {
-            return plus.getClientInfo().clientid;
+            return plus.push.getClientInfo().clientid;
         } else {
             return 'H5';
         }

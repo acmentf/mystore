@@ -5,9 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../css/login.css" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link href="../assets/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../assets/css/login.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/css/app.css" />
 	</head>
 
 	<body>
@@ -32,12 +32,12 @@
 
 			
 			</div>
-		<script src="../js/framework/common.js"></script>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/framework/define.js"></script>
-		<script src="../js/framework/styles.js"></script>
-		<script src="../js/framework/lf.js"></script>
-		<script src="../libs/vue.min.js"></script>
+		<script src="../assets/js/framework/common.js"></script>
+		<script src="../assets/js/mui.min.js"></script>
+		<script src="../assets/js/framework/define.js"></script>
+		<script src="../assets/js/framework/styles.js"></script>
+		<script src="../assets/js/framework/lf.js"></script>
+		<script src="../assets/libs/vue.min.js"></script>
 		<script type="text/javascript">
 			var vm = new Vue({
 				el:'#login',
@@ -56,7 +56,7 @@
 			lf.ready(function(){
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
-					plus.navigator.closeSplashscreen();
+					Utils.closeSplashscreen();
 
 					var roleId = window.Role.currentPositions[0].roleId;
 					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
@@ -130,11 +130,10 @@
 			        lf.nativeUI.toast('请输入您的密码')
 					return
 				}
-                var info = plus.push.getClientInfo();
                 var params = {
                     phone : vm.account,
                     password: vm.passWord,
-                    clientId:info.clientid
+                    clientId: Utils.getClientId()
 				}
                 lf.nativeUI.showWaiting();
 				lf.net.getJSON('/user/login',params,function (res) {

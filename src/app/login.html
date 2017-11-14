@@ -56,7 +56,7 @@
 			lf.ready(function(){
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
-					plus.navigator.closeSplashscreen();
+					Utils.closeSplashscreen();
 
 					var roleId = window.Role.currentPositions[0].roleId;
 					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
@@ -130,11 +130,10 @@
 			        lf.nativeUI.toast('请输入您的密码')
 					return
 				}
-                var info = plus.push.getClientInfo();
                 var params = {
                     phone : vm.account,
                     password: vm.passWord,
-                    clientId:info.clientid
+                    clientId: Utils.getClientId()
 				}
                 lf.nativeUI.showWaiting();
 				lf.net.getJSON('/user/login',params,function (res) {
