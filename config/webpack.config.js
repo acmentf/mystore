@@ -122,8 +122,19 @@ const config = {
 		],
 		disableHostCheck: true,  // https://stackoverflow.com/questions/43650550/invalid-host-header-in-when-running-react-app
 		hot: false,
-		host: '0.0.0.0',
-		port: 8080,
+		host: (function getIPAdress(){
+            let interfaces = require('os').networkInterfaces();
+            for(let devName in interfaces){
+                let iface = interfaces[devName];
+                for(let i=0;i<iface.length;i++){
+                    let alias = iface[i];
+                    if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){
+                        return alias.address;
+                    }
+                }
+            }
+        })(),
+		port: 3001,
         open: true,
         openPage: 'app/login.html',
 		/*proxy: {
