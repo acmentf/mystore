@@ -108,7 +108,7 @@ function init() {
 				}
 				
                 if( list[i].planPersons > 0 ){
-					list[i]["proportionCoverage"] = toPercent(list[i].realityPersons / list[i].planPersons);
+					list[i]["proportionCoverage"] = toPercent(list[i].realityShootNums / list[i].planPersons);
 				} else {
 					list[i]["proportionCoverage"] = '0.00%';
 				}

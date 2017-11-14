@@ -93,10 +93,10 @@
                             <div class="progress-container">
                                 <p class="title">服务覆盖率</p>
                                 <div class="progressbar">
-                                    <span class="progress" :class="todayData.planPersons!==0&&todayData.realityPersons/todayData.planPersons<1?'yellow':''" :style="{width:todayData.planPersons==0&&todayData.realityPersons!=0?'55%':todayData.proportionCoverage}"></span>
+                                    <span class="progress" :class="todayData.planPersons!==0&&todayData.realityShootNums/todayData.planPersons<1?'yellow':''" :style="{width:todayData.planPersons==0&&todayData.realityShootNums!=0?'55%':todayData.proportionCoverage}"></span>
                                 </div>
                                 <div class="proportion">
-                                    <p><span v-text="todayData.realityPersons"></span>/<span v-text="todayData.planPersons"></span></p>
+                                    <p><span v-text="todayData.realityShootNums"></span>/<span v-text="todayData.planPersons"></span></p>
                                     <p>完成率: <span v-text="todayData.planPersons==0?'- -':todayData.proportionCoverage"></span></p>
                                 </div>
                             </div>
