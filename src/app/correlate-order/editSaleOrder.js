@@ -50,11 +50,11 @@ lf.ready(function() {
             channelTyle: function(channelName){
                 switch (channelName) {
                     case '现金支付':
-                        return '../../css/images/sell_cash.png'
+                        return '../../assets/css/images/sell_cash.png'
                     case '微信支付':
-                        return '../../css/images/sell_wechat.png' 
+                        return '../../assets/css/images/sell_wechat.png' 
                     case '支付宝支付':
-                        return '../../css/images/sell_alipay.png'
+                        return '../../assets/css/images/sell_alipay.png'
                 }
             },
             saveInfo: function () {
@@ -171,7 +171,7 @@ lf.ready(function() {
             selectDate: function() {
                 blur()
                 var opts = { "type": "date" };
-                picker = new mui.DtPicker(opts);
+                var picker = new mui.DtPicker(opts);
                 picker.setSelectedValue(vm.saleTime)
                 picker.show(function(select) {
                     if(select.value != vm.orderSaleDate){

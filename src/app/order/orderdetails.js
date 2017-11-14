@@ -200,6 +200,8 @@ lf.ready(function () {
 		vm.popupShow = false;
 	})
 	mui('.popup-mod').on('tap', '.mind', function () { //点击心得,进入录入心得页面
+		lf.nativeUI.toast('请使用「摄影师APP」操作');
+		return;
 		var orderid = this.getAttribute('data-orderid');
 		if (vm.photographerExperienceFlage == 0) { //1进入查看页面，0进入修改页面
 			lf.window.openWindow('summary/summary.html', '../summary/summary.html', {}, {
@@ -401,6 +403,8 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 })
 
 mui('body').on('tap', '.summary', function () { //点击心得
+	lf.nativeUI.toast('请使用「摄影师APP」操作');
+	return;
 	if (!(vm.currentRoleId == 3 && (vm.orderInfo.actionStatus != 0 && vm.orderInfo.actionStatus != 11))) {
 		return
 	}
@@ -538,7 +542,7 @@ function renderOrderDetails() {
 
 			vm.photographerInfos = data.data.photographerInfos;
 			var totalLength = vm.photographerInfos.length > 3 ? 3 : vm.photographerInfos.length
-			for (i = 0; i < totalLength; i++) {
+			for (var i = 0; i < totalLength; i++) {
 				vm.photographerData.push(vm.photographerInfos[i])
 			}
 			vm.shotOrderOutput = data.data.shotOrderOutput;

@@ -18,6 +18,7 @@ var vm = new Vue({
 		pageSize: 10
 	}
 })
+var picker,userPicker,actionPicker;
 lf.ready(function(){
 	var opts = {"type": "date"};
 	picker = new mui.DtPicker(opts);

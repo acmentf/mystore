@@ -8,6 +8,7 @@ var vm = new Vue({
         history: 0
     }
 })
+var picker;
 lf.ready(function(){
     var today = lf.window.currentWebview().todayDate
     vm.yesterday = lf.util.timeStampToDate2(today-24*60*60*1000)

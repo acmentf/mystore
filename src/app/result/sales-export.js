@@ -28,6 +28,7 @@ var vm = new Vue({
 		}
 	}
 })
+var userPicker,picker;
 lf.ready(function(){
 	userPicker = new mui.PopPicker();
 	userPicker.setData([{

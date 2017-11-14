@@ -9,10 +9,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" href="../../css/mui.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/app.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
-    <link rel="stylesheet" href="../../css/common/common.css" />
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/order/order.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
     <style>
         html,
         body {
@@ -116,7 +116,7 @@
         }
         
         .orderlist-content-box .footer-order-icon {
-            background: url(../../images/message/nav_order_green.png) no-repeat center;
+            background: url(../../assets/images/message/nav_order_green.png) no-repeat center;
             background-size: 100%;
         }
         
@@ -147,7 +147,7 @@
             <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="offCanvasSide-header">
-                        <img src="../../css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
                         <p class="offCanvasSide-header-name">{{username}}</p>
                     </div>
 
@@ -173,7 +173,7 @@
                 <h1 class="mui-title" style="color: #fff;">订单管理</h1>
                 <a style="color:#fff" id="search-order" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
                 <a v-if="currentRoleId == 4" id="quickOrder" class="mui-icon mui-action-menu mui-pull-right">
-                    <img src="../../images/order/sale_flash.png" alt="">
+                    <img src="../../assets/images/order/sale_flash.png" alt="">
                 </a>
             </header>
             <div class="mui-content orderlist-content">
@@ -322,7 +322,7 @@
                                             <div v-if="(currentRoleId==9)&&checkIcon.type" class="link quickLook" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-aliasName="item.aliasName" :data-purchaser="item.purchaser" :data-tourGuide="item.tourGuide" :data-id="item.id" :data-areaCode="item.areaCode" :data-summary="item.summary" :data-actionStatus="item.actionStatus" :data-province="item.province" :data-city="item.city">
                                                 <div>{{item.productName}}</div>
                                                 <div>{{item.tourGuide}} {{item.startTime}}</div>
-                                                <img src="../../images/order/sale.png" alt="">
+                                                <img src="../../assets/images/order/sale.png" alt="">
                                             </div>
                                         </li>
                                     </ul>
@@ -354,16 +354,14 @@
             </div>
         </div>
 
-        <script src="../../js/mui.min.js"></script>
-        <script src="../../js/mui.pullToRefresh.js"></script>
-        <script src="../../js/mui.pullToRefresh.material.js"></script>
-        <script src="../../js/framework/define.js"></script>
-        <script src="../../js/framework/styles.js"></script>
-        <script src="../../js/framework/lf.js"></script>
-        <script src="../../js/framework/common.js"></script>
-        <script src="../../libs/vue.min.js"></script>
-        <script src="../../update.js"></script>
-        <script src="orderlist.js"></script>
+        <script src="../../assets/js/mui.min.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+        <script src="../../assets/js/framework/define.js"></script>
+        <script src="../../assets/js/framework/styles.js"></script>
+        <script src="../../assets/js/framework/lf.js"></script>
+        <script src="../../assets/js/framework/common.js"></script>
+        <script src="../../assets/libs/vue.min.js"></script>
 </body>
 
 </html>

@@ -238,6 +238,8 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 })
 
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
+	lf.nativeUI.toast('请使用「摄影师APP」操作');
+	return;
 	var orderid = this.getAttribute('data-id');
 	var tourId = this.getAttribute('data-tourId');
 	console.log('列表页点击心得' + orderid + '，' + tourId + ',' + window.Role.usercode + ',' + window.Role.photograherId)

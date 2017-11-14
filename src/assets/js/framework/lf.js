@@ -1739,9 +1739,28 @@ var lf = (function(document, undefined) {
 			return wv;
 		},
 		_openWindow: function(id, url, styles, extras, closeWV) {
-			if(!$.os.plus) {
+			if(!$.os.plus) { // 判断 web 或 app
+				var ignoreList = [
+					'orderlist',
+					'daily-paper',
+					'daily-manage',
+					'market-expansion'
+				]
+				
+				if (!/login.html/.test(window.location.href)) {
+					// 防止 web访问 在 login.html 回退
+					ignoreList.forEach(function(item) {
+						if (url.indexOf(item) > -1) {
+							window.history.replaceState(null, '', url)
+						}
+					})
+				}
+				var keyReg = /(\w+-?\w+\.html)/g;
+				keyReg.test(url);
+				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+				this.setPageParams(localStorageKey, extras)
 				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
-				if($.os.ios || $.os.android) {
+				if($.os.ios || $.os.android) { // 判断平台
 					window.top.location.href = url;
 				} else {
 					window.parent.location.href = url;
@@ -1843,7 +1862,7 @@ var lf = (function(document, undefined) {
 					return;
 				}
 				result.reload = function() {
-					return;
+					window.location.reload()
 				}
 				return result;
 			}
@@ -1865,6 +1884,7 @@ var lf = (function(document, undefined) {
 		 */
 		closeCurrentWebview: function() {
 			if(!$.os.plus) {
+				window.history.back();
 				return;
 			}
 			$.log.info("close webview id = [" + plus.webview.currentWebview().id + "]");

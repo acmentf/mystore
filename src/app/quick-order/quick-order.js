@@ -133,7 +133,7 @@ lf.ready(function() {
     mui('#app').on('tap', '.groupDate', function() { //选择出团日期
         blur()
         var opts = { "type": "date" };
-        picker = new mui.DtPicker(opts);
+        var picker = new mui.DtPicker(opts);
         picker.show(function(select) {
             vm.groupDate = select.value
             vm.shootTime=select.value+' 全天'
@@ -143,7 +143,7 @@ lf.ready(function() {
     mui('#app').on('tap', '.saleDate', function() { //选择销售日期
         blur()
         var opts = { "type": "date" };
-        picker = new mui.DtPicker(opts);
+        var picker = new mui.DtPicker(opts);
         picker.show(function(select) {
             vm.saleDate = select.value
         })
@@ -212,7 +212,7 @@ lf.ready(function() {
                 ]
             }
         };
-        picker = new mui.DtPicker(opts);
+        var picker = new mui.DtPicker(opts);
         picker.show(function(select) {
             console.log(select)
             vm.shootTime = select.text

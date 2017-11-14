@@ -13,10 +13,14 @@ lf.ready(function() {
         })
         init()
     }
-    mui.plusReady(function() {
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
+
+    var currentWebview = lf.window.currentWebview();
+    setPageParams(currentWebview)
+
+    // mui.plusReady(function() {
+    //     var currentWebview = lf.window.currentWebview();
+    //     setPageParams(currentWebview)
+    // });
     window.addEventListener('pageParams', function(event) {
         setPageParams(event.detail)
     });

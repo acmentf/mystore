@@ -12,7 +12,7 @@ var vm = new Vue({
 		],
 		checkIcon:{
 			type: false,
-			url: '../../images/order/switch.png'
+			url: '../../assets/images/order/switch.png'
 		},
 		opType: 'list',//搜索类型
 		pageNum: 10,
@@ -272,6 +272,8 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 })
 
 mui('.order-ul').on('tap', '.summary', function() { //点击心得
+	lf.nativeUI.toast('请使用「摄影师APP」操作');
+	return;
 	var orderid = this.getAttribute('data-id');
 	var tourId = this.getAttribute('data-tourId');
 	var summary = this.getAttribute('data-summary');
@@ -349,9 +351,9 @@ mui('body').on('tap', '#logout', function() {
 
 mui('body').on('tap', '.quick-sale-pay', function() {
 	if (!vm.checkIcon.type){
-		vm.checkIcon.url = '../../images/order/switch_back.png'
+		vm.checkIcon.url = '../../assets/images/order/switch_back.png'
 	} else {
-		vm.checkIcon.url = '../../images/order/switch.png'
+		vm.checkIcon.url = '../../assets/images/order/switch.png'
 	}
 	vm.checkIcon.type = !vm.checkIcon.type
 })
@@ -631,45 +633,6 @@ function find(index) {
 		lf.nativeUI.toast(res.msg)
 	})
 }
-function update() {
-	var params = {
-		"app_id": plus.runtime.appid,
-		"version": plus.runtime.version,
-		"imei": plus.device.imei,
-		"platform": plus.os.name
-	};
-	lf.net.getJSON("/app/validationversion", params, function(data) {
-		var update_desc = "发现新的版本，是否需要立即更新";
-		if(data.code == 200) {
-			var btns = null;
-			console.log(data.data.releaseUrl)
-			if(data.data.isMandatory == 1) {
-				update_desc = "发现新的版本，请立即更新";
-				btns = ["立即更新"];
-			} else {
-				btns = ["立即更新", "取　　消"];
-			}
-			if(data.data.upgrade_desc) {
-				update_desc = update_desc + "\n" + data.data.releaseRemark;
-			}
-			lf.nativeUI.confirm("", update_desc, btns, function(e) {
-				if(btns.length == 1) {
-					if(0 == e.index) {
-						plus.runtime.openURL(data.data.releaseUrl);
-						lf.window.closeCurrentWebview();
-					} else {
-						plus.runtime.quit();
-					}
-				} else {
-					if(0 == e.index) {
-						plus.runtime.openURL(data.data.releaseUrl);
-						lf.window.closeCurrentWebview();
-					} else {}
-				}
-			});
-		}
-	}, function(res) {});
-}
 lf.event.listener('orderdetails', function(e) {
 	vm.orderList.forEach(function(v, i) { // 将数据制空
 		dodata('down', i, [])
@@ -699,10 +662,3 @@ lf.event.listener('orderPay', function(e) {
 lf.event.listener('selectAssignUser', function(e) {
 	console.log(JSON.stringify(e.detail, null, 2))
 })
-
-function getVersion() {
-	plus.runtime.getProperty(plus.runtime.appid,function(inf){
-        vm.wgtVer = inf.version;
-        console.log("当前应用版本：" + vm.wgtVer);
-    });
-}

@@ -30,6 +30,7 @@ var vm = new Vue({
 
 	}
 })
+var picker,userPicker,reasonPicker;
 lf.ready(function(){
 	vm.userId = window.Role.usercode
 	var opts = {"type": "date"};
@@ -106,7 +107,7 @@ mui('.mui-content').on('tap', '.remove-printsNum', function(){
 //保存S
 
 mui('.order-result').on('tap', '.save-btn', function(){
-	var params
+	var params,flag;
 	if(vm.isOut==1){
 		flag = true
 //		if(vm.shootNum==''){

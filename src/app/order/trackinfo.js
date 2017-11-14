@@ -13,7 +13,7 @@ var vm = new Vue({
 		assignRole:false, // 是否有指派权限
 	}
 })
-var picker = null;
+var picker = null,userPicker;
 lf.ready(function() {
 	vm.assignRole = window.Role.hasAuth('assign');// 指派按钮的key
 	renderTrackInfo();

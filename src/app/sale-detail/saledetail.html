@@ -8,10 +8,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" href="../../css/mui.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/app.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/sale-detail/saledetail.css" />
-    <link rel="stylesheet" href="../../css/common/common.css" />
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/sale-detail/saledetail.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
 </head>
 
 <body>
@@ -39,9 +39,9 @@
                                 <div>{{item.salePersonnelNum || "未填"}}</div>
                                 <div><span v-text="item.nums"></span>张</div>
                                 <div>
-                                    <span v-if="item.channelId ==1"><img src="../../css/images/sell_wechat.png" alt="">微信</span>
-                                    <span v-if="item.channelId ==2"><img src="../../css/images/sell_alipay.png" alt="">支付宝</span>
-                                    <span v-if="item.channelId ==3"><img src="../../css/images/sell_cash.png" alt="">现金</span>
+                                    <span v-if="item.channelId ==1"><img src="../../assets/css/images/sell_wechat.png" alt="">微信</span>
+                                    <span v-if="item.channelId ==2"><img src="../../assets/css/images/sell_alipay.png" alt="">支付宝</span>
+                                    <span v-if="item.channelId ==3"><img src="../../assets/css/images/sell_cash.png" alt="">现金</span>
                                     <span v-if="item.channelId ==4">核销支付</span>
                                 </div>
                                 <div><span v-text="item.totalAmount"></span>元</div>
@@ -52,16 +52,14 @@
             </section>
         </main>
         </div>
-        <script src="../../js/mui.min.js"></script>
-        <script src="../../js/mui.pullToRefresh.js"></script>
-        <script src="../../js/mui.pullToRefresh.material.js"></script>
-        <script src="../../js/framework/define.js"></script>
-        <script src="../../js/framework/styles.js"></script>
-        <script src="../../js/framework/common.js"></script>
-        <script src="../../js/framework/lf.js"></script>
-        <script src="../../libs/vue.min.js"></script>
-        <script src="../../update.js"></script>
-        <script src="saledetail.js"></script>
+        <script src="../../assets/js/mui.min.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+        <script src="../../assets/js/framework/define.js"></script>
+        <script src="../../assets/js/framework/styles.js"></script>
+        <script src="../../assets/js/framework/common.js"></script>
+        <script src="../../assets/js/framework/lf.js"></script>
+        <script src="../../assets/libs/vue.min.js"></script>
 </body>
 
 </html>

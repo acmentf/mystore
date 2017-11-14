@@ -10,13 +10,14 @@ lf.ready(function () {
                 pageParams[key] = params[key] || ''
             }
         })
-        //后台接口无法初始化执行人
-        vm.init()
     }
-    mui.plusReady(function () {
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
+    var currentWebview = lf.window.currentWebview();
+    setPageParams(currentWebview)
+
+    // mui.plusReady(function () {
+    //     var currentWebview = lf.window.currentWebview();
+    //     setPageParams(currentWebview)
+    // });
     window.addEventListener('pageParams', function (event) {
         setPageParams(event.detail)
     });
@@ -87,6 +88,9 @@ lf.ready(function () {
         },
         mounted: function () { }
     });
+
+    vm.init()
+
     mui('.designate-designate').on('tap', '.btn-designate', function (e) {
         var type = e.target.getAttribute('data-type')
         lf.window.openWindow('designate/allocation-staff.html', 'allocation-staff.html', {}, {

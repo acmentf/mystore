@@ -317,11 +317,4 @@ lf.ready(function() {
     lf.event.listener('refreshData', function(e) {
         lf.window.currentWebview().reload()
     })
-
-    function getVersion() {
-        plus.runtime.getProperty(plus.runtime.appid,function(inf){
-            vm.wgtVer = inf.version;
-            console.log("当前应用版本：" + vm.wgtVer);
-        });
-    }
 })
