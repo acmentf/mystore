@@ -117,6 +117,7 @@ lf.ready(function () {
                 if(priceReg.test(item.monthPlanAmt)) {
                     temp = {
                         userId: item.userId,
+                        userName: item.userName,
                         saleAmt: -(-item.monthPlanAmt),
                         salesPersons: item.planPreNum
                     };
@@ -128,6 +129,7 @@ lf.ready(function () {
             } else {
                 temp = {
                     userId: item.userId,
+                    userName: item.userName,
                     saleAmt: 0,
                     salesPersons: item.planPreNum
                 };
