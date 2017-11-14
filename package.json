@@ -16,7 +16,7 @@
       "command": "cross-env NODE_ENV=production webpack --config config/webpack.config"
     },
     "start": {
-      "command": "webpack-dev-server --config config/webpack.config"
+      "command": "cross-env NODE_ENV=start webpack-dev-server --config config/webpack.config"
     }
   },
   "devDependencies": {

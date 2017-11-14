@@ -10,7 +10,7 @@ const HappyPack = require('happypack');
 const HappyThreadPool = HappyPack.ThreadPool({ size: (isProduction ? 10 : 4) });
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const staticUrl = '../../';
-const publicPath = isProduction ? staticUrl : '../../';
+const publicPath = (isProduction || ENV === 'dev')? staticUrl : '/';
 
 function resolve (dir) {
     // return path.join(__dirname, '..', dir)
@@ -124,6 +124,8 @@ const config = {
 		hot: false,
 		host: '0.0.0.0',
 		port: 8080,
+        open: true,
+        openPage: 'app/login.html',
 		/*proxy: {
 		  "/m/public": {
 		  	target: "http://localhost:8080",
