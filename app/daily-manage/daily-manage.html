@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="progress-container">
-                                <p class="title">服务覆盖率</p>
+                                <p class="title">拍摄完成率</p>
                                 <div class="progressbar">
                                     <span class="progress" :class="todayData.planPersons!==0&&todayData.realityShootNums/todayData.planPersons<1?'yellow':''" :style="{width:todayData.planPersons==0&&todayData.realityShootNums!=0?'55%':todayData.proportionCoverage}"></span>
                                 </div>
@@ -141,9 +141,9 @@
                                         <div class="mui-col-xs-2"><span class="num" v-text="item.planAmount"></span></div>
                                     </div>
                                     <div class="mui-row bgwhite">
-                                        <div class="mui-col-xs-4 title">预期发团人数</div>
+                                        <div class="mui-col-xs-4 title">预期拍摄人数</div>
                                         <div class="mui-col-xs-2"><span class="num" v-text="todayData.expectPersons"></span></div>
-                                        <div class="mui-col-xs-4 title">计划发团人数</div>
+                                        <div class="mui-col-xs-4 title">计划拍摄人数</div>
                                         <div class="mui-col-xs-2"><span class="num" v-text="item.planPersons"></span></div>
                                     </div>
                                 </div>
