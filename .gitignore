@@ -3,6 +3,7 @@
 .svn
 *.txt
 *.bak
+*.log
 .project
 .sass-cache/
 launch.json
