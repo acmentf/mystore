@@ -1577,11 +1577,14 @@
 					"js/mui.min.js",
 					"libs/vue.min.js",
 					"js/framework/lf.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"app/market-expansion/component/expansion-completed-summary.tpl"
 				],
 				"refer": [
 					"app/daily-manage/daily-manage.html",
-					"app/order/orderlist.html"
+					"app/order/orderlist.html",
+					"app/market-expansion/market-expansion.html",
+					"app/login.html"
 				],
 				"priority": 0
 			},
