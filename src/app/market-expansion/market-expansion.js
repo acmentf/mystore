@@ -1,3 +1,4 @@
+import ExpansionCompletedSummary from "./component/expansion-completed-summary.vue"
 
 Vue.filter('dateFormatter', function(date){
     var reg = /^NaN/;
@@ -37,6 +38,9 @@ Vue.filter('lengthTo8', function(value){
 var vm = new Vue({
     el: '#app',
     mixins: [userPositionInfoMinix],
+    components: {
+        ExpansionCompletedSummary
+    },
     data: function() {
         return {
             date: {
@@ -127,7 +131,7 @@ var planCompleted = {
         lf.net.getJSON('/report/newAnalysis/channelPlanDetail', params, function(res){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
-                var resData = res.data.dataList[0].list[0];
+                var resData = res.data;
                 if(resData) {
                     that.setData(resData);
                 } else {

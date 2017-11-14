@@ -1,3 +1,5 @@
+import ExpansionCompletedSummary from "./component/expansion-completed-summary.vue"
+
 Vue.filter('dayFormatter', function(date){
     var dayArr = ['日', '一', '二', '三', '四', '五', '六'];
     var timeStamp = new Date(date);
@@ -6,6 +8,9 @@ Vue.filter('dayFormatter', function(date){
 var vm = new Vue({
     el: "#app",
     mixins: [userPositionInfoMinix],
+    components: {
+        ExpansionCompletedSummary
+    },
     data: function() {
         return {
             date: {
