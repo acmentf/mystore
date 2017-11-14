@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="content-bottom">
                                         <div>
-                                            <div v-show="item.saleDate == date">实际服务人数</div>
-                                            <div v-show="item.saleDate == date" v-text="item.serverPerNum"></div>
+                                            <div v-show="formatDate(item.fetchPhotoTime) == date">实际服务人数</div>
+                                            <div v-show="formatDate(item.fetchPhotoTime) == date" v-text="item.serverPerNum"></div>
                                         </div>
                                         <div>
-                                            <div v-show="item.saleDate == date">前置销售金额</div>
-                                            <div v-show="item.saleDate == date" v-text="item.payableAmount"></div>
+                                            <div v-show="formatDate(item.fetchPhotoTime) == date">前置销售金额</div>
+                                            <div v-show="formatDate(item.fetchPhotoTime) == date" v-text="item.payableAmount"></div>
                                         </div>
                                         <div>
                                             <div>实销金额</div>

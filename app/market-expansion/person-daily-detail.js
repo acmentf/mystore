@@ -34,6 +34,11 @@ var vm = new Vue({
             ],
             userName: ''
         }
+    },
+    methods: {
+        formatDate: function(date) {
+            return new Date(date).format('yyyy-MM-dd');
+        }
     }
 });
 
