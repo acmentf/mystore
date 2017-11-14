@@ -127,7 +127,7 @@ var planCompleted = {
         lf.net.getJSON('/report/newAnalysis/channelPlanDetail', params, function(res){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
-                var resData = res.data.dataList[0].list[0];
+                var resData = res.data;
                 if(resData) {
                     that.setData(resData);
                 } else {
