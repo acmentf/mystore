@@ -173,11 +173,23 @@ var GLOBAL_SHOOT = {
         }
     },
     /**
+     * 登录系统后，打开页面，由于，closeW 在 app 和 h5 里，要 关闭的closeW 不一样
+     */
+    loginOpenPage: function(windowId, pageUrl, styleConfig, windowParams) {
+        var closeW;
+        if(mui.os.plus) {
+            closeW = lf.window.currentWebview();
+        } else {
+            closeW = 'login';
+        }
+        this.switchPositionOpenWindow(windowId, pageUrl, styleConfig, windowParams, closeW);
+    },
+    /**
      * 切换岗位，打开新页面
      * app 端在切换岗位时需要关闭当前的 WebView
      * h5 端在登录时要关闭掉 'login'
      */
-    switchPositionOpenWindow: function(windowId, pageUrl, styleConfig, windowParams, closeW) {
+    switchPositionOpenWindow: (function(windowId, pageUrl, styleConfig, windowParams, closeW) {
         if(mui.os.plus) {
             // app 端
             lf.window._openWindow(windowId, pageUrl, styleConfig || {}, windowParams || {}, closeW || lf.window.currentWebview());
@@ -185,7 +197,7 @@ var GLOBAL_SHOOT = {
             // h5 端
             lf.window.openWindow(windowId, pageUrl, styleConfig || {}, windowParams || {}, closeW);
         }
-    }
+    })
 }
 
 var Utils = {
