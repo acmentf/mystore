@@ -283,6 +283,9 @@ function initPull() {
 									if(v.orderTime){
 										v.orderTime = lf.util.timeStampToDate2(v.orderTime)
 									}
+									if(v.orderSaleDate){
+										v.orderSaleDate = lf.util.timeStampToDate2(v.orderSaleDate)
+									}
 									if(v.saleDate){
 										v.saleDate = lf.util.timeStampToDate2(v.saleDate)
 									}
