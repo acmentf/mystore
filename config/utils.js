@@ -71,6 +71,10 @@ exports.styleLoaders = function (options) {
   return output
 }
 
+function getEntryKey(pathname, basename) {
+    let dir = pathname.split('/').splice(3).join('/')
+    return (dir ? dir + '/' : '') + basename
+}
 /**
  * 根据目录获取入口
  * @param  {[type]} globPath [description]
@@ -83,8 +87,7 @@ exports.getEntry = function (globPath) {
             pathname = path.dirname(entry);
         // js/lib/*.js 不作为入口
         if (!entry.match(/\/js\/(lib|commons)\//)) {
-            let dir = pathname.split('/').splice(3).join('/')
-            entries[ (dir ? dir + '/' : '') + basename] = pathname + '/' + basename;
+            entries[getEntryKey(pathname, basename)] = pathname + '/' + basename;
         }
     });
     return entries;
@@ -110,7 +113,7 @@ exports.getEntryHtml = function (globPath) {
         entries.push({
             filename: entry.split('/').splice(2).join('/'),
             template: entry,
-            chunks: ['common', pathname.split('/').splice(3).join('/') + '/' + basename],
+            chunks: ['common', getEntryKey(pathname, basename)],
             minify: minifyConfig
         });
 

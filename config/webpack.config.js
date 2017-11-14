@@ -135,8 +135,4 @@ const config = {
 	}
 };
 
-if (ENV === 'watch') {
-	delete config.devServer
-}
-
 module.exports = config;

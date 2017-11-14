@@ -43,11 +43,11 @@ npm start
 ├── src                      # 程序源文件
 │   └── app                  # 页面入口
 │   ├    └── index.html       # 对应 js/index.js
-│   ├    └── user
-│   ├        ├── index.html   # 对应 js/user/index.js html文件名和js文件名需相同
-│   └── component             # 组件
 │   ├    └── other
-│   └── template              # html 模板目录
-│       └── head.html
-│       └── foot.html
+│   ├        ├── index.html   # 对应 js/other/index.js html文件名和js文件名需相同
+│   └── component             # 组件
+│   ├    └── public           # 公共组件
+│   ├    └── other           # 对应 app/other 的页面组件
+│   └── js                   # 公共js目录
+│   └── template              # html 公共模板目录
 ```
