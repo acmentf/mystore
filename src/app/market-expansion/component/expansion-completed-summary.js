@@ -35,14 +35,6 @@ function getTemplate(tplStr) {
 Vue.component('expansionCompletedSummary', function(resolve, reject){
     // iso 模拟机上，初次启动时不加载，修改文件liveReload时加载，问题尚未定位，有待解决 
     var pageUrl = './component/expansion-completed-summary.tpl';
-    // console.log("11plus: ", plus.io.convertLocalFileSystemURL(pageUrl));
-    
-    // var localPageUrl = '';
-    // if(typeof plus !== "undefined") {
-    //     localPageUrl = plus.io.convertLocalFileSystemURL(pageUrl);
-    // } else {
-    //     localPageUrl = pageUrl;
-    // }
     
     lf.get(pageUrl, function(res) {
         resolve({

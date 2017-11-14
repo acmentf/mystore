@@ -54,7 +54,7 @@ lf.ready(function() {
     vm.date = date;
     lf.nativeUI.showWaiting();
     lf.net.getJSON('/plan/queryPurchaserOrderList', {
-        date: date,
+        saleDate: date,
         userId: userId
     }, function(res) {
         lf.nativeUI.closeWaiting();

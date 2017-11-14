@@ -201,32 +201,32 @@ var GLOBAL_SHOOT = {
 }
 
 var Utils = {
-    isApp: (function(){
+    isApp: function(){
         return !!mui.os.plus;
-    }()),
+    },
     getPageParams: function(windowId) {
-        if(Utils.isApp) {
+        if(this.isApp()) {
             return lf.window.currentWebview();
         } else {
             return lf.window.getPageParams("getPageParams");
         }
     },
     RoleLogout: function() {
-        if(Utils.isApp) {
+        if(this.isApp()) {
             plus.runtime.restart();
         } else {
             lf.window.openWindow('login','../login.html',{},{});
         }
     },
     getClientId: function() {
-        if(Utils.isApp) {
+        if(this.isApp()) {
             return plus.push.getClientInfo().clientid;
         } else {
             return 'H5';
         }
     },
     closeSplashscreen: function() {
-        if(Utils.isApp) {
+        if(this.isApp()) {
             plus.plus.navigator.closeSplashscreen();
         } else {
             return ;
