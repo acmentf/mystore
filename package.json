@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "echarts": "^3.7.1",
+    "v-tap": "^3.0.2",
     "vue": "^2.3.2",
     "vue-echarts": "^2.4.1"
   }
