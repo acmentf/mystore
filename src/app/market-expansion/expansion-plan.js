@@ -30,11 +30,7 @@ var vm = new Vue({
 
 lf.ready(function(){
     var expectAmount;
-    if(mui.os.plus) {
-        expectAmount = lf.window.currentWebview().expectAmount;
-    } else {
-        expectAmount = lf.window.getPageParams('expansion-plan').expectAmount;
-    }
+    expectAmount = Utils.getPageParams('expansion-plan').expectAmount;
     vm.expectAmount = expectAmount;
     // 获取计划列表
     lf.nativeUI.showWaiting()

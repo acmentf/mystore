@@ -5,21 +5,9 @@ lf.ready(function() {
         orderId: ''
     }
 
-    function setPageParams(params) {
-        mui.each(pageParams, function(key) {
-            if (key in params) {
-                pageParams[key] = params[key] || ''
-            }
-        })
-        init()
-    }
-    mui.plusReady(function() {
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
-    window.addEventListener('pageParams', function(event) {
-        setPageParams(event.detail)
-    });
+    var query = Utils.getPageParams('allocationStaff')
+    pageParams.passBack = query.passBack;
+    pageParams.orderId = query.orderId;
 
     var vmTableView = new Vue({
         el: '#app-table-view',

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link href="../../assets/css/mui.min.css" rel="stylesheet" />
-    <link href="../../assets/css/app.css" rel="stylesheet"/>
-    <link href="../../assets/css/order-pay/order-list.css" rel="stylesheet"/>
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <link href="../../css/app.css" rel="stylesheet"/>
+    <link href="../../css/order-pay/order-list.css" rel="stylesheet"/>
 </head>
 <body>
     <header id="order-pay-header" class="mui-bar mui-bar-nav">
@@ -36,15 +36,15 @@
         <button type="button" class="mui-btn mui-btn-block">生成销售</button>
     </div> -->
    
-    <script src="../../assets/js/mui.min.js"></script>
-    <script src="../../assets/js/mui.zoom.js"></script>
-    <script src="../../assets/js/mui.pullToRefresh.js"></script>
-    <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
-    <script src="../../assets/js/mui.previewimage.js"></script>
-    <script src="../../assets/js/framework/define.js"></script>
-    <script src="../../assets/js/framework/styles.js"></script>
-    <script src="../../assets/js/framework/lf.js"></script>
-    <script src="../../assets/libs/vue.min.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/mui.zoom.js"></script>
+    <script src="../../js/mui.pullToRefresh.js"></script>
+    <script src="../../js/mui.pullToRefresh.material.js"></script>
+    <script src="../../js/mui.previewimage.js"></script>
+    <script src="../../js/framework/define.js"></script>
+    <script src="../../js/framework/styles.js"></script>
+    <script src="../../js/framework/lf.js"></script>
+    <script src="../../libs/vue.min.js"></script>
     <script>
          var data = {
             currentId: '',
@@ -96,16 +96,17 @@
         })
 
         lf.ready(function() {
-            vm.currentId = lf.window.currentWebview().orderId
-            vm.areaCode = lf.window.currentWebview().areaCode
-            vm.tourGuide = lf.window.currentWebview().tourGuide
-            vm.purchaser = lf.window.currentWebview().purchaser
-            vm.aliasName = lf.window.currentWebview().aliasName
-            vm.province = lf.window.currentWebview().province
-            vm.city = lf.window.currentWebview().city
-            vm.tourGuidePhone = lf.window.currentWebview().tourGuidePhone
-            vm.tourNo = lf.window.currentWebview().tourNo
-            vm.productName = lf.window.currentWebview().productName
+            var query = Utils.getPageParams("orderPayList");
+            vm.currentId = query.orderId
+            vm.areaCode = query.areaCode
+            vm.tourGuide = query.tourGuide
+            vm.purchaser = query.purchaser
+            vm.aliasName = query.aliasName
+            vm.province = query.province
+            vm.city = query.city
+            vm.tourGuidePhone = query.tourGuidePhone
+            vm.tourNo = query.tourNo
+            vm.productName = query.productName
             function getOrderPayList() {
                 vm.curPage++
 

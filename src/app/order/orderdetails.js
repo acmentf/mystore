@@ -75,8 +75,9 @@ lf.ready(function () {
 	//saleOutOrder 销售输出
 	//genSale 生成销售
 	//summary 录入心得
-	vm.currentTabIndex = lf.window.currentWebview().index;
-	vm.summaryFlag = lf.window.currentWebview().summary;
+	var query = Utils.getPageParams('orderDetail');
+	vm.currentTabIndex = query.index;
+	vm.summaryFlag = query.summary;
 	vm.photograherId = window.Role.photograherId,
 		console.log("当前photograherId" + vm.photograherId)
 	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派
@@ -85,7 +86,7 @@ lf.ready(function () {
 		vm.saleOutOrder = window.Role.hasAuth('saleOutOrder'), // 销售输出
 		vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
 		vm.summary = window.Role.hasAuth('summary'), // 录入心得
-		vm.currentOrderId = lf.window.currentWebview().orderNo;
+		vm.currentOrderId = query.orderNo;
 	vm.allotRole = window.Role.hasAuth('allotPhoto') // 分配按钮的key
 	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
@@ -514,7 +515,8 @@ lf.event.listener('orderPay', function (e) {
 })
 
 function renderOrderDetails() {
-	var orderId = lf.window.currentWebview().orderNo;
+	var query = Utils.getPageParams('orderDetail').orderNo;
+	
 	var params = {
 		orderId: orderId
 	};

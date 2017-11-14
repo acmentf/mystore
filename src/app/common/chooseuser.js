@@ -15,7 +15,7 @@ var vm = new Vue({
 	}
 })
 lf.ready(function() {
-	var wv = lf.window.currentWebview();
+	var wv = Utils.getPageParams('chooseuser');
 	initPull();
 	vm.type = wv.type;
 	vm.orderId = wv.orderNo;

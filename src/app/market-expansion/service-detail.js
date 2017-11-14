@@ -103,11 +103,8 @@ lf.ready(function () {
         deceleration: mui.os.ios ? 0.003 : 0.0009
     });
     var orderId;
-    if(mui.os.plus) {
-        orderId = lf.window.currentWebview().orderId;
-    } else {
-        orderId = lf.window.getPageParams('service-detail').orderId;
-    }
+    var query = Utils.getPageParams("service-detail");
+    orderId = query.orderId;
     lf.nativeUI.showWaiting();
     lf.net.getJSON('/order/purchaserOrderDetail', {
         orderId: orderId,

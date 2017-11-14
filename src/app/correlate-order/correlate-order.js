@@ -84,25 +84,27 @@ lf.ready(function() {
 	document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 		vm.index = event.detail.slideNumber;
 	});
-
-	var status = lf.window.currentWebview().status;
-	var gallery = mui('.mui-slider');
-	switch(status) {
-		case '1':
-			gallery.slider().gotoItem(1, 0);
-			break;
-		case '2':
-			gallery.slider().gotoItem(2, 0);
-			break;
-		case '3':
-			gallery.slider().gotoItem(4, 0);
-			break;
-		case '4':
-			gallery.slider().gotoItem(3, 0);
-			break;
-		default:
-			break;
+	if(util.isApp) {
+		var status = Utils.getPageParams('correlate-order').status;
+		var gallery = mui('.mui-slider');
+		switch(status) {
+			case '1':
+				gallery.slider().gotoItem(1, 0);
+				break;
+			case '2':
+				gallery.slider().gotoItem(2, 0);
+				break;
+			case '3':
+				gallery.slider().gotoItem(4, 0);
+				break;
+			case '4':
+				gallery.slider().gotoItem(3, 0);
+				break;
+			default:
+				break;
+		}
 	}
+	
 })	
 
 mui('body').on('tap', '#logout', function() {

@@ -1,25 +1,5 @@
 lf.ready(function () {
-    var pageParams = {
-        orderId: '',
-        userId:'',
-        photographerId: ''
-    }
-    function setPageParams(params) {
-        mui.each(pageParams,function (key) {
-            if(key in params){
-                pageParams[key] = params[key]||''
-            }
-        })
-        vm.init()
-    }
-    mui.plusReady(function(){
-        var currentWebview = lf.window.currentWebview();
-        setPageParams(currentWebview)
-    });
-    window.addEventListener('pageParams',function(event){
-        setPageParams(event.detail)
-    });
-
+    var pageParams = Utils.getPageParams('summaryDetails');
     var vm = new Vue({
         el: '#app',
         data: function () {

@@ -17,7 +17,7 @@ function initPull() {
             up : {
                 auto:true,
                 callback: function(){
-                    var orderId = lf.window.currentWebview().orderId;
+                    var orderId = Utils.getPageParams("saledetail").orderId;
                     var params = {
                         orderId: orderId,
                         status: 2,

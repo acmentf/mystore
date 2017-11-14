@@ -187,3 +187,37 @@ var GLOBAL_SHOOT = {
         }
     }
 }
+
+var Utils = {
+    isApp: (function(){
+        return !!mui.os.plus;
+    }()),
+    getPageParams: function(windowId) {
+        if(Utils.isApp) {
+            return lf.window.currentWebview();
+        } else {
+            return lf.window.getPageParams("getPageParams");
+        }
+    },
+    RoleLogout: function() {
+        if(Utils.isApp) {
+            plus.runtime.restart();
+        } else {
+            lf.window.openWindow('login','../login.html',{},{});
+        }
+    },
+    getClientId: function() {
+        if(Utils.isApp) {
+            return plus.getClientInfo().clientid;
+        } else {
+            return 'H5';
+        }
+    },
+    closeSplashscreen: function() {
+        if(Utils.isApp) {
+            plus.plus.navigator.closeSplashscreen();
+        } else {
+            return ;
+        }
+    }
+}

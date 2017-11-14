@@ -30,16 +30,18 @@ var vm = new Vue({
 })
 
 lf.ready(function() {
-	vm.searchText = lf.window.currentWebview().searchText
-	vm.status = lf.window.currentWebview().status
-	vm.startTime  = lf.window.currentWebview().startTime 
-	vm.endTime  = lf.window.currentWebview().endTime 
-	vm.orderTimeEnd = lf.window.currentWebview().orderTimeEnd
-	vm.startBeginTime = lf.window.currentWebview().startBeginTime
-	vm.startEndTime = lf.window.currentWebview().startEndTime
-	vm.currPage = lf.window.currentWebview().currPage
-	vm.pageSize = lf.window.currentWebview().pageSize
-	vm.actionStatus = lf.window.currentWebview().actionStatus
+	var query = Utils.getPageParams("search");
+	
+	vm.searchText = query.searchText
+	vm.status = query.status
+	vm.startTime  = query.startTime 
+	vm.endTime  = query.endTime 
+	vm.orderTimeEnd = query.orderTimeEnd
+	vm.startBeginTime = query.startBeginTime
+	vm.startEndTime = query.startEndTime
+	vm.currPage = query.currPage
+	vm.pageSize = query.pageSize
+	vm.actionStatus = query.actionStatus
 
 	vm.photograherId = window.Role.photograherId
 	vm.assignOrder=window.Role.hasAuth('assignOrder'), //计调、指派 

@@ -1,15 +1,17 @@
 lf.ready(function() {
+    var query = Utils.getPageParams("editSaleOrder");
+    
     var vm = new Vue({
         el: '#app',
         data: {
-            orderId: lf.window.currentWebview().orderId,
-            productName: lf.window.currentWebview().productName,
-            tourNo: lf.window.currentWebview().tourNo,
-            saleTime: lf.util.timeStampToDate2(lf.window.currentWebview().saleTime),
-            amount: lf.window.currentWebview().amount,
-            channelName: lf.window.currentWebview().channelName,
-            saleOrderId: lf.window.currentWebview().saleOrderId,
-            tourGuide: lf.window.currentWebview().tourGuide,
+            orderId: query.orderId,
+            productName: query.productName,
+            tourNo: query.tourNo,
+            saleTime: lf.util.timeStampToDate2(query.saleTime),
+            amount: query.amount,
+            channelName: query.channelName,
+            saleOrderId: query.saleOrderId,
+            tourGuide: query.tourGuide,
             orderStatus: '',
             orderNo: '',
             pOrderNo: '',

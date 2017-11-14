@@ -96,23 +96,25 @@ lf.ready(function() {
 		vm.index = event.detail.slideNumber;
 	});
 
-	var status = lf.window.currentWebview().status;
-	var gallery = mui('.mui-slider');
-	switch(status) {
-		case '1':
-			gallery.slider().gotoItem(1, 0);
-			break;
-		case '2':
-			gallery.slider().gotoItem(2, 0);
-			break;
-		case '3':
-			gallery.slider().gotoItem(4, 0);
-			break;
-		case '4':
-			gallery.slider().gotoItem(3, 0);
-			break;
-		default:
-			break;
+	if(Utils.isApp) {
+		var status = Utils.getPageParams('orderlist').status;
+		var gallery = mui('.mui-slider');
+		switch(status) {
+			case '1':
+				gallery.slider().gotoItem(1, 0);
+				break;
+			case '2':
+				gallery.slider().gotoItem(2, 0);
+				break;
+			case '3':
+				gallery.slider().gotoItem(4, 0);
+				break;
+			case '4':
+				gallery.slider().gotoItem(3, 0);
+				break;
+			default:
+				break;
+		}
 	}
 })
 /*document.getElementById('searchDiv').addEventListener('tap',function(){
