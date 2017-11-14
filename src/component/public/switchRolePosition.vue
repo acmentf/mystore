@@ -1,5 +1,5 @@
 <template>
-    <aside id="offCanvasSide" class="mui-off-canvas-left public-switch-role-position" v-if="exist">
+    <aside id="offCanvasSide" class="mui-off-canvas-left public-switch-role-position">
         <!--侧滑菜单部分-->
         <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
             <div class="mui-scroll">
@@ -27,9 +27,6 @@
 <script>
     export default {
         name: 'switchRolePosition',
-        props: {
-            exist: Boolean
-        },
         data () {
             return {
                 username: '',
