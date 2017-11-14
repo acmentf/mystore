@@ -102,10 +102,6 @@
 					vm.hidden=true
 					vm.rotate=false
 				})
-				mui("body").on("tap", ".login-header", function(e){
-					e.stopPropagation();
-					lf.window._openWindow(ROLE_EMUN.cityManager.windowId, './market-expansion/manager-daily.html',{},{},lf.window.currentWebview());
-				})
 				mui("body").on("tap", ".account-item>span", function(e){
 					e.stopPropagation();
 					var account = this.parentNode.getAttribute('data-account')
