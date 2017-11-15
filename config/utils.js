@@ -1,7 +1,6 @@
 let path = require('path')
 let Glob = require('glob');
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
-let isProduction = process.env.NODE_ENV === 'production'
 
 exports.assetsPath = function (_path) {
   let assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -97,7 +96,7 @@ exports.getEntry = function (globPath) {
  * @param  {[type]} globPath [description]
  * @return {[type]}          [description]
  */
-exports.getEntryHtml = function (globPath) {
+exports.getEntryHtml = function (globPath, isProduction) {
     let entries = [];
     Glob.sync(globPath).forEach(function (entry) {
         let basename = path.basename(entry, path.extname(entry)),

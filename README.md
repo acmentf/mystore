@@ -21,14 +21,12 @@ npm install
 ```
 npm start
 ```
-> http://localhost:8080/app
-
 
 ### 构建
 
 | 命令              | 说明           |
 | --------------- | ------------ |
-| `npm run dev`   | 开发环境构建，不压缩代码 |
+| `npm run dev`   | 启动开发环境 |
 | `npm run build` | 生产环境构建，压缩代码  |
 
 

@@ -76,9 +76,10 @@
                 let roleId = window.Role.currentPositions[0].roleId;
                 let windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 1);
                 if(windowParams) {
+                    this.$emit('before-switch-page')
                     GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{})
                 } else {
-                    lf.nativeUI.toast('页面跳转失败');
+                    this.$emit('after-switch-role')
                 }
             },
             switchRole (roleId) {
@@ -118,10 +119,12 @@
             }
         },
         created () {
-            this.init()
+            lf.ready(() => {
+                this.init()
+            })
         },
         mounted () {
-            $('#offCanvasSideScroll').offCanvas();
+            mui('#offCanvasSideScroll').offCanvas();
         },
         beforeDestroy () {
 
@@ -130,6 +133,8 @@
 </script>
 <style lang="scss">
     .public-switch-role-position{
-
+        .version {
+            text-align: center
+        }
     }
 </style>

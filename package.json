@@ -9,14 +9,14 @@
     "start": "better-npm-run start"
   },
   "betterScripts": {
+    "start": {
+      "command": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf"
+    },
     "dev": {
-      "command": "cross-env NODE_ENV=dev webpack --config config/webpack.config"
+      "command": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf"
     },
     "build": {
-      "command": "cross-env NODE_ENV=production webpack --config config/webpack.config"
-    },
-    "start": {
-      "command": "cross-env NODE_ENV=start webpack-dev-server --config config/webpack.config"
+      "command": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf"
     }
   },
   "devDependencies": {
@@ -46,7 +46,8 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.2",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.1"
   },
   "dependencies": {
     "echarts": "^3.7.1",
