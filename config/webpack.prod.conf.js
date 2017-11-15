@@ -14,9 +14,6 @@ let entryHtml = utils.getEntryHtml('./src/app/**/*.html', true),
             },
             sourceMap: true
         }),
-        /* new webpack.optimize.CommonsChunkPlugin({
-            name: 'common'
-        }), */
         // 手动 copy 一些文件
         // @see https://github.com/kevlened/copy-webpack-plugin
         new CopyWebpackPlugin([
