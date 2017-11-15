@@ -432,9 +432,9 @@
     import {pageTypeConstant} from './daily-paper/commom'
     import switchRolePosition from '../public/switchRolePosition.vue'
     const titleMap = {
-        income: '收入',
-        flow: '流量',
-        history: '历史数据'
+        [pageTypeConstant.income]: '收入',
+        [pageTypeConstant.flow]: '流量',
+        [pageTypeConstant.history]: '历史数据'
     }
     //大区省份选择
     const cityPicker = new mui.PopPicker({
