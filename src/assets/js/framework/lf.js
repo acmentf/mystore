@@ -2504,7 +2504,7 @@ var lf = (function(document, undefined) {
 				this.currentPositions = [];
 				this.photograherId = '';
 			}
-			$.log.info("complete loading role data is ："+k);
+			// $.log.info("complete loading role data is ："+k);
 		},
 		save:function(k){
 			this.usercode = k.usercode;

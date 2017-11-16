@@ -118,11 +118,26 @@ lf.ready(function() {
                     ids.push(item.value)
                 }
             })
-            lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
-                nameString: names.length>0?names.join(' '):'',
-                idString: ids.length>0?ids.join(','):'',
-                type:lf.window.currentWebview().type
-            });
+
+            if (mui.os.plus) {
+                lf.event.fire(lf.window.currentWebview().opener(), 'quikOrderSelectUsers', {
+                    nameString: names.length>0?names.join(' '):'',
+                    idString: ids.length>0?ids.join(','):'',
+                    type:lf.window.currentWebview().type
+                });
+            } else {
+                var quickOrderTempData=lf.window.currentWebview()
+                if(lf.window.currentWebview().type==2){//如果是选摄影师
+                    quickOrderTempData.shooter=names.length > 0 ? names.join(' ') : ''
+                    quickOrderTempData.shooterId=ids.length > 0 ? ids.join(',') : ''
+                    quickOrderTempData.fromAllocation=true
+                }else{
+                    quickOrderTempData.operator=names.length > 0 ? names.join(' ') : ''
+                    quickOrderTempData.idString=ids.length > 0 ? ids.join(',') : ''
+                    quickOrderTempData.fromAllocation=true
+                }
+                localStorage.setItem('allocation-staff.html',JSON.stringify(quickOrderTempData))
+            }
             lf.window.closeCurrentWebview();
             return
         }
