@@ -29,7 +29,27 @@ function init(){
         console.log('response data:', data);
         lf.nativeUI.closeWaiting();
 		if(data.code == 200) {
-            vm.groupList = data.data;
+            var sortArr = [];
+            data.data.forEach(function(item, id){
+                var index;
+                data.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
+                sortArr.forEach(function(el, i){
+                    if( el.purchaser == item.purchaser ){
+                        return index = i;
+                    }
+                });
+
+                if( index ){
+                    sortArr[index].orderList.push(item);
+                } else {
+                    sortArr.push({
+                        purchaser: item.purchaser,
+                        orderList: [].concat(item)
+                    });
+                }
+            });
+
+            vm.groupList = sortArr;
         } else {
             lf.nativeUI.closeWaiting();
 			lf.nativeUI.toast(data.msg);
