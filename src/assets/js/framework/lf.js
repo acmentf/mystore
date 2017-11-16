@@ -1708,7 +1708,11 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
+<<<<<<< HEAD
 				var keyReg = /([-?\w+\.?]*\.html)/g;
+=======
+				var keyReg = /(\w+[-?\w+]*\.html)/g;
+>>>>>>> d8cdb5c41a1aa541abe08a26736a2d04b25d69b5
 				keyReg.test(url);
 				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
 				this.setPageParams(localStorageKey, extras)
@@ -1755,7 +1759,11 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
+<<<<<<< HEAD
 				var keyReg = /([-?\w+\.?]*\.html)/g;
+=======
+				var keyReg = /(\w+[-?\w+]*\.html)/g;
+>>>>>>> d8cdb5c41a1aa541abe08a26736a2d04b25d69b5
 				keyReg.test(url);
 				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
 				this.setPageParams(localStorageKey, extras)
