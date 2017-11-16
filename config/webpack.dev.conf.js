@@ -53,7 +53,7 @@ module.exports = merge(baseWebpackConfig, {
             }
         })(),
         port: 3001,
-        open: true,
+        open: false,
         openPage: 'app/login.html',
     }
 })
