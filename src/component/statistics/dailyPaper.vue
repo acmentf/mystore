@@ -1199,7 +1199,7 @@
                 return [this.isSign(value) ? 'number-sign' : 'number-lose']
             },
             getChartTypeTitle(type, text) {
-                return type === pageTypeConstant.day ? '查看累积趋势' : '查看' + text
+                return type === chartTypeConstant.day ? '查看累积趋势' : '查看' + text
             },
             switchChartType (params) {
                 const key = params.key

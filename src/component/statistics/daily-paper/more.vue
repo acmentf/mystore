@@ -325,10 +325,80 @@
             // 下拉数据
             initPickerData: function (cb) {
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/queryRegionAndProvince', {}, res => {
+                lf.net.getJSON('newReport/analysisMobile/totalMoreAll', {
+                    type: this.queryType.areaList,
+                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
+                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : ''
+                }, res => {
                     lf.nativeUI.closeWaiting()
+                    function map2(v) {
+                        return {
+                            category: v.date,
+                            value: v.value
+                        }
+                    }
                     if (res.code === '200') {
+                        const {
+                            areaMap,
+                            araeCode,
+                            araeName,
+                            areaData,
 
+                            provinceMap,
+                            provinceCode,
+                            provinceName,
+                            provinceData,
+
+                            lineList,
+                            lineName,
+                            lineData,
+
+                            productMap,
+                            productId,
+                            productName,
+                            productData
+                        } = res.data || {}
+
+                        this.initPicker({
+                            areaSelect: (areaMap || []).map(v => {
+                                return {
+                                    value: v.regionsCode,
+                                    text: v.regionsName
+                                }
+                            }),
+                            provinceSelect: (provinceMap || []).map(v => {
+                                return {
+                                    value: v.regionsCode,
+                                    text: v.regionsName
+                                }
+                            }),
+                            lineSelect: (lineList || []).map(v => {
+                                return {
+                                    value: v,
+                                    text: v
+                                }
+                            }),
+                            productSelect: (productMap || []).map(v => {
+                                return {
+                                    value: v.id,
+                                    text: v.pName
+                                }
+                            })
+                        })
+
+                        this.areaSelect.value = araeCode || ''
+                        this.areaSelect.text = araeName || ''
+                        this.provinceSelect.value = provinceCode || ''
+                        this.provinceSelect.text = provinceName || ''
+                        this.lineSelect.value = lineName || ''
+                        this.lineSelect.text = lineName || ''
+                        this.productSelect.value = productId || ''
+                        this.productSelect.text = productName || ''
+
+                        this.areaList = (areaData || []).map(map2)
+                        this.provinceList = (provinceData || []).map(map2)
+                        this.lineList = (lineData || []).map(map2)
+                        this.productList = (productData || []).map(map2)
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -344,7 +414,7 @@
                 return typeName + title + (name ? ' - ' + name : '' )
             },
             getChartTypeTitle(type) {
-                return type === pageTypeConstant.day ? '查看累积趋势' : '查看每日趋势'
+                return type === chartTypeConstant.day ? '查看累积趋势' : '查看每日趋势'
             },
             selectPicker (params) {
                 const key = params.key
@@ -448,7 +518,7 @@
                 })
             },
             init (cb) {
-                this.initPickerData(() => {
+                /*this.initPickerData(() => {
                     this.refreshAreaList(() => {
                         this.refreshProvinceList(() => {
                             this.refreshLineList(() => {
@@ -456,7 +526,8 @@
                             })
                         })
                     })
-                })
+                })*/
+                this.initPickerData(cb)
             },
             initMui () {
                 this.pageType = lf.window.currentWebview().pageType
