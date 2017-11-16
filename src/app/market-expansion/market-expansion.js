@@ -1,3 +1,5 @@
+import ExpansionCompletedSummary from "@/component/market-expansion/expansion-completed-summary.vue";
+import userPositionInfoMinix from "@/component/market-expansion/common/userPositionInfo";
 
 Vue.filter('dateFormatter', function(date){
     var reg = /^NaN/;
@@ -37,6 +39,9 @@ Vue.filter('lengthTo8', function(value){
 var vm = new Vue({
     el: '#app',
     mixins: [userPositionInfoMinix],
+    components: {
+        ExpansionCompletedSummary
+    },
     data: function() {
         return {
             date: {

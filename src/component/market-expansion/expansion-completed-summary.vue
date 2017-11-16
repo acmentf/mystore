@@ -42,7 +42,22 @@
         </div>
     </div>
 </template>
-<style lang="less">
+<script>
+    export default {
+        props: ['item'],
+        data: function() {
+            return {
+            }
+        },
+        computed: {
+        },
+        methods: {
+        },
+        mounted: function() {
+        }
+    }
+</script>
+<style lang="scss">
     .person-completed-summary {
         background: #fff;
         .summary-block {
@@ -50,11 +65,11 @@
                 display: flex;
                 padding: 0 15px;
                 &>div {
-                    @height: 0.8rem;
+                    $height: 0.8rem;
                     font-size: 0.3rem;
                     flex: 1;
-                    height: @height;
-                    line-height: @height;
+                    height: $height;
+                    line-height: $height;
                 }
                 .lable {
 
@@ -71,9 +86,9 @@
                     font-size: 0.3rem;
                     
                     div {
-                        @height: 0.7rem;
-                        height: @height;
-                        line-height: @height;
+                        $height: 0.7rem;
+                        height: $height;
+                        line-height: $height;
                         text-align: center;
                     }
                 }

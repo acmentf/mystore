@@ -1,4 +1,4 @@
-var userPositionInfoMinix = {
+export default {
     data: function () {
         return {
             username: '',

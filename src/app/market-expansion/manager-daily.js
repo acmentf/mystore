@@ -1,3 +1,6 @@
+import ExpansionCompletedSummary from "@/component/market-expansion/expansion-completed-summary.vue";
+import userPositionInfoMinix from "@/component/market-expansion/common/userPositionInfo";
+
 Vue.filter('dayFormatter', function(date){
     var dayArr = ['日', '一', '二', '三', '四', '五', '六'];
     var timeStamp = new Date(date);
@@ -6,6 +9,9 @@ Vue.filter('dayFormatter', function(date){
 var vm = new Vue({
     el: "#app",
     mixins: [userPositionInfoMinix],
+    components: {
+        ExpansionCompletedSummary
+    },
     data: function() {
         return {
             date: {

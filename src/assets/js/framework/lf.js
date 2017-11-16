@@ -1708,7 +1708,7 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
-				var keyReg = /(\w+-?\w+\.html)/g;
+				var keyReg = /([-?\w+\.?]*\.html)/g;
 				keyReg.test(url);
 				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
 				this.setPageParams(localStorageKey, extras)
@@ -1854,7 +1854,7 @@ var lf = (function(document, undefined) {
 		currentWebview: function() {
 			if(!$.os.plus) {   // web 访问 直接返回带参对象
 				var href = window.location.href;
-				var keyReg = /(\w+-?\w+\.html)/;
+				var keyReg = /([-?\w+\.?]*\.html)/g;
 				keyReg.test(href);
 				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
 				var result = JSON.parse(localStorage.getItem(localStorageKey)) || {};
