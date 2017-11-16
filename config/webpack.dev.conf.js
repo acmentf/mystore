@@ -5,12 +5,15 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 let entryHtml = utils.getEntryHtml('./src/app/**/*.html'),
     entryJs = utils.getEntry('./src/app/**/*.js'),
     configPlugins = [
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new FriendlyErrorsWebpackPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
     ];
 
@@ -33,6 +36,7 @@ module.exports = merge(baseWebpackConfig, {
         publicPath: '/',
         disableHostCheck: true,  // https://stackoverflow.com/questions/43650550/invalid-host-header-in-when-running-react-app
         hot: true,
+        stats: 'none',
         host: (function getIPAdress(){
             let interfaces = require('os').networkInterfaces();
             for(let devName in interfaces){
