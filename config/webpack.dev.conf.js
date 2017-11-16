@@ -38,6 +38,9 @@ module.exports = merge(baseWebpackConfig, {
         hot: true,
         stats: 'none',
         host: (function getIPAdress(){
+            if (process.env.NODE_ENV !== 'foreign') {
+                return 'localhost'
+            }
             let interfaces = require('os').networkInterfaces();
             for(let devName in interfaces){
                 let iface = interfaces[devName];
