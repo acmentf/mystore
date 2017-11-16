@@ -340,8 +340,8 @@ mui('#app').on('tap', '.fpsys', function() {
 }, false);
 
 window.getAssignStaff = function(data) {
-	var pIndex = data.pIndex
 	var idx = 0
+	var pIndex = data.pIndex
 	var forgraphersId=[{idx:[]}]
 	var forgraphersNames = [{idx:[]}]
 	data.userList.forEach(function(val){
