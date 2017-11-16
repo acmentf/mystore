@@ -33,11 +33,11 @@
                 </div>
                 <div class="mui-row">
                     <div class="mui-input-row">
-                        <label>预期销售额</label>
+                        <label>预期实销金额</label>
                         <span class="text">{{item.expectAmount}}</span>
                     </div>
                     <div class="mui-input-row">
-                        <label>计划销售额</label>
+                        <label>计划实销金额</label>
                         <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planAmount')" @blur="inputValue($event,index,'planAmount')" @input="formChange($event,index,'planAmount')" :value="item.planAmount" placeholder="请填写销售额">
                     </div>
                     <div class="line"></div>
