@@ -86,10 +86,25 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background: #FFFFFF;
 			}
+
+			.assign-staff-wrapper {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				z-index: 99999;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
 		</style>
 	</head>
 
 	<body>
+		<iframe src="../designate/assign-staff.html" name="iframeStaff" id="iframeStaff" class="assign-staff-wrapper"></iframe>
+
 		<div id="app">
 			<!-- 选择景点弹窗 -->
 			<div class="select-journey-wrapper">

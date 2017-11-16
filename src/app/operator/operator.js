@@ -306,28 +306,55 @@ mui('#app').on('tap', '.fpsys', function() {
 	}
 	var index = this.getAttribute('data-index');
 	if(vm.forStatus == 'edit'){
-		lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
-	        //订单Id
-	        orderId:vm.orderId,
-	        //摄影师ID
-	        passBack:vm.shootInfos[index].photographers
-		})
+		if (mui.os.plus) {
+			// lf.window.openWindow('designate/assign-staff.html', '../designate/assign-staff.html',{},{
+			// 	//订单Id
+			// 	orderId:vm.orderId,
+			// 	//摄影师ID
+			// 	passBack:vm.shootInfos[index].photographers
+			// })
+		} else {
+			document.querySelector('.assign-staff-wrapper').style.display = 'block'
+			iframeStaff.window.init({
+				//订单Id
+				orderId:vm.orderId,
+				//摄影师ID
+				passBack:vm.shootInfos[index].photographers,
+				pIndex: index
+			})
+		}
 	}
-	var idx = 0
-	var forgraphersId=[{idx:[]}]
-	var forgraphersNames = [{idx:[]}]
-	lf.event.listener('selectAssignUser',function(e){
-		e.detail.userList.forEach(function(val){
-			forgraphersId[idx].idx.push(val.id)
-			forgraphersNames[idx].idx.push(val.name)
-		})
+	// var idx = 0
+	// var forgraphersId=[{idx:[]}]
+	// var forgraphersNames = [{idx:[]}]
+	// lf.event.listener('selectAssignUser',function(e){
+	// 	e.detail.userList.forEach(function(val){
+	// 		forgraphersId[idx].idx.push(val.id)
+	// 		forgraphersNames[idx].idx.push(val.name)
+	// 	})
 
-		vm.shootInfos[index].photographers = forgraphersId[idx].idx
-		vm.shootInfos[index].photographerNames = forgraphersNames[idx].idx
-		idx ++
-	})
+	// 	vm.shootInfos[index].photographers = forgraphersId[idx].idx
+	// 	vm.shootInfos[index].photographerNames = forgraphersNames[idx].idx
+	// 	idx ++
+	// })
 }, false);
 
+window.getAssignStaff = function(data) {
+	var idx = 0
+	var pIndex = data.pIndex
+	var forgraphersId=[{idx:[]}]
+	var forgraphersNames = [{idx:[]}]
+	data.userList.forEach(function(val){
+		forgraphersId[idx].idx.push(val.id)
+		forgraphersNames[idx].idx.push(val.name)
+	})
+
+	vm.shootInfos[pIndex].photographers = forgraphersId[idx].idx
+	vm.shootInfos[pIndex].photographerNames = forgraphersNames[idx].idx
+	idx ++
+
+	iframeStaff.location.reload()
+}
 
 //修改
 mui('.mui-bar-nav').on('tap', '.edit',function(){
