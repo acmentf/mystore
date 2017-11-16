@@ -186,7 +186,7 @@
         data () {
             return {
                 pageType: pageTypeConstant.income,
-                queryDate: utils.recentDay(30),
+                queryDate: utils.recentDay(90),
                 areaSelect: {
                     chartType: chartTypeConstant.day,
                     value: '',
@@ -215,7 +215,7 @@
         computed: {
             queryType () {
                 const {income, incomeAcc, people, peopleAcc} = totalMoreTypeConstant
-                if (this.pageType = pageTypeConstant.income) {
+                if (this.pageType === pageTypeConstant.income) {
                     return {
                         areaList: this.areaSelect === chartTypeConstant.day ? income : incomeAcc ,
                         provinceList: this.provinceSelect === chartTypeConstant.day ? income : incomeAcc,
@@ -434,7 +434,7 @@
             queryTotalMoreData (options, cb) {
                 const {queryDate} = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                lf.net.getJSON('newReport/analysisMobile/totalMore', {
                     startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
                     endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     ...options

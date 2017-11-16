@@ -1699,7 +1699,7 @@ var lf = (function(document, undefined) {
 					'daily-manage',
 					'market-expansion'
 				]
-				
+
 				if (!/login.html/.test(window.location.href)) {
 					// 防止 web访问 在 login.html 回退
 					ignoreList.forEach(function(item) {

@@ -404,7 +404,7 @@
                                         </div>
                                     </div>
                                     <div class="section-content"
-                                         v-show="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.acc">
+                                         v-if="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.acc">
                                         <e-charts ref="historyChart_1" :options="historyThreeMonthIncomeAccChart" auto-resize></e-charts>
                                     </div>
                                 </div>
@@ -816,7 +816,7 @@
                 //激活模块
                 pageTypeActive: pageTypeConstant.income,
                 queryDate: new Date(/*new Date() - 1000*60*60*24*/),
-                historyDate: utils.recentDay(30),
+                historyDate: utils.recentDay(90),
                 //大区省份code
                 //regionProvinceActive: '',
                 regionProvinceMap: {
@@ -1529,7 +1529,7 @@
             queryTotalMoreData (options, cb) {
                 const {historyDate} = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                lf.net.getJSON('newReport/analysisMobile/totalMore', {
                     startDate: historyDate[0] ? historyDate[0].format('yyyy-MM-dd') : '',
                     endDate: historyDate[1] ? historyDate[1].format('yyyy-MM-dd') : '',
                     ...options
@@ -1616,6 +1616,7 @@
             },
             //近3个月收入统计
             refreshDataByThreeMonthIncome: function (cb) {
+                const {historyDate} = this
                 let self = this
                 let regionProvince = this.regionProvinceMap.historyThreeMonthIncome
                 if (regionProvince.chartType === chartTypeConstant.day) {
@@ -1645,7 +1646,9 @@
                     })
                 } else {
                     lf.nativeUI.showWaiting()
-                    lf.net.getJSON('newReport/analysisMobile/threeMonthIncomeTrend.htm', {
+                    lf.net.getJSON('newReport/analysisMobile/threeMonthIncomeTrend', {
+                        startDate: historyDate[0] ? historyDate[0].format('yyyy-MM-dd') : '',
+                        endDate: historyDate[1] ? historyDate[1].format('yyyy-MM-dd') : '',
                         areaCode: regionProvince.areaCode,
                         provinceCode: regionProvince.provinceCode
                     }, function(res) {
@@ -1679,6 +1682,7 @@
                                     return listMap[key]
                                 })
                             }
+                            self.refreshChart('history')
                         } else {
                             lf.nativeUI.toast(res.msg)
                         }
