@@ -98,5 +98,10 @@ export default {
         c = !isNaN(c) || Math.abs(c) === Infinity ? c : 0
         c = c !== 0 ? toFixed(c * 100, 2) : 0
         return c
+    },
+    randomNumBoth (min,max){
+        let range = max - min
+        let rand = Math.random()
+        return min + Math.round(rand * range); //四舍五入
     }
 }

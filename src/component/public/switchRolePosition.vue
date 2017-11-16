@@ -116,18 +116,25 @@
                     lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(res.msg);
                 })
+            },
+            initMui () {
+                this.init()
+                mui('#offCanvasSideScroll').offCanvas();
+                 // 退出登录
+                mui('body').on('tap', '#logout', function() {
+                    lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+                        if (e.index == 0) {
+                            window.Role.logout();
+                            GLOBAL_SHOOT.restart();
+                        }
+                    });
+                })
             }
         },
         created () {
             lf.ready(() => {
-                this.init()
+                this.initMui()
             })
-        },
-        mounted () {
-            mui('#offCanvasSideScroll').offCanvas();
-        },
-        beforeDestroy () {
-
         }
     }
 </script>

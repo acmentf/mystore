@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "better-npm-run build",
     "dev": "better-npm-run dev",
+    "foreign": "better-npm-run foreign",
     "start": "better-npm-run start"
   },
   "betterScripts": {
@@ -14,6 +15,9 @@
     },
     "dev": {
       "command": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf"
+    },
+    "foreign": {
+      "command": "cross-env NODE_ENV=foreign webpack-dev-server --config config/webpack.dev.conf"
     },
     "build": {
       "command": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf"
