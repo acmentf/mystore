@@ -324,6 +324,7 @@
             },
             // 下拉数据
             initPickerData: function (cb) {
+                const {queryDate} = this
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('newReport/analysisMobile/totalMoreAll', {
                     type: this.queryType.areaList,
