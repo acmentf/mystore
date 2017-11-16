@@ -103,5 +103,15 @@ export default {
         let range = max - min
         let rand = Math.random()
         return min + Math.round(rand * range); //四舍五入
+    },
+    //校验数字值
+    isValidNumber (v) {
+        v = +v
+        return !!v && !isNaN(v)
+    },
+    // 截断字符串
+    truncationStr(str, count) {
+        str = str + ''
+        return str.length > count ? str.slice(0, count - 1) + '...' : str
     }
 }

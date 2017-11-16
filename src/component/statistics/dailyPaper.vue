@@ -572,7 +572,7 @@
     }
     // 过滤（或）
     function filterSeriesByOr(item) {
-        return isValidValue(item.value) || isValidValue(item['value' + MERGE_SERIES_SUFFIX])
+        return utils.isValidNumber(item.value) || utils.isValidNumber(item['value' + MERGE_SERIES_SUFFIX])
     }
     // 排序
     function baseSortSeries(a, b) {
@@ -592,7 +592,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -662,7 +662,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -733,7 +733,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -789,20 +789,6 @@
                 valueKey: 'value'+ MERGE_SERIES_SUFFIX
             }
         ])
-    }
-    //校验值
-    function isValidValue(v) {
-        v = +v
-        return !!v && !isNaN(v)
-    }
-    //是否定义
-    function isDef(v) {
-        return v !== undefined && v !== null
-    }
-    // 截断字符串
-    function truncationStr(str, count) {
-        str = str + ''
-        return str.length > count ? str.slice(0, count - 1) + '...' : str
     }
 
     export default {
@@ -1074,10 +1060,11 @@
             },
             historyThreeMonthIncomeAccChart: function () {
                 let regionProvince = this.regionProvinceMap.historyThreeMonthIncome
-                if (this.pageTypeActive !== pageTypeConstant.flow || regionProvince.chartType === chartTypeConstant.day) {
+                let {seriesOpts, list} = this.historyThreeMonthIncomeAcc
+
+                if (this.pageTypeActive !== pageTypeConstant.history || regionProvince.chartType === chartTypeConstant.day || !seriesOpts) {
                     return EMPTY_CHART
                 }
-                let {seriesOpts, list} = this.historyThreeMonthIncomeAcc
                 let options = getLineChartOption(list,seriesOpts)
                 options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
                     start: 0,
@@ -1189,7 +1176,7 @@
         },
         methods: {
             getAbs: function (value) {
-                return isDef(value) ? Math.abs(value) : 0
+                return utils.isDef(value) ? Math.abs(value) : 0
             },
             isSign: function(value) {
                 value = value + ''
@@ -1702,7 +1689,7 @@
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                         self.historyShootCount = {
-                            shoot: isDef(res.data) ? res.data : 0
+                            shoot: utils.isDef(res.data) ? res.data : 0
                         }
                     } else {
                         lf.nativeUI.toast(res.msg);
