@@ -4,78 +4,80 @@
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
             <h1 class="mui-title">更多数据</h1>
         </header>
-        <div class="mui-content">
-            <div class="daily-content">
-                <!--各大区-->
-                <div class="section-box">
-                    <div class="section-title clearfix">
-                        <div class="text" v-text="areaTitle"></div>
-                        <div class="tool">
-                            <button type="button" class="item mui-btn"
-                                    v-text="areaTypeTitle"
-                                    v-tap="{ methods : switchChartType, key: 'areaSelect' }">
-                            </button>
-                            <i class="item icon-more-select"
-                               v-tap="{ methods : selectPicker, key: 'areaSelect' }">
-                            </i>
+        <div class="mui-content mui-scroll-wrapper" id="page-scroll">
+            <div class="mui-scroll">
+                <div class="daily-content">
+                    <!--各大区-->
+                    <div class="section-box">
+                        <div class="section-title clearfix">
+                            <div class="text" v-text="areaTitle"></div>
+                            <div class="tool">
+                                <button type="button" class="item mui-btn"
+                                        v-text="areaTypeTitle"
+                                        v-tap="{ methods : switchChartType, key: 'areaSelect' }">
+                                </button>
+                                <i class="item icon-more-select"
+                                   v-tap="{ methods : selectPicker, key: 'areaSelect' }">
+                                </i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <e-charts class="axis-label-long" :options="areaChart" auto-resize></e-charts>
                         </div>
                     </div>
-                    <div class="section-content">
-                        <e-charts class="axis-label-long" :options="areaChart" auto-resize></e-charts>
-                    </div>
-                </div>
-                <!--各省份-->
-                <div class="section-box">
-                    <div class="section-title clearfix">
-                        <div class="text" v-text="provinceTitle"></div>
-                        <div class="tool">
-                            <button type="button" class="item mui-btn"
-                                    v-text="provinceTypeTitle"
-                                    v-tap="{ methods : switchChartType, key: 'provinceSelect' }">
-                            </button>
-                            <i class="item icon-more-select"
-                               v-tap="{ methods : selectPicker, key: 'provinceSelect' }">
-                            </i>
+                    <!--各省份-->
+                    <div class="section-box">
+                        <div class="section-title clearfix">
+                            <div class="text" v-text="provinceTitle"></div>
+                            <div class="tool">
+                                <button type="button" class="item mui-btn"
+                                        v-text="provinceTypeTitle"
+                                        v-tap="{ methods : switchChartType, key: 'provinceSelect' }">
+                                </button>
+                                <i class="item icon-more-select"
+                                   v-tap="{ methods : selectPicker, key: 'provinceSelect' }">
+                                </i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <e-charts class="axis-label-long" :options="provinceChart" auto-resize></e-charts>
                         </div>
                     </div>
-                    <div class="section-content">
-                        <e-charts class="axis-label-long" :options="provinceChart" auto-resize></e-charts>
-                    </div>
-                </div>
-                <!--各线路-->
-                <div class="section-box">
-                    <div class="section-title clearfix">
-                        <div class="text" v-text="lineTitle"></div>
-                        <div class="tool">
-                            <button type="button" class="item mui-btn"
-                                    v-text="lineTypeTitle"
-                                    v-tap="{ methods : switchChartType, key: 'lineSelect' }">
-                            </button>
-                            <i class="item icon-more-select"
-                               v-tap="{ methods : selectPicker, key: 'lineSelect' }">
-                            </i>
+                    <!--各线路-->
+                    <div class="section-box">
+                        <div class="section-title clearfix">
+                            <div class="text" v-text="lineTitle"></div>
+                            <div class="tool">
+                                <button type="button" class="item mui-btn"
+                                        v-text="lineTypeTitle"
+                                        v-tap="{ methods : switchChartType, key: 'lineSelect' }">
+                                </button>
+                                <i class="item icon-more-select"
+                                   v-tap="{ methods : selectPicker, key: 'lineSelect' }">
+                                </i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <e-charts class="axis-label-long" :options="lineChart" auto-resize></e-charts>
                         </div>
                     </div>
-                    <div class="section-content">
-                        <e-charts class="axis-label-long" :options="lineChart" auto-resize></e-charts>
-                    </div>
-                </div>
-                <!--各产品-->
-                <div class="section-box">
-                    <div class="section-title clearfix">
-                        <div class="text" v-text="productTitle"></div>
-                        <div class="tool">
-                            <button type="button" class="item mui-btn"
-                                    v-text="productTypeTitle"
-                                    v-tap="{ methods : switchChartType, key: 'productSelect' }">
-                            </button>
-                            <i class="item icon-more-select"
-                               v-tap="{ methods : selectPicker, key: 'productSelect' }">
-                            </i>
+                    <!--各产品-->
+                    <div class="section-box">
+                        <div class="section-title clearfix">
+                            <div class="text" v-text="productTitle"></div>
+                            <div class="tool">
+                                <button type="button" class="item mui-btn"
+                                        v-text="productTypeTitle"
+                                        v-tap="{ methods : switchChartType, key: 'productSelect' }">
+                                </button>
+                                <i class="item icon-more-select"
+                                   v-tap="{ methods : selectPicker, key: 'productSelect' }">
+                                </i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="section-content">
-                        <e-charts class="axis-label-long" :options="productChart" auto-resize></e-charts>
+                        <div class="section-content">
+                            <e-charts class="axis-label-long" :options="productChart" auto-resize></e-charts>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,7 +86,7 @@
 </template>
 <script>
     import utils from '../../../js/utils'
-    import {pageTypeConstant, chartTypeConstant} from './commom'
+    import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant} from './commom'
 
     const EACH_SCREEN_COUNT = 8
     const X_AXIS_NAME_COUNT = 7
@@ -212,19 +214,20 @@
         },
         computed: {
             queryType () {
+                const {income, incomeAcc, people, peopleAcc} = totalMoreTypeConstant
                 if (this.pageType = pageTypeConstant.income) {
                     return {
-                        areaList: this.areaSelect === chartTypeConstant.day ? 3 : 4 ,
-                        provinceList: this.provinceSelect === chartTypeConstant.day ? 3 : 4,
-                        lineList: this.lineSelect === chartTypeConstant.day ? 3 : 4,
-                        productList: this.productSelect === chartTypeConstant.day ? 3 : 4
+                        areaList: this.areaSelect === chartTypeConstant.day ? income : incomeAcc ,
+                        provinceList: this.provinceSelect === chartTypeConstant.day ? income : incomeAcc,
+                        lineList: this.lineSelect === chartTypeConstant.day ? income : incomeAcc,
+                        productList: this.productSelect === chartTypeConstant.day ? income : incomeAcc
                     }
                 } else {
                     return {
-                        areaList: this.areaSelect === chartTypeConstant.day ? 1 : 2 ,
-                        provinceList: this.provinceSelect === chartTypeConstant.day ? 1 : 2,
-                        lineList: this.lineSelect === chartTypeConstant.day ? 1 : 2,
-                        productList: this.productSelect === chartTypeConstant.day ? 1 : 2
+                        areaList: this.areaSelect === chartTypeConstant.day ? people : peopleAcc ,
+                        provinceList: this.provinceSelect === chartTypeConstant.day ? people : peopleAcc,
+                        lineList: this.lineSelect === chartTypeConstant.day ? people : peopleAcc,
+                        productList: this.productSelect === chartTypeConstant.day ? people : peopleAcc
                     }
                 }
             },
@@ -272,7 +275,40 @@
                 return getLineLongCategoryChartOption(this.productList, this.seriesOpts)
             }
         },
-        watch: {},
+        watch: {
+            areaSelect: {
+                handler () {
+                    this.$nextTick(function () {
+                        this.refreshAreaList()
+                    })
+                },
+                deep: true
+            },
+            provinceSelect: {
+                handler () {
+                    this.$nextTick(function () {
+                        this.refreshProvinceList()
+                    })
+                },
+                deep: true
+            },
+            lineSelect: {
+                handler () {
+                    this.$nextTick(function () {
+                        this.refreshLineList()
+                    })
+                },
+                deep: true
+            },
+            productSelect: {
+                handler () {
+                    this.$nextTick(function () {
+                        this.refreshProductList()
+                    })
+                },
+                deep: true
+            }
+        },
         methods: {
             initPicker (data) {
                 const p = this.Picker = {
@@ -324,129 +360,121 @@
                 const s = this[key]
                 s.chartType = s.chartType === chartTypeConstant.day ? chartTypeConstant.acc :chartTypeConstant.day
             },
+            queryTotalMoreData (options, cb) {
+                const {queryDate} = this
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
+                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
+                    ...options
+                }, res => {
+                    let data
+                    lf.nativeUI.closeWaiting()
+                    if (res.code === '200') {
+                        data = (res.data || []).map(v => {
+                            return {
+                                category: v.date,
+                                value: v.value
+                            }
+                        })
+                    } else {
+                        lf.nativeUI.toast(res.msg)
+                    }
+                    cb && cb(data)
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg)
+                })
+            },
             refreshAreaList (cb) {
-                const {queryDate,areaSelect} = this
+                const {areaSelect} = this
                 if (!areaSelect.value) {
                     return
                 }
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                this.queryTotalMoreData({
                     type: this.queryType.areaList,
-                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
-                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     areaCode: areaSelect.value
-                }, res => {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        this.areaList = (res.data || []).map(v => {
-                            return {
-                                category: v.date,
-                                value: v.value
-                            }
-                        })
-                    } else {
-                        lf.nativeUI.toast(res.msg)
+                }, data => {
+                    if (data) {
+                        this.areaList = data
                     }
                     cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg)
                 })
             },
             refreshProvinceList (cb) {
-                const {queryDate,provinceSelect} = this
+                const {provinceSelect} = this
                 if (!provinceSelect.value) {
                     return
                 }
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                this.queryTotalMoreData({
                     type: this.queryType.provinceList,
-                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
-                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     provinceCode: provinceSelect.value
-                }, res => {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        this.provinceList = (res.data || []).map(v => {
-                            return {
-                                category: v.date,
-                                value: v.value
-                            }
-                        })
-                    } else {
-                        lf.nativeUI.toast(res.msg)
+                }, data => {
+                    if (data) {
+                        this.provinceList = data
                     }
                     cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg)
                 })
             },
             refreshLineList (cb) {
-                const {queryDate,lineSelect} = this
+                const {lineSelect} = this
                 if (!lineSelect.value) {
                     return
                 }
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                this.queryTotalMoreData({
                     type: this.queryType.lineList,
-                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
-                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     lineName: lineSelect.value
-                }, res => {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        this.lineList = (res.data || []).map(v => {
-                            return {
-                                category: v.date,
-                                value: v.value
-                            }
-                        })
-                    } else {
-                        lf.nativeUI.toast(res.msg)
+                }, data => {
+                    if (data) {
+                        this.lineSelect = data
                     }
                     cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg)
                 })
             },
             refreshProductList (cb) {
-                const {queryDate,productSelect} = this
+                const {productSelect} = this
                 if (!productSelect.value) {
                     return
                 }
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                this.queryTotalMoreData({
                     type: this.queryType.productList,
-                    startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
-                    endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     productId: productSelect.value
-                }, res => {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        this.productList = (res.data || []).map(v => {
-                            return {
-                                category: v.date,
-                                value: v.value
-                            }
-                        })
-                    } else {
-                        lf.nativeUI.toast(res.msg)
+                }, data => {
+                    if (data) {
+                        this.productList = data
                     }
                     cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg)
+                })
+            },
+            init (cb) {
+                this.initPickerData(() => {
+                    this.refreshAreaList(() => {
+                        this.refreshProvinceList(() => {
+                            this.refreshLineList(() => {
+                                this.refreshProductList(cb)
+                            })
+                        })
+                    })
+                })
+            },
+            initMui () {
+                this.pageType = lf.window.currentWebview().pageType
+                this.$nextTick(() =>{
+                    this.init()
+                })
+                let deceleration = mui.os.ios ? 0.003 : 0.0009;
+                mui('.mui-scroll-wrapper').scroll({
+                    bounce: false,
+                    indicators: true, //是否显示滚动条
+                    deceleration: deceleration
                 })
             }
         },
         created () {
-
+            lf.ready(() => {
+                this.initMui()
+            })
         }
     }
 </script>
