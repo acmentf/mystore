@@ -4,7 +4,7 @@
         <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
             <div class="mui-scroll">
                 <div class="offCanvasSide-header">
-                    <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                    <img :src="logoImg" alt="" class="offCanvasSide-header-avatar">
                     <p class="offCanvasSide-header-name">{{username}}</p>
                 </div>
 
@@ -29,6 +29,7 @@
         name: 'switchRolePosition',
         data () {
             return {
+                logoImg: '../../assets/css/images/logo_login.png',
                 username: '',
                 rolePositionList: [],
                 rolePositionId: '',

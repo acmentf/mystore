@@ -128,7 +128,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -169,15 +169,7 @@
             series: series
         }
     }
-    //校验值
-    function isValidValue(v) {
-        v = +v
-        return !!v && !isNaN(v)
-    }
-    //是否定义
-    function isDef(v) {
-        return v !== undefined && v !== null
-    }
+
     export default {
         name: 'more',
         components: {
@@ -186,7 +178,7 @@
         data () {
             return {
                 pageType: pageTypeConstant.income,
-                queryDate: utils.recentDay(30),
+                queryDate: utils.recentDay(90),
                 areaSelect: {
                     chartType: chartTypeConstant.day,
                     value: '',
@@ -198,6 +190,7 @@
                     text: ''
                 },
                 lineSelect: {
+                    chartType: chartTypeConstant.day,
                     value: '',
                     text: ''
                 },
@@ -215,7 +208,7 @@
         computed: {
             queryType () {
                 const {income, incomeAcc, people, peopleAcc} = totalMoreTypeConstant
-                if (this.pageType = pageTypeConstant.income) {
+                if (this.pageType === pageTypeConstant.income) {
                     return {
                         areaList: this.areaSelect === chartTypeConstant.day ? income : incomeAcc ,
                         provinceList: this.provinceSelect === chartTypeConstant.day ? income : incomeAcc,
@@ -310,13 +303,16 @@
             }
         },
         methods: {
-            initPicker (data) {
-                const p = this.Picker = {
+            initPicker () {
+                this.Picker = {
                     areaSelect: new mui.PopPicker(),
                     provinceSelect: new mui.PopPicker(),
                     lineSelect: new mui.PopPicker(),
                     productSelect: new mui.PopPicker()
                 }
+            },
+            setPickerData (data) {
+                const p = this.Picker
                 p.areaSelect.setData(data.areaSelect)
                 p.provinceSelect.setData(data.provinceSelect);
                 p.lineSelect.setData(data.lineSelect);
@@ -360,7 +356,7 @@
                             productData
                         } = res.data || {}
 
-                        this.initPicker({
+                        this.setPickerData({
                             areaSelect: (areaMap || []).map(v => {
                                 return {
                                     value: v.regionsCode,
@@ -434,7 +430,7 @@
             queryTotalMoreData (options, cb) {
                 const {queryDate} = this
                 lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/totalMore.htm', {
+                lf.net.getJSON('newReport/analysisMobile/totalMore', {
                     startDate: queryDate[0] ? queryDate[0].format('yyyy-MM-dd') : '',
                     endDate: queryDate[1] ? queryDate[1].format('yyyy-MM-dd') : '',
                     ...options
@@ -498,7 +494,7 @@
                     lineName: lineSelect.value
                 }, data => {
                     if (data) {
-                        this.lineSelect = data
+                        this.lineList = data
                     }
                     cb && cb()
                 })
@@ -528,6 +524,7 @@
                         })
                     })
                 })*/
+                this.initPicker()
                 this.initPickerData(cb)
             },
             initMui () {
