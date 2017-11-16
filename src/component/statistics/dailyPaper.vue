@@ -318,8 +318,8 @@
                                     累积收入
                                     <span class="currency single-value" v-text="historyIncomeTotal.saleAmt"></span>
                                     <button type="button" class="item mui-btn check-more"
-                                            v-text="更多数据"
                                             v-tap="{ methods : goPageMore, pageType: pageTypeConstant.income }">
+                                        更多数据
                                     </button>
                                 </div>
                                 <div class="section-box">
@@ -335,7 +335,7 @@
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyIncomeDayTitle"></div>
                                         <div class="tool">
-                                            <button type="button" class="item mui-btn"
+                                            <button type="button" class="item mui-btn switchover"
                                                     v-text="historyIncomeDayTypeTitle"
                                                     v-tap="{ methods : switchChartType, key: 'historyIncomeDay' }">
                                             </button>
@@ -351,14 +351,15 @@
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyThreeMonthIncomeTitle"></div>
                                         <div class="tool">
-                                            <button type="button" class="item mui-btn"
+                                            <button type="button" class="item mui-btn switchover"
                                                     v-text="historyThreeMonthIncomeTypeTitle"
                                                     v-tap="{ methods : switchChartType, key: 'historyThreeMonthIncome' }">
                                             </button>
                                             <i class="item icon-more-select" id="historyThreeMonthIncome_RP"></i>
                                         </div>
                                     </div>
-                                    <div class="section-content">
+                                    <div class="section-content"
+                                         v-show="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.day">
                                         <div class="mui-slider info-box-mui-slider">
                                             <div class="mui-slider-group">
                                                 <div class="mui-slider-item"  v-for="(item,index) in historyThreeMonthIncome" v-if="index % 2 === 0">
@@ -402,7 +403,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="section-content">
+                                    <div class="section-content"
+                                         v-show="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.acc">
                                         <e-charts ref="historyChart_1" :options="historyThreeMonthIncomeAccChart" auto-resize></e-charts>
                                     </div>
                                 </div>
@@ -410,8 +412,8 @@
                                     累积拍摄人数
                                     <span class="single-value" v-text="historyShootCount.shoot"></span>
                                     <button type="button" class="item mui-btn check-more"
-                                            v-text="更多数据"
                                             v-tap="{ methods : goPageMore, pageType: pageTypeConstant.flow }">
+                                        更多数据
                                     </button>
                                 </div>
                                 <!--近30天每日拍摄人数-->
@@ -419,7 +421,7 @@
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyShootDayTitle"></div>
                                         <div class="tool">
-                                            <button type="button" class="item mui-btn"
+                                            <button type="button" class="item mui-btn switchover"
                                                     v-text="historyShootDayTypeTitle"
                                                     v-tap="{ methods : switchChartType, key: 'historyShootDay' }">
                                             </button>
@@ -967,6 +969,9 @@
             },
             pageTypeConstant: function () {
                 return pageTypeConstant
+            },
+            chartTypeConstant () {
+                return chartTypeConstant
             },
             incomeAllTitle: function () {
                 return getRegionProvince(this.regionProvinceMap.incomeAll, '全国') + '收入（' + this.realTitleExplainText + '）'
@@ -2015,6 +2020,9 @@
                             cursor: pointer;
                             margin-left: 10px;
                         }
+                        .switchover{
+                            padding: 1px 4px;
+                        }
                         .icon-more-select{
                             width: 26px;
                             background-repeat: no-repeat;
@@ -2042,6 +2050,7 @@
                 background-color: #fff;
                 padding: 20px;
                 margin-bottom: 5px;
+                position: relative;
                 &.center{
                     text-align: center;
                 }
@@ -2075,6 +2084,9 @@
                 }
                 .check-more{
                     cursor: pointer;
+                    position: absolute;
+                    top: 22%;
+                    right: 10%;
                 }
             }
             .list-show-wrap{

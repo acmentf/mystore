@@ -12,7 +12,7 @@
                         <div class="section-title clearfix">
                             <div class="text" v-text="areaTitle"></div>
                             <div class="tool">
-                                <button type="button" class="item mui-btn"
+                                <button type="button" class="item mui-btn switchover"
                                         v-text="areaTypeTitle"
                                         v-tap="{ methods : switchChartType, key: 'areaSelect' }">
                                 </button>
@@ -30,7 +30,7 @@
                         <div class="section-title clearfix">
                             <div class="text" v-text="provinceTitle"></div>
                             <div class="tool">
-                                <button type="button" class="item mui-btn"
+                                <button type="button" class="item mui-btn switchover"
                                         v-text="provinceTypeTitle"
                                         v-tap="{ methods : switchChartType, key: 'provinceSelect' }">
                                 </button>
@@ -48,7 +48,7 @@
                         <div class="section-title clearfix">
                             <div class="text" v-text="lineTitle"></div>
                             <div class="tool">
-                                <button type="button" class="item mui-btn"
+                                <button type="button" class="item mui-btn switchover"
                                         v-text="lineTypeTitle"
                                         v-tap="{ methods : switchChartType, key: 'lineSelect' }">
                                 </button>
@@ -66,7 +66,7 @@
                         <div class="section-title clearfix">
                             <div class="text" v-text="productTitle"></div>
                             <div class="tool">
-                                <button type="button" class="item mui-btn"
+                                <button type="button" class="item mui-btn switchover"
                                         v-text="productTypeTitle"
                                         v-tap="{ methods : switchChartType, key: 'productSelect' }">
                                 </button>
@@ -526,6 +526,9 @@
                         .item + .item {
                             cursor: pointer;
                             margin-left: 10px;
+                        }
+                        .switchover{
+                            padding: 1px 4px;
                         }
                         .icon-more-select{
                             width: 26px;
