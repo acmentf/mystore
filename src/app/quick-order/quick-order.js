@@ -29,6 +29,21 @@ lf.ready(function() {
             deptId:'',//部门id
             lineName: ''
         },
+        mounted: function () {
+            // 初始化数据,针对h5特殊处理
+            if (!mui.os.plus && window.localStorage.getItem('allocation-staff.html')) {
+                var localStorageData = JSON.parse(window.localStorage.getItem('allocation-staff.html'))
+                if(localStorageData.fromAllocation){
+                    for (var key in localStorageData) {
+                        if (localStorageData.hasOwnProperty(key)) {
+                            this[key] = localStorageData[key]
+                        }
+                    }
+                    localStorageData.fromAllocation=false
+                    localStorage.setItem('allocation-staff.html',JSON.stringify(localStorageData))
+                }
+            }
+        },
         methods: {
             selectJourneyName: function(e){
                 e.preventDefault()
@@ -99,6 +114,14 @@ lf.ready(function() {
         }
     })
 
+    // 监听是否从其他页面点击返回到该页面
+    // 主要用于h5中选择指派人或摄影师后刷新页面
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload() 
+        }
+    };
+
     mui('#app').on('tap', '.product-name', function() { //选择产品名称
         blur()
         var picker = new mui.PopPicker();
@@ -149,22 +172,27 @@ lf.ready(function() {
         })
     })
 
-    mui('#app').on('tap', '.designate', function() { //选择执行人1
+    mui('#app').on('tap', '.designate', function() { //选择执行人
         blur()
         vm.operator = ''
         lf.window.openWindow('allocation', '../designate/allocation-staff.html', {}, {
             quikOrderTag: true,
-            type: 1
+            type: 1,
+            ...vm.$data
         })
     })
 
-    mui('#app').on('tap', '.shooter', function() { //选择摄影师2
+    mui('#app').on('tap', '.shooter', function() { //选择摄影师
         blur()
         vm.shooter = ''
+        if (!vm.deptId) {
+            lf.nativeUI.toast('请先选择产品')
+            return
+        }
         lf.window.openWindow('allocation', '../designate/allocation-staff.html', {}, {
             quikOrderTag: true,
-            deptId:vm.deptId,
-            type: 2
+            type: 2,
+            ...vm.$data
         })
     })
     

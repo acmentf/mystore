@@ -25,13 +25,14 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: 'happypack/loader?id=js',
                 options: vueLoaderConfig
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src'), resolve('test')]
+                loaders: 'happypack/loader?id=js',
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -69,7 +70,8 @@ module.exports = {
     plugins: [
         new HappyPack({
             id: 'js',
-            // @see https://github.com/amireh/happypack
+            cache: true,
+            verbose: true,
             threadPool: HappyThreadPool,
             loaders: ['babel-loader', 'vue-loader']
         }),

@@ -179,7 +179,6 @@ function getOrder(){
 	lf.net.getJSON('order/orderDetail',params, function(res){
 		if(res.code == 200){		
 			vm.orderMessage = res.data
-			console.log(JSON.stringify(vm.orderMessage))
 			vm.orderMessage.orderTrackInfo.startTime = lf.util.timeStampToDate2(vm.orderMessage.orderTrackInfo.startTime)
 		}
 	})
