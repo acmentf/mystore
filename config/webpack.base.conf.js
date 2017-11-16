@@ -25,8 +25,9 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'happypack/loader?id=js',
-                options: vueLoaderConfig
+                loader: 'happypack/loader?id=vue',
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
             },
             {
                 test: /\.js$/,
@@ -69,11 +70,19 @@ module.exports = {
     },
     plugins: [
         new HappyPack({
-            id: 'js',
-            cache: true,
-            verbose: true,
+            id: 'vue',
             threadPool: HappyThreadPool,
-            loaders: ['babel-loader', 'vue-loader']
+            loaders: [
+                {
+                  loader: 'vue-loader',
+                  options: vueLoaderConfig,
+                }
+            ]
+        }),
+        new HappyPack({
+            id: 'js',
+            threadPool: HappyThreadPool,
+            loaders: ['babel-loader']
         }),
         new HappyPack({
             id: 'styles',
