@@ -1699,7 +1699,7 @@ var lf = (function(document, undefined) {
 					'daily-manage',
 					'market-expansion'
 				]
-				
+
 				if (!/login.html/.test(window.location.href)) {
 					// 防止 web访问 在 login.html 回退
 					ignoreList.forEach(function(item) {
@@ -1755,7 +1755,7 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
-				var keyReg = /(\w+-?\w+\.html)/g;
+				var keyReg = /([-?\w+\.?]*\.html)/g;
 				keyReg.test(url);
 				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
 				this.setPageParams(localStorageKey, extras)
@@ -2504,7 +2504,7 @@ var lf = (function(document, undefined) {
 				this.currentPositions = [];
 				this.photograherId = '';
 			}
-			$.log.info("complete loading role data is ："+k);
+			// $.log.info("complete loading role data is ："+k);
 		},
 		save:function(k){
 			this.usercode = k.usercode;

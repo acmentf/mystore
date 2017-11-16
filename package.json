@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "better-npm-run build",
     "dev": "better-npm-run dev",
+    "foreign": "better-npm-run foreign",
     "start": "better-npm-run start"
   },
   "betterScripts": {
@@ -15,8 +16,17 @@
     "dev": {
       "command": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf"
     },
+    "uat": {
+      "command": "cross-env NODE_ENV=uat webpack --config config/webpack.prod.conf"
+    },
+    "sit": {
+      "command": "cross-env NODE_ENV=sit webpack --config config/webpack.prod.conf"
+    },
     "build": {
       "command": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf"
+    },
+    "foreign": {
+      "command": "cross-env NODE_ENV=foreign webpack-dev-server --config config/webpack.dev.conf"
     }
   },
   "devDependencies": {
@@ -34,8 +44,9 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "glob": "^7.1.2",
-    "happypack": "^4.0.0-beta.1",
+    "happypack": "^4.0.0",
     "html-webpack-plugin": "^2.28.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "image-webpack-loader": "^3.3.1",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.5",

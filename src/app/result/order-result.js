@@ -159,17 +159,17 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			}
 		}
 		params = {
-		userId:vm.userId,
-		id: vm.id,
-		orderId:vm.orderId,
-		isOut: vm.isOut,
-		orderXms:vm.printOrderXms,
-		selectsNum: vm.selectsNum,			
-		shootNum: vm.shootNum,
-		saleRemark:vm.saleRemark,
-		serverPerNum: vm.serverPerNum,
-		flag: 1
-	}
+			userId:vm.userId,
+			id: vm.id,
+			orderId:vm.orderId,
+			isOut: vm.isOut,
+			orderXms:vm.printOrderXms,
+			selectsNum: vm.selectsNum,			
+			shootNum: vm.shootNum,
+			saleRemark:vm.saleRemark,
+			serverPerNum: vm.serverPerNum,
+			flag: 1
+		}
 		
 	}else{
 		flag = true
@@ -186,31 +186,29 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			return
 		}
 		params = {
-		id: vm.id,
-		userId:vm.userId,
-		orderId:vm.orderId,
-		isOut: vm.isOut,
-		noOutReason:vm.reason,
-		flag: 1
-
-	}
+			id: vm.id,
+			userId:vm.userId,
+			orderId:vm.orderId,
+			isOut: vm.isOut,
+			noOutReason:vm.reason,
+			flag: 1
+		}
 	}
 	if(flag){
-		console.log(JSON.stringify(params));
 		lf.nativeUI.showWaiting()
 		lf.net.getJSON('order/saveShotOutput', params, function(res) {
-		lf.nativeUI.closeWaiting()
-		if(res.code == 200) {
-			lf.nativeUI.toast('保存成功！');
-			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-			lf.window.closeCurrentWebview();
-		} else {
-			lf.nativeUI.toast(res.msg);
-		}
-	}, function(res) {
-		lf.nativeUI.closeWaiting()
-		lf.nativeUI.toast(res.msg)
-	})
+			lf.nativeUI.closeWaiting()
+			if(res.code == 200) {
+				lf.nativeUI.toast('保存成功！');
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			} else {
+				lf.nativeUI.toast(res.msg);
+			}
+		}, function(res) {
+			lf.nativeUI.closeWaiting()
+			lf.nativeUI.toast(res.msg)
+		})
 	}
 })
 function loadResult(){

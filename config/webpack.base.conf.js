@@ -19,19 +19,21 @@ module.exports = {
         filename: 'js/[name].js',
         chunkFilename: 'js/[name].js',
         path: resolve('dist'),
-        publicPath: '../../'
+        // publicPath: '../../'
     },
     module: {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: vueLoaderConfig
+                loader: 'happypack/loader?id=vue',
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src'), resolve('test')]
+                loaders: 'happypack/loader?id=js',
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -68,10 +70,19 @@ module.exports = {
     },
     plugins: [
         new HappyPack({
-            id: 'js',
-            // @see https://github.com/amireh/happypack
+            id: 'vue',
             threadPool: HappyThreadPool,
-            loaders: ['babel-loader', 'vue-loader']
+            loaders: [
+                {
+                  loader: 'vue-loader',
+                  options: vueLoaderConfig,
+                }
+            ]
+        }),
+        new HappyPack({
+            id: 'js',
+            threadPool: HappyThreadPool,
+            loaders: ['babel-loader']
         }),
         new HappyPack({
             id: 'styles',

@@ -1,13 +1,13 @@
-.detail-item .mui-card-header, .mui-card-footer .num{
-    color:#3eb392;
-    font-size: 16px;
+.mui-card-header{
+    background: #3eb392;
 }
 
 .mui-card-content .block{
-    margin: 10px 15px 0;
+    margin: 0 15px;
     padding-bottom: 10px;
 }
-.mui-card-content .block:first-child{
+.mui-card-content .block, .count{
+    padding: 10px 0 8px 0;
     border-bottom: 1px solid #c8c7cc;
 }
 .mui-card-content .block > .mui-row{
@@ -18,10 +18,13 @@
 .mui-card-content .block .title{
     flex: 1;
 }
-
-.mui-card-footer .text{
+.mui-card-content .text{
     padding: 5px 0;
     text-align: center;
+}
+.mui-card-content .num{
+    color:#3eb392;
+    font-size: 16px;
 }
 
 .mui-card{

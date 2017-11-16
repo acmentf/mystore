@@ -169,7 +169,7 @@
                                         <div class="section-title clearfix">
                                             <div class="text" v-text="incomeAllTitle"></div>
                                             <div class="tool">
-                                                <i class="icon icon-more-select" id="incomeAll_RP"></i>
+                                                <i class="item icon-more-select" id="incomeAll_RP"></i>
                                             </div>
                                         </div>
                                         <div class="section-content">
@@ -181,7 +181,7 @@
                                         <div class="section-title clearfix">
                                             <div class="text" v-text="incomeRegionTitle"></div>
                                             <div class="tool">
-                                                <i class="icon icon-more-select" id="incomeRegion_RP"></i>
+                                                <i class="item icon-more-select" id="incomeRegion_RP"></i>
                                             </div>
                                         </div>
                                         <div class="section-content">
@@ -267,7 +267,7 @@
                                         <div class="section-title clearfix">
                                             <div class="text" v-text="flowShootAllTitle"></div>
                                             <div class="tool">
-                                                <i class="icon icon-more-select" id="flowShootAll_RP"></i>
+                                                <i class="item icon-more-select" id="flowShootAll_RP"></i>
                                             </div>
                                         </div>
                                         <div class="section-content">
@@ -279,7 +279,7 @@
                                         <div class="section-title clearfix">
                                             <div class="text" v-text="flowShootRegionTitle"></div>
                                             <div class="tool">
-                                                <i class="icon icon-more-select" id="flowShootRegion_RP"></i>
+                                                <i class="item icon-more-select" id="flowShootRegion_RP"></i>
                                             </div>
                                         </div>
                                         <div class="section-content">
@@ -315,7 +315,12 @@
                         <div id="tab-history" class="mui-control-content">
                             <div class="history-page" v-if="pageTypeActive === pageTypeConstant.history">
                                 <div class="info-box center" style="position: relative;top: 3px;">
-                                    累积收入<span class="currency single-value" v-text="historyIncomeTotal.saleAmt"></span>
+                                    累积收入
+                                    <span class="currency single-value" v-text="historyIncomeTotal.saleAmt"></span>
+                                    <button type="button" class="item mui-btn check-more"
+                                            v-tap="{ methods : goPageMore, pageType: pageTypeConstant.income }">
+                                        更多数据
+                                    </button>
                                 </div>
                                 <div class="section-box">
                                     <div class="section-title clearfix">
@@ -330,7 +335,11 @@
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyIncomeDayTitle"></div>
                                         <div class="tool">
-                                            <i class="icon icon-more-select" id="historyIncomeDay_RP"></i>
+                                            <button type="button" class="item mui-btn switchover"
+                                                    v-text="historyIncomeDayTypeTitle"
+                                                    v-tap="{ methods : switchChartType, key: 'historyIncomeDay' }">
+                                            </button>
+                                            <i class="item icon-more-select" id="historyIncomeDay_RP"></i>
                                         </div>
                                     </div>
                                     <div class="section-content">
@@ -342,10 +351,15 @@
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyThreeMonthIncomeTitle"></div>
                                         <div class="tool">
-                                            <i class="icon icon-more-select" id="historyThreeMonthIncome_RP"></i>
+                                            <button type="button" class="item mui-btn switchover"
+                                                    v-text="historyThreeMonthIncomeTypeTitle"
+                                                    v-tap="{ methods : switchChartType, key: 'historyThreeMonthIncome' }">
+                                            </button>
+                                            <i class="item icon-more-select" id="historyThreeMonthIncome_RP"></i>
                                         </div>
                                     </div>
-                                    <div class="section-content">
+                                    <div class="section-content"
+                                         v-show="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.day">
                                         <div class="mui-slider info-box-mui-slider">
                                             <div class="mui-slider-group">
                                                 <div class="mui-slider-item"  v-for="(item,index) in historyThreeMonthIncome" v-if="index % 2 === 0">
@@ -389,17 +403,29 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="section-content"
+                                         v-if="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.acc">
+                                        <e-charts ref="historyChart_1" :options="historyThreeMonthIncomeAccChart" auto-resize></e-charts>
+                                    </div>
                                 </div>
                                 <div class="info-box center">
                                     累积拍摄人数
                                     <span class="single-value" v-text="historyShootCount.shoot"></span>
+                                    <button type="button" class="item mui-btn check-more"
+                                            v-tap="{ methods : goPageMore, pageType: pageTypeConstant.flow }">
+                                        更多数据
+                                    </button>
                                 </div>
                                 <!--近30天每日拍摄人数-->
                                 <div class="section-box">
                                     <div class="section-title clearfix">
                                         <div class="text" v-text="historyShootDayTitle"></div>
                                         <div class="tool">
-                                            <i class="icon icon-more-select" id="historyShootDay_RP"></i>
+                                            <button type="button" class="item mui-btn switchover"
+                                                    v-text="historyShootDayTypeTitle"
+                                                    v-tap="{ methods : switchChartType, key: 'historyShootDay' }">
+                                            </button>
+                                            <i class="item icon-more-select" id="historyShootDay_RP"></i>
                                         </div>
                                     </div>
                                     <div class="section-content">
@@ -429,12 +455,13 @@
     </div>
 </template>
 <script>
-    import {pageTypeConstant} from './daily-paper/commom'
+    import utils from '../../js/utils'
+    import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant} from './daily-paper/commom'
     import switchRolePosition from '../public/switchRolePosition.vue'
     const titleMap = {
-        income: '收入',
-        flow: '流量',
-        history: '历史数据'
+        [pageTypeConstant.income]: '收入',
+        [pageTypeConstant.flow]: '流量',
+        [pageTypeConstant.history]: '历史数据'
     }
     //大区省份选择
     const cityPicker = new mui.PopPicker({
@@ -545,7 +572,7 @@
     }
     // 过滤（或）
     function filterSeriesByOr(item) {
-        return isValidValue(item.value) || isValidValue(item['value' + MERGE_SERIES_SUFFIX])
+        return utils.isValidNumber(item.value) || utils.isValidNumber(item['value' + MERGE_SERIES_SUFFIX])
     }
     // 排序
     function baseSortSeries(a, b) {
@@ -565,7 +592,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -635,7 +662,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -706,7 +733,7 @@
             list.forEach(function(item) {
                 let value = +item[valueKey]
                 if (groupIndex) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
+                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
                 }
                 seriesData.push(value)
             })
@@ -763,20 +790,6 @@
             }
         ])
     }
-    //校验值
-    function isValidValue(v) {
-        v = +v
-        return !!v && !isNaN(v)
-    }
-    //是否定义
-    function isDef(v) {
-        return v !== undefined && v !== null
-    }
-    // 截断字符串
-    function truncationStr(str, count) {
-        str = str + ''
-        return str.length > count ? str.slice(0, count - 1) + '...' : str
-    }
 
     export default {
         name: 'dailyPaper',
@@ -789,6 +802,7 @@
                 //激活模块
                 pageTypeActive: pageTypeConstant.income,
                 queryDate: new Date(/*new Date() - 1000*60*60*24*/),
+                historyDate: utils.recentDay(90),
                 //大区省份code
                 //regionProvinceActive: '',
                 regionProvinceMap: {
@@ -817,18 +831,21 @@
                         provinceName: ALL_NAME_RP
                     },
                     historyIncomeDay: {
+                        chartType: chartTypeConstant.day,
                         areaCode: ALL_RP,
                         areaName: ALL_NAME_RP,
                         provinceCode: ALL_RP,
                         provinceName: ALL_NAME_RP
                     },
                     historyThreeMonthIncome: {
+                        chartType: chartTypeConstant.day,
                         areaCode: ALL_RP,
                         areaName: ALL_NAME_RP,
                         provinceCode: ALL_RP,
                         provinceName: ALL_NAME_RP
                     },
                     historyShootDay: {
+                        chartType: chartTypeConstant.day,
                         areaCode: ALL_RP,
                         areaName: ALL_NAME_RP,
                         provinceCode: ALL_RP,
@@ -916,6 +933,7 @@
                  totalAmt	总收入
                  amtRate	涨幅*/
                 historyThreeMonthIncome: [],
+                historyThreeMonthIncomeAcc: {},
                 //累计拍摄人数
                 historyShootCount: {
                     shoot: ''//	累计拍摄人数
@@ -938,6 +956,9 @@
             pageTypeConstant: function () {
                 return pageTypeConstant
             },
+            chartTypeConstant () {
+                return chartTypeConstant
+            },
             incomeAllTitle: function () {
                 return getRegionProvince(this.regionProvinceMap.incomeAll, '全国') + '收入（' + this.realTitleExplainText + '）'
             },
@@ -958,6 +979,15 @@
             },
             historyShootDayTitle: function () {
                 return '近30天每日拍摄人数'
+            },
+            historyIncomeDayTypeTitle: function () {
+                return this.getChartTypeTitle(this.regionProvinceMap.historyIncomeDay.chartType, '每日收入')
+            },
+            historyThreeMonthIncomeTypeTitle: function () {
+                return this.getChartTypeTitle(this.regionProvinceMap.historyThreeMonthIncome.chartType, '每日拍摄')
+            },
+            historyShootDayTypeTitle: function () {
+                return this.getChartTypeTitle(this.regionProvinceMap.historyShootDay.chartType, '每月统计')
             },
             incomeLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.income) {
@@ -1025,6 +1055,20 @@
                 options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
                     startValue: options.xAxis.data.length - EACH_SCREEN_COUNT,
                     end: 100
+                })
+                return options
+            },
+            historyThreeMonthIncomeAccChart: function () {
+                let regionProvince = this.regionProvinceMap.historyThreeMonthIncome
+                let {seriesOpts, list} = this.historyThreeMonthIncomeAcc
+
+                if (this.pageTypeActive !== pageTypeConstant.history || regionProvince.chartType === chartTypeConstant.day || !seriesOpts) {
+                    return EMPTY_CHART
+                }
+                let options = getLineChartOption(list,seriesOpts)
+                options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
+                    start: 0,
+                    endValue: 9
                 })
                 return options
             },
@@ -1132,7 +1176,7 @@
         },
         methods: {
             getAbs: function (value) {
-                return isDef(value) ? Math.abs(value) : 0
+                return utils.isDef(value) ? Math.abs(value) : 0
             },
             isSign: function(value) {
                 value = value + ''
@@ -1140,6 +1184,14 @@
             },
             getNumberClassName: function (value) {
                 return [this.isSign(value) ? 'number-sign' : 'number-lose']
+            },
+            getChartTypeTitle(type, text) {
+                return type === chartTypeConstant.day ? '查看累积趋势' : '查看' + text
+            },
+            switchChartType (params) {
+                const key = params.key
+                const s = this.regionProvinceMap[key]
+                s.chartType = s.chartType === chartTypeConstant.day ? chartTypeConstant.acc :chartTypeConstant.day
             },
             calcBarChartHeight: function (options) {
                 let height = 0
@@ -1164,6 +1216,10 @@
                     flow: {
                         prefix: 'flowChart_',
                         list: ['1','2','3','4']
+                    },
+                    history: {
+                        prefix: 'historyChart_',
+                        list: ['1']
                     }
                 }
                 let item = chartMap[key]
@@ -1451,6 +1507,40 @@
                     })
                 })
             },
+            goPageMore (params) {
+                const pageType = params.pageType
+                lf.window.openWindow('statistics/daily-paper-more.html', '../statistics/daily-paper-more.html', {}, {
+                    pageType: pageType,
+                })
+            },
+            queryTotalMoreData (options, cb) {
+                const {historyDate} = this
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/totalMore', {
+                    startDate: historyDate[0] ? historyDate[0].format('yyyy-MM-dd') : '',
+                    endDate: historyDate[1] ? historyDate[1].format('yyyy-MM-dd') : '',
+                    ...options
+                }, res => {
+                    let data
+                    lf.nativeUI.closeWaiting()
+                    if (res.code === '200') {
+                        data = (res.data || []).map(v => {
+                            return {
+                                noTruncation: true,
+                                category: v.date,
+                                value: v.value
+                            }
+                        })
+                    } else {
+                        lf.nativeUI.toast(res.msg)
+                    }
+                    cb && cb(data)
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg)
+                })
+            },
             //累计收入
             refreshDataByHistoryIncome: function (cb) {
                 let self = this
@@ -1473,58 +1563,123 @@
             refreshDataByThirtyIncome: function (cb) {
                 let self = this
                 let regionProvince = this.regionProvinceMap.historyIncomeDay
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/thirtyIncome', {
-                    areaCode: regionProvince.areaCode,
-                    provinceCode: regionProvince.provinceCode
-                }, function(res) {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        self.historyIncomeDay = (res.data || []).map(function (item) {
-                            return {
-                                noTruncation: true,
-                                category: item.date,
-                                value: item.saleAmt
-                            }
-                        }).filter(filterSeriesByOr)
-                    } else {
-                        lf.nativeUI.toast(res.msg);
-                    }
-                    cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg);
-                });
+                if (regionProvince.chartType === chartTypeConstant.day) {
+                    lf.nativeUI.showWaiting()
+                    lf.net.getJSON('newReport/analysisMobile/thirtyIncome', {
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    }, function(res) {
+                        lf.nativeUI.closeWaiting()
+                        if (res.code === '200') {
+                            self.historyIncomeDay = (res.data || []).map(function (item) {
+                                return {
+                                    noTruncation: true,
+                                    category: item.date,
+                                    value: item.saleAmt
+                                }
+                            }).filter(filterSeriesByOr)
+                        } else {
+                            lf.nativeUI.toast(res.msg)
+                        }
+                        cb && cb()
+                    }, function(error) {
+                        lf.nativeUI.closeWaiting()
+                        cb && cb()
+                        lf.nativeUI.toast(error.msg)
+                    })
+                } else {
+                    this.queryTotalMoreData({
+                        type: totalMoreTypeConstant.incomeAcc,
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    },  data => {
+                        if (data) {
+                            this.historyIncomeDay = data.filter(filterSeriesByOr)
+                        }
+                        cb && cb()
+                    })
+                }
+
             },
             //近3个月收入统计
             refreshDataByThreeMonthIncome: function (cb) {
+                const {historyDate} = this
                 let self = this
                 let regionProvince = this.regionProvinceMap.historyThreeMonthIncome
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/threeMonthIncome', {
-                    areaCode: regionProvince.areaCode,
-                    provinceCode: regionProvince.provinceCode
-                }, function(res) {
-                    let data = res.data || {}
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        self.historyThreeMonthIncome = ['1','2','3'].map(function (index) {
-                            return {
-                                date: data['date' + index],
-                                totalAmt: data['totalAmt' + index],
-                                amtRate: data['amtRate' + index]
+                if (regionProvince.chartType === chartTypeConstant.day) {
+                    lf.nativeUI.showWaiting()
+                    lf.net.getJSON('newReport/analysisMobile/threeMonthIncome', {
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    }, function(res) {
+                        let data = res.data || {}
+                        lf.nativeUI.closeWaiting()
+                        if (res.code === '200') {
+                            self.historyThreeMonthIncome = ['1','2','3'].map(function (index) {
+                                return {
+                                    date: data['date' + index],
+                                    totalAmt: data['totalAmt' + index],
+                                    amtRate: data['amtRate' + index]
+                                }
+                            })
+                        } else {
+                            lf.nativeUI.toast(res.msg)
+                        }
+                        cb && cb()
+                    }, function(error) {
+                        lf.nativeUI.closeWaiting()
+                        cb && cb()
+                        lf.nativeUI.toast(error.msg)
+                    })
+                } else {
+                    lf.nativeUI.showWaiting()
+                    lf.net.getJSON('newReport/analysisMobile/threeMonthIncomeTrend', {
+                        startDate: historyDate[0] ? historyDate[0].format('yyyy-MM-dd') : '',
+                        endDate: historyDate[1] ? historyDate[1].format('yyyy-MM-dd') : '',
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    }, function(res) {
+                        lf.nativeUI.closeWaiting()
+                        if (res.code === '200') {
+                            let seriesOpts = []
+                            let listMap =  {}
+                            let valuePrefix = 'value_'
+                            ;(res.data || []).forEach((item, index) => {
+                                seriesOpts.push({
+                                    seriesName: item.month,
+                                    categoryKey: 'category',
+                                    valueKey: valuePrefix + index
+                                })
+                                ;(item.dataList || []).forEach(({date, value}) => {
+                                    if (date) {
+                                        let key = date.slice(8)
+                                        let temp = listMap[key]
+                                        if (!temp) {
+                                            temp = listMap[key] = {
+                                                category: key
+                                            }
+                                        }
+                                        temp[valuePrefix + index] = value
+                                    }
+                                })
+                            })
+                            self.historyThreeMonthIncomeAcc =  {
+                                seriesOpts,
+                                list: Object.keys(listMap).map(key => {
+                                    return listMap[key]
+                                })
                             }
-                        })
-                    } else {
-                        lf.nativeUI.toast(res.msg);
-                    }
-                    cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg);
-                });
+                            self.refreshChart('history')
+                        } else {
+                            lf.nativeUI.toast(res.msg)
+                        }
+                        cb && cb()
+                    }, function(error) {
+                        lf.nativeUI.closeWaiting()
+                        cb && cb()
+                        lf.nativeUI.toast(error.msg)
+                    })
+                }
             },
             //累计拍摄人数
             refreshDataByHistoryShoot: function (cb) {
@@ -1534,7 +1689,7 @@
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
                         self.historyShootCount = {
-                            shoot: isDef(res.data) ? res.data : 0
+                            shoot: utils.isDef(res.data) ? res.data : 0
                         }
                     } else {
                         lf.nativeUI.toast(res.msg);
@@ -1550,29 +1705,42 @@
             refreshDataByThirtyShoot: function (cb) {
                 let self = this
                 let regionProvince = this.regionProvinceMap.historyShootDay
-                lf.nativeUI.showWaiting()
-                lf.net.getJSON('newReport/analysisMobile/thirtyShoot', {
-                    areaCode: regionProvince.areaCode,
-                    provinceCode: regionProvince.provinceCode
-                }, function(res) {
-                    lf.nativeUI.closeWaiting()
-                    if (res.code === '200') {
-                        self.historyShootDay = (res.data || []).map(function (item) {
-                            return {
-                                noTruncation: true,
-                                category: item.hour,
-                                value: item.shootPerples
-                            }
-                        }).filter(filterSeriesByOr)
-                    } else {
-                        lf.nativeUI.toast(res.msg);
-                    }
-                    cb && cb()
-                }, function(error) {
-                    lf.nativeUI.closeWaiting()
-                    cb && cb()
-                    lf.nativeUI.toast(error.msg);
-                });
+                if (regionProvince.chartType === chartTypeConstant.day) {
+                    lf.nativeUI.showWaiting()
+                    lf.net.getJSON('newReport/analysisMobile/thirtyShoot', {
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    }, function(res) {
+                        lf.nativeUI.closeWaiting()
+                        if (res.code === '200') {
+                            self.historyShootDay = (res.data || []).map(function (item) {
+                                return {
+                                    noTruncation: true,
+                                    category: item.hour,
+                                    value: item.shootPerples
+                                }
+                            }).filter(filterSeriesByOr)
+                        } else {
+                            lf.nativeUI.toast(res.msg)
+                        }
+                        cb && cb()
+                    }, function(error) {
+                        lf.nativeUI.closeWaiting()
+                        cb && cb()
+                        lf.nativeUI.toast(error.msg)
+                    })
+                } else {
+                    this.queryTotalMoreData({
+                        type: totalMoreTypeConstant.peopleAcc,
+                        areaCode: regionProvince.areaCode,
+                        provinceCode: regionProvince.provinceCode
+                    },  data => {
+                        if (data) {
+                            this.historyShootDay = data.filter(filterSeriesByOr)
+                        }
+                        cb && cb()
+                    })
+                }
             },
             //旅行社发团人数排行
             refreshDataByTravelRanking: function (cb) {
@@ -1613,105 +1781,96 @@
             },
             initMui () {
                 const self = this
-                lf.ready(function() {
+                Vue.nextTick(function() {
+                    self.init(refreshSlider)
+                })
+                let deceleration = mui.os.ios ? 0.003 : 0.0009;
+                mui('.mui-scroll-wrapper').scroll({
+                    bounce: false,
+                    indicators: true, //是否显示滚动条
+                    deceleration: deceleration
+                });
+                refreshSlider()
+                function goPageTop() {
+                    mui('#page-scroll').scroll().scrollTo(0,0,0)
+                }
+                function refreshSlider() {
                     Vue.nextTick(function() {
-                        self.init(refreshSlider)
+                        mui('.info-box-mui-slider').slider();
                     })
-                    let deceleration = mui.os.ios ? 0.003 : 0.0009;
-                    mui('.mui-scroll-wrapper').scroll({
-                        bounce: false,
-                        indicators: true, //是否显示滚动条
-                        deceleration: deceleration
+                }
+                function switchTab() {
+                    goPageTop()
+                    self.initTabData(refreshSlider)
+                }
+
+                // 收入
+                mui('body').on('tap', '#income', function(){
+                    self.pageTypeActive = pageTypeConstant.income
+                    switchTab()
+                })
+                mui('#tab-income').on('tap', '.mui-control-item', function(){
+                    self.refreshChart('income')
+                })
+                mui('body').on('tap', '#incomeAll_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.incomeAll, items)
                     });
-                    refreshSlider()
-                    function goPageTop() {
-                        mui('#page-scroll').scroll().scrollTo(0,0,0)
-                    }
-                    function refreshSlider() {
-                        Vue.nextTick(function() {
-                            mui('.info-box-mui-slider').slider();
-                        })
-                    }
-                    function switchTab() {
-                        goPageTop()
-                        self.initTabData(refreshSlider)
-                    }
+                })
+                mui('body').on('tap', '#incomeRegion_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.incomeRegion, items)
+                    });
+                })
+                // 流量
+                mui('body').on('tap', '#flow', function(){
+                    self.pageTypeActive = pageTypeConstant.flow
+                    switchTab()
+                })
+                mui('#tab-flow').on('tap', '.mui-control-item', function(){
+                    self.refreshChart('flow')
+                })
+                mui('body').on('tap', '#flowShootAll_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.flowShootAll, items)
+                    });
+                })
+                mui('body').on('tap', '#flowShootRegion_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.flowShootRegion, items)
+                    });
+                })
+                // 历史
+                mui('body').on('tap', '#history', function(){
+                    self.pageTypeActive = pageTypeConstant.history
+                    switchTab()
+                })
+                mui('body').on('tap', '#historyIncomeDay_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.historyIncomeDay, items)
+                    });
+                })
+                mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.historyThreeMonthIncome, items)
+                    });
+                })
+                mui('body').on('tap', '#historyShootDay_RP', function(){
+                    cityPicker.show(function(items) {
+                        setRegionProvince(self.regionProvinceMap.historyShootDay, items)
+                    });
+                })
 
-                    // 收入
-                    mui('body').on('tap', '#income', function(){
-                        self.pageTypeActive = pageTypeConstant.income
-                        switchTab()
-                    })
-                    mui('#tab-income').on('tap', '.mui-control-item', function(){
-                        self.refreshChart('income')
-                    })
-                    mui('body').on('tap', '#incomeAll_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.incomeAll, items)
-                        });
-                    })
-                    mui('body').on('tap', '#incomeRegion_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.incomeRegion, items)
-                        });
-                    })
-                    // 流量
-                    mui('body').on('tap', '#flow', function(){
-                        self.pageTypeActive = pageTypeConstant.flow
-                        switchTab()
-                    })
-                    mui('#tab-flow').on('tap', '.mui-control-item', function(){
-                        self.refreshChart('flow')
-                    })
-                    mui('body').on('tap', '#flowShootAll_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.flowShootAll, items)
-                        });
-                    })
-                    mui('body').on('tap', '#flowShootRegion_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.flowShootRegion, items)
-                        });
-                    })
-                    // 历史
-                    mui('body').on('tap', '#history', function(){
-                        self.pageTypeActive = pageTypeConstant.history
-                        switchTab()
-                    })
-                    mui('body').on('tap', '#historyIncomeDay_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.historyIncomeDay, items)
-                        });
-                    })
-                    mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.historyThreeMonthIncome, items)
-                        });
-                    })
-                    mui('body').on('tap', '#historyShootDay_RP', function(){
-                        cityPicker.show(function(items) {
-                            setRegionProvince(self.regionProvinceMap.historyShootDay, items)
-                        });
-                    })
-
-                    // 退出登录
-                    mui('body').on('tap', '#logout', function() {
-                        lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
-                            if (e.index == 0) {
-                                window.Role.logout();
-                                GLOBAL_SHOOT.restart();
-                            }
-                        });
-                    })
-                    lf.event.listener('dailyPaper', function(e) {
-                        switchTab();
-                        lf.event.fire(lf.window.currentWebview().opener(), 'dailyPaper', {})
-                    })
+                lf.event.listener('dailyPaper', function(e) {
+                    switchTab();
+                    lf.event.fire(lf.window.currentWebview().opener(), 'dailyPaper', {})
                 })
             }
         },
         created: function () {
-            this.initMui()
+            lf.ready(() => {
+                this.initMui()
+            })
         }
     }
 </script>
@@ -1844,13 +2003,16 @@
                     .tool {
                         float: right;
                         height: 21px;
-                        .icon{
+                        .item{
                             display: inline-block;
                             height: 21px;
                         }
-                        .icon + .icon {
+                        .item + .item {
                             cursor: pointer;
                             margin-left: 10px;
+                        }
+                        .switchover{
+                            padding: 1px 4px;
                         }
                         .icon-more-select{
                             width: 26px;
@@ -1879,6 +2041,7 @@
                 background-color: #fff;
                 padding: 20px;
                 margin-bottom: 5px;
+                position: relative;
                 &.center{
                     text-align: center;
                 }
@@ -1909,6 +2072,12 @@
                 }
                 .content{
                     font-size: 24px;
+                }
+                .check-more{
+                    cursor: pointer;
+                    position: absolute;
+                    top: 22%;
+                    right: 10%;
                 }
             }
             .list-show-wrap{
