@@ -29,7 +29,7 @@
                             <li class="section-1-block" v-for="(item, key) in purchaserOrderList" :key="key">
                                 <div class="travel-agency" v-text="item.purchaser"></div>
                                 <div class="order-container" v-for="(order, orderKey) in item.orderList" :key="orderKey" :data-orderid="order.orderId">
-                                    <div class="detail-content-wrap">
+                                    <div class="detail-content-wrap" v-if="order.orderShow">
                                         <div class="content-top">
                                             <div class="detail-section detail-section-1">
                                                 <div class="part-1">

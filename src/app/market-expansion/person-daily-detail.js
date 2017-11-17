@@ -70,6 +70,13 @@ lf.ready(function() {
                 res.data.forEach(function(item, id){
                     var index;
                     res.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
+                    res.data[id].orderShow = (function(item){
+                        if(!item.saleDate) {
+                            return true;
+                        } else {
+                            return item.saleDate == date;
+                        }
+                    }(item))
                     sortArr.forEach(function(el, i){
                         if( el.purchaser == item.purchaser ){
                             return index = i;
@@ -85,6 +92,7 @@ lf.ready(function() {
                         });
                     }
                 });
+                console.log(sortArr);
     
                 vm.purchaserOrderList = sortArr;
             }
