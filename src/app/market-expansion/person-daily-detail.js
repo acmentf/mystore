@@ -66,14 +66,42 @@ lf.ready(function() {
             if(res.data.length == 0) {
                 lf.nativeUI.toast('没有详细数据');
             } else {
-                vm.purchaserOrderList = res.data;
+                var sortArr = [];
+                res.data.forEach(function(item, id){
+                    var index;
+                    res.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
+                    res.data[id].orderShow = (function(item){
+                        if(!item.saleDate) {
+                            return true;
+                        } else {
+                            return item.saleDate == date;
+                        }
+                    }(item))
+                    sortArr.forEach(function(el, i){
+                        if( el.purchaser == item.purchaser ){
+                            return index = i;
+                        }
+                    });
+    
+                    if( index ){
+                        sortArr[index].orderList.push(item);
+                    } else {
+                        sortArr.push({
+                            purchaser: item.purchaser,
+                            orderList: [].concat(item)
+                        });
+                    }
+                });
+                console.log(sortArr);
+    
+                vm.purchaserOrderList = sortArr;
             }
         } else {
             lf.nativeUI.toast(res.msg);
         }
     });
 
-    mui('body').on('tap', '.section-1-block', function(){
+    mui('body').on('tap', '.order-container', function(){
         // 跳转到任务完成详情
         var orderId = this.getAttribute('data-orderid');
         lf.window.openWindow('service-detail', './service-detail.html', {}, {

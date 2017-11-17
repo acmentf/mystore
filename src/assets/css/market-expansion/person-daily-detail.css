@@ -28,6 +28,8 @@ main {
       background: #3eb392;
       color: #fff;
       font-size: 0.32rem; }
+    .section-1 ul li .order-container {
+      border-bottom: 1px solid #797979; }
     .section-1 ul li .detail-content-wrap {
       font-size: 0.26rem;
       color: #888888; }

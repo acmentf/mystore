@@ -2,12 +2,6 @@ let path = require('path')
 let Glob = require('glob');
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-exports.assetsPath = function (_path) {
-  let assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? 'static'
-    : 'static'
-  return path.posix.join(assetsSubDirectory, _path)
-}
 
 exports.cssLoaders = function (options) {
   options = options || {}

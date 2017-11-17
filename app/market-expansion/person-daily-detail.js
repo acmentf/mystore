@@ -36,13 +36,8 @@ var vm = new Vue({
         }
     },
     methods: {
-<<<<<<< HEAD
-        formatDate(date) {
-            return new Date(date).format("yyyy-MM-dd");
-=======
         formatDate: function(date) {
             return new Date(date).format('yyyy-MM-dd');
->>>>>>> dev
         }
     }
 });

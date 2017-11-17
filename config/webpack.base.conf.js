@@ -40,7 +40,9 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('img/[name].[ext]')
+                    useRelativePath: true,
+                    context:resolve('src'),
+                    name: '[name].[ext]'
                 }
             },
             {
@@ -48,7 +50,9 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('media/[name].[ext]')
+                    useRelativePath: true,
+                    context:resolve('src'),
+                    name: '[name].[ext]'
                 }
             },
             {
@@ -56,7 +60,9 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('fonts/[name].[ext]')
+                    useRelativePath: true,
+                    context:resolve('src'),
+                    name: '[name].[ext]'
                 }
             }
         ]
