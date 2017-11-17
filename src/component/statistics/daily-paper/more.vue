@@ -87,6 +87,8 @@
 <script>
     import utils from '../../../js/utils'
     import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant,
+        EACH_SCREEN_COUNT,
+        DATA_ZOOM_INSIDE,
         X_AXIS_NAME_COUNT,
         getLineLongCategoryChartOption} from './commom'
 
@@ -177,16 +179,36 @@
                 }
             },
             areaChart () {
-                return getLineLongCategoryChartOption(this.areaList, this.seriesOpts)
+                let options = getLineLongCategoryChartOption(this.areaList, this.seriesOpts)
+                options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
+                    startValue: options.xAxis.data.length - EACH_SCREEN_COUNT,
+                    end: 100
+                })
+                return options
             },
             provinceChart () {
-                return getLineLongCategoryChartOption(this.provinceList, this.seriesOpts)
+                let options = getLineLongCategoryChartOption(this.provinceList, this.seriesOpts)
+                options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
+                    startValue: options.xAxis.data.length - EACH_SCREEN_COUNT,
+                    end: 100
+                })
+                return options
             },
             lineChart () {
-                return getLineLongCategoryChartOption(this.lineList, this.seriesOpts)
+                let options = getLineLongCategoryChartOption(this.lineList, this.seriesOpts)
+                options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
+                    startValue: options.xAxis.data.length - EACH_SCREEN_COUNT,
+                    end: 100
+                })
+                return options
             },
             productChart () {
-                return getLineLongCategoryChartOption(this.productList, this.seriesOpts)
+                let options = getLineLongCategoryChartOption(this.productList, this.seriesOpts)
+                options.dataZoom = lf.extend({},DATA_ZOOM_INSIDE,{
+                    startValue: options.xAxis.data.length - EACH_SCREEN_COUNT,
+                    end: 100
+                })
+                return options
             }
         },
         watch: {
