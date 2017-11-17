@@ -179,6 +179,7 @@
             return {
                 pageType: pageTypeConstant.income,
                 queryDate: utils.recentDay(90),
+                watchSelect: false, // 为假时开始 watch *Select
                 areaSelect: {
                     chartType: chartTypeConstant.day,
                     value: '',
@@ -210,17 +211,17 @@
                 const {income, incomeAcc, people, peopleAcc} = totalMoreTypeConstant
                 if (this.pageType === pageTypeConstant.income) {
                     return {
-                        areaList: this.areaSelect === chartTypeConstant.day ? income : incomeAcc ,
-                        provinceList: this.provinceSelect === chartTypeConstant.day ? income : incomeAcc,
-                        lineList: this.lineSelect === chartTypeConstant.day ? income : incomeAcc,
-                        productList: this.productSelect === chartTypeConstant.day ? income : incomeAcc
+                        areaList: this.areaSelect.chartType === chartTypeConstant.day ? income : incomeAcc ,
+                        provinceList: this.provinceSelect.chartType === chartTypeConstant.day ? income : incomeAcc,
+                        lineList: this.lineSelect.chartType === chartTypeConstant.day ? income : incomeAcc,
+                        productList: this.productSelect.chartType === chartTypeConstant.day ? income : incomeAcc
                     }
                 } else {
                     return {
-                        areaList: this.areaSelect === chartTypeConstant.day ? people : peopleAcc ,
-                        provinceList: this.provinceSelect === chartTypeConstant.day ? people : peopleAcc,
-                        lineList: this.lineSelect === chartTypeConstant.day ? people : peopleAcc,
-                        productList: this.productSelect === chartTypeConstant.day ? people : peopleAcc
+                        areaList: this.areaSelect.chartType === chartTypeConstant.day ? people : peopleAcc ,
+                        provinceList: this.provinceSelect.chartType === chartTypeConstant.day ? people : peopleAcc,
+                        lineList: this.lineSelect.chartType === chartTypeConstant.day ? people : peopleAcc,
+                        productList: this.productSelect.chartType === chartTypeConstant.day ? people : peopleAcc
                     }
                 }
             },
@@ -271,33 +272,25 @@
         watch: {
             areaSelect: {
                 handler () {
-                    this.$nextTick(function () {
-                        this.refreshAreaList()
-                    })
+                    this.watchSelect && this.refreshAreaList()
                 },
                 deep: true
             },
             provinceSelect: {
                 handler () {
-                    this.$nextTick(function () {
-                        this.refreshProvinceList()
-                    })
+                    this.watchSelect && this.refreshProvinceList()
                 },
                 deep: true
             },
             lineSelect: {
                 handler () {
-                    this.$nextTick(function () {
-                        this.refreshLineList()
-                    })
+                    this.watchSelect && this.refreshLineList()
                 },
                 deep: true
             },
             productSelect: {
                 handler () {
-                    this.$nextTick(function () {
-                        this.refreshProductList()
-                    })
+                    this.watchSelect && this.refreshProductList()
                 },
                 deep: true
             }
@@ -330,6 +323,7 @@
                     lf.nativeUI.closeWaiting()
                     function map2(v) {
                         return {
+                            noTruncation: true,
                             category: v.date,
                             value: v.value
                         }
@@ -396,6 +390,9 @@
                         this.provinceList = (provinceData || []).map(map2)
                         this.lineList = (lineData || []).map(map2)
                         this.productList = (productData || []).map(map2)
+                        this.$nextTick(() => {
+                            this.watchSelect = true
+                        })
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -408,7 +405,7 @@
             },
             getChartTitle(typeName, name) {
                 let title = this.pageType === pageTypeConstant.income ? '每日收入' : '每日拍摄人数'
-                return typeName + title + (name ? ' - ' + name : '' )
+                return typeName + title + (name ? ' - ' + utils.truncationStr(name, X_AXIS_NAME_COUNT) : '' )
             },
             getChartTypeTitle(type) {
                 return type === chartTypeConstant.day ? '查看累积趋势' : '查看每日趋势'
@@ -440,6 +437,7 @@
                     if (res.code === '200') {
                         data = (res.data || []).map(v => {
                             return {
+                                noTruncation: true,
                                 category: v.date,
                                 value: v.value
                             }
@@ -529,6 +527,7 @@
             },
             initMui () {
                 this.pageType = lf.window.currentWebview().pageType
+                console.log('pageTypeConstant', this.pageType)
                 this.$nextTick(() =>{
                     this.init()
                 })
