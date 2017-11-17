@@ -66,7 +66,27 @@ lf.ready(function() {
             if(res.data.length == 0) {
                 lf.nativeUI.toast('没有详细数据');
             } else {
-                vm.purchaserOrderList = res.data;
+                var sortArr = [];
+                res.data.forEach(function(item, id){
+                    var index;
+                    res.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
+                    sortArr.forEach(function(el, i){
+                        if( el.purchaser == item.purchaser ){
+                            return index = i;
+                        }
+                    });
+    
+                    if( index ){
+                        sortArr[index].orderList.push(item);
+                    } else {
+                        sortArr.push({
+                            purchaser: item.purchaser,
+                            orderList: [].concat(item)
+                        });
+                    }
+                });
+    
+                vm.purchaserOrderList = sortArr;
             }
         } else {
             lf.nativeUI.toast(res.msg);
