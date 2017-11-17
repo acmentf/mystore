@@ -4,8 +4,8 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "better-npm-run build",
     "dev": "better-npm-run dev",
+    "build": "better-npm-run build",
     "foreign": "better-npm-run foreign",
     "start": "better-npm-run start"
   },
@@ -15,12 +15,6 @@
     },
     "dev": {
       "command": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.conf"
-    },
-    "uat": {
-      "command": "cross-env NODE_ENV=uat webpack --config config/webpack.prod.conf"
-    },
-    "sit": {
-      "command": "cross-env NODE_ENV=sit webpack --config config/webpack.prod.conf"
     },
     "build": {
       "command": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf"
