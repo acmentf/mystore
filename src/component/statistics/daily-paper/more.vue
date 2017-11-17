@@ -86,89 +86,9 @@
 </template>
 <script>
     import utils from '../../../js/utils'
-    import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant} from './commom'
-
-    const EACH_SCREEN_COUNT = 8
-    const X_AXIS_NAME_COUNT = 7
-    const DATA_ZOOM_INSIDE = {
-        show: true,
-        realtime: true,
-        type: 'inside',
-        orient: 'horizontal',
-        zoomLock: false,
-        startValue: 0,
-        endValue: EACH_SCREEN_COUNT - 1
-    }
-    const LINE_Y_AXIS = {
-        name: '',
-        show: false,
-        type: 'value'
-    }
-    const AXIS_LABEL = {
-        interval: 0,
-        rotate: 30
-    }
-    const GRID_TOP = 20
-    const GRID_LEFT = 14
-    const GRID_RIGHT = 10
-    const GRID_BOTTOM = 30
-    const AXIS_LABEL_LEFT = 50
-    const AXIS_LABEL_BOTTOM = 70
-
-    //获取line的chart option(长category)
-    function getLineLongCategoryChartOption(list, seriesOpts) {
-        let xAxisData = []
-        let series = []
-        seriesOpts = Array.isArray(seriesOpts) ? seriesOpts : [seriesOpts]
-        seriesOpts.forEach(function (opt, groupIndex) {
-            let categoryKey = opt.categoryKey;
-            let valueKey = opt.valueKey
-            let seriesData = []
-
-            list.forEach(function(item) {
-                let value = +item[valueKey]
-                if (groupIndex === 0) {
-                    xAxisData.push(item.noTruncation ? item[categoryKey] : utils.truncationStr(item[categoryKey], X_AXIS_NAME_COUNT))
-                }
-                seriesData.push(value)
-            })
-            series.push({
-                name: opt.seriesName,
-                type: 'line',
-                label: {
-                    normal: {
-                        show: true
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: opt.color
-                    }
-                },
-                data: seriesData
-            })
-        })
-
-        return {
-            tooltip: {
-                trigger: 'axis'
-            },
-            dataZoom: DATA_ZOOM_INSIDE,
-            grid: {
-                top: GRID_TOP,
-                left: AXIS_LABEL_LEFT,
-                right:GRID_RIGHT,
-                bottom: AXIS_LABEL_BOTTOM
-            },
-            yAxis: LINE_Y_AXIS,
-            xAxis: {
-                type: 'category',
-                axisLabel: AXIS_LABEL,
-                data: xAxisData
-            },
-            series: series
-        }
-    }
+    import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant,
+        X_AXIS_NAME_COUNT,
+        getLineLongCategoryChartOption} from './commom'
 
     export default {
         name: 'more',
