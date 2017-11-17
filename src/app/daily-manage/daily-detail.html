@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/daily-manage/daily-detail.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+</head>
+<body>
+    <div id="app">
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">今日数据详情</h1>
+        </header>
+        <div class="mui-content">
+            <div class="detail-item" v-for="(item, index) in groupList" :key="item">
+                <div class="mui-card">
+                    <div class="mui-card-header mui-card-media"><span v-text="item.purchaser"></span></div>
+                    <div class="mui-card-content" v-for="order in item.orderList">
+                        <div @click="showOrder(order.orderId)">
+                            <div class="basic">
+                                <div class="block">
+                                    <div class="mui-row">
+                                        <div class="title">订单号: <span v-text="order.orderNo"></span></div>
+                                        <div v-if="order.actionStatus ==0">待计调</div>
+                                        <div v-if="order.actionStatus ==11">待分配</div>
+                                        <div v-if="order.actionStatus ==22">待输出</div>
+                                        <div v-if="order.actionStatus ==33">待销售</div>
+                                        <div v-if="order.actionStatus ==44">待完成</div>
+                                        <div v-if="order.actionStatus ==55">已完成</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="title"><span v-text="order.productName"></span></div>
+                                        <div v-text="order.isPreTour==1?'前置团':'非前置团'"></div>
+                                    </div> 
+                                </div>
+                                <div class="block">
+                                    <div class="mui-row">
+                                        <div class="title">出团日期: <span v-text="order.createTime"></span></div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="title">团人数: <span v-text="order.personCount"></span>人</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="count mui-row">
+                                <div class="mui-col-xs-4">
+                                    <div class="text">实际服务人数</div>
+                                    <div class="text num" v-text="order.serverPerNum">10</div>
+                                </div>
+                                <div class="mui-col-xs-4">
+                                    <div class="text">前置销售金额</div>
+                                    <div class="text num" v-text="order.payableAmount"></div>
+                                </div>
+                                <div class="mui-col-xs-4">
+                                    <div class="text">实销金额</div>
+                                    <div class="text num" v-text="order.saleAmt">0</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/common.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    
+</body>
+</html>

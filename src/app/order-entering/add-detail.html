@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../assets/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../assets/css/order-entering/add-detail.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.poppicker.css" />
+	</head>
+
+	<body>	
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">销售明细</h1>
+		</header>
+		<div id="addDetailData" class="mui-content detail-container">
+			<div class="mui-input-group">
+			<div class="mui-input-row give-number group-info">
+		        <label>照片尺寸：</label>
+				<input type="text" v-model='picSizeName' class="mui-input-clear select-number" readonly="readonly" placeholder="请选择尺寸"/>
+		        <span class="mui-icon mui-icon-arrowdown size-icon"></span>
+		    </div>
+		    <div class="mui-input-row">
+		        <label>销售单价：</label>
+		        <input type="number" v-model="price" class="mui-input-clear" placeholder="请输入销售单价">
+		    </div>
+			<div class="mui-input-row">
+		        <label>销售数量：</label>
+		        <input type="number" v-model="picNum" class="mui-input-clear" placeholder="请输入销售数量">
+		    </div>
+			</div>
+				<div class="login-btn-box"><button  type="button"id="result" class="mui-btn login-pass-btn">保存</button></div>
+			</div>
+		</div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/mui.picker.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script type="text/javascript">
+            var vm = new Vue({
+                el: '#addDetailData',
+                data: {
+                	picSizeName:'',
+					picSize: '',
+			        price: '',
+			        picNum: ''
+                }
+			})
+			var picker,userPicker;
+            lf.ready(function() {
+				var opts = {"type":"date"}
+                picker = new mui.DtPicker(opts);
+                userPicker = new mui.PopPicker();
+                userPicker.setData([{
+                    value: '1',
+                    text: '16寸'
+                }, {
+                    value: '2',
+                    text: '12寸'
+                }, {
+                    value: '3',
+                    text: '10寸'
+                }, {
+                    value: '4',
+                    text: '8寸'
+                }, {
+                    value: '5',
+                    text: '6寸'
+                }
+                ]);
+            })
+            mui('.detail-container').on('tap','.give-number',function(){
+                userPicker.show(function(items) {
+                    vm.picSizeName = items[0].text
+                    vm.picSize = items[0].value
+                });
+            })
+ 			document.getElementById('result').addEventListener('tap',function(){
+ 				if(!vm.picSize){
+ 					lf.nativeUI.toast('请选择照片尺寸');
+ 					return
+ 				}
+ 				if(!vm.price){
+ 					lf.nativeUI.toast('请填写销售单价');
+ 					return
+ 				}
+ 				if(!vm.picNum){
+ 					lf.nativeUI.toast('请填写销售数量')
+ 				}
+ 				lf.event.fire(lf.window.currentWebview().opener(),'listchange',{
+					picSizeName: vm.picSizeName,
+					picSize: vm.picSize,
+			        price: vm.price,
+			        picNum: vm.picNum
+				})
+ 				lf.window.closeCurrentWebview()
+ 			})
+		</script>
+	</body>
+
+</html>

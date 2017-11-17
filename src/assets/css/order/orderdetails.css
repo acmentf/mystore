@@ -1,0 +1,377 @@
+.orderdetails .topbar {
+	width: 100%;
+	color: #fff;
+	overflow: hidden;
+	height: 1.8rem;
+	background: #fff;
+	margin-top: 44px;
+}
+
+.orderdetails .topbar .mod {
+	background: linear-gradient(#FF9000,#FE5200); 
+	height: 100%;
+	padding: 0.5rem 0.4rem;
+	position: relative;
+}
+
+.orderdetails .topbar .mod .title {
+	font-size: 0.3rem;
+	padding:0 0 0.1rem 1rem;
+}
+
+.orderdetails .topbar .mod .intro {
+	font-size: 0.24rem;
+	padding-left: 1rem;
+}
+
+.orderdetails .topbar .status1 {
+	background: url(../../images/order/order_pending.png) no-repeat center;
+	background-size: 100% 100%;
+}
+
+.orderdetails .topbar .status2 {
+	background: url(../../images/order/order_jidiao.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.orderdetails .topbar .status3 {
+	background: url(../../images/order/order_assigned.png) no-repeat;
+	background-size: 100% 100%;
+}
+.orderdetails .topbar .status4 {
+	background: url(../../images/order/order_outputed.png) no-repeat;
+	background-size: 100% 100%;
+}
+.orderdetails .topbar .status5 {
+	background: url(../../images/order/order_shooting.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+
+.orderdetails .topbar .ico {
+	width: 0.94rem;
+	height: 1.06rem;
+	display: inline-block;
+	margin: 0.1rem 0 0 0.4rem;
+	position: absolute;
+	left: 0;
+	top: 0.2rem;
+}
+.orderdetails .topbar .arrow{
+	position: absolute;
+	right: 0.2rem;
+	top:40%
+}
+.orderdetails .item {
+	font-size: 0.28rem;
+}
+
+.orderdetails .item {
+	color: #666;
+}
+
+.orderdetails .mui-card {
+	margin: 0 0 0.2rem 0;
+	box-shadow: none;
+}
+
+.orderdetails .mui-card .mui-card-header {
+	padding-left: 0;
+
+}
+.orderdetails .assign-name{
+	width: 70%; 
+	display: inline-block; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+	text-align: right;
+}
+
+.orderdetails .mui-card .mui-card-header .border-left {
+	border-left: 4px solid #3C9E82;
+	text-indent: 0.2rem;
+	font-size: 0.36rem;
+	color: #333;
+}
+
+.orderdetails .operate {
+	width: 1rem;
+	height: 1rem;
+	text-align: center;
+	font-size: 0.4rem;
+	line-height: 1rem;
+	color: #000;
+	background: url(../../images/order/order_operation.png) no-repeat;
+	background-size: 100% 100%;
+	position: fixed;
+	bottom: 1rem;
+	right: 0;
+}
+
+.orderdetails .operate .button {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.orderdetails .sale-table {
+	margin: 0.1rem 0 0.2rem 0.6rem;
+}
+
+.orderdetails .sale-table .table-hd {
+	background: #D0D3E4;
+}
+
+.sale-table td {
+	width: 20%;
+	text-align: center;
+}
+
+.orderdetails .sale-table span {
+	color: #333;
+}
+
+.orderdetails .sale-table .delete-ico {
+	background: url("../images/icon_phone.svg") no-repeat;
+}
+
+.orderdetails .photpgrapher-name {
+	color: #16A7D7;
+	margin-right: 0.1rem;
+}
+
+.orderdetails .routeinfo {
+	position: relative;
+	overflow: auto;
+	/*padding-left: 2.05rem !important;*/
+	color: #888;
+}
+
+.orderdetails .routeinfo label {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 2rem;
+	display: inline-block;
+}
+.orderdetails .remark label{
+	padding: 0.1rem 0 0 0;
+}
+.orderdetails .remark .cnt{
+	float: right;padding-top: 0;width: 74%;
+}
+.orderdetails .mui-input-group .mui-input-row:after{
+	background: #fff;
+}
+.orderdetails .mui-input-group .mui-input-row{
+	height: auto;
+	color: #888;
+}
+.orderdetails  .mui-segmented-control{
+	border: none;
+	background: #fff;
+	color: #999999;
+}
+.orderdetails .mui-segmented-control .mui-control-item{
+	border: none;
+	color: #999999;
+}
+.orderdetails  .mui-segmented-control .mui-control-item.mui-active{
+	background: #fff;
+	color: #3EB392;
+	border: none;
+	border-bottom: 1px solid #3EB392;
+	
+}
+.orderdetails .sepline{
+	height: 1px;
+	background: #F6F6F6;
+	margin: 0.2rem 0;
+}
+.orderdetails .orderaction .name{
+	float: right;
+	color: #888;
+}
+.orderdetails .detail{
+	margin: 0.1rem 0 ;
+}
+.orderdetails .view-detail{
+	border: 1px solid #3EB392;
+	color: #3EB392;
+	float: right;
+	vertical-align: middle;
+	display: inline-block;
+}
+.orderdetails  .remark{
+	border-top: 1px solid #FFE0DB;
+	background: #FFFCF7;
+	padding: 0.2rem;
+	color: #5C5C5C;
+}
+.orderdetails   .shootinfo .ico{
+	color: #fff;
+	position:absolute;
+	top: 0;
+	left: 0;
+}
+.orderdetails   .shootinfo .item{
+	background: #FFF8F8;
+	padding: 0.2rem;
+	border-radius: 5px;
+	position: relative;
+	
+}
+.orderdetails .print{
+	padding-left: 0.5rem;
+}
+.orderdetails .print span{
+	margin-right: 0.2rem;
+}
+.orderdetails .ico-dot{
+	background: url(../../images/order/dot.png) no-repeat;
+	background-size: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.08rem;
+	height: 0.08rem;
+}
+.orderdetails .mind .name{
+	color: #3EB392;
+}
+.orderdetails .loadmore{
+	text-align: center;
+	color: #C2CACC;
+}
+.orderdetails .mui-icon-arrowright{
+	color: #C2CACC;
+}
+.orderdetails .buttons{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: right;
+	background: #fff;	
+}
+.orderdetails .buttons .mui-button{
+	padding: 0.2rem 0.4rem;
+	border: none;     
+	margin: 0;
+	float: right;
+	border-radius: 0;
+}
+.orderdetails .buttons .colorlight{
+	background:#D8E8E3 ;
+	color: #3EB392;
+}
+.orderdetails .buttons .colordark{
+	background: #3EB392;
+	color: #fff;
+}
+.orderdetails .colorgray{
+	color: #B1B1B1;
+}
+.popup-mod .ico {
+	background: #fff;
+	width: 1.6rem;
+	height: 1.6rem;
+	text-align: center;
+	line-height: 1.6rem;
+	border-radius: 50%;
+	font-size: 0.3rem;
+}
+.popup-mod .disabled .ico {
+	background: #a4a4a4;
+}
+.popup-mod ul {
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+.popup-mod li {
+	list-style: none;
+	float: left;
+	text-align: center;
+	height: 1.6rem;
+	width: 50%;
+	margin-bottom: 0.4rem;
+}
+
+.popup-mod li .mod {
+	height: 1.6rem;
+	width: 1.6rem;
+}
+
+.mask {
+	position: fixed;
+	z-index: 998;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .8);
+}
+
+.popup-mod {
+	position: fixed;
+	z-index: 999;
+	top: 24%;
+	left: 22%;
+	width: 4.4rem;
+	padding: 0.4rem 0;
+}
+.orderdetails .dialog-detail{
+	background: #fff;
+	border-radius: 0.2rem;
+	position: fixed;
+	z-index: 999;
+	top: 24%;
+	left: 5%;
+	width: 90%;
+	
+	border:none;
+	
+}
+.orderdetails .dialog-detail .hd{
+	padding: 0.2rem 0 0 0.2rem;
+
+}
+.orderdetails .dialog-detail .cnt{
+	padding:0.2rem;
+	max-height: 4rem;
+	overflow: auto;
+}
+.orderdetails .dialog-detail .close{
+	width: 100%;
+	background: #3DB391;
+	color: #fff;
+	text-align: center;
+	padding:0.1rem 0;
+	border-radius: 0 0 .2rem .2rem;
+}
+.orderdetails .tel-ico{
+	background: url(../../images/order/call_btn.png) no-repeat;
+	background-size: 100%;
+	width: 0.28rem;
+	height: 0.28rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+.orderdetails .shootinfo .ico-index{
+	background: url(../../images/order/corner.png) no-repeat;
+	background-size: 100%;
+	width: 0.54rem;
+	height: 0.54rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	color: #fff;
+	padding-left: 0.1rem;
+}
+.popup-mod .mui-btn {
+	padding: 2px 4px;
+	font-size: 12px;
+}

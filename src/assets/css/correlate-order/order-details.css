@@ -1,0 +1,152 @@
+.mui-content .container{
+    padding: 0 10px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    color:#343434;
+    font-size: 14px;
+}
+.mui-bar + main.mui-content {
+    padding-bottom: 70px;
+}
+main section.container:first-child .title{
+    font-size: .32rem;
+}
+.title {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.total{
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #EEEEEE;
+}
+.total .orange {
+    font-size: .32rem;
+}
+.border-left::before{
+    content:'';
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background-color: #3eb392;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+}
+.modifyBtn{
+    position: relative;
+    top:7px;
+    height: 26px;
+    line-height: 26px;
+    padding:0 8px;
+    color:#3eb392;
+    border: 1px solid #3eb392;
+    border-radius: 3px;
+}
+.content {
+    padding: 10px 0;
+}
+.content li {
+    line-height: 24px;
+}
+.content img {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+.gray {
+    color:#888888;
+}
+.orange{
+    color: #FF8458;
+}
+.list-unstyle{
+    margin:0;
+    padding: 0;
+}
+.list-unstyle li {
+    list-style: none;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.mui-icon-arrowright{
+    color:#999;
+    line-height: 40px;
+}
+.border-none{
+    border:none;
+}
+.mui-bar-footer{
+    height: 54px;
+}
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+.mui-popover{
+    width: auto;
+}
+.mui-popover-arrow{
+    display: none;
+}
+#topPopover button{
+    display: block;
+    width: 100%;
+    border-radius: 0;
+}
+#topPopover button:first-child{
+    border-bottom: none;
+}
+.mui-content .price-container{
+    position: relative;
+    padding: 10px;
+}
+.price-container h3 small{
+    font-size: 14px;
+}
+.price-container .badge{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    padding:1px 10px;
+    border-radius: 20px;
+}
+.price-container .badge.pay{
+    background: #FF6666;
+}
+.border-top{
+    border-top: 1px solid #eeeeee;
+}
+.pay-title{
+    position: relative;
+    top: 5px;
+    left: 10px;
+    margin-top: 10px;
+}
+.mui-table-view-cell{
+    padding:10px 0 10px 0;
+}
+.mui-table-view-cell::after,.mui-table-view:before,.mui-table-view::after{
+    content: none;
+}
+.mui-table-view-cell img{
+    height: 20px;
+    vertical-align: middle;
+}

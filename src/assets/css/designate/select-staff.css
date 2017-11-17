@@ -1,0 +1,147 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.mui-bar #operate {
+  color: #3DB291;
+}
+
+.designate-select-staff {
+  font-size: 0.76rem;
+  background-color: #F6F6F6;
+}
+
+.designate-select-staff .btn-call {
+  background-color: #fff;
+  border: 1px solid #3DB291;
+  border-radius: 0.2rem;
+  color: #3DB291;
+}
+
+.designate-select-staff .btn-call:enabled:active {
+  color: #fff;
+  border: 1px solid #3DB291;
+  background-color: #fff;
+}
+
+.designate-select-staff .btn-select {
+  background-color: #3DB291;
+  border: 1px solid #3DB291;
+  border-radius: 0.2rem;
+  color: #fff;
+}
+
+.designate-select-staff .btn-select:enabled:active {
+  color: #fff;
+  border: 1px solid #3DB291;
+  background-color: #3DB291;
+}
+
+.designate-select-staff .btn-cancel {
+  background-color: #E5E5E5;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.2rem;
+  color: #707070;
+}
+
+.designate-select-staff .btn-cancel:enabled:active {
+  color: #707070;
+  border: 1px solid #E5E5E5;
+  background-color: #E5E5E5;
+}
+
+.designate-select-staff .mui-indexed-list {
+  border-top: none;
+}
+
+.designate-select-staff .mui-indexed-list .search-wrap {
+  background-color: #fff;
+  padding: 5px 20px;
+  border-bottom: solid 1px #f1f1f1;
+}
+
+.designate-select-staff .mui-indexed-list .search-wrap .mui-indexed-list-search {
+  border: 1px solid #E1E1E1;
+  border-radius: 8px;
+}
+
+.designate-select-staff .mui-indexed-list .mui-search .mui-input-clear {
+  height: 30px;
+}
+
+.designate-select-staff .mui-indexed-list .mui-search .mui-placeholder {
+  line-height: 30px;
+  height: 30px;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-bar {
+  background-color: #fff;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-bar a {
+  color: #3DB291;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-bar.active {
+  background-color: #fff;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-bar.active a {
+  color: #3DB291;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-bar.active a.active {
+  color: #fff;
+  background-color: #3DB291;
+  border-radius: 1rem;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-table-view-divider:before, .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-table-view-divider:after, .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-table-view-cell:before, .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-table-view-cell:after, .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view:before, .designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view:after {
+  background-color: #f1f1f1;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item {
+  font-size: 14px;
+  padding: 25px 35px 25px 15px;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap.selected .text-name {
+  color: #3DB291;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .text-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 6rem;
+  color: #333;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .text-role {
+  text-align: left;
+  color: #999;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .text-state {
+  border-radius: 0.8rem;
+  padding: 0.09rem 0.44rem 0.1rem;
+  color: #fff;
+  background-color: #FB9471;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .btn-wrap .mui-btn {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  padding: 0.2rem 0.4rem;
+}
+
+.designate-select-staff .mui-indexed-list .mui-indexed-list-inner .mui-table-view .mui-indexed-list-item .item-wrap .btn-wrap .mui-btn + .mui-btn {
+  margin-left: 0.3rem;
+}

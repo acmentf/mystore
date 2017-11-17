@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>区域月度预期</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../assets/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/market-expansion/monthly-expect.css" />
+		<link rel="stylesheet" href="../../assets/css/common/common.css" />
+    </head>
+    <body>
+        <div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+                <h1 class="mui-title">区域月度销售额预期</h1>
+                <a id="reAllocate" class="color-green mui-icon mui-icon-compose mui-pull-right"></a>
+			</header>
+			<main class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="blank-div" style="height: 44px;"></div>
+                    <section class="section-1 section-container">
+                        <div class="echart-wrap">
+                            <e-charts id="echart" :options="chartOptions" auto-resize></e-charts>
+                        </div>
+                        <div class="summary-wrap">
+                            <div>
+                                <div>
+                                    <div>销售额预期：</div>
+                                    <div v-text="monthPlanAmt"></div>
+                                </div>
+                                <div class="color-green">
+                                    <div>已完成：</div>
+                                    <div v-text="monthAmount"></div>
+                                </div>
+                                <div class="color-green">
+                                    <div>完成率：</div>
+                                    <div v-text="completeRate"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section-2">
+                        <div class="section-2-block" v-for="(item, key) in planCompletedList" :key="key">
+                            <div class="name-label color-green" v-text="item.userName">
+                            </div>
+                            <div class="data-table">
+                                <div class="column">
+                                    <div>本月销售额预期</div>
+                                    <div v-text="item.monthPlanAmt ? item.monthPlanAmt : 0"></div>
+                                </div>
+                                <div class="column color-green">
+                                    <div>本月销售额已完成</div>
+                                    <div v-text="item.monthAmount ? item.monthAmount : 0"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+			</main>
+		</div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+        <script src="../../assets/libs/vue.min.js"></script>
+        <script src="../../assets/libs/vue-echarts.js"></script>
+		
+    </body>
+</html>

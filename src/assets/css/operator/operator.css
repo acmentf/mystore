@@ -1,0 +1,144 @@
+.mui-control-content {
+  margin-top: 10px;
+}
+
+.mui-bar {
+  background-color: #fff;
+}
+
+.mui-title {
+  color: #000000;
+}
+
+.mui-table-view-chevron .mui-table-view-cell {
+  padding-right: 0;
+  border-radius: 12px;
+}
+
+.mui-table-view {
+  margin-bottom: 10px;
+}
+
+.shoot-table {
+  margin-bottom: 10px;
+  border-radius: 12px;
+  width: 96%;
+  margin: 10px auto;
+}
+
+.mui-table-view:before {
+  background-color: #fff;
+}
+
+.mui-table-view:after {
+  background-color: #fff;
+}
+
+.addshootinfo {
+  color: #3db391;
+  font-size: 14px;
+  width: 96%;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: none;
+}
+
+.titleOperat {
+  color: #3DB391;
+  position: absolute;
+  right: 24px;
+  line-height: 44px;
+}
+
+.show-on-right {
+  position: absolute;
+  right: 15px;
+  width: 130px;
+}
+
+.show-on-right a {
+  text-decoration: none;
+  margin-right: 31px;
+  color: #A4A4A4;
+}
+
+.show-on-right .forinput {
+  margin-left: 10px;
+  border: 1px solid #fff;
+  text-align: right;
+  height: 14px;
+  font-size: 14px;
+  color: #A4A4A4;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mui-icon-arrowright {
+  position: absolute;
+  right: 10px;
+  font-size: 21px;
+  line-height: 1.1;
+}
+
+.remark {
+  height: 3rem !important;
+  margin-top: 10px;
+}
+
+.remark .remarkTitle {
+  line-height: 1.1;
+  padding: 11px 15px;
+  margin-bottom: 0;
+}
+
+.remark .remark-text {
+  width: 95% !important;
+  margin: 0 auto;
+  display: block;
+  background: #F6F6F6;
+  font-size: 15px;
+  color: #8B8B8B;
+}
+
+.superscript {
+  height: 45px;
+  background: #fff;
+  overflow: inherit;
+  padding: 0;
+}
+
+.superscript .superscript-img {
+  width: 45px;
+  height: 100%;
+  float: left;
+}
+
+.superscript .superscript-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.superscript .superscript-num {
+  color: #fff;
+  position: absolute;
+  left: 9px;
+  top: 3px;
+}
+
+.superscript .superscript-xx {
+  float: right;
+  width: 50px;
+  height: 100%;
+  position: relative;
+}
+
+.superscript .superscript-xx img {
+  width: 50%;
+  height: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 28%;
+  left: 26%;
+}

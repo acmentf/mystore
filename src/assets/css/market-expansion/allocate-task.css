@@ -1,0 +1,83 @@
+.mui-scroll-wrapper {
+    /* background: #fff; */
+}
+.mui-bar-footer{
+    height: 54px;
+}
+
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+
+.color-green {
+    color: #3eb392;
+}
+
+.mui-bar + main.mui-content {
+    padding-bottom: 70px;
+}
+
+.section-1 {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    display: flex;
+    width: 7.5rem;
+    /* background: red; */
+    background: #fff;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.section-1 div {
+    flex: 1;
+    padding: 11px 15px;
+}
+
+
+.section-2 {
+    font-size: 0.3rem;
+    padding: 0px 15px;
+    padding-bottom: 15px;
+}
+.section-2 {
+    
+}
+.section-2 .mui-input-row label {
+    width: 65%;
+    font-size: 0.3rem;
+}
+.section-2 .mui-input-row input {
+    width: 35%;
+}
+/* .section-2 input {
+    font-size: 0.3rem;
+} */
+.section-2 .section-2-block {
+    padding: 10px 15px;
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 5px;
+}
+.section-2 .section-2-block .name-label {
+    height: 0.6rem;
+    line-height: 0.6rem;
+}
+.section-2 .section-2-block .data-table {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 0px 15px;
+    padding-top: 10px;
+    margin-top: 5px;
+    color: #888;
+}
+.section-2 .section-2-block .data-table .column {
+    flex: 1;
+}
+.section-2 .section-2-block .data-table .column div{
+    text-align: center;
+    height: 0.6rem;
+    line-height: 0.6rem;
+}  

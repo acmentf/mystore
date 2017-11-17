@@ -32,11 +32,11 @@
 
 			
 			</div>
-		<script src="../js/framework/common.js"></script>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/framework/define.js"></script>
 		<script src="../js/framework/styles.js"></script>
 		<script src="../js/framework/lf.js"></script>
+		<script src="../js/framework/common.js"></script>
 		<script src="../libs/vue.min.js"></script>
 		<script type="text/javascript">
 			var vm = new Vue({
@@ -56,7 +56,9 @@
 			lf.ready(function(){
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
-					plus.navigator.closeSplashscreen();
+					if(mui.os.plus) {
+						plus.navigator.closeSplashscreen();
+					}
 
 					var roleId = window.Role.currentPositions[0].roleId;
 					var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);
@@ -78,7 +80,9 @@
 						vm.account = hisAccount.split(",")[0]
 					}
 					vm.type = 1
-					plus.navigator.closeSplashscreen();
+					if(mui.os.plus) {
+						plus.navigator.closeSplashscreen();
+					}
 				}
 				document.getElementById('login').addEventListener('tap', function(e){
 					if(e.target.getAttribute("data-down")) return
@@ -126,11 +130,15 @@
 			        lf.nativeUI.toast('请输入您的密码')
 					return
 				}
-                var info = plus.push.getClientInfo();
                 var params = {
                     phone : vm.account,
                     password: vm.passWord,
-                    clientId:info.clientid
+                    clientId: (function() {
+						if(mui.os.plus) {
+							return plus.push.getClientInfo().clientId;
+						}
+						return "h5";
+					}())
 				}
                 lf.nativeUI.showWaiting();
 				lf.net.getJSON('/user/login',params,function (res) {

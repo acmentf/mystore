@@ -1,0 +1,78 @@
+p{
+    margin:0;
+}
+.bgwhite{
+    background-color: #fff;
+}
+.badge{
+    display: inline-block;
+    font-size: 12px;
+    padding: 0 6px;
+    height: 19px;
+    line-height: 18px;
+    margin-left: 5px;
+    border: 1px solid #E5E7EA;
+    border-radius: 16px;
+    background-color: #F4F6F9;
+    color: #C3C4C5;
+}
+/* .save-btn{
+    display: block;
+    height: 100%;
+} */
+.save-btn > button {
+    top: 9px!important;
+    color: #3eb392!important;
+    border-color: #3eb392;
+    font-size: 14px;
+    padding: 3px 10px!important;
+}
+.save-btn > button:hover,.save-btn > button:active{
+    color: #3eb392!important;
+    border-color: #3eb392;
+    background-color: #fff;
+}
+.info{
+    margin-top: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+.info .date{
+    padding: 12px 15px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 16px;
+    color: #555;
+}
+.info .date img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -3px;
+}
+
+.mui-input-row{
+    display: flex;
+    justify-content: space-between;
+}
+.mui-input-row > label{
+    width: 160px;
+    padding-left: 20px;
+}
+.mui-input-row label~input{
+    padding-right: 30px;
+    color: #555;
+    text-align: right;
+}
+.mui-input-row > .text{
+    flex: 1;
+    line-height: 40px;
+    margin-right: 30px;
+    text-align: right;
+}
+
+.line{
+    height: 1px;
+    margin: 0 15px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #ddd;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--cwj-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/correlate-order/correlate-order.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        
+        .mui-bar~.mui-content .mui-fullscreen {
+            top: 44px;
+            height: auto;
+        }
+        
+        .mui-pull-top-tips {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            margin-left: -25px;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            z-index: 1;
+        }
+        
+        .mui-bar~.mui-pull-top-tips {
+            top: 24px;
+        }
+        
+        .mui-pull-top-wrapper {
+            width: 42px;
+            height: 42px;
+            display: block;
+            text-align: center;
+            background-color: #efeff4;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background-clip: padding-box;
+            box-shadow: 0 4px 10px #bbb;
+            overflow: hidden;
+        }
+        
+        .mui-pull-top-tips.mui-transitioning {
+            -webkit-transition-duration: 200ms;
+            transition-duration: 200ms;
+        }
+        
+        .mui-pull-top-tips .mui-pull-loading {
+            /*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+            margin: 0;
+        }
+        
+        .mui-pull-top-wrapper .mui-icon,
+        .mui-pull-top-wrapper .mui-spinner {
+            margin-top: 7px;
+        }
+        
+        .mui-pull-top-wrapper .mui-icon.mui-reverse {
+            /*-webkit-transform: rotate(180deg) translateZ(0);*/
+        }
+        
+        .mui-pull-bottom-tips {
+            text-align: center;
+            background-color: #efeff4;
+            font-size: 15px;
+            line-height: 40px;
+            color: #777;
+        }
+        
+        .mui-pull-top-canvas {
+            overflow: hidden;
+            background-color: #fafafa;
+            border-radius: 40px;
+            box-shadow: 0 4px 10px #bbb;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        
+        .mui-pull-top-canvas canvas {
+            width: 40px;
+        }
+        
+        .mui-slider-indicator.mui-segmented-control {
+            background-color: #efeff4;
+        }
+        
+        .mui-segmented-control .mui-control-item {
+            color: #CCECE1 !important;
+        }
+        
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border-bottom: 1px solid #fff !important;
+            color: #fff !important;
+        }
+        
+        .mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {}
+        
+        .mui-slider-indicator.mui-segmented-control {
+            background: #3DB391;
+            color: #CCECE1
+        }
+        
+        .orderlist-content-box .footer-order-icon {
+            background: url(../../assets/images/message/nav_order_green.png) no-repeat center;
+            background-size: 100%;
+        }
+        
+        .orderlist-content-box .footer-order-text {
+            color: #31BA90;
+        }
+        
+        .quick-sale-pay {
+            position: fixed;
+            bottom: 60px;
+            right: 10px;
+            z-index: 9999;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .version {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="offCanvasSide-header">
+                        <img src="../../assets/css/images/logo_login.png" alt="" class="offCanvasSide-header-avatar">
+                        <p class="offCanvasSide-header-name">{{username}}</p>
+                    </div>
+
+                    <form class="offCanvasSide-role-wrap mui-input-group">
+                        <div class="mui-input-row mui-radio mui-left" v-for="item in rolePositionList">
+                            <label>{{item.name}}</label>
+                            <input type="radio" v-bind:value="item.id" v-model="rolePositionId">
+                        </div>
+                    </form>
+
+                    <div class="offCanvasSide-logout">
+                        <button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+                    </div>
+
+                    <p class="version">v{{wgtVer}}</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap" style="background:#efeff4">
+            <header class="mui-bar mui-bar-nav" style="background:#3db391;">
+                <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title" style="color: #fff;">关联订单</h1>
+                <a style="color:#fff" id="search-order" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
+            </header>
+            <div class="mui-content orderlist-content">
+                <div id="slider" class="mui-slider mui-fullscreen">
+                    <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                        <a class="mui-control-item" :class="{'mui-active':index == 0}" :href="'#item'+index+'mobile'" v-for="(data,index) in orderHeader">
+                            <span v-text="data.name"></span>
+                            <span v-text='data.number'></span>
+                        </a>
+                    </div>
+                    <div class="mui-slider-group">
+                        <div id="item0mobile" class="mui-slider-item mui-control-content" :class="{'mui-active':index == 0}">
+                            <div id="scroll1" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="order-ul">
+                                        <li class="order-li no-correlate" v-for="item in orderList[0]" :data-saleTime="item.orderTime" :data-price="item.totalAmount" :data-saleId="item.id" :data-id="item.orderId" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.guideName" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+                                            <p>生成时间:<span v-text="item.createTime"></span></p>
+                                            <strong>金额:<span>￥<span v-text="item.totalAmount"></span></span></strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item1mobile" class="mui-slider-item mui-control-content" :class="{'mui-active':index == 1}">
+                            <div id="scroll1" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="order-ul">
+                                        <li class="order-li correlate" v-for="item in orderList[1]" :data-saleId="item.id" :data-id="item.orderId" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.guideName" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+                                            <div class="product-name">
+                                                <span>产品名称：</span>
+                                                <span v-text="item.productName"></span>
+                                            </div>
+                                            <div class="middle">
+                                                <div class="guide">导游:<span v-text="item.guideName"></span></div>
+                                                <div class="sale-time">预计销售日期:<span v-text="item.orderSaleDate"></span></div>
+                                            </div>
+                                            <div class="bottom">
+                                                <p>生成时间:<span v-text="item.createTime"></span></p>
+                                                <strong>金额:<span>￥<span v-text="item.totalAmount"></span></span></strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mui-off-canvas-backdrop"></div>
+            <div class="footer">
+                <div class="footer-order-btn">
+                    <span class="footer-order-icon foot-icon"></span>
+                    <span class="footer-order-text">订单</span>
+                </div>
+                <div class="footer-order-contact-btn" v-if="currentRoleId==9">
+                    <span class="footer-order-contact-icon foot-icon"></span>
+                    <span class="footer-order-contact-text">关联</span>
+                </div>
+                <div class="footer-message-btn">
+                    <span class="footer-message-icon foot-icon"></span>
+                    <span class="footer-message-text">消息</span>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../assets/js/mui.min.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.js"></script>
+        <script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+        <script src="../../assets/js/framework/define.js"></script>
+        <script src="../../assets/js/framework/styles.js"></script>
+        <script src="../../assets/js/framework/lf.js"></script>
+        <script src="../../assets/js/framework/common.js"></script>
+        <script src="../../assets/libs/vue.min.js"></script>
+        
+</body>
+
+</html>

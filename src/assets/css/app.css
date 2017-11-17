@@ -1,0 +1,165 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+/*.mui-plus header.mui-bar{
+	display: none;
+}
+.mui-plus .mui-bar-nav~.mui-content{
+	padding: 0;
+}*/
+
+/*hm开头的表示仅为 Hello MUI示例定义*/
+/*.hm-description{
+	margin: .5em 0;
+}
+
+.hm-description>li {
+	font-size: 14px;
+	color: #8f8f94;
+}*/
+
+.mui-bar .mui-action-back{
+	color: #000;
+}
+.mui-title{
+	color: #000;
+}
+.mui-bar{
+	background-color: #fff;
+	box-shadow:none;
+}
+
+@font-face {
+	font-family: "iconfont";
+	src: url('../fonts/iconfont.ttf?t=1500946903609') format('truetype'); 
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tuichu:before { content: "\e892"; }
+
+/* reset mui style */
+.mui-off-canvas-wrap.mui-active .mui-off-canvas-backdrop {
+	background: rgba(0,0,0,0);
+	box-shadow: -4px 0 4px rgba(0,0,0,.2), 4px 0 4px rgba(0,0,0,.2);
+}
+
+/* drag right style */
+#offCanvasSide {
+	background-color: #fff;
+}
+
+#offCanvasSide .offCanvasSide-header {
+	text-align: center;
+	margin: 50px 0 20px 0
+}
+
+#offCanvasSide .offCanvasSide-header-avatar {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 10px;
+}
+
+#offCanvasSide .offCanvasSide-header-name {
+	color: #3eb392;
+	font-size: 0.3rem;
+}
+
+#offCanvasSide .offCanvasSide-role-wrap {
+	color: #bbb;
+	font-size: 0.3rem;
+}
+
+#offCanvasSide .offCanvasSide-role-wrap input[type=radio] {
+	margin-right: 10px;
+}
+
+#offCanvasSide .offCanvasSide-role-wrap .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+	color: #3eb392;
+}
+
+#offCanvasSide .offCanvasSide-logout {
+	margin: 50px 20px;
+}
+
+#offCanvasSide .offCanvasSide-logout > button {
+	border: none;
+	color: #fff;
+	overflow: hidden;
+	background: #3eb392;
+}
+
+.empty-tips {
+    text-align: center;
+    color: #bbb;
+}
+
+/* 多选景点弹窗样式 */
+.select-journey-wrapper {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 99999;
+	background: #fff;
+}
+
+.select-journey-wrapper .journey-select-inner {
+	background: #fff;
+	position: absolute;
+	top: 44px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 99999;
+	overflow-y: auto;
+}
+
+.select-journey-wrapper .journey-select-inner .item-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.select-journey-wrapper #confirmBtn {
+	color:#3DB391
+}
+
+.select-journey-wrapper .journey-select-inner .text-name{
+	color: #444
+}
+
+.select-journey-wrapper .journey-select-inner .text-name{
+	color: #444
+}
+
+.select-journey-wrapper .btn-wrap .btn-select {
+	font-size: 14px;
+	color:#3DB391;
+	border: 1px solid #3DB391
+}
+
+.select-journey-wrapper .confirm-btn {
+	border: none;
+	color:#3DB391;
+}
+
+.select-journey-wrapper .btn-wrap .btn-cancel {
+	font-size: 14px;
+	color:#666;
+	border: 1px solid #666
+}
+
+.select-journey-wrapper .journey-select-inner .item-wrap.selected {
+	background: #f0f0f0
+}

@@ -211,7 +211,7 @@ lf.ready(function() {
 			if(e.index == 0) {
 				window.Role.logout();
 				// lf.window.openWindow('login','../login.html',{},{})
-				plus.runtime.restart();
+				GLOBAL_SHOOT.restart();
 			}
 		});
     })

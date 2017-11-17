@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../assets/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/daily-manage/daily-plan.css" />
+    <link rel="stylesheet" href="../../assets/css/common/common.css" />
+</head>
+
+<body>
+    <div id="app">
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">填报计划</h1>
+            <span class="save-btn mui-pull-right">
+                <button type="button" class="mui-btn mui-btn-success mui-btn-outlined">保存</button>
+            </span>
+        </header>
+        <main class="mui-content">
+            <div class="info bgwhite" v-for="(item, index) in planList" :key="item">
+                <div class="date">
+                    <img src="../../assets/images/order/date.png">
+                    <span v-text="item.planDate"></span>
+                    <span class="badge" v-if="item.flag==1">计划被改</span>
+                </div>
+                <div class="mui-row">
+                    <div class="mui-input-row">
+                        <label>预期实销金额</label>
+                        <span class="text">{{item.expectAmount}}</span>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>计划实销金额</label>
+                        <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planAmount')" @blur="inputValue($event,index,'planAmount')" @input="formChange($event,index,'planAmount')" :value="item.planAmount" placeholder="请填写销售额">
+                    </div>
+                    <div class="line"></div>
+                    <div class="mui-input-row">
+                        <label>预期发团人数</label>
+                        <span class="text">{{item.expectPersons}}</span>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>计划发团人数</label>
+                        <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planPersons')" @blur="inputValue($event,index,'planPersons')" @input="formChange($event,index,'planPersons')" :value="item.planPersons" placeholder="请填写人数">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/js/mui.min.js"></script>
+    <script src="../../assets/js/framework/define.js"></script>
+    <script src="../../assets/js/framework/styles.js"></script>
+    <script src="../../assets/js/framework/common.js"></script>
+    <script src="../../assets/js/framework/lf.js"></script>
+    <script src="../../assets/libs/vue.min.js"></script>
+    
+</body>
+
+</html>

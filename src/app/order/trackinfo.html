@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>跟踪信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../assets/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/order/trackinfo.css" />
+		<style>
+			.mui-table-view-cell.mui-active {
+				background: #FFFFFF;
+			}
+			
+			.mui-table-view-cell.mui-active .mui-navigate-right {
+				border-bottom: 1px solid #EEEEEE;
+			}
+		</style>
+	</head>
+
+	<body class="trackinfo">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">计调信息</h1>
+		</header>
+		<div id="trackinfo" class="mui-content">
+			<div class="assigninfo">
+				<div v-if='assignRole' style="margin-bottom: 0.15rem;">
+					<button type="button" class="mui-btn mui-btn-primary assign" :data-orderid='currentOrderId'>指派</button>
+				</div>
+				<div   class="mui-input-group">
+					<div class="mui-input-row" style="height: auto;">
+						<label>已指派人</label>
+						<textarea readonly="readonly" v-model='trackInfo.assignNames'></textarea>
+					</div>
+					
+				</div>
+
+			</div>
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>团信息</a>
+						<div class="mui-collapse-content">
+							<div class="group-info">
+								<div class="mui-input-group">
+									<!--<div class="mui-input-row">
+										<label>区域</label>
+										<input readonly="readonly" type="text" v-model='trackInfo.personCount' placeholder="">
+									</div>-->
+									<div class="mui-input-row">
+										<label>团名称</label>
+										<input readonly="readonly" type="text" v-model='trackInfo.lineName' placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>团人数</label>
+										<input type="text" v-model='trackInfo.personCount' class="mui-input-clear" placeholder="请输入团人数">
+									</div>
+									<div class="mui-input-row">
+										<label>团性质</label>
+										<input type="text" v-model='trackInfo.groupType' class="mui-input-clear" placeholder="请输入团性质">
+									</div>
+									<div class="mui-input-row">
+										<label>导游</label>
+										<input type="text"  v-model='trackInfo.tourGuide'  class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>导游电话</label>
+										<input type="text"  v-model='trackInfo.tourGuidePhone' class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>车牌号码</label>
+										<input type="text" v-model='trackInfo.busCardNo' class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>预留座位</label>
+										<input type="text" v-model='trackInfo.preReservedSeats' class="mui-input-clear" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>行程信息</a>
+						<div class="mui-collapse-content">
+							<div class="group-info">
+								<div class="mui-input-group">
+									<div class="mui-input-row">
+										<label>行程天数</label>
+										<input v-model='trackInfo.groupDays' type="text" class="mui-input-clear" placeholder="请输入行程天数">
+									</div>
+									<div class="mui-input-row" style="height: auto;">
+										<label>行程描述</label>
+										<textarea v-model='trackInfo.groupRoute' rows="3" class="mui-input-clear" placeholder="请输入行程描述"></textarea>
+									</div>
+									<div class="mui-input-row">
+										<label>取片时间</label>
+										<input v-model='trackInfo.fetchPhotoTime' readonly="readonly" type="text" class="mui-input-clear fetchtime">
+									</div>
+									<div class="mui-input-row">
+										<label>取片地点</label>
+										<input v-model='trackInfo.fetchPhotoScene' type="text" class="mui-input-clear" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#"><span class="border-left"></span>拍摄信息</a>
+						<div class="mui-collapse-content shoot-info">
+							<div class="group-info">
+								<div class="mui-input-group" v-for='(item,index) in shootInfoForms'>
+									<div class="mui-input-row">
+										<label>拍摄地点</label>
+										<input v-model='item.journeyName' type="text" class="mui-input-clear" placeholder="">
+									</div>
+									<div class="mui-input-row">
+										<label>拍摄时间</label>
+										<input type="text" v-model='item.shootTime' :data-index="index" class="shootTime" readonly="readonly" placeholder="拍摄时间">
+										<input type="text" v-if='item.periodType == 0' :data-index="index" v-model='timeName0' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 1' :data-index="index" v-model='timeName1' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 2' :data-index="index" v-model='timeName2' class="time" placeholder="全天">
+										<input type="text" v-if='item.periodType == 3' :data-index="index" v-model='timeName3' class="time" placeholder="全天">
+
+										<i :data-index='index' v-if="shootInfoForms.length>1" class="delete-ico"></i>
+									</div>
+									<div class="mui-input-row">
+										<label>具体时段</label>
+										<input v-model='item.remark' type="text" class="mui-input-clear" placeholder="如：7:00-8:00">
+									</div>
+									<!--<div class="mui-input-row" style="height: auto;">
+										<label>备注</label>
+										<textarea   rows="3" class="mui-input-clear" placeholder="请输入备注"></textarea>
+									</div>-->
+								</div>
+							</div>
+							<div class="addshootinfo">
+								<span class="ico"></span><span style="vertical-align: middle;">添加拍摄信息</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="save">
+					<button type="button" :data-orderid="trackInfo.orderId" class="mui-btn mui-btn-primary save-trackinfo">保存</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/mui.picker.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+		<script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+		
+	</body>
+
+</html>
