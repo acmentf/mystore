@@ -93,7 +93,7 @@ lf.ready(function() {
         }
     });
 
-    mui('body').on('tap', '.section-1-block', function(){
+    mui('body').on('tap', '.order-container', function(){
         // 跳转到任务完成详情
         var orderId = this.getAttribute('data-orderid');
         lf.window.openWindow('service-detail', './service-detail.html', {}, {
