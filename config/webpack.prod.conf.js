@@ -3,11 +3,19 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const pathsToClean = [
+    utils.resolvePath('dist')
+]
 
 let entryHtml = utils.getEntryHtml('./src/app/**/*.html', true),
     entryJs = utils.getEntry('./src/app/**/*.js'),
     configPlugins = [
+        new CleanWebpackPlugin(pathsToClean, {
+            root: utils.resolvePath('')
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
