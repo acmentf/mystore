@@ -8,10 +8,10 @@
             <div class="mui-content orderlist-content">
                 <div id="slider" class="mui-slider mui-fullscreen">
                     <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                        <a class="mui-control-item" href="#day">
+                        <a class="mui-control-item mui-active" href="#day">
                             <span class="text">昨日</span>
                         </a>
-                        <a class="mui-control-item mui-active" href="#week">
+                        <a class="mui-control-item" href="#week">
                             <span class="text">当周</span>
                         </a>
                         <a class="mui-control-item" href="#month">
@@ -19,17 +19,17 @@
                         </a>
                     </div>
                     <div class="mui-slider-group">
-                        <div id="day" class="mui-slider-item mui-control-content">
+                        <div id="day" class="mui-slider-item mui-control-content mui-active">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <!-- <photographer-page :date-str="'当日'" :time-range="'today'"></photographer-page> -->
+                                    <photographer-page :date-str="'当日'" :time-range="'today'"></photographer-page>
                                 </div>
                             </div>
                         </div>
-                        <div id="week" class="mui-slider-item mui-control-content mui-active">
+                        <div id="week" class="mui-slider-item mui-control-content">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <!-- <photographer-page :date-str="'本周'" :time-range="'thisWeek'"></photographer-page> -->
+                                    <photographer-page :date-str="'本周'" :time-range="'thisWeek'"></photographer-page>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,9 @@
 <template>
     <div class="photos-ranking-list-summary">
-        <div>
-            <div class="count">15</div>
+        <div v-on:tap="uploadTap" :class="active == 'uploadTap'">
+            <div class="count" v-text="photographerUploadTrips"></div>
             <div class="tip">
-                <div>本月拍摄上传</div>
+                <div>{{dateStr}}拍摄上传</div>
                 <div>摄影师人数</div>
             </div>
         </div>
@@ -12,10 +12,10 @@
                 <e-charts :options="chartOption" auto-resize ></e-charts>
             </div>
         </div>
-        <div>
-            <div class="count">24</div>
+        <div v-on:tap="pendingUploadTap" :class="active == 'pendingUploadTap'">
+            <div class="count" v-text="photographerPendingUploadTrips"></div>
             <div class="tip">
-                <div>本周拍摄未上传</div>
+                <div>{{dateStr}}拍摄未上传</div>
                 <div>摄影师人数</div>
             </div>
         </div>
@@ -27,6 +27,33 @@
             chartOption: {
                 type: Object,
                 required: true
+            },
+            dateStr: {
+                type: String,
+                required: true,
+            },
+            photographerUploadTrips: {
+                // 摄影师上传过照片行程数
+                type: Number,
+                required: true,
+            },
+            photographerPendingUploadTrips: {
+                // 摄影师未上传过照片行程数
+                type: Number,
+                required: true
+            }
+        },
+        data() {
+            return {
+                active: 'uploadTap'
+            }
+        },
+        methods: {
+            uploadTap() {
+                this.$emit('upload-tap');
+            },
+            pendingUploadTap() {
+                this.$emit('pending-upload-tap');
             }
         },
         components: {
@@ -45,6 +72,7 @@
         flex-direction: column;
         padding: $side_padding;
         flex: 1;
+        color: #888;
         // border-right: 1px solid red;
         .count {
             display: flex;
@@ -66,6 +94,11 @@
                 justify-content: center;
             }
         }
+        &:active {
+            .count {
+                color: #000;
+            }
+        }
     }
     .summary-chart-container {
         .summary-chart-wrap {
@@ -75,7 +108,7 @@
                 position: absolute;
                 height: 100%;
                 width: 100%;
-                background: red;
+                // background: red;
             }
         }
     }

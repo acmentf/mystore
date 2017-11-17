@@ -40,7 +40,7 @@
                         }
                     },
                     grid: {
-                        left: "25%",
+                        left: "30%",
                         bottom: '10%'
                     },
                     yAxis: {
@@ -49,6 +49,9 @@
                     },
                     xAxis: {
                         type: 'value',
+                        axisLabel: {
+                            rotate: 30
+                        },
                     },
                     series: [
                         {
@@ -75,7 +78,12 @@
                 };
                 Request.getJson(url, params, function(res) {
                     res.data.forEach((item, index) => {
-                        defaultChartOption.yAxis.data.push(item.palce);
+                        var palce = (function(){
+                            var result = "";
+                            result = item.palce.length > 7 ? item.palce.slice(0, 6) + ' ...' : item.palce;
+                            return result;  
+                        }());
+                        defaultChartOption.yAxis.data.push(palce);
                         defaultChartOption.series[0].data.push(item.photoCounts)
                     })
                     that.chartOption = defaultChartOption;

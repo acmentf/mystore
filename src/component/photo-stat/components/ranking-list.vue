@@ -16,67 +16,12 @@
     export default {
         name: "Rankinglist",
         props: {
-            // tableData: {
-            //     type: Object,
-            //     required: true
-            // }
+            tableData: {
+                type: Object
+            }
         },
         data() {
             return {
-                tableData: {
-                    title: [
-                        {
-                            text: '',
-                            prop: 'index'
-                        },
-                        {
-                            text: '摄影师',
-                            prop: 'photographer'
-                        },
-                        {
-                            text: '本周拍摄张数',
-                            prop: 'count'
-                        },
-                        {
-                            text: '昨日服务人数',
-                            prop: 'personNum'
-                        },
-                        {
-                            text: '照片占比',
-                            prop: 'percent'
-                        }
-                    ],
-                    data: [
-                        {
-                            index: 1,
-                            photographer: '张山',
-                            count: 10,
-                            personNum: 12,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 2,
-                            photographer: '张2山',
-                            count: 11,
-                            personNum: 125,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 3,
-                            photographer: '张3山',
-                            count: 102,
-                            personNum: 125,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 4,
-                            photographer: '张4山',
-                            count: 104,
-                            personNum: 122,
-                            percent: "0.8"
-                        },
-                    ]
-                }
             }
         },
         computed: {

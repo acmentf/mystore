@@ -1,7 +1,14 @@
 <template>
     <div>
-        <photos-ranking-list-summary :chart-option="RankingListSummaryChartOptions"></photos-ranking-list-summary>
-        <ranking-list :list-data="rankingListData"></ranking-list>
+        <photos-ranking-list-summary
+            @upload-tap="uploadTap"
+            @pending-upload-tap="pendingUploadTap"
+            :date-str="dateStr" 
+            :photographer-upload-trips="photographerUploadTrips" 
+            :photographer-pending-upload-trips="photographerPendingUploadTrips"
+            :chart-option="rankingListSummaryChartOptions"></photos-ranking-list-summary>
+        <ranking-list :list-data="uploadRankingList" v-show="active == 'uploadTap'"></ranking-list>
+        <ranking-list :list-data="pendingUploadRankingList" v-show="active == 'pendingUploadTap'"></ranking-list>
     </div>
 </template>
 <script>
@@ -15,12 +22,71 @@
             PhotosRankingListSummary,
             RankingList,
         },
-        computed: {
-            RankingListSummaryChartOptions() {
-                return {
+        data() {
+            return {
+                photographerUploadTrips: 0,
+                photographerPendingUploadTrips: 0,
+                rankingListSummaryChartOptions: {
                     series: []
+                },
+                active: 'uploadTap',
+                uploadRankingList: {
+                    title: [
+                        {
+                            text: '',
+                            prop: 'index',
+                        },
+                        {
+                            text: '摄影师',
+                            prop: 'photographerName'
+                        },
+                        {
+                            text: '昨日拍摄张数',
+                            prop: 'shotPhotos'
+                        },
+                        {
+                            text: '昨日服务团数',
+                            prop: 'shotGroups'
+                        },
+                        {
+                            text: '照片占比',
+                            prop: 'shotPhotoRate'
+                        }
+                    ],
+                    data: [
+
+                    ]
+                },
+                pendingUploadRankingList: {
+                    title: [
+                        {
+                            text: '',
+                            prop: 'index',
+                        },
+                        {
+                            text: '摄影师',
+                            prop: 'photographerName'
+                        },
+                        {
+                            text: '昨日拍摄张数',
+                            prop: 'shotPhotos'
+                        },
+                        {
+                            text: '昨日服务团数',
+                            prop: 'shotGroups'
+                        },
+                        {
+                            text: '照片占比',
+                            prop: 'shotPhotoRate'
+                        }
+                    ],
+                    data: [
+                        
+                    ]
                 }
-            },
+            }
+        },
+        computed: {
             rankingListData() {
                 return {
 
@@ -32,6 +98,12 @@
                 this.selectPhotographerTripShotCount();
                 this.selectPhotographerUploadPersonsList();
                 this.selectPhotographerPendingUploadTripList();  
+            },
+            uploadTap () {
+                this.active = 'uploadTap';
+            },
+            pendingUploadTap () {
+                this.active = 'pendingUploadTap';
             },
             selectPhotographerTripShotCount() {
                 // 获取摄影师行程拍摄统计
@@ -47,7 +119,48 @@
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
-                })
+                    that.photographerUploadTrips = res.data.photographerUploadTrips;
+                    that.photographerPendingUploadTrips = res.data.photographerPendingUploadTrips;
+                    that.rankingListSummaryChartOptions = {
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: false,
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {
+                                value: res.data.photographerUploadTrips,
+                                name:'已上传',
+                                itemStyle: {
+                                    normal: {
+                                        color: "#3eb392"
+                                    }
+                                }
+                            },
+                            {
+                                value: res.data.photographerPendingUploadTrips,
+                                name:'未上传',
+                                itemStyle: {
+                                    normal: {
+                                        color: "#b5b5b5"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                });
             },
             selectPhotographerUploadPersonsList() {
                 // 上传过照片摄影师列表
@@ -64,7 +177,18 @@
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
-                })
+                    var temp = []
+                    res.data.forEach(function(item, index) {
+                        temp.push({
+                            index: index,
+                            photographerName: item.photographerName,
+                            shotPhotos: item.shotPhotos,
+                            shotGroups: item.shotGroups,
+                            shotPhotoRate: -(-item.shotPhotoRate).toFixed(2) + '%'
+                        })
+                    });
+                    that.uploadRankingList.data = temp;
+                });
             },
             selectPhotographerPendingUploadTripList() {
                 // 未上传过照片摄影师行程列表
@@ -76,9 +200,22 @@
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
+                    curPage: 1,
+                    pageSize: 10
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
+                    var temp = []
+                    res.data.forEach(function(item, index) {
+                        temp.push({
+                            index: index,
+                            photographerName: item.photographerName,
+                            shotPhotos: item.shotPhotos,
+                            shotGroups: item.shotGroups,
+                            shotPhotoRate: -(-item.shotPhotoRate).toFixed(2) + '%'
+                        })
+                    });
+                    that.pendingUploadRankingList.data = temp;
                 })
             }
         },

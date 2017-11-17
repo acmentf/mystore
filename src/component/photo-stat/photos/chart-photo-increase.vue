@@ -51,9 +51,11 @@
                         }
                     },
                     dataZoom: [{
-                        type: 'inside'
+                        type: 'inside',
+                    
                     }],
                     grid: {
+                        left: '15%',
                         right: '0%'
                     },
                     yAxis: {
@@ -76,7 +78,6 @@
                         }
                     ]
                 };
-
                 var defaultCumulativeTrendChartOption = {
                     title: {
                         text: `${that.dateStr}每日照片累积增长趋势`,
@@ -86,6 +87,8 @@
                         }
                     },
                     dataZoom: [{
+                        startValue: 0,
+                        end: 100,
                         type: 'inside',
                     }],
                     grid: {
@@ -126,7 +129,7 @@
                         defaultTrendChartOption.series[0].data.push(item.photoCounts);
                         defaultCumulativeTrendChartOption.xAxis.data.push(dateStr);
                         defaultCumulativeTrendChartOption.series[0].data.push(item.cumulativeCounts);
-                    })
+                    });
                     that.trendChartOption = defaultTrendChartOption;
                     that.cumulativeTrendChartOption = defaultCumulativeTrendChartOption;
                 });
