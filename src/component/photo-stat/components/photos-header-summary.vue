@@ -2,47 +2,98 @@
     <div class="photos-header-summary">
         <div class="top">
             <div class="block">
-                <div class="count">2500</div>
+                <div class="count" v-text="info.photoCounts"></div>
                 <div class="tip">
-                    <div>{{timeRange}}上传照片数(含历史照片)</div>
+                    <div>{{dateStr}}上传照片数(含历史照片)</div>
                 </div>
             </div>
         </div>
         <div class="bottom">
             <div class="block">
-                <div class="count">200</div>
+                <div class="count" v-text="info.uploadGroupCounts"></div>
                 <div class="tip">
-                    <div>{{timeRange}}拍摄</div>
+                    <div>{{dateStr}}拍摄</div>
                     <div>上传团数</div>
                 </div>
             </div>
             <div class="block">
-                <div class="count">200</div>
+                <div class="count" v-text="info.pendingUploadGroupCounts"></div>
                 <div class="tip">
-                    <div>{{timeRange}}拍摄</div>
+                    <div>{{dateStr}}拍摄</div>
                     <div>待传团数</div>
                 </div>
             </div>
             <div class="block">
-                <div class="count">200</div>
+                <div class="count" v-text="info.shotNumbers"></div>
                 <div class="tip">
-                    <div>{{timeRange}}拍摄人数</div>
+                    <div>{{dateStr}}拍摄人数</div>
                 </div>
             </div>
             <div class="block">
-                <div class="count">200</div>
+                <div class="count">{{info.averageNumbers|toFixed(2)}}</div>
                 <div class="tip">
-                    <div>{{timeRange}}客均张数</div>
+                    <div>{{dateStr}}客均张数</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import TimeRangeMixin from "../TimeRageMixin";
     export default {
-        props: ["data", "timeRange"],
+        mixins: [TimeRangeMixin],
         data() {
+            return {
+                info: {
+                    photoCounts: '',
+                    uploadGroupCounts: '',
+                    pendingUploadGroupCounts: '',
+                    shotNumbers: '',
+                    averageNumbers: ''
+                }
+            }
+        },
+        filters: {
+            toFixed(val, n) {
+                if(val) {
+                    return val.toFixed(n);
+                } else {
+                    return val;
+                }
+            }
+        },
+        computed: {
 
+        },
+        methods: {
+            init() {
+                var that = this;
+                var queryTime = this.queryTime;
+                lf.nativeUI.showWaiting();
+                // 查询照片拍摄统计
+                lf.net.getJSON('/report/photo/selectPhotoShotCount', {
+                    queryStartDate: queryTime.startDate,
+                    queryEndDate: queryTime.endDate
+                }, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    if (res.code == 200) {
+                        for(var attr in that.info) {
+                            that.info[attr] = res.data[attr];
+                        }
+                    } else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    lf.nativeUI.toast(error.msg);
+                });
+            }
+        },
+        mounted() {
+            var that = this;
+            lf.ready(function() {
+                that.init()
+            })
         }
     }
 </script>

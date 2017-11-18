@@ -1,8 +1,8 @@
 <template>
     <div class="photo-stat-photos-today">
-        <photos-header-summary :time-range="'当天'"></photos-header-summary>
-        <chart-upload-point></chart-upload-point>
-        <photos-ranking></photos-ranking>
+        <photos-header-summary :date-str="'昨日'" :time-range="'yesterday'"></photos-header-summary>
+        <chart-upload-point :date-str="'昨日'" :time-range="'yesterday'"></chart-upload-point>
+        <photos-ranking :date-str="'昨日'" :time-range="'yesterday'"></photos-ranking>
     </div>
 </template>
 <script>

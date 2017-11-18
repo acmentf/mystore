@@ -1,9 +1,9 @@
 <template>
     <div class="photo-stat-photos-this-week">
-        <photos-header-summary :time-range="'当天'"></photos-header-summary>
-        <chart-photo-increase></chart-photo-increase>
-        <chart-upload-point></chart-upload-point>
-        <photos-ranking></photos-ranking>
+        <photos-header-summary :date-str="'本周'" :time-range="'thisWeek'"></photos-header-summary>
+        <chart-photo-increase :date-str="'本周'" :time-range="'thisWeek'"></chart-photo-increase>
+        <chart-upload-point :date-str="'本周'" :time-range="'thisWeek'"></chart-upload-point>
+        <photos-ranking :date-str="'本周'" :time-range="'thisWeek'"></photos-ranking>
     </div>
 </template>
 <script>

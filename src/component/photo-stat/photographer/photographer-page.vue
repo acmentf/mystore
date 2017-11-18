@@ -1,81 +1,73 @@
 <template>
-    <div>
-        <photos-ranking-list-summary :chart-option="RankingListSummaryChartOptions"></photos-ranking-list-summary>
+    <div class="statistics-photo-stat-photographer-page">
+        <photographer-header-summary></photographer-header-summary>
+        <ranking-list :list-data="rankingListData"></ranking-list>
         <ranking-list :list-data="rankingListData"></ranking-list>
     </div>
 </template>
 <script>
-    import PhotosRankingListSummary from "../components/photos-ranking-list-summary.vue";
+    import PhotographerHeaderSummary from "../components/photographer-header-summary.vue";
     import RankingList from "../components/ranking-list.vue";
     import TimeRangeMixin from "../TimeRageMixin";
     import Request from "../Request";
     export default {
         mixins: [TimeRangeMixin],
         components: {
-            PhotosRankingListSummary,
-            RankingList,
+            PhotographerHeaderSummary,
+            RankingList
         },
         computed: {
-            RankingListSummaryChartOptions() {
-                return {
-                    series: []
-                }
-            },
             rankingListData() {
-                return {
 
-                }
-            },
+            }
         },
         methods: {
             init() {
-                this.selectPhotographerTripShotCount();
-                this.selectPhotographerUploadPersonsList();
-                this.selectPhotographerPendingUploadTripList();  
+                this.selectPhotographerAverageCount();
+                this.selectPhotographerUploadPhotoRank();
+                this.selectPhotographerChicePhotoRank();
             },
-            selectPhotographerTripShotCount() {
-                // 获取摄影师行程拍摄统计
+            selectPhotographerAverageCount() {
+                // 统计摄影师人均上传
                 var that = this;
                 var queryTime = this.queryTime;
 
-                lf.nativeUI.showWaiting();
-                var url = '/report/photo/selectPhotographerTripShotCount';
-
+                var url = '/report/photo/selectPhotographerAverageCount';
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
-                };
+                }
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
                 })
             },
-            selectPhotographerUploadPersonsList() {
-                // 上传过照片摄影师列表
+            selectPhotographerUploadPhotoRank() {
+                // 摄影师上传照片排名
                 var that = this;
                 var queryTime = this.queryTime;
 
-                lf.nativeUI.showWaiting();
-                var url = "/report/photo/selectPhotographerUploadPersonsList";
+                var url = '/report/photo/selectPhotographerUploadPhotoRank';
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
                     curPage: 1,
-                    pageSize: 10
+                    pageSize: 20,
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
                 })
             },
-            selectPhotographerPendingUploadTripList() {
-                // 未上传过照片摄影师行程列表
+            selectPhotographerChicePhotoRank() {
+                // 摄影师精品照片排名
                 var that = this;
                 var queryTime = this.queryTime;
 
-                lf.nativeUI.showWaiting();
-                var url = "/report/photo/selectPhotographerPendingUploadTripList";
+                var url = '/report/photo/selectPhotographerChicePhotoRank';
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
+                    curPage: 1,
+                    pageSize: 20,
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
@@ -86,12 +78,12 @@
             var that = this;
             lf.ready(function() {
                 that.init()
-            })
+            });
         }
     }
 </script>
-<style>
-    .photos-ranking {
+<style lang="scss">
+    .statistics-photo-stat-photographer-page {
 
     }
 </style>

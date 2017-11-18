@@ -32,7 +32,6 @@ lf.ready(function() {
 
 
     mui('body').on('tap', '#backToLast', function(){
-        debugger
         // lf.window.openWindow('market-expansion','../market-expansion/market-expansion.html',{},{
         //     date: date
         // })        

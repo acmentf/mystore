@@ -1,10 +1,9 @@
 <template>
     <div class="photo-stat-photos-this-month">
-        <photos-header-summary :time-range="'当天'"></photos-header-summary>
-        <chart-photo-increase></chart-photo-increase>
-        <large-chart :chart-options="accumulativeTrendChartOptions"></large-chart>
-        <chart-upload-point></chart-upload-point>
-        <photos-ranking></photos-ranking>
+        <photos-header-summary :date-str="'本月'" :time-range="'thisMonth'"></photos-header-summary>
+        <chart-photo-increase :date-str="'本月'" :time-range="'thisMonth'"></chart-photo-increase>
+        <chart-upload-point :date-str="'本月'" :time-range="'thisMonth'"></chart-upload-point>
+        <photos-ranking :date-str="'本月'" :time-range="'thisMonth'"></photos-ranking>
     </div>
 </template>
 <script>
@@ -19,21 +18,8 @@
             PhotosRanking,
             ChartPhotoIncrease,
             ChartUploadPoint,
-            LargeChart
         },
         computed: {
-            accumulativeTrendChartOptions() {
-                return {
-                    title: {
-                        text: "本月每日照片累积增长趋势",
-                        left: 'center',
-                        textStyle: {
-                            color: "#505050"
-                        }
-                    },
-                    series: []
-                }
-            },
         }
     }
 </script>
