@@ -2,7 +2,7 @@
     <div class="mui-inner-wrap statistics-photo-stat-photographer">
         <header class="mui-bar mui-bar-nav">
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
-            <h1 class="mui-title">区域月度销售额预期</h1>
+            <h1 class="mui-title">摄影师统计</h1>
         </header>
         <div class="mui-content">
             <div class="mui-content orderlist-content">

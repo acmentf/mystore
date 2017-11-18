@@ -1,6 +1,10 @@
 <template>
     <div class="statistics-photo-stat-auditing-photo-page">
-        <auditing-photo-header-summary></auditing-photo-header-summary>
+        <div style="height: 5px;"></div>
+        <auditing-photo-header-summary
+        :photo-audit-counts="photoAuditCounts"
+        :photo-audit-tour-counts="photoAuditTourCounts"
+        ></auditing-photo-header-summary>
         <ranking-list :list-data="rankingListData"></ranking-list>
     </div>
 </template>
@@ -12,14 +16,39 @@
     export default {
         mixins: [TimeRangeMixin],
         components: {
-            AuditingPhotoHeaderSummary
+            AuditingPhotoHeaderSummary,
+            RankingList
         },
-        computed: {
-            rankingListData() {
-                return {
-                    
+        data() {
+            return {
+                photoAuditCounts: 0,
+                photoAuditTourCounts: 0,
+                rankingListData: {
+                    title: [
+                        {
+                            text: '',
+                            prop: 'index'
+                        },
+                        {
+                            text: '审核员',
+                            prop: 'reviewer'
+                        },
+                        {
+                            text: '审核照片数',
+                            prop: 'photoAuditCounts'
+                        },
+                        {
+                            text: '审核团数',
+                            prop: 'photoAuditTourCounts'
+                        }
+                    ],
+                    data: [
+
+                    ]
                 }
             }
+        },
+        computed: {
         },
         methods: {
             init() {
@@ -31,13 +60,15 @@
                 var that = this;
                 var queryTime = this.queryTime;
 
-                var url = '/report/photo/selectPhotographerAverageCount';
+                var url = '/report/photo/selectAuditPhotosTotal';
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
+                    that.photoAuditCounts = res.data.photoAuditCounts;
+                    that.photoAuditTourCounts = res.data.photoAuditTourCounts;
                 })
             },
             selectAuditPhotosList() {
@@ -54,7 +85,17 @@
                 };
                 Request.getJson(url, params, function(res) {
                     console.log(url, ":::::", JSON.stringify(res.data));
-                })
+                    var temp = [];
+                    res.data.forEach((item, index) => {
+                        temp.push({
+                            index: index + 1,
+                            reviewer: item.reviewer,
+                            photoAuditCounts: item.photoAuditCounts,
+                            photoAuditTourCounts: item.photoAuditTourCounts
+                        })
+                    });
+                    that.rankingListData.data = temp;
+                });
             }
         },
         mounted() {

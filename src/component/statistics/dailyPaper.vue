@@ -11,22 +11,28 @@
             </header>
             <nav class="mui-bar mui-bar-tab">
                 <a class="mui-tab-item mui-active" href="#tab-income" id="income">
-                <span class="mui-icon">
-                    <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.income ? 'income-active.png' : 'income.png')">
-                </span>
+                    <span class="mui-icon">
+                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.income ? 'income-active.png' : 'income.png')">
+                    </span>
                     <span class="mui-tab-label">收入</span>
                 </a>
                 <a class="mui-tab-item" href="#tab-flow" id="flow">
-                <span class="mui-icon">
-                     <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.flow ? 'flow-active.png' : 'flow.png')">
-                </span>
+                    <span class="mui-icon">
+                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.flow ? 'flow-active.png' : 'flow.png')">
+                    </span>
                     <span class="mui-tab-label">流量</span>
                 </a>
                 <a class="mui-tab-item" href="#tab-history" id="history">
-                <span class="mui-icon">
-                     <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
-                </span>
+                    <span class="mui-icon">
+                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
+                    </span>
                     <span class="mui-tab-label">历史数据</span>
+                </a>
+                <a class="mui-tab-item" href="#tab-photo" id="photo">
+                    <span class="mui-icon">
+                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
+                    </span>
+                    <span class="mui-tab-label">照片</span>
                 </a>
             </nav>
             <div class="mui-scroll-wrapper mui-content" id="page-scroll">
@@ -447,6 +453,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="tab-photo" class="mui-control-content">
+                            <photo-stat v-if="pageTypeActive === pageTypeConstant.photo"></photo-stat>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -460,11 +469,13 @@
     import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant,
         EACH_SCREEN_COUNT, DATA_ZOOM_INSIDE, GRID_TOP, GRID_BOTTOM,
         getLineChartOption, getLineLongCategoryChartOption, getBarLongCategoryChartOption} from './daily-paper/commom'
+    import PhotoStat from "../photo-stat/photo-stat.vue"
     import switchRolePosition from '../public/switchRolePosition.vue'
     const titleMap = {
         [pageTypeConstant.income]: '收入',
         [pageTypeConstant.flow]: '流量',
-        [pageTypeConstant.history]: '历史数据'
+        [pageTypeConstant.history]: '历史数据',
+        [pageTypeConstant.photo]: '照片'
     }
     //大区省份选择
     const cityPicker = new mui.PopPicker({
@@ -598,7 +609,8 @@
         name: 'dailyPaper',
         components: {
             ECharts: VueECharts,
-            switchRolePosition
+            switchRolePosition,
+            PhotoStat
         },
         data () {
             return {
@@ -1586,6 +1598,10 @@
                         break
                     case pageTypeConstant.history:
                         this.initHistory(cb)
+                    case pageTypeConstant.photo: 
+                        if(cb) {
+                            cb();
+                        }
                         break
                 }
             },
@@ -1660,6 +1676,7 @@
                         setRegionProvince(self.regionProvinceMap.historyIncomeDay, items)
                     });
                 })
+                
                 mui('body').on('tap', '#historyThreeMonthIncome_RP', function(){
                     cityPicker.show(function(items) {
                         setRegionProvince(self.regionProvinceMap.historyThreeMonthIncome, items)
@@ -1669,6 +1686,11 @@
                     cityPicker.show(function(items) {
                         setRegionProvince(self.regionProvinceMap.historyShootDay, items)
                     });
+                })
+                // 照片
+                mui('body').on('tap', '#photo', function(){
+                    self.pageTypeActive = pageTypeConstant.photo
+                    switchTab()
                 })
 
                 lf.event.listener('dailyPaper', function(e) {

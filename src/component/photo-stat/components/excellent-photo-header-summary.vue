@@ -7,7 +7,7 @@
             </div>
         </div>
         <div>
-            <div class="count">2333</div>
+            <div class="count" v-text="chicePhotoCounts"></div>
             <div class="tip">
                 <div>审片团数</div>
             </div>
@@ -17,6 +17,15 @@
 </template>
 <script>
     export default {
+        props: {
+            chartOption: {
+                type: Object,
+                required: true
+            },
+            chicePhotoCounts: {
+                required: true
+            }
+        },
         components: {
             ECharts: VueECharts,
         }
@@ -59,7 +68,6 @@
                 position: absolute;
                 height: 100%;
                 width: 100%;
-                background: red;
             }
         }
     }

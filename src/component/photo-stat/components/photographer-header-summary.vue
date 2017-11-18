@@ -2,13 +2,13 @@
     <div class="photographer-header-summary">
         <div class="blank-div"></div>
         <div>
-            <div class="count">205</div>
+            <div class="count" v-text="photographerAverageChicePhotoCount"></div>
             <div class="tip">
                 <div>摄影师人均上传张数</div>
             </div>
         </div>
         <div>
-            <div class="count">2333</div>
+            <div class="count" v-text="photographerAverageUploadPhotoCount"></div>
             <div class="tip">
                 <div>摄影师人均精品张数</div>
             </div>
@@ -18,7 +18,14 @@
 </template>
 <script>
     export default {
-
+        props: {
+            photographerAverageUploadPhotoCount: {
+                required: true
+            },
+            photographerAverageChicePhotoCount: {
+                required: true
+            }
+        }
     }
 </script>
 <style lang="scss">

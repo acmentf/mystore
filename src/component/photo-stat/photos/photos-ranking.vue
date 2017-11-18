@@ -3,12 +3,13 @@
         <photos-ranking-list-summary
             @upload-tap="uploadTap"
             @pending-upload-tap="pendingUploadTap"
-            :date-str="dateStr" 
+            :date-str="dateStr"
+            :active-tab="activeTab"
             :photographer-upload-trips="photographerUploadTrips" 
             :photographer-pending-upload-trips="photographerPendingUploadTrips"
             :chart-option="rankingListSummaryChartOptions"></photos-ranking-list-summary>
-        <ranking-list :list-data="uploadRankingList" v-show="active == 'uploadTap'"></ranking-list>
-        <ranking-list :list-data="pendingUploadRankingList" v-show="active == 'pendingUploadTap'"></ranking-list>
+        <ranking-list :list-data="uploadRankingList" v-show="activeTab == 'uploadTap'"></ranking-list>
+        <ranking-list :list-data="pendingUploadRankingList" v-show="activeTab == 'pendingUploadTap'"></ranking-list>
     </div>
 </template>
 <script>
@@ -29,7 +30,7 @@
                 rankingListSummaryChartOptions: {
                     series: []
                 },
-                active: 'uploadTap',
+                activeTab: 'uploadTap',
                 uploadRankingList: {
                     title: [
                         {
@@ -100,10 +101,10 @@
                 this.selectPhotographerPendingUploadTripList();  
             },
             uploadTap () {
-                this.active = 'uploadTap';
+                this.activeTab = 'uploadTap';
             },
             pendingUploadTap () {
-                this.active = 'pendingUploadTap';
+                this.activeTab = 'pendingUploadTap';
             },
             selectPhotographerTripShotCount() {
                 // 获取摄影师行程拍摄统计
@@ -122,41 +123,45 @@
                     that.photographerUploadTrips = res.data.photographerUploadTrips;
                     that.photographerPendingUploadTrips = res.data.photographerPendingUploadTrips;
                     that.rankingListSummaryChartOptions = {
-                        type:'pie',
-                        radius: ['50%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center'
-                            },
-                            emphasis: {
-                                show: false,
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                show: false
-                            }
-                        },
-                        data:[
+                        series: [
                             {
-                                value: res.data.photographerUploadTrips,
-                                name:'已上传',
-                                itemStyle: {
+                                type:'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
                                     normal: {
-                                        color: "#3eb392"
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: false,
                                     }
-                                }
-                            },
-                            {
-                                value: res.data.photographerPendingUploadTrips,
-                                name:'未上传',
-                                itemStyle: {
+                                },
+                                labelLine: {
                                     normal: {
-                                        color: "#b5b5b5"
+                                        show: false
                                     }
-                                }
+                                },
+                                data:[
+                                    {
+                                        value: res.data.photographerUploadTrips,
+                                        name:'已上传',
+                                        itemStyle: {
+                                            normal: {
+                                                color: "#3cb493"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        value: res.data.photographerPendingUploadTrips,
+                                        name:'未上传',
+                                        itemStyle: {
+                                            normal: {
+                                                color: "#d0d0d0"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -180,7 +185,7 @@
                     var temp = []
                     res.data.forEach(function(item, index) {
                         temp.push({
-                            index: index,
+                            index: index + 1,
                             photographerName: item.photographerName,
                             shotPhotos: item.shotPhotos,
                             shotGroups: item.shotGroups,
@@ -208,7 +213,7 @@
                     var temp = []
                     res.data.forEach(function(item, index) {
                         temp.push({
-                            index: index,
+                            index: index + 1,
                             photographerName: item.photographerName,
                             shotPhotos: item.shotPhotos,
                             shotGroups: item.shotGroups,

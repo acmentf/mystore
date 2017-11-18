@@ -1,7 +1,7 @@
 <template>
     <div class="ranking-list">
         <div class="table-header">
-            <div v-for="(item, key) in tableData.title" :key="key">{{item.text}}</div>
+            <div v-for="(item, key) in listData.title" :key="key">{{item.text}}</div>
         </div>
         <div class="table-body">
             <div class="row" v-for="(itemRow, rowKey) in tableBodyData" :key="rowKey">
@@ -16,8 +16,9 @@
     export default {
         name: "Rankinglist",
         props: {
-            tableData: {
-                type: Object
+            listData: {
+                type: Object,
+                required: true
             }
         },
         data() {
@@ -27,23 +28,23 @@
         computed: {
             tableHeader() {
                 var result = [];
-                if(this.tableData) {
-                    return this.tableData.title;
+                if(this.listData) {
+                    return this.listData.title;
                 } else {
-                    console.warn("ranking-list tableData.length 为 0");
+                    console.warn("ranking-list listData.length 为 0");
                 }
             },
             tableBodyData() {
                 var result = [];
-                if(this.tableData) {
-                    var tableData = this.tableData;
+                if(this.listData) {
+                    var listData = this.listData;
                     var propArr = [];
-                    for(let i = 0; i < tableData.title.length; i++) {
-                        propArr.push(tableData.title[i].prop);
+                    for(let i = 0; i < listData.title.length; i++) {
+                        propArr.push(listData.title[i].prop);
                     }
-                    for(let i = 0; i < tableData.data.length; i++) {
+                    for(let i = 0; i < listData.data.length; i++) {
                         // 将 一维数组 转为 二维数组
-                        var item = tableData.data[i];
+                        var item = listData.data[i];
                         var temp = [];
                         for(let j = 0; j < propArr.length; j++) {
                             var prop = propArr[j];
@@ -53,7 +54,7 @@
                     }
                     return result;
                 } else {
-                    console.warn("ranking-list tableData.length 为 0");
+                    console.warn("ranking-list listData.length 为 0");
                 }
             }
         }

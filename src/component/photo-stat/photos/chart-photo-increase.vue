@@ -52,7 +52,6 @@
                     },
                     dataZoom: [{
                         type: 'inside',
-                    
                     }],
                     grid: {
                         left: '15%',
@@ -68,6 +67,7 @@
                     series: [
                         {
                             type: 'bar',
+                            barMaxWidth: '40px',
                             label: {
                                 normal: {
                                     show: true,
@@ -117,7 +117,7 @@
                 var queryTime = this.queryTime;
                 lf.nativeUI.showWaiting();
                 // 照片按天统计
-                var url = ' /report/photo/selectPhotoCumulativeCount';
+                var url = '/report/photo/selectPhotoCumulativeCount';
                 var params = {
                     queryStartDate: queryTime.startDate,
                     queryEndDate: queryTime.endDate,
@@ -130,6 +130,11 @@
                         defaultCumulativeTrendChartOption.xAxis.data.push(dateStr);
                         defaultCumulativeTrendChartOption.series[0].data.push(item.cumulativeCounts);
                     });
+                    defaultTrendChartOption.dataZoom[0].startValue = res.data.length > 7 ? (res.data.length - 7) : 0;
+                    defaultTrendChartOption.dataZoom[0].end = 30;
+                    defaultCumulativeTrendChartOption.dataZoom[0].startValue = res.data.length > 7 ? (res.data.length - 7) : 0;
+                    defaultCumulativeTrendChartOption.dataZoom[0].end = 30;
+
                     that.trendChartOption = defaultTrendChartOption;
                     that.cumulativeTrendChartOption = defaultCumulativeTrendChartOption;
                 });

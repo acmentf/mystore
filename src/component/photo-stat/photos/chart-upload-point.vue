@@ -1,6 +1,6 @@
 <template>
     <div class="chart-upload-point">
-        <large-chart :chart-option="chartOption"></large-chart>
+        <large-chart :chart-option="chartOption" ></large-chart>
     </div>
 </template>
 <script>
@@ -56,6 +56,7 @@
                     series: [
                         {
                             type: 'bar',
+                            barMaxWidth: '30px',
                             label: {
                                 normal: {
                                     show: true,

@@ -1,6 +1,6 @@
 <template>
     <div class="photos-ranking-list-summary">
-        <div v-on:tap="uploadTap" :class="active == 'uploadTap'">
+        <div v-on:tap="uploadTap" :class="{activeTab: activeTab == 'uploadTap'}">
             <div class="count" v-text="photographerUploadTrips"></div>
             <div class="tip">
                 <div>{{dateStr}}拍摄上传</div>
@@ -9,10 +9,10 @@
         </div>
         <div class="summary-chart-container">
             <div class="summary-chart-wrap">
-                <e-charts :options="chartOption" auto-resize ></e-charts>
+                <e-charts :options="chartOption" auto-resize></e-charts>
             </div>
         </div>
-        <div v-on:tap="pendingUploadTap" :class="active == 'pendingUploadTap'">
+        <div v-on:tap="pendingUploadTap" :class="{activeTab: activeTab == 'pendingUploadTap'}">
             <div class="count" v-text="photographerPendingUploadTrips"></div>
             <div class="tip">
                 <div>{{dateStr}}拍摄未上传</div>
@@ -23,7 +23,15 @@
 </template>
 <script>
     export default {
-        porps: {
+        components: {
+            ECharts: VueECharts
+        },
+        props: {
+            activeTab: {
+                type: String,
+                required: true,
+                default: 'uploadTap'
+            },
             chartOption: {
                 type: Object,
                 required: true
@@ -45,7 +53,6 @@
         },
         data() {
             return {
-                active: 'uploadTap'
             }
         },
         methods: {
@@ -56,9 +63,6 @@
                 this.$emit('pending-upload-tap');
             }
         },
-        components: {
-            ECharts: VueECharts,
-        }
     }
 </script>
 <style lang="scss">
@@ -81,6 +85,7 @@
             flex: 1 0 0;
             font-size: $summary_count_font_size;
             color: $summary_count_color;
+            color: #888;
         }
         .tip {
             display: flex;
@@ -94,7 +99,7 @@
                 justify-content: center;
             }
         }
-        &:active {
+        &.activeTab {
             .count {
                 color: #000;
             }
