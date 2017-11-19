@@ -10,7 +10,6 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 let entryHtml = utils.getEntryHtml('./src/app/**/*.html'),
     entryJs = utils.getEntry('./src/app/**/*.js'),
     configPlugins = [
-        // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new FriendlyErrorsWebpackPlugin(),
@@ -23,18 +22,20 @@ entryHtml.forEach(function (v) {
 });
 
 module.exports = merge(baseWebpackConfig, {
+    output: {
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[name].js',
+        path: utils.resolvePath('dist')
+    },
     entry: entryJs,
-    // cheap-module-eval-source-map is faster for development
     devtool: '#cheap-module-eval-source-map',
     plugins: configPlugins,
-    // @see http://webpack.github.io/docs/webpack-dev-server.html
-    // @see http://www.css88.com/doc/webpack2/configuration/dev-server/
     devServer: {
         contentBase: [
             path.join(ROOT, 'src/')
         ],
         publicPath: '/',
-        disableHostCheck: true,  // https://stackoverflow.com/questions/43650550/invalid-host-header-in-when-running-react-app
+        disableHostCheck: true,
         hot: true,
         stats: 'none',
         host: (function getIPAdress(){

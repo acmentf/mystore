@@ -109,7 +109,7 @@ exports.getEntryHtml = function (globPath, isProduction) {
         entries.push({
             filename: entry.split('/').splice(2).join('/'),
             template: entry,
-            chunks: ['common', getEntryKey(pathname, basename)],
+            chunks: ['bundle-common', getEntryKey(pathname, basename)],
             minify: minifyConfig
         });
 

@@ -22,8 +22,10 @@ let entryHtml = utils.getEntryHtml('./src/app/**/*.html', true),
             },
             sourceMap: true
         }),
-        // 手动 copy 一些文件
-        // @see https://github.com/kevlened/copy-webpack-plugin
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "bundle-common",
+            filename: "bundle-common.[chunkhash].js"
+        }),
         new CopyWebpackPlugin([
             {
                 context: 'src/assets',
@@ -40,6 +42,11 @@ entryHtml.forEach(function (v) {
 });
 
 module.exports = merge(baseWebpackConfig, {
+    output: {
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js',
+        path: utils.resolvePath('dist')
+    },
     entry: entryJs,
     devtool: '#source-map',
     plugins: configPlugins,
