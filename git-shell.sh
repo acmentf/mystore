@@ -22,7 +22,7 @@ mergeMaster() {
     git merge --no-ff ${releaseBranch}
     git push
     git tag "v${now}"
-    git tags
+    git tag
 }
 
 echo 'a、推送代码到生产环境'
