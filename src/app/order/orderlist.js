@@ -403,6 +403,10 @@ mui('body').on('tap', '.footer-message-btn', function() {
 mui('body').on('tap', '.footer-order-contact-btn', function() {
 	lf.window._openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
 })
+mui('body').on('tap', '.footer-addressbook-btn', function() {
+	var redirect = '../webim/index.html#/contact?username=' + window.Role.usercode;
+	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
+})
 mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window._openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
 })

@@ -52,7 +52,8 @@
 }
 .footer-order-btn,
 .footer-order-contact-btn,
-.footer-message-btn{
+.footer-message-btn,
+.footer-addressbook-btn{
 	flex:1;
 	margin-top: 0.14rem;
 	height: 100%;
@@ -63,7 +64,8 @@
 .footer-order-text,
 .footer-message-text,
 .footer-order-contact-text,
-.footer-personage-text{
+.footer-personage-text,
+.footer-addressbook-text{
 	font-size:0.24rem;
 	color: #999;
 }
@@ -87,6 +89,10 @@
 }
 .footer-personage-icon{
 	background: url(../../images/message/nav_mine_gray.png) no-repeat center;
+	background-size: 100%;
+}
+.footer-addressbook-icon{
+	background: url(../../images/message/nav_addressbook_gray.png) no-repeat center;
 	background-size: 100%;
 }
 .mui-btn-blue, .mui-btn-primary, input[type=submit]{
