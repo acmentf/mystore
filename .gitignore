@@ -5,6 +5,7 @@
 *.bak
 *.log
 .project
+package-lock.json
 .sass-cache/
 launch.json
 *.css.map
