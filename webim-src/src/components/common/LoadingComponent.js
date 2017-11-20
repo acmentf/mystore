@@ -8,8 +8,7 @@ const LoadingComponent = ({ size = "large", show, msg }) => {
                 style={{
                     position: "absolute",
                     top: "40%",
-                    left: "50%",
-                    zIndex: '999999'
+                    left: "50%"
                 }}
             >
                 <Spin size={size} />

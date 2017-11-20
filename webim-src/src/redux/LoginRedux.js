@@ -7,7 +7,6 @@ import Cookie from "js-cookie"
 import { message } from "antd"
 import { history } from "@/utils"
 import { store } from "@/redux"
-import request, { basicUrl } from '@/services/request';
 
 
 /* ------------- Types and Action Creators ------------- */
@@ -38,8 +37,10 @@ const { Types, Creators } = createActions({
                 appKey: WebIM.config.appkey,
                 success(token) {
                     let I18N = store.getState().i18n.translations[store.getState().i18n.locale]
-                    // message.success(I18N.loginSuccessfully, 1)
-                    dispatch(Creators.loginByToken(username, token.access_token));
+                    message.success(I18N.loginSuccessfully, 1)
+
+                    dispatch(Creators.setLoginToken(username, token.access_token))
+                    dispatch(Creators.setLoginSuccess(username))
                 },
                 error: e => {
                     dispatch(Creators.stopLoging())
@@ -58,14 +59,15 @@ const { Types, Creators } = createActions({
                 user: username.trim().toLowerCase(),
                 pwd: token,
                 accessToken: token,
-                appKey: WebIM.config.appkey
+                appKey: WebIM.config.appkey,
                 // there is no success callback when login by token
-                // success(token) {
-                // }
-            });
-
-            dispatch(Creators.setLoginToken(username, token));
-            dispatch(Creators.setLoginSuccess(username));
+                success(token) {
+                    dispatch(Creators.setLoging(username, null, token))
+                },
+                error: e => {
+                    dispatch(Creators.stopLoging())
+                }
+            })
         }
     }
 })
@@ -117,9 +119,7 @@ export const stopLoging = (state = INITIAL_STATE) => {
 
 // we've successfully logged in
 export const setLoginSuccess = state => {
-    return Immutable.merge(state, {
-        isLogin: true
-    })
+    return Immutable.merge(state, { isLogin: true })
 }
 
 // we've had a problem logging in

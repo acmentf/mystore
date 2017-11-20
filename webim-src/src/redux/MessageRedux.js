@@ -204,11 +204,9 @@ const { Types, Creators } = createActions({
                 to,
                 roomType: chatroom,
                 success: function () {
-                    console.log('send success')
                     dispatch(Creators.updateMessageStatus(pMessage, "sent"))
                 },
                 fail: function () {
-                    console.log('send fail')
                     dispatch(Creators.updateMessageStatus(pMessage, "fail"))
                 }
             })

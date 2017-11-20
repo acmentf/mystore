@@ -100,11 +100,14 @@ class GroupInfo extends React.Component {
             const { groupId, name } = this.props.room
             this.props.switchRightSider({ rightSiderOffset: 0 })
             this.props.dissolveGroupAsync({ groupId: groupId, groupName: name })
+            history.back()
             break
         case "6":
             const { login } = this.props
             const username = _.get(login, "username")
+            this.props.switchRightSider({ rightSiderOffset: 0 })
             this.props.quitGroupAsync(this.props.room.groupId, username)
+            history.back();
             break
         default:
             break
@@ -295,8 +298,7 @@ export default connect(
     ({ entities, login }) => ({ login, groupMember: entities.groupMember }),
     dispatch => ({
         updateGroupInfoAsync: info => dispatch(GroupActions.updateGroupInfoAsync(info)),
-        dissolveGroupAsync: ({ groupId, groupName }) =>
-            dispatch(GroupActions.dissolveGroupAsync({ groupId, groupName })),
+        dissolveGroupAsync: ({ groupId, groupName }) => dispatch(GroupActions.dissolveGroupAsync({ groupId, groupName })),
         getGroupBlackListAsync: groupId => dispatch(GroupMemberActions.getGroupBlackListAsync(groupId)),
         removeGroupBlockSingleAsync: (groupId, username) => dispatch(GroupMemberActions.removeGroupBlockSingleAsync(groupId, username)),
         inviteToGroupAsync: (groupId, users) => dispatch(GroupActions.inviteToGroupAsync(groupId, users)),

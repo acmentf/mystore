@@ -21,9 +21,23 @@
         work correctly both with client-side routing and a non-root public URL.
         Learn how to configure a non-root public URL by running `npm run build`.
       -->
-    <title>WebIM-Demo</title>
+    <title>通讯录</title>
     <!-- <script src="http://172.17.3.80:8000/js/remote.js?lwz"></script> -->
-
+    <script>
+        document.addEventListener('plusready', function() {
+            var webview = plus.webview.currentWebview();
+            plus.key.addEventListener('backbutton', function() {
+                webview.canBack(function(e) {
+                    if(e.canBack) {
+                        webview.back();
+                    } else {
+                        webview.close(); //hide,quit
+                        //plus.runtime.quit();
+                    }
+                })
+            });
+        });
+    </script>
     <script>
         // document.body.addEventListener('touchmove', function (e) {
         //   e.preventDefault();

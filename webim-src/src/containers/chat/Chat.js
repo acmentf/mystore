@@ -496,9 +496,9 @@ class Chat extends React.Component {
                 <div className="x-chat-footer">
                     <div className="x-list-item x-chat-ops">
                         {/* emoji */}
-                        <div className="x-chat-ops-icon ib">
+                        {/* <div className="x-chat-ops-icon ib">
                             <ChatEmoji onSelect={this.handleEmojiSelect}/>
-                        </div>
+                        </div> */}
                         {/* image upload */}
                         <label
                             htmlFor="uploadImage"

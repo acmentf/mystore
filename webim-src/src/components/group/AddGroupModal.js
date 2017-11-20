@@ -137,27 +137,27 @@ class AddGroupModal extends React.Component {
                          </RadioGroup>
                      )}
                  </FormItem>
-                 {this.props.form.getFieldValue("type") === "private" &&
-      <FormItem style={{ marginBottom: 10 }}>
-          {getFieldDecorator("allowInvite", {
-              valuePropName: "checked",
-              initialValue: true
-          })(<Checkbox>Allow invite</Checkbox>)}
-      </FormItem>}
-
-                 <FormItem style={{ marginBottom: 10 }}>
-                     <p>Permission to join</p>
-                     {getFieldDecorator("canJoin", { initialValue: "no" })(
-                         <RadioGroup>
-                             <Radio style={{ width: 100 }} value="yes">
-									Yes
-                             </Radio>
-                             <Radio style={{ width: 100 }} value="no">
-									No
-                             </Radio>
-                         </RadioGroup>
-                     )}
-                 </FormItem>
+                {this.props.form.getFieldValue("type") === "private" &&
+                    <FormItem style={{ marginBottom: 10 }}>
+                        {getFieldDecorator("allowInvite", {
+                            valuePropName: "checked",
+                            initialValue: true
+                        })(<Checkbox>Allow invite</Checkbox>)}
+                    </FormItem>
+                }
+                <FormItem style={{ marginBottom: 10 }}>
+                    <p>Permission to join</p>
+                    {getFieldDecorator("canJoin", { initialValue: "no" })(
+                        <RadioGroup>
+                            <Radio style={{ width: 100 }} value="yes">
+                                    Yes
+                            </Radio>
+                            <Radio style={{ width: 100 }} value="no">
+                                    No
+                            </Radio>
+                        </RadioGroup>
+                    )}
+                </FormItem>
                  <div style={{ overflow: "hidden" }}>
                      <Button
                          style={{

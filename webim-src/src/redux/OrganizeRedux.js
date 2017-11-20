@@ -3519,7 +3519,7 @@ const { Types, Creators } = createActions({
                         dispatch(Creators.setOrganizes(response.data));
                         dispatch(Creators.sortOrganizeList({value, type}));
                     } else {
-                        message.error(response.msg || '系统异常');
+                        console.log("组织架构请求失败", response.msg || '系统异常');
                     }
                 });
         }

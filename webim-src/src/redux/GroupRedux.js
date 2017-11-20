@@ -127,7 +127,7 @@ export const deleteGroup = (state, { groupId }) => {
     const byId = state.getIn([ "byId" ]).without(groupId)
     const names = []
     _.forEach(byId, (v, k) => {
-        names.push(v.name)
+        names.push(v.name || v.groupName);
     })
     return state.merge({ byId, names })
 }
@@ -191,10 +191,12 @@ export const dissolveGroup = (state, { group }) => {
     const { groupId, groupName } = group
     let byId = state.getIn([ "byId" ]).without(groupId)
     const names = state.getIn([ "names" ]).asMutable()
-    names.splice(names.indexOf(`${groupName}_#-#_${groupId}`), 1)
+    const filtered = names.filter(item => {
+        return item.indexOf(groupId) == -1;
+    });
     return state.merge({
         byId,
-        names: names.sort()
+        names: filtered
     })
 }
 
