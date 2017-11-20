@@ -62,7 +62,7 @@
                             label: {
                                 normal: {
                                     show: true,
-                                    position: 'inside'
+                                    position: 'right'
                                 }
                             },
                             data: []

@@ -9,7 +9,10 @@
             :chart-option="chicePhotoChartOptions"
             :chice-photo-counts="chicePhotoCounts"
             ></excellent-photo-header-summary>
-            <ranking-list :list-data="rankingListData"></ranking-list>
+            <div>
+                <div class="ranking-list-title">精品照片评审人</div>
+                <ranking-list :list-data="rankingListData"></ranking-list>
+            </div>
             <large-chart :chart-option="boutiquePhotosPhotographerChartOption" v-if="photographerChartOptionShow" :height="photographerChartOptionHeight"></large-chart>
             <large-chart :chart-option="boutiquePhotosScenicRateChartOption"></large-chart>
         </div>
@@ -32,6 +35,11 @@ export default {
         return {
             chicePhotoCounts: 0,
             chicePhotoChartOptions: {
+                title: {
+                    subtext: '精品照片占比',
+                    left: 'center',
+                    bottom: '0'
+                },
                 series: []
             },
             rankingListData: {
@@ -86,10 +94,20 @@ export default {
                 var chicePhotoRate = res.data.chicePhotoRate;
                 var restChicePhotoRate = 100 - chicePhotoRate;
                 that.chicePhotoChartOptions = {
+                    title: {
+                        subtext: '精品照片占比',
+                        left: 'center',
+                        fontSize: '12px',
+                        bottom: '0'
+                    },
+                    grid: {
+                        top: '0%'
+                    },
                     series: [
                         {
                             type:'pie',
                             radius: ['50%', '70%'],
+                            center: ['50%', '43%'],
                             avoidLabelOverlap: false,
                             label: {
                                 normal: {
@@ -112,6 +130,13 @@ export default {
                                     itemStyle: {
                                         normal: {
                                             color: "#3cb493"
+                                        }
+                                    },
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'center',
+                                            formatter: '{b}\n{d}%'
                                         }
                                     }
                                 },
@@ -215,11 +240,6 @@ export default {
                         color: "#505050"
                     }
                 },
-                tooltip: {
-                    show: true,
-                    trigger: 'axis',
-                    formatter: '{a} {b} {c}%'
-                },
                 legend: {
                     orient: 'vertical',
                     left: 'left',
@@ -257,7 +277,7 @@ export default {
                             label: {
                                 normal: {
                                     show: true,
-                                    formatter: '{b} {c} ({d}%)'
+                                    formatter: '{b}\n{c} ({d}%)'
                                 }
                             }
                         }
@@ -278,6 +298,13 @@ export default {
 <style lang="scss">
 .statistics-photo-stat-excellent-photo {
     padding-top: 5px;
+    .ranking-list-title {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 0.3rem;
+        background: #fff;
+    }
 }
 </style>
 
