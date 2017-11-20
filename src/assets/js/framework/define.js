@@ -4,13 +4,13 @@
 
 
 //开发服务器路径
-// var SERVER_BAS_URL = "https://tuyi.uat.fingercrm.cn/shoot-mobile-web";//开发
+var SERVER_BAS_URL = "https://tuyi.uat.fingercrm.cn/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "http://tuyi.fingercrm.cn/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "https://tuyi.sit.fingercrm.cn/shoot-mobile-web";//开发
 //  var SERVER_BAS_URL = "http://47.96.162.9:8091/shoot-mobile-web";//开发
 // var SERVER_BAS_URL = "http://120.26.37.73:8091/shoot-mobile-web";//开发
 // he zhi
-var SERVER_BAS_URL = "https://tuyi.sit.fingercrm.cn/shoot-mobile-web";
+// var SERVER_BAS_URL = "https://tuyi.sit.fingercrm.cn/shoot-mobile-web";
 
 var REQUESTDATA = {
     "sysType": "1",

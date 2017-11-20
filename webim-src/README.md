@@ -1,1 +1,2 @@
-webim
+WebIM 2.0
+

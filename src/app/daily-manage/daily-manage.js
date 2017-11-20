@@ -72,7 +72,7 @@ lf.ready(function() {
 	})
 	// 点击通讯录
 	mui("body").on("tap", "#link-to-address-book", function(){
-		var redirect = '../../assets/webim/index.html#/?username=' + window.Role.usercode;
+		var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
 		lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
 	});
 	// 退出登录
