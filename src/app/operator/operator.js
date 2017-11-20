@@ -443,14 +443,14 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		}
 	}
 
+	if(!vm.marchInfo.fetchPhotoTime) {
+		lf.nativeUI.toast('预计服务完成时间必填');
+		return
+	}
+
 	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
 		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
 		flag = true
-	}
-
-	if(!vm.marchInfo.fetchPhotoTime) {
-		lf.nativeUI.toast('销售日期必填');
-		return
 	}
 
 	if(vm.groupInfo.prePropsValue === null) {
