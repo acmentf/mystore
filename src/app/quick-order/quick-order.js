@@ -4,6 +4,8 @@ lf.ready(function() {
         data: {
             journeyList: [], // 拍摄景点多选列表
             journeyListed: [], // 已选择拍摄景点列表
+            shootType: '',
+            shootTypeValue: '',
             productName: '',
             groupNo: '',
             groupMemberNum: '',
@@ -195,6 +197,26 @@ lf.ready(function() {
             ...vm.$data
         })
     })
+
+    mui('#app').on('tap', '.shootType', function() { //选择拍摄类型
+        var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: '1',
+			text: '跟团'
+		}, {
+			value: '2',
+			text: '驻点'
+		}, {
+			value: '3',
+			text: '散团'
+		}]);
+		userPicker.show(function(items) {
+			vm.shootType = items[0].text
+			vm.shootTypeValue = items[0].value
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		}, false);
+    })
     
     // mui('#app').on('tap', '.shootPlance', function() { //选择拍摄景点
     //     //拍摄景点
@@ -304,6 +326,7 @@ lf.ready(function() {
                 tourGuide: vm.guidName,
                 tourGuidePhone: vm.guidTel,
                 startTime: vm.groupDate,
+                shootType: vm.shootTypeValue
             },
             tourGroups: {
                 personCount: vm.groupMemberNum
@@ -410,6 +433,10 @@ function validate(vm,formData) {
     }
     if (!formData.shooter.trim()) {
         lf.nativeUI.toast('请选择摄影师')
+        return false
+    }
+    if (!formData.shootTypeValue.trim()) {
+        lf.nativeUI.toast('请选择拍摄类型')
         return false
     }
     if (formData.shootNums.trim()) {
