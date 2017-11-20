@@ -443,14 +443,14 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		}
 	}
 
+	if(!vm.marchInfo.fetchPhotoTime) {
+		lf.nativeUI.toast('预计服务完成时间必填');
+		return
+	}
+
 	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
 		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
 		flag = true
-	}
-
-	if(!vm.marchInfo.fetchPhotoTime) {
-		lf.nativeUI.toast('销售日期必填');
-		return
 	}
 
 	if(vm.groupInfo.prePropsValue === null) {
@@ -534,10 +534,13 @@ function renderTrackInfo(){
 			}
 			// 判断是否超时
 			vm.orderstatus = data.data.shootType
-			var date = 1000 * 60 * 60 * 27 + data.data.fetchPhotoTime // 获取当前时间data.data.fetchPhotoTime
-			if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
-				vm.overTime = true
-				vm.serveInputDisable = true
+			var date
+			if(lf.window.currentWebview().actionStatus !==0 ){  //待计调情况禁止点击修改
+				date = 1000 * 60 * 60 * 27 + data.data.fetchPhotoTime // 获取当前时间data.data.fetchPhotoTime
+				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+					vm.overTime = true
+					vm.serveInputDisable = true
+				}
 			}
 			if(data.data.fetchPhotoTime){
 				data.data.fetchPhotoTime = lf.util.timeStampToDate2(data.data.fetchPhotoTime)
