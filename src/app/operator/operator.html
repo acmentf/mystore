@@ -239,12 +239,15 @@
 									</span>
 								</li>
 								<li class="mui-table-view-cell ">
-									<span>预计服务完成时间</span>
-									<span class="show-on-right ">
-										<!--<input v-model="marchInfo.fetchPhotoTime" v-if="forStatus == 'check'" readonly="readonly" type="text"  v-model="getPhotoDate.text"  class="forinput mui-pull-right"  />-->
-										<input v-model="marchInfo.fetchPhotoTime" readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="forinput mui-pull-right"  placeholder="请选择取片日期" />
-									</span>
-									<span class="mui-icon mui-icon-arrowright"></span>
+										<span style="width: 40%"  class="dayFl">预计服务完成时间</span>
+										<span class="show-on-right dayFl">
+											<!--<input v-model="marchInfo.fetchPhotoTime" v-if="forStatus == 'check'" readonly="readonly" type="text"  v-model="getPhotoDate.text"  class="forinput mui-pull-right"  />-->
+											<input :disabled="serveInputDisable" v-model="marchInfo.fetchPhotoTime" readonly="readonly" type="text" id='qupian' data-options='{"type":"date"}' v-model="getPhotoDate.text"  class="forinput mui-pull-right "  placeholder="请选择取片日期"/>
+										</span>
+										<span class="mui-icon mui-icon-arrowright dayFl r10"></span>
+	
+										<!-- 新增修改按钮 -->
+										<button @click="amend" class="btnDv" :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button>
 								</li>
 								<li class="mui-table-view-cell">
 									<span>销售地点</span>
@@ -347,6 +350,40 @@
 					</div>
 				</div>
 			</div>
+			  <!--修改表单-->
+			  <div  v-show="isAmend" class="amendBox" v-cloak>
+				    <div class="amendInfo">
+				 	    <h4>修改服务时间</h4>
+				 	    <p class="overtime">现已超时，如需修改请输入相关原因</p>
+				 	    <div class="actualAmend">
+						 	    <div class="mui-input-row mui-input-group  group-info shoot-number">
+						 	    	<p>预计服务完成时间</p>		
+							        <label>修改前</label>
+						            <input type="text" v-model="marchInfo.fetchPhotoTime" readonly="readonly" style="font-size: 0.26rem;text-indent: 1em"/>
+						    	</div>
+								<div class="mui-input-row mui-input-group  group-info shoot-number">
+							        <label>修改后</label>								
+									<input type="text"  v-model="amendTime" class="select-amend" placeholder="请输入实际服务时间" id='changeAmend' data-options='{"type":"date"}'  v-model="getPhotoDate.text"/>
+						    	</div>
+						    	<div class="shoot-number mui-input-group">
+									<div class="mui-input-row group-info">
+										<label>修改原因</label>
+									</div>
+									<div class="mui-input-row group-info remark-box reasonS">
+										<textarea v-model="amendReserverReasons" class="remark-text" placeholder="请输入修改原因" style="font-size: 0.26rem"></textarea>
+									</div>
+								</div>
+						</div>
+						<div class="amendBtn">
+								<button type="button" class="mui-btn btn1" @click="cancelAmend">
+									取消
+								</button>
+								<div class="mui-btn mui-btn-primary btn2" @click="confirmAmend">
+									确认
+								</div>
+						</div>
+					</div>
+				 </div>	
 		</div>
 		<script src="../../assets/js/mui.min.js"></script>
 		<script src="../../assets/js/mui.pullToRefresh.js"></script>

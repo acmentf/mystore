@@ -142,3 +142,122 @@
   top: 28%;
   left: 26%;
 }
+
+
+/*新增样式*/
+#item1 .dayFl {
+  float: left!important;
+  position: relative!important;
+  height: 21px;
+  overflow: hidden;
+}
+#item1 .r10 {
+  margin-left: -20px;
+} 
+
+
+/*修改按钮样式*/
+.order-result .add-printsNum{
+  background-color: #3DB391;
+  color: #FFF;
+  margin: 0.2rem 0;
+  border: none;
+  widows: 2.2rem;
+  height: 0.68rem;
+}
+
+/*修改盒子样式*/
+.amendBox{
+  position: fixed;
+  left: 0;
+  top: 44px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  border-top: 1px solid #a0a0a0; 
+}
+.amendBox .amendInfo {
+  background-color: #fff;
+  width: 80%;
+  padding: 0.2rem 0;
+  margin: 0 auto;
+  margin-top: 25%;
+}
+.amendBox h4{
+  text-align: center;
+  padding:0.2rem 0;
+  font-size: 0.3rem;
+  color: #000;
+}
+.amendBox .overtime{
+  color: #ee6e6c;
+  font-size: 0.26rem;
+  padding-left: 0.3rem; 
+}
+.amendBox .actualAmend{
+  background-color: #F2F2F2;
+  padding: 0 0.2rem 0.3rem 0.3rem;
+}
+.actualAmend p{
+  padding: 0.3rem 0; 
+  font-size: 0.26rem;
+  color: #000;
+  margin-bottom: 0;
+}
+.amendBox label{
+  color: #000!important;
+  font-size: 0.26rem!important;
+  padding-left: 0;
+}
+.amendBox .mui-input-row {
+  background-color: #F2F2F2;
+  border:none;
+}
+.amendBox .select-amend{
+    background-color: #fff;
+    text-indent: 1em;
+    font-size: 0.26rem;
+}
+.amendBox .btn1{
+   float: left;
+   margin-left: 1rem;
+}
+.amendBox .amendBtn {
+  padding: 0.2rem 0;
+  overflow: hidden;
+}
+.amendBox .btn2{
+   float: right;
+   margin-right: 1rem;
+}
+.amendBox .mui-input-group:after,.amendBox .mui-input-group:before{
+  background-color: #F2F2F2!important;
+}
+
+.grayBtn{
+  color: gray!important;
+}
+.reasonS {
+  height: 60px!important;
+}
+.reasonS textarea{
+  padding-left: 0;
+  background-color: #fff;
+}
+#slider .btnDv {
+  position: absolute;
+  right: 24px;
+  height: 21px; 
+  padding: 0;
+  border: none;
+  color: #3DB391;
+  font-size: 15px;
+}
+.amendBox textarea{
+  font-size: 0.26rem;
+  text-indent: 1em;
+}
+
+[v-cloak] {
+    display: none;  
+}
