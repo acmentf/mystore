@@ -397,7 +397,8 @@ mui('body').on('tap', '.jidiao', function () { //点击计调
 			orderNo: vm.currentOrderNo,
 			type: type,
 			status: status,
-			lineName: vm.orderInfo.aliasName
+			lineName: vm.orderInfo.aliasName,
+			actionStatus: vm.orderInfo.actionStatus
 		})
 	}
 })
