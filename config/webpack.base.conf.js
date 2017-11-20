@@ -9,18 +9,10 @@ const HappyPack = require('happypack');
 const HappyThreadPool = HappyPack.ThreadPool({ size: (isProduction ? 10 : 4) });
 
 function resolve (dir) {
-    // return path.join(__dirname, '..', dir)
     return path.resolve(ROOT, dir)
 }
 
 module.exports = {
-    // @see https://github.com/webpack-contrib/extract-text-webpack-plugin/blob/master/example/webpack.config.js
-    output: {
-        filename: 'js/[name].js',
-        chunkFilename: 'js/[name].js',
-        path: resolve('dist'),
-        // publicPath: '../../'
-    },
     module: {
         rules: [
             {
@@ -88,7 +80,7 @@ module.exports = {
         new HappyPack({
             id: 'js',
             threadPool: HappyThreadPool,
-            loaders: ['babel-loader']
+            loaders: ['babel-loader?cacheDirectory']
         }),
         new HappyPack({
             id: 'styles',

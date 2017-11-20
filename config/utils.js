@@ -2,6 +2,9 @@ let path = require('path')
 let Glob = require('glob');
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+exports.resolvePath = function(dir) {
+  return path.resolve(__dirname, '..', dir)
+}
 
 exports.cssLoaders = function (options) {
   options = options || {}
@@ -106,7 +109,7 @@ exports.getEntryHtml = function (globPath, isProduction) {
         entries.push({
             filename: entry.split('/').splice(2).join('/'),
             template: entry,
-            chunks: ['common', getEntryKey(pathname, basename)],
+            chunks: ['bundle-common', getEntryKey(pathname, basename)],
             minify: minifyConfig
         });
 

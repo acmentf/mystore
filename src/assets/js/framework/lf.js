@@ -1694,10 +1694,11 @@ var lf = (function(document, undefined) {
 		openWindow: function(id, url, styles, extras, closeWV) {
 			if(!$.os.plus) { // 判断 web 或 app
 				var ignoreList = [
-					'orderlist',
-					'daily-paper',
-					'daily-manage',
-					'market-expansion'
+					'orderlist.html',
+					'daily-paper.html',
+					'daily-manage.html',
+					'manager-daily.html',
+					'market-expansion.html'
 				]
 
 				if (!/login.html/.test(window.location.href)) {
@@ -1741,10 +1742,11 @@ var lf = (function(document, undefined) {
 		_openWindow: function(id, url, styles, extras, closeWV) {
 			if(!$.os.plus) { // 判断 web 或 app
 				var ignoreList = [
-					'orderlist',
-					'daily-paper',
-					'daily-manage',
-					'market-expansion'
+					'orderlist.html',
+					'daily-paper.html',
+					'daily-manage.html',
+					'manager-daily.html',
+					'market-expansion.html'
 				]
 				
 				if (!/login.html/.test(window.location.href)) {

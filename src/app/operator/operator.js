@@ -1,3 +1,5 @@
+import { fail } from "assert";
+
 var vm = new Vue({
 	el: '#app',
 	data: {
@@ -11,6 +13,7 @@ var vm = new Vue({
 		journeyList: [], // 拍摄景点多选列表
 		journeyListed: [], // 已选择拍摄景点列表
 		currentJourneyIndex: '', // 当前选择的景点
+		preServiceDateChange: false,
 		shootInfos:[{
 			id:null,
 			photographers:[],
@@ -201,15 +204,27 @@ mui('#app').on('tap', '#chutuan', function() {
 	}
 }, false);
 
-//取片日期
+//预计服务完成日期
 mui('#app').on('tap', '#qupian', function() {
 	if(vm.forStatus == 'edit'){
 		var optionsJson = this.getAttribute('data-options') || '{}';
 		var options = JSON.parse(optionsJson);
 		var picker = new mui.DtPicker(options);
 		picker.show(function(rs) {
-			vm.marchInfo.fetchPhotoTime = rs.text;
-			vm.marchInfo.fetchPhotoTime = rs.value;
+			var isChangeDate = new Date(rs.text.replace(/-/g, '/')) >= new Date(new Date().toLocaleDateString())
+
+			if (vm.preServiceDateChange) {
+				if (isChangeDate) {
+					vm.marchInfo.fetchPhotoTime = rs.text;
+					vm.marchInfo.fetchPhotoTime = rs.value;
+				} else {
+					lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期')
+				}
+			} else {
+				vm.marchInfo.fetchPhotoTime = rs.text;
+				vm.marchInfo.fetchPhotoTime = rs.value;
+			}
+			
 			picker.dispose();
 		});
 	}
@@ -369,13 +384,17 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 			flag = true
 		}
 	})
-	if (flag) return
 
 	if(vm.marchInfo.preReservedSeats){
-			if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
+		if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
 			lf.nativeUI.toast('预留座位数只能填写数字');
 			flag = true
 		}
+	}
+
+	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
+		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
+		flag = true
 	}
 
 	if(!vm.marchInfo.fetchPhotoTime) {
@@ -387,6 +406,8 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		lf.nativeUI.toast('前置属性必填');
 		return
 	}
+
+	if (flag) return
 
 	var params = {
 		orderId: vm.orderId,
@@ -505,6 +526,10 @@ function renderTrackInfo(){
 				groupRoute : data.data.groupRoute,//行程详情
 				exeRemark : data.data.exeRemark//备注信息
 			}
+
+			// 设置预计服务完成时间是否需要判断
+			vm.preServiceDateChange = vm.marchInfo.fetchPhotoTime ? true : false
+			
 			if(data.data.lineSight && data.data.lineSight.length>0){
 				vm.shootInfos = []
 			}

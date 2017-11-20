@@ -1487,7 +1487,7 @@
                             })
                             self.historyThreeMonthIncomeAcc =  {
                                 seriesOpts,
-                                list: Object.keys(listMap).map(key => {
+                                list: Object.keys(listMap).sort().map(key => {
                                     return listMap[key]
                                 })
                             }
