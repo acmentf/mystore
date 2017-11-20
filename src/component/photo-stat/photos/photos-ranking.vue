@@ -122,7 +122,7 @@
                         series: [
                             {
                                 type:'pie',
-                                radius: ['50%', '70%'],
+                                radius: ['70%', '90%'],
                                 avoidLabelOverlap: false,
                                 label: {
                                     normal: {
@@ -146,7 +146,14 @@
                                             normal: {
                                                 color: "#3cb493"
                                             }
-                                        }
+                                        },
+                                        label: {
+                                            normal: {
+                                                show: true,
+                                                position: 'center',
+                                                formatter: '{b}\n{d}%'
+                                            }
+                                        },
                                     },
                                     {
                                         value: res.data.photographerPendingUploadTrips,

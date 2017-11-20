@@ -37,7 +37,6 @@ var vm = new Vue({
             return {
                 series: [
                     {
-                        name:'访问来源',
                         type:'pie',
                         radius: ['50%', '70%'],
                         avoidLabelOverlap: false,
@@ -63,7 +62,14 @@ var vm = new Vue({
                                     normal: {
                                         color: "#3eb392"
                                     }
-                                }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'center',
+                                        formatter: '{d}%'
+                                    }
+                                },
                             },
                             {
                                 value: restAmount,

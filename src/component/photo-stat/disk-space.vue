@@ -102,6 +102,7 @@ export default {
                     },
                     {
                         value: basePhotoCapacity,
+                        selected: true,
                         name: "压缩图",
                         label: {
                             normal: {
