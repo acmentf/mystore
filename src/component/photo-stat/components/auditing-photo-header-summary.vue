@@ -2,15 +2,15 @@
     <div class="auditing-photo-header-summary">
         <div class="blank-div"></div>
         <div>
-            <div class="count">205</div>
+            <div class="count" v-text="photoAuditCounts"></div>
             <div class="tip">
-                <div>审片数</div>
+                <div>审核照片数</div>
             </div>
         </div>
         <div>
-            <div class="count">2333</div>
+            <div class="count" v-text="photoAuditTourCounts"></div>
             <div class="tip">
-                <div>审片团数</div>
+                <div>审核团数</div>
             </div>
         </div>
         <div class="blank-div"></div>
@@ -18,7 +18,14 @@
 </template>
 <script>
     export default {
-
+        props: {
+            photoAuditCounts: {
+                required: true
+            },
+            photoAuditTourCounts: {
+                required: true
+            }
+        }
     }
 </script>
 <style lang="scss">

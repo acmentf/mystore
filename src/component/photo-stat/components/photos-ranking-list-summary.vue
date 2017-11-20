@@ -1,21 +1,21 @@
 <template>
     <div class="photos-ranking-list-summary">
-        <div>
-            <div class="count">15</div>
+        <div v-on:tap="uploadTap" :class="{activeTab: activeTab == 'uploadTap'}">
+            <div class="count" v-text="photographerUploadTrips"></div>
             <div class="tip">
-                <div>本月拍摄上传</div>
+                <div>{{dateStr}}拍摄上传</div>
                 <div>摄影师人数</div>
             </div>
         </div>
         <div class="summary-chart-container">
             <div class="summary-chart-wrap">
-                <e-charts :options="chartOption" auto-resize ></e-charts>
+                <e-charts :options="chartOption" auto-resize></e-charts>
             </div>
         </div>
-        <div>
-            <div class="count">24</div>
+        <div v-on:tap="pendingUploadTap" :class="{activeTab: activeTab == 'pendingUploadTap'}">
+            <div class="count" v-text="photographerPendingUploadTrips"></div>
             <div class="tip">
-                <div>本周拍摄未上传</div>
+                <div>{{dateStr}}拍摄未上传</div>
                 <div>摄影师人数</div>
             </div>
         </div>
@@ -23,15 +23,46 @@
 </template>
 <script>
     export default {
-        porps: {
+        components: {
+            ECharts: VueECharts
+        },
+        props: {
+            activeTab: {
+                type: String,
+                required: true,
+                default: 'uploadTap'
+            },
             chartOption: {
                 type: Object,
                 required: true
+            },
+            dateStr: {
+                type: String,
+                required: true,
+            },
+            photographerUploadTrips: {
+                // 摄影师上传过照片行程数
+                type: Number,
+                required: true,
+            },
+            photographerPendingUploadTrips: {
+                // 摄影师未上传过照片行程数
+                type: Number,
+                required: true
             }
         },
-        components: {
-            ECharts: VueECharts,
-        }
+        data() {
+            return {
+            }
+        },
+        methods: {
+            uploadTap() {
+                this.$emit('upload-tap');
+            },
+            pendingUploadTap() {
+                this.$emit('pending-upload-tap');
+            }
+        },
     }
 </script>
 <style lang="scss">
@@ -45,6 +76,7 @@
         flex-direction: column;
         padding: $side_padding;
         flex: 1;
+        color: #888;
         // border-right: 1px solid red;
         .count {
             display: flex;
@@ -53,6 +85,7 @@
             flex: 1 0 0;
             font-size: $summary_count_font_size;
             color: $summary_count_color;
+            color: #888;
         }
         .tip {
             display: flex;
@@ -66,6 +99,11 @@
                 justify-content: center;
             }
         }
+        &.activeTab {
+            .count {
+                color: #000;
+            }
+        }
     }
     .summary-chart-container {
         .summary-chart-wrap {
@@ -75,7 +113,7 @@
                 position: absolute;
                 height: 100%;
                 width: 100%;
-                background: red;
+                // background: red;
             }
         }
     }

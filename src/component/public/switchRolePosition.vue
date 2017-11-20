@@ -81,6 +81,7 @@
                     GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{})
                 } else {
                     this.$emit('after-switch-role')
+                    GLOBAL_SHOOT.switchPositionOpenWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
                 }
             },
             switchRole (roleId) {

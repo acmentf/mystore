@@ -1,9 +1,10 @@
 <template>
     <div class="ranking-list">
         <div class="table-header">
-            <div v-for="(item, key) in tableData.title" :key="key">{{item.text}}</div>
+            <div v-for="(item, key) in listData.title" :key="key">{{item.text}}</div>
         </div>
         <div class="table-body">
+            <div class="empty-tip" v-show="!tableBodyData.length">没有详细数据</div>
             <div class="row" v-for="(itemRow, rowKey) in tableBodyData" :key="rowKey">
                 <div class="cell" v-for="(itemCell, cellKey) in itemRow" :key="cellKey+''+rowKey">
                     {{itemCell}}
@@ -16,89 +17,35 @@
     export default {
         name: "Rankinglist",
         props: {
-            // tableData: {
-            //     type: Object,
-            //     required: true
-            // }
+            listData: {
+                type: Object,
+                required: true
+            }
         },
         data() {
             return {
-                tableData: {
-                    title: [
-                        {
-                            text: '',
-                            prop: 'index'
-                        },
-                        {
-                            text: '摄影师',
-                            prop: 'photographer'
-                        },
-                        {
-                            text: '本周拍摄张数',
-                            prop: 'count'
-                        },
-                        {
-                            text: '昨日服务人数',
-                            prop: 'personNum'
-                        },
-                        {
-                            text: '照片占比',
-                            prop: 'percent'
-                        }
-                    ],
-                    data: [
-                        {
-                            index: 1,
-                            photographer: '张山',
-                            count: 10,
-                            personNum: 12,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 2,
-                            photographer: '张2山',
-                            count: 11,
-                            personNum: 125,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 3,
-                            photographer: '张3山',
-                            count: 102,
-                            personNum: 125,
-                            percent: "0.8"
-                        },
-                        {
-                            index: 4,
-                            photographer: '张4山',
-                            count: 104,
-                            personNum: 122,
-                            percent: "0.8"
-                        },
-                    ]
-                }
             }
         },
         computed: {
             tableHeader() {
                 var result = [];
-                if(this.tableData) {
-                    return this.tableData.title;
+                if(this.listData) {
+                    return this.listData.title;
                 } else {
-                    console.warn("ranking-list tableData.length 为 0");
+                    console.warn("ranking-list listData.length 为 0");
                 }
             },
             tableBodyData() {
                 var result = [];
-                if(this.tableData) {
-                    var tableData = this.tableData;
+                if(this.listData) {
+                    var listData = this.listData;
                     var propArr = [];
-                    for(let i = 0; i < tableData.title.length; i++) {
-                        propArr.push(tableData.title[i].prop);
+                    for(let i = 0; i < listData.title.length; i++) {
+                        propArr.push(listData.title[i].prop);
                     }
-                    for(let i = 0; i < tableData.data.length; i++) {
+                    for(let i = 0; i < listData.data.length; i++) {
                         // 将 一维数组 转为 二维数组
-                        var item = tableData.data[i];
+                        var item = listData.data[i];
                         var temp = [];
                         for(let j = 0; j < propArr.length; j++) {
                             var prop = propArr[j];
@@ -108,7 +55,7 @@
                     }
                     return result;
                 } else {
-                    console.warn("ranking-list tableData.length 为 0");
+                    console.warn("ranking-list listData.length 为 0");
                 }
             }
         }
@@ -122,6 +69,7 @@
         padding-top: 0;
         background: #fff;
         margin-bottom: $margin_bottom;
+        $cell_height: 0.8rem;
         .table-header {
             div {
             }
@@ -130,7 +78,7 @@
             display: flex;
             div {
                 font-size: 0.25rem;
-                $cell_height: 0.8rem;
+                
                 height: $cell_height;
                 line-height: $cell_height;
                 flex: 1;
@@ -140,6 +88,12 @@
                     flex: $first_column_width;
                 }
             }
+        }
+        .empty-tip {
+            text-align: center;
+            height: $cell_height;
+            line-height: $cell_height;
+            color: #afafaf;
         }
     }
 </style>

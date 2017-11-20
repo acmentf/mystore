@@ -3,7 +3,8 @@ import utils from '../../../js/utils'
 const pageTypeConstant = {
     income: 'income',
     flow: 'flow',
-    history: 'history'
+    history: 'history',
+    photo: 'photo'
 }
 const chartTypeConstant = {
     day: 'day',
