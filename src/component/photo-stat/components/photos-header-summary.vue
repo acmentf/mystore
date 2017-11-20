@@ -4,7 +4,7 @@
             <div class="block">
                 <div class="count" v-text="info.photoCounts"></div>
                 <div class="tip">
-                    <div>{{dateStr}}上传照片数(含历史照片)</div>
+                    <div>{{dateStr}}上传照片数（含历史照片）</div>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
             height: 1.6rem;
             display: flex;
             .count {
-                font-size: 0.7rem;
+                font-size: 0.8rem;
             }
         }
         .bottom {
@@ -129,9 +129,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                flex: 1.5;
+                flex: 1;
                 color: $summary_count_color;
-                font-size: $summary_count_font_size;
+                // font-size: $summary_count_font_size;
             }
             .tip {
                 display: flex;
@@ -141,7 +141,7 @@
                 font-size: $summary_tip_font_size;
                 color: $summary_tip_color;
                 div {
-                    height: 0.5rem;
+                    // height: 0.5rem;
                     display: flex;
                     flex: 1;
                     align-items: center;

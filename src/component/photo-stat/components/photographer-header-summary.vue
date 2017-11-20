@@ -2,13 +2,13 @@
     <div class="photographer-header-summary">
         <div class="blank-div"></div>
         <div>
-            <div class="count" v-text="photographerAverageChicePhotoCount"></div>
+            <div class="count" v-text="photographerAverageUploadPhotoCount"></div>
             <div class="tip">
                 <div>摄影师人均上传张数</div>
             </div>
         </div>
         <div>
-            <div class="count" v-text="photographerAverageUploadPhotoCount"></div>
+            <div class="count" v-text="photographerAverageChicePhotoCount"></div>
             <div class="tip">
                 <div>摄影师人均精品张数</div>
             </div>
