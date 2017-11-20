@@ -113,7 +113,7 @@
         }
         .bottom {
             display: flex;
-            height: 1.3rem;
+            height: 1.4rem;
             .count {
                 font-size: 0.6rem;
             }
