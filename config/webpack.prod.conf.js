@@ -24,7 +24,7 @@ let entryHtml = utils.getEntryHtml('./src/app/**/*.html', true),
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "bundle-common",
-            filename: "bundle-common.[chunkhash].js"
+            filename: "bundle-common.js"
         }),
         new CopyWebpackPlugin([
             {
