@@ -10,7 +10,7 @@
             :chice-photo-counts="chicePhotoCounts"
             ></excellent-photo-header-summary>
             <ranking-list :list-data="rankingListData"></ranking-list>
-            <large-chart :chart-option="boutiquePhotosPhotographerChartOption"></large-chart>
+            <large-chart :chart-option="boutiquePhotosPhotographerChartOption" v-if="photographerChartOptionShow" :height="photographerChartOptionHeight"></large-chart>
             <large-chart :chart-option="boutiquePhotosScenicRateChartOption"></large-chart>
         </div>
     </div>
@@ -55,6 +55,8 @@ export default {
                 ],
                 data: []
             },
+            photographerChartOptionHeight: 0,
+            photographerChartOptionShow: false,
             boutiquePhotosPhotographerChartOption: {
                 series: []
             },
@@ -160,7 +162,7 @@ export default {
                 },
                 grid: {
                     left: "20%",
-                    bottom: '10%'
+                    bottom: '20%'
                 },
                 yAxis: {
                     type: 'category',
@@ -175,7 +177,7 @@ export default {
                 series: [
                     {
                         type: 'bar',
-                        barMaxWidth: "40px",
+                        barWidth: "30px",
                         label: {
                             normal: {
                                 show: true,
@@ -198,7 +200,9 @@ export default {
                     defaultChartOption.yAxis.data.push(item.photographerName);
                     defaultChartOption.series[0].data.push(item.chicePhotoCounts);
                 });
+                that.photographerChartOptionHeight = res.data.length * 40 + 120 + 'px';
                 that.boutiquePhotosPhotographerChartOption = defaultChartOption;
+                that.photographerChartOptionShow = true;
             });
         },
         selectBoutiquePhotosScenicRate() {
@@ -273,6 +277,7 @@ export default {
 </script>
 <style lang="scss">
 .statistics-photo-stat-excellent-photo {
+    padding-top: 5px;
 }
 </style>
 

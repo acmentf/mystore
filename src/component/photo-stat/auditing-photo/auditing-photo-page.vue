@@ -108,7 +108,6 @@
 </script>
 <style lang="scss">
     .statistics-photo-stat-auditing-photo-page {
-
     }
 </style>
 

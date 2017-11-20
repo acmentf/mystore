@@ -127,18 +127,21 @@ export default {
                     },
                     dataZoom: [{
                         type: 'inside',
-                    
+                        end: 100
                     }],
                     grid: {
-                        left: '10%',
-                        right: '0%',
+                        left: '20%',
+                        right: '10%',
                     },
                     yAxis: {
                         type: "value"
                     },
                     xAxis: {
                         type: 'category',
-                        data: []
+                        data: [],
+                        axisLabel: {
+                            rotate: 30
+                        },
                     },
                     series: [
                         {
@@ -166,7 +169,6 @@ export default {
                     defaultChartOption.xAxis.data.push(item.dateStr);
                 });
                 defaultChartOption.dataZoom[0].startValue = (res.data.length - 7);
-                defaultChartOption.dataZoom[0].end = res.data.length;
                 that.photosSpaceEverydayChartOption = defaultChartOption;
             });
         },
@@ -182,20 +184,22 @@ export default {
                     }
                 },
                 dataZoom: [{
-                    startValue: 0,
-                    end: 100,
                     type: 'inside',
+                    end: 100,
                 }],
                 grid: {
-                    right: '0%',
-                    left: '10%'
+                    right: '10%',
+                    left: '20%'
                 },
                 yAxis: {
                     type: 'value',
                 },
                 xAxis: {
                     type: 'category',
-                    data: []
+                    data: [],
+                    axisLabel: {
+                        rotate: 30
+                    },
                 },
                 series: [
                     {
@@ -223,7 +227,6 @@ export default {
                     defaultChartOption.series[0].data.push(photoCapacity);
                 });
                 defaultChartOption.dataZoom[0].startValue = (res.data.length - 7);
-                defaultChartOption.dataZoom[0].end = res.data.length;
                 that.photosSpaceCumulativeChartOption = defaultChartOption;
             });
         },

@@ -2,7 +2,7 @@
     <div class="mui-inner-wrap statistics-photo-stat-photographer">
         <header class="mui-bar mui-bar-nav">
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
-            <h1 class="mui-title">摄影师统计</h1>
+            <h1 class="mui-title">摄影师上传数据</h1>
         </header>
         <div class="mui-content">
             <div class="mui-content orderlist-content">
@@ -12,31 +12,37 @@
                             <span class="text">昨日</span>
                         </a>
                         <a class="mui-control-item" href="#week">
-                            <span class="text">当周</span>
+                            <span class="text">本周</span>
                         </a>
                         <a class="mui-control-item" href="#month">
-                            <span class="text">当月</span>
+                            <span class="text">本月</span>
                         </a>
                     </div>
                     <div class="mui-slider-group">
                         <div id="day" class="mui-slider-item mui-control-content mui-active">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <photographer-page :date-str="'当日'" :time-range="'today'"></photographer-page>
+                                    <photographer-page 
+                                    v-if="todayShow"
+                                    :date-str="'本日'" :time-range="'today'"></photographer-page>
                                 </div>
                             </div>
                         </div>
                         <div id="week" class="mui-slider-item mui-control-content">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <photographer-page :date-str="'本周'" :time-range="'thisWeek'"></photographer-page>
+                                    <photographer-page 
+                                    v-if="thisWeekShow"
+                                    :date-str="'本周'" :time-range="'thisWeek'"></photographer-page>
                                 </div>
                             </div>
                         </div>
                         <div id="month" class="mui-slider-item mui-control-content">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <photographer-page :date-str="'本月'" :time-range="'thisMonth'"></photographer-page>
+                                    <photographer-page 
+                                    v-if="thisMonthShow"
+                                    :date-str="'本月'" :time-range="'thisMonth'"></photographer-page>
                                 </div>
                             </div>
                         </div>
@@ -54,9 +60,22 @@ export default {
         PhotographerPage
     },
     data: function() {
-        return {};
+        return {
+            currentTab: [0]
+        };
     },
-    computed: {},
+    computed: {
+        todayShow() {
+            return this.currentTab.indexOf(0) != -1;
+        },
+        thisWeekShow() {
+            return this.currentTab.indexOf(1) != -1;
+
+        },
+        thisMonthShow() {
+            return this.currentTab.indexOf(2) != -1;
+        }
+    },
     methods: {
         initMui: function() {
             lf.ready(function() {
@@ -66,10 +85,20 @@ export default {
                     deceleration: mui.os.ios ? 0.003 : 0.0009
                 });
             });
+        },
+        switchTab(index) {
+            this.currentTab.push(index);
         }
     },
     mounted: function() {
-        this.initMui();
+        var that = this;
+        lf.ready(function() {
+            that.initMui();
+            document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+                console.log(event.detail.slideNumber);
+                that.switchTab(event.detail.slideNumber);
+            });
+        })
     }
 };
 </script>

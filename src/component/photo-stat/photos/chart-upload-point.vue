@@ -1,6 +1,6 @@
 <template>
     <div class="chart-upload-point">
-        <large-chart :chart-option="chartOption" ></large-chart>
+        <large-chart :chart-option="chartOption" v-if="chartShow" :height="chartHeight"></large-chart>
     </div>
 </template>
 <script>
@@ -14,6 +14,8 @@
         },
         data() {
             return {
+                chartShow: false,
+                chartHeight: 0,
                 chartOption: {
                     title: {
                         text: `${this.dateStr}拍摄照片上传景点分布`,
@@ -56,7 +58,7 @@
                     series: [
                         {
                             type: 'bar',
-                            barMaxWidth: '30px',
+                            barWidth: '20px',
                             label: {
                                 normal: {
                                     show: true,
@@ -87,7 +89,9 @@
                         defaultChartOption.yAxis.data.push(palce);
                         defaultChartOption.series[0].data.push(item.photoCounts)
                     })
+                    that.chartHeight = res.data.length * 40 + 100 + 'px';
                     that.chartOption = defaultChartOption;
+                    that.chartShow = true;
                 });
             },
         },

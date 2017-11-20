@@ -69,12 +69,8 @@
                             prop: 'photographerName'
                         },
                         {
-                            text: '昨日拍摄张数',
+                            text: '未上传行程总数',
                             prop: 'shotPhotos'
-                        },
-                        {
-                            text: '昨日服务团数',
-                            prop: 'shotGroups'
                         },
                         {
                             text: '照片占比',
@@ -216,7 +212,6 @@
                             index: index + 1,
                             photographerName: item.photographerName,
                             shotPhotos: item.shotPhotos,
-                            shotGroups: item.shotGroups,
                             shotPhotoRate: -(-item.shotPhotoRate).toFixed(2) + '%'
                         })
                     });

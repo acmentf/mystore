@@ -52,6 +52,7 @@
                     },
                     dataZoom: [{
                         type: 'inside',
+                        end: 100
                     }],
                     grid: {
                         left: '15%',
@@ -87,9 +88,8 @@
                         }
                     },
                     dataZoom: [{
-                        startValue: 0,
-                        end: 100,
                         type: 'inside',
+                        end: 100
                     }],
                     grid: {
                         right: '0%',
@@ -131,9 +131,7 @@
                         defaultCumulativeTrendChartOption.series[0].data.push(item.cumulativeCounts);
                     });
                     defaultTrendChartOption.dataZoom[0].startValue = res.data.length > 7 ? (res.data.length - 7) : 0;
-                    defaultTrendChartOption.dataZoom[0].end = 30;
                     defaultCumulativeTrendChartOption.dataZoom[0].startValue = res.data.length > 7 ? (res.data.length - 7) : 0;
-                    defaultCumulativeTrendChartOption.dataZoom[0].end = 30;
 
                     that.trendChartOption = defaultTrendChartOption;
                     that.cumulativeTrendChartOption = defaultCumulativeTrendChartOption;

@@ -38,7 +38,7 @@
             <div class='block'>
                 <div class="block-content" data-url="../photo-stat/disk-space.html">
                     <div class="count" >
-                        <span v-text="photoCapacity"></span><span class="unit">GB</span>
+                        <span v-text="photoCapacity"></span><span class="unit"> GB</span>
                     </div>
                     <div class="text">累积存储空间</div>
                 </div>
@@ -73,13 +73,16 @@
             }
         },
         mounted() {
+            var that = this;
             lf.ready(function() {
-                this.init();
+                that.init();
                 mui('.statistics-photo-stat').on('tap', '.block-content', function() {
                     var url = this.getAttribute('data-url');
                     if(url) {
                         lf.window.openWindow(url, url, {}, {
                         })
+                    } else {
+                        lf.nativeUI.toast('功能尚未开通');
                     }
                 });
             });
@@ -93,18 +96,21 @@
         .row {
             flex: 1;
             display: flex;
+            height: 3.25rem;
             .block {
                 flex: 1;
+                display: flex;
                 padding: 5px;
                 .block-content {
-                    border: 1px solid #888;
-                    background: #afafaf;
-                    border-radius: 10px;
+                    flex: 1;
                     display: flex;
+                    border: 1px solid #c5c5c5;
+                    background: #eaeaea;
+                    border-radius: 10px;
                     flex-direction: column;
                     .count {
                         flex: 1;
-                        font-size: 0.36rem;
+                        font-size: 0.6rem;
                         .unit {
                             color: #888;
                             font-size: 0.2rem;
@@ -116,6 +122,7 @@
                         color: #888;
                     }
                     div {
+                        display: flex;
                         align-items: center;
                         justify-content: center;
                     }

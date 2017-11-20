@@ -30,9 +30,9 @@
                 </a>
                 <a class="mui-tab-item" href="#tab-photo" id="photo">
                     <span class="mui-icon">
-                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.history ? 'history-active.png' : 'history.png')">
+                        <img :src="'../../assets/images/statistics/'+ (pageTypeActive === pageTypeConstant.photo ? 'photo-active.jpg' : 'photo.jpg')">
                     </span>
-                    <span class="mui-tab-label">照片</span>
+                    <span class="mui-tab-label">照片统计</span>
                 </a>
             </nav>
             <div class="mui-scroll-wrapper mui-content" id="page-scroll">
@@ -475,7 +475,7 @@
         [pageTypeConstant.income]: '收入',
         [pageTypeConstant.flow]: '流量',
         [pageTypeConstant.history]: '历史数据',
-        [pageTypeConstant.photo]: '照片'
+        [pageTypeConstant.photo]: '照片统计'
     }
     //大区省份选择
     const cityPicker = new mui.PopPicker({
@@ -1687,7 +1687,7 @@
                         setRegionProvince(self.regionProvinceMap.historyShootDay, items)
                     });
                 })
-                // 照片
+                // 照片统计
                 mui('body').on('tap', '#photo', function(){
                     self.pageTypeActive = pageTypeConstant.photo
                     switchTab()
