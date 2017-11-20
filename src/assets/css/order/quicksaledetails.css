@@ -104,3 +104,24 @@ main section.container:first-child .title{
 .mui-popover-arrow{
     display: none;
 }
+
+
+/*服务完成按钮样式*/
+.mui-bar .serve-bth{
+    float: left;    
+    width: 49%;
+    color: #fff;
+    height: 0.546667rem;
+    padding: 0!important;
+    font-size: 0.213333rem;
+    line-height: 0.5rem;
+    text-align: center;
+}
+.mui-bar .genSale{
+    float: right;
+}
+
+.isGray {
+    background-color: gray!important;
+    border:none;
+}

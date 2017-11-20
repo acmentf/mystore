@@ -70,7 +70,7 @@
                         },
                         {
                             text: '未上传行程总数',
-                            prop: 'shotPhotos'
+                            prop: 'shotGroups'
                         },
                         {
                             text: '照片占比',
@@ -122,7 +122,7 @@
                         series: [
                             {
                                 type:'pie',
-                                radius: ['50%', '70%'],
+                                radius: ['70%', '90%'],
                                 avoidLabelOverlap: false,
                                 label: {
                                     normal: {
@@ -146,7 +146,14 @@
                                             normal: {
                                                 color: "#3cb493"
                                             }
-                                        }
+                                        },
+                                        label: {
+                                            normal: {
+                                                show: true,
+                                                position: 'center',
+                                                formatter: '{b}\n{d}%'
+                                            }
+                                        },
                                     },
                                     {
                                         value: res.data.photographerPendingUploadTrips,
@@ -211,7 +218,7 @@
                         temp.push({
                             index: index + 1,
                             photographerName: item.photographerName,
-                            shotPhotos: item.shotPhotos,
+                            shotGroups: item.shotGroups,
                             shotPhotoRate: -(-item.shotPhotoRate).toFixed(2) + '%'
                         })
                     });

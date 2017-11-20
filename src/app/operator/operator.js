@@ -13,6 +13,12 @@ var vm = new Vue({
 		journeyList: [], // 拍摄景点多选列表
 		journeyListed: [], // 已选择拍摄景点列表
 		currentJourneyIndex: '', // 当前选择的景点
+		isAmend: false,     //修改弹窗
+		amendReserverReasons:'',   //修改原因
+		amendTime:'',   //修改后服务时间
+		overTime: false,  //是否超时
+		serveInputDisable: false,  //是否禁止修改服务框时间
+		orderstatus:'',
 		preServiceDateChange: false,
 		shootInfos:[{
 			id:null,
@@ -118,7 +124,52 @@ var vm = new Vue({
 
 			this.journeyListed = []
 			this.journeyList = []
-		}
+		},
+		amend:function(){
+			if(!vm.isAmend){
+			   vm.isAmend = !vm.isAmend;
+			}     			   	
+	   },
+	   // 修改取消
+	   cancelAmend:function(){
+		   this.isAmend = !this.isAmend; 
+		   this.amendReasons='';
+		   this.amendPerNum='';
+	   },
+	   // 确认修改
+	   confirmAmend:function(){
+			 if(!this.amendTime){
+			  mui.toast('请填写实际服务时间');
+			  return
+		  }else if(!this.amendReserverReasons) {
+			  mui.toast('请填写修改原因');  
+			  return
+		  }         	
+		   var params = {
+				  fetchPhotoTime: this.amendTime ,
+				  fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
+				  remark: this.amendReserverReasons,
+				  orderId: this.orderId,
+				  userId:this.currentRoleId
+		   }
+		   var isAmend = this.isAmend
+		   var isDisabled = this.isDisabled
+		   lf.nativeUI.showWaiting()
+		   lf.net.getJSON('order/timeoutSave', params, function(res) {
+				  lf.nativeUI.closeWaiting()
+				  if(res.code == 200) {
+					  lf.nativeUI.toast('修改成功');
+					  vm.isAmend = false; 
+					  vm.overTime = false;
+					  vm.marchInfo.fetchPhotoTime = vm.amendTime
+				  } else {
+					  lf.nativeUI.toast(res.msg);
+				  }
+		   }, function(res) {
+				  lf.nativeUI.closeWaiting()
+				  lf.nativeUI.toast(res.msg)
+		   })
+	   }
 	}
 })
 
@@ -392,14 +443,14 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		}
 	}
 
+	if(!vm.marchInfo.fetchPhotoTime) {
+		lf.nativeUI.toast('预计服务完成时间必填');
+		return
+	}
+
 	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
 		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
 		flag = true
-	}
-
-	if(!vm.marchInfo.fetchPhotoTime) {
-		lf.nativeUI.toast('销售日期必填');
-		return
 	}
 
 	if(vm.groupInfo.prePropsValue === null) {
@@ -443,7 +494,6 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		if(data.code == 200) {
 			lf.nativeUI.toast('保存成功');
 			vm.forStatus = 'check'
-
 			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.currentWebview().reload()
 		} else {
@@ -482,14 +532,23 @@ function renderTrackInfo(){
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
+			// 判断是否超时
+			vm.orderstatus = data.data.shootType
+			var date
+			if(lf.window.currentWebview().actionStatus !==0 ){  //待计调情况禁止点击修改
+				date = 1000 * 60 * 60 * 27 + data.data.fetchPhotoTime // 获取当前时间data.data.fetchPhotoTime
+				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+					vm.overTime = true
+					vm.serveInputDisable = true
+				}
+			}
 			if(data.data.fetchPhotoTime){
 				data.data.fetchPhotoTime = lf.util.timeStampToDate2(data.data.fetchPhotoTime)
 			}
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
-			console.log(JSON.stringify(data.data))
-
+			console.log(JSON.stringify(data.data))			
 			if (data.data.isPreTour !== null) {
 				var _pre = data.data.isPreTour == 0 ? '非前置团' : '前置团'
 			} else {
@@ -525,8 +584,7 @@ function renderTrackInfo(){
 				busCardNo : data.data.busCardNo,//车牌号码
 				groupRoute : data.data.groupRoute,//行程详情
 				exeRemark : data.data.exeRemark//备注信息
-			}
-
+			}		
 			// 设置预计服务完成时间是否需要判断
 			vm.preServiceDateChange = vm.marchInfo.fetchPhotoTime ? true : false
 			
@@ -579,3 +637,15 @@ lf.event.listener('orderdetails',function(e){
 		orderNo : orderNo
 	})
 })
+// 修改日期
+//取片日期
+mui('#app').on('tap', '#changeAmend', function() {
+		var optionsJson = this.getAttribute('data-options') || '{}';
+		var options = JSON.parse(optionsJson);
+		var picker = new mui.DtPicker(options);
+		picker.show(function(rs) {
+			vm.amendTime = rs.text;
+			vm.amendTime = rs.value;
+			picker.dispose();
+		});
+}, false);

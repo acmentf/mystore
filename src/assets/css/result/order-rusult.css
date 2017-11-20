@@ -23,9 +23,15 @@
 	padding: 0 0.2rem;
 }
 .order-result .save-btn{
-	color: #3DB391;
 	float: right;
-	line-height: 44px;
+	color: #fff;
+	line-height: 12px;
+	height: 24px;
+	width: 40px;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	background-color: #3EB392;
 }
 .order-result .add-printsNum{
 	background-color: #3DB391;
@@ -118,6 +124,103 @@
 }
 
 
+.btnDv 	{
+	text-align: center;
+	line-height: 12px!important;
+	height: 24px!important;
+	width: 40px!important;
+	padding: 0!important;
+	margin: 7px 0 7px 10px;
+	color: #fff;
+	float: right;
+	background-color: #3EB392;
+}
+
+/*修改按钮样式*/
+.order-result .add-printsNum{
+	background-color: #3DB391;
+	color: #FFF;
+	margin: 0.2rem 0;
+	border: none;
+	widows: 2.2rem;
+	height: 0.68rem;
+}
+
+/*修改盒子样式*/
+.amendBox{
+	position: fixed;
+	left: 0;
+	top: 44px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.5);
+	border-top: 1px solid #a0a0a0; 
+}
+.amendBox .amendInfo {
+	background-color: #fff;
+	width: 80%;
+	padding: 0.2rem 0;
+	margin: 0 auto;
+	margin-top: 25%;
+}
+.amendBox h4{
+	text-align: center;
+	padding:0.2rem 0;
+	font-size: 0.3rem;
+}
+.amendBox .overtime{
+	color: #ee6e6c;
+	font-size: 0.26rem;
+	padding-left: 0.3rem; 
+}
+.amendBox .actualAmend{
+	background-color: #F2F2F2;
+	padding-left: 0.3rem;
+}
+.actualAmend p{
+	padding: 0.3rem 0; 
+	font-size: 0.26rem;
+	color: #000;
+	margin-bottom: 0;
+}
+.amendBox label{
+	color: #000!important;
+	font-size: 0.26rem!important;
+}
+.amendBox .mui-input-row {
+	background-color: #F2F2F2;
+	border:none;
+}
+.amendBox .select-amend{
+    background-color: #fff;
+    text-indent: 1em;
+}
+.amendBox .btn1{
+   float: left;
+   margin-left: 1rem;
+}
+.amendBox .amendBtn {
+	padding: 0.2rem 0;
+	overflow: hidden;
+}
+.amendBox .btn2{
+   float: right;
+   margin-right: 1rem;
+}
+.amendBox .mui-input-group:after,.amendBox .mui-input-group:before{
+	background-color: #F2F2F2!important;
+}
+
+.grayBtn{
+	background-color: gray;
+	border:none;
+}
+.amendFl{
+	float: left!important;
+}
+
+[v-cloak] {
+        display: none;  }
 
 
 /*未输出*/

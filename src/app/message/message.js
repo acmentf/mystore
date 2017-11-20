@@ -43,6 +43,10 @@ mui('body').on('tap', '.footer-order-contact-btn', function() {
 mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window._openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
 })
+mui('body').on('tap', '.footer-addressbook-btn', function() {
+	var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
+	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
+})
 //查看消息详情
 mui('body').on('tap','.message-list',function(){
 	var id = this.getAttribute('data-id')

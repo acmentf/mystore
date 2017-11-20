@@ -4,6 +4,7 @@
             <div v-for="(item, key) in listData.title" :key="key">{{item.text}}</div>
         </div>
         <div class="table-body">
+            <div class="empty-tip" v-show="!tableBodyData.length">没有详细数据</div>
             <div class="row" v-for="(itemRow, rowKey) in tableBodyData" :key="rowKey">
                 <div class="cell" v-for="(itemCell, cellKey) in itemRow" :key="cellKey+''+rowKey">
                     {{itemCell}}
@@ -68,6 +69,7 @@
         padding-top: 0;
         background: #fff;
         margin-bottom: $margin_bottom;
+        $cell_height: 0.8rem;
         .table-header {
             div {
             }
@@ -76,7 +78,7 @@
             display: flex;
             div {
                 font-size: 0.25rem;
-                $cell_height: 0.8rem;
+                
                 height: $cell_height;
                 line-height: $cell_height;
                 flex: 1;
@@ -86,6 +88,12 @@
                     flex: $first_column_width;
                 }
             }
+        }
+        .empty-tip {
+            text-align: center;
+            height: $cell_height;
+            line-height: $cell_height;
+            color: #afafaf;
         }
     }
 </style>
