@@ -30,9 +30,11 @@
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">拍摄输出</h1>
-				<span class="save-btn">保存</span>
+				<button class="save-btn mui-btn mui-btn-primary" :disabled="overTime" :class="{grayBtn:overTime}">保存</button>
 			</header>
 			<div id="app" class="mui-content ">
+				<!--修改按钮部分-->
+				<!-- <button @click="amend" class="mui-btn mui-btn-primary btnDv" :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button> -->
 				 <!--点击切换S-->
 				<div class="cut">
 					    <div class="mui-row ">
@@ -56,8 +58,10 @@
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row group-info">
-								<label style="width: 60%">实际服务人数</label>
-								<input type="number" style="text-align:right; width: 40%" v-model="serverPerNum" placeholder="请填写人数"/>
+									<label style="width: 40%" class="amendFl">实际服务人数</label>
+									<input :disabled="serveInputDisabled" type="number" style="text-align:right; width: 40%" v-model="serverPerNum" placeholder="请填写人数" class="amendFl"/>
+													<!--修改按钮部分-->
+									<button @click="amend" class="mui-btn mui-btn-primary btnDv " :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button>
 							</div>
 						</div>
 					</div>
@@ -122,7 +126,41 @@
 				</div>
 				<!--未输出表单E-->
 			<!--	<div class="login-btn-box"><button type="button" id="save" class="mui-btn login-pass-btn">保存</button></div>-->
-			</div>
+			      <!--修改表单-->
+				 <div v-if="isAmend" class="amendBox" v-cloak>
+						<div class="amendInfo">
+							 <h4>修改输出信息</h4>
+							 <p class="overtime">现已超时，如需修改请输入相关原因</p>
+							 <div class="actualAmend">
+									 <div class="mui-input-row mui-input-group  group-info shoot-number">
+										 <p>实际服务人数</p>		
+										<label>修改前</label>
+										<input type="text" v-model="serverPerNum" readonly="readonly" style="text-indent:1em"/>
+									</div>
+									<div class="mui-input-row mui-input-group  group-info shoot-number">
+										<label>修改后</label>
+										<input type="text"  v-model="amendPerNum" class="select-amend" placeholder="请输入实际服务人数"/>
+									</div>
+									<div class="shoot-number mui-input-group">
+										<div class="mui-input-row group-info">
+											<label>修改原因</label>
+										</div>
+										<div class="mui-input-row group-info remark-box reasonS">
+											<textarea v-model="amendReasons" class="remark-text" placeholder="请输入修改原因"></textarea>
+										</div>
+									</div>
+							</div>
+							<div class="amendBtn">
+									<button type="button" class="mui-btn btn1" @click="cancelAmend">
+										取消
+									</button>
+									<div class="mui-btn mui-btn-primary btn2" @click="confirmAmend">
+										确认
+									</div>
+							</div>
+						</div>
+					 </div>	
+		</div>
 		</div>
 		<script src="../../assets/js/mui.min.js"></script>
 		<script src="../../assets/js/mui.picker.min.js"></script>

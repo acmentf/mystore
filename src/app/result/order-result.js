@@ -2,6 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		userId:'',
+		overTime: false,              //是否禁止点击
 		id: '',                      //销售输出ID
 	    orderId: '',                //订单ID
 	    isOut: 1,                    //是否输出   1已输出   2未输出
@@ -14,6 +15,12 @@ var vm = new Vue({
 		salesAmt: '',                //销售额
 		selectsNum: '',				//选片张数
 		shootNum: '',				//拍摄张数
+		isAmend: false,     //修改弹窗
+		amendReasons:'',   //修改原因
+		amendPerNum:'',   //修改后服务人数
+		fetchTime: "",  //预计服务时间
+		orderstatus:"",   //服务状态
+		serveInputDisabled: false,
 	    printOrderXms: [             //打印张数
 	        {
 	        	fType: '1',
@@ -27,8 +34,53 @@ var vm = new Vue({
 	    ]
 	},
 	methods: {
-
-	}
+		// 点击修改
+	   amend:function(){
+			if(!vm.isAmend){
+			   vm.isAmend = !vm.isAmend;
+			}
+	   },
+	   // 修改取消
+	   cancelAmend:function(){
+		   this.isAmend = !this.isAmend; 
+		   this.amendReasons='';
+		   this.amendPerNum='';
+	   },
+	   // 确认修改
+	   confirmAmend:function(){
+		  if(!this.amendPerNum){
+			  mui.toast('请填写实际服务人数');
+			  return
+		  }else if(!this.amendReasons) {
+			  mui.toast('请填写修改原因');
+			  return
+		  }
+		   var params = {
+				  serverPerNum: this.amendPerNum ,
+				  serverPerNumBefore: this.serverPerNum,
+				  remark: this.amendReasons,
+				  orderId: this.orderId,
+				  userId:this.userId
+		   }
+		   var isAmend = this.isAmend
+		   var isDisabled = this.isDisabled
+		  lf.nativeUI.showWaiting()
+		  lf.net.getJSON('order/timeoutSave', params, function(res) {
+				  lf.nativeUI.closeWaiting()
+				  if(res.code == 200) {
+					  lf.nativeUI.toast('修改成功');
+					  vm.isAmend = false; 
+					  vm.overTime = false;
+					  vm.serverPerNum = vm.amendPerNum
+				  } else {
+					  lf.nativeUI.toast(res.msg);
+				  }
+		  }, function(res) {
+				  lf.nativeUI.closeWaiting()
+				  lf.nativeUI.toast(res.msg)
+		  })           		
+	   }
+    }
 })
 var picker,userPicker,reasonPicker;
 lf.ready(function(){
@@ -218,6 +270,7 @@ function loadResult(){
 	lf.net.getJSON('/order/getShotOutput', params, function (res){
 		if(res.code == 200){
 			console.log(JSON.stringify(res.data.orderX))
+			console.log(JSON.stringify(res.data.order))
 			if(res.data.orderX == null){
 				return
 			}else{
@@ -233,6 +286,18 @@ function loadResult(){
 				vm.reason = res.data.orderX.noOutReason
 				vm.saleRemark = res.data.orderX.saleRemark
 				vm.isOut = res.data.orderX.isOut == null ? 1 : res.data.orderX.isOut 
+			}
+			if(res.data.order == null){
+				return	
+			}else{
+				vm.fetchTime = res.data.order.fetchPhotoTime
+				vm.orderstatus = res.data.order.status
+				var date = 1000 * 60 * 60 * 27 + vm.fetchTime  // 获取当前时间vm.fetchTime
+				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+					console.log('123123')
+					vm.overTime = true
+					vm.serveInputDisabled = true
+				}
 			}
 		}else {
 			lf.nativeUI.toast(res.msg);

@@ -15,8 +15,31 @@ var vm = new Vue({
         totalPrice: '',
         actionStatus: '',
         city: '',
-        province: ''
-    }
+        province: '',
+        isDisable:true  //禁止按钮
+    },
+    created:function(){
+        this.initConfirmBtn();
+        this.isOverTime
+   },
+   methods:{
+       // 初始化服務完成點擊按鈕
+       initConfirmBtn:function(){  
+           // console.log(this.actionStatus)         
+           var serveStatus=lf.window.currentWebview().actionStatus
+           // console.log(serveStatus)
+           if(serveStatus=='44'){
+               this.isDisable=!this.isDisable;
+           }           
+       },
+       isOverTime:function(){
+            var date = 1000 * 60 * 60 * 27 + _this.fetchTime // 获取当前时间
+               if (new Date(date).getTime() < new Date().getTime() || data.data.order.status == 7) {
+                   console.log('123123')
+                   this.overTime = true
+               }
+        }
+   }
 })
 lf.ready(function() {
     vm.actionStatus = lf.window.currentWebview().actionStatus
@@ -80,7 +103,7 @@ lf.ready(function() {
 		})
 	})
     mui('body').on('tap', '.finish', function() {
-        lf.nativeUI.confirm("操作提示", "是否完成销售?", ["确定", "取消"], function (e) {
+        lf.nativeUI.confirm("操作提示", "确认服务已完成?", ["确定", "取消"], function (e) {
 			if (e.index == 0) {
 				saleFn()
 			}
@@ -89,14 +112,17 @@ lf.ready(function() {
 		function saleFn() {
 			var params = {
 				orderId: vm.orderInfo.orderId,
-                orderState: 1,
+                orderState: 2,
                 orderNo: vm.orderInfo.orderNo
 			};
+			lf.nativeUI.showWaiting();
 			lf.net.getJSON('order/updateOrderState', params, function (data) {
+                lf.nativeUI.closeWaiting();
 				if (data.code == 200) {
-					lf.nativeUI.toast("已完成销售！");
-                    lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-                    vm.actionStatus = '44'
+					lf.nativeUI.toast("服务已完成！");
+                    // lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+                    vm.isDisable=!vm.isDisable;
+                    // console.log(vm.actionStatus)          
                     mui.back();
 				} else {
 					lf.nativeUI.toast(data.msg);
