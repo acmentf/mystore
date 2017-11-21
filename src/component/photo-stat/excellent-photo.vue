@@ -186,8 +186,9 @@ export default {
                     }
                 },
                 grid: {
-                    left: "20%",
-                    bottom: '20%'
+                    left: "15%",
+                    bottom: '20%',
+                    right: '10%'
                 },
                 yAxis: {
                     type: 'category',
@@ -206,7 +207,7 @@ export default {
                         label: {
                             normal: {
                                 show: true,
-                                position: 'inside'
+                                position: 'top'
                             }
                         },
                         data: []
