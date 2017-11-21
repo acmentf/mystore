@@ -44,7 +44,14 @@ if (mui.os.plus) {
                             phone:item.phone || '',
                             roleName:item.roleName || '',
                             state:false,
-                            selected:!!item.assignState
+                            selected:!!item.assignState,
+                            chartUrl: (function() {
+                                var host = 'https://tuyi.uat.fingercrm.cn'
+                                var query = `#/group?username=${window.Role.usercode}&ids=${item.id}&members=${item.name}`
+                                var url = `${host}/html5/assets/webim/index.html${query}`
+
+                                return url
+                            })()
                         }
                     }).sort(function (a, b) {
                         return a.tags.localeCompare(b.tags)
@@ -173,6 +180,11 @@ if (mui.os.plus) {
                 var index = +e.target.getAttribute('index')
                 vm.cancel(index)
             })
+
+            mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
+                var href = e.target.getAttribute('href')
+                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+            })
         }
     })
     
@@ -210,7 +222,14 @@ if (mui.os.plus) {
                             phone:item.phone || '',
                             roleName:item.roleName || '',
                             state:false,
-                            selected:!!item.assignState
+                            selected:!!item.assignState,
+                            chartUrl: (function() {
+                                var host = 'http://localhost:3001'
+                                var query = `#/group?username=${window.Role.usercode}&ids=${item.id}&members=${item.name}`
+                                var url = `${host}/assets/webim/index.html${query}`
+
+                                return url
+                            })()
                         }
                     }).sort(function (a, b) {
                         return a.tags.localeCompare(b.tags)
@@ -343,6 +362,11 @@ if (mui.os.plus) {
                 console.log(456);
                 var index = +e.target.getAttribute('index')
                 vm.cancel(index)
+            })
+
+            mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
+                var href = e.target.getAttribute('href')
+                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
             })
         }
         init()

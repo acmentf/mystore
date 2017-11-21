@@ -18,6 +18,17 @@ body {
   border: 1px solid #3DB291;
   border-radius: 0.2rem;
   color: #3DB291;
+  margin-right: 10px;
+}
+
+.designate-select-staff .btn-chat {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: url(../../images/message/nav_message_green.png) no-repeat;
+  color: #3DB291;
+  background-size: contain;
+  margin-right: 15px;
 }
 
 .designate-select-staff .btn-call:enabled:active {
