@@ -211,11 +211,13 @@ class DefaultLayout extends Component {
 
     searchEmployee = (value) => {
         const { history, location } = this.props;
-        let pathname_list = location.pathname.split('/');
-        pathname_list[1] = "organize";
-        history.push(pathname_list.join("/") + location.search);
-
-        this.props.sortOrganizeList({ value, type: "name" });
+        if( location.indexOf("group") == -1 ) {
+            let pathname_list = location.pathname.split('/');
+            pathname_list[1] = "organize";
+            history.push(pathname_list.join("/") + location.search);
+    
+            this.props.sortOrganizeList({ value, type: "name" });
+        }
     }
 
     searchCancel = () => {
@@ -235,7 +237,8 @@ class DefaultLayout extends Component {
         const { collapsed, selectTab, selectItem, headerTabs, roomId, showOrganize } = this.state;
         const { login, rightSiderOffset, organizeOffset, location } = this.props;
 
-        const NavTitle = location.pathname === "/organize" ? "组织架构" : "通讯录";
+        const NavTitle = location.pathname.indexOf("organize") !== -1 ? "组织架构" : "通讯录";
+        const mainStyle = location.pathname.indexOf("group") !== -1 ? { top: 45 } : {};
 
         return (
             <Layout>
@@ -245,15 +248,16 @@ class DefaultLayout extends Component {
                         icon={<Icon type="left" />}
                         onLeftClick={() => this.goBack()}
                     >{NavTitle}</NavBar>
-                    <SearchBar
-                        value={this.state.searchValue}
-                        placeholder="搜索"
-                        maxLength={8}
-                        onChange={this.searchChange}
-                        onSubmit={this.searchEmployee}
-                        onCancel={this.searchCancel} />
+                    { location.pathname.indexOf("group") == -1 &&
+                        <SearchBar
+                            value={this.state.searchValue}
+                            placeholder="搜索"
+                            maxLength={8}
+                            onChange={this.searchChange}
+                            onSubmit={this.searchEmployee}
+                            onCancel={this.searchCancel} /> }
                 </Header>
-                <Content className="x-layout-main">
+                <Content className="x-layout-main" style={mainStyle}>
                     <div
                         className="x-layout-sider"
                         style={{

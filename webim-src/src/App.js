@@ -65,10 +65,14 @@ class App extends Component {
 
     componentDidMount() {
         // 1. check user auth by cookie
-        const { isLogin, login, loginByToken } = this.props;
+        const { hasToken, isLogin, login, loginByToken } = this.props;
         
+        if (hasToken && !debug) {
+            return loginByToken(utils.getUserName(), utils.getToken())
+        }
+
         if( !isLogin ) {
-            login(utils.getUserName(), utils.getUserName());
+            return login(utils.getUserName(), utils.getUserName());
         }
     }
 
@@ -91,7 +95,7 @@ class App extends Component {
                     {/* <Route path="/cnm" component={ChinaMobile} /> */}
                     {/* <Route path="/" children={authorizedComponent} /> */}
                     {/* <Route path="/" component={AuthorizedComponent} /> */}
-                    <Route path="/" render={props => <AuthorizedComponent {...this.props} token={token} isLogin={isLogin} loginByToken={loginByToken} />} />
+                    <Route path="/" render={props => <AuthorizedComponent {...this.props} token={token} />} />
                 </Switch>
             </div>
         )

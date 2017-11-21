@@ -24,7 +24,7 @@
                                 <div class="mui-scroll">
                                     <auditing-photo-page 
                                     v-if="yesterdayShow"
-                                    :date-str="'昨日'" :time-range="'today'"></auditing-photo-page>
+                                    :date-str="'昨日'" :time-range="'yesterday'"></auditing-photo-page>
                                 </div>
                             </div>
                         </div>

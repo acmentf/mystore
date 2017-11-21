@@ -14,11 +14,11 @@ import ChatRoomActions from "@/redux/ChatRoomRedux"
 import OrganizeActions from '@/redux/OrganizeRedux';
 import getTabMessages from "@/selectors/ChatSelector"
 import getCurrentContacts from "@/selectors/ContactSelector"
-import { config } from "@/config"
+import { config, WebIM } from "@/config"
 
 class Contact extends React.Component {
     componentWillReceiveProps(nextProps) {
-        if(nextProps.location.pathname === "/organize"){
+        if(nextProps.location.pathname.indexOf("organize") !== -1){
             const { searchId } = qs.parse(nextProps.location.search);
             if( nextProps.location.search !== this.props.location.search ){
                 nextProps.getOrganizes(searchId || "0", "id");
@@ -26,31 +26,35 @@ class Contact extends React.Component {
         }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         const { pathname, search } = this.props.location;
         const search_obj = qs.parse(this.props.location.search);
-        if( pathname.indexOf('group') !== -1 && search.indexOf('ids') !== -1 && search.indexOf('members') !== -1 ){
-            this.props.createGroups({
-                data: {
-                    groupname: search_obj.members,
-                    desc: "群聊",
-                    members: search_obj.ids.split(','),
-                    public: true,
-                    approval: false,
-                    allowinvites: true
-                },
-                success: () => {
-                    message.success(`群聊创建成功`);
-                    this.props.getGroups();
-                },
-                error: () => {
-                    message.error("创建群聊失败");
-                    // message.error(`Group ${name} failed`)
-                }
-            });
+        if( pathname.indexOf('group') !== -1 &&
+            pathname.indexOf('_') == -1 &&
+            search.indexOf('ids') !== -1 && search.indexOf('members') !== -1 ){
+            setTimeout(() => {
+                this.props.createGroups({
+                    data: {
+                        groupname: search_obj.members,
+                        desc: "群聊",
+                        members: search_obj.ids.split(','),
+                        public: true,
+                        approval: false,
+                        allowinvites: true
+                    },
+                    success: () => {
+                        message.success(`群聊创建成功`);
+                        this.props.getGroups();
+                    },
+                    error: () => {
+                        message.error("创建群聊失败");
+                        // message.error(`Group ${name} failed`)
+                    }
+                });
+            }, 0);
         }
 
-        this.props.getOrganizes(search_obj.searchId || "0", "id");
+        // this.props.getOrganizes(search_obj.searchId || "0", "id");
     }
 
     changeSearchId = (id) => {
@@ -138,8 +142,8 @@ class Contact extends React.Component {
                 {
                     chatType === "contact" || chatType === "group" ?
                         <List>
-                            <List.Item arrow="horizontal" onClick={() => rest.changeTab({key: "organize"})}>组织架构</List.Item>
-                            <List.Item arrow="down">常用联系人</List.Item>
+                            { chatType !== "group" && <List.Item arrow="horizontal" onClick={() => rest.changeTab({key: "organize"})}>组织架构</List.Item> }
+                            <List.Item arrow="down">{ chatType === "group" ? "常用群组" : "常用联系人"}</List.Item>
                         </List> : ''
                 }
                 {
