@@ -125,7 +125,8 @@ lf.ready(function() {
 		}
     })
     lf.event.listener('orderdetails', function(e) {
-        if(e.serveStatus=='44'){
+        console.log(e)
+        if(e.detail.serveStatus=='44'){
             vm.isDisable=!vm.isDisable;
         }
         renderOrderDetails();
