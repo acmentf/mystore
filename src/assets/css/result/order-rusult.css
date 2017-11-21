@@ -150,7 +150,7 @@
 .amendBox{
 	position: fixed;
 	left: 0;
-	top: 44px;
+	top: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,.5);
@@ -158,7 +158,7 @@
 }
 .amendBox .amendInfo {
 	position: absolute;
-	top: 45%;
+	top: 48%;
 	left: 10%;
 	background-color: #fff;
 	width: 80%;
