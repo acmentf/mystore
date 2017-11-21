@@ -46,8 +46,8 @@ lf.ready(function() {
                         state: false,
                         selected: !!item.assignState,
                         chartUrl: (function() {
-                            var id = item.id.split('|')[0]
-                            var name = item.name.split('-')[0]
+                            var id = /[\|]/g.test(item.id) ? item.id.split('|')[0] : item.id
+                            var name = /[\-]/g.test(item.id) ? item.name.split('-')[0] : item.name
                             // modifywebim
                             var host = "https://tuyi.uat.fingercrm.cn"
                             var query = `#/group?username=${window.Role.usercode}&ids=${id}&members=${name}`
