@@ -4,7 +4,7 @@
             <div class="count" v-text="photographerUploadTrips"></div>
             <div class="tip">
                 <div>{{dateStr}}拍摄上传</div>
-                <div>摄影师人数</div>
+                <div>行程数</div>
             </div>
         </div>
         <div class="summary-chart-container">
@@ -16,7 +16,7 @@
             <div class="count" v-text="photographerPendingUploadTrips"></div>
             <div class="tip">
                 <div>{{dateStr}}拍摄未上传</div>
-                <div>摄影师人数</div>
+                <div>行程数</div>
             </div>
         </div>
     </div>
