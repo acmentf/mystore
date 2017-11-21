@@ -86,6 +86,9 @@ var vm = new Vue({
 		  })           		
 	   },
 	   isOverTime: function () {  //判断是否超时
+			var params={
+				orderId: this.orderId
+			}
 			lf.net.getJSON('/order/getShotOutput', params, function (res){
 				if(res.code == 200){			
 					if (res.data.isTimeover == 2 || res.data.order.status == 7) {
