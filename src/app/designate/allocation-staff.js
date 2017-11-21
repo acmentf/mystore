@@ -48,7 +48,8 @@ lf.ready(function() {
                         chartUrl: (function() {
                             var id = item.id.split('|')[0]
                             var name = item.name.split('-')[0]
-                            var host = process.env.WEBIMHOST
+                            // modifywebim
+                            var host = "https://tuyi.uat.fingercrm.cn"
                             var query = `#/group?username=${window.Role.usercode}&ids=${id}&members=${name}`
                             var url = `${host}/html5/assets/webim/index.html${query}`
 
