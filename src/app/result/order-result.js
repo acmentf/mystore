@@ -19,7 +19,6 @@ var vm = new Vue({
 		amendReasons:'',   //修改原因
 		amendPerNum:'',   //修改后服务人数
 		fetchTime: "",  //预计服务时间
-		orderstatus:"",   //服务状态
 		serveInputDisabled: false,
 	    printOrderXms: [             //打印张数
 	        {
@@ -32,11 +31,6 @@ var vm = new Vue({
 				price: ''           //1 打印 2赠送3销售
 	        }
 	    ]
-	},
-	created() {
-		lf.ready(() => {
-            this.isOverTime();            
-        })
 	},
 	methods: {
 		// 点击修改
@@ -84,24 +78,6 @@ var vm = new Vue({
 				  lf.nativeUI.closeWaiting()
 				  lf.nativeUI.toast(res.msg)
 		  })           		
-	   },
-	   isOverTime: function () {  //判断是否超时
-		    var params = {
-				orderId: this.orderId
-			}
-			lf.net.getJSON('/order/getShotOutput', params, function (res){
-				if(res.code == 200){			
-					if (res.data.isTimeover == 2 || res.data.order.status == 7) {
-						console.log('123123')
-						vm.overTime = true
-						vm.serveInputDisabled = true
-					}
-				}else {
-					lf.nativeUI.toast(res.msg);
-				}
-			}, function(res) {			
-				lf.nativeUI.toast(res.msg)
-			})					
 	   }
     }
 })
@@ -314,9 +290,7 @@ function loadResult(){
 				return	
 			}else{
 				// 判断是否超时
-				vm.orderstatus = res.data.order.status
-				if (res.data.isTimeover == 2 || vm.orderstatus == 7) {
-					console.log('123123')
+				if (res.data.isTimeover == 2 || res.data.order.status == 7) {
 					vm.overTime = true
 					vm.serveInputDisabled = true
 				}
