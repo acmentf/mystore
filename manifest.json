@@ -2049,7 +2049,8 @@
 					"dist/app/order/orderlist.html",
 					"dist/app/market-expansion/market-expansion.html",
 					"dist/app/statistics/daily-paper-more.html",
-					"dist/app/photo-stat/photos.html"
+					"dist/app/photo-stat/photos.html",
+					"dist/app/photo-stat/excellent-photo.html"
 				],
 				"priority": 0
 			},
@@ -2869,7 +2870,6 @@
 				"src/app/correlate-order/editSaleOrder.html",
 				"src/assets/css/app.css",
 				"src/assets/fonts/mui.ttf",
-				"dist/app/photo-stat/excellent-photo.html",
 				"css/images/index/u773.png",
 				"src/app/test/muban2.html",
 				"src/assets/css/schedule/mui-preview.scss",
