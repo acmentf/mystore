@@ -405,7 +405,7 @@ mui('body').on('tap', '.footer-order-contact-btn', function() {
 })
 mui('body').on('tap', '.footer-addressbook-btn', function() {
 	var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
+	lf.window._openWindow(redirect, redirect,{},{});
 })
 mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window._openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())

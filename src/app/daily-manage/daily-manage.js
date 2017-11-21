@@ -73,7 +73,7 @@ lf.ready(function() {
 	// 点击通讯录
 	mui("body").on("tap", "#link-to-address-book", function(){
 		var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-		lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
+		lf.window._openWindow(redirect, redirect,{},{});
 	});
 	// 退出登录
 	mui('body').on('tap', '#logout', function() {
