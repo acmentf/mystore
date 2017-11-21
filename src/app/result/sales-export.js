@@ -210,7 +210,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		lf.nativeUI.closeWaiting()
 		if(res.code == 200){
 			lf.nativeUI.toast('保存成功！');
-			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {serveStatus:'44'})
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.closeCurrentWebview();
 		}else {
 			lf.nativeUI.toast(res.msg);

@@ -19,17 +19,35 @@ var vm = new Vue({
         isDisable:true  //禁止按钮
     },
     created:function(){
-        this.initConfirmBtn();
+        lf.ready(() => {
+            this.initConfirmBtn();            
+        })
    },
    methods:{
        // 初始化服務完成點擊按鈕
-       initConfirmBtn:function(){  
-           // console.log(this.actionStatus)         
+       initConfirmBtn:function(){        
            var serveStatus=lf.window.currentWebview().actionStatus
-           // console.log(serveStatus)
            if(serveStatus=='44'){
                this.isDisable=!this.isDisable;
-           }           
+               return 
+           }
+            var orderId = lf.window.currentWebview().orderId;
+            var params = {
+                orderId: orderId
+            }
+            lf.net.getJSON('order/orderDetail', params, function(data) {
+                if (data.code == 200) {
+                    console.log(data.data.orderInfo.actionStatus)
+                    if(data.data.orderInfo.actionStatus=='44'){
+                        vm.isDisable=!vm.isDisable;
+                    }
+                } else {
+                    lf.nativeUI.toast(data.msg);
+                }
+            }, function(erro) {
+                lf.nativeUI.toast(erro.msg);
+            });          
+                    
        }
    }
 })
@@ -112,9 +130,7 @@ lf.ready(function() {
                 lf.nativeUI.closeWaiting();
 				if (data.code == 200) {
 					lf.nativeUI.toast("服务已完成！");
-                    // lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-                    vm.isDisable=!vm.isDisable;
-                    // console.log(vm.actionStatus)          
+                    vm.isDisable=!vm.isDisable;     
                     mui.back();
 				} else {
 					lf.nativeUI.toast(data.msg);
@@ -125,9 +141,6 @@ lf.ready(function() {
 		}
     })
     lf.event.listener('orderdetails', function(e) {
-        if(e.detail.serveStatus=='44'){
-            vm.isDisable=!vm.isDisable;
-        }
         renderOrderDetails();
         lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
     })
