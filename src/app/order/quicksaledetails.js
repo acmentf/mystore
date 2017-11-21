@@ -28,7 +28,7 @@ var vm = new Vue({
            var serveStatus=lf.window.currentWebview().actionStatus
            // console.log(serveStatus)
            if(serveStatus=='44'){
-               vm.isDisable=!vm.isDisable;
+               this.isDisable=!this.isDisable;
            }           
        }
    }
