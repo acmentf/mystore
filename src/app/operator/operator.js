@@ -150,7 +150,7 @@ var vm = new Vue({
 				  fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
 				  remark: this.amendReserverReasons,
 				  orderId: this.orderId,
-				  userId:this.currentRoleId
+				  userId: lf.window.currentWebview().userId
 		   }
 		   var isAmend = this.isAmend
 		   var isDisabled = this.isDisabled
@@ -513,7 +513,7 @@ lf.ready(function() {
 			console.log("当前用户的角色id"+vm.currentRoleId)
 	}
 	renderTrackInfo();
-})
+})	
 
 //读取页面信息
 function renderTrackInfo(){
@@ -528,16 +528,13 @@ function renderTrackInfo(){
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
 		lf.nativeUI.closeWaiting()
-		if(data.code == 200) {
+		if(data.code == 200) { 
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
 			// 判断是否超时
-			vm.orderstatus = data.data.shootType
-			var date
 			if(lf.window.currentWebview().actionStatus !==0 ){  //待计调情况禁止点击修改
-				date = 1000 * 60 * 60 * 27 + data.data.fetchPhotoTime // 获取当前时间data.data.fetchPhotoTime
-				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+				if (data.data.isTimeover == 2 || lf.window.currentWebview().orderStatus == 7) {
 					vm.overTime = true
 					vm.serveInputDisable = true
 				}

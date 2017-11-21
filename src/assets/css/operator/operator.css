@@ -177,11 +177,13 @@
   border-top: 1px solid #a0a0a0; 
 }
 .amendBox .amendInfo {
+  position: absolute;
+  top: 45%;
+  left: 10%;
   background-color: #fff;
   width: 80%;
   padding: 0.2rem 0;
-  margin: 0 auto;
-  margin-top: 25%;
+  transform: translateY(-50%);
 }
 .amendBox h4{
   text-align: center;
