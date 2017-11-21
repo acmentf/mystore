@@ -46,7 +46,8 @@ if (mui.os.plus) {
                             state:false,
                             selected:!!item.assignState,
                             chartUrl: (function() {
-                                var host = 'https://tuyi.uat.fingercrm.cn'
+                                // modifywebim
+                                var host = "https://tuyi.uat.fingercrm.cn"
                                 var query = `#/group?username=${window.Role.usercode}&ids=${item.id}&members=${item.name}`
                                 var url = `${host}/html5/assets/webim/index.html${query}`
 
@@ -224,9 +225,10 @@ if (mui.os.plus) {
                             state:false,
                             selected:!!item.assignState,
                             chartUrl: (function() {
-                                var host = 'http://localhost:3001'
+                                // modifywebim
+                                var host = "https://tuyi.uat.fingercrm.cn"
                                 var query = `#/group?username=${window.Role.usercode}&ids=${item.id}&members=${item.name}`
-                                var url = `${host}/assets/webim/index.html${query}`
+                                var url = `${host}/html5/assets/webim/index.html${query}`
 
                                 return url
                             })()

@@ -6,10 +6,17 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const CONFIG = require('./build-config')
 
 let entryHtml = utils.getEntryHtml('./src/app/**/*.html'),
     entryJs = utils.getEntry('./src/app/**/*.js'),
     configPlugins = [
+        new webpack.DefinePlugin({
+			"process.env": {
+				NODE_ENV: JSON.stringify('development'),
+				WEBIMHOST: JSON.stringify('' + CONFIG.WEBIMHOST)
+			}
+		}),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new FriendlyErrorsWebpackPlugin(),
