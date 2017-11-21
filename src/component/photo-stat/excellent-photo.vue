@@ -107,7 +107,7 @@ export default {
                         {
                             type:'pie',
                             radius: ['50%', '70%'],
-                            center: ['50%', '43%'],
+                            center: ['50%', '38%'],
                             avoidLabelOverlap: false,
                             label: {
                                 normal: {
