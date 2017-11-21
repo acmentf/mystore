@@ -54,7 +54,7 @@ class Contact extends React.Component {
             }, 0);
         }
 
-        // this.props.getOrganizes(search_obj.searchId || "0", "id");
+        this.props.getOrganizes(search_obj.searchId || "0", "id");
     }
 
     changeSearchId = (id) => {

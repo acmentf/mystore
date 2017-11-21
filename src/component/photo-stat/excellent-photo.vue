@@ -107,7 +107,7 @@ export default {
                         {
                             type:'pie',
                             radius: ['50%', '70%'],
-                            center: ['50%', '43%'],
+                            center: ['50%', '38%'],
                             avoidLabelOverlap: false,
                             label: {
                                 normal: {
@@ -186,8 +186,9 @@ export default {
                     }
                 },
                 grid: {
-                    left: "20%",
-                    bottom: '20%'
+                    left: "15%",
+                    bottom: '20%',
+                    right: '10%'
                 },
                 yAxis: {
                     type: 'category',
@@ -206,7 +207,7 @@ export default {
                         label: {
                             normal: {
                                 show: true,
-                                position: 'inside'
+                                position: 'top'
                             }
                         },
                         data: []

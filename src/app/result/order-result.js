@@ -33,6 +33,11 @@ var vm = new Vue({
 	        }
 	    ]
 	},
+	created() {
+		lf.ready(() => {
+            this.isOverTime();            
+        })
+	},
 	methods: {
 		// 点击修改
 	   amend:function(){
@@ -60,7 +65,7 @@ var vm = new Vue({
 				  serverPerNumBefore: this.serverPerNum,
 				  remark: this.amendReasons,
 				  orderId: this.orderId,
-				  userId:this.userId
+				  userId: this.userId
 		   }
 		   var isAmend = this.isAmend
 		   var isDisabled = this.isDisabled
@@ -79,6 +84,21 @@ var vm = new Vue({
 				  lf.nativeUI.closeWaiting()
 				  lf.nativeUI.toast(res.msg)
 		  })           		
+	   },
+	   isOverTime: function () {  //判断是否超时
+			lf.net.getJSON('/order/getShotOutput', params, function (res){
+				if(res.code == 200){			
+					if (res.data.isTimeover == 2 || res.data.order.status == 7) {
+						console.log('123123')
+						vm.overTime = true
+						vm.serveInputDisabled = true
+					}
+				}else {
+					lf.nativeUI.toast(res.msg);
+				}
+			}, function(res) {			
+				lf.nativeUI.toast(res.msg)
+			})					
 	   }
     }
 })
@@ -290,10 +310,9 @@ function loadResult(){
 			if(res.data.order == null){
 				return	
 			}else{
-				vm.fetchTime = res.data.order.fetchPhotoTime
+				// 判断是否超时
 				vm.orderstatus = res.data.order.status
-				var date = 1000 * 60 * 60 * 27 + vm.fetchTime  // 获取当前时间vm.fetchTime
-				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+				if (res.data.isTimeover == 2 || vm.orderstatus == 7) {
 					console.log('123123')
 					vm.overTime = true
 					vm.serveInputDisabled = true

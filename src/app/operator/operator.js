@@ -150,7 +150,7 @@ var vm = new Vue({
 				  fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
 				  remark: this.amendReserverReasons,
 				  orderId: this.orderId,
-				  userId:this.currentRoleId
+				  userId: lf.window.currentWebview().userId
 		   }
 		   var isAmend = this.isAmend
 		   var isDisabled = this.isDisabled
@@ -429,18 +429,15 @@ mui('.mui-bar-nav').on('tap', '.edit',function(){
 //保存
 mui('.mui-bar-nav').on('tap', '.save',function(){
 	var flag = false
-	vm.shootInfos.forEach(function(v,i){
-		if(!v.shootTime){
-			lf.nativeUI.toast('拍摄日期不能为空');
-			flag = true
-		}
-	})
 
-	if(vm.marchInfo.preReservedSeats){
-		if(!/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
-			lf.nativeUI.toast('预留座位数只能填写数字');
-			flag = true
-		}
+	if(vm.groupInfo.prePropsValue === null) {
+		lf.nativeUI.toast('前置属性必填');
+		return
+	}
+
+	if(!vm.groupInfo.shootType || !vm.groupInfo.shootTypeValue) {
+		lf.nativeUI.toast('拍摄类型必填');
+		return
 	}
 
 	if(!vm.marchInfo.fetchPhotoTime) {
@@ -448,15 +445,26 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 		return
 	}
 
-	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
-		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
-		flag = true
-	}
-
-	if(vm.groupInfo.prePropsValue === null) {
-		lf.nativeUI.toast('前置属性必填');
+	if(vm.marchInfo.preReservedSeats && !/^[0-9]*$/.test(vm.marchInfo.preReservedSeats)){
+		lf.nativeUI.toast('预留座位数只能填写数字');
 		return
 	}
+
+	if(new Date(vm.marchInfo.fetchPhotoTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
+		lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
+		return
+	}
+
+	vm.shootInfos.forEach(function(v,i){
+		if(!v.shootTime){
+			lf.nativeUI.toast('拍摄日期不能为空');
+			flag = true
+		}
+		if(!v.journeyName){
+			lf.nativeUI.toast('拍摄景点不能为空');
+			flag = true
+		}
+	})
 
 	if (flag) return
 
@@ -513,7 +521,7 @@ lf.ready(function() {
 			console.log("当前用户的角色id"+vm.currentRoleId)
 	}
 	renderTrackInfo();
-})
+})	
 
 //读取页面信息
 function renderTrackInfo(){
@@ -528,16 +536,13 @@ function renderTrackInfo(){
 	lf.nativeUI.showWaiting()
 	lf.net.getJSON('order/getOrderTrackInfo', params, function(data) {
 		lf.nativeUI.closeWaiting()
-		if(data.code == 200) {
+		if(data.code == 200) { 
 			if(data.data.startTime){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
 			// 判断是否超时
-			vm.orderstatus = data.data.shootType
-			var date
 			if(lf.window.currentWebview().actionStatus !==0 ){  //待计调情况禁止点击修改
-				date = 1000 * 60 * 60 * 27 + data.data.fetchPhotoTime // 获取当前时间data.data.fetchPhotoTime
-				if (new Date(date).getTime() < new Date().getTime() || vm.orderstatus == 7) {
+				if (data.data.isTimeover == 2 || lf.window.currentWebview().orderStatus == 7) {
 					vm.overTime = true
 					vm.serveInputDisable = true
 				}
@@ -566,7 +571,8 @@ function renderTrackInfo(){
 				assignNames : data.data.assignNames,//导游姓名
 				lineName :data.data.lineName,//线路名称
 				groupType :data.data.groupType,//团性质
-				shootType :vm.shootTypeArr[data.data.shootType - 1],//拍摄类型
+				shootType : vm.shootTypeArr[data.data.shootType - 1],//拍摄类型
+				shootTypeValue : data.data.shootType,//拍摄类型
 				personCount : data.data.personCount,//团人数
 				preProps : _pre,//前置属性
 				prePropsValue : data.data.isPreTour,//前置属性
