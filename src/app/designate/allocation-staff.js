@@ -44,7 +44,16 @@ lf.ready(function() {
                         phone: item.phone || '',
                         roleName: item.roleName || '',
                         state: false,
-                        selected: !!item.assignState
+                        selected: !!item.assignState,
+                        chartUrl: (function() {
+                            var id = item.id.split('|')[0]
+                            var name = item.name.split('-')[0]
+                            var host = process.env.WEBIMHOST
+                            var query = `#/group?username=${window.Role.usercode}&ids=${id}&members=${name}`
+                            var url = `${host}/html5/assets/webim/index.html${query}`
+
+                            return url
+                        })()
                     }
                 }).sort(function(a, b) {
                     return a.tags.localeCompare(b.tags)
@@ -206,6 +215,11 @@ lf.ready(function() {
         }).on('tap', '.btn-cancel', function(e) {
             var index = +e.target.getAttribute('index')
             vm.cancel(index)
+        })
+
+        mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
+            var href = e.target.getAttribute('href')
+            lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
         })
     }
 })
