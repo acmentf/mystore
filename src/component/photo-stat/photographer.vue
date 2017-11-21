@@ -24,7 +24,7 @@
                                 <div class="mui-scroll">
                                     <photographer-page 
                                     v-if="todayShow"
-                                    :date-str="'本日'" :time-range="'today'"></photographer-page>
+                                    :date-str="'昨日'" :time-range="'yesterday'"></photographer-page>
                                 </div>
                             </div>
                         </div>
