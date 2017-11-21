@@ -150,7 +150,7 @@ var vm = new Vue({
 				  fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
 				  remark: this.amendReserverReasons,
 				  orderId: this.orderId,
-				  userId: lf.window.currentWebview().userId
+				  userId: window.Role.usercode
 		   }
 		   var isAmend = this.isAmend
 		   var isDisabled = this.isDisabled

@@ -86,7 +86,7 @@ var vm = new Vue({
 		  })           		
 	   },
 	   isOverTime: function () {  //判断是否超时
-			var params={
+		    var params = {
 				orderId: this.orderId
 			}
 			lf.net.getJSON('/order/getShotOutput', params, function (res){
