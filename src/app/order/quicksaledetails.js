@@ -20,7 +20,6 @@ var vm = new Vue({
     },
     created:function(){
         this.initConfirmBtn();
-        this.isOverTime
    },
    methods:{
        // 初始化服務完成點擊按鈕
@@ -29,16 +28,9 @@ var vm = new Vue({
            var serveStatus=lf.window.currentWebview().actionStatus
            // console.log(serveStatus)
            if(serveStatus=='44'){
-               this.isDisable=!this.isDisable;
+               vm.isDisable=!vm.isDisable;
            }           
-       },
-       isOverTime:function(){
-            var date = 1000 * 60 * 60 * 27 + _this.fetchTime // 获取当前时间
-               if (new Date(date).getTime() < new Date().getTime() || data.data.order.status == 7) {
-                   console.log('123123')
-                   this.overTime = true
-               }
-        }
+       }
    }
 })
 lf.ready(function() {
@@ -133,6 +125,9 @@ lf.ready(function() {
 		}
     })
     lf.event.listener('orderdetails', function(e) {
+        if(e.serveStatus=='44'){
+            vm.isDisable=!vm.isDisable;
+        }
         renderOrderDetails();
         lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
     })
