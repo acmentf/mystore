@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#app',
 	data: {
 		userId:'',
-		overTime: true,              //是否禁止点击
+		overTime: false,              //是否禁止点击
 		id: '',                      //销售输出ID
 	    orderId: '',                //订单ID
 	    isOut: 1,                    //是否输出   1已输出   2未输出
