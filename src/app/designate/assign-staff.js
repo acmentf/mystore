@@ -181,7 +181,7 @@ if (mui.os.plus) {
                 vm.cancel(index)
             })
 
-            mui('.designate-select-staff').on('tap','.btn-call',function (e) {
+            mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
                 var href = e.target.getAttribute('href')
                 lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
             })
@@ -224,9 +224,9 @@ if (mui.os.plus) {
                             state:false,
                             selected:!!item.assignState,
                             chartUrl: (function() {
-                                var host = 'https://tuyi.uat.fingercrm.cn'
+                                var host = 'http://localhost:3001'
                                 var query = `#/group?username=${window.Role.usercode}&ids=${item.id}&members=${item.name}`
-                                var url = `${host}/html5/assets/webim/index.html${query}`
+                                var url = `${host}/assets/webim/index.html${query}`
 
                                 return url
                             })()
@@ -364,7 +364,7 @@ if (mui.os.plus) {
                 vm.cancel(index)
             })
 
-            mui('.designate-select-staff').on('tap','.btn-call',function (e) {
+            mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
                 var href = e.target.getAttribute('href')
                 lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
             })
