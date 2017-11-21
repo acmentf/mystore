@@ -1,12 +1,13 @@
+// webim的服务器列表
 var SERVERS = {
-	development: 'http://47.96.162.9:8091/shoot-mobile-web',
-	sit: 		 'https://tuyi.sit.fingercrm.cn/shoot-mobile-web',
-	uat: 		 'https://tuyi.uat.fingercrm.cn/shoot-mobile-web',
-	production:  'http://tuyi.fingercrm.cn/shoot-mobile-web'
+	development: 'https://tuyi.uat.fingercrm.cn',
+	sit: 		 'https://tuyi.sit.fingercrm.cn',
+	uat: 		 'https://tuyi.uat.fingercrm.cn',
+	production:  'https://tuyi.fingercrm.cn'
 }
 
 module.exports = {
-	HOST: SERVERS[process.env.NODE_ENV],
+	WEBIMHOST: SERVERS[process.env.NODE_ENV],
 
 	devPublicPath: '/',
 
