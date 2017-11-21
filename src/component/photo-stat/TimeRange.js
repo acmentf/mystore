@@ -13,7 +13,7 @@ export default {
         var yesterdayStr = lf.util.timeStampToDate2(new Date(yesterdayTime));
         return {
             startDate: yesterdayStr,
-            endDate: lf.util.timeStampToDate2(new Date())
+            endDate: yesterdayStr
         }
     },
     thisWeek: function() {

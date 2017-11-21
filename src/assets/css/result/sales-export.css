@@ -3,7 +3,7 @@
 }
 .sales-export .group-info label{
 	padding:10px 0;
-	width:30%;
+	width:50%;
 }
 .sales-export .mui-input-row{
 	padding: 0 0.2rem;
@@ -18,7 +18,8 @@
 	height: 0.68rem;
 }
 .sales-export .group-info input{
-	width:70%;
+	width:50%;
+	text-align: center;
 }
 .sales-export .save-btn{
 	color: #3DB391;
