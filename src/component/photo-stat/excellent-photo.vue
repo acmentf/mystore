@@ -207,7 +207,7 @@ export default {
                         label: {
                             normal: {
                                 show: true,
-                                position: 'top'
+                                position: 'right'
                             }
                         },
                         data: []
