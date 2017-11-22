@@ -88,7 +88,7 @@ export default {
                 console.log(url, ":::::", JSON.stringify(res.data));
                 var photoCapacity = (res.data.photoCapacity/1024/1024/1024).toFixed(2);
                 var basePhotoCapacity = (res.data.basePhotoCapacity/1024/1024/1024).toFixed(2);
-                defaultChartOption.title.text = -(-photoCapacity) + (-(-basePhotoCapacity)) + "GB";
+                defaultChartOption.title.text = ((res.data.photoCapacity + res.data.basePhotoCapacity)/1024/1024/1024).toFixed(2) + "GB";
                 defaultChartOption.series[0].data = [
                     {
                         value: photoCapacity,
