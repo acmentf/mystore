@@ -131,7 +131,7 @@ export default {
                         end: 100
                     }],
                     grid: {
-                        left: '20%',
+                        left: '15%',
                         right: '10%',
                     },
                     yAxis: {
@@ -190,7 +190,7 @@ export default {
                 }],
                 grid: {
                     right: '10%',
-                    left: '20%'
+                    left: '15%'
                 },
                 yAxis: {
                     type: 'value',
