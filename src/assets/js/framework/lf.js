@@ -1076,6 +1076,54 @@ var lf = (function(document, undefined) {
 				code: code,
 				codeUrl: data
 			};
+		},
+		/**
+		 * 页面相对路径 转 成 绝对路径
+		 * @param targetRelPath String 目标页面的相对路径
+		 * 
+		 * 当前页面：https://github.com/seajs/seajs/blob/master/src/util-path.js
+		 * targetRelPath: "../../ab/cd/./../test.html"
+		 * result: "/seajs/seajs/blob/ab/test.html"
+		 */
+		relUrlToAbsPathname: function(targetRelPath) {
+			var DIRNAME_RE = /[^?#]*\//
+			
+			var DOT_RE = /\/\.\//g
+			var DOUBLE_DOT_RE = /\/[^/]+\/\.\.\//
+			var MULTI_SLASH_RE = /([^:/])\/+\//g
+			
+			// Extract the directory portion of a path
+			// dirname("a/b/c.js?t=123#xx/zz") ==> "a/b/"
+			// ref: http://jsperf.com/regex-vs-split/2
+			function dirname(path) {
+				return path.match(DIRNAME_RE)[0]
+			}
+			
+			// Canonicalize a path
+			// realpath("http://test.com/a//./b/../c") ==> "http://test.com/a/c"
+			function realpath(path) {
+				// /a/b/./c/./d ==> /a/b/c/d
+				path = path.replace(DOT_RE, "/")
+			
+				/*
+				  @author wh1100717
+				  a//b/c ==> a/b/c
+				  a///b/////c ==> a/b/c
+				  DOUBLE_DOT_RE matches a/b/c//../d path correctly only if replace // with / first
+				*/
+				path = path.replace(MULTI_SLASH_RE, "$1/")
+			
+				// a/b/c/../../d  ==>  a/b/../d  ==>  a/d
+				while (path.match(DOUBLE_DOT_RE)) {
+					path = path.replace(DOUBLE_DOT_RE, "/")
+				}
+			
+				return path
+			}
+		
+			var currentPageDir = dirname(location.pathname);
+			var targetRealPath = currentPageDir + targetRelPath;
+			return realpath(targetRealPath);
 		}
 	};
 })(lf, window);
@@ -1709,9 +1757,8 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
-				var keyReg = /([-?\w+\.?]*\.html)/g;
-				keyReg.test(url);
-				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+
+				var localStorageKey = $.util.relUrlToAbsPathname(url); // 拿到 页面文件名.html
 				this.setPageParams(localStorageKey, extras)
 				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
 				if($.os.ios || $.os.android) { // 判断平台
@@ -1757,9 +1804,7 @@ var lf = (function(document, undefined) {
 						}
 					})
 				}
-				var keyReg = /([-?\w+\.?]*\.html)/g;
-				keyReg.test(url);
-				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+				var localStorageKey = $.util.relUrlToAbsPathname(url); 
 				this.setPageParams(localStorageKey, extras)
 				//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
 				if($.os.ios || $.os.android) { // 判断平台
@@ -1855,10 +1900,7 @@ var lf = (function(document, undefined) {
 		 */
 		currentWebview: function() {
 			if(!$.os.plus) {   // web 访问 直接返回带参对象
-				var href = window.location.href;
-				var keyReg = /([-?\w+\.?]*\.html)/g;
-				keyReg.test(href);
-				var localStorageKey = RegExp.$1; // 拿到 页面文件名.html
+				var localStorageKey = window.location.pathname;
 				var result = JSON.parse(localStorage.getItem(localStorageKey)) || {};
 				result.opener = function() {
 					return;
