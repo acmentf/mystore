@@ -210,6 +210,17 @@ lf.ready(function() {
                 mui.alert('你没选择任何员工');
             }
         }, false);
+
+
+
+        mui('body').on('tap', '.staff-back', function(e) {
+            if(lf.window.currentWebview().quikOrderTag) {
+                save()
+            } else {
+                lf.window.closeCurrentWebview()
+            }
+        })
+
         mui('.designate-select-staff').on('tap', '.btn-select', function(e) {
             var index = +e.target.getAttribute('index')
             vm.select(index)
