@@ -136,18 +136,19 @@ lf.ready(function() {
                 res.data.forEach(function(item, index) {
                     var obj = {
                         value: item.pNo + ' ' + item.aliasName,
-                        text: item.pName
+                        text: item.pName,
+                        purchaserStr: item.purchaserStr
                     }
                     data.push(obj)
                 })
                 picker.setData(data)
-                vm.purchaserStr = res.data.purchaserStr
-                console.log(res.data[0].deptId)
                 vm.deptId=res.data[0].deptId
                 picker.show(function(selectItems) {
+                    console.log(selectItems)
                     vm.productName = selectItems[0].text
                     vm.pNo = selectItems[0].value.split(' ')[0]
                     vm.lineName = selectItems[0].value.split(' ')[1]
+                    vm.purchaserStr = selectItems[0].purchaserStr
                 })
             } else {
                 mui.alert(res.msg)
@@ -326,7 +327,8 @@ lf.ready(function() {
                 tourGuide: vm.guidName,
                 tourGuidePhone: vm.guidTel,
                 startTime: vm.groupDate,
-                shootType: vm.shootTypeValue
+                shootType: vm.shootTypeValue,
+                purchaser: vm.purchaserStr
             },
             tourGroups: {
                 personCount: vm.groupMemberNum
