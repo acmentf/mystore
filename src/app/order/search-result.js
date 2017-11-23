@@ -233,7 +233,9 @@ mui('.order-ul').on('tap', '.jidiao', function() { //点击计调
 		orderNo: orderid,
 		type: 0,
 		status: 'edit',
-		lineName: this.getAttribute('data-aliasName')
+		lineName: this.getAttribute('data-aliasName'),
+		actionStatus: this.getAttribute('data-actionStatus'),
+		orderStatus: this.getAttribute('data-orderStatus')
 	})
 })
 
