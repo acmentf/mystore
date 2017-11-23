@@ -541,7 +541,7 @@ function renderTrackInfo(){
 				data.data.startTime = lf.util.timeStampToDate2(data.data.startTime)
 			}
 			// 判断是否超时
-			if(lf.window.currentWebview().actionStatus !==0 ){  //待计调情况禁止点击修改
+			if(lf.window.currentWebview().actionStatus !=0 ){  //待计调情况禁止点击修改
 				if (data.data.isTimeover == 2 || lf.window.currentWebview().orderStatus == 7) {
 					vm.overTime = true
 					vm.serveInputDisable = true
