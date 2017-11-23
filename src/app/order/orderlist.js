@@ -68,8 +68,8 @@ lf.ready(function() {
 			console.log("当前用户的角色id"+vm.currentRoleId)
 		}
 		if (vm.currentRoleId == 9) {
-			vm.orderHeader[0].name = '待销售'
-			vm.orderHeader[1].name = '销售完成'
+			vm.orderHeader[0].name = '服务中'
+			vm.orderHeader[1].name = '服务完成'
 		} else {
 			vm.orderHeader[0].name = '待处理'
 			vm.orderHeader[1].name = '进行中'
@@ -434,8 +434,8 @@ function switchRolePostion(val) {
 		// }
 		
 		if (vm.currentRoleId == 9) {
-			vm.orderHeader[0].name = '待销售'
-			vm.orderHeader[1].name = '销售完成'
+			vm.orderHeader[0].name = '服务中'
+			vm.orderHeader[1].name = '服务完成'
 		} else {
 			vm.orderHeader[0].name = '待处理'
 			vm.orderHeader[1].name = '进行中'
