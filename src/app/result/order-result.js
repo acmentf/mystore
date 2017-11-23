@@ -53,6 +53,13 @@ var vm = new Vue({
 		  }else if(!this.amendReasons) {
 			  mui.toast('请填写修改原因');
 			  return
+		  }else if(this.amendPerNum){
+			  var importNum = this.amendPerNum;
+			  var judgeNum = isNaN(importNum);
+			  if(judgeNum){
+				  mui.toast('实际服务人数请填写数字');
+				  return
+			  }
 		  }
 		   var params = {
 				  serverPerNum: this.amendPerNum ,
