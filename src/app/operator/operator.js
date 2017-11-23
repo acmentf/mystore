@@ -125,50 +125,56 @@ var vm = new Vue({
 			this.journeyListed = []
 			this.journeyList = []
 		},
-		amend:function(){
+		amend: function() {
 			if(!vm.isAmend){
 			   vm.isAmend = !vm.isAmend;
 			}     			   	
 	   },
 	   // 修改取消
-	   cancelAmend:function(){
+	   cancelAmend: function() {
 		   this.isAmend = !this.isAmend; 
 		   this.amendReasons='';
 		   this.amendPerNum='';
 	   },
 	   // 确认修改
-	   confirmAmend:function(){
-			 if(!this.amendTime){
-			  mui.toast('请填写实际服务时间');
-			  return
-		  }else if(!this.amendReserverReasons) {
-			  mui.toast('请填写修改原因');  
-			  return
-		  }         	
-		   var params = {
-				  fetchPhotoTime: this.amendTime ,
-				  fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
-				  remark: this.amendReserverReasons,
-				  orderId: this.orderId,
-				  userId: window.Role.usercode
-		   }
-		   var isAmend = this.isAmend
-		   var isDisabled = this.isDisabled
-		   lf.nativeUI.showWaiting()
-		   lf.net.getJSON('order/timeoutSave', params, function(res) {
-				  lf.nativeUI.closeWaiting()
-				  if(res.code == 200) {
-					  lf.nativeUI.toast('修改成功');
-					  vm.isAmend = false; 
-					  vm.overTime = false;
-					  vm.marchInfo.fetchPhotoTime = vm.amendTime
-				  } else {
-					  lf.nativeUI.toast(res.msg);
-				  }
-		   }, function(res) {
-				  lf.nativeUI.closeWaiting()
-				  lf.nativeUI.toast(res.msg)
-		   })
+	   confirmAmend: function () {
+		   if(!this.amendTime) {
+			   mui.toast('请填写实际服务时间');
+			   return
+			}else if(!this.amendReserverReasons) {
+				mui.toast('请填写修改原因');
+				return
+			}
+			else if(this.amendTime) {
+				if(new Date(this.amendTime.replace(/-/g, '/')) < new Date(new Date().toLocaleDateString())){
+					lf.nativeUI.toast('预计服务完成时间不能选今天以前的日期');
+					return
+				}
+			}       	
+			var params = {
+					fetchPhotoTime: this.amendTime ,
+					fetchPhotoTimeBefore: this.marchInfo.fetchPhotoTime,
+					remark: this.amendReserverReasons,
+					orderId: this.orderId,
+					userId: window.Role.usercode
+			}
+			var isAmend = this.isAmend
+			var isDisabled = this.isDisabled
+			lf.nativeUI.showWaiting()
+			lf.net.getJSON('order/timeoutSave', params, function(res) {
+					lf.nativeUI.closeWaiting()
+					if(res.code == 200) {
+						lf.nativeUI.toast('修改成功');
+						vm.isAmend = false; 
+						vm.overTime = false;
+						vm.marchInfo.fetchPhotoTime = vm.amendTime
+					} else {
+						lf.nativeUI.toast(res.msg);
+					}
+			}, function(res) {
+					lf.nativeUI.closeWaiting()
+					lf.nativeUI.toast(res.msg)
+			})
 	   }
 	}
 })
