@@ -19,13 +19,14 @@
                         <div id="tab1" class="mui-slider-item mui-control-content mui-active">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    
+                                    <relation-card v-for="(item, index) in notConnectList" :item="item" :key="index"></relation-card>
                                 </div>
                             </div>
                         </div>
                         <div id="tab2" class="mui-slider-item mui-control-content">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
+                                    <relation-card v-for="(item, index) in hadConnectList" :item="item" :key="index"></relation-card>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +37,23 @@
     </div>
 </template>
 <script>
+    import RelationCard from './market-staff-relation/relation-card.vue';
     export default {
+        components: {
+            RelationCard
+        },
+        data() {
+            return {
+                notConnectList: [
+                    {}
+                ],
+                hadConnectList: [
+                    {
+
+                    }
+                ]
+            }
+        },
         methods: {
             initMui: function() {
                 lf.ready(function() {
@@ -55,8 +72,14 @@
         }
     }
 </script>
-<style>
+<style lang="scss">
 .market-expansion-market-staff-relation {
-
+    .mui-slider-indicator {
+        background: #fff;
+    }
+    .mui-control-item.mui-active {
+        color: #3cb493 !important;
+        border-bottom: 2px solid #3cb493 !important;
+    }
 }
 </style>

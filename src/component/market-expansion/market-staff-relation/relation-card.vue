@@ -1,19 +1,19 @@
 <template>
     <div class="market-staff-relation-relation-card">
         <div class="mui-card">
-            <div class="mui-card-header mui-card-media">旅行社：<span v-text="order.purchaser"></span></div>
+            <div class="mui-card-header mui-card-media">旅行社：<span v-text="item.purchaser"></span></div>
             <div class="mui-card-content">
                 <div>
                     <div class="basic">
                         <div class="block">
                             <div class="mui-row">
-                                <div class="title">产品名称: <span v-text="order.createTime"></span></div>
+                                <div class="title">产品名称: <span v-text="item.createTime"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">渠道专员: <span v-text="order.personCount"></span></div>
+                                <div class="title">渠道专员: <span v-text="item.personCount"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">有效期: <span v-text="order.tourGuide"></span></div>
+                                <div class="title">有效期: <span v-text="item.tourGuide"></span></div>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,6 @@
     }
     .mui-card-content .block, .count{
         padding: 10px 0 8px 0;
-        border-bottom: 1px solid #c8c7cc;
     }
     .mui-card-content .block > .mui-row{
         display: flex;

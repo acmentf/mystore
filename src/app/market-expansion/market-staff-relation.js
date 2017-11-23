@@ -1,4 +1,4 @@
-import MarketStaffRelation from '@/component/market-expansion/market-staff-relative.vue'
+import MarketStaffRelation from '@/component/market-expansion/market-staff-relation.vue'
 import vueTap from 'v-tap';
 
 Vue.use(vueTap);
