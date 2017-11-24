@@ -203,10 +203,11 @@ class DefaultLayout extends Component {
     goBack(){
         const { location, history } = this.props;
         if( location.pathname == '/group' ){
-            history.goBack();
+            // history.goBack();
             mui.back();
         } else {
-            history.goBack();
+            // history.goBack();
+            mui.back();
         }
     }
 

@@ -36,7 +36,7 @@ class Contact extends React.Component{
         const { pathname, search } = this.props.location;
         const search_obj = qs.parse(search);
         
-        if( pathname.indexOf('group') !== -1 &&
+        if( pathname.indexOf('contact') !== -1 &&
                 pathname.indexOf('_') == -1 &&
                 search.indexOf('ids') !== -1 &&
                 search.indexOf('members') !== -1 ){

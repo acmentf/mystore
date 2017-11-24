@@ -56,7 +56,7 @@ class AddGroupModal extends React.Component {
                  },
                  success: () => {
                      console.log("success")
-                     message.success(`Group ${name} created`)
+                    //  message.success(`Group ${name} created`)
                      this.props.getGroups()
                      this.props.onCancel()
                  },

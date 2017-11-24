@@ -264,7 +264,7 @@ class Chat extends React.Component {
         case "2":
             // add a friend
             this.props.addContact(selectItem)
-            message.success(`${I18n.t("addFriendMessage")}`)
+            // message.success(`${I18n.t("addFriendMessage")}`)
             break
         case "3":
             // delete
@@ -484,7 +484,7 @@ class Chat extends React.Component {
                             />
                         </label>
                         {/*  file upload*/}
-                        <label
+                        {/* <label
                             htmlFor="uploadFile"
                             className="x-chat-ops-icon ib"
                             onClick={() => this.file && this.file.focus() && this.file.click()}>
@@ -496,7 +496,7 @@ class Chat extends React.Component {
                                 type="file"
                                 className="hide"
                             />
-                        </label>
+                        </label> */}
                         {/* webrtc video && audio */}
                         {webrtcButtons}
                         {/* clear */}

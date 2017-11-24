@@ -43,7 +43,7 @@ class JoinGroupModal extends React.Component {
         var options = {
             groupId: this.state.gid,
             success: function(resp) {
-                message.success(`${I18n.t("groupRequest")}${I18n.t("successfully")}`)
+                // message.success(`${I18n.t("groupRequest")}${I18n.t("successfully")}`)
             },
             error: function(e) {
                 if (e.type == 17) {

@@ -78,7 +78,7 @@ WebIM.conn.listen({
             store.dispatch(GroupActions.getGroups())
             break
         case "joinPublicGroupSuccess":
-            message.success(`${I18n.t("joinGroup")} ${msg.from} ${I18n.t("successfully")}`)
+            // message.success(`${I18n.t("joinGroup")} ${msg.from} ${I18n.t("successfully")}`)
             store.dispatch(GroupActions.getGroups())
             break
         case "joinPublicGroupDeclined":
@@ -118,10 +118,10 @@ WebIM.conn.listen({
             }
             break
         case "memberJoinPublicGroupSuccess":
-            message.success(`${msg.mid}${I18n.t("join")}${I18n.t("group")}${msg.from}${I18n.t("successfully")}`)
+            // message.success(`${msg.mid}${I18n.t("join")}${I18n.t("group")}${msg.from}${I18n.t("successfully")}`)
             break
         case "memberJoinChatRoomSuccess":
-            message.success(`${msg.mid}${I18n.t("join")}${I18n.t("chatroom")}${msg.from}${I18n.t("successfully")}`)
+            // message.success(`${msg.mid}${I18n.t("join")}${I18n.t("chatroom")}${msg.from}${I18n.t("successfully")}`)
             break
         case "leaveChatRoom": // Leave the chat room
             break
@@ -131,7 +131,7 @@ WebIM.conn.listen({
             break
         case "removeMute":
             console.log("you was unmuted", msg)
-            message.success(`you was unmuted: ${msg}`)
+            // message.success(`you was unmuted: ${msg}`)
             break
         default:
             break
@@ -300,7 +300,7 @@ WebIM.conn.listen({
         console.log("onInviteMessage", msg)
         store.dispatch(GroupRequestActions.addGroupRequest(msg))
         store.dispatch(GroupActions.getGroups())
-        message.success(`${msg.from}${I18n.t("invite")}${I18n.t("you")}${I18n.t("join")}${msg.roomid}`)
+        // message.success(`${msg.from}${I18n.t("invite")}${I18n.t("you")}${I18n.t("join")}${msg.roomid}`)
     },
     onMutedMessage: msg => {
         console.log("onMutedMessage", msg)
@@ -319,7 +319,7 @@ const { Types, Creators } = createActions({
     logout: () => {
         return (dispatch, state) => {
             let I18N = store.getState().i18n.translations[store.getState().i18n.locale]
-            message.success(I18N.logoutSuccessfully)
+            // message.success(I18N.logoutSuccessfully)
             dispatch(CommonActions.fetching())
             dispatch(LoginActions.logout())
             if (WebIM.conn.isOpened()) {

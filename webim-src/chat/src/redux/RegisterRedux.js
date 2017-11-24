@@ -59,7 +59,7 @@ export const registerRequest = (state = INITIAL_STATE,
 
 export const registerSuccess = (state = INITIAL_STATE, { username }) => {
     let I18N = store.getState().i18n.translations[store.getState().i18n.locale]
-    message.success(username + ", " + I18N.signUpSuccessfully)
+    // message.success(username + ", " + I18N.signUpSuccessfully)
     history.push("/login")
     return Immutable.merge(state, { fetching: false, registerError: null })
 }
