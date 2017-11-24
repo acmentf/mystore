@@ -225,6 +225,18 @@ class DefaultLayout extends Component {
             }
         }
 
+        const goSysMsg = function() {
+            const url = "../../app/message/message.html"
+            if (mui && mui.os.plus) {
+                mui.openWindow({
+                    url: url,
+                    id: url,
+                })
+            } else {
+                window.top.location.href = url
+            }
+        }
+
         // NavTitle
 
         return (
@@ -234,6 +246,9 @@ class DefaultLayout extends Component {
                         mode="light"
                         icon={<Icon type="left" />}
                         onLeftClick={() => this.goBack()}
+                        rightContent={(
+                            <a onClick={goSysMsg}>系统消息</a>
+                        )}
                     >{headerTitle}</NavBar>
                 </Header>
                 <Content className="x-layout-main">
