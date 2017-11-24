@@ -37,6 +37,24 @@
         [v-cloak] {
             display: none !important;
         }
+        .mui-bar {
+            position: relative;
+        }
+        .edit-relation {
+            position: absolute;
+            padding:4px 10px;
+            border: 1px solid #fff;
+            top: 6px;
+            right: 5px;
+            border-radius: 3px;
+            color: #fff;
+            background-color: #3cb493;
+            
+        }
+        .edit-relation:active {
+            background-color: #fff;
+            color: #3cb493;
+        }
     </style>
 </head>
 
@@ -73,6 +91,7 @@
                 <h1 class="mui-title" style="color: #fff;">
                     渠道经理日报
                 </h1>
+                <div class="edit-relation">渠道关系</div>
             </header>
             
             <div class="mui-scroll-wrapper mui-content">

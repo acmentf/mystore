@@ -1564,6 +1564,22 @@ var lf = (function(document, undefined) {
 			options.async = async;
 			this.ajax(url, options);
 		},
+		getJSONWithLoading(url, params, successCallback, errorCallback){
+			lf.nativeUI.showWaiting();
+			lf.net.getJSON(url, params, function(res) {
+				lf.nativeUI.closeWaiting()
+				if (res.code == 200) {
+					if(successCallback) {
+						successCallback(res)
+					}
+				} else {
+					lf.nativeUI.toast(res.msg);
+				}
+			}, function(error) {
+				lf.nativeUI.closeWaiting()
+				lf.nativeUI.toast(error.msg);
+			});
+		},
 		doData: function(data) {
 			data.timestamp = new Date().getTime();
 			var token = window.Role.getSignature();
