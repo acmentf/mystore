@@ -34,6 +34,7 @@ const { Types, Creators } = createActions({
                 success: function(response) {
                     logger.info("getGroups", response.data)
                     dispatch(Creators.updateGroup(response.data))
+                    // callback && callback(response.data)
                 },
                 error: function(e) {
                     WebIM.conn.setPresence()
@@ -127,7 +128,7 @@ export const deleteGroup = (state, { groupId }) => {
     const byId = state.getIn([ "byId" ]).without(groupId)
     const names = []
     _.forEach(byId, (v, k) => {
-        names.push(v.name || v.groupName);
+        names.push(v.name)
     })
     return state.merge({ byId, names })
 }
@@ -191,12 +192,17 @@ export const dissolveGroup = (state, { group }) => {
     const { groupId, groupName } = group
     let byId = state.getIn([ "byId" ]).without(groupId)
     const names = state.getIn([ "names" ]).asMutable()
-    const filtered = names.filter(item => {
-        return item.indexOf(groupId) == -1;
-    });
+    // const filtered = names.filter(item => {
+    //     return item.indexOf(groupId) == -1;
+    // });
+    // return state.merge({
+    //     byId,
+    //     names: filtered
+    // })
+    names.splice(names.indexOf(`${groupName}_#-#_${groupId}`), 1)
     return state.merge({
         byId,
-        names: filtered
+        names: names.sort()
     })
 }
 

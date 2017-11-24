@@ -15,6 +15,7 @@ export default class ModalComponent extends React.Component {
         this.setState({
             visible: true
         })
+        debugger
     }
     handleOk = e => {
         // console.log(e)

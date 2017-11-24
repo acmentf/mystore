@@ -400,10 +400,8 @@ const { Types, Creators } = createActions({
     },
 
     fetchMessage: (id, chatType, offset, cb) => {
-        id = id.split('_').reverse()[0];
         return (dispatch) => {
             AppDB.fetchMessage(id, chatType, offset).then(res => {
-                console.log("fetch message:", res);
                 if (res.length) {
                     dispatch({
                         "type": "FETCH_MESSAGE",

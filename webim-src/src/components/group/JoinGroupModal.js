@@ -47,7 +47,8 @@ class JoinGroupModal extends React.Component {
             },
             error: function(e) {
                 if (e.type == 17) {
-                    message.error(`${I18n.t("already")}${I18n.t("in")}${I18n.t("group")}`)
+                    // message.error(`${I18n.t("already")}${I18n.t("in")}${I18n.t("group")}`)
+                    console.log(`${I18n.t("already")}${I18n.t("in")}${I18n.t("group")}`)
                 }
             }
         }

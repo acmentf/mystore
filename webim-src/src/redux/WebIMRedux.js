@@ -170,13 +170,13 @@ WebIM.conn.listen({
             return
         }
         // 8: offline by multi login
-        // if (error.type == WebIM.statusCode.WEBIM_CONNCTION_SERVER_ERROR) {
-        //     console.log("WEBIM_CONNCTION_SERVER_ERROR")
-        //     message.error(`${I18n.t("offlineByMultiLogin")}`)
+        if (error.type == WebIM.statusCode.WEBIM_CONNCTION_SERVER_ERROR) {
+            console.log("WEBIM_CONNCTION_SERVER_ERROR")
+            message.error(`${I18n.t("offlineByMultiLogin")}`)
         //     // history.push("/login")
         //     history.goBack();
-        //     return
-        // }
+            return
+        }
         if (error.type == 1) {
             let data = error.data ? error.data.data : ""
             data && message.error(data)
