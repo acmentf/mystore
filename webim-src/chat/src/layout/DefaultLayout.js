@@ -205,12 +205,13 @@ class DefaultLayout extends Component {
         const { location, history } = this.props;
         const { selectTab, selectItem } = this.state
 
-        if ((selectTab == "group" && !selectItem) || (selectTab == "contact" && !selectItem)) {
-            history.goBack();
-            mui.back();
-        } else {
-            history.goBack();
-        }
+        mui.back()
+        // if ((selectTab == "group" && !selectItem) || (selectTab == "contact" && !selectItem)) {
+        //     history.goBack();
+        //     mui.back();
+        // } else {
+        //     history.goBack();
+        // }
     }
 
     render() {
