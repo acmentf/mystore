@@ -211,6 +211,13 @@ lf.ready(function() {
         })
     });
 
+    //TODO:
+    mui('body').on('tap', '.edit-relation', function() {
+        var date = this.getAttribute('data-date');
+        lf.window.openWindow('monthly-expect','./monthly-expect.html',{},{
+        })        
+    });
+
     // 退出登录
 	mui('body').on('tap', '#logout', function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
