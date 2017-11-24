@@ -628,6 +628,15 @@
             }
         ])
     }
+    function formatterPercent(params) {
+        let title = params[0] ? params[0].name : ''
+        let content = params.map(item => {
+            return `<span style="display:inline-block;margin-right:5px;border-radius:10px;
+                                                 width:9px;height:9px;background-color:${item.color}"></span>
+                                                 ${item.seriesName}:&nbsp;&nbsp;${item.value}%`
+        }).join('<br>')
+        return title + '<br>' + content
+    }
 
     export default {
         name: 'dailyPaper',
@@ -876,6 +885,7 @@
                     return EMPTY_CHART
                 }
                 let options = getTwoBarLongCategoryChartOption(this.incomeTravelRegionOrderRate)
+                options.tooltip.formatter = formatterPercent
                 options.series.forEach(function (item) {
                     item.label.normal.formatter = '{c}%'
                 })
@@ -886,6 +896,7 @@
                     return EMPTY_CHART
                 }
                 let options = getTwoBarLongCategoryChartOption(this.incomeTravelRegionArriveRate)
+                options.tooltip.formatter = formatterPercent
                 options.series.forEach(function (item) {
                     item.label.normal.formatter = '{c}%'
                 })
