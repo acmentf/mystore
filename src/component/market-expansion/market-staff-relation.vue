@@ -63,11 +63,25 @@
                         deceleration: mui.os.ios ? 0.003 : 0.0009
                     });
                 });
+                this.getOrderProductPurchaserList(1, 'notConnectList');
+            },
+            getOrderProductPurchaserList(flag, listName) {
+                let url = "/purchaser/getOrderProductPurchaserList.htm";
+                let params = {
+                    flag: flag
+                }
+                lf.net.getJSONWithLoading(url, params, function(res) {
+                    this[listName] = res.data;
+                })
             }
         },
         mounted() {
             lf.ready(() =>{
                 this.initMui();
+            });
+            document.querySelector('.mui-slider').addEventListener('slide', (event) => {
+                console.log("mui-slider: ", event.detail.slideNumber);
+                this.getOrderProductPurchaserList(event.detail.slideNumber + 1);
             });
         }
     }

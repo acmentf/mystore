@@ -211,10 +211,10 @@ lf.ready(function() {
         })
     });
 
-    //TODO:
+    // 跳转到 渠道关系列表
     mui('body').on('tap', '.edit-relation', function() {
         var date = this.getAttribute('data-date');
-        lf.window.openWindow('monthly-expect','./monthly-expect.html',{},{
+        lf.window.openWindow('market-staff-relation.html','./market-staff-relation.html',{},{
         })        
     });
 

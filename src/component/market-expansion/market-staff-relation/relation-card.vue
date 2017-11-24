@@ -7,13 +7,13 @@
                     <div class="basic">
                         <div class="block">
                             <div class="mui-row">
-                                <div class="title">产品名称: <span v-text="item.createTime"></span></div>
+                                <div class="title">产品名称: <span v-text="item.alias_name"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">渠道专员: <span v-text="item.personCount"></span></div>
+                                <div class="title">渠道专员: <span v-text="item.user_name"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">有效期: <span v-text="item.tourGuide"></span></div>
+                                <div class="title">有效期: <span v-text="item.begin_date"></span> - <span v-text="item.end_date"></span></div>
                             </div>
                         </div>
                     </div>
