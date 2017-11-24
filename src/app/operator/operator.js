@@ -232,7 +232,7 @@ mui('#app').on('tap', '#selectShootType', function() {
 mui('#app').on('tap', '#showPropsPicker', function() {
 	if(vm.forStatus == 'edit'){
 		if(vm.source == 2) {
-			lf.nativeUI.toast('快速下单无法修改前置属性');
+			lf.nativeUI.toast('快速下单的订单无法修改前置属性');
 			return;
 		}
 		var index = this.getAttribute('data-index');
