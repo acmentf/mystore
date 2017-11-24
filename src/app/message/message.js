@@ -46,12 +46,16 @@ mui('body').on('tap','.footer-personage-btn',function(){
 mui('body').on('tap', '.footer-message-btn', function() {
 	lf.nativeUI.showWaiting();
 	var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{});
+	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview(),function() {
+		lf.nativeUI.closeWaiting();
+	});
 })
 mui('body').on('tap', '.footer-addressbook-btn', function() {
 	lf.nativeUI.showWaiting();
 	var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview());
+	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview(),function() {
+		lf.nativeUI.closeWaiting();
+	});
 })
 //查看消息详情
 mui('body').on('tap','.message-list',function(){

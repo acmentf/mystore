@@ -1786,7 +1786,7 @@ var lf = (function(document, undefined) {
 			});
 			return wv;
 		},
-		_openWindow: function(id, url, styles, extras, closeWV) {
+		_openWindow: function(id, url, styles, extras, closeWV, callback) {
 			if(!$.os.plus) { // 判断 web 或 app
 				var ignoreList = [
 					'orderlist.html',
@@ -1825,6 +1825,7 @@ var lf = (function(document, undefined) {
 			wv = plus.webview.create(url, id, styles, extras);
 			wv.addEventListener("loaded", function() {
 				wv.show();
+				typeof callback == 'function' && callback()
 				if(closeWV) {
 					setTimeout(function() {
 						closeWV.close()

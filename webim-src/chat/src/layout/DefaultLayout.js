@@ -19,6 +19,7 @@ import GroupMemberActions from "@/redux/GroupMemberRedux"
 import MessageActions from "@/redux/MessageRedux"
 import OrganizeActions from "@/redux/OrganizeRedux"
 import { config } from "@/config"
+import { getParameterByName } from "@/utils/utils"
 import { setTimeout } from "timers";
 
 const { SIDER_COL_BREAK, SIDER_COL_WIDTH, SIDER_WIDTH, RIGHT_SIDER_WIDTH } = config
@@ -203,11 +204,10 @@ class DefaultLayout extends Component {
     goBack(){
         const { location, history } = this.props;
         if( location.pathname == '/group' ){
-            // history.goBack();
+            history.goBack();
             mui.back();
         } else {
-            // history.goBack();
-            mui.back();
+            history.goBack();
         }
     }
 
@@ -238,6 +238,8 @@ class DefaultLayout extends Component {
             }
         }
 
+        const isPc = getParameterByName("fromPC")
+
         // NavTitle
 
         return (
@@ -245,10 +247,12 @@ class DefaultLayout extends Component {
                 <Header className="header">
                     <NavBar
                         mode="light"
-                        icon={<Icon type="left" />}
+                        icon={
+                            isPc ? "" : <Icon type="left" />
+                        }
                         onLeftClick={() => this.goBack()}
                         rightContent={(
-                            <a onClick={goSysMsg}>系统消息</a>
+                            <a onClick={goSysMsg} style={{ "display": isPc ? "none" : "block" }}>系统消息</a>
                         )}
                     >{headerTitle}</NavBar>
                 </Header>
