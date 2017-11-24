@@ -241,6 +241,10 @@ class DefaultLayout extends Component {
             }
         }
 
+        const goBack = function(){
+            mui.back()
+        }
+
         const isPc = getParameterByName("fromPC")
 
         // NavTitle
@@ -253,7 +257,7 @@ class DefaultLayout extends Component {
                         icon={
                             isPc ? "" : <Icon type="left" />
                         }
-                        onLeftClick={() => this.goBack()}
+                        onLeftClick={() => {goBack()}}
                         rightContent={(
                             <a onClick={goSysMsg} style={{ "display": isPc ? "none" : "block" }}>系统消息</a>
                         )}
