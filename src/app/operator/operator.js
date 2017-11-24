@@ -17,6 +17,7 @@ var vm = new Vue({
 		amendReserverReasons:'',   //修改原因
 		amendTime:'',   //修改后服务时间
 		overTime: false,  //是否超时
+		exceptCompletedIsTimeover: false,  // 预计服务完成时间是否超时，1:正常，2: 超时 == 1
 		serveInputDisable: false,  //是否禁止修改服务框时间
 		orderstatus:'',
 		preServiceDateChange: false,
@@ -236,7 +237,10 @@ mui('#app').on('tap', '#showPropsPicker', function() {
 			text: '非前置团'
 		}, {
 			value: 1,
-			text: '前置团'
+			text: '应收'
+		}, {
+			value: 2,
+			text: '预付'
 		}]);
 		userPicker.show(function(items) {
 			vm.groupInfo.preProps = items[0].text
@@ -561,7 +565,12 @@ function renderTrackInfo(){
 			}
 			console.log(JSON.stringify(data.data))			
 			if (data.data.isPreTour !== null) {
-				var _pre = data.data.isPreTour == 0 ? '非前置团' : '前置团'
+				var emun = {
+					0: '非前置团',
+					1: '应收',
+					2: '预付'
+				}
+				var _pre = emun[data.data.isPreTour]
 			} else {
 				var _pre = ''
 			}
@@ -572,6 +581,8 @@ function renderTrackInfo(){
 				_prePrice = (data.data.unitPrice / 100).toFixed(2)
 			}
 			vm.orderId = data.data.orderId
+			// 预计服务完成时间是否超时，1:正常，2: 超时 == 1
+			vm.exceptCompletedIsTimeover = data.data.isTimeover == 2
 			vm.groupInfo={
 				areaName :data.data.areaName,//区域
 				assignNames : data.data.assignNames,//导游姓名
