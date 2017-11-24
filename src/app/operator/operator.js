@@ -18,6 +18,7 @@ var vm = new Vue({
 		amendTime:'',   //修改后服务时间
 		overTime: false,  //是否超时
 		exceptCompletedIsTimeover: false,  // 预计服务完成时间是否超时，1:正常，2: 超时 == 1
+		source: 1, //订单来源：1: 门户订单，2: 快速下单
 		serveInputDisable: false,  //是否禁止修改服务框时间
 		orderstatus:'',
 		preServiceDateChange: false,
@@ -230,6 +231,10 @@ mui('#app').on('tap', '#selectShootType', function() {
 //前置属性
 mui('#app').on('tap', '#showPropsPicker', function() {
 	if(vm.forStatus == 'edit'){
+		if(vm.source == 2) {
+			lf.nativeUI.toast('快速下单的订单无法修改前置属性');
+			return;
+		}
 		var index = this.getAttribute('data-index');
 		var userPicker = new mui.PopPicker();
 		userPicker.setData([{
@@ -582,7 +587,8 @@ function renderTrackInfo(){
 			}
 			vm.orderId = data.data.orderId
 			// 预计服务完成时间是否超时，1:正常，2: 超时 == 1
-			vm.exceptCompletedIsTimeover = data.data.isTimeover == 2
+			vm.exceptCompletedIsTimeover = data.data.isTimeover == 2;
+			vm.source = data.data.source;
 			vm.groupInfo={
 				areaName :data.data.areaName,//区域
 				assignNames : data.data.assignNames,//导游姓名
