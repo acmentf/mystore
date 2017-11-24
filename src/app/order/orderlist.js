@@ -42,6 +42,34 @@ var vm = new Vue({
 		}
 	}
 })
+/**
+ * 检出用户的操作权限，关系到 每个订单下方的按钮显示
+ */
+function checkAuth() {
+	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派 
+	vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder'), // 分配
+	vm.outOrder = window.Role.hasAuth('outOrder'), // 填写输出信息
+	vm.saleOutOrder = window.Role.hasAuth('saleOutOrder'), // 销售输出
+	vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
+	vm.summary = window.Role.hasAuth('summary'), // 录入心得
+	vm.confirmOrder = window.Role.hasAuth('confirmOrder'), // 确认完成
+	vm.currentRole = window.Role.userrole;
+	if(window.Role.currentPositions.length>0){
+		vm.currentRoleId = window.Role.currentPositions[0].roleId;
+		console.log("当前用户的角色id"+vm.currentRoleId)
+	}
+	if (vm.currentRoleId == 9) {
+		vm.orderHeader[0].name = '服务中'
+		vm.orderHeader[1].name = '服务完成'
+	} else {
+		vm.orderHeader[0].name = '待处理'
+		vm.orderHeader[1].name = '进行中'
+	}
+	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
+	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
+	// vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder') // 分配按钮的key
+	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
+}
 lf.ready(function() {
 	// 检查版本更新
     GLOBAL_SHOOT.update()
@@ -54,36 +82,14 @@ lf.ready(function() {
 	//genSale 生成销售
 	//summary 录入心得
 	vm.photograherId = window.Role.photograherId,
-		console.log("当前photograherId" + JSON.stringify(window.Role))
-	vm.assignOrder = window.Role.hasAuth('assignOrder'), //计调、指派 
-		vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder'), // 分配
-		vm.outOrder = window.Role.hasAuth('outOrder'), // 填写输出信息
-		vm.saleOutOrder = window.Role.hasAuth('saleOutOrder'), // 销售输出
-		vm.genSale = window.Role.hasAuth('genSale'), // 生成销售
-		vm.summary = window.Role.hasAuth('summary'), // 录入心得
-		vm.confirmOrder = window.Role.hasAuth('confirmOrder'), // 确认完成
-		vm.currentRole = window.Role.userrole;
-		if(window.Role.currentPositions.length>0){
-			vm.currentRoleId = window.Role.currentPositions[0].roleId;
-			console.log("当前用户的角色id"+vm.currentRoleId)
-		}
-		if (vm.currentRoleId == 9) {
-			vm.orderHeader[0].name = '服务中'
-			vm.orderHeader[1].name = '服务完成'
-		} else {
-			vm.orderHeader[0].name = '待处理'
-			vm.orderHeader[1].name = '进行中'
-		}
-	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
-	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
-	// vm.allotPhotoOrder = window.Role.hasAuth('allotPhotoOrder') // 分配按钮的key
-	vm.assignRole = window.Role.hasAuth('assign') // 指派按钮的key
+		// console.log("当前photograherId" + JSON.stringify(window.Role))
+	checkAuth();
 
 	vm.rolePositionId = window.Role.userroleId // 岗位id
 	vm.username = window.Role.username // 用户昵称
 	vm.rolePositionList = window.Role.positions // 岗位列表
 
-	console.log(JSON.stringify(vm.rolePositionList))
+	// console.log(JSON.stringify(vm.rolePositionList))
 	/*if(vm.currentRole == 2){
 		vm.orderHeader = ['全部','待处理','已完成','已取消']
 		vm.orderList.splice(3,1);
@@ -434,7 +440,8 @@ function switchRolePostion(val) {
 		// if (window.Role.currentPositions[0].roleId==12) {
 		//     lf.window.openWindow('daily-manage','../daily-manage/daily-manage.html',{},{})
 		// }
-		
+		checkAuth();
+	
 		if (vm.currentRoleId == 9) {
 			vm.orderHeader[0].name = '服务中'
 			vm.orderHeader[1].name = '服务完成'
@@ -466,7 +473,7 @@ function dodata(type, index, data) {
 
 function getType(index) {
 	var r = "";
-	console.log(index);
+	// console.log(index);
 	switch(index) {
 		case 0:
 			r = 0;
@@ -508,10 +515,10 @@ function initPull() {
 							searchSource: 'list',
 							optype: vm.opType
 						};
-						console.log(JSON.stringify(params));
+						// console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
 							self.endPullDownToRefresh();
-							console.log(JSON.stringify(res));
+							// console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.refresh(true);
 								res.data.result.forEach(function(v, i) {
@@ -521,7 +528,7 @@ function initPull() {
 									}
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
 
-									console.log(JSON.stringify(v.tourGuidePhone));
+									// console.log(JSON.stringify(v.tourGuidePhone));
 								})
 								dodata('down', index, res.data.result)
 								console.log("*******************");
@@ -560,9 +567,9 @@ function initPull() {
 							searchSource: 'list',
 							opType: vm.opType
 						};
-						console.log(JSON.stringify(params));
+						// console.log(JSON.stringify(params));
 						lf.net.getJSON('/order/search', params, function(res) {
-							console.log(JSON.stringify(res));
+							// console.log(JSON.stringify(res));
 							if(res.code == 200) {
 								self.endPullUpToRefresh(vm.pageNos[index] >= res.data.totalPages);
 								res.data.result.forEach(function(v, i) {
@@ -571,7 +578,7 @@ function initPull() {
 										v.saleDate = lf.util.timeStampToDate2(v.saleDate)
 									}
 									v.tourGuidePhone = v.tourGuidePhone.split(',')
-									console.log(JSON.stringify(v.tourGuidePhone));
+									// console.log(JSON.stringify(v.tourGuidePhone));
 								})
 								dodata('up', index, res.data.result)
 								console.log("##############");
@@ -607,7 +614,7 @@ function find(index) {
 		searchSource: 'list'
 	};
 	lf.net.getJSON('/order/search', params, function(res) {
-		console.log(JSON.stringify(res));
+		// console.log(JSON.stringify(res));
 
 		console.log("%%%%%%%%%%%%%%%%%%%%");
 		if(res.code == 200) {
@@ -619,7 +626,7 @@ function find(index) {
 					v.saleDate = lf.util.timeStampToDate2(v.saleDate)
 				}
 				v.tourGuidePhone = v.tourGuidePhone.split(',')
-				console.log(JSON.stringify(v.tourGuidePhone));
+				// console.log(JSON.stringify(v.tourGuidePhone));
 			})
 
 			if(res.data.result.length > 0) {
