@@ -326,7 +326,8 @@ lf.ready(function() {
                 tourGuide: vm.guidName,
                 tourGuidePhone: vm.guidTel,
                 startTime: vm.groupDate,
-                shootType: vm.shootTypeValue
+                shootType: vm.shootTypeValue,
+                fetchPhotoTime: vm.saleDate
             },
             tourGroups: {
                 personCount: vm.groupMemberNum
