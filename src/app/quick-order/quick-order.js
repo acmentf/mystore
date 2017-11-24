@@ -328,7 +328,8 @@ lf.ready(function() {
                 tourGuidePhone: vm.guidTel,
                 startTime: vm.groupDate,
                 shootType: vm.shootTypeValue,
-                purchaser: vm.purchaserStr
+                purchaser: vm.purchaserStr,
+                fetchPhotoTime: vm.saleDate
             },
             tourGroups: {
                 personCount: vm.groupMemberNum

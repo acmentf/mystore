@@ -19,6 +19,7 @@ import GroupMemberActions from "@/redux/GroupMemberRedux"
 import MessageActions from "@/redux/MessageRedux"
 import OrganizeActions from "@/redux/OrganizeRedux"
 import { config } from "@/config"
+import { setTimeout } from "timers";
 
 const { SIDER_COL_BREAK, SIDER_COL_WIDTH, SIDER_WIDTH, RIGHT_SIDER_WIDTH } = config
 const { Header, Content, Footer, Sider, RightSider, OrganzeSider } = Layout
@@ -28,11 +29,9 @@ let chat_message_status = {};
 class DefaultLayout extends Component {
     constructor({ breakpoint, match }) {
         super()
-        let { selectTab, selectItem = "" } = match.params
+        const { selectTab, selectItem = "" } = match.params
 
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-        }
+
         // console.log(selectTab, selectItem, "-----")
 
         this.state = {
@@ -96,43 +95,36 @@ class DefaultLayout extends Component {
         if (selectItem) this.props.quitChatRoom(selectItem)
 
         this.props.switchRightSider({ rightSiderOffset: 0 })
-        history.push(redirectPath + location.search);
+        history.push(redirectPath + location.search)
     }
 
     // switch contact
     changeItem(e) {
         console.log("changeItem", e)
-        const { history, location, group } = this.props;
-        let { selectItem, selectTab } = this.state;
-        const redirectPath = "/" + [ selectTab === "group" ? "group" : "organize", e.key ].join("/");
-        const typeMap = {
-            contact: "chat",
-            group: "groupchat",
-            chatroom: "chatroom",
-            stranger: "stranger"
-        }
+        const { history, location, group } = this.props
+        let { selectItem, selectTab } = this.state
 
         if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
+            selectTab = 'group';
         }
 
-        const key = e.key.split("_").reverse()[0];
+        const redirectPath = "/" + [ selectTab, e.key ].join("/")
+        const typeMap = { contact: "chat", group: "groupchat", chatroom: "chatroom", stranger: "stranger" }
 
         // chatroom will push recent messages automatically
-        if (!chat_message_status[key] && typeMap[selectTab] !== "chatroom") {
-            this.props.fetchMessage(key, typeMap[selectTab])
-            chat_message_status[key] = true
+        if (!chat_message_status[e.key] && typeMap[selectTab] !== "chatroom") {
+            this.props.fetchMessage(e.key, typeMap[selectTab]);
+            chat_message_status[e.key] = true;
         }
 
-        this.props.clearUnread(typeMap[selectTab], key)
+        this.props.clearUnread(typeMap[selectTab], e.key)
 
         if (selectItem == e.key) {
             return
         }
 
         if (selectTab === "group") {
-            const groupId = key
+            const groupId = e.key
             if (groupId) {
                 this.setState({ roomId: groupId })
                 const room = _.get(group, `byId.${groupId}`, {})
@@ -155,7 +147,7 @@ class DefaultLayout extends Component {
             //     this.props.quitChatRoom(selectItem)
             // }
             // join chatroom
-            this.props.joinChatRoom(key)
+            this.props.joinChatRoom(e.key)
         }
 
         history.push(redirectPath + location.search)
@@ -164,11 +156,7 @@ class DefaultLayout extends Component {
     setSelectStatus() {
         const { history, location, match } = this.props
         // console.log(location.patchname, match)
-        let { selectTab, selectItem = "" } = match.params
-        
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-        }
+        const { selectTab, selectItem = "" } = match.params
         // console.log(match)
         this.setState({
             selectTab,
@@ -205,40 +193,21 @@ class DefaultLayout extends Component {
         }
     }
 
-    searchChange = (value) => {
-        this.setState({ searchValue: value });
-    };
-
-    searchEmployee = (value) => {
-        const { history, location } = this.props;
-        if( location.indexOf("group") == -1 ) {
-            let pathname_list = location.pathname.split('/');
-            pathname_list[1] = "organize";
-            history.push(pathname_list.join("/") + location.search);
-    
-            this.props.sortOrganizeList({ value, type: "name" });
+    goBack(){
+        const { location, history } = this.props;
+        if( location.pathname == '/group' ){
+            history.goBack();
+            mui.back();
+        } else {
+            history.goBack();
         }
     }
 
-    searchCancel = () => {
-        this.setState({
-            searchValue: ""
-        }, () => {
-            this.props.sortOrganizeList({ value: "0", type: "id" });
-        });
-    }
-
-    goBack(){
-        const { history } = this.props;
-        history.goBack();
-    }
-
     render() {
-        const { collapsed, selectTab, selectItem, headerTabs, roomId, showOrganize } = this.state;
-        const { login, rightSiderOffset, organizeOffset, location } = this.props;
+        const { collapsed, selectTab, selectItem, headerTabs, roomId } = this.state
+        const { login, rightSiderOffset } = this.props
 
-        const NavTitle = location.pathname.indexOf("organize") !== -1 ? "组织架构" : "通讯录";
-        const mainStyle = location.pathname.indexOf("group") !== -1 ? { top: 45 } : {};
+        // NavTitle
 
         return (
             <Layout>
@@ -247,17 +216,9 @@ class DefaultLayout extends Component {
                         mode="light"
                         icon={<Icon type="left" />}
                         onLeftClick={() => this.goBack()}
-                    >{NavTitle}</NavBar>
-                    { location.pathname.indexOf("group") == -1 &&
-                        <SearchBar
-                            value={this.state.searchValue}
-                            placeholder="搜索"
-                            maxLength={8}
-                            onChange={this.searchChange}
-                            onSubmit={this.searchEmployee}
-                            onCancel={this.searchCancel} /> }
+                    >{"通讯录"}</NavBar>
                 </Header>
-                <Content className="x-layout-main" style={mainStyle}>
+                <Content className="x-layout-main">
                     <div
                         className="x-layout-sider"
                         style={{
@@ -267,11 +228,8 @@ class DefaultLayout extends Component {
                             left: selectItem && collapsed ? "-100%" : 0
                         }}
                     >
-                        <Contact
-                            collapsed={false}
-                            onClick={this.changeItem}
-                            changeTab={this.changeTab}
-                            selectedKeys={[ selectItem ]} />
+                        <Contact collapsed={false} onClick={this.changeItem} selectedKeys={[ selectItem ]}
+                        />
                     </div>
                     <Content
                         className="x-layout-chat"
@@ -311,7 +269,6 @@ export default withRouter(
             group: entities.group,
             login,
             common,
-            organizeOffset: entities.organize.organizeOffset,
             rightSiderOffset: entities.group.rightSiderOffset,
         }),
         dispatch => ({

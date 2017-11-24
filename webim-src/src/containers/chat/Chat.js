@@ -42,12 +42,7 @@ class Chat extends React.Component {
 
     constructor({ match }) {
         super()
-        let { selectTab, selectItem = "" } = match.params
-
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-        }
-
+        const { selectTab, selectItem = "" } = match.params
         this.state = {
             showWebRTC: false,
             selectTab,
@@ -86,13 +81,7 @@ class Chat extends React.Component {
 
     pictureChange(e) {
         const { match } = this.props
-        let { selectItem, selectTab } = match.params;
-        
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
-        }
-
+        const { selectItem, selectTab } = match.params
         const isRoom = chatType[selectTab] == "chatroom" || chatType[selectTab] == "groupchat"
 
         // console.log(e, e.target)
@@ -118,13 +107,7 @@ class Chat extends React.Component {
 
     fileChange(e) {
         const { match } = this.props
-        let { selectItem, selectTab } = match.params;
-
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
-        }
-        
+        const { selectItem, selectTab } = match.params
         const isRoom = chatType[selectTab] == "chatroom" || chatType[selectTab] == "groupchat"
 
         // console.log(e, e.target)
@@ -192,16 +175,9 @@ class Chat extends React.Component {
             message
             // form: { getFieldDecorator, validateFieldsAndScroll }
         } = this.props
-        let { selectItem, selectTab } = match.params;
-
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
-        }
-
+        const { selectItem, selectTab } = match.params
         const { value } = this.state
         if (!value) return
-
         this.props.sendTxtMessage(chatType[selectTab], selectItem, {
             msg: value
         })
@@ -272,13 +248,7 @@ class Chat extends React.Component {
 
     onMenuContactClick({ key }) {
         const { match } = this.props
-        let { selectItem, selectTab } = match.params;
-        
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
-        }
-
+        const { selectItem, selectTab } = match.params
         const search = history.location.search
         switch (key) {
         case "0":
@@ -305,20 +275,9 @@ class Chat extends React.Component {
     }
 
     onClearMessage = () => {
-        let { selectItem, selectTab } = _.get(this.props, [ "match", "params" ], {})
-
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[0];
-        }
-
+        const { selectItem, selectTab } = _.get(this.props, [ "match", "params" ], {})
         console.log(selectItem, selectTab)
-        const chatTypes = {
-            "contact": "chat",
-            "group": "groupchat",
-            "chatroom": "chatroom",
-            "stranger": "stranger"
-        };
+        const chatTypes = { "contact": "chat", "group": "groupchat", "chatroom": "chatroom", "stranger": "stranger" }
         const chatType = chatTypes[selectTab]
         this.props.clearMessage(chatType, selectItem)
     }
@@ -351,8 +310,7 @@ class Chat extends React.Component {
     }
 
     callVideo = () => {
-        let { selectItem } = _.get(this.props, [ "match", "params" ], {})
-        selectItem = selectItem.split('_').reverse()[0];
+        const { selectItem } = _.get(this.props, [ "match", "params" ], {})
         console.log("sendWrapper::callVideo", WebIM.conn.context.userId, selectItem)
         this.setState({
             showWebRTC: true
@@ -362,8 +320,7 @@ class Chat extends React.Component {
     }
 
     callVoice = () => {
-        let { selectItem } = _.get(this.props, [ "match", "params" ], {})
-        selectItem = selectItem.split('_').reverse()[0];
+        const { selectItem } = _.get(this.props, [ "match", "params" ], {})
         console.log("sendWrapper::callVoice", WebIM.conn.context.userId, selectItem)
         this.setState({
             showWebRTC: true
@@ -379,19 +336,8 @@ class Chat extends React.Component {
             setTimeout(function() {
                 console.log(_this.props.messageList)
                 const offset = _this.props.messageList ? _this.props.messageList.length : 0            
-                let { selectItem, selectTab } = _.get(_this.props, [ "match", "params" ], {})
-
-                if( selectTab === 'organize' ){
-                    selectTab = 'contact';
-                    selectItem = selectItem.split('_').reverse()[0];
-                }
-
-                const chatTypes = {
-                    "contact": "chat",
-                    "group": "groupchat",
-                    "chatroom": "chatroom",
-                    "stranger": "stranger"
-                };
+                const { selectItem, selectTab } = _.get(_this.props, [ "match", "params" ], {})
+                const chatTypes = { "contact": "chat", "group": "groupchat", "chatroom": "chatroom", "stranger": "stranger" }
                 const chatType = chatTypes[selectTab]
                 
                 // load more history message
@@ -413,25 +359,19 @@ class Chat extends React.Component {
     }
 
     render() {
-        this.logger.info("chat component render")
         const {
             collapsed,
             match,
             history,
             location,
             messageList,
+            group,
+            organize
         } = this.props
 
-        console.log("messageList:", messageList);
+        console.log("group", group);
 
-        let { selectItem, selectTab } = match.params;
-        
-        if( selectTab === 'organize' ){
-            selectTab = 'contact';
-            selectItem = selectItem.split('_').reverse()[1];
-        } else if( selectTab === 'group' ) {
-            selectItem = selectItem.split('/').reverse()[1];
-        }
+        const { selectItem, selectTab } = match.params
         // console.log(collapsed, selectTab, selectItem)
 
         const back = () => {
@@ -441,6 +381,7 @@ class Chat extends React.Component {
         }
 
         let name = selectItem
+        // let name = group.byId[selectItem] ? group.byId[selectItem].groupName : selectItem;
         let webrtcButtons = []
         if (WebIM.config.isWebRTC && selectTab === "contact") {
             // webrtc video button
@@ -454,6 +395,11 @@ class Chat extends React.Component {
                 <i className="icon iconfont icon-mic"></i>
             </label>)
         }
+
+        let employee = [];
+        organize.organizes.map(item => {
+            item.positionUserList.map(p => employee.push(p));
+        });
 
         const { showWebRTC } = this.state
         return (
@@ -474,7 +420,7 @@ class Chat extends React.Component {
                             : null}
                         {name}
                     </div>
-                    <div className="fr">
+                    {/* <div className="fr">
                         <span style={{ color: "#8798a4", cursor: "pointer" }}>
                             {selectTab === "contact" || selectTab === "stranger"
                                 ? <Dropdown
@@ -486,12 +432,12 @@ class Chat extends React.Component {
                                 </Dropdown>
                                 : <Icon type="ellipsis" onClick={this.handleRightIconClick}/>}
                         </span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="x-chat-content" ref="x-chat-content" onScroll={this.handleScroll}>
                     {/* fixed bug of messageList.map(...) */}
                     {this.state.isLoaded && <div style={{ width:"150px",height:"30px",lineHeight:"30px",backgroundColor:"#888",color:"#fff",borderRadius:"15px", textAlign:"center", margin:"10px auto" }}>{I18n.t("noMoreMessage")}</div>}
-                    {_.map(messageList, message => <ChatMessage key={message.id} {...message} />)}
+                    {_.map(messageList, message => <ChatMessage key={message.id} group={group} employee={employee} {...message} />)}
                 </div>
                 <div className="x-chat-footer">
                     <div className="x-list-item x-chat-ops">
@@ -560,6 +506,8 @@ class Chat extends React.Component {
 
 export default connect(
     (state, props) => ({
+        group: state.entities.group,
+        organize: state.entities.organize,
         messageList: getTabMessages(state, props)
     }),
     dispatch => ({
