@@ -12,7 +12,7 @@ const ContactHead = ({ width, imgUrl, name, className, ...rest }) => {
         )
     }
     if (imgUrl) {
-        content = <img src={imgUrl} />
+        content = <img src={imgUrl} style={{width: '100%'}} />
     }
 
     let size = width + "px"
@@ -25,7 +25,9 @@ const ContactHead = ({ width, imgUrl, name, className, ...rest }) => {
                 height: size,
                 lineHeight: size,
                 fontSize: width / 3,
-                background: '#00ba6e'
+                background: '#00ba6e',
+                borderRadius: width / 2,
+                overflow: 'hidden'
             }}
         >
             {content}

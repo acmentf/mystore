@@ -9,13 +9,7 @@ const chatType = {
 }
 
 const getTabMessageArray = (state, props) => {
-    let { selectTab, selectItem } = props.match.params;
-    
-    if( selectTab === 'organize' ){
-        selectTab = 'contact';
-        selectItem = selectItem.split('_').reverse()[0];
-    }
-    
+    const { selectTab, selectItem } = props.match.params
     return _.get(state, [ "entities", "message", chatType[selectTab], selectItem ])
 }
 

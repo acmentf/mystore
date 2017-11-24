@@ -67,9 +67,9 @@ class App extends Component {
         // 1. check user auth by cookie
         const { hasToken, isLogin, login, loginByToken } = this.props;
         
-        if (hasToken && !debug) {
-            return loginByToken(utils.getUserName(), utils.getToken())
-        }
+        // if (hasToken && !debug) {
+        //     return loginByToken(utils.getUserName(), utils.getToken())
+        // }
 
         if( !isLogin ) {
             return login(utils.getUserName(), utils.getUserName());
@@ -80,7 +80,7 @@ class App extends Component {
         const { isLogin, token, isLoading, loginByToken } = this.props
         const { hasToken } = this.state
         console.log("App render:", isLogin, token, isLoading, hasToken)
-        // if (!isLogin && hasToken && !debug) return <Loading show={true} />
+        if (!isLogin && hasToken && !debug) return <Loading show={true} />
 
         // const authorizedComponent = <AuthorizedComponent {...this.props} token={token} Layout={Layout} />
         // const authorizedComponent = <Layout {...this.props} token={token} />

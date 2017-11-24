@@ -8,15 +8,28 @@ const MenuItemGroup = Menu.ItemGroup
 
 const ContactItem = ({ chatType, items, collapse, hasLogo, ...rest }) => {
     const tabs = items //["Contacts", "Chat", "Public"]
+    const tabsLen = tabs.length
     const tabCls = collapse ? "" : ""
 
     const tabsItem = tabs.map(item =>
-        <Menu.Item key={`${item.name}_${item.id}`} className={tabCls}>
-            <ContactHead className="fl nav-img" name={item.name} width={50} />
+        <Menu.Item key={chatType == "chatroom" || chatType == "group" ? item.id : `${item.name}_${item.id}`} className={tabCls}>
+            <ContactHead className="fl nav-img" name={item.name} imgUrl={item.headImg} width={50} />
             <div className="nav-text">
-                <div>
+                <div style={{width: '135px', overflow: 'hidden'}}>
                     {item.name}
-                    {/* <Badge count={item.unread} style={{ marginLeft: 10 }} /> */}
+
+                    {/*
+                        <Badge
+                        count={109}
+                        style={{
+                            backgroundColor: "#87d068",
+                            marginLeft: 10,
+                            verticalAlign: "middle"
+                        }}
+                    />
+                    */}
+                    {/* {chatType === "group" ? <Badge count={item.unread} style={{ marginLeft: 10 }} /> : ""} */}
+                    <Badge count={item.unread} style={{ marginLeft: 10 }} />
                 </div>
                 <div className="nav-text-desc">
                     {chatType === "organize" ? item.position : item.latestMessage}
@@ -29,7 +42,7 @@ const ContactItem = ({ chatType, items, collapse, hasLogo, ...rest }) => {
     )
 
     return (
-        <Menu id="x-contact-item" mode={"inline"} inlineIndent={24} {...rest} inlineCollapsed={false}>
+        <Menu id="x-contact-item" mode={"inline"} inlineIndent={24} {...rest} onClick={rest.isGroupExist} inlineCollapsed={false}>
             {tabsItem}
         </Menu>
     )

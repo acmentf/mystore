@@ -50,6 +50,8 @@ const { Types, Creators } = createActions({
     },
     loginByToken: (username, token) => {
         return (dispatch, getState) => {
+            dispatch(Creators.setLoging(username, null, token))
+
             if (WebIM.conn.isOpened()) {
                 WebIM.conn.close("logout")
             }
@@ -59,14 +61,10 @@ const { Types, Creators } = createActions({
                 user: username.trim().toLowerCase(),
                 pwd: token,
                 accessToken: token,
-                appKey: WebIM.config.appkey,
+                appKey: WebIM.config.appkey
                 // there is no success callback when login by token
-                success(token) {
-                    dispatch(Creators.setLoging(username, null, token))
-                },
-                error: e => {
-                    dispatch(Creators.stopLoging())
-                }
+                // success(token) {
+                // }
             })
         }
     }

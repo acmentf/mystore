@@ -45,7 +45,7 @@ const { Types, Creators } = createActions({
                     dispatch(GroupActions.switchRightSider({ rightSiderOffset: 0 }))
                     dispatch(Creators.operateGroupMember(groupId, username, "del"))
                     dispatch(GroupActions.deleteGroup(groupId))
-                    history.push("/group")
+                    history.goBack();
                 },
                 error: e => logger.error(`an error found while invoking resultful quitGroup: ${e.message}`)
             })
