@@ -400,7 +400,9 @@ mui('body').on('tap', '#search-order', function() {
 	lf.window.openWindow('search.html', 'search.html', {})
 })
 mui('body').on('tap', '.footer-message-btn', function() {
-	lf.window._openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+	// lf.window._openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
+	var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
+	lf.window._openWindow(redirect, redirect,{},{});
 })
 mui('body').on('tap', '.footer-order-contact-btn', function() {
 	lf.window._openWindow('../correlate-order/correlate-order.html','../correlate-order/correlate-order.html',{},{},lf.window.currentWebview())
