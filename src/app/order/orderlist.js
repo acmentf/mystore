@@ -409,7 +409,7 @@ mui('body').on('tap', '.footer-message-btn', function() {
 	lf.nativeUI.showWaiting();
 	// lf.window._openWindow('../message/message.html','../message/message.html',{},{},lf.window.currentWebview())
 	var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview(),function() {
+	lf.window._openWindow(redirect, redirect,{},{},"",function() {
 		lf.nativeUI.closeWaiting();
 	});
 })
@@ -419,7 +419,7 @@ mui('body').on('tap', '.footer-order-contact-btn', function() {
 mui('body').on('tap', '.footer-addressbook-btn', function() {
 	lf.nativeUI.showWaiting();
 	var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},lf.window.currentWebview(),function() {
+	lf.window._openWindow(redirect, redirect,{},{},"",function() {
 		lf.nativeUI.closeWaiting();
 	});
 })
