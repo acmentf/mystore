@@ -12,6 +12,7 @@ launch.json
 unpackage/
 src/app/test
 webim-src/sdk
+webim-src/chat/node_modules
 webim-src/webrtc
 src/js/framework/define.js
 #忽略node_modules下大部分文件
