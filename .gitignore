@@ -11,9 +11,9 @@ launch.json
 *.css.map
 unpackage/
 src/app/test
-webim-src/sdk
+webim-src/sdk/node_modules
 webim-src/chat/node_modules
-webim-src/webrtc
+webim-src/webrtc/node_modules
 src/js/framework/define.js
 #忽略node_modules下大部分文件
 node_modules
