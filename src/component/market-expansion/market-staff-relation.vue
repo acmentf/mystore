@@ -78,16 +78,17 @@
         mounted() {
             lf.ready(() =>{
                 this.initMui();
-            });
-            document.querySelector('.mui-slider').addEventListener('slide', (event) => {
-                let flag = event.detail.slideNumber + 1;
-                let listNameArr = ['notConnectList', 'hadConnectList']
-                this.getOrderProductPurchaserList(flag, listNameArr[event.detail.slideNumber]);
-            });
-            lf.event.listener('refresh', function(e) {
-                lf.window.currentWebview().reload()
-                // 刷新父级窗口 manager-daily.html
-                lf.event.fire(lf.window.currentWebview().opener(),'refreshData')
+                document.querySelector('.mui-slider').addEventListener('slide', (event) => {
+                    let flag = event.detail.slideNumber + 1;
+                    let listNameArr = ['notConnectList', 'hadConnectList']
+                    this.getOrderProductPurchaserList(flag, listNameArr[event.detail.slideNumber]);
+                });
+                lf.event.listener('refreshMarketStaffRelation', function(e) {
+                    console.log("market-staff-relation refresh");
+                    lf.window.currentWebview().reload()
+                    // 刷新父级窗口 manager-daily.html
+                    lf.event.fire(lf.window.currentWebview().opener(),'refreshData')
+                });
             });
         }
     }

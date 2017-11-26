@@ -140,7 +140,7 @@ export default {
                 if(res.code == '200') {
                     lf.nativeUI.toast('保存成功');
                     // 刷新父级窗口 market-staff-relation.html
-                    lf.event.fire(lf.window.currentWebview().opener(),'refresh')
+                    lf.event.fire(lf.window.currentWebview().opener(),'refreshMarketStaffRelation')
                 }
             })
         },
@@ -273,8 +273,6 @@ export default {
                     that.positionId = selectedItem[0].positionId;
                 })
             });
-
-            
         })
     }
 };
@@ -300,13 +298,15 @@ export default {
         }
     }
     .mui-input-row label {
-        width: 40%;
+        width: 45%;
         .required {
             color: red;
         }
     }
     .mui-input-row input {
         width: 50%;
+        line-height: 1.2;
+        font-size: 0.3rem;
     }
 }
 </style>
