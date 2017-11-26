@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>渠道专员日报</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -35,12 +35,16 @@
         .version {
             text-align: center
         }
+
+        [v-cloak] {
+            display: none !important;
+        }
     </style>
     <script src="../../js/framework/common.js"></script>
 </head>
 
 <body>
-    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app">
+    <div class="mui-off-canvas-wrap mui-draggable orderlist-content-box" id="app" v-cloak>
         <!--侧滑菜单部分-->
         <aside id="offCanvasSide" class="mui-off-canvas-left">
             <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
@@ -70,12 +74,16 @@
             <header class="mui-bar mui-bar-nav" style="background:#3db391;">
                 <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
                 <h1 class="mui-title" style="color: #fff;">
-                    地推计划
+                    渠道人员日报
                 </h1>
             </header>
             
-            <div class="mui-content">
-                <div >
+            <div class="mui-scroll-wrapper mui-content">
+                <div class="mui-scroll">
+                    <section class="section-0">
+                        <div>本月预期销售额任务：</div>
+                        <div id="missionProgress" class="num">{{monthAmount}}/{{monthPlanAmt}}</div>
+                    </section>
                     <section class="section-1 section-container">
                         <div>
                             <div class="day" id="preDay">
@@ -83,61 +91,44 @@
                             </div>
                             <div class="date" id="dateSelected" v-text="">{{date.dateText|dayFormatter}}</div>
                             <div class="day" id="nextDay">
-                                <span class="mui-icon mui-icon-arrowright"></span>
+                                <span class="mui-icon mui-icon-arrowright">
+                                </span>
                             </div>
                         </div>
                     </section>
-                    <section class="section-2 section-container">
-                        <ul class="mui-table-view">
-                            <li class="mui-table-view-cell">
-                                <a class="mui-navigate-right">
-                                    <div class="table-item">
-                                        <div class="mui-pull-left left-part">团人数完成率</div>
-                                        <div class="mui-pull-right right-part">
-                                            <div class="summary">
-                                                <span v-text="planCompletedDetail.peopleComletionRate + '%'"></span>
-                                                <!-- <span>cddd级</span> -->
-                                            </div>
-                                            <div>
-                                                <span v-text="planCompletedDetail.completedPeople"></span>/<span v-text="planCompletedDetail.planPeople"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mui-table-view-cell">
-                                <a class="mui-navigate-right">
-                                    <div class="table-item">
-                                        <div class="mui-pull-left left-part">前置金额完成率</div>
-                                        <div class="mui-pull-right right-part">
-                                            <div class="summary">
-                                                <span v-text="planCompletedDetail.amountComletionRate + '%'"></span>
-                                                <!-- <span>c级</span> -->
-                                            </div>
-                                            <div>
-                                                <span v-text="planCompletedDetail.completedAmount"></span>/<span v-text="planCompletedDetail.planAmount"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+                    <section class="section-2 section-container" 
+                        :data-userid="planCompletedListPerson.userId" 
+                        :data-date="date.dateText" 
+                        :data-user-name="planCompletedListPerson.userName">
+                        <expansion-completed-summary :item="planCompletedListPerson">
+                        </expansion-completed-summary>
                     </section>
-                    
+                    <div class="remark" style="display: none;">
+                        <p>备注</p>
+                        <p>
+                            <span class="placeholder" v-text="planCompletedListPerson.remark ? planCompletedListPerson.remark : '请输入缺填或数据偏差大的原因'"></span>
+                            <span class="right mui-icon mui-icon-arrowright"></span>
+                        </p>
+                    </div>
                     <section class="section-3 section-container">
-                        <div class="title">未来到团计划</div>
+                        <div class="title">未来到团计划</div>                        
                         <ul class="mui-table-view">
-                            <li class="mui-table-view-cell table-header">
-                                <div>日期</div>
-                                <div>团人数</div>
-                                <div>前置金额</div>
-                                <div>今天备注</div>
-                            </li>
-                            <li class="mui-table-view-cell table-item" v-for="item in planList" :key="item.index">
-                                <div>{{item.planTime|dateFormatter}}</div>
-                                <div>{{item.planPreNum}}</div>
-                                <div>{{item.planPreAmount|toFixed2}}</div>
-                                <div>{{item.remark|lengthTo8}}</div>
+                            <li class="mui-table-view-cell" v-for="(item, key) in planList" :key="key">
+                                <div class="date">{{item.planTime|dateFormatter}}</div>
+                                <div class="content">
+                                    <div>
+                                        <div>预期销售额</div>
+                                        <div>{{expectAmount}}</div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div>
+                                        <div>计划销售额</div>
+                                        <div>{{item.planPreNum|toFixed2}}</div>
+                                        <div>计划流量数</div>
+                                        <div v-text="item.planPreAmount"></div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </section>
@@ -148,7 +139,7 @@
 				<button type="button" id="toExpansionPlan" class="mui-btn mui-btn-primary">填报计划</button>
 			</footer>
         </div>
-
+    </div>
         <script src="../../js/mui.min.js"></script>
         <script src="../../js/mui.picker.min.js"></script>
         <script src="../../js/mui.dtpicker.js"></script>
@@ -156,7 +147,9 @@
         <script src="../../js/framework/styles.js"></script>
         <script src="../../js/framework/lf.js"></script>
         <script src="../../libs/vue.min.js"></script>
-        <script src="../update.js"></script>
+        <script src="./component/less.min.js"></script>
+        <script src="./minix/userPositionInfo.js"></script>
+        <script src="./component/expansion-completed-summary.js"></script>
         <script src="market-expansion.js"></script>
 </body>
 

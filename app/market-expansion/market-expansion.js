@@ -1,3 +1,4 @@
+
 Vue.filter('dateFormatter', function(date){
     var reg = /^NaN/;
     var result = new Date(date).format('yyyy-MM-dd');
@@ -35,7 +36,8 @@ Vue.filter('lengthTo8', function(value){
 
 var vm = new Vue({
     el: '#app',
-    data() {
+    mixins: [userPositionInfoMinix],
+    data: function() {
         return {
             date: {
                 dateText: new Date().format('yyyy-MM-dd'),
@@ -56,11 +58,25 @@ var vm = new Vue({
                     remark: ''
                 }
             ],
-            username: '',
-            rolePositionList: [],
-            rolePositionId: '',
-            currentRoleId:'',//当前用户角色id,
-            wgtVer: '1.4.6'
+            planCompletedList: [{}],
+            monthAmount: 0,
+            monthPlanAmt: 0
+        }
+    },
+    computed: {
+        expectAmount: function() {
+            if(this.planCompletedList.length == 0) {
+                return 0;
+            } else {
+                return this.planCompletedList[0].expectAmount;
+            }
+        },
+        planCompletedListPerson: function() {
+            if(this.planCompletedList.length == 0) {
+                return {};
+            } else {
+                return this.planCompletedList[0];
+            }
         }
     },
     watch: {
@@ -70,6 +86,8 @@ var vm = new Vue({
 		}
 	}
 });
+
+
 
 function Watcher() {
     this._subs = [];
@@ -91,24 +109,25 @@ var subVm = {
     }
 }
 
-var planCompletedRatio = {
+var planCompleted = {
     setData: function(data){
-        for(var attr in data) {
-            Vue.set(vm.planCompletedDetail, attr, data[attr]);
-        }
+        vm.planCompletedList = data.dailyList.length > 0 ? data.dailyList : [{}];
+        vm.monthAmount = data.monthAmount || 0;
+        vm.monthPlanAmt = data.monthPlanAmt || 0;
     },
     update: function(date) {
         this.getDataByDate(date);
     },
     getDataByDate: function(date){
         var params = {
-            startDate: date,
-            endDate: date
+            startDate: date
         };
         var that = this;
-        lf.net.getJSON('/report/newAnalysis/dtPlannedComletionRate', params, function(res){
+        lf.nativeUI.showWaiting();
+        lf.net.getJSON('/report/newAnalysis/channelPlanDetail', params, function(res){
+            lf.nativeUI.closeWaiting();
             if(res.code == 200) {
-                var resData = res.data.dataList[0].list[0];
+                var resData = res.data;
                 if(resData) {
                     that.setData(resData);
                 } else {
@@ -116,12 +135,15 @@ var planCompletedRatio = {
             } else {
                 lf.nativeUI.toast(res.msg);
             }
+        }, function(erro) {
+            lf.nativeUI.closeWaiting();
+            lf.nativeUI.toast(erro.msg);
         })
     }
 };
 
 var dateWatcher = new Watcher();
-dateWatcher.addSub(planCompletedRatio);
+dateWatcher.addSub(planCompleted);
 dateWatcher.addSub(subVm);
 
 var dateSelector = {
@@ -193,107 +215,114 @@ function initPage() {
         } else {
             lf.nativeUI.toast(res.msg);
         }
-    })
-}
-
-// 岗位切换
-function switchRolePostion(val) {
-    var params = {
-        positionId: val
-    };
-    lf.nativeUI.showWaiting();
-    lf.net.getJSON('user/switchPosition', params, function(data) {
-        console.log(JSON.stringify(data));
-        if(data.code == 200) {
-            lf.nativeUI.closeWaiting();
-            var obj = {
-                usercode: data.data.id,
-                username: data.data.name,
-                phone: data.data.phone,
-                companyId: data.data.companyId,
-                userrole: data.data.positions[0].type,
-                userroleName: data.data.positions[0].name,
-                userroleId: data.data.positions[0].id,
-                tonken: data.data.token,
-                loginsign: '1',
-                auths: data.data.auths,
-                positions: data.data.userPositionList,
-                currentPositions: data.data.positions,
-                photograherId: data.data.photograherId
-            }
-            window.Role.save(obj)
-            lf.nativeUI.toast('切换岗位成功');
-
-            var windowCurrentPositionRoleId = window.Role.currentPositions[0].roleId;
-            
-            if(windowCurrentPositionRoleId == ROLE_EMUN.cityManager.id) {
-                // 城市经理
-                lf.window.openWindow(ROLE_EMUN.cityManager.windowId, '../' + ROLE_EMUN.cityManager.pageUrl,{},{});
-            } else if (windowCurrentPositionRoleId == ROLE_EMUN.commissioner.id) {
-                // 渠道 
-                // lf.window.openWindow(ROLE_EMUN.commissioner.windowId, ROLE_EMUN.commissioner.pageUrl,{},{});
-            } else if (windowCurrentPositionRoleId == ROLE_EMUN.officeManager.id) {
-                //总经办
-                lf.window.openWindow(ROLE_EMUN.officeManager.windowId, '../' + ROLE_EMUN.officeManager.pageUrl,{},{});
-            } else {
-                lf.window.openWindow('order','../order/orderlist.html',{},{});
-            }
-
-            // if (window.Role.currentPositions[0].roleId!=12) {
-            //     lf.window.openWindow('order','../order/orderlist.html',{},{})
-            // }
-        } else {
-            lf.nativeUI.closeWaiting();
-            lf.nativeUI.toast(data.msg);
-        }
     }, function(erro) {
         lf.nativeUI.closeWaiting();
         lf.nativeUI.toast(erro.msg);
     })
 }
 
+// 岗位切换
+function switchRolePostion(val) {
+    GLOBAL_SHOOT.switchPosition(val, function() {
+        var roleId = window.Role.currentPositions[0].roleId;
+        var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 1);
+        if(windowParams) {
+            GLOBAL_SHOOT.switchPositionOpenWindow(windowParams.windowId,windowParams.pageUrl,{},{},lf.window.currentWebview())
+        } else {
+            GLOBAL_SHOOT.switchPositionOpenWindow('order','../order/orderlist.html',{},{},lf.window.currentWebview())
+        }
+    })
+}
+
 lf.ready(function() {
+    // 检查版本更新
+    GLOBAL_SHOOT.update()
+    // 设置版本号
+    GLOBAL_SHOOT.setVersion(vm)
+    
     vm.rolePositionId = window.Role.userroleId // 岗位id
 	vm.username = window.Role.username // 用户昵称
     vm.rolePositionList = window.Role.positions // 岗位列表
     
-    
+    mui('.mui-scroll-wrapper').scroll({
+		bounce: false,
+		indicators: true, //是否显示滚动条
+		deceleration: mui.os.ios ? 0.003 : 0.0009
+    });
     
     mui('body').on('tap', '#dateSelected', function(){
+        // 日期选择
         dtPicker.setSelectedValue(new Date(dateSelector.getValue()).format('yyyy-MM-dd'));
         dtPicker.show(function(selectedItem) {
             dateSelector.setValue(selectedItem.text);
         });
     });
     mui('body').on('tap', '#preDay', function(){
+        // 前一天
         dateSelector.pre();
     });
     mui('body').on('tap', '#nextDay', function(){
+        // 后一天
         dateSelector.next();
     });
     mui('body').on('tap', '#toExpansionPlan', function() {
-        lf.window.openWindow('expansion-plan','../market-expansion/expansion-plan.html',{},{})        
+        // 填写计划
+        var expectAmount = vm.expectAmount;
+        lf.window.openWindow('expansion-plan','../market-expansion/expansion-plan.html',{},{
+            expectAmount: expectAmount
+        })        
     });
 
     mui('body').on('tap', '.section-2', function() {
-        lf.window.openWindow('group-plan-completion','../market-expansion/group-plan-completion.html',{},{
-            date: dateSelector.getValue()
-        })
+        // 计划完成详情
+        var userId = this.getAttribute('data-userid');
+        var date = this.getAttribute('data-date');
+        var userName = this.getAttribute('data-user-name');
+
+        if(userId == undefined || userName == undefined) {
+            lf.nativeUI.toast("没有更多详情");
+        } else {
+            // 个人日报数据详情
+            lf.window.openWindow('person-daily-detail', './person-daily-detail.html', {}, {
+                userId: userId,
+                date: date,
+                userName: userName
+            })
+        }
+        
+        
     });
+    mui('body').on('tap', '.remark', function(){
+        lf.window.openWindow('market-expansion-remark', './remark.html', {}, {
+            planDate: this.getAttribute('data-planDate'),
+			planPersons: this.getAttribute('data-planPersons'),
+			planAmount: this.getAttribute('data-planAmount'),
+			planShootNums: this.getAttribute('data-planShootNums'),
+			remark: this.getAttribute('data-remark')
+        })
+    })
 
     // 退出登录
 	mui('body').on('tap', '#logout', function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
 			if(e.index == 0) {
 				window.Role.logout();
-				lf.window.openWindow('login','../login.html',{},{})
-				// plus.runtime.restart();
+				// lf.window.openWindow('login','../login.html',{},{})
+				plus.runtime.restart();
 			}
 		});
-	})
+    })
 
-
-    
     initPage();
     
+    lf.event.listener('refreshData', function(e) {
+        lf.window.currentWebview().reload()
+    })
+
+    function getVersion() {
+        plus.runtime.getProperty(plus.runtime.appid,function(inf){
+            vm.wgtVer = inf.version;
+            console.log("当前应用版本：" + vm.wgtVer);
+        });
+    }
 })

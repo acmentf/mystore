@@ -20,6 +20,33 @@
 .section-container {
     margin-top: 10px;
 }
+.section-0 {
+    display: flex;
+    padding: 0 25px;
+    background: #fff;
+    font-size: 0.30rem;
+}
+
+.section-0 div {
+    flex: 1;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.section-0 .num {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+}
+
+.remark {
+    padding:12px 10px;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
 .section-1 {
     background: #fff;
 }
@@ -31,17 +58,12 @@
     text-align: center;
     /* border-right: 1px solid red; */
 }
-.section-1 .week {
-    flex: 1;
-}
 .section-1 .day {
     flex: 1;
 }
 .section-1 .date {
     flex: 4;
-}
-.section-1 .today {
-    flex: 1;
+    font-size: 0.3rem;
 }
 
 .section-2 {
@@ -70,7 +92,8 @@
 }
 
 .section-3 {
-
+    margin-top: 0;
+    padding-bottom: 54px;
 }
 .section-3 .title {
     background: #fff;
@@ -80,33 +103,22 @@
 .section-3 .mui-table-view-cell.mui-active {
     background-color: #fff;
 }
-.section-3 .mui-table-view .mui-table-view-cell {
-    display: flex;
-}
 .section-3 .mui-table-view .mui-table-view-cell:after {
     right: 15px;
 }
-.section-3 .mui-table-view .mui-table-view-cell div {
-    /* flex: 1; */
-    text-align: center;
-    /* border-right: 1px solid red; */
+.section-3 .mui-table-view-cell .date {
+    height: 0.6rem;
+    line-height: 0.6rem;
 }
-.section-3 .mui-table-view .mui-table-view-cell div:nth-child(1) {
-    flex: 1.3;
-}
-.section-3 .mui-table-view .mui-table-view-cell div:nth-child(2) {
-    flex: 1;
-}
-.section-3 .mui-table-view .mui-table-view-cell div:nth-child(3) {
-    flex: 1;
-}
-.section-3 .mui-table-view .mui-table-view-cell div:nth-child(4) {
-    flex: 2;
-}    
+/* .section-3 .mui-table-view-cell .content {
 
-.section-3 .mui-table-view .table-header {
-    font-size: 0.30rem;
-}
-.section-3 .mui-table-view .table-item {
+} */
+.section-3 .mui-table-view-cell .content>div {
+    display: flex;
     font-size: 0.3rem;
+}
+.section-3 .mui-table-view-cell .content>div>div {
+    flex: 1;
+    height: 0.6rem;
+    line-height: 0.6rem;
 }

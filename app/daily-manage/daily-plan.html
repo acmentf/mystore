@@ -31,17 +31,24 @@
                     <span v-text="item.planDate"></span>
                     <span class="badge" v-if="item.flag==1">计划被改</span>
                 </div>
-                <div class="mui-input-row">
-                    <label class="order-pay-list-key">预发团人数</label>
-                    <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planPersons')" @blur="inputValue($event,index,'planPersons')" @input="formChange($event,index,'planPersons')" :value="item.planPersons" placeholder="请填写人数">
-                </div>
-                <div class="mui-input-row">
-                    <label class="order-pay-list-key">预拍人数</label>
-                    <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planShootNums')" @blur="inputValue($event,index,'planShootNums')" @input="formChange($event,index,'planShootNums')" :value="item.planShootNums" placeholder="请填写人数">
-                </div>
-                <div class="mui-input-row">
-                    <label class="order-pay-list-key">预销售额</label>
-                    <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planAmount')" @blur="inputValue($event,index,'planAmount')" @input="formChange($event,index,'planAmount')" :value="item.planAmount" placeholder="请填写销售额">
+                <div class="mui-row">
+                    <div class="mui-input-row">
+                        <label>预期实销金额</label>
+                        <span class="text">{{item.expectAmount}}</span>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>计划实销金额</label>
+                        <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planAmount')" @blur="inputValue($event,index,'planAmount')" @input="formChange($event,index,'planAmount')" :value="item.planAmount" placeholder="请填写销售额">
+                    </div>
+                    <div class="line"></div>
+                    <div class="mui-input-row">
+                        <label>预期发团人数</label>
+                        <span class="text">{{item.expectPersons}}</span>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>计划发团人数</label>
+                        <input type="number" class="mui-input-clear" @focus="clearValue($event,index,'planPersons')" @blur="inputValue($event,index,'planPersons')" @input="formChange($event,index,'planPersons')" :value="item.planPersons" placeholder="请填写人数">
+                    </div>
                 </div>
             </div>
         </main>

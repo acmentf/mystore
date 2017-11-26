@@ -19,18 +19,25 @@ Vue.filter('toFixed2', function(value) {
 
 var vm = new Vue({
     el: '#app',
-    data() {
+    data: function() {
         return {
             planList: [
-            ]
+            ],
+            expectAmount: 0
         }
     }
 });
 
 lf.ready(function(){
-    lf.nativeUI.showWaiting()
+    var expectAmount;
+    if(mui.os.plus) {
+        expectAmount = lf.window.currentWebview().expectAmount;
+    } else {
+        expectAmount = lf.window.getPageParams('expansion-plan').expectAmount;
+    }
+    vm.expectAmount = expectAmount;
     // 获取计划列表
-    // lf.net.getJSON('/purchaserPlan/getPlanThree.htm', {
+    lf.nativeUI.showWaiting()
     lf.net.getJSON('/purchaser/getPurchaserPlan', {
         userId: window.Role.usercode,
         date: new Date().format('yyyy-MM-dd')
@@ -41,6 +48,9 @@ lf.ready(function(){
         } else {
             lf.nativeUI.toast(data.msg);
         }
+    }, function(err) {
+        lf.nativeUI.closeWaiting();
+        lf.nativeUI.toast(err.msg);
     });
 
     mui('body').on('tap', '#save', function() {
@@ -67,11 +77,19 @@ lf.ready(function(){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 lf.nativeUI.toast('保存成功');
+                refreshParentView();
             } else {
                 lf.nativeUI.toast(res.msg);
             }
+        }, function(err) {
+            lf.nativeUI.closeWaiting();
+            lf.nativeUI.toast(err.msg);
         })
     })
+
+    function refreshParentView() {
+        lf.event.fire(lf.window.currentWebview().opener(), 'refreshData', {})
+    }
 
     function validateData(data) {
         // debugger

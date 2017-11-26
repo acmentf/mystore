@@ -124,25 +124,21 @@ mui('.order-result').on('tap', '.save-btn', function(){
 //			flag = false
 //			return
 //		}
-		if(vm.serverPerNum ==''){
-			lf.nativeUI.toast('请填写实际服务到达人数')
+		if(!vm.serverPerNum){
+			lf.nativeUI.toast('请填写实际服务人数')
 			flag = false
 			return
 		}
 		vm.printOrderXms.forEach(function(v){
-			if(v.picNum){
-				if(!v.picSize){
-					lf.nativeUI.toast('请选择打印尺寸')
-					flag = false;
-					return
-				}
+			if(!v.picSize){
+				lf.nativeUI.toast('请选择打印尺寸')
+				flag = false;
+				return
 			}
-			if(v.picSize){
-				if(!v.picNum){
+			if(!v.picNum){
 				lf.nativeUI.toast('请输入打印数张数')
 				flag = false
 				return
-				}
 			}
 		})
 		var orderX = []

@@ -1,0 +1,99 @@
+.mui-bar-footer{
+    height: 54px;
+}
+
+.mui-btn-primary{
+    width: 100%;
+    background-color: #3eb392;
+    border-color:#3eb392;
+    padding: 10px 12px 10px !important;
+}
+
+.mui-bar + main.mui-content {
+    padding-bottom: 70px;
+}
+
+.version {
+    text-align: center
+}
+
+.section-container {
+    margin-top: 10px;
+}
+
+.section-0 {
+    display: flex;
+    padding: 0 25px;
+    background: #fff;
+    font-size: 0.30rem;
+}
+
+.section-0 div {
+    flex: 1;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.section-0 .num {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+}
+.section-1 {
+    background: #fff;
+}
+.section-1>div {
+    padding: 11px 15px;
+    display: flex;
+}
+.section-1 div {
+    text-align: center;
+    /* border-right: 1px solid red; */
+}
+.section-1 .week {
+    flex: 1;
+}
+.section-1 .day {
+    flex: 1;
+}
+.section-1 .date {
+    flex: 4;
+}
+.section-1 .today {
+    flex: 1;
+}
+.section-2 .person-wrap {
+    position: relative;
+    padding: 0 15px;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    display: flex;
+    font-size: 0.3rem;
+    background: #fff;
+    
+}
+
+.section-2 .section-2-block {
+    margin-bottom: 20px;
+}
+.section-2 .section-2-block .border {
+    padding: 0 15px;
+    background: #fff;
+}
+.section-2 .section-2-block .border .border-line {
+    height: 1px;
+    background: #ccc;
+}
+
+.section-2 .person-wrap div {
+    flex: 1;
+}
+.section-2 .person-wrap div.name {
+
+}
+.section-2 .person-wrap div.btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #3eb392;
+}    

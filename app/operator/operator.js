@@ -7,6 +7,7 @@ var vm = new Vue({
 		forStatus:'check',//check是查看，edit是直接能编辑的
 		orderId:null,
 		operatorHeader: ['团信息', '行程信息', '拍摄信息'],
+		shootTypeArr: ['跟团', '驻点', '散团'],
 		journeyList: [], // 拍摄景点多选列表
 		journeyListed: [], // 已选择拍摄景点列表
 		currentJourneyIndex: '', // 当前选择的景点
@@ -22,6 +23,8 @@ var vm = new Vue({
 		groupInfo:{//存放所有团信息
 			groupType:'',//团队性质
 			groupTypeValue:'',//团队性质的value
+			shootType:'',//团队性质
+			shootTypeValue:'',//团队性质的value
 			preProps:'',//前置属性,
 			prePropsValue: ''
 		},
@@ -138,6 +141,31 @@ mui('#app').on('tap', '#showUserPicker', function() {
 	}
 })
 
+//拍摄类型
+mui('#app').on('tap', '#selectShootType', function() {
+	if(vm.forStatus == 'edit'){
+		var index = this.getAttribute('data-index');
+		var userPicker = new mui.PopPicker();
+		userPicker.setData([{
+			value: '1',
+			text: '跟团'
+		}, {
+			value: '2',
+			text: '驻点'
+		}, {
+			value: '3',
+			text: '散团'
+		}]);
+		userPicker.show(function(items) {
+			vm.groupInfo.shootType = items[0].text
+			vm.groupInfo.shootTypeValue = items[0].value
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		}, false);
+	}
+})
+
+
 //前置属性
 mui('#app').on('tap', '#showPropsPicker', function() {
 	if(vm.forStatus == 'edit'){
@@ -198,7 +226,19 @@ mui('#app').on('tap', '.psrq', function() {
 		var options = JSON.parse(optionsJson);
 		var picker = new mui.DtPicker(options);
 		picker.show(function(rs) {
-			vm.shootInfos[index].shootTime = rs.text;
+			// 无法拍摄状态下，不能选今天以前的日期
+			var isChangeDate = new Date(rs.text.replace(/-/g, '/')) >= new Date(new Date().toLocaleDateString())
+
+			if (vm.shootInfos[index].isConfirmShot == 2) {
+				if (isChangeDate) {
+					vm.shootInfos[index].shootTime = rs.text
+				} else {
+					lf.nativeUI.toast('无法拍摄状态下，不能选今天以前的日期')
+				}
+			} else {
+				vm.shootInfos[index].shootTime = rs.text
+			}
+
 			picker.dispose();
 		});
 	}
@@ -334,6 +374,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 				tourGuidePhone : vm.groupInfo.tourGuidePhone,//导游电话
 				isPreTour :vm.groupInfo.prePropsValue,//前置属性
 				prePrice :vm.groupInfo.prePrice * 100,//前置金额
+				shootType :vm.groupInfo.shootTypeValue,//拍摄类型
 		},
 		tourGroups: {
 				id: vm.marchInfo.id,
@@ -356,6 +397,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 			vm.forStatus = 'check'
 
 			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+			lf.window.currentWebview().reload()
 		} else {
 //			lf.nativeUI.toast(data.msg);
 			lf.nativeUI.toast(data.code);
@@ -417,6 +459,7 @@ function renderTrackInfo(){
 				assignNames : data.data.assignNames,//导游姓名
 				lineName :data.data.lineName,//线路名称
 				groupType :data.data.groupType,//团性质
+				shootType :vm.shootTypeArr[data.data.shootType - 1],//拍摄类型
 				personCount : data.data.personCount,//团人数
 				preProps : _pre,//前置属性
 				prePropsValue : data.data.isPreTour,//前置属性

@@ -1,0 +1,52 @@
+.mui-scroll {
+  padding: 0 15px 10px; }
+
+.section {
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 0.3rem;
+  border-radius: 5px; }
+  .section > div {
+    display: flex; }
+    .section > div > div {
+      height: 0.6rem;
+      line-height: 0.6rem;
+      flex: 1; }
+    .section > div > div:nth-child(1) {
+      flex: 1; }
+    .section > div > div:nth-child(2) {
+      flex: 2;
+      text-align: right; }
+  .section ul {
+    list-style: none;
+    padding: 0 15px;
+    margin: 0;
+    padding: 0; }
+    .section ul li {
+      border-bottom: 1px solid #ccc; }
+      .section ul li > div {
+        display: flex; }
+        .section ul li > div > div {
+          height: 0.6rem;
+          line-height: 0.6rem;
+          flex: 1; }
+        .section ul li > div > div:nth-child(1) {
+          flex: 1; }
+        .section ul li > div > div:nth-child(2) {
+          flex: 2;
+          text-align: right; }
+      .section ul li:last-child {
+        border: none; }
+  .section .table {
+    height: 1.2rem;
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    padding-top: 5px; }
+    .section .table > div > div {
+      height: 0.6rem;
+      line-height: 0.6rem;
+      text-align: center; }
+
+/*# sourceMappingURL=service-detail.css.map */
