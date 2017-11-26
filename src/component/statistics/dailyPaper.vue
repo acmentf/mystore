@@ -179,7 +179,7 @@
                                             </div>
                                         </div>
                                         <div class="section-content">
-                                            <e-charts ref="incomeChart_1" :options="incomeAllChart" auto-resize></e-charts>
+                                            <e-charts ref="refreshChart_1" :options="incomeAllChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                     <!--各大区收入（今日实时/昨日）-->
@@ -192,7 +192,7 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(incomeRegionChart)"
-                                                      ref="incomeChart_2" class="axis-label-long" :options="incomeRegionChart" auto-resize></e-charts>
+                                                      ref="refreshChart_2" class="axis-label-long" :options="incomeRegionChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +203,7 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(incomeLineChart)"
-                                                      ref="incomeChart_3" class="axis-label-long" :options="incomeLineChart" auto-resize></e-charts>
+                                                      ref="refreshChart_3" class="axis-label-long" :options="incomeLineChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +214,31 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(incomeTravelChart)"
-                                                      ref="incomeChart_4" class="axis-label-long" :options="incomeTravelChart" auto-resize></e-charts>
+                                                      ref="refreshChart_4" class="axis-label-long" :options="incomeTravelChart" auto-resize></e-charts>
+                                        </div>
+                                    </div>
+                                    <div class="section-box">
+                                        <div class="section-title clearfix"
+                                             :class="getCollapseActiveClassName(collapseState.incomeTravelRegionOrderRateChart)"
+                                             v-tap="{ methods : setCollapseState, key: 'incomeTravelRegionOrderRateChart' }">
+                                            <div class="text">旅行社下单率统计分析（{{realTitleExplainText}}）</div>
+                                            <span class="after-icon"></span>
+                                        </div>
+                                        <div class="section-content" v-show="collapseState.incomeTravelRegionOrderRateChart">
+                                            <e-charts :style="calcBarChartStyle(incomeTravelRegionOrderRateChart)"
+                                                      ref="refreshChart_5" class="axis-label-long" :options="incomeTravelRegionOrderRateChart" auto-resize></e-charts>
+                                        </div>
+                                    </div>
+                                    <div class="section-box">
+                                        <div class="section-title clearfix"
+                                             :class="getCollapseActiveClassName(collapseState.incomeTravelRegionArriveRateChart)"
+                                             v-tap="{ methods : setCollapseState, key: 'incomeTravelRegionArriveRateChart' }">
+                                            <div class="text">旅行社到团率统计分析（{{realTitleExplainText}}）</div>
+                                            <span class="after-icon"></span>
+                                        </div>
+                                        <div class="section-content" v-show="collapseState.incomeTravelRegionArriveRateChart">
+                                            <e-charts :style="calcBarChartStyle(incomeTravelRegionArriveRateChart)"
+                                                      ref="refreshChart_6" class="axis-label-long" :options="incomeTravelRegionArriveRateChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +301,7 @@
                                             </div>
                                         </div>
                                         <div class="section-content">
-                                            <e-charts ref="flowChart_1" :options="flowShootAllChart" auto-resize></e-charts>
+                                            <e-charts ref="refreshChart_7" :options="flowShootAllChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                     <!--各大区拍摄人数（今日实时/昨日）-->
@@ -290,7 +314,7 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(flowShootRegionChart)"
-                                                      ref="flowChart_2" class="axis-label-long" :options="flowShootRegionChart" auto-resize></e-charts>
+                                                      ref="refreshChart_8" class="axis-label-long" :options="flowShootRegionChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -301,7 +325,7 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(flowShootLineChart)"
-                                                      ref="flowChart_3" class="axis-label-long" :options="flowShootLineChart" auto-resize></e-charts>
+                                                      ref="refreshChart_9" class="axis-label-long" :options="flowShootLineChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -312,7 +336,7 @@
                                         </div>
                                         <div class="section-content">
                                             <e-charts :style="calcBarChartStyle(flowShootTravelChart)"
-                                                      ref="flowChart_4" class="axis-label-long" :options="flowShootTravelChart" auto-resize></e-charts>
+                                                      ref="refreshChart_10" class="axis-label-long" :options="flowShootTravelChart" auto-resize></e-charts>
                                         </div>
                                     </div>
                                 </div>
@@ -411,7 +435,7 @@
                                     </div>
                                     <div class="section-content"
                                          v-if="regionProvinceMap.historyThreeMonthIncome.chartType === chartTypeConstant.acc">
-                                        <e-charts ref="historyChart_1" :options="historyThreeMonthIncomeAccChart" auto-resize></e-charts>
+                                        <e-charts ref="refreshChart_11" :options="historyThreeMonthIncomeAccChart" auto-resize></e-charts>
                                     </div>
                                 </div>
                                 <div class="info-box center">
@@ -604,6 +628,15 @@
             }
         ])
     }
+    function formatterPercent(params) {
+        let title = params[0] ? params[0].name : ''
+        let content = params.map(item => {
+            return `<span style="display:inline-block;margin-right:5px;border-radius:10px;
+                                                 width:9px;height:9px;background-color:${item.color}"></span>
+                                                 ${item.seriesName}:&nbsp;&nbsp;${item.value}%`
+        }).join('<br>')
+        return title + '<br>' + content
+    }
 
     export default {
         name: 'dailyPaper',
@@ -618,6 +651,10 @@
                 pageTypeActive: pageTypeConstant.income,
                 queryDate: new Date(/*new Date() - 1000*60*60*24*/),
                 historyDate: utils.recentDay(90),
+                collapseState: {
+                    incomeTravelRegionOrderRateChart: true,
+                    incomeTravelRegionArriveRateChart: true
+                },
                 //大区省份code
                 //regionProvinceActive: '',
                 regionProvinceMap: {
@@ -704,6 +741,16 @@
                 /*areaName	大区名称
                  saleAmt	收入金额*/
                 incomeRegion: [],
+                //各城市旅行社下单和到团情况
+                /*regionName	地区名称	String
+                 travelTotal	旅行社总数量	Int
+                 orderRate	下单率(%)	Double
+                 travelNum	下单旅行社数量	Int
+                 planArriveNum	计划到团数	Int
+                 shootTours	实际到团数	Int
+                 arriveRate	到团率(%)	double*/
+                incomeTravelRegionOrderRate: [],
+                incomeTravelRegionArriveRate: [],
                 /*收入模块 end*/
                 /*流量模块 start*/
                 //拍摄统计
@@ -832,6 +879,28 @@
                     return EMPTY_CHART
                 }
                 return getTwoBarLongCategoryChartOption(this.incomeRegion)
+            },
+            incomeTravelRegionOrderRateChart: function () {
+                if (this.pageTypeActive !== pageTypeConstant.income) {
+                    return EMPTY_CHART
+                }
+                let options = getTwoBarLongCategoryChartOption(this.incomeTravelRegionOrderRate)
+                options.tooltip.formatter = formatterPercent
+                options.series.forEach(function (item) {
+                    item.label.normal.formatter = '{c}%'
+                })
+                return options
+            },
+            incomeTravelRegionArriveRateChart: function () {
+                if (this.pageTypeActive !== pageTypeConstant.income) {
+                    return EMPTY_CHART
+                }
+                let options = getTwoBarLongCategoryChartOption(this.incomeTravelRegionArriveRate)
+                options.tooltip.formatter = formatterPercent
+                options.series.forEach(function (item) {
+                    item.label.normal.formatter = '{c}%'
+                })
+                return options
             },
             flowShootLineChart: function () {
                 if (this.pageTypeActive !== pageTypeConstant.flow) {
@@ -997,6 +1066,17 @@
             }
         },
         methods: {
+            getCollapseActiveClassName (state) {
+                return {
+                    'shoot-collapse': true,
+                    'collapse-active': state
+                }
+            },
+            setCollapseState (params) {
+                const key = params.key
+                this.collapseState[key] = !this.collapseState[key]
+                this.refreshChart('collapseState')
+            },
             getAbs: function (value) {
                 return utils.isDef(value) ? Math.abs(value) : 0
             },
@@ -1030,24 +1110,16 @@
             },
             refreshChart: function (key) {
                 let self = this
+                let prefix = 'refreshChart_'
                 let chartMap = {
-                    income: {
-                        prefix: 'incomeChart_',
-                        list: ['1','2','3','4']
-                    },
-                    flow: {
-                        prefix: 'flowChart_',
-                        list: ['1','2','3','4']
-                    },
-                    history: {
-                        prefix: 'historyChart_',
-                        list: ['1']
-                    }
+                    income: ['1','2','3','4','5','6'],
+                    flow: ['7','8','9','10'],
+                    history: ['11'],
+                    collapseState: ['5','6']
                 }
                 let item = chartMap[key]
                 item && this.$nextTick(function () {
-                    let prefix = item.prefix
-                    item.list.forEach(function (index) {
+                    item.forEach(function (index) {
                         let chart = self.$refs[prefix + index]
                         chart && chart.resize()
                     })
@@ -1090,8 +1162,10 @@
                 self.refreshDataByIncome(function () {
                     self.refreshDataByIncomeAll(function () {
                         self.refreshDataByIncomeRegion(function () {
-                            cb && cb()
-                            self.refreshChart('income')
+                            self.refreshDataByTravelRegionRate(function () {
+                                cb && cb()
+                                self.refreshChart('income')
+                            })
                         })
                     })
                 })
@@ -1186,6 +1260,46 @@
                             }),
                             categoryKey: 'areaName',
                             valueKey: 'saleAmt'
+                        }).filter(filterSeriesByOr).sort(baseSortSeries)
+                    } else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                    cb && cb()
+                }, function(error) {
+                    lf.nativeUI.closeWaiting()
+                    cb && cb()
+                    lf.nativeUI.toast(error.msg);
+                });
+            },
+            //各城市旅行社下单和到团情况
+            refreshDataByTravelRegionRate: function (cb) {
+                let self = this
+                lf.nativeUI.showWaiting()
+                lf.net.getJSON('newReport/analysisMobile/travelRegionRate', {
+                    queryDate: this.queryDate.format('yyyy-MM-dd')
+                }, function(res) {
+                    let data = res.data || {}
+                    lf.nativeUI.closeWaiting()
+                    if (res.code === '200') {
+                        self.incomeTravelRegionOrderRate = mergeSeriesData({
+                            toList: (data.toDay || []).map(function (item) {
+                                return item
+                            }),
+                            fromList:(data.yesterday || []).map(function (item) {
+                                return item
+                            }),
+                            categoryKey: 'regionName',
+                            valueKey: 'orderRate'
+                        }).filter(filterSeriesByOr).sort(baseSortSeries)
+                        self.incomeTravelRegionArriveRate = mergeSeriesData({
+                            toList: (data.toDay || []).map(function (item) {
+                                return item
+                            }),
+                            fromList:(data.yesterday || []).map(function (item) {
+                                return item
+                            }),
+                            categoryKey: 'regionName',
+                            valueKey: 'arriveRate'
                         }).filter(filterSeriesByOr).sort(baseSortSeries)
                     } else {
                         lf.nativeUI.toast(res.msg);
@@ -1598,6 +1712,7 @@
                         break
                     case pageTypeConstant.history:
                         this.initHistory(cb)
+                        break
                     case pageTypeConstant.photo: 
                         if(cb) {
                             cb();
@@ -1827,6 +1942,31 @@
                 .section-title {
                     padding: 18px 14px 16px;
                     color: #919191;
+                    &.shoot-collapse{
+                        position: relative;
+                        .after-icon{
+                            position: absolute;
+                            width: 20px;
+                            height: 20px;
+                            top: 50%;
+                            right: 15px;
+                            &:after{
+                                display: inline-block;
+                                font-family: Muiicons;
+                                font-size: inherit;
+                                line-height: 1;
+                                color: #bbb;
+                                text-decoration: none;
+                                transform: translateY(-50%);
+                                content: '\e583';
+                            }
+                        }
+                        &.collapse-active{
+                            .after-icon:after{
+                                content: '\e581';
+                            }
+                        }
+                    }
                     .text {
                         float: left;
                         font-size: 15px;

@@ -15,6 +15,14 @@ mergeRelease() {
     git push
 }
 
+mergeBuildRelease() {
+    mergeRelease
+    npm run build
+    git add .
+    git commit -m "Update dist build ${now}"
+    git push
+}
+
 mergeMaster() {
     git checkout ${masterBranch}
     git pull
@@ -26,7 +34,8 @@ mergeMaster() {
 }
 
 echo 'a、推送代码到生产环境'
-echo 'b、合并生产环境代码到master分支'
+echo 'b、构建后推送代码到生产环境'
+echo 'c、合并生产环境代码到master分支'
 echo '请根据字母选择您的操作：'
 
 read isOk
@@ -37,6 +46,10 @@ case $isOk in
         break
         ;;
     b)
+        mergeBuildRelease
+        break
+        ;;
+    c)
         mergeMaster
         break
         ;;

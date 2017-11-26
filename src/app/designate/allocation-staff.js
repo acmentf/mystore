@@ -50,7 +50,7 @@ lf.ready(function() {
                             var name = /[\-]/g.test(item.id) ? item.name.split('-')[0] : item.name
                             // modifywebim
                             var host = "https://tuyi.uat.fingercrm.cn"
-                            var query = `#/group?username=${window.Role.usercode}&ids=${id}&members=${name}`
+                            var query = `#/contact/${id}?username=${window.Role.usercode}`
                             var url = `${host}/html5/assets/webim/index.html${query}`
 
                             return url
