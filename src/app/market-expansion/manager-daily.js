@@ -211,9 +211,8 @@ lf.ready(function() {
         })
     });
 
-    // 跳转到 渠道关系列表
+    // 跳转到 渠道关系列表; 分别有 头部的 “渠道关系” 及 人员详情“设置绑定”
     mui('body').on('tap', '.edit-relation', function() {
-        var date = this.getAttribute('data-date');
         lf.window.openWindow('market-staff-relation.html','./market-staff-relation.html',{},{
         })        
     });

@@ -1,19 +1,19 @@
 <template>
     <div class="market-staff-relation-relation-card">
-        <div class="mui-card">
+        <div class="mui-card" @tap="editRelation">
             <div class="mui-card-header mui-card-media">旅行社：<span v-text="item.purchaser"></span></div>
             <div class="mui-card-content">
                 <div>
                     <div class="basic">
                         <div class="block">
                             <div class="mui-row">
-                                <div class="title">产品名称: <span v-text="item.alias_name"></span></div>
+                                <div class="title">产品名称： <span v-text="item.p_name"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">渠道专员: <span v-text="item.user_name"></span></div>
+                                <div class="title">渠道专员： <span v-text="item.user_name ? item.user_name : '未关联'"></span></div>
                             </div>
                             <div class="mui-row">
-                                <div class="title">有效期: <span v-text="item.begin_date"></span> - <span v-text="item.end_date"></span></div>
+                                <div class="title">有效期：<span>{{item.begin_date|timeFormatter}}</span> - <span>{{item.end_date|timeFormatter}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -28,6 +28,22 @@
             item: {
                 type: Object,
                 required: true
+            }
+        },
+        filters: {
+            timeFormatter(val) {
+                if(val) {
+                    return new Date(val).format('yyyy-MM-dd');
+                }
+                return '';
+            }
+        },
+        methods: {
+            editRelation() {
+                // 跳转到 渠道关系列表
+                lf.window.openWindow('edit-market-staff-relation.html','./edit-market-staff-relation.html',{},{
+                    item: JSON.stringify(this.item)
+                })
             }
         }
     }

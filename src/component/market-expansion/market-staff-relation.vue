@@ -26,7 +26,11 @@
                         <div id="tab2" class="mui-slider-item mui-control-content">
                             <div class="mui-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <relation-card v-for="(item, index) in hadConnectList" :item="item" :key="index"></relation-card>
+                                    <relation-card 
+                                        v-for="(item, index) in hadConnectList"
+                                        :item="item" 
+                                        :key="index">
+                                    </relation-card>
                                 </div>
                             </div>
                         </div>
@@ -45,12 +49,8 @@
         data() {
             return {
                 notConnectList: [
-                    {}
                 ],
                 hadConnectList: [
-                    {
-
-                    }
                 ]
             }
         },
@@ -70,8 +70,8 @@
                 let params = {
                     flag: flag
                 }
-                lf.net.getJSONWithLoading(url, params, function(res) {
-                    this[listName] = res.data;
+                lf.net.getJSONWithLoading(url, params, (res) => {
+                    this[listName] = res.data.data;
                 })
             }
         },
@@ -80,8 +80,14 @@
                 this.initMui();
             });
             document.querySelector('.mui-slider').addEventListener('slide', (event) => {
-                console.log("mui-slider: ", event.detail.slideNumber);
-                this.getOrderProductPurchaserList(event.detail.slideNumber + 1);
+                let flag = event.detail.slideNumber + 1;
+                let listNameArr = ['notConnectList', 'hadConnectList']
+                this.getOrderProductPurchaserList(flag, listNameArr[event.detail.slideNumber]);
+            });
+            lf.event.listener('refresh', function(e) {
+                lf.window.currentWebview().reload()
+                // 刷新父级窗口 manager-daily.html
+                lf.event.fire(lf.window.currentWebview().opener(),'refreshData')
             });
         }
     }
