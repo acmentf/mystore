@@ -94,15 +94,6 @@ export default {
         },
         save() {
             let requiredStrArr = [
-                
-                {
-                    str: 'startDate',
-                    errMsg: '请设置有效起始时间'
-                },
-                {
-                    str: 'endDate',
-                    errMsg: '请设置有效结束时间'
-                },
                 {
                     str: 'areaId',
                     errMsg: '请选择大区'
@@ -115,10 +106,18 @@ export default {
                     str: 'staffId',
                     errMsg: '请选择渠道专员'
                 },
-            ]
-            var validFlag = true;
+                {
+                    str: 'startDate',
+                    errMsg: '请设置有效起始时间'
+                },
+                {
+                    str: 'endDate',
+                    errMsg: '请设置有效结束时间'
+                }
+            ];
+            let validFlag = true;
             for(let i = 0; i < requiredStrArr.length; i++) {
-                if(this[requiredStrArr[i]] == '') {
+                if(this[requiredStrArr[i].str] == '') {
                     lf.nativeUI.toast(requiredStrArr[i].errMsg);
                     validFlag = false;
                     break;
@@ -138,8 +137,11 @@ export default {
                 position_id: this.positionId
             }
             lf.net.getJSONWithLoading(url, params, (res) => {
-                // 刷新父级窗口 market-staff-relation.html
-                lf.event.fire(lf.window.currentWebview().opener(),'refresh')
+                if(res.code == '200') {
+                    lf.nativeUI.toast('保存成功');
+                    // 刷新父级窗口 market-staff-relation.html
+                    lf.event.fire(lf.window.currentWebview().opener(),'refresh')
+                }
             })
         },
         getArea(parentId, callBack) {
