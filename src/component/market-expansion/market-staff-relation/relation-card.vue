@@ -52,6 +52,7 @@
 .market-staff-relation-relation-card {
     .mui-card-header{
         background: #3eb392;
+        font-size: 0.32rem;
     }
 
     .mui-card-content .block{
