@@ -25,6 +25,22 @@
 		.sales-export .mui-input-group .mui-input-row:after {
 			background: #f1f1f1;
 		}
+		.mui-card-header{
+			background: #3eb392;
+			font-size: 0.32rem;
+			color: #fff;
+		}
+		.mui-content .block {
+			position: relative;
+		}
+		.mui-content .block .mui-icon-close {
+			position: absolute;
+			top: -8px;
+			right: 0px;
+			background: #fff;
+			border-radius: 50%;
+		}
+		
 	</style>
 </head>
 
@@ -42,6 +58,85 @@
 				<label>预计服务完成时间</label>
 				<input type="text" style="text-align:right;position:relative;left:-10px;" placeholder="请选择时间" v-model="saleDate" class="saleDate" disabled readonly>
 			</div>
+			
+			<div class="mui-card mui-card-outer">
+				<div class="mui-card-header">
+					销售张数
+				</div>
+				<div class="mui-card-content-outer">
+					<div class="block">
+						<div class="mui-card mui-card-inner">
+							<div class="mui-card-content">
+								<div class="block">
+									<div class="mui-input-row">
+										<label for="">产品类型：</label>
+									</div>
+									<div class="mui-input-row">
+										<label for="">照片尺寸</label>
+									</div>
+									<div class="mui-input-row">
+										<label for="">数量</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<span class="mui-icon mui-icon-close"></span>
+					</div>
+
+					<div class="block">
+						<div class="mui-card mui-card-inner">
+							<div class="mui-card-content">
+								<div class="block">
+									<div class="mui-input-row">
+										<label for="">产品类型：</label>
+									</div>
+									<div class="mui-input-row">
+										<label for="">照片尺寸</label>
+									</div>
+									<div class="mui-input-row">
+										<label for="">数量</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<span class="mui-icon mui-icon-close"></span>
+					</div>
+					
+
+					<div class="mui-card mui-card-inner">
+						<div class="mui-card-content">
+							<div class="block">
+								<div class="mui-input-row">
+									<label for="">产品类型：</label>
+								</div>
+								<div class="mui-input-row">
+									<label for="">照片尺寸</label>
+								</div>
+								<div class="mui-input-row">
+									<label for="">数量</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="mui-card mui-card-inner">
+						<div class="mui-card-content">
+							<div class="block">
+								<div class="mui-input-row">
+									<label for="">产品类型：</label>
+								</div>
+								<div class="mui-input-row">
+									<label for="">照片尺寸</label>
+								</div>
+								<div class="mui-input-row">
+									<label for="">数量</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="mui-input-row  group-info">
 				<label>销售张数</label>
 			</div>
