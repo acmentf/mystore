@@ -68,7 +68,9 @@
             getOrderProductPurchaserList(flag, listName) {
                 let url = "/purchaser/getOrderProductPurchaserList.htm";
                 let params = {
-                    flag: flag
+                    flag: flag,
+                    pageNo: 1,
+                    pageSize: 1000
                 }
                 lf.net.getJSONWithLoading(url, params, (res) => {
                     this[listName] = res.data.data;
