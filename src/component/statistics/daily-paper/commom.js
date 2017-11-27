@@ -96,14 +96,14 @@ function getLineChartOption(list, seriesOpts) {
         tooltip: {
             trigger: 'axis'
         },
-        dataZoom: DATA_ZOOM_INSIDE,
+        dataZoom: {...DATA_ZOOM_INSIDE},
         grid: {
             top: GRID_TOP,
             left: GRID_LEFT,
             right:GRID_RIGHT,
             bottom: GRID_BOTTOM
         },
-        yAxis: LINE_Y_AXIS,
+        yAxis: {...LINE_Y_AXIS},
         xAxis: {
             type: 'category',
             data: xAxisData
@@ -149,17 +149,17 @@ function getLineLongCategoryChartOption(list, seriesOpts) {
         tooltip: {
             trigger: 'axis'
         },
-        dataZoom: DATA_ZOOM_INSIDE,
+        dataZoom: {...DATA_ZOOM_INSIDE},
         grid: {
             top: GRID_TOP,
             left: AXIS_LABEL_LEFT,
             right:GRID_RIGHT,
             bottom: AXIS_LABEL_BOTTOM
         },
-        yAxis: LINE_Y_AXIS,
+        yAxis: {...LINE_Y_AXIS},
         xAxis: {
             type: 'category',
-            axisLabel: AXIS_LABEL,
+            axisLabel: {...AXIS_LABEL},
             data: xAxisData
         },
         series: series
@@ -202,7 +202,7 @@ function getBarLongCategoryChartOption(list, seriesOpts) {
     })
 
     return {
-        tooltip: BAR_TOOLTIP,
+        tooltip: {...BAR_TOOLTIP},
         grid: {
             top: GRID_TOP-10,
             left: BAR_AXIS_LABEL_LEFT,
@@ -211,10 +211,10 @@ function getBarLongCategoryChartOption(list, seriesOpts) {
         },
         yAxis: {
             type: 'category',
-            axisTick: BAR_Y_AXIS_TICK,
+            axisTick: {...BAR_Y_AXIS_TICK},
             data: xAxisData
         },
-        xAxis: BAR_X_AXIS,
+        xAxis: {...BAR_X_AXIS},
         series: series
     }
 }
