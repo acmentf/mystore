@@ -280,21 +280,21 @@
 																	计调
 																</button>
 
-                                                            <button v-if="item.actionStatus==33 || item.actionStatus==44" type="button" class="mui-btn tourinfo link" :data-id="item.id" :data-no="item.orderNo">
+                                                            <button v-if="item.actionStatus==33 || item.actionStatus==44 || item.actionStatus==55" type="button" class="mui-btn tourinfo link" :data-id="item.id" :data-no="item.orderNo">
 																	修改信息
 																</button>
 
-                                                            <button v-if="confirmOrder&&item.actionStatus==44" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo" id="confirmComplete">
+                                                            <!-- <button v-if="confirmOrder&&item.actionStatus==44" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo" id="confirmComplete">
 																	确认完成
-																</button>
+																</button> -->
                                                         </div>
                                                         <div v-if="currentRoleId == 2">
-                                                            <button v-if="assignOrder&&item.actionStatus!=44" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
+                                                            <button v-if="assignOrder" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
 																	计调
 																</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 5">
-                                                            <button v-if="allotPhotoOrder&&item.actionStatus==11||item.actionStatus==22" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
+                                                            <button v-if="allotPhotoOrder&&(item.actionStatus==11||item.actionStatus==22)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
 																		分配
 																</button>
 
@@ -308,12 +308,12 @@
 															</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 8">
-                                                            <button v-if="outOrder&&item.actionStatus==22||item.actionStatus==33" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
+                                                            <button v-if="outOrder&&(item.actionStatus==22||item.actionStatus==33||item.actionStatus==55)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
 																	输出
 															</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 9">
-                                                            <button v-if="genSale&&item.actionStatus<=33" type="button" class="mui-btn genSale" :data-id="item.id" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+                                                            <button v-if="genSale&&(item.actionStatus<=33||item.actionStatus==55)" type="button" class="mui-btn genSale" :data-id="item.id" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
                                                                 生成销售
                                                             </button>
                                                         </div>

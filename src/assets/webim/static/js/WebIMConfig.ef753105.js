@@ -111,7 +111,7 @@ var config = {
      */
     // appkey: "easemob-demo#chatdemoui",
     // appkey: "1132171109178564#jindouyun",
-    appkey: "1132171109178564#jindouyun-prod",
+    appkey: "1132171109178564#jindouyun",
     /*
      * Whether to use HTTPS
      * @parameter {Boolean} true or false
