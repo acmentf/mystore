@@ -53,9 +53,19 @@
 				}
 			});
 
+			var imLogin = function() {
+				try {
+					ANDROID_JSB.imLogin(window.Role.usercode)
+				} catch (error) {
+
+				}
+			}
+
 			lf.ready(function(){
 				var loginsign = window.Role.loginsign;
 				if(loginsign){
+					imLogin()
+
 					if(mui.os.plus) {
 						plus.navigator.closeSplashscreen();
 					}
@@ -177,6 +187,8 @@
 							photograherId: res.data.photograherId
 						}
 						window.Role.save(obj)
+
+						imLogin()
 
 						var roleId = window.Role.currentPositions[0].roleId;
 						var windowParams = GLOBAL_SHOOT.getPageUrlWithPosition(roleId, 0);

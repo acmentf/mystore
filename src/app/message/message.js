@@ -44,18 +44,26 @@ mui('body').on('tap','.footer-personage-btn',function(){
 	lf.window._openWindow('../personal/personal.html','../personal/personal.html',{},{},lf.window.currentWebview())
 })
 mui('body').on('tap', '.footer-message-btn', function() {
-	lf.nativeUI.showWaiting();
-	var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},"",function() {
-		lf.nativeUI.closeWaiting();
-	});
+	try {
+		ANDROID_JSB.message()
+	} catch (error) {
+		lf.nativeUI.showWaiting();
+		var redirect = '../../assets/webim/index.html#/contact?username=' + window.Role.usercode;
+		lf.window._openWindow(redirect, redirect,{},{},"",function() {
+			lf.nativeUI.closeWaiting();
+		});
+	}
 })
 mui('body').on('tap', '.footer-addressbook-btn', function() {
-	lf.nativeUI.showWaiting();
-	var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-	lf.window._openWindow(redirect, redirect,{},{},"",function() {
-		lf.nativeUI.closeWaiting();
-	});
+	try {
+		ANDROID_JSB.contact()
+	} catch (error) {
+		lf.nativeUI.showWaiting();
+		var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
+		lf.window._openWindow(redirect, redirect,{},{},"",function() {
+			lf.nativeUI.closeWaiting();
+		});
+	}
 })
 //查看消息详情
 mui('body').on('tap','.message-list',function(){
