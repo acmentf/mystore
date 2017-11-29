@@ -35,7 +35,21 @@ lf.ready(function() {
             saleId: '',
             saleName: '',
             salePositionId: '',
-            pNo:''
+            pNo:'',
+            salesList: [
+                {
+                    picType: '',
+                    picTypeName: '',
+                    picSize: '',                    
+                    picSizeName: '',
+                    picNum: ''
+                }
+            ]
+        },
+        computed: {
+            saleRemoveIconShow() {
+                return this.salesList.length > 1;
+            }
         },
         // watch: {
         //     argDictId: function(val) {
@@ -47,6 +61,19 @@ lf.ready(function() {
         //     }
         // },
         methods: {
+            removeSaleItem(index) {
+                this.salesList.splice(index, 1);
+            },
+            addSaleItem() {
+                let saleItem = {
+                    picType: '',
+                    picTypeName: '',
+                    picSize: '',                    
+                    picSizeName: '',
+                    picNum: ''
+                };
+                this.salesList.push(saleItem);
+            },
             channelTyle: function(channelName){
                 switch (channelName) {
                     case '现金支付':
@@ -264,6 +291,72 @@ lf.ready(function() {
             }
         },
         mounted: function() {
+            let picker = new mui.PopPicker();
+            let salesSizeEmun = [
+                {
+                    value: '1',
+                    text: '16寸'
+                },
+                {
+                    value: '2',
+                    text: '12寸'
+                },
+                {
+                    value: '3',
+                    text: '10寸'
+                },
+                {
+                    value: '4',
+                    text: '8寸'
+                },
+                {
+                    value: '6',
+                    text: '7寸'
+                },
+                {
+                    value: '5',
+                    text: '6寸'
+                },
+            ];
+            let salesTypeEmun = [
+                {
+                    value: '相片',
+                    text: '相片'
+                },
+                {
+                    value: '相框',
+                    text: '相框'
+                },
+                {
+                    value: '相片+相框',
+                    text: '相片+相框'
+                }
+            ]
+            let that = this;
+            // 订单补全，选择照片尺寸
+            mui('.mui-content').on('tap', '.sales-size', function() {
+                let index = this.getAttribute('data-index')
+                let currentItem = that.salesList[index];
+                picker.setData(salesSizeEmun);
+                picker.show(function(selectedItem){
+                    currentItem.picSizeName = selectedItem[0].text;
+                    currentItem.picSize = selectedItem[0].value;
+                    that.salesList[index] = currentItem;
+                })
+            });
+            // 订单补全，选择产品类型
+            mui('.mui-content').on('tap', '.sales-type', function() {
+                console.log(index)
+                let index = this.getAttribute('data-index');
+                let currentItem = that.salesList[index];
+                picker.setData(salesTypeEmun);
+                picker.show(function(selectedItem) {
+                    currentItem.picType = selectedItem[0].value;
+                    currentItem.picTypeName = selectedItem[0].text;
+                    that.salesList[index] = currentItem;
+                })
+            });
+
             console.log(window.Role.userroleId)
             this.salePositionId = window.Role.userroleId
             var params = {

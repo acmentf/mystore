@@ -184,8 +184,8 @@ main section.container:first-child .title{
 }
 .form-title{
     position: relative;
-    top: 13px;
-    margin-bottom: 8px;
+    height: 40px;
+    line-height: 40px;
     padding: 0 15px;
 }
 .mui-table-view{
@@ -228,4 +228,10 @@ main section.container:first-child .title{
 }
 .order-pay-list-value option{
     text-align: right;
+}
+
+.sales-list {
+    background: #fff;
+    padding-top: 1px;
+    padding-bottom: 10px;
 }

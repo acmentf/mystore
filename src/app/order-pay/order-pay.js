@@ -4,7 +4,8 @@
  * Email: nishu@foxmail.com
  */
 
- lf.ready(function() {
+lf.ready(function() {
+    let params = lf.window.currentWebview();
     var data = {
         orderId: lf.window.currentWebview().orderId,
         productName: lf.window.currentWebview().productName,
@@ -51,15 +52,95 @@
         loopOrderId: '',
         timer: null,
         price:'',
-        isPrice:false
+        isPrice:false,
+        salesList: [
+            {
+                picType: '',
+                picTypeName: '',
+                picSize: '',                    
+                picSizeName: '',
+                picNum: ''
+            }
+        ]
     }
 
     var vm = new Vue({
         el: '#app',
         data: data,
+        computed: {
+            saleRemoveIconShow() {
+                return this.salesList.length > 1;
+            }
+        },
         mounted: function() {
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
+
+            let salesSizeEmun = [
+                {
+                    value: '1',
+                    text: '16寸'
+                },
+                {
+                    value: '2',
+                    text: '12寸'
+                },
+                {
+                    value: '3',
+                    text: '10寸'
+                },
+                {
+                    value: '4',
+                    text: '8寸'
+                },
+                {
+                    value: '6',
+                    text: '7寸'
+                },
+                {
+                    value: '5',
+                    text: '6寸'
+                },
+            ];
+            let salesTypeEmun = [
+                {
+                    value: '相片',
+                    text: '相片'
+                },
+                {
+                    value: '相框',
+                    text: '相框'
+                },
+                {
+                    value: '相片+相框',
+                    text: '相片+相框'
+                }
+            ]
+            let that = this;
+            let picker = new mui.PopPicker();
+            // 选择照片尺寸
+            mui('.mui-content').on('tap', '.sales-size', function() {
+                let index = this.getAttribute('data-index')
+                let currentItem = that.salesList[index];
+                picker.setData(salesSizeEmun);
+                picker.show(function(selectedItem){
+                    currentItem.picSizeName = selectedItem[0].text;
+                    currentItem.picSize = selectedItem[0].value;
+                    that.salesList[index] = currentItem;
+                })
+            });
+            // 选择产品类型
+            mui('.mui-content').on('tap', '.sales-type', function() {
+                console.log(index)
+                let index = this.getAttribute('data-index');
+                let currentItem = that.salesList[index];
+                picker.setData(salesTypeEmun);
+                picker.show(function(selectedItem) {
+                    currentItem.picType = selectedItem[0].value;
+                    currentItem.picTypeName = selectedItem[0].text;
+                    that.salesList[index] = currentItem;
+                })
+            });
 
             if (!this.saleOrderId) return
 
@@ -109,6 +190,19 @@
             })
         },
         methods: {
+            removeSaleItem(index) {
+                this.salesList.splice(index, 1);
+            },
+            addSaleItem() {
+                let saleItem = {
+                    picType: '',
+                    picTypeName: '',
+                    picSize: '',                    
+                    picSizeName: '',
+                    picNum: ''
+                };
+                this.salesList.push(saleItem);
+            },
             showPriceDialog: function() {
                 vm.isPrice = true
                 vm.price = ''

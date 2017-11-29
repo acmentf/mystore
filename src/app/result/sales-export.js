@@ -21,6 +21,11 @@ var vm = new Vue({
 		buyers: '',
 		total: ''
 	},
+	computed: {
+		saleRemoveIconShow() {
+			return this.saleOrderXms.length > 1;
+		}
+	},
 	methods: {
 		computedTotal:function() {
 			var _total = Number(this.salesAmt) + Number(this.advanceAmount) + Number(this.payableAmount)
@@ -29,35 +34,36 @@ var vm = new Vue({
 	}
 })
 var userPicker,picker;
+let sizesEmun = [{
+	value: '1',
+	text: '16寸'
+}, {
+	value: '2',
+	text: '12寸'
+}, {
+	value: '3',
+	text: '10寸'
+}, {
+	value: '4',
+	text: '8寸'
+}, {
+	value: '6',
+	text: '7寸'
+},
+{
+	value: '5',
+	text: '6寸'
+}]
 lf.ready(function(){
 	userPicker = new mui.PopPicker();
-	userPicker.setData([{
-		value: '1',
-		text: '16寸'
-	}, {
-		value: '2',
-		text: '12寸'
-	}, {
-		value: '3',
-		text: '10寸'
-	}, {
-		value: '4',
-		text: '8寸'
-	}, {
-		value: '6',
-		text: '7寸'
-	},
-	{
-		value: '5',
-		text: '6寸'
-	}]);
+	userPicker.setData(sizesEmun);
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderId
 	loadResult()
 	vm.userId = wv.userId
 	console.log(JSON.stringify(lf.window.currentWebview()))
 })
-mui('.mui-content').on('tap', '.givesSize', function() {
+mui('.mui-content').on('tap', '.gives-size', function() {
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.giveOrderXms,index,{
@@ -68,8 +74,9 @@ mui('.mui-content').on('tap', '.givesSize', function() {
 		})
 	});
 })
-mui('.mui-content').on('tap', '.salesSize', function() {
+mui('.mui-content').on('tap', '.sales-size', function() {
 	var index = this.getAttribute('data-index');
+	console.log(index);
 	userPicker.show(function(items) {
 		Vue.set(vm.saleOrderXms,index,{
 			fType:'3',
@@ -80,23 +87,28 @@ mui('.mui-content').on('tap', '.salesSize', function() {
 	});
 })
 mui('.mui-content').on('tap', '.add-givesNum', function() { //添加赠送张数
-	vm.giveOrderXms.push({fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''})
+	vm.giveOrderXms.push({
+		fType: '',
+		id: '',
+		orderId: '',
+		picNum: '',
+		picSize: '',
+		picSizeName: '',
+		price: ''
+	})
 })
 mui('.mui-content').on('tap', '.add-salesNum', function() { //添加销售张数
-	vm.saleOrderXms.push({fType: '',
-			id: '',
-			orderId: '',
-			picNum: '',
-			picSize: '',
-			picSizeName: '',
-			price: ''})
-})
+	vm.saleOrderXms.push({
+		fType: '',
+		id: '',
+		orderId: '',
+		picNum: '',
+		picSize: '',
+		picSizeName: '',
+		price: ''
+	})
+});
+
 mui('.mui-content').on('tap', '.remove-salesNum', function(){
 	var index = this.getAttribute('data-index');
 	vm.saleOrderXms.splice(index,1)
@@ -106,7 +118,7 @@ mui('.mui-content').on('tap', '.remove-givesNum', function(){
 	vm.giveOrderXms.splice(index,1)
 
 })
-mui('#app').on('tap', '.saleDate', function () { //选择销售日期
+mui('.mui-content').on('tap', '.saleDate', function () { //选择销售日期
 	var inputs = document.getElementsByTagName("input")
 	for(var i=0;i<inputs.length;i++){
 		inputs[i].blur();
@@ -119,46 +131,46 @@ mui('#app').on('tap', '.saleDate', function () { //选择销售日期
 	})
 })
 mui('.mui-bar').on('tap', '.save-btn', function(){
-		var flag = true 
-		console.log(vm.saleDate)
-		if(!vm.saleDate){
-			lf.nativeUI.toast('请选择销售时间')
-			flag = false;
+	var flag = true 
+	console.log(vm.saleDate)
+	if(!vm.saleDate){
+		lf.nativeUI.toast('请选择销售时间')
+		flag = false;
+	}
+	vm.saleOrderXms.forEach(function(v){
+		if(v.picNum>=0){
+			if(!v.picSize){
+				lf.nativeUI.toast('请选择销售尺寸')
+				flag = false;
+			}
 		}
-		vm.saleOrderXms.forEach(function(v){
-			if(v.picNum>=0){
-				if(!v.picSize){
-					lf.nativeUI.toast('请选择销售尺寸')
-					flag = false;
-				}
-			}
-			if(v.picSize){
-				if(v.picNum!==0){
-					if(!v.picNum){
-						lf.nativeUI.toast('请输入销售张数')
-					flag = false
-					}else if(v.picNum<0){
-						lf.nativeUI.toast('销售张数参数不合法')
-						flag = false
-					}
-				}
-			}
-			console.log(v.picNum)
-		})
-		console.log(vm.giveOrderXms.length)
-		var tempGiveOrderXms=vm.giveOrderXms
-		for(var i=0;i<tempGiveOrderXms.length;i++){
-			if(tempGiveOrderXms[i].picSize===''){
-				vm.giveOrderXms.splice(i,1)
-				i--
-			}
-			if(tempGiveOrderXms[i]&&tempGiveOrderXms[i].picSize&&tempGiveOrderXms[i].picNum===''){
-				tempGiveOrderXms[i].picNum=0
-			} else if (tempGiveOrderXms[i]&&tempGiveOrderXms[i].picNum<0){
-				lf.nativeUI.toast('赠送张数参数不合法')
+		if(v.picSize){
+			if(v.picNum!==0){
+				if(!v.picNum){
+					lf.nativeUI.toast('请输入销售张数')
 				flag = false
+				}else if(v.picNum<0){
+					lf.nativeUI.toast('销售张数参数不合法')
+					flag = false
+				}
 			}
 		}
+		console.log(v.picNum)
+	})
+	console.log(vm.giveOrderXms.length)
+	var tempGiveOrderXms=vm.giveOrderXms
+	for(var i=0;i<tempGiveOrderXms.length;i++){
+		if(tempGiveOrderXms[i].picSize===''){
+			vm.giveOrderXms.splice(i,1)
+			i--
+		}
+		if(tempGiveOrderXms[i]&&tempGiveOrderXms[i].picSize&&tempGiveOrderXms[i].picNum===''){
+			tempGiveOrderXms[i].picNum=0
+		} else if (tempGiveOrderXms[i]&&tempGiveOrderXms[i].picNum<0){
+			lf.nativeUI.toast('赠送张数参数不合法')
+			flag = false
+		}
+	}
 	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
 	// 校验 是否输入了相同的尺寸
 	var orderX = []
@@ -206,21 +218,20 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 	}
 	if(flag){
 		lf.nativeUI.showWaiting()
-		lf.net.getJSON('order/saveSalesOutput', params, function (res){
-		lf.nativeUI.closeWaiting()
-		if(res.code == 200){
-			lf.nativeUI.toast('保存成功！');
-			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-			lf.window.closeCurrentWebview();
-		}else {
-			lf.nativeUI.toast(res.msg);
-		}
-	}, function(res) {
-		lf.nativeUI.closeWaiting()
-		lf.nativeUI.toast(res.msg)
-	})
+			lf.net.getJSON('order/saveSalesOutput', params, function (res){
+			lf.nativeUI.closeWaiting()
+			if(res.code == 200){
+				lf.nativeUI.toast('保存成功！');
+				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+				lf.window.closeCurrentWebview();
+			}else {
+				lf.nativeUI.toast(res.msg);
+			}
+		}, function(res) {
+			lf.nativeUI.closeWaiting()
+			lf.nativeUI.toast(res.msg)
+		})
 	}
-			
 })
 function timeStampToDate(timestamp) { //时间戳转换成正常日期格式
 	function add0(m) {

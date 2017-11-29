@@ -20,6 +20,21 @@
                 padding-top: 0 !important;
                 padding-bottom: 0 !important;
             }
+            .mui-card-header{
+                background: #3eb392;
+                font-size: 0.32rem;
+                color: #fff;
+            }
+            .mui-content .block {
+                position: relative;
+            }
+            .mui-content .block .mui-icon-close {
+                position: absolute;
+                top: -8px;
+                right: 0px;
+                background: #fff;
+                border-radius: 50%;
+            }
         </style>
     </head>
     <body>
@@ -83,7 +98,42 @@
                         </li>
                     </ul>
                 </section>
-                <p class="form-title">订单补全</p>
+                <!-- <p class="form-title">订单补全</p> -->
+                
+                <div class="sales-list">
+                    <div class="mui-card mui-card-outer">
+                        <div class="mui-card-header">
+                            订单补全
+                        </div>
+                        <div class="mui-card-content-outer">
+                            <div class="block" v-for="(item, index) in salesList" :key="index">
+                                <div class="mui-card mui-card-inner">
+                                    <div class="mui-card-content">
+                                        <div class="block">
+                                            <div class="mui-input-row sales-type" :data-index="index">
+                                                <label for="">产品类型</label>
+                                                <input type="text" placeholder="产品类型" v-model="item.picTypeName" readonly />
+                                            </div>
+                                            <div class="mui-input-row sales-size" :data-index="index">
+                                                <label for="">照片尺寸</label>
+                                                <input type="text" placeholder="照片尺寸" v-model="item.picSizeName" readonly />
+                                            </div>
+                                            <div class="mui-input-row" :data-index="index">
+                                                <label for="">数量</label>
+                                                <input type="text" placeholder="数量" v-model="item.picNum" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="mui-icon mui-icon-close remove-salesNum" v-if="saleRemoveIconShow" @tap="removeSaleItem(index)" :data-index="index"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">添加产品</button>
+                    </div>
+                </div>
+
                 <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
