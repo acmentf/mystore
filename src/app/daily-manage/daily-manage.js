@@ -70,11 +70,6 @@ lf.ready(function() {
 			remark: this.getAttribute('data-remark')
 		})
 	})
-	// 点击通讯录
-	mui("body").on("tap", "#link-to-address-book", function(){
-		var redirect = '../../assets/webim/index.html#/group?username=' + window.Role.usercode;
-		lf.window._openWindow(redirect, redirect,{},{});
-	});
 	// 退出登录
 	mui('body').on('tap', '#logout', function() {
 		lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {

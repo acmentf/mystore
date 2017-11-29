@@ -45,6 +45,7 @@ if (mui.os.plus) {
                             roleName:item.roleName || '',
                             state:false,
                             selected:!!item.assignState,
+                            imUserId: item.id,
                             chartUrl: (function() {
                                 // modifywebim
                                 var host = "https://tuyi.uat.fingercrm.cn"
@@ -183,8 +184,13 @@ if (mui.os.plus) {
             })
 
             mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
-                var href = e.target.getAttribute('href')
-                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                var imUserId = e.target.getAttribute('imUserId')
+                try {
+                    ANDROID_JSB.chat(imUserId)
+                } catch (error) {
+                    var href = e.target.getAttribute('href')
+                    lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                }
             })
         }
     })
@@ -224,6 +230,7 @@ if (mui.os.plus) {
                             roleName:item.roleName || '',
                             state:false,
                             selected:!!item.assignState,
+                            imUserId: item.id,
                             chartUrl: (function() {
                                 // modifywebim
                                 var host = "https://tuyi.uat.fingercrm.cn"
@@ -367,8 +374,13 @@ if (mui.os.plus) {
             })
 
             mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
-                var href = e.target.getAttribute('href')
-                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                var imUserId = e.target.getAttribute('imUserId')
+                try {
+                    ANDROID_JSB.chat(imUserId)
+                } catch (error) {
+                    var href = e.target.getAttribute('href')
+                    lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                }
             })
         }
         init()

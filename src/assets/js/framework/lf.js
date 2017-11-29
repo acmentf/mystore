@@ -1564,7 +1564,7 @@ var lf = (function(document, undefined) {
 			options.async = async;
 			this.ajax(url, options);
 		},
-		getJSONWithLoading(url, params, successCallback, errorCallback){
+		getJSONWithLoading: function(url, params, successCallback, errorCallback){
 			$.nativeUI.showWaiting();
 			$.net.getJSON(url, params, function(res) {
 				$.nativeUI.closeWaiting()
