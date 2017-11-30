@@ -188,10 +188,17 @@ var GLOBAL_SHOOT = {
         }
     },
     restart: function() {
+        try {
+            ANDROID_JSB.imLogout()
+        } catch (error) {
+            console.log('UIWebView 运行环境不存在，不执行环信登出。');
+        }
+        
         if(mui.os.plus) {
             plus.runtime.restart()
         } else {
             lf.window.openWindow('login','../login.html',{},{});
+            window.history.replaceState(null, '', '../login.html')
         }
     }
 }
