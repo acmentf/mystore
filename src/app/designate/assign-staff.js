@@ -38,6 +38,7 @@ if (mui.os.plus) {
                     var list = [];
                     (indexedList || []).map(function (item) {
                         return {
+                            isUaTuyi: lf.net.browser.versions.tuyi,
                             value:item.id+'',
                             tags:(item.pyname || '').toUpperCase(),
                             text:item.name || '',
@@ -223,6 +224,7 @@ if (mui.os.plus) {
                     var list = [];
                     (indexedList || []).map(function (item) {
                         return {
+                            isUaTuyi: lf.net.browser.versions.tuyi,
                             value:item.id+'',
                             tags:(item.pyname || '').toUpperCase(),
                             text:item.name || '',

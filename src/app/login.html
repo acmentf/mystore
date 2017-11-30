@@ -54,11 +54,11 @@
 			});
 
 			var imLogin = function() {
-				// try {
-				// 	ANDROID_JSB.imLogin(window.Role.usercode)
-				// } catch (error) {
-
-				// }
+				try {
+					ANDROID_JSB.imLogin(window.Role.usercode)
+				} catch (error) {
+					console.log('UIWebView 运行环境不存在，不执行环信登录。');
+				}
 			}
 
 			lf.ready(function(){
