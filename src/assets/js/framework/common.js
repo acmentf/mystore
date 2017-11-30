@@ -189,7 +189,7 @@ var GLOBAL_SHOOT = {
     },
     restart: function() {
         try {
-            ANDROID_JSB.imLoginOut(window.Role.usercode)
+            ANDROID_JSB.imLogout()
         } catch (error) {
             console.log('UIWebView 运行环境不存在，不执行环信登出。');
         }
@@ -198,6 +198,7 @@ var GLOBAL_SHOOT = {
             plus.runtime.restart()
         } else {
             lf.window.openWindow('login','../login.html',{},{});
+            window.history.replaceState(null, '', '../login.html')
         }
     }
 }

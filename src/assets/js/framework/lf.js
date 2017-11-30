@@ -1721,6 +1721,7 @@ var lf = (function(document, undefined) {
 			if (!(/\/login\.html/.test(location.pathname))) {
 				window.Role.logout();
 				$.window.openWindow('login','../login.html',{},{});
+				window.history.replaceState(null, '', '../login.html')
 			}
 		},
 		/**
