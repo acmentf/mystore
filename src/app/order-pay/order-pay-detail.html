@@ -68,7 +68,9 @@
                 <ul class="list-unstyle">
                     <li>
                         <span class="gray">销售信息：</span>
-                        <span ><span>{{remark}}</span> <span>{{argDictName}} </span> <span>{{salesNums}}</span>张 &nbsp; </span>
+                        <p v-for="(item, key) in salesOrderTxList" ::key="key">
+                            <span ><span>{{item.remark}}</span> <span>{{item.argDictName}} </span> <span>{{item.nums}}</span>张 &nbsp; </span>
+                        </p>
                     </li>
                     <!-- <li>
                         <span class="gray">赠送信息：</span>

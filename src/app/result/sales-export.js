@@ -12,7 +12,9 @@ var vm = new Vue({
 			picNum: '',
 			picSize: '',
 			picSizeName: '',
-			price: ''
+			price: '',
+			// 产品类型
+			remark: ''
 		}],
 		saleDate: '',
 		salesAmt: '',
@@ -34,29 +36,48 @@ var vm = new Vue({
 	}
 })
 var userPicker,picker;
-let sizesEmun = [{
-	value: '1',
-	text: '16寸'
-}, {
-	value: '2',
-	text: '12寸'
-}, {
-	value: '3',
-	text: '10寸'
-}, {
-	value: '4',
-	text: '8寸'
-}, {
-	value: '6',
-	text: '7寸'
-},
-{
-	value: '5',
-	text: '6寸'
-}]
+let sizesEmun = [
+		{
+			value: '1',
+			text: '16寸'
+		}, {
+			value: '2',
+			text: '12寸'
+		}, {
+			value: '3',
+			text: '10寸'
+		}, {
+			value: '4',
+			text: '8寸'
+		}, {
+			value: '6',
+			text: '7寸'
+		},
+		{
+			value: '5',
+			text: '6寸'
+		}
+	];
+let salesTypeEmun = [
+		{
+			value: '相片',
+			text: '相片'
+		},
+		{
+			value: '相框',
+			text: '相框'
+		},
+		{
+			value: '相片+相框',
+			text: '相片+相框'
+		},
+		{
+			value: '电子片',
+			text: '电子片'
+		}
+	];
 lf.ready(function(){
 	userPicker = new mui.PopPicker();
-	userPicker.setData(sizesEmun);
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderId
 	loadResult()
@@ -65,47 +86,68 @@ lf.ready(function(){
 })
 mui('.mui-content').on('tap', '.gives-size', function() {
 	var index = this.getAttribute('data-index');
-	userPicker.show(function(items) {
-		Vue.set(vm.giveOrderXms,index,{
-			fType:'2',
-			picNum: vm.giveOrderXms[index].picNum,
-			picSize: items[0].value,
-			picSizeName: items[0].text
-		})
+	let currentItem = {...vm.giveOrderXms[index]};
+	userPicker.setData(sizesEmun);
+	userPicker.show(function(selectedItem) {
+		currentItem.picSize = selectedItem[0].value;
+		currentItem.picSizeName = selectedItem[0].text;
+		Vue.set(vm.giveOrderXms,index,currentItem)
 	});
 })
+
+// 选择赠送类型
+mui('.mui-content').on('tap', '.gives-type', function() {
+	let index = this.getAttribute('data-index');
+	let currentItem = {...vm.giveOrderXms[index]};
+	userPicker.setData(salesTypeEmun);
+	userPicker.show(function(selectedItem) {
+		currentItem.remark = selectedItem[0].value;
+		Vue.set(vm.giveOrderXms,index,currentItem)
+	})
+});
+
 mui('.mui-content').on('tap', '.sales-size', function() {
 	var index = this.getAttribute('data-index');
-	console.log(index);
-	userPicker.show(function(items) {
-		Vue.set(vm.saleOrderXms,index,{
-			fType:'3',
-			picNum: vm.saleOrderXms[index].picNum,
-			picSize: items[0].value,
-			picSizeName: items[0].text
-		})
+	let currentItem = {...vm.saleOrderXms[index]};
+	userPicker.setData(sizesEmun);
+	userPicker.show(function(selectedItem) {
+		currentItem.picSize = selectedItem[0].value;
+		currentItem.picSizeName = selectedItem[0].text;
+		Vue.set(vm.saleOrderXms,index,currentItem)
 	});
-})
+});
+// 选择销售类型
+mui('.mui-content').on('tap', '.sales-type', function() {
+	console.log(index)
+	let index = this.getAttribute('data-index');
+	let currentItem = {...vm.saleOrderXms[index]};
+	userPicker.setData(salesTypeEmun);
+	userPicker.show(function(selectedItem) {
+		currentItem.remark = selectedItem[0].value;
+		Vue.set(vm.saleOrderXms,index,currentItem)
+	})
+});
+
 mui('.mui-content').on('tap', '.add-givesNum', function() { //添加赠送张数
 	vm.giveOrderXms.push({
-		fType: '',
+		fType: 2,
 		id: '',
 		orderId: '',
 		picNum: '',
 		picSize: '',
 		picSizeName: '',
-		price: ''
+		remark: ''
 	})
 })
 mui('.mui-content').on('tap', '.add-salesNum', function() { //添加销售张数
 	vm.saleOrderXms.push({
-		fType: '',
+		fType: 3,
 		id: '',
 		orderId: '',
 		picNum: '',
 		picSize: '',
 		picSizeName: '',
-		price: ''
+		remark: ''
 	})
 });
 
@@ -116,7 +158,6 @@ mui('.mui-content').on('tap', '.remove-salesNum', function(){
 mui('.mui-content').on('tap', '.remove-givesNum', function(){
 	var index = this.getAttribute('data-index');
 	vm.giveOrderXms.splice(index,1)
-
 })
 mui('.mui-content').on('tap', '.saleDate', function () { //选择销售日期
 	var inputs = document.getElementsByTagName("input")
@@ -131,78 +172,75 @@ mui('.mui-content').on('tap', '.saleDate', function () { //选择销售日期
 	})
 })
 mui('.mui-bar').on('tap', '.save-btn', function(){
-	var flag = true 
-	console.log(vm.saleDate)
 	if(!vm.saleDate){
 		lf.nativeUI.toast('请选择销售时间')
-		flag = false;
+		return;
 	}
-	vm.saleOrderXms.forEach(function(v){
-		if(v.picNum>=0){
-			if(!v.picSize){
-				lf.nativeUI.toast('请选择销售尺寸')
-				flag = false;
-			}
+
+	var reg = /^[1-9]\d*$/
+	for (let i = 0; i < vm.saleOrderXms.length; i++) {
+		let item = vm.saleOrderXms[i];
+		if(!item.remark) {
+			lf.nativeUI.toast('请选择销售类型');
+			return;
 		}
-		if(v.picSize){
-			if(v.picNum!==0){
-				if(!v.picNum){
-					lf.nativeUI.toast('请输入销售张数')
-				flag = false
-				}else if(v.picNum<0){
-					lf.nativeUI.toast('销售张数参数不合法')
-					flag = false
-				}
-			}
+		if(!item.picSize) {
+			lf.nativeUI.toast('请选择销售尺寸');
+			return;
 		}
-		console.log(v.picNum)
-	})
-	console.log(vm.giveOrderXms.length)
-	var tempGiveOrderXms=vm.giveOrderXms
-	for(var i=0;i<tempGiveOrderXms.length;i++){
-		if(tempGiveOrderXms[i].picSize===''){
-			vm.giveOrderXms.splice(i,1)
-			i--
-		}
-		if(tempGiveOrderXms[i]&&tempGiveOrderXms[i].picSize&&tempGiveOrderXms[i].picNum===''){
-			tempGiveOrderXms[i].picNum=0
-		} else if (tempGiveOrderXms[i]&&tempGiveOrderXms[i].picNum<0){
-			lf.nativeUI.toast('赠送张数参数不合法')
-			flag = false
+		if(!reg.test(item.picNum)){
+			lf.nativeUI.toast('请输入正确的销售张数');
+			return;
 		}
 	}
-	var orderXms = vm.giveOrderXms.concat(vm.saleOrderXms)
-	// 校验 是否输入了相同的尺寸
-	var orderX = []
-	var orderY = []
-	for (var i = 0;i<orderXms.length; i++){
-		if(orderXms[i].fType == 2){
-			orderX[orderX.length] = orderXms[i].picSize
+
+	for (let i = 0; i < vm.giveOrderXms.length; i++) {
+		let item = vm.giveOrderXms[i];
+		if(!item.remark) {
+			lf.nativeUI.toast('请选择赠送类型');
+			return;
 		}
-		console.log(orderX)
-	}
-	for(var i=0;i<orderX.length;i++){
-		for(var j = i+1;j<orderX.length;j++){
-			if(orderX[i]==orderX[j]){
-				lf.nativeUI.toast('请勿输入相同照片尺寸')
-				flag =false
-			}
+		if(!item.picSize) {
+			lf.nativeUI.toast('请选择赠送尺寸');
+			return;
+		}
+		if(!reg.test(item.picNum)) {
+			lf.nativeUI.toast('请输入正确的正确张数');
+			return;
 		}
 	}
-	for (var i = 0;i<orderXms.length; i++){
-		if(orderXms[i].fType == 3){
-			orderY[orderY.length] = orderXms[i].picSize
+
+	// 通过 saleOrderXmsCopy 去重校验 vm.saleOrderXms 是否选择了相同销售类型与销售尺寸;
+	let saleOrderXmsCopy = vm.saleOrderXms.map((item) => {
+		return `remark:${item.remark},picSize:${item.picSize},picSizeName:${item.picSizeName}`;
+	});
+	let tempSaleOrderXms = [];
+	for(let i = 0; i < saleOrderXmsCopy.length; i ++) {
+		if(tempSaleOrderXms.indexOf(saleOrderXmsCopy[i]) == -1) {
+			tempSaleOrderXms.push(saleOrderXmsCopy[i]);
+		} else {
+			lf.nativeUI.toast('请勿选择相同的销售类型与销售尺寸');
+			return;
 		}
-		console.log(orderY)
 	}
-	for(var i=0;i<orderY.length;i++){
-		for(var j = i+1;j<orderY.length;j++){
-			if(orderY[i]==orderY[j]){
-				lf.nativeUI.toast('请勿输入相同照片尺寸')
-				flag =false
-			}
+
+	// 通过 giveOrderXmsCopy 去重校验 vm.giveOrderXms 是否选择了相同赠送类型与赠送尺寸;
+	let giveOrderXmsCopy = vm.giveOrderXms.map((item) => {
+		return `remark:${item.remark},picSize:${item.picSize},picSizeName:${item.picSizeName}`;
+	});
+
+	let tempGiveOrderXms = [];
+	for(let i = 0; i < giveOrderXmsCopy.length; i ++) {
+		if(tempGiveOrderXms.indexOf(giveOrderXmsCopy[i]) == -1) {
+			tempGiveOrderXms.push(giveOrderXmsCopy[i]);
+		} else {
+			lf.nativeUI.toast('请勿选择相同的赠送类型与赠送尺寸');
+			return;
 		}
 	}
+	
+	let orderXms = vm.saleOrderXms.concat(vm.giveOrderXms);
+
 	// 传参
 	var params ={
 		id: vm.id,
@@ -216,22 +254,20 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		flag: 2,
 		saleDate:new Date(vm.saleDate.replace(/-/g, '/'))
 	}
-	if(flag){
-		lf.nativeUI.showWaiting()
-			lf.net.getJSON('order/saveSalesOutput', params, function (res){
-			lf.nativeUI.closeWaiting()
-			if(res.code == 200){
-				lf.nativeUI.toast('保存成功！');
-				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
-				lf.window.closeCurrentWebview();
-			}else {
-				lf.nativeUI.toast(res.msg);
-			}
-		}, function(res) {
-			lf.nativeUI.closeWaiting()
-			lf.nativeUI.toast(res.msg)
-		})
-	}
+	lf.nativeUI.showWaiting()
+	lf.net.getJSON('order/saveSalesOutput', params, function (res){
+		lf.nativeUI.closeWaiting()
+		if(res.code == 200){
+			lf.nativeUI.toast('保存成功！');
+			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
+			lf.window.closeCurrentWebview();
+		}else {
+			lf.nativeUI.toast(res.msg);
+		}
+	}, function(res) {
+		lf.nativeUI.closeWaiting()
+		lf.nativeUI.toast(res.msg)
+	})
 })
 function timeStampToDate(timestamp) { //时间戳转换成正常日期格式
 	function add0(m) {
@@ -257,14 +293,15 @@ function loadResult(){
 				return
 			}else{
 				if( !res.data.orderX.saleOrderXms ||(res.data.orderX.saleOrderXms&&res.data.orderX.saleOrderXms.length == 0)){
-					vm.saleOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+					vm.saleOrderXms = [{fType: 3,id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: '', remark: ''}]
 				}else{
 					vm.saleOrderXms = res.data.orderX.saleOrderXms
 				}
-				if(!res.data.orderX.shotOrderXms||(res.data.orderX.shotOrderXms&&res.data.orderX.shotOrderXms.length == 0)){
-					vm.giveOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
+				if(!res.data.orderX.giveOrderXms||(res.data.orderX.giveOrderXms&&res.data.orderX.giveOrderXms.length == 0)){
+					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: '', remark: ''}]
+					vm.giveOrderXms = [];
 				}else{
-					vm.giveOrderXms = res.data.orderX.shotOrderXms
+					vm.giveOrderXms = res.data.orderX.giveOrderXms
 				}
 				vm.id = res.data.orderX.id
 				vm.buyers = res.data.orderX.buyers

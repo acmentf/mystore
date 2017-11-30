@@ -184,6 +184,7 @@ main section.container:first-child .title{
 }
 .form-title{
     position: relative;
+    top: 7px;
     height: 40px;
     line-height: 40px;
     padding: 0 15px;

@@ -106,21 +106,21 @@
                             订单补全
                         </div>
                         <div class="mui-card-content-outer">
-                            <div class="block" v-for="(item, index) in salesList" :key="index">
+                            <div class="block" v-for="(item, index) in salesOrderTxList" :key="index">
                                 <div class="mui-card mui-card-inner">
                                     <div class="mui-card-content">
                                         <div class="block">
                                             <div class="mui-input-row sales-type" :data-index="index">
-                                                <label for="">产品类型</label>
-                                                <input type="text" placeholder="产品类型" v-model="item.picTypeName" readonly />
+                                                <label for="">销售类型</label>
+                                                <input type="text" placeholder="销售类型" v-model="item.remark" readonly />
                                             </div>
                                             <div class="mui-input-row sales-size" :data-index="index">
-                                                <label for="">照片尺寸</label>
-                                                <input type="text" placeholder="照片尺寸" v-model="item.picSizeName" readonly />
+                                                <label for="">销售尺寸</label>
+                                                <input type="text" placeholder="销售尺寸" v-model="item.argDictName" readonly />
                                             </div>
                                             <div class="mui-input-row" :data-index="index">
                                                 <label for="">数量</label>
-                                                <input type="text" placeholder="数量" v-model="item.picNum" />
+                                                <input type="text" placeholder="数量" v-model="item.nums" />
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
 
-                <section class="content">
+                <!-- <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="mui-input-row">
@@ -161,7 +161,7 @@
                             </div>
                         </li>
                     </ul>
-                </section>
+                </section> -->
                 <!-- <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">

@@ -1,4 +1,10 @@
 lf.ready(function() {
+    let salesOrderTxListItemDefault = {
+        remark: '',
+        argDictId: '',                    
+        argDictName: '',
+        nums: ''
+    };
     var vm = new Vue({
         el: '#app',
         data: {
@@ -36,19 +42,13 @@ lf.ready(function() {
             saleName: '',
             salePositionId: '',
             pNo:'',
-            salesList: [
-                {
-                    picType: '',
-                    picTypeName: '',
-                    picSize: '',                    
-                    picSizeName: '',
-                    picNum: ''
-                }
+            salesOrderTxList: [
+                {...salesOrderTxListItemDefault}
             ]
         },
         computed: {
             saleRemoveIconShow() {
-                return this.salesList.length > 1;
+                return this.salesOrderTxList.length > 1;
             }
         },
         // watch: {
@@ -62,17 +62,13 @@ lf.ready(function() {
         // },
         methods: {
             removeSaleItem(index) {
-                this.salesList.splice(index, 1);
+                this.salesOrderTxList.splice(index, 1);
             },
             addSaleItem() {
                 let saleItem = {
-                    picType: '',
-                    picTypeName: '',
-                    picSize: '',                    
-                    picSizeName: '',
-                    picNum: ''
+                    ...salesOrderTxListItemDefault
                 };
-                this.salesList.push(saleItem);
+                this.salesOrderTxList.push(saleItem);
             },
             channelTyle: function(channelName){
                 switch (channelName) {
@@ -97,22 +93,44 @@ lf.ready(function() {
                     lf.nativeUI.toast("请选择导游")
                     return
                 }
-                if(!vm.remark){
-                    lf.nativeUI.toast("请选择销售类型")
-                    return
-                }
-                if(!vm.argDictId){
-                    lf.nativeUI.toast("请选择销售尺寸")
-                    return
-                }
+                // if(!vm.remark){
+                //     lf.nativeUI.toast("请选择销售类型")
+                //     return
+                // }
+                // if(!vm.argDictId){
+                //     lf.nativeUI.toast("请选择销售尺寸")
+                //     return
+                // }
                 var reg = /^[1-9]\d*$/
-                if(!vm.nums){
-                    lf.nativeUI.toast("请输入销售张数")
-                    return
+
+                for(let i = 0; i < vm.salesOrderTxList.length; i++) {
+                    let item = vm.salesOrderTxList[i];
+                    if(!item.remark) {
+                        lf.nativeUI.toast("请选择销售类型")
+                        return;
+                    }
+                    if(!item.argDictName) {
+                        lf.nativeUI.toast("请选择销售尺寸")
+                        return;
+                    }
+                    if(!reg.test(item.nums)) {
+                        lf.nativeUI.toast("请输入正确的销售张数")
+                        return;
+                    }
                 }
-                if (!reg.test(vm.nums)){
-                    lf.nativeUI.toast('销售张数不合法')
-                    return
+
+                // 通过 salesOrderTxListCopy 去重校验 vm.salesOrderTxList 是否选择了相同销售类型与销售尺寸;
+                let salesOrderTxListCopy = vm.salesOrderTxList.map((item) => {
+                    return `remark:${item.remark},argDictId:${item.argDictId},argDictName:${item.argDictName}`;
+                });
+                let tempSalesOrderTxList = [];
+                for(let i = 0; i < salesOrderTxListCopy.length; i ++) {
+                    if(tempSalesOrderTxList.indexOf(salesOrderTxListCopy[i]) == -1) {
+                        tempSalesOrderTxList.push(salesOrderTxListCopy[i]);
+                    } else {
+                        lf.nativeUI.toast('请勿选择相同的销售类型与销售尺寸');
+                        return;
+                    }
                 }
                 if(!vm.salePersonnelNum){
                     lf.nativeUI.toast("请输入销售人数")
@@ -139,7 +157,8 @@ lf.ready(function() {
                     saleId:vm.saleId,
                     saleName:vm.saleName,
                     salePersonnelNum:vm.salePersonnelNum,
-                    salePositionId:vm.salePositionId
+                    salePositionId:vm.salePositionId,
+                    salesOrderTxList: vm.salesOrderTxList
                 };
                 console.log(vm.argDictdName)
                 lf.nativeUI.showWaiting()
@@ -330,30 +349,33 @@ lf.ready(function() {
                 {
                     value: '相片+相框',
                     text: '相片+相框'
+                },
+                {
+                    value: '电子片',
+                    text: '电子片'
                 }
             ]
             let that = this;
             // 订单补全，选择照片尺寸
             mui('.mui-content').on('tap', '.sales-size', function() {
                 let index = this.getAttribute('data-index')
-                let currentItem = that.salesList[index];
+                let currentItem = {...that.salesOrderTxList[index]};
                 picker.setData(salesSizeEmun);
                 picker.show(function(selectedItem){
-                    currentItem.picSizeName = selectedItem[0].text;
-                    currentItem.picSize = selectedItem[0].value;
-                    that.salesList[index] = currentItem;
+                    currentItem.argDictName = selectedItem[0].text;
+                    currentItem.argDictId = selectedItem[0].value;
+                    Vue.set(that.salesOrderTxList,index,currentItem)
                 })
             });
-            // 订单补全，选择产品类型
+            // 订单补全，选择销售类型
             mui('.mui-content').on('tap', '.sales-type', function() {
                 console.log(index)
                 let index = this.getAttribute('data-index');
-                let currentItem = that.salesList[index];
+                let currentItem = {...that.salesOrderTxList[index]};
                 picker.setData(salesTypeEmun);
                 picker.show(function(selectedItem) {
-                    currentItem.picType = selectedItem[0].value;
-                    currentItem.picTypeName = selectedItem[0].text;
-                    that.salesList[index] = currentItem;
+                    currentItem.remark = selectedItem[0].value;
+                    Vue.set(that.salesOrderTxList,index,currentItem)
                 })
             });
 
@@ -399,6 +421,19 @@ lf.ready(function() {
                     vm.guideName = data.data.guideName
                     vm.nums = data.data.salesNums
                     vm.productName = data.data.productName
+
+                    vm.salesOrderTxList = (function() {
+                        // 如果 salesOrderTxList 没值，要赋默认值
+                        if (!data.data.salesOrderTxList || data.data.salesOrderTxList.length == 0) {
+                            return [
+                                {
+                                    ...salesOrderTxListItemDefault
+                                }
+                            ]
+                        } else {
+                            return data.data.salesOrderTxList;
+                        }
+                    }())
     
                 } else {
                     lf.nativeUI.closeWaiting();

@@ -69,16 +69,16 @@
 							<div class="mui-card-content">
 								<div class="block">
 									<div class="mui-input-row sales-type" :data-index="index">
-										<label for="">产品类型</label>
-										<input type="text" placeholder="产品类型" v-model="item.picSizeName" :data-item="item" readonly />
+										<label for="">销售类型</label>
+										<input type="text" placeholder="销售类型" v-model="item.remark" readonly />
 									</div>
 									<div class="mui-input-row sales-size" :data-index="index">
-										<label for="">照片尺寸</label>
-										<input type="text" placeholder="照片尺寸" v-model="item.picSizeName"  :data-item="item" readonly />
+										<label for="">销售尺寸</label>
+										<input type="text" placeholder="销售尺寸" v-model="item.picSizeName" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
 										<label for="">数量</label>
-										<input type="text" placeholder="数量" v-model="item.picNum" :data-item="item" />
+										<input type="text" placeholder="数量" v-model="item.picNum" />
 									</div>
 								</div>
 							</div>
@@ -88,7 +88,7 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-				<button type="button" class="mui-btn  add-salesNum ">添加销售尺寸</button>
+				<button type="button" class="mui-btn  add-salesNum ">添加销售</button>
 			</div>
 		</div>
 		<div class="give-number mui-input-group" style="padding-top: 1px;">
@@ -102,12 +102,12 @@
 							<div class="mui-card-content">
 								<div class="block">
 									<div class="mui-input-row gives-type" :data-index="index">
-										<label for="">产品类型</label>
-										<input type="text" placeholder="产品类型" v-model="item.picSizeName" :data-item="item" readonly />
+										<label for="">赠送类型</label>
+										<input type="text" placeholder="赠送类型" v-model="item.remark" :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row gives-size" :data-index="index">
-										<label for="">照片尺寸</label>
-										<input type="text" placeholder="照片尺寸" v-model="item.picSizeName"  :data-item="item" readonly />
+										<label for="">赠送尺寸</label>
+										<input type="text" placeholder="赠送尺寸" v-model="item.picSizeName"  :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
 										<label for="">数量</label>
@@ -121,7 +121,7 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-				<button type="button" class="mui-btn  add-givesNum">添加赠送尺寸</button>
+				<button type="button" class="mui-btn  add-givesNum">添加赠送</button>
 			</div>
 
 
