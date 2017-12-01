@@ -98,8 +98,15 @@
                 <div class="mui-scroll">
                     <section class="section-0">
                         <div>本月预期销售额任务：</div>
-                        <div id="missionProgress" class="num" :data-date="date.dateText">
+                        <div class="num mission-progress" :data-date="date.dateText">
                             {{monthAmount}}/{{monthPlanAmt}}
+                            <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                    </section>
+                    <section class="section-0">
+                        <div>本月计划销售额任务：</div>
+                        <div class="num mission-progress" :data-date="date.dateText">
+                            {{monthSelfAmount}}/{{monthPlanAmt}}
                             <span class="mui-icon mui-icon-arrowright"></span>
                         </div>
                     </section>

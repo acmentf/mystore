@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>渠道专员日报</title>
+    <title>渠道人员日报</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -81,7 +81,11 @@
                 <div class="mui-scroll">
                     <section class="section-0">
                         <div>本月预期销售额任务：</div>
-                        <div id="missionProgress" class="num">{{monthAmount}}/{{monthPlanAmt}}</div>
+                        <div class="num mission-progress">{{monthAmount}}/{{monthPlanAmt}}</div>
+                    </section>
+                    <section class="section-0">
+                        <div>本月计划销售额任务：</div>
+                        <div class="num mission-progress">{{monthSelfAmount}}/{{monthPlanAmt}}</div>
                     </section>
                     <section class="section-1 section-container">
                         <div>

@@ -19,7 +19,8 @@ var vm = new Vue({
             },
             planCompletedList: [],
             monthAmount: '',
-            monthPlanAmt: ''
+            monthPlanAmt: '',
+            monthSelfAmount: ''
         }
     },
     methods: {
@@ -60,6 +61,7 @@ var planCompleted = {
         vm.planCompletedList = data.dailyList;
         vm.monthAmount = data.monthAmount || 0;
         vm.monthPlanAmt = data.monthPlanAmt || 0;
+        vm.monthSelfAmount = data.monthSelfAmount || 0;
     },
     update: function(date) {
         this.getDataByDate(date);
@@ -194,7 +196,7 @@ lf.ready(function() {
     mui('body').on('tap', '#nextDay', function(){
         dateSelector.next();
     });
-    mui('body').on('tap', '#missionProgress', function() {
+    mui('body').on('tap', '.mission-progress', function() {
         var date = this.getAttribute('data-date');
         lf.window.openWindow('monthly-expect','./monthly-expect.html',{},{
         })        

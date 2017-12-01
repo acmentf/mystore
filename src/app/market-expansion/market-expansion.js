@@ -65,7 +65,8 @@ var vm = new Vue({
             ],
             planCompletedList: [{}],
             monthAmount: 0,
-            monthPlanAmt: 0
+            monthPlanAmt: 0,
+            monthSelfAmount: 0
         }
     },
     computed: {
@@ -119,6 +120,7 @@ var planCompleted = {
         vm.planCompletedList = data.dailyList.length > 0 ? data.dailyList : [{}];
         vm.monthAmount = data.monthAmount || 0;
         vm.monthPlanAmt = data.monthPlanAmt || 0;
+        vm.monthSelfAmount = data.monthSelfAmount || 0;
     },
     update: function(date) {
         this.getDataByDate(date);
