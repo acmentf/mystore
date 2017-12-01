@@ -129,7 +129,7 @@
                 clearInterval(vm.timer)
             },
             edit: function() {
-                mui.back();
+                // mui.back();
                 lf.window.openWindow('../correlate-order/editSaleOrder.html','../correlate-order/editSaleOrder.html',{},{
                     orderId: vm.orderId,
                     productName: vm.productName,
