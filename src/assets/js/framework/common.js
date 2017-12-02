@@ -26,7 +26,7 @@ var GLOBAL_SHOOT = {
         if (mui.os.plus) {
             var params = {
                 "app_id": plus.runtime.appid,
-                "version": plus.runtime.version,
+                "version": '1.5.8',
                 "imei": plus.device.imei,
                 "platform": plus.os.name
             };
