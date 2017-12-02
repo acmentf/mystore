@@ -12,7 +12,6 @@ var vm = new Vue({
 			picNum: '',
 			picSize: '',
 			picSizeName: '',
-			price: '',
 			// 产品类型
 			remark: ''
 		}],
@@ -189,8 +188,12 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 			return;
 		}
 		if(!reg.test(item.picNum)){
-			lf.nativeUI.toast('请输入正确的销售张数');
-			return;
+			if(item.picNum == 0) {
+
+			} else {
+				lf.nativeUI.toast('请输入正确的销售张数');
+				return;
+			}
 		}
 	}
 
@@ -293,12 +296,12 @@ function loadResult(){
 				return
 			}else{
 				if( !res.data.orderX.saleOrderXms ||(res.data.orderX.saleOrderXms&&res.data.orderX.saleOrderXms.length == 0)){
-					vm.saleOrderXms = [{fType: 3,id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: '', remark: ''}]
+					vm.saleOrderXms = [{fType: 3,id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 				}else{
 					vm.saleOrderXms = res.data.orderX.saleOrderXms
 				}
 				if(!res.data.orderX.giveOrderXms||(res.data.orderX.giveOrderXms&&res.data.orderX.giveOrderXms.length == 0)){
-					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: '', remark: ''}]
+					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 					vm.giveOrderXms = [];
 				}else{
 					vm.giveOrderXms = res.data.orderX.giveOrderXms

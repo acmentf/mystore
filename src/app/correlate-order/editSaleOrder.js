@@ -102,7 +102,7 @@ lf.ready(function() {
                 //     return
                 // }
                 var reg = /^[1-9]\d*$/
-
+                
                 for(let i = 0; i < vm.salesOrderTxList.length; i++) {
                     let item = vm.salesOrderTxList[i];
                     if(!item.remark) {
@@ -114,8 +114,12 @@ lf.ready(function() {
                         return;
                     }
                     if(!reg.test(item.nums)) {
-                        lf.nativeUI.toast("请输入正确的销售张数")
-                        return;
+                        if(item.nums == 0) {
+                            
+                        } else {
+                            lf.nativeUI.toast('请输入正确的销售张数');
+                            return;
+                        }
                     }
                 }
 

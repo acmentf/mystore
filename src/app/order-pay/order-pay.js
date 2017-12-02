@@ -283,8 +283,12 @@ lf.ready(function() {
                         return;
                     }
                     if(!reg.test(item.nums)){
-                        lf.nativeUI.toast('请输入正确的销售张数');
-                        return;
+                        if(item.nums == 0) {
+                            
+                        } else {
+                            lf.nativeUI.toast('请输入正确的销售张数');
+                            return;
+                        }
                     }
                 }
 
