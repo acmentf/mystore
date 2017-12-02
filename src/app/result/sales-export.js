@@ -208,8 +208,12 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 			return;
 		}
 		if(!reg.test(item.picNum)) {
-			lf.nativeUI.toast('请输入正确的正确张数');
-			return;
+			if(item.picNum == 0) {
+				
+			} else {
+				lf.nativeUI.toast('请输入正确的赠送张数');
+				return;
+			}
 		}
 	}
 
