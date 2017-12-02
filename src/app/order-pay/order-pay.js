@@ -4,7 +4,14 @@
  * Email: nishu@foxmail.com
  */
 
- lf.ready(function() {
+lf.ready(function() {
+    let params = lf.window.currentWebview();
+    let salesOrderTxListItemDefault = {
+        remark: '',
+        argDictId: '',                    
+        argDictName: '',
+        nums: ''
+    };
     var data = {
         orderId: lf.window.currentWebview().orderId,
         productName: lf.window.currentWebview().productName,
@@ -51,15 +58,94 @@
         loopOrderId: '',
         timer: null,
         price:'',
-        isPrice:false
+        isPrice:false,
+        salesOrderTxList: [
+            {
+                ...salesOrderTxListItemDefault
+            }
+        ]
     }
 
     var vm = new Vue({
         el: '#app',
         data: data,
+        computed: {
+            saleRemoveIconShow() {
+                return this.salesOrderTxList.length > 1;
+            }
+        },
         mounted: function() {
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
+
+            let salesSizeEmun = [
+                {
+                    value: '1',
+                    text: '16寸'
+                },
+                {
+                    value: '2',
+                    text: '12寸'
+                },
+                {
+                    value: '3',
+                    text: '10寸'
+                },
+                {
+                    value: '4',
+                    text: '8寸'
+                },
+                {
+                    value: '6',
+                    text: '7寸'
+                },
+                {
+                    value: '5',
+                    text: '6寸'
+                },
+            ];
+            let salesTypeEmun = [
+                {
+                    value: '相片',
+                    text: '相片'
+                },
+                {
+                    value: '相框',
+                    text: '相框'
+                },
+                {
+                    value: '相片+相框',
+                    text: '相片+相框'
+                },
+                {
+                    value: '电子片',
+                    text: '电子片'
+                }
+            ]
+            let that = this;
+            let picker = new mui.PopPicker();
+            // 选择照片尺寸
+            mui('.mui-content').on('tap', '.sales-size', function() {
+                let index = this.getAttribute('data-index')
+                let currentItem = that.salesOrderTxList[index];
+                picker.setData(salesSizeEmun);
+                picker.show(function(selectedItem){
+                    currentItem.argDictName = selectedItem[0].text;
+                    currentItem.argDictId = selectedItem[0].value;
+                    Vue.set(that.salesOrderTxList,index,currentItem)
+                })
+            });
+            // 选择产品类型
+            mui('.mui-content').on('tap', '.sales-type', function() {
+                console.log(index)
+                let index = this.getAttribute('data-index');
+                let currentItem = that.salesOrderTxList[index];
+                picker.setData(salesTypeEmun);
+                picker.show(function(selectedItem) {
+                    currentItem.remark = selectedItem[0].value;
+                    Vue.set(that.salesOrderTxList,index,currentItem)
+                })
+            });
 
             if (!this.saleOrderId) return
 
@@ -98,6 +184,19 @@
                     vm.guidePhone = data.data.guidePhone
                     vm.guideName = data.data.guideName
                     vm.productName = data.data.productName
+
+                    vm.salesOrderTxList = (function() {
+                        // 如果 salesOrderTxList 没值，要赋默认值
+                        if (!data.data.salesOrderTxList || data.data.salesOrderTxList.length == 0) {
+                            return [
+                                {
+                                    ...salesOrderTxListItemDefault
+                                }
+                            ]
+                        } else {
+                            return data.data.salesOrderTxList;
+                        }
+                    }())
                 } else {
                     lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(data.msg);
@@ -109,6 +208,13 @@
             })
         },
         methods: {
+            removeSaleItem(index) {
+                this.salesOrderTxList.splice(index, 1);
+            },
+            addSaleItem() {
+                let saleItem = {...salesOrderTxListItemDefault};
+                this.salesOrderTxList.push(saleItem);
+            },
             showPriceDialog: function() {
                 vm.isPrice = true
                 vm.price = ''
@@ -164,52 +270,54 @@
             },
 
             handlePay: function(payType) {
-                if (!vm.nums){
-                    lf.nativeUI.toast('请输入数量')
-                    return
-                }
-
                 var reg = /^[1-9]\d*$/
-                if (!reg.test(vm.nums)){
-                    lf.nativeUI.toast('销售数量不合法')
-                    return
+
+                for (let i = 0; i < vm.salesOrderTxList.length; i++) {
+                    let item = vm.salesOrderTxList[i];
+                    if(!item.remark) {
+                        lf.nativeUI.toast('请选择销售类型');
+                        return;
+                    }
+                    if(!item.argDictId) {
+                        lf.nativeUI.toast('请选择销售尺寸');
+                        return;
+                    }
+                    if(!reg.test(item.nums)){
+                        if(item.nums == 0) {
+                            
+                        } else {
+                            lf.nativeUI.toast('请输入正确的销售张数');
+                            return;
+                        }
+                    }
                 }
-                
-                var reg = /^[1-9]\d*$/
-                if (!reg.test(vm.nums)){
-                    lf.nativeUI.toast('销售数量不合法')
-                    return
+
+                // 通过 salesOrderTxListCopy 去重校验 vm.salesOrderTxList 是否选择了相同销售类型与销售尺寸;
+                let nums = 0;
+                let salesOrderTxListCopy = vm.salesOrderTxList.map((item) => {
+                    nums = nums + (item.nums - 0);
+                    return `remark:${item.remark},argDictId:${item.argDictId},argDictName:${item.argDictName}`;
+                });
+                this.nums = nums;
+                let tempSalesOrderTxList = [];
+                for(let i = 0; i < salesOrderTxListCopy.length; i ++) {
+                    if(tempSalesOrderTxList.indexOf(salesOrderTxListCopy[i]) == -1) {
+                        tempSalesOrderTxList.push(salesOrderTxListCopy[i]);
+                    } else {
+                        lf.nativeUI.toast('请勿选择相同的销售类型与销售尺寸');
+                        return;
+                    }
                 }
-                
-                if(!reg.test(vm.salePersonnelNum)&&vm.salePersonnelNum){
-                    lf.nativeUI.toast('销售人数不合法')
+
+                if(!reg.test(vm.salePersonnelNum)){
+                    lf.nativeUI.toast('请输入正确的销售人数')
                     return
                 }
 
-                var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
+                var amountReg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^(0){1}$)|(^\d\.\d{1,2}?$)/;
                 
-                if (!vm.amount){
-                    lf.nativeUI.toast('请输入金额')
-                    return
-                }
-
-                if (vm.amount < 0.01){
-                    lf.nativeUI.toast('金额不能小于0.01')
-                    return
-                }
-
                 if (!amountReg.test(vm.amount)){
-                    lf.nativeUI.toast('金额只能精确到两位小数')
-                    return
-                }
-                
-                if (!vm.remark){
-                    lf.nativeUI.toast('请选择销售类型')
-                    return
-                }
-                
-                if (!vm.argDictId){
-                    lf.nativeUI.toast('请选择尺寸')
+                    lf.nativeUI.toast('请输入正确的金额');
                     return
                 }
 
@@ -312,9 +420,9 @@
             saleOrderId: vm.saleOrderId,
             province: vm.province,
             city: vm.city,
-            salePersonnelNum: vm.salePersonnelNum
+            salePersonnelNum: vm.salePersonnelNum,
+            salesOrderTxList: vm.salesOrderTxList
         }
-
         console.log(JSON.stringify(params));
 
         lf.nativeUI.showWaiting();

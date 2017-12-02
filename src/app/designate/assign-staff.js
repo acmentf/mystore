@@ -38,6 +38,7 @@ if (mui.os.plus) {
                     var list = [];
                     (indexedList || []).map(function (item) {
                         return {
+                            isUaTuyi: lf.net.browser.versions.tuyi,
                             value:item.id+'',
                             tags:(item.pyname || '').toUpperCase(),
                             text:item.name || '',
@@ -45,10 +46,11 @@ if (mui.os.plus) {
                             roleName:item.roleName || '',
                             state:false,
                             selected:!!item.assignState,
+                            imUserId: item.userId+'',
                             chartUrl: (function() {
                                 // modifywebim
                                 var host = "https://tuyi.uat.fingercrm.cn"
-                                var query = `#/contact/${item.id}?username=${window.Role.usercode}`
+                                var query = `#/contact/${item.imUserId}?username=${window.Role.usercode}`
                                 var url = `${host}/html5/assets/webim/index.html${query}`
 
                                 return url
@@ -183,8 +185,13 @@ if (mui.os.plus) {
             })
 
             mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
-                var href = e.target.getAttribute('href')
-                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                var imUserId = e.target.getAttribute('imUserId')
+                try {
+                    ANDROID_JSB.chat(imUserId)
+                } catch (error) {
+                    var href = e.target.getAttribute('href')
+                    lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                }
             })
         }
     })
@@ -217,6 +224,7 @@ if (mui.os.plus) {
                     var list = [];
                     (indexedList || []).map(function (item) {
                         return {
+                            isUaTuyi: lf.net.browser.versions.tuyi,
                             value:item.id+'',
                             tags:(item.pyname || '').toUpperCase(),
                             text:item.name || '',
@@ -224,10 +232,11 @@ if (mui.os.plus) {
                             roleName:item.roleName || '',
                             state:false,
                             selected:!!item.assignState,
+                            imUserId: item.userId+'',
                             chartUrl: (function() {
                                 // modifywebim
                                 var host = "https://tuyi.uat.fingercrm.cn"
-                                var query = `#/contact/${item.id}?username=${window.Role.usercode}`
+                                var query = `#/contact/${item.imUserId}?username=${window.Role.usercode}`
                                 var url = `${host}/html5/assets/webim/index.html${query}`
 
                                 return url
@@ -367,8 +376,13 @@ if (mui.os.plus) {
             })
 
             mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
-                var href = e.target.getAttribute('href')
-                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                var imUserId = e.target.getAttribute('imUserId')
+                try {
+                    ANDROID_JSB.chat(imUserId)
+                } catch (error) {
+                    var href = e.target.getAttribute('href')
+                    lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+                }
             })
         }
         init()

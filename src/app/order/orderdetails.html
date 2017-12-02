@@ -249,13 +249,17 @@
 									<span v-text="orderResult.serverPerNum"></span>
 								</div>
 								<div class="item">
-									<label>拍摄张数：</label>
+									<label>上传张数：</label>
 									<span v-text="orderResult.shootNum"></span>
 								</div>
-								<div class="item">
+								<!-- <div class="item">
+									<label>拍摄张数：</label>
+									<span v-text="orderResult.shootNum"></span>
+								</div> -->
+								<!-- <div class="item">
 									<label>选片张数：</label>
 									<span v-text="orderResult.selectsNum"></span>
-								</div>
+								</div> -->
 								<div class="item">
 									<label>打印张数：</label>
 									<div class="print" v-for="item in orderResult.printOrderXms">
@@ -303,7 +307,8 @@
 									<div>
 										<span class="ico-dot"></span>
 										<span v-text="item.picSizeName"></span>
-										<span v-text="item.picNum"></span>张
+										<span v-text="item.picNum || 0"></span>张
+										<span v-text="item.remark"></span>张
 									</div>
 								</div>
 							</div>
@@ -314,7 +319,8 @@
 							<div class="print" v-for="item in orderResult.salesOrderXms">
 								<div><span class="ico-dot"></span>
 									<span v-text="item.picSizeName"></span>
-									<span v-text="item.picNum"></span>张
+									<span v-text="item.picNum || 0"></span>张
+									<span v-text="item.remark"></span>
 								</div>
 							</div>
 						</div>

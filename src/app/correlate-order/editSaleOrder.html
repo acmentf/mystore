@@ -20,6 +20,30 @@
                 padding-top: 0 !important;
                 padding-bottom: 0 !important;
             }
+            .mui-card-header{
+                background: #3eb392;
+                font-size: 0.32rem;
+                color: #fff;
+            }
+            .mui-content .block {
+                position: relative;
+            }
+            .mui-content .block .mui-icon-close {
+                position: absolute;
+                top: -8px;
+                right: 0px;
+                background: #fff;
+                border-radius: 50%;
+            }
+            .mui-card-content .block .mui-input-row {
+                position: relative;
+            }
+            .mui-card-content .block .mui-pull-left {
+                width: 35% !important;
+            }
+            .mui-card-content .block .mui-pull-right {
+                width: 60% !important; 
+            }
         </style>
     </head>
     <body>
@@ -44,7 +68,7 @@
 								<span>{{pOrderNo}}</span>
 							</li>
 							<li>
-								<span class="gray">预计销售时间：</span>
+								<span class="gray">预计服务完成时间：</span>
 								<span>{{orderSaleDate}}</span>
                             </li>
                             <li class="price-container">
@@ -65,7 +89,7 @@
                         </li>
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right">
-                                <div class="mui-pull-left personal-list-key">预计销售时间</div>
+                                <div class="mui-pull-left personal-list-key">预计服务完成时间</div>
                                 <input @click="selectDate" readonly class="mui-pull-right" placeholder="请输入时间" v-model="orderSaleDate">
                             </div>
                         </li>
@@ -83,8 +107,43 @@
                         </li>
                     </ul>
                 </section>
-                <p class="form-title">订单补全</p>
-                <section class="content">
+                <!-- <p class="form-title">订单补全</p> -->
+                
+                <div class="sales-list">
+                    <div class="mui-card mui-card-outer">
+                        <div class="mui-card-header">
+                            订单补全
+                        </div>
+                        <div class="mui-card-content-outer">
+                            <div class="block" v-for="(item, index) in salesOrderTxList" :key="index">
+                                <div class="mui-card mui-card-inner">
+                                    <div class="mui-card-content">
+                                        <div class="block">
+                                            <div class="mui-input-row sales-type" :data-index="index">
+                                                <label class="mui-pull-left" for="">销售类型</label>
+                                                <input class="mui-pull-right" type="text" placeholder="销售类型" v-model="item.remark" readonly />
+                                            </div>
+                                            <div class="mui-input-row sales-size" :data-index="index">
+                                                <label class="mui-pull-left" for="">销售尺寸</label>
+                                                <input class="mui-pull-right" type="text" placeholder="销售尺寸" v-model="item.argDictName" readonly />
+                                            </div>
+                                            <div class="mui-input-row" :data-index="index">
+                                                <label class="mui-pull-left" for="">数量</label>
+                                                <input class="mui-pull-right" type="text" placeholder="数量" v-model="item.nums" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="mui-icon mui-icon-close remove-salesNum" v-if="saleRemoveIconShow" @tap="removeSaleItem(index)" :data-index="index"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">添加产品</button>
+                    </div>
+                </div>
+
+                <!-- <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="mui-input-row">
@@ -111,7 +170,7 @@
                             </div>
                         </li>
                     </ul>
-                </section>
+                </section> -->
                 <!-- <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">

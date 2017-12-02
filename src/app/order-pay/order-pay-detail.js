@@ -51,7 +51,8 @@
         loopOrderId: '',
         timer: null,
         price:'',
-        isPrice:false
+        isPrice:false,
+        salesOrderTxList: []
     }
 
     var vm = new Vue({
@@ -69,7 +70,7 @@
 
             lf.nativeUI.showWaiting();
 
-            lf.net.getJSON('pay/getOrderDetail', params, function(data) {
+            lf.net.getJSON('/pay/getOrderDetail', params, function(data) {
                 console.log(JSON.stringify(data));
 
                 if(data.code == 200) {
@@ -98,6 +99,7 @@
                     vm.guidePhone = data.data.guidePhone
                     vm.guideName = data.data.guideName
                     vm.productName = data.data.productName
+                    vm.salesOrderTxList = data.data.salesOrderTxList
                 } else {
                     lf.nativeUI.closeWaiting();
                     lf.nativeUI.toast(data.msg);
@@ -234,7 +236,7 @@
 
                 lf.nativeUI.showWaiting();
 
-                lf.net.getJSON('pay/cancelOrder', params, function(data) {
+                lf.net.getJSON('/pay/cancelOrder', params, function(data) {
                     console.log(JSON.stringify(data));
         
                     if(data.code == 200) {
@@ -319,7 +321,7 @@
 
         lf.nativeUI.showWaiting();
 
-        lf.net.getJSON('pay/payment', params, function(data) {
+        lf.net.getJSON('/pay/payment', params, function(data) {
             console.log(JSON.stringify(data));
 
             if(data.code == 200) {
@@ -454,6 +456,7 @@
                 vm.guideName = data.data.guideName
                 vm.salesNums = data.data.salesNums
                 vm.productName = data.data.productName
+                vm.salesOrderTxList = data.data.salesOrderTxList;
             } else {
                 lf.nativeUI.closeWaiting();
                 lf.nativeUI.toast(data.msg);

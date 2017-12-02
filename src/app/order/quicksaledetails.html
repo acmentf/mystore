@@ -11,6 +11,23 @@
 		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/css/order/quicksaledetails.css" />
 		<link rel="stylesheet" href="../../assets/css/common/common.css" />
+		<style>
+			.sale-list {
+				overflow: hidden;
+			}
+			.sale-list .label{
+				float: left;
+			}
+			.sale-list .list-wrap{
+				float: left;
+			}
+			.sale-list .list-wrap .size-wrap {
+				display: inline-block;
+				width: 1rem;
+				text-align: right;
+				padding-right: 0.1rem;
+			}
+		</style>
     </head>
     <body>
         <div id="app">
@@ -69,13 +86,25 @@
 								<span class="gray">预计服务完成时间：</span>
 								<span v-text="orderResult.saleDate"></span>
 							</li>
-							<li>
-								<span class="gray">销售张数：</span>
-								<span v-if="orderResult.salesOrderXms.length>0" v-for="item in orderResult.salesOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum || 0"></span>张 &nbsp; </span>
+							<li class="sale-list">
+								<div class="gray label">销售张数：</div>
+								<div class="list-wrap">
+									<div v-if="orderResult.salesOrderXms.length>0" v-for="item in orderResult.salesOrderXms" :key="item">
+										<span v-text="item.picSizeName" class="size-wrap"></span>
+										<span v-text="item.picNum || 0"></span>张 &nbsp;
+										<span v-text="item.remark"></span>
+									</div>
+								</div>
 							</li>
-							<li>
-								<span class="gray">赠送张数：</span>
-								<span v-if="orderResult.giveOrderXms.length>0" v-for="item in orderResult.giveOrderXms" :key="item"><span v-text="item.picSizeName"></span> <span v-text="item.picNum || 0"></span>张 &nbsp; </span>
+							<li class="sale-list">
+								<div class="gray label">赠送张数：</div>
+								<div class="list-wrap">
+									<div v-if="orderResult.giveOrderXms.length>0" v-for="item in orderResult.giveOrderXms" :key="item">
+										<span v-text="item.picSizeName" class="size-wrap"></span> 
+										<span v-text="item.picNum || 0"></span>张 &nbsp;
+										<span v-text="item.remark"></span>
+									</div>
+								</div>
 							</li>
 							<li>
 								<span class="gray">销售人数/家庭：</span>

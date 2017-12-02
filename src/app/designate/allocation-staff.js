@@ -38,6 +38,7 @@ lf.ready(function() {
                 var list = [];
                 (indexedList || []).map(function(item) {
                     return {
+                        isUaTuyi: lf.net.browser.versions.tuyi,
                         value: item.id + '',
                         tags: (item.pyname || '').toUpperCase(),
                         text: item.name || '',
@@ -45,6 +46,7 @@ lf.ready(function() {
                         roleName: item.roleName || '',
                         state: false,
                         selected: !!item.assignState,
+                        imUserId: /[\|]/g.test(item.id) ? item.id.split('|')[0] : item.id,
                         chartUrl: (function() {
                             var id = /[\|]/g.test(item.id) ? item.id.split('|')[0] : item.id
                             var name = /[\-]/g.test(item.id) ? item.name.split('-')[0] : item.name
@@ -230,8 +232,13 @@ lf.ready(function() {
         })
 
         mui('.designate-select-staff').on('tap','.btn-chat',function (e) {
-            var href = e.target.getAttribute('href')
-            lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+            var imUserId = e.target.getAttribute('imUserId')
+            try {
+                ANDROID_JSB.chat(imUserId)
+            } catch (error) {
+                var href = e.target.getAttribute('href')
+                lf.window._openWindow('chat', href,{},{},lf.window.currentWebview());
+            }
         })
     }
 })
