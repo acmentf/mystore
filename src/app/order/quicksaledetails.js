@@ -175,7 +175,7 @@ lf.ready(function() {
                         var seconds = time.getSeconds();
                         vm.orderResult.saleDate = year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
                     }
-                    vm.totalPrice = (parseFloat(vm.orderResult.advanceAmount) || 0) + (parseFloat(vm.orderResult.payableAmount) || 0) + (parseFloat(vm.orderResult.salesAmt) || 0)
+                    vm.totalPrice = ((parseFloat(vm.orderResult.advanceAmount) || 0) + (parseFloat(vm.orderResult.payableAmount) || 0) + (parseFloat(vm.orderResult.salesAmt) || 0)).toFixed(2)
                 }
             } else {
                 lf.nativeUI.toast(data.msg);

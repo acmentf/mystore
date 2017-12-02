@@ -18,7 +18,7 @@ var GLOBAL_SHOOT = {
                 console.log("当前应用版本：" + vm.wgtVer);
             })
         } else {
-            vm.wgtVer = '1.4.9'
+            vm.wgtVer = '1.5.8'
         }
     },
     // 检测版本是否更新
