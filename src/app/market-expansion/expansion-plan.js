@@ -89,9 +89,9 @@ lf.ready(function(){
 
     function validateData(data) {
         // debugger
-        var planPreAmountReg = /^\d+$/;
+        var planPreNumReg = /^\d+$/;
         if(data.planPreNum) {
-            if(!planPreAmountReg.test(data.planPreNum)) {
+            if(!planPreNumReg.test(data.planPreNum)) {
                 lf.nativeUI.toast('请正确填写前置人数');
                 return false;
             }
