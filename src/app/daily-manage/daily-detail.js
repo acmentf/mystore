@@ -31,7 +31,7 @@ function init(){
 		if(data.code == 200) {
             var sortArr = [];
             data.data.forEach(function(item, id){
-                var index;
+                var index = undefined;
                 data.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
                 sortArr.forEach(function(el, i){
                     if( el.purchaser == item.purchaser ){
@@ -39,13 +39,13 @@ function init(){
                     }
                 });
 
-                if( index ){
-                    sortArr[index].orderList.push(item);
-                } else {
+                if( index === undefined ){
                     sortArr.push({
                         purchaser: item.purchaser,
                         orderList: [].concat(item)
                     });
+                } else {
+                    sortArr[index].orderList.push(item);
                 }
             });
 
