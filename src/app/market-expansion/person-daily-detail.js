@@ -67,7 +67,7 @@ lf.ready(function() {
                 lf.nativeUI.toast('没有详细数据');
             } else {
                 var sortArr = [];
-                for(let i = 0; i < res.data.length; i++) {
+                for(var i = 0; i < res.data.length; i++) {
                     var item = res.data[i];
                     item.createTime = lf.util.timeStampToDate2(item.createTime);
 
