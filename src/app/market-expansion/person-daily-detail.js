@@ -67,31 +67,40 @@ lf.ready(function() {
                 lf.nativeUI.toast('没有详细数据');
             } else {
                 var sortArr = [];
-                res.data.forEach(function(item, id){
-                    var index;
-                    res.data[id].createTime = lf.util.timeStampToDate2(item.createTime);
-                    res.data[id].orderShow = (function(item){
+                for(var i = 0; i < res.data.length; i++) {
+                    var item = res.data[i];
+                    item.createTime = lf.util.timeStampToDate2(item.createTime);
+
+                    item.orderShow = (function(item){
                         if(!item.saleDate) {
                             return true;
                         } else {
                             return item.saleDate == date;
                         }
-                    }(item))
-                    sortArr.forEach(function(el, i){
-                        if( el.purchaser == item.purchaser ){
-                            return index = i;
+                    }(item));
+
+                    if (!item.orderShow) {
+                        // 如果当前订单 orderShow 为 false，直接进入下一次循环；
+                        // 保证了 sortArr 下，所有的 旅行社组别 里，都是可显示的订单。
+                        continue;
+                    }
+
+                    var index = undefined;
+                    for(var j = 0; j < sortArr.length; j++) {
+                        if(sortArr[j].purchaser == item.purchaser) {
+                            index = j;
+                            break;
                         }
-                    });
-    
-                    if( index ){
-                        sortArr[index].orderList.push(item);
-                    } else {
+                    }
+                    if(index === undefined) {
                         sortArr.push({
                             purchaser: item.purchaser,
                             orderList: [].concat(item)
                         });
+                    } else {
+                        sortArr[index].orderList.push(item);
                     }
-                });
+                }
                 console.log(sortArr);
     
                 vm.purchaserOrderList = sortArr;
