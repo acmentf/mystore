@@ -91,7 +91,7 @@
                 <h1 class="mui-title" style="color: #fff;">
                     渠道经理日报
                 </h1>
-                <div class="edit-relation">渠道关系</div>
+                <!-- <div class="edit-relation">渠道关系</div> -->
             </header>
             
             <div class="mui-scroll-wrapper mui-content">
@@ -125,12 +125,12 @@
                         <div class="section-2-block" v-for="(item, key) in planCompletedList" :key="key">
                             <div class="person-wrap">
                                 <div class="name">{{item.userName}}</div>
-                                <div v-if="item.setFlag == 1" class="btn-wrap check-section-2" :data-userid="item.userId" :data-date="date.dateText" :data-user-name="item.userName">
+                                <div class="btn-wrap check-section-2" :data-userid="item.userId" :data-date="date.dateText" :data-user-name="item.userName">
                                     <span>查看详情</span>
                                 </div>
-                                <div v-else class="btn-wrap edit-relation">
+                                <!-- <div v-else class="btn-wrap edit-relation">
                                     <span>绑定关系</span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="border">
                                 <div class="border-line"></div>
