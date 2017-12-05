@@ -119,12 +119,12 @@
                             <li class="mui-table-view-cell" v-for="(item, key) in planList" :key="key">
                                 <div class="date">{{item.planTime|dateFormatter}}</div>
                                 <div class="content">
-                                    <div>
+                                    <!-- <div>
                                         <div>预期销售额</div>
                                         <div>{{expectAmount}}</div>
                                         <div></div>
                                         <div></div>
-                                    </div>
+                                    </div> -->
                                     <div>
                                         <div>计划销售额</div>
                                         <div>{{item.planPreAmount|toFixed2}}</div>

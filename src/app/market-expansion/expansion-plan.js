@@ -25,24 +25,40 @@ var vm = new Vue({
             ],
             expectAmount: 0
         }
+    },
+    computed: {
+        lastIndex: function() {
+            if(this.planList.length > 0) {
+                return this.planList.length - 1
+            } else {
+                return 0;
+            }
+        }
+    },
+    methods: {
+        removeItem: function(index) {
+            this.planList.splice(index, 1);
+        }
     }
 });
 
 lf.ready(function(){
     var expectAmount;
+    var userId = window.Role.usercode;
+    var userName = window.Role.username;
     expectAmount = lf.window.currentWebview().expectAmount;
     vm.expectAmount = expectAmount;
     // 获取计划列表
     lf.nativeUI.showWaiting()
     lf.net.getJSON('/purchaser/getPurchaserPlan', {
-        userId: window.Role.usercode,
+        userId: userId,
         date: new Date().format('yyyy-MM-dd')
     }, function(res) {
         lf.nativeUI.closeWaiting();
         if(res.code == 200) {
             vm.planList = res.data;
         } else {
-            lf.nativeUI.toast(data.msg);
+            lf.nativeUI.toast(res.msg);
         }
     }, function(err) {
         lf.nativeUI.closeWaiting();
@@ -58,7 +74,9 @@ lf.ready(function(){
                     id: item.id,
                     planPreNum: item.planPreNum,
                     planPreAmount: item.planPreAmount,
-                    remark: item.remark
+                    remark: item.remark,
+                    createTime: item.createTime,
+                    planTime: item.planTime
                 }
                 requestPlanList.push(temp);
             } else {
@@ -73,6 +91,7 @@ lf.ready(function(){
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 lf.nativeUI.toast('保存成功');
+                location.reload();
                 refreshParentView();
             } else {
                 lf.nativeUI.toast(res.msg);
@@ -83,8 +102,27 @@ lf.ready(function(){
         })
     })
 
+    function getNewDay() {
+        if(vm.planList.length > 0) {
+            var lastDayTimeStamp = vm.planList[vm.planList.length - 1].planTime;
+            return lastDayTimeStamp + (1000 * 60 * 60 * 24);
+        } else {
+            return new Date().getTime();
+        }
+    }
+
     mui('body').on('tap', '.add-plan', function() {
-        
+        var newDay = getNewDay();
+        var newItem = {
+            createTime: new Date().getTime(),
+            planTime: newDay,
+            planPreAmount: 0,
+            planPreNum: 0,
+            userName: '',
+            userId: userId
+        };
+        vm.planList.push(newItem);
+        lf.nativeUI.toast(new Date(newDay).format('yyyy-MM-dd') + ' 计划添加成功');
     })
 
     function refreshParentView() {
