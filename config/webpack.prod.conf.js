@@ -31,7 +31,7 @@ let entryHtml = utils.getEntryHtml('./src/app/**/*.html', true),
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "bundle-common",
-            filename: "js/bundle-common.[chunkhash].js"
+            filename: "js/bundle-common.js"
         }),
         new CopyWebpackPlugin([
             {
@@ -50,8 +50,8 @@ entryHtml.forEach(function (v) {
 
 module.exports = merge(baseWebpackConfig, {
     output: {
-        filename: 'js/[name].[chunkhash].js',
-        chunkFilename: 'js/[name].[chunkhash].js',
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[name].js',
         path: utils.resolvePath('dist')
     },
     entry: entryJs,
