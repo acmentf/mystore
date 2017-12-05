@@ -172,7 +172,7 @@ mui("body").on("tap", ".correlate", function() {
 		purchaser: purchaser,
 		aliasName: aliasName,
 		province: province,
-		city: city
+		city: city,
 	})
 })
 mui("body").on("tap", ".no-correlate", function() {
@@ -200,7 +200,8 @@ mui("body").on("tap", ".no-correlate", function() {
 		purchaser: purchaser,
 		aliasName: aliasName,
 		province: province,
-		city: city
+		city: city,
+		interSource: 0
 	})
 })
 

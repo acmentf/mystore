@@ -5,10 +5,10 @@
                 <div class="label">本日预期销售额完成率</div>
                 <div class="num">{{item.amountComletionRate}}%</div>
             </div>
-            <div class="label-wrap">
+            <!-- <div class="label-wrap">
                 <div class="label">本日计划销售额完成率</div>
                 <div class="num">{{item.selfAmtComletionRate}}%</div>
-            </div>
+            </div> -->
             <div class="detail-wrap">
                 <div class="detail-column">
                     <div>预期销售额</div>

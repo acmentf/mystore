@@ -138,7 +138,8 @@
                     amount: vm.amount,
                     channelName: vm.channelName,
                     saleOrderId: vm.saleOrderId,
-                    tourGuide: vm.guideName
+                    tourGuide: vm.guideName,
+                    interSource: 1
                 })
             },
             payStatus: function(status) {
