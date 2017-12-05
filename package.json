@@ -9,7 +9,8 @@
     "uat": "better-npm-run uat",
     "build": "better-npm-run build",
     "foreign": "better-npm-run foreign",
-    "start": "better-npm-run start"
+    "start": "better-npm-run start",
+    "hash": "gulp hash"
   },
   "betterScripts": {
     "start": {
