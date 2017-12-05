@@ -149,6 +149,9 @@ lf.ready(function() {
                     return
                 }
                 console.log(vm.orderId)
+                var parentPageName = lf.window.currentWebview().parentPageName;
+                
+
                 var params = {
                     argDictId:vm.argDictId,
                     argDictName: vm.sizeOptions[vm.argDictId],
@@ -162,7 +165,13 @@ lf.ready(function() {
                     saleName:vm.saleName,
                     salePersonnelNum:vm.salePersonnelNum,
                     salePositionId:vm.salePositionId,
-                    salesOrderTxList: vm.salesOrderTxList
+                    salesOrderTxList: vm.salesOrderTxList,
+
+                    // order-pay-list.html  --- order-pay-detail.html --- editSaleOrder.html  interSource: 1
+                    // correlate-order.html --- order-pay-detail.html --- editSaleOrder.html  interSource: 1
+                    // correlate-order.html --- editSaleOrder.html interSource: 0
+
+                    interSource: lf.window.currentWebview().interSource
                 };
                 console.log(vm.argDictdName)
                 lf.nativeUI.showWaiting()
