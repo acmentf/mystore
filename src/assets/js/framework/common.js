@@ -23,12 +23,12 @@ var GLOBAL_SHOOT = {
     },
     // 检测版本是否更新
     update: function () {
-        if (lf.net.browser.versions.tuyi) {
+        if (mui.os.plus) {
             var params = {
-                "app_id": '',
+                "app_id": '123456',
                 "version": '1.5.8',
-                "imei": '',
-                "platform": ''
+                "imei": '123456',
+                "platform": 'android'
             };
             lf.net.getJSON("/app/validationversion", params, function(data) {
                 var update_desc = "发现新的版本，是否需要立即更新";
