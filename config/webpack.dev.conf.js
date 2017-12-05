@@ -30,8 +30,8 @@ entryHtml.forEach(function (v) {
 
 module.exports = merge(baseWebpackConfig, {
     output: {
-        filename: 'js/[name].js',
-        chunkFilename: 'js/[name].js',
+        filename: 'js/[name][hash].js',
+        chunkFilename: 'js/[name][hash].js',
         path: utils.resolvePath('dist')
     },
     entry: entryJs,
