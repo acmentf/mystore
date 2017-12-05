@@ -34,35 +34,49 @@ class Contact extends React.Component{
 
     componentDidMount(){
         const { pathname, search } = this.props.location;
+        const { history } = this.props;
         const search_obj = qs.parse(search);
+
+        const activeCreateGroup = () => {
+            setTimeout(() => {
+                this.props.createGroups({
+                    data: {
+                        groupname: search_obj.members,
+                        desc: "群聊",
+                        members: search_obj.ids.split(','),
+                        public: false,
+                        approval: false,
+                        allowinvites: false
+                    },
+                    success: ({data}) => {
+                        console.log(`群聊创建成功`);
+                        this.props.getGroups();
+                        console.log("object");
+                        console.log(search_obj);
+                        history.push(`/group/${data.groupid}?username=${search_obj['?username']}&fromPC=true`)
+                        // this.props.onClick({
+                        //     key: data.groupid,
+                        //     keyPath: [data.groupid]
+                        // });
+                    },
+                    error: (error) => {
+                        console.log("创建群聊失败", error || "error");
+                    }
+                });
+            }, 500);
+        }
         
         if( pathname.indexOf('contact') !== -1 &&
                 pathname.indexOf('_') == -1 &&
                 search.indexOf('ids') !== -1 &&
                 search.indexOf('members') !== -1 ){
-                    setTimeout(() => {
-                        this.props.createGroups({
-                            data: {
-                                groupname: search_obj.members,
-                                desc: "群聊",
-                                members: search_obj.ids.split(','),
-                                public: false,
-                                approval: false,
-                                allowinvites: false
-                            },
-                            success: ({data}) => {
-                                console.log(`群聊创建成功`);
-                                this.props.getGroups();
-                                this.props.onClick({
-                                    key: data.groupid,
-                                    keyPath: [data.groupid]
-                                });
-                            },
-                            error: (error) => {
-                                console.log("创建群聊失败", error || "error");
-                            }
-                        });
-                    }, 500);
+
+                    if (search_obj.ids.indexOf(',') > -1) {
+                        activeCreateGroup()
+                    } else {
+                        history.push(`/contact/${search_obj.ids}?username=${search_obj['?username']}&fromPC=true`)
+                    }
+                    
         }
 
         this.props.getOrganizes(search_obj.searchId || "0", "id");
