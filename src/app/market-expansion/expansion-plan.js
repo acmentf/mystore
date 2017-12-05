@@ -83,6 +83,10 @@ lf.ready(function(){
         })
     })
 
+    mui('body').on('tap', '.add-plan', function() {
+        
+    })
+
     function refreshParentView() {
         lf.event.fire(lf.window.currentWebview().opener(), 'refreshData', {})
     }
