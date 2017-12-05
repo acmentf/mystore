@@ -11,12 +11,33 @@
 		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/css/market-expansion/expansion-plan.css" />
 		<link rel="stylesheet" href="../../assets/css/common/common.css" />
+		<style>
+			.mui-bar {
+				/* position: relative; */
+			}
+			.mui-bar .add-plan {
+				position: absolute;
+				padding:4px 10px;
+				border: 1px solid #fff;
+				top: 6px;
+				right: 5px;
+				border-radius: 3px;
+				color: #fff;
+				background-color: #3cb493;
+				font-size: 0.26rem;
+			}
+			.mui-bar .add-plan:active {
+				background-color: #fff;
+				color: #3cb493;
+			}
+		</style>
     </head>
     <body>
         <div id="app">
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
 				<h1 class="mui-title">填报计划</h1>
+				<!-- <div class="add-plan">添加</div> -->
 			</header>
 			<footer class="mui-bar mui-bar-footer">
 				<button type="button" id="save" class="mui-btn mui-btn-primary genSale">保存</button>
