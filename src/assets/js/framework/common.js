@@ -18,17 +18,17 @@ var GLOBAL_SHOOT = {
                 console.log("当前应用版本：" + vm.wgtVer);
             })
         } else {
-            vm.wgtVer = '1.5.8'
+            vm.wgtVer = '1.5.9'
         }
     },
     // 检测版本是否更新
     update: function () {
-        if (mui.os.plus) {
+        if (lf.net.browser.versions.tuyi) {
             var params = {
-                "app_id": plus.runtime.appid,
+                "app_id": '',
                 "version": '1.5.8',
-                "imei": plus.device.imei,
-                "platform": plus.os.name
+                "imei": '',
+                "platform": ''
             };
             lf.net.getJSON("/app/validationversion", params, function(data) {
                 var update_desc = "发现新的版本，是否需要立即更新";
@@ -47,14 +47,24 @@ var GLOBAL_SHOOT = {
                     lf.nativeUI.confirm("", update_desc, btns, function(e) {
                         if(btns.length == 1) {
                             if(0 == e.index) {
-                                plus.runtime.openURL(data.data.releaseUrl);
+                                try {
+                                    ANDROID_JSB.openBrowser(data.data.releaseUrl)
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                                // plus.runtime.openURL(data.data.releaseUrl);
                                 lf.window.closeCurrentWebview();
                             } else {
                                 plus.runtime.quit();
                             }
                         } else {
                             if(0 == e.index) {
-                                plus.runtime.openURL(data.data.releaseUrl);
+                                // plus.runtime.openURL(data.data.releaseUrl);
+                                try {
+                                    ANDROID_JSB.openBrowser(data.data.releaseUrl)
+                                } catch (error) {
+                                    console.log(error);
+                                }
                                 lf.window.closeCurrentWebview();
                             } else {}
                         }
