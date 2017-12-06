@@ -1,9 +1,9 @@
 #!/bin/sh
 
-now="$(date +'%Y%m%d%H%M%S')"
-devBranch="build"
-releaseBranch="tuyi_publish_branch"
-masterBranch="master"
+readonly now="$(date +'%Y%m%d%H%M%S')"
+readonly devBranch="build"
+readonly releaseBranch="tuyi_publish_branch"
+readonly masterBranch="master"
 
 mergeRelease() {
     git checkout ${devBranch}
@@ -16,8 +16,8 @@ mergeRelease() {
 }
 
 mergeBuildRelease() {
-    mergeRelease
     npm run build
+    npm run hash
     git add .
     git commit -m "Update dist build ${now}"
     git push
@@ -33,8 +33,8 @@ mergeMaster() {
     git tag
 }
 
-echo 'a、推送代码到生产环境'
-echo 'b、构建后推送代码到生产环境'
+echo 'a、推送代码到发行环境'
+echo 'b、构建代码+添加HASH后缀到发行环境'
 echo 'c、合并生产环境代码到master分支'
 echo '请根据字母选择您的操作：'
 
