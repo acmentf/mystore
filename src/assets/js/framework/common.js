@@ -23,7 +23,8 @@ var GLOBAL_SHOOT = {
     },
     // 检测版本是否更新
     update: function () {
-        if (!mui.os.plus) {
+        return
+        if (mui.os.plus) {
             var params = {
                 "app_id": '123456',
                 "version": '1.5.8',
