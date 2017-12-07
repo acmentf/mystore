@@ -1,7 +1,12 @@
 var messages = {
     "en": {
-        "sign_in": "sign in",
-        "sign_out": "sign out",
+        "confirm_del_account": "Do you want to delete {account} ?",
+        "tips": "Tips",
+        "invalid_user": "Invalid user",
+        "placeholder_account": "Please input account",
+        "placeholder_password": "Please input password",
+        "sign_in": "Sign in",
+        "sign_out": "Sign out",
         "ok": "ok",
         "cancel": "cancel",
         "sign_out_tips": "Would you sign out this account?",
@@ -127,7 +132,12 @@ var messages = {
         "sales_order_no": "sales order No.",
         "time_generated": "time generated"
     },
-    "zh-cn": {
+    "cn": {
+        "confirm_del_account": "确定删除账号{account}吗?",
+        "tips": "提示",
+        "invalid_user": "无效的用户",
+        "placeholder_account": "请输入账号",
+        "placeholder_password": "请输入密码",
         "sign_in": "登 陆",
         "sign_out": "退出登陆",
         "ok": "确定",
@@ -255,4 +265,16 @@ var messages = {
         "sales_order_no": "销售订单号",
         "time_generated": "生成时间"
     }
+}
+
+/**
+ * vue-i18n configure
+ */
+if (window.VueI18n) {
+    var i18n = new VueI18n({
+        locale: navigator.language === 'zh-CN' ? 'cn' : 'en', // set locale
+        messages: messages, // set locale messages
+    })
+
+    Vue.mixin({i18n: i18n})
 }
