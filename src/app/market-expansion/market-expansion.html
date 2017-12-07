@@ -83,10 +83,10 @@
                         <div>本月预期销售额任务：</div>
                         <div class="num mission-progress">{{monthAmount}}/{{monthPlanAmt}}</div>
                     </section>
-                    <!-- <section class="section-0">
+                    <section class="section-0">
                         <div>本月计划销售额任务：</div>
                         <div class="num mission-progress">{{monthAmount}}/{{monthSelfAmount}}</div>
-                    </section> -->
+                    </section>
                     <section class="section-1 section-container">
                         <div>
                             <div class="day" id="preDay">
@@ -119,12 +119,12 @@
                             <li class="mui-table-view-cell" v-for="(item, key) in planList" :key="key">
                                 <div class="date">{{item.planTime|dateFormatter}}</div>
                                 <div class="content">
-                                    <div>
+                                    <!-- <div>
                                         <div>预期销售额</div>
                                         <div>{{expectAmount}}</div>
                                         <div></div>
                                         <div></div>
-                                    </div>
+                                    </div> -->
                                     <div>
                                         <div>计划销售额</div>
                                         <div>{{item.planPreAmount|toFixed2}}</div>
