@@ -159,7 +159,7 @@
                     </form>
 
                     <div class="offCanvasSide-logout">
-                        <button type="button" id="logout" class="mui-btn mui-btn-block">退出登录</button>
+                        <button type="button" id="logout" class="mui-btn mui-btn-block">{{$t('sign_out')}}</button>
                     </div>
 
                     <p class="version">v{{wgtVer}}</p>
@@ -170,7 +170,7 @@
         <div class="mui-inner-wrap" style="background:#efeff4">
             <header class="mui-bar mui-bar-nav" style="background:#3db391;">
                 <a href="#offCanvasSide" style="color:#fff" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-                <h1 class="mui-title" style="color: #fff;">订单管理</h1>
+                <h1 class="mui-title" style="color: #fff;">{{$t('order_list')}}</h1>
                 <a style="color:#fff" id="search-order" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
                 <a v-if="currentRoleId == 4" id="quickOrder" class="mui-icon mui-action-menu mui-pull-right">
                     <img src="../../assets/images/order/sale_flash.png" alt="">
@@ -199,18 +199,18 @@
                                                     <div class="mui-table title">
                                                         <div class="mui-clearfix" style="margin-bottom: 0.2rem;">
                                                             <span class="colorgray">
-																途忆团号:<i v-text="item.tourNo"></i>
+																{{$t('tuyi_gourp_no')}}:<i v-text="item.tourNo"></i>
 															</span>
                                                             <span v-if="currentRoleId!=9">
-																<span class="dqr colororange" v-if="item.actionStatus ==0">待计调</span>
-																<span class="dqr colorgreen" v-if="item.actionStatus ==11">待分配</span>
-																<span class="dqr colorblue" v-if="item.actionStatus ==22">待输出</span>
-																<span class="dqr colorpink" v-if="item.actionStatus ==33">待销售</span>
-																<span class="dqr coloryellow" v-if="item.actionStatus ==44">待完成</span>
-																<span class="dqr colorgreen" v-if="item.actionStatus ==55">服务完成</span>
+																<span class="dqr colororange" v-if="item.actionStatus ==0">{{$t('active_status.operating')}}</span>
+																<span class="dqr colorgreen" v-if="item.actionStatus ==11">{{$t('active_status.assigning')}}</span>
+																<span class="dqr colorblue" v-if="item.actionStatus ==22">{{$t('active_status.outputting')}}</span>
+																<span class="dqr colorpink" v-if="item.actionStatus ==33">{{$t('active_status.selling')}}</span>
+																<span class="dqr coloryellow" v-if="item.actionStatus ==44">{{$t('active_status.completing')}}</span>
+																<span class="dqr colorgreen" v-if="item.actionStatus ==55">{{$t('active_status.service_complete')}}</span>
                                                             </span>
                                                             <span v-if="currentRoleId==9" class="dqr guideinfo">
-                                                                <span v-if="item.salesAmt || item.actionStatus>33">已售:￥{{item.salesAmt}}</span>
+                                                                <span v-if="item.salesAmt || item.actionStatus>33">{{$t('paid')}}:￥{{item.salesAmt}}</span>
                                                                 <span v-if="!item.salesAmt&&item.actionStatus<=33">尚未销售</span>
                                                             </span>
                                                         </div>
@@ -224,28 +224,28 @@
                                                                 <div v-if="currentRoleId!=9">
 																	<div class="item">
 																		<span class="ico ico-starttime"></span>
-																		<span>出团日期: {{item.startTime}}</span>
+																		<span>{{$t('launch_date')}}: {{item.startTime}}</span>
 																		<!-- <span>共{{item.groupDays}}天</span> -->
 																	</div>
 																	<div class="item">
-																		<span class="ico ico-linename"></span> 线路名称: {{item.aliasName}}
+																		<span class="ico ico-linename"></span> {{$t('route_name')}}: {{item.aliasName}}
 																	</div>
 																</div>
 																<div v-if="currentRoleId==9">
 																	<div class="item">
 																		<span class="saletime"></span>
-																		<span>销售时间: {{item.saleDate}}</span>
+																		<span>{{$t('sales_time')}}: {{item.saleDate}}</span>
 																	</div>
 																	<div class="item">
-																		<span class="ico ico-linename"></span> 销售地点: {{item.saleScene}}
+																		<span class="ico ico-linename"></span> {{$t('selling_address')}}: {{item.saleScene}}
 																	</div>
 																</div>
                                                                 <div class="item">
-                                                                    <span class="ico ico-personcount"></span> 团队人数: {{item.personCount}}
+                                                                    <span class="ico ico-personcount"></span> {{$t('participates_number')}}: {{item.personCount}}
                                                                 </div>
                                                             </div>
                                                             <div class="item guideinfo">
-                                                                <span class="ico ico-tourguide"></span> 导游: {{item.tourGuide}}
+                                                                <span class="ico ico-tourguide"></span> {{$t('tour_guide')}}: {{item.tourGuide}}
                                                                 <a v-for="tp in item.tourGuidePhone" :href="'tel:'+tp" style=" color: #FF8458; margin-left: 0.1rem;" :data-tel="tp"> <span v-text="tp"></span> </a>
 
                                                             </div>
@@ -277,11 +277,11 @@
                                                         <div v-if="currentRoleId == 4">
                                                             <button v-if="assignOrder&&item.actionStatus!=44&&item.actionStatus!=33" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName"
                                                             :data-actionStatus="item.actionStatus" :data-orderStatus="item.status">
-																	计调
+																	{{$t('action_btns.operate')}}
 																</button>
 
                                                             <button v-if="item.actionStatus==33 || item.actionStatus==44 || item.actionStatus==55" type="button" class="mui-btn tourinfo link" :data-id="item.id" :data-no="item.orderNo">
-																	修改信息
+                                                                    {{$t('action_btns.modify_info')}}
 																</button>
 
                                                             <!-- <button v-if="confirmOrder&&item.actionStatus==44" type="button" class="mui-btn" :data-id="item.id" :data-no="item.orderNo" id="confirmComplete">
@@ -290,31 +290,31 @@
                                                         </div>
                                                         <div v-if="currentRoleId == 2">
                                                             <button v-if="assignOrder" type="button" class="mui-btn jidiao" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
-																	计调
+                                                                {{$t('action_btns.operate')}}
 																</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 5">
                                                             <button v-if="allotPhotoOrder&&(item.actionStatus==11||item.actionStatus==22)" type="button" class="mui-btn allotPhotoOrder" :data-id="item.id" :data-no="item.orderNo" :data-aliasName="item.aliasName" :data-lineName="item.lineName">
-																		分配
+                                                                {{$t('action_btns.assign_photographer')}}
 																</button>
 
                                                             <button v-if="item.actionStatus==33" type="button" class="mui-btn tourinfo link" :data-id="item.id" :data-no="item.orderNo">
-																	修改信息
+                                                                {{$t('action_btns.modify_info')}}
 																</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 3">
                                                             <button v-if="summary&&item.actionStatus!=0&&item.actionStatus!=11" type="button" class="mui-btn summary" :data-summary="item.summary" :data-id="item.id" :data-no="item.orderNo" :data-tourId="item.tourId">
-																	录入心得
+																	{{$t('add_notes')}}
 															</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 8">
                                                             <button v-if="outOrder&&(item.actionStatus==22||item.actionStatus==33||item.actionStatus==55)" type="button" class="mui-btn outOrder" :data-id="item.id" :data-no="item.orderNo">
-																	输出
+                                                                {{$t('action_btns.outputter')}}
 															</button>
                                                         </div>
                                                         <div v-if="currentRoleId == 9">
                                                             <button v-if="genSale&&(item.actionStatus<=33||item.actionStatus==55)" type="button" class="mui-btn genSale" :data-id="item.id" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
-                                                                生成销售
+                                                                {{$t('action_btns.sell')}}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -338,19 +338,19 @@
             <div class="footer">
                 <div class="footer-order-btn">
                     <span class="footer-order-icon foot-icon"></span>
-                    <span class="footer-order-text">订单</span>
+                    <span class="footer-order-text">{{$t('order')}}</span>
                 </div>
                 <div class="footer-order-contact-btn" v-if="currentRoleId==9">
                     <span class="footer-order-contact-icon foot-icon"></span>
-                    <span class="footer-order-contact-text">关联</span>
+                    <span class="footer-order-contact-text">{{$t('relate')}}</span>
                 </div>
                 <div class="footer-message-btn">
                     <span class="footer-message-icon foot-icon"></span>
-                    <span class="footer-message-text">消息</span>
+                    <span class="footer-message-text">{{$t('message')}}</span>
                 </div>
                 <div class="footer-addressbook-btn">
                     <span class="footer-addressbook-icon foot-icon"></span>
-                    <span class="footer-addressbook-text">通讯录</span>
+                    <span class="footer-addressbook-text">{{$t('contacts')}}</span>
                 </div>
                 <!--<div class="footer-personage-btn">
 						<span class="footer-personage-icon foot-icon"></span>
@@ -367,6 +367,8 @@
         <script src="../../assets/js/framework/lf.js"></script>
         <script src="../../assets/js/framework/common.js"></script>
         <script src="../../assets/libs/vue.min.js"></script>
+        <script src="../../assets/libs/vue-i18n.js"></script>
+		<script src="../../assets/i18n/language.js"></script>
 </body>
 
 </html>

@@ -243,6 +243,12 @@
 	text-align: center;
 	color: #C2CACC;
 }
+.orderdetails .mod > .mui-icon-arrowright{
+	color: #C2CACC;
+	position: absolute;
+    right: 10px;
+    top: 35px;
+}
 .orderdetails .mui-icon-arrowright{
 	color: #C2CACC;
 }

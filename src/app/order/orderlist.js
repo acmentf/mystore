@@ -59,11 +59,11 @@ function checkAuth() {
 		console.log("当前用户的角色id"+vm.currentRoleId)
 	}
 	if (vm.currentRoleId == 9) {
-		vm.orderHeader[0].name = '服务中'
-		vm.orderHeader[1].name = '服务完成'
+		vm.orderHeader[0].name = vm.$t('active_status.servicing')
+		vm.orderHeader[1].name = vm.$t('active_status.service_complete')
 	} else {
-		vm.orderHeader[0].name = '待处理'
-		vm.orderHeader[1].name = '进行中'
+		vm.orderHeader[0].name = vm.$t('active_status.pending')
+		vm.orderHeader[1].name = vm.$t('active_status.processing')
 	}
 	vm.cancelRole = window.Role.hasAuth('cancel') // 取消按钮的key
 	vm.operatorRole = window.Role.hasAuth('handle') // 计调key
@@ -197,7 +197,7 @@ mui('.order-ul').on('tap', '.qdbtn', function() {
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')
 	//确认，取消
-	lf.nativeUI.confirm("", "你确认要执行订单", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_operate_order'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
 		if(e.index == 0) {
 			var params = {
 				"orderId": id,
@@ -224,7 +224,7 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')
 	//确认，取消
-	lf.nativeUI.confirm("", "你确认要取消订单", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_cancel_order'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
 		if(e.index == 0) {
 			var params = {
 				"orderId": id,
@@ -237,7 +237,7 @@ mui('.order-ul').on('tap', '.qxbtn', function() {
 				if(res.code == 200) {
 					lf.event.fire(lf.window.currentWebview().opener(), 'indexdata', {})
 					mui(vm.pullObjects[1]).pullToRefresh().pullDownLoading();
-					lf.nativeUI.toast('操作成功')
+					lf.nativeUI.toast(vm.$t('success'))
 				} else {
 					lf.nativeUI.toast(res.msg)
 				}
@@ -348,7 +348,7 @@ mui('.order-ul').on('tap', '.genSale', function() { //点击生成销售
 })
 
 mui('body').on('tap', '#logout', function() {
-	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm(vm.$t('tips'), vm.$t('sign_out_tips'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
 		if(e.index == 0) {
 			window.Role.logout();
 			GLOBAL_SHOOT.restart();
@@ -369,7 +369,7 @@ mui('body').on('tap', '.quick-sale-pay', function() {
 mui('body').on('tap', '#confirmComplete', function() { //确认完成
 	var id = this.getAttribute('data-id')
 	var no = this.getAttribute('data-no')
-	lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_service_complete'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
 		if(e.index == 0) {
 			completeFn()
 		}
@@ -384,7 +384,7 @@ mui('body').on('tap', '#confirmComplete', function() { //确认完成
 		};
 		lf.net.getJSON('order/updateOrderState', params, function(data) {
 			if(data.code == 200) {
-				lf.nativeUI.toast("确认成功！");
+				lf.nativeUI.toast(vm.$t('success'));
 			} else {
 				lf.nativeUI.toast(data.msg);
 			}
@@ -456,12 +456,13 @@ function switchRolePostion(val) {
 		checkAuth();
 	
 		if (vm.currentRoleId == 9) {
-			vm.orderHeader[0].name = '服务中'
-			vm.orderHeader[1].name = '服务完成'
+			vm.orderHeader[0].name = vm.$t('active_status.servicing')
+			vm.orderHeader[1].name = vm.$t('active_status.service_complete')
 		} else {
-			vm.orderHeader[0].name = '待处理'
-			vm.orderHeader[1].name = '进行中'
+			vm.orderHeader[0].name = vm.$t('active_status.pending')
+			vm.orderHeader[1].name = vm.$t('active_status.processing')
 		}
+
 		vm.orderList.forEach(function(v, i) { // 将数据制空
 			dodata('down', i, [])
 			vm.pageNos[i] = 0;
@@ -569,6 +570,7 @@ function initPull() {
 					}
 				},
 				up: {
+					contentnomore: vm.$t('no_more_data'),
 					auto: true,
 					callback: function() {
 						var self = this;
