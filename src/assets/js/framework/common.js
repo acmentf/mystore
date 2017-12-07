@@ -23,7 +23,7 @@ var GLOBAL_SHOOT = {
     },
     // 检测版本是否更新
     update: function () {
-        if (mui.os.plus) {
+        if (!mui.os.plus) {
             var params = {
                 "app_id": '123456',
                 "version": '1.5.8',
@@ -210,5 +210,17 @@ var GLOBAL_SHOOT = {
             lf.window.openWindow('login','../login.html',{},{});
             window.history.replaceState(null, '', '../login.html')
         }
-    }
+    },
+    androidDownloadApp: (function () {
+        var browserInfo = lf.net.browser.versions;
+        if(!browserInfo.tuyi && browserInfo.android) {
+            // 不在途忆客户端内，且访问设备为 Android 设备
+            var downloadAddress = 'https://fir.im/jdytrip';
+            var title = '途忆客户端下载';
+            var tip_desc = '亲爱的安卓用户\n为了给您带来更好的使用体验\n请前往下载执行端App';
+            lf.nativeUI.confirm(title, tip_desc, ['前往下载'], function(e) {
+                lf.window.openWindow("downloadAddress", downloadAddress)
+            });
+        }
+    })()
 }
