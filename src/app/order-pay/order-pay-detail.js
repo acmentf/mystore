@@ -167,54 +167,54 @@
             },
 
             handlePay: function(payType) {
-                if (!vm.nums){
-                    lf.nativeUI.toast('请输入数量')
-                    return
-                }
+                // if (!vm.nums){
+                //     lf.nativeUI.toast('请输入数量')
+                //     return
+                // }
 
-                var reg = /^[1-9]\d*$/
-                if (!reg.test(vm.nums)){
-                    lf.nativeUI.toast('销售数量不合法')
-                    return
-                }
+                // var reg = /^[1-9]\d*$/
+                // if (!reg.test(vm.nums)){
+                //     lf.nativeUI.toast('销售数量不合法')
+                //     return
+                // }
                 
-                var reg = /^[1-9]\d*$/
-                if (!reg.test(vm.nums)){
-                    lf.nativeUI.toast('销售数量不合法')
-                    return
-                }
+                // var reg = /^[1-9]\d*$/
+                // if (!reg.test(vm.nums)){
+                //     lf.nativeUI.toast('销售数量不合法')
+                //     return
+                // }
                 
-                if(!reg.test(vm.salePersonnelNum)&&vm.salePersonnelNum){
-                    lf.nativeUI.toast('销售人数不合法')
-                    return
-                }
+                // if(!reg.test(vm.salePersonnelNum)&&vm.salePersonnelNum){
+                //     lf.nativeUI.toast('销售人数不合法')
+                //     return
+                // }
 
-                var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
+                // var amountReg = /^[0-9]+([.]{1}[0-9]{1,2})?$/
                 
-                if (!vm.amount){
-                    lf.nativeUI.toast('请输入金额')
-                    return
-                }
+                // if (!vm.amount){
+                //     lf.nativeUI.toast('请输入金额')
+                //     return
+                // }
 
-                if (vm.amount < 0.01){
-                    lf.nativeUI.toast('金额不能小于0.01')
-                    return
-                }
+                // if (vm.amount < 0.01){
+                //     lf.nativeUI.toast('金额不能小于0.01')
+                //     return
+                // }
 
-                if (!amountReg.test(vm.amount)){
-                    lf.nativeUI.toast('金额只能精确到两位小数')
-                    return
-                }
+                // if (!amountReg.test(vm.amount)){
+                //     lf.nativeUI.toast('金额只能精确到两位小数')
+                //     return
+                // }
                 
-                if (!vm.remark){
-                    lf.nativeUI.toast('请选择销售类型')
-                    return
-                }
+                // if (!vm.remark){
+                //     lf.nativeUI.toast('请选择销售类型')
+                //     return
+                // }
                 
-                if (!vm.argDictId){
-                    lf.nativeUI.toast('请选择尺寸')
-                    return
-                }
+                // if (!vm.argDictId){
+                //     lf.nativeUI.toast('请选择尺寸')
+                //     return
+                // }
 
                 this.payType = payType
                 this.payName = this.getPayName(this.payType)
@@ -307,15 +307,16 @@
             nums: vm.nums,
             amount: vm.amount,
             remark: vm.remark,
-            argDictId: vm.argDictId,
-            argDictName: vm.sizeOptions[vm.argDictId],
+            argDictId: 1, // 脏代码待移除
+            argDictName: "相片", // 脏代码待移除
             guideName: vm.guideName,
             purchaser: vm.purchaser,
             alias: vm.alias,
             saleOrderId: vm.saleOrderId,
             province: vm.province,
             city: vm.city,
-            salePersonnelNum: vm.salePersonnelNum
+            salePersonnelNum: vm.salePersonnelNum,
+            salesOrderTxList: vm.salesOrderTxList
         }
 
         console.log(JSON.stringify(params));
