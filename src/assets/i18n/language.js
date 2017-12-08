@@ -356,7 +356,8 @@ var messages = {
  */
 if (window.VueI18n) {
     var i18n = new VueI18n({
-        locale: navigator.language === 'zh-CN' ? 'cn' : 'en', // set locale
+        // locale: navigator.language === 'zh-CN' ? 'cn' : 'en', // set locale
+        locale: 'cn',
         messages: messages, // set locale messages
     })
 
