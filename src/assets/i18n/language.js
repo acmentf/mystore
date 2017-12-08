@@ -4,6 +4,11 @@ var messages = {
         "confirm_operate_order": "Would you operate the order?",
         "confirm_cancel_order": "Would you cancel the order?",
         "confirm_service_complete": "The order should not be modified after you comfirming sevice complete, would you comfirm?",
+        "confirm_finished_sales": "Have you finished all sales?",
+        "cant_cancel_order": "The order has been completed and can't be cancelled",
+        "order_cancelled": "The order has been cancelled",
+        "no_list_assigner": "No executor is assigned, Please click '+ Assign'",
+        "enter_name_employee": "Please enter the name of the employee",
         "success": "Success",
         "no_more_data": "No more data",
         "tips": "Tips",
@@ -153,13 +158,32 @@ var messages = {
         "night": "Night",
         "reason": "Reason",
         "node_giving_away": "Not giving away",
-        "cancel_order": "Cancel order"
+        "cancel_order": "Cancel order",
+        "normal_group": "Normal group",
+        "pending_group": "Pending group",
+        "assigner": "Assigner",
+        "toast_server_exception": "Server exception",
+        "select": "Select",
+        "call": "Call",
+        "state_log": "State log",
+        "state_log_list": {
+            "completed": "Order completed",
+            "photographed": "Order photographed",
+            "assigned_photographer": "Assigned photographer",
+            "completed_plan": "Completed plan",
+            "order_treated": "Order to be treated"
+        }
     },
     "cn": {
         "confirm_del_account": "确定删除账号{account}吗?",
         "confirm_operate_order": "您确认要执行订单吗?",
         "confirm_cancel_order": "你确认要取消订单吗?",
         "confirm_service_complete": "确认后订单无法修改，是否确认订单完成?",
+        "confirm_finished_sales": "是否已完成所有销售?",
+        "cant_cancel_order": "订单已完成，无法取消",
+        "order_cancelled": "该订单已取消",
+        "no_list_assigner": "没有指派执行人，请点击'+ 指派'按钮指派",
+        "enter_name_employee": "请输入员工姓名",
         "success": "操作成功",
         "no_more_data": "没有更多数据了",
         "tips": "提示",
@@ -309,7 +333,21 @@ var messages = {
         "night": "晚上",
         "reason": "原因",
         "node_giving_away": "未赠送",
-        "cancel_order": "取消订单"
+        "cancel_order": "取消订单",
+        "normal_group": "非前置团",
+        "pending_group": "前置团",
+        "assigner": "指派人",
+        "toast_server_exception": "服务器异常",
+        "select": "选择",
+        "call": "呼叫",
+        "state_log": "状态日志",
+        "state_log_list": {
+            "completed": "订单已完成",
+            "photographed": "订单已完成拍照",
+            "assigned_photographer": "订单已分配摄影师",
+            "completed_plan": "已完成计调",
+            "order_treated": "订单待处理"
+        }
     }
 }
 
@@ -318,9 +356,11 @@ var messages = {
  */
 if (window.VueI18n) {
     var i18n = new VueI18n({
-        locale: navigator.language === 'zh-CN' ? 'cn' : 'en', // set locale
+        locale: navigator.language !== 'zh-CN' ? 'cn' : 'en', // set locale
         messages: messages, // set locale messages
     })
 
-    Vue.mixin({i18n: i18n})
+    Vue.mixin({
+        "i18n": i18n
+    })
 }

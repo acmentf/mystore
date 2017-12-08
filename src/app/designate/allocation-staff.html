@@ -12,16 +12,18 @@
 </head>
 
 <body>
+<div id="app">
+
 <header class="mui-bar mui-bar-nav">
     <a class="staff-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">指派</h1>
-    <a id='operate' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue">确定</a>
+    <h1 class="mui-title">{{$t('action_btns.assign')}}</h1>
+    <a id='operate' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue">{{$t('ok')}}</a>
 </header>
 <div class="mui-content designate-select-staff">
     <div id='list' class="mui-indexed-list">
         <div class="search-wrap">
             <div class="mui-indexed-list-search mui-input-row mui-search">
-                <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="输入员工姓名">
+                <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="{{$t('enter_name_employee')}}">
             </div>
         </div>
         <div class="mui-indexed-list-bar">
@@ -54,7 +56,7 @@
         </div>
         <div class="mui-indexed-list-alert"></div>
         <div class="mui-indexed-list-inner">
-            <div class="mui-indexed-list-empty-alert">没有数据</div>
+            <div class="mui-indexed-list-empty-alert">{{$t('no_more_data')}}</div>
             <ul class="mui-table-view" id="app-table-view">
                 <template v-for="(item,index) in indexedList">
                     <li class="mui-table-view-divider mui-indexed-list-group"
@@ -71,9 +73,9 @@
                             <span class="text-state" v-show="item.state">指派中</span>
                             <div class="btn-wrap">
                                 <a class="btn-chat" :style="{'display': item.isUaTuyi ? 'inline-block': 'none'}" :href="item.chartUrl" :imUserId="item.imUserId"></a>
-                                <a class="mui-btn btn-call" :href="'tel:'+item.phone">呼叫</a>
-                                <button v-if="!item.selected" :index="index" type="button" class="mui-btn btn-select">选择</button>
-                                <button v-else :index="index" type="button" class="mui-btn btn-cancel">取消</button>
+                                <a class="mui-btn btn-call" :href="'tel:'+item.phone">{{$t('call')}}</a>
+                                <button v-if="!item.selected" :index="index" type="button" class="mui-btn btn-select">{{$t('select')}}</button>
+                                <button v-else :index="index" type="button" class="mui-btn btn-cancel">{{$t('cancel')}}</button>
                             </div>
                         </div>
                     </li>
@@ -82,11 +84,16 @@
         </div>
     </div>
 </div>
+
+</div>
+
 <script src="../../assets/js/mui.js"></script>
 <script src="../../assets/js/mui.indexedlist.js"></script>
 <script src="../../assets/js/framework/define.js"></script>
 <script src="../../assets/js/framework/styles.js"></script>
 <script src="../../assets/js/framework/lf.js"></script>
 <script src="../../assets/libs/vue.min.js"></script>
+<script src="../../assets/libs/vue-i18n.js"></script>
+<script src="../../assets/i18n/language.js"></script>
 </body>
 </html>

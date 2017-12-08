@@ -110,7 +110,7 @@ lf.ready(function () {
 	});
 	mui('.operate').on('tap', '.button', function () {
 		if (vm.currentOrderStatus == 3) {
-			lf.nativeUI.toast('该订单已取消！');
+			lf.nativeUI.toast(vm.$t('order_cancelled'));
 		} else {
 			vm.maskShow = true;
 			vm.popupShow = true;
@@ -149,9 +149,9 @@ lf.ready(function () {
 	})
 	mui('.popup-mod').on('tap', '.cancled', function () { //点击取消
 		if (vm.currentOrderStatus == 7) {
-			lf.nativeUI.toast('订单已完成，无法取消！');
+			lf.nativeUI.toast(vm.$t('cant_cancel_order'));
 		} else {
-			lf.nativeUI.confirm("操作提示", "确定要取消该订单吗?", ["确定", "取消"], function (e) {
+			lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_cancel_order'), [vm.$t('ok'), vm.$t('cancel')], function (e) {
 				if (e.index == 0) {
 					var params = {
 						orderId: vm.currentOrderId,
@@ -160,7 +160,7 @@ lf.ready(function () {
 					};
 					lf.net.getJSON('order/updateOrderState', params, function (data) {
 						if (data.code == 200) {
-							lf.nativeUI.toast("订单取消成功！");
+							lf.nativeUI.toast(vm.$t('success'));
 							lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 							lf.window.closeCurrentWebview();
 						} else {
@@ -236,7 +236,7 @@ lf.ready(function () {
 		vm.orderdetailShow = false;
 	})
 	mui('#topPopover').on('tap', '.cancle', function () { //取消订单
-		lf.nativeUI.confirm("操作提示", "是否确认取消订单?", ["确认取消", "不取消"], function (e) {
+		lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_cancel_order'), [vm.$t('ok'), vm.$t('cancel')], function (e) {
 			if (e.index == 0) {
 				var params = {
 					orderId: vm.currentOrderId,
@@ -245,7 +245,7 @@ lf.ready(function () {
 				};
 				lf.net.getJSON('order/updateOrderState', params, function (data) {
 					if (data.code == 200) {
-						lf.nativeUI.toast("订单取消成功！");
+						lf.nativeUI.toast(vm.$t('success'));
 						lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 						lf.window.closeCurrentWebview();
 					} else {
@@ -291,7 +291,7 @@ lf.ready(function () {
 	})
 
 	mui('body').on('tap', '#confirmComplete', function () { //确认完成
-		lf.nativeUI.confirm("操作提示", "确认后订单无法修改，是否确认订单完成?", ["确定", "取消"], function (e) {
+		lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_service_complete'), [vm.$t('ok'), vm.$t('cancel')], function (e) {
 			if (e.index == 0) {
 				completeFn()
 			}
@@ -306,7 +306,7 @@ lf.ready(function () {
 			};
 			lf.net.getJSON('order/updateOrderState', params, function (data) {
 				if (data.code == 200) {
-					lf.nativeUI.toast("确认成功！");
+					lf.nativeUI.toast(vm.$t('success'));
 					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 				} else {
 					lf.nativeUI.toast(data.msg);
@@ -318,7 +318,7 @@ lf.ready(function () {
 	})
 
 	mui('body').on('tap', '#saleComplete', function () { //销售完成
-		lf.nativeUI.confirm("操作提示", "是否已完成所有销售?", ["确定", "取消"], function (e) {
+		lf.nativeUI.confirm(vm.$t('tips'), vm.$t('confirm_finished_sales'), [vm.$t('ok'), vm.$t('cancel')], function (e) {
 			if (e.index == 0) {
 				saleFn()
 			}
@@ -332,7 +332,7 @@ lf.ready(function () {
 			};
 			lf.net.getJSON('order/updateOrderState', params, function (data) {
 				if (data.code == 200) {
-					lf.nativeUI.toast("已完成所有销售！");
+					lf.nativeUI.toast(vm.$t('success'));
 					lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 				} else {
 					lf.nativeUI.toast(data.msg);
@@ -533,7 +533,7 @@ function renderOrderDetails() {
 			if(vm.orderTrackInfo.isPreTour === null) {
 				vm.orderTrackInfo.isPreTour = ''
 			} else {
-				vm.orderTrackInfo.isPreTour = vm.orderTrackInfo.isPreTour === 0 ? '非前置团' : '前置团'
+				vm.orderTrackInfo.isPreTour = vm.orderTrackInfo.isPreTour === 0 ? vm.$t('normal_group') : vm.$t('pending_group')
 			}
 		
 			if (vm.orderTrackInfo.prePrice) {
