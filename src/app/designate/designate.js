@@ -52,7 +52,7 @@ lf.ready(function () {
                 ],
                 outputList: [],
                 salesList: [],
-                emptyTip: '没有指派执行人，请点击“+ 指派”按钮指派'
+                emptyTip: ""
             }
         },
         methods: {
@@ -70,7 +70,7 @@ lf.ready(function () {
                     }
                 }, function () {
                     lf.nativeUI.closeWaiting()
-                    mui.toast(res.msg || '服务器异常')
+                    mui.toast(res.msg || self.$t('toast_server_exception'))
                 })
             },
             initList: function (allExecutorList) {
@@ -86,7 +86,9 @@ lf.ready(function () {
                 this.executorList = list
             }
         },
-        mounted: function () { }
+        mounted: function () {
+            this.emptyTip = this.$t('no_list_assigner')
+        }
     });
 
     vm.init()

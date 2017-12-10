@@ -290,7 +290,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		return;
 	}
 
-	var reg = /^[1-9]\d*$/
+	var reg = /^[0-9]\d*$/
 	for (let i = 0; i < vm.saleOrderXms.length; i++) {
 		let item = vm.saleOrderXms[i];
 		if(!item.remark) {
@@ -302,12 +302,8 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 			return;
 		}
 		if(!reg.test(item.picNum)){
-			if(item.picNum == 0) {
-
-			} else {
-				lf.nativeUI.toast('请输入正确的销售张数');
-				return;
-			}
+			lf.nativeUI.toast('请输入正确的销售张数');
+			return;
 		}
 	}
 
@@ -322,12 +318,8 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 			return;
 		}
 		if(!reg.test(item.picNum)) {
-			if(item.picNum == 0) {
-				
-			} else {
-				lf.nativeUI.toast('请输入正确的赠送张数');
-				return;
-			}
+			lf.nativeUI.toast('请输入正确的赠送张数');
+			return;
 		}
 	}
 
@@ -410,7 +402,6 @@ function loadResult(){
 	}
 	lf.net.getJSON('/order/getSalesOutput', params, function (res){
 		if(res.code == 200){
-			console.log(JSON.stringify(res.data.orderX))
 			if(res.data == null){
 				return
 			}else{

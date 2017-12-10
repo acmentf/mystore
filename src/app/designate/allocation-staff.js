@@ -26,7 +26,7 @@ lf.ready(function() {
     });
 
     var vmTableView = new Vue({
-        el: '#app-table-view',
+        el: '#app',
         data: function() {
             return {
                 indexedList: []
