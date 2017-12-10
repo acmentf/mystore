@@ -32,7 +32,7 @@
 				<h1 class="mui-title">拍摄输出</h1>
 				<button class="save-btn mui-btn mui-btn-primary" :disabled="overTime" :class="{grayBtn:overTime}">保存</button>
 			</header>
-			<div id="app" class="mui-content ">
+			<div id="app" class="mui-content rusult">
 				<!--修改按钮部分-->
 				<!-- <button @click="amend" class="mui-btn mui-btn-primary btnDv" :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button> -->
 				 <!--点击切换S-->
@@ -105,6 +105,29 @@
 							</div>
 						</div>
 					</div>
+					<div class="mui-input-group">
+						<div class="shoot-number">
+							<div class="mui-input-row group-info">
+								<label>上传附件</label>
+							</div>
+							<div class="uploader-wrap">
+						<div class="finger-uploader" style="padding: 0 0.2rem;">
+							<div class="finger-uploader__bd">
+								<ul class="finger-uploader__files">
+									<li v-for="(file,index) in uploaderFiles" class="finger-uploader__file">
+										<span style="position:absolute;" class="remove" :index="index">✖</span>
+										<img style="width:100%;height:100%;" class="preview" :src="file.fileUrl" data-preview-src="" data-preview-group="1">
+									</li>
+								</ul>
+								<div class="finger-uploader__input-box">
+									<input type='file' accept='image/*' @change='selectPhoto' style="width:100%;height:100%;text-indent: 100em;">
+								</div>
+							</div>
+						</div>
+					</div>
+						</div>
+					</div>
+					
 				</div>
 				</div>
 				<!--已输出表单E-->
@@ -165,6 +188,8 @@
 		<script src="../../assets/js/mui.min.js"></script>
 		<script src="../../assets/js/mui.picker.min.js"></script>
 		<script src="../../assets/js/mui.dtpicker.js"></script>
+		<script src="../../assets/js/mui.zoom.js"></script>
+		<script src="../../assets/js/mui.previewimage.js"></script>
 		<script src="../../assets/js/framework/define.js"></script>
 		<script src="../../assets/js/framework/styles.js"></script>
 		<script src="../../assets/js/framework/lf.js"></script>

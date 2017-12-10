@@ -50,6 +50,7 @@
 		.mui-card-content .block .mui-pull-right {
 			width: 60% !important; 
 		}
+		
 	</style>
 </head>
 
@@ -169,12 +170,33 @@
 				<label>总金额</label>
 				<input type="number" style="text-align:right" v-model="total" disabled/>
 			</div>
+			<div class="mui-input-row  group-info" style="height:auto;">
+				<div>上传附件</div>
+				<div class="uploader-wrap">
+				<div class="finger-uploader">
+					<div class="finger-uploader__bd">
+						<ul class="finger-uploader__files">
+							<li v-for="(file,index) in uploaderFiles" class="finger-uploader__file">
+								<span style="position:absolute;" class="remove" :index="index">✖</span>
+								<img style="width:100%;height:100%;" class="preview" :src="file.fileUrl" data-preview-src="" data-preview-group="3">
+							</li>
+						</ul>
+						<div class="finger-uploader__input-box">
+							<input type='file' accept='image/*' @change='selectPhoto' style="width:100%;height:100%;text-indent: 100em;">
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
 		</div>
 	</div>
 	<!--</div>-->
 	<script src="../../assets/js/mui.min.js"></script>
 	<script src="../../assets/js/mui.picker.min.js"></script>
 	<script src="../../assets/js/mui.dtpicker.js"></script>
+	<script src="../../assets/js/mui.zoom.js"></script>
+	<script src="../../assets/js/mui.previewimage.js"></script>
 	<script src="../../assets/js/framework/define.js"></script>
 	<script src="../../assets/js/framework/styles.js"></script>
 	<script src="../../assets/js/framework/lf.js"></script>

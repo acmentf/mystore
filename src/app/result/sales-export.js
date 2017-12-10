@@ -4,6 +4,7 @@ var vm = new Vue({
 		id: '',
 		userId: '',
 		orderId: '',
+		uploaderFiles: [],
 		giveOrderXms: [],
 		saleOrderXms: [{
 			fType: '',
@@ -31,7 +32,117 @@ var vm = new Vue({
 		computedTotal:function() {
 			var _total = Number(this.salesAmt) + Number(this.advanceAmount) + Number(this.payableAmount)
 			this.total = _total.toFixed(2)
+		},
+		remove: function (index) {
+			this.uploaderFiles.splice(index, 1)
+		},
+		createImgUpload: function (path) {
+			var self = this
+			lf.nativeUI.showWaiting()
+			var task = plus.uploader.createUpload(SERVER_BAS_URL +  '/file/uploadFile', { method:'POST'}, function ( res, status ) {
+				lf.nativeUI.closeWaiting()
+				if ( status === 200 ) {
+					try{
+						var response = JSON.parse(res.responseText)
+						if (response.code === '200') {
+							self.uploaderFiles.push({
+								fileSize: response.data.fileSize,
+								fileName: response.data.fileName,
+								fileUrl: response.data.fileUrl
+							})
+						} else {
+							mui.toast(response.msg)
+						}
+					}catch(e) {
+						mui.toast('上传失败')
+					}
+				} else {
+					mui.toast('上传失败')
+				}
+			});
+			task.addFile( path, {key:'filename'} );
+			task.start();
+		},
+		galleryImg: function () {
+			var self = this
+			plus.gallery.pick( function(path){
+				plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+					entry.file( function(file){
+						if (file.size / 1024 / 1024 > 10) {
+							mui.toast('每张照片小于5')
+							return false
+						} else {
+							self.createImgUpload(path)
+						}
+					} );
+				}, function ( e ) {
+					mui.toast( "Resolve file URL failed: " + e.message );
+				} );
+			}, function ( e ) {
+			},{
+				filter:'image'
+			});
+		},
+		fileSelect: function () {
+			if (this.uploaderFiles.length < 3) {
+			//    this.galleryImg()
+			this.selectPhoto()
+			} else {
+				mui.toast('最多可以上传3张照片')
+			}
+		},
+		selectPhoto: function(e) {
+			var files = e.target.files || e.dataTransfer.files
+			if (!files.length) {
+				return
+			}
+			var file = files[0]
+			var filesize = file.size / (1024 * 1024)
+			if (filesize > 10) {
+				mui.toast('图片大小不能超过10M')
+				return
+			}
+			var re = new RegExp('(jpg|png|jpeg)$')
+			var filepath = e.target.value
+			var filetype = filepath.substring(filepath.lastIndexOf('.') + 1).toLowerCase()
+
+			if (!re.test(filetype.toLowerCase())) {
+				mui.toast('请上传jpg,png格式照片')
+				return
+			}
+
+			if (this.uploaderFiles.length >= 10) {
+				mui.toast('最多可以上传10张照片')
+				return
+			}
+
+			var params = {
+				'file_name': 'filename',
+				'file': file
+			}
+			lf.nativeUI.showWaiting()
+			lf.net.upload('/file/uploadFile', params, (res) => {
+				if (res.code == '200') {
+					lf.nativeUI.closeWaiting()
+					this.uploaderFiles.push({
+						fileSize: res.data.fileSize,
+						fileName: res.data.fileName,
+						fileUrl: res.data.fileUrl
+					})
+				} else {
+					lf.nativeUI.closeWaiting()
+					mui.toast(res.msg)
+				}
+			}, (res) => {
+				lf.nativeUI.closeWaiting()
+				mui.toast(res.msg || '服务器异常')
+			})
 		}
+	},
+	mounted: function () {
+		this.$nextTick(function () {
+			mui.previewImage()
+		})
 	}
 })
 var userPicker,picker;
@@ -126,7 +237,10 @@ mui('.mui-content').on('tap', '.sales-type', function() {
 		Vue.set(vm.saleOrderXms,index,currentItem)
 	})
 });
-
+mui('.sales-export').on('tap','.remove',function (e) {
+	var index = +e.target.getAttribute('index')
+	vm.remove(index)
+})
 mui('.mui-content').on('tap', '.add-givesNum', function() { //添加赠送张数
 	vm.giveOrderXms.push({
 		fType: 2,
@@ -256,6 +370,7 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		salesAmt: vm.salesAmt,
 		advanceAmount: vm.advanceAmount,
 		payableAmount: vm.payableAmount,
+		attachmentSaleUrl: vm.uploaderFiles,
 		buyers: vm.buyers,
 		orderXms: orderXms,
 		flag: 2,
@@ -309,6 +424,10 @@ function loadResult(){
 					vm.giveOrderXms = [];
 				}else{
 					vm.giveOrderXms = res.data.orderX.giveOrderXms
+				}
+				if (res.data.attachmentSaleUrl) {
+					vm.uploaderFiles = JSON.parse(res.data.attachmentSaleUrl)
+					console.log(vm.uploaderFiles)
 				}
 				vm.id = res.data.orderX.id
 				vm.buyers = res.data.orderX.buyers

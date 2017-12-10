@@ -20,6 +20,7 @@ var vm = new Vue({
 		amendPerNum:'',   //修改后服务人数
 		fetchTime: "",  //预计服务时间
 		serveInputDisabled: false,
+		uploaderFiles: [],
 	    printOrderXms: [             //打印张数
 	        {
 	        	fType: '1',
@@ -34,6 +35,111 @@ var vm = new Vue({
 	},
 	methods: {
 		// 点击修改
+		remove: function (index) {
+			this.uploaderFiles.splice(index, 1)
+		},
+		createImgUpload: function (path) {
+			var self = this
+			lf.nativeUI.showWaiting()
+			var task = plus.uploader.createUpload(SERVER_BAS_URL +  '/file/uploadFile', { method:'POST'}, function ( res, status ) {
+				lf.nativeUI.closeWaiting()
+				if ( status === 200 ) {
+					try{
+						var response = JSON.parse(res.responseText)
+						if (response.code === '200') {
+							self.uploaderFiles.push({
+								fileSize: response.data.fileSize,
+								fileName: response.data.fileName,
+								fileUrl: response.data.fileUrl
+							})
+						} else {
+							mui.toast(response.msg)
+						}
+					}catch(e) {
+						mui.toast('上传失败')
+					}
+				} else {
+					mui.toast('上传失败')
+				}
+			});
+			task.addFile( path, {key:'filename'} );
+			task.start();
+		},
+		galleryImg: function () {
+			var self = this
+			plus.gallery.pick( function(path){
+				plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+					entry.file( function(file){
+						if (file.size / 1024 / 1024 > 10) {
+							mui.toast('每张照片小于5')
+							return false
+						} else {
+							self.createImgUpload(path)
+						}
+					} );
+				}, function ( e ) {
+					mui.toast( "Resolve file URL failed: " + e.message );
+				} );
+			}, function ( e ) {
+			},{
+				filter:'image'
+			});
+		},
+		fileSelect: function () {
+			if (this.uploaderFiles.length < 3) {
+			//    this.galleryImg()
+			this.selectPhoto()
+			} else {
+				mui.toast('最多可以上传3张照片')
+			}
+		},
+		selectPhoto: function(e) {
+			var files = e.target.files || e.dataTransfer.files
+			if (!files.length) {
+				return
+			}
+			var file = files[0]
+			var filesize = file.size / (1024 * 1024)
+			if (filesize > 10) {
+				mui.toast('图片大小不能超过10M')
+				return
+			}
+			var re = new RegExp('(jpg|png|jpeg)$')
+			var filepath = e.target.value
+			var filetype = filepath.substring(filepath.lastIndexOf('.') + 1).toLowerCase()
+
+			if (!re.test(filetype.toLowerCase())) {
+				mui.toast('请上传jpg,png格式照片')
+				return
+			}
+
+			if (this.uploaderFiles.length >= 10) {
+				mui.toast('最多可以上传10张照片')
+				return
+			}
+
+			var params = {
+				'file_name': 'filename',
+				'file': file
+			}
+			lf.nativeUI.showWaiting()
+			lf.net.upload('/file/uploadFile', params, (res) => {
+				if (res.code == '200') {
+					lf.nativeUI.closeWaiting()
+					this.uploaderFiles.push({
+						fileSize: res.data.fileSize,
+						fileName: res.data.fileName,
+						fileUrl: res.data.fileUrl
+					})
+				} else {
+					lf.nativeUI.closeWaiting()
+					mui.toast(res.msg)
+				}
+			}, (res) => {
+				lf.nativeUI.closeWaiting()
+				mui.toast(res.msg || '服务器异常')
+			})
+		},
 	   amend:function(){
 			if(!vm.isAmend){
 			   vm.isAmend = !vm.isAmend;
@@ -86,7 +192,12 @@ var vm = new Vue({
 				  lf.nativeUI.toast(res.msg)
 		  })           		
 	   }
-    }
+	},
+	mounted: function () {
+		this.$nextTick(function () {
+			mui.previewImage()
+		})
+	}
 })
 var picker,userPicker,reasonPicker;
 lf.ready(function(){
@@ -161,7 +272,10 @@ mui('.mui-content').on('tap', '.remove-printsNum', function(){
 	vm.printOrderXms.splice(index,1)
 })
 //移除E
-
+mui('.rusult').on('tap','.remove',function (e) {
+	var index = +e.target.getAttribute('index')
+	vm.remove(index)
+})
 //保存S
 
 mui('.order-result').on('tap', '.save-btn', function(){
@@ -226,6 +340,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 			shootNum: vm.shootNum,
 			saleRemark:vm.saleRemark,
 			serverPerNum: vm.serverPerNum,
+			attachmentOutputUrl: vm.uploaderFiles,
 			flag: 1
 		}
 		
@@ -284,6 +399,9 @@ function loadResult(){
 					vm.printOrderXms = [{fType: '',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '',price: ''}]
 				}else{
 					vm.printOrderXms = res.data.orderX.printOrderXms
+				}
+				if (res.data.attachmentOutputUrl) {
+					vm.uploaderFiles = JSON.parse(res.data.attachmentOutputUrl)
 				}
 				vm.selectsNum = res.data.orderX.selectsNum
 				vm.shootNum = res.data.orderX.shootNum
