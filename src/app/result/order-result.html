@@ -26,13 +26,13 @@
 		</style>
 	</head>
 	<body>
-		<div class="order-result">
+		<div class="order-result" id="app">
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">拍摄输出</h1>
-				<button class="save-btn mui-btn mui-btn-primary" :disabled="overTime" :class="{grayBtn:overTime}">保存</button>
+				<h1 class="mui-title">{{$t('photographic_output')}}</h1>
+				<button class="save-btn mui-btn mui-btn-primary" :disabled="overTime" :class="{grayBtn:overTime}">{{$t('save')}}</button>
 			</header>
-			<div id="app" class="mui-content rusult">
+			<div class="mui-content rusult">
 				<!--修改按钮部分-->
 				<!-- <button @click="amend" class="mui-btn mui-btn-primary btnDv" :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button> -->
 				 <!--点击切换S-->
@@ -40,13 +40,13 @@
 					    <div class="mui-row ">
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
-									<label>已输出</label>
+									<label>{{$t('outputted')}}</label>
 									<input v-model="isOut" class="export" name="radio" type="radio" value="1" checked="checked">
 								</div>
 					        </div>
 					        <div class="mui-col-sm-6">
 								<div class="mui-input-row mui-radio">
-									<label>未输出</label>
+									<label>{{$t('without_output')}}</label>
 									<input v-model="isOut" class="no-export" name="radio" type="radio" value="2">
 								</div>
 					        </div>
@@ -58,18 +58,18 @@
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row group-info">
-									<label style="width: 40%" class="amendFl">实际服务人数</label>
-									<input :disabled="serveInputDisabled" type="number" style="text-align:right; width: 40%" v-model="serverPerNum" placeholder="请填写人数" class="amendFl"/>
+									<label style="width: 50%" class="amendFl">{{$t('number_Actual_participates')}}</label>
+									<input :disabled="serveInputDisabled" type="number" style="text-align:right; width: 30%" v-model="serverPerNum" placeholder="请填写人数" class="amendFl"/>
 													<!--修改按钮部分-->
-									<button @click="amend" class="mui-btn mui-btn-primary btnDv " :disabled="!overTime" :class="{grayBtn:!overTime}">修改</button>
+									<button @click="amend" class="mui-btn mui-btn-primary btnDv " :disabled="!overTime" :class="{grayBtn:!overTime}">{{$t('modify')}}</button>
 							</div>
 						</div>
 					</div>
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row  group-info">
-						        <label>上传张数</label>
-								<input type="number"  style="text-align:right" v-model="shootNum" readonly  placeholder="请填写拍摄张数"/>
+						        <label>{{$t('number_upload')}}</label>
+								<input type="number"  style="text-align:right" v-model="shootNum" readonly :placeholder="$t('input_conut')"/>
 					    	</div>
 					    	<!-- <div class="mui-input-row  group-info">
 						        <label>选片张数</label>
@@ -80,35 +80,35 @@
 					<div  class="shoot-number">
 						<div class="mui-input-group ">
 							<div class="mui-input-row group-info">
-								<label>打印张数</label>
+								<label>{{$t('number_prints')}}</label>
 							</div>
 						<div class="mui-input-row group-info give-number" v-for="(v, i) in printOrderXms">
 						<!--<label v-if="i==0" >打印张数：</label>-->
 						<label v-else >&nbsp;</label>
 						<div class="select" >
-							<input type="text" v-model="v.picSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" placeholder="尺寸" />
-							<input type="number"  style="text-align:right" v-model="v.picNum" class="select-number" placeholder="请输入打印张数">
+							<input type="text" v-model="v.picSizeName"   :data-index="i"   readonly="readonly" class="select-size printsSize" :placeholder="$t('size')" />
+							<input type="number"  style="text-align:right" v-model="v.picNum" class="select-number" :placeholder="$t('input_conut')">
 						</div>
 						<span v-if="i!==0"style="color:red;" :data-index="i" class="mui-icon mui-icon-close add-num remove-printsNum"></span>
 					</div>
 					<div style="display: flex; justify-content: center;">
-						<button type="button" class="mui-btn  add-printsNum ">添加打印尺寸</button>
+						<button type="button" class="mui-btn  add-printsNum ">{{$t('add_print_size')}}</button>
 					</div>
 					</div>
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row group-info">
-								<label>备注</label>
+								<label>{{$t('remarks')}}</label>
 							</div>
 							<div class="mui-input-row group-info remark-box">
-								<textarea v-model="saleRemark" class="remark-text" placeholder="请输入备注信息"></textarea>
+								<textarea v-model="saleRemark" class="remark-text" :placeholder="$t('input_remarks')"></textarea>
 							</div>
 						</div>
 					</div>
 					<div class="mui-input-group">
 						<div class="shoot-number">
 							<div class="mui-input-row group-info">
-								<label>上传附件</label>
+								<label>{{$t('uploading_attachments')}}</label>
 							</div>
 							<div class="uploader-wrap">
 						<div class="finger-uploader" style="padding: 0 0.2rem;">
@@ -135,15 +135,15 @@
 				
 				<div v-show="isOut==2" div >
 					<div class="mui-input-row mui-input-group  group-info shoot-number">
-				        <label>原因</label>
-						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" placeholder="请选择未输出原因"/>
+				        <label>{{$t('reason')}}</label>
+						<input type="text"  v-model="reason" class="select-reason" readonly="readonly" :placeholder="$t('choose_reason')"/>
 			    	</div>
 			    	<div class="shoot-number mui-input-group">
 						<div class="mui-input-row group-info">
-							<label>其他原因</label>
+							<label>{{$t('other_reason')}}</label>
 						</div>
 						<div class="mui-input-row group-info remark-box">
-							<textarea v-model="noOutRemark" class="remark-text" placeholder="请输入未输出的原因详情"></textarea>
+							<textarea v-model="noOutRemark" class="remark-text" :placeholder="$t('input_reason')"></textarea>
 						</div>
 					</div>
 				</div>
@@ -152,33 +152,33 @@
 			      <!--修改表单-->
 				 <div v-if="isAmend" class="amendBox" v-cloak>
 						<div class="amendInfo">
-							 <h4>修改输出信息</h4>
-							 <p class="overtime">现已超时，如需修改请输入相关原因</p>
+							 <h4>{{$t('modify_output_information')}}</h4>
+							 <p class="overtime">{{$t('timeout_tips')}}</p>
 							 <div class="actualAmend">
 									 <div class="mui-input-row mui-input-group  group-info shoot-number">
-										 <p>实际服务人数</p>		
-										<label>修改前</label>
+										 <p>{{$t('number_Actual_participates')}}</p>		
+										<label>{{$t('before_modification')}}</label>
 										<input type="text" v-model="serverPerNum" readonly="readonly" style="text-indent:1em"/>
 									</div>
 									<div class="mui-input-row mui-input-group  group-info shoot-number">
-										<label>修改后</label>
-										<input type="text"  v-model="amendPerNum" class="select-amend" placeholder="请输入实际服务人数"/>
+										<label>{{$t('after_modification')}}</label>
+										<input type="text"  v-model="amendPerNum" class="select-amend" :placeholder="$t('please_input')+$t('number_Actual_participates')"/>
 									</div>
 									<div class="shoot-number mui-input-group">
 										<div class="mui-input-row group-info">
-											<label>修改原因</label>
+											<label>{{$t('modify_reason')}}</label>
 										</div>
 										<div class="mui-input-row group-info remark-box reasonS">
-											<textarea v-model="amendReasons" class="remark-text" placeholder="请输入修改原因"></textarea>
+											<textarea v-model="amendReasons" class="remark-text" :placeholder="$t('please_input')+$t('modify_reason')"></textarea>
 										</div>
 									</div>
 							</div>
 							<div class="amendBtn">
 									<button type="button" class="mui-btn btn1" @click="cancelAmend">
-										取消
+										{{$t('cancel')}}
 									</button>
 									<div class="mui-btn mui-btn-primary btn2" @click="confirmAmend">
-										确认
+										{{$t('ok')}}
 									</div>
 							</div>
 						</div>
@@ -195,6 +195,7 @@
 		<script src="../../assets/js/framework/lf.js"></script>
 		<script src="../../assets/js/framework/common.js"></script>
 		<script src="../../assets/libs/vue.min.js"></script>
-		
+		<script src="../../assets/libs/vue-i18n.js"></script>
+		<script src="../../assets/i18n/language.js"></script>
 	</body>
 </html>

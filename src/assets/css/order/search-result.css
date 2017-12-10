@@ -9,6 +9,15 @@
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
+.saletime{
+	display: inline-block;
+	width: .28rem;
+	height: .28rem;
+	background: url("../../images/order/list_time.png") no-repeat center center;
+	background-size: contain;
+	vertical-align: middle;
+}
+
 .order-state1{
 	float:right;
 	background-color: #FF9369;

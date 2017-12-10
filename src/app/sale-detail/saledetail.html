@@ -18,19 +18,19 @@
     <div id="app">
         <header class="mui-bar mui-bar-nav">
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-            <h1 class="mui-title">销售明细</h1>
+            <h1 class="mui-title">{{$t('sales_detail')}}</h1>
         </header>
         <footer class="mui-bar mui-bar-footer">
-            <div>销售金额： <span class="orange">￥<span v-text="totalSaleAmount"></span></span>元</div>
-            <div>购买人数： <span v-text="totalSalePersonnelNum"></span>人 &nbsp; 销售张数： <span v-text="totalSaleNum"></span>张</div>
+            <div>{{$t('total_sales')}}： <span class="orange">￥<span v-text="totalSaleAmount"></span></span>元</div>
+            <div>{{$t('buy_number_purchaser')}}： <span v-text="totalSalePersonnelNum"></span>人 &nbsp; {{$t('number_sold')}}： <span v-text="totalSaleNum"></span>张</div>
         </footer>
         <main class="mui-content">
             <section class="container">
                 <ul class="title list-unstyle">
-                    <li>人数</li>
-                    <li>张数</li>
-                    <li>支付方式</li>
-                    <li>金额</li>
+                    <li>{{$t('buyers')}}</li>
+                    <li>{{$t('photo_count')}}</li>
+                    <li>{{$t('payment')}}</li>
+                    <li>{{$t('cost')}}</li>
                 </ul>
                 <div id="scroll-wrap">
                     <div id="scroll1">
@@ -39,10 +39,10 @@
                                 <div>{{item.salePersonnelNum || "未填"}}</div>
                                 <div><span v-text="item.nums"></span>张</div>
                                 <div>
-                                    <span v-if="item.channelId ==1"><img src="../../assets/css/images/sell_wechat.png" alt="">微信</span>
-                                    <span v-if="item.channelId ==2"><img src="../../assets/css/images/sell_alipay.png" alt="">支付宝</span>
-                                    <span v-if="item.channelId ==3"><img src="../../assets/css/images/sell_cash.png" alt="">现金</span>
-                                    <span v-if="item.channelId ==4">核销支付</span>
+                                    <span v-if="item.channelId ==1"><img src="../../assets/css/images/sell_wechat.png" alt="">{{$t('wechat')}}</span>
+                                    <span v-if="item.channelId ==2"><img src="../../assets/css/images/sell_alipay.png" alt="">{{$t('alipay')}}</span>
+                                    <span v-if="item.channelId ==3"><img src="../../assets/css/images/sell_cash.png" alt="">{{$t('cash')}}</span>
+                                    <span v-if="item.channelId ==4">{{$t('verify_payment')}}</span>
                                 </div>
                                 <div><span v-text="item.totalAmount"></span>元</div>
                             </li>
@@ -60,6 +60,8 @@
         <script src="../../assets/js/framework/lf.js"></script>
         <script src="../../assets/js/framework/common.js"></script>
         <script src="../../assets/libs/vue.min.js"></script>
+        <script src="../../assets/libs/vue-i18n.js"></script>
+        <script src="../../assets/i18n/language.js"></script>
 </body>
 
 </html>

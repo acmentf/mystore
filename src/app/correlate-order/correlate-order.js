@@ -38,6 +38,9 @@ var vm = new Vue({
 		}
 	}
 })
+
+vm.orderHeader = [{ name: vm.$t('relating'), number: '' }, { name: vm.$t('related'), number: '' }];
+
 lf.ready(function() {
 	// 检查版本更新
     GLOBAL_SHOOT.update()
