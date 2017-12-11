@@ -59,14 +59,8 @@
                 this.setVersion()
             },
             setVersion () {
-                if (mui.os.plus) {
-                    plus.runtime.getProperty(plus.runtime.appid,function(inf){
-                        this.wgtVer = inf.version;
-                        console.log("当前应用版本：" + this.wgtVer);
-                    })
-                } else {
-                    this.wgtVer = '1.4.9'
-                }
+                if(!window.GLOBAL_SHOOT) return
+                GLOBAL_SHOOT.setVersion(this)
             },
             openWindow () {
                 if(window.Role.currentPositions.length>0){
