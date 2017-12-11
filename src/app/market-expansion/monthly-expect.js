@@ -132,4 +132,17 @@ lf.ready(function() {
         lf.window.openWindow('allocate-task','./allocate-task.html',{},{
         })
     });
+
+    /**
+     * 查看渠道专员计划
+     */
+    mui('body').on('tap', '.name-head-bar', function() {
+        var userId = this.getAttribute('data-userId');
+        var userName = this.getAttribute('data-userName');
+        
+        lf.window.openWindow('review-channel-plan.html', './review-channel-plan.html', {}, {
+            userId: userId,
+            userName: userName
+        })
+    });
 })

@@ -59,8 +59,11 @@
                 this.setVersion()
             },
             setVersion () {
-                if(!window.GLOBAL_SHOOT) return
-                GLOBAL_SHOOT.setVersion(this)
+                try {
+                    GLOBAL_SHOOT.setVersion(this)
+                } catch (error) {
+                    console.log(error);
+                }
             },
             openWindow () {
                 if(window.Role.currentPositions.length>0){

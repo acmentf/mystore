@@ -45,7 +45,9 @@
                     </section>
                     <section class="section-2">
                         <div class="section-2-block" v-for="(item, key) in planCompletedList" :key="key">
-                            <div class="name-label color-green" v-text="item.userName">
+                            <div class="name-head-bar" :data-userId="item.userId" :data-userName="item.userName">
+                                <div class="name-label color-green" v-text="item.userName"></div>
+                                <span class="mui-icon mui-icon-arrowright"></span>
                             </div>
                             <div class="data-table">
                                 <div class="column">
