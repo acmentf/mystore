@@ -49,8 +49,8 @@ var vm = new Vue({
 						if (response.code === '200') {
 							self.uploaderFiles.push({
 								fileSize: response.data.fileSize,
-								fileName: response.data.fileName,
-								fileUrl: response.data.fileUrl
+								name: response.data.fileName,
+								url: response.data.fileUrl
 							})
 						} else {
 							mui.toast(response.msg)
@@ -128,8 +128,8 @@ var vm = new Vue({
 					lf.nativeUI.closeWaiting()
 					this.uploaderFiles.push({
 						fileSize: res.data.fileSize,
-						fileName: res.data.fileName,
-						fileUrl: res.data.fileUrl
+						name: res.data.fileName,
+						url: res.data.fileUrl
 					})
 				} else {
 					lf.nativeUI.closeWaiting()
