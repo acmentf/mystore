@@ -50,9 +50,9 @@
         <div id="app">
 			<header class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">编辑销售信息</h1>
+				<h1 class="mui-title">{{$t('edit_sales_info')}}</h1>
 				<span class="save-btn mui-pull-right">
-                    <button @click="saveInfo" type="button" class="mui-btn mui-btn-success mui-btn-outlined">保存</button>
+                    <button @click="saveInfo" type="button" class="mui-btn mui-btn-success mui-btn-outlined">{{$t('save')}}</button>
                 </span>
 			</header>
 			<main class="mui-content">
@@ -64,11 +64,11 @@
 					<div class="content">
 						<ul class="list-unstyle">
 							<li>
-								<span class="gray">产品订单号：</span>
+								<span class="gray">{{$t('product_order_no')}}：</span>
 								<span>{{pOrderNo}}</span>
 							</li>
 							<li>
-								<span class="gray">预计服务完成时间：</span>
+								<span class="gray">{{$t('anticipated_service_completion_time')}}：</span>
 								<span>{{orderSaleDate}}</span>
                             </li>
                             <li class="price-container">
@@ -78,31 +78,31 @@
 						</ul>
 					</div>
                 </section>
-                <p class="form-title">关联订单</p>
+                <p class="form-title">{{$t('relate_order')}}</p>
                 <section class="content">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right">
-                                <div class="mui-pull-left personal-list-key">产品名称</div>
-                                <input @click="selectProduct" readonly class="mui-pull-right" placeholder="请选择产品" v-model="productName">
+                                <div class="mui-pull-left personal-list-key">{{$t('product_name')}}</div>
+                                <input @click="selectProduct" readonly class="mui-pull-right" :placeholder="$t('select_product')" v-model="productName">
                             </div>
                         </li>
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right">
-                                <div class="mui-pull-left personal-list-key">预计服务完成时间</div>
-                                <input @click="selectDate" readonly class="mui-pull-right" placeholder="请输入时间" v-model="orderSaleDate">
+                                <div class="mui-pull-left personal-list-key">{{$t('anticipated_service_completion_time')}}</div>
+                                <input @click="selectDate" readonly class="mui-pull-right" :placeholder="$t('select_time')" v-model="orderSaleDate">
                             </div>
                         </li>
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right groupDate">
-                                <div class="mui-pull-left personal-list-key">导游</div>
-                                <input @click="selectGuide" readonly class="mui-pull-right" placeholder="请选择导游" v-model="tourGuide">
+                                <div class="mui-pull-left personal-list-key">{{$t('tour_guide')}}</div>
+                                <input @click="selectGuide" readonly class="mui-pull-right" :placeholder="$t('select_tour_guide')" v-model="tourGuide">
                             </div>
                         </li>
                         <li class="mui-table-view-cell">
                             <div>
-                                <div class="mui-pull-left personal-list-key">产品订单号</div>
-                                <span class="mui-pull-right" v-text="pOrderNo || '尚未关联'"></span>
+                                <div class="mui-pull-left personal-list-key">{{$t('product_order_no')}}</div>
+                                <span class="mui-pull-right" v-text="pOrderNo || $t('not_related')"></span>
                             </div>
                         </li>
                     </ul>
@@ -112,7 +112,7 @@
                 <div class="sales-list">
                     <div class="mui-card mui-card-outer">
                         <div class="mui-card-header">
-                            订单补全
+                            {{$t('complement_order')}}
                         </div>
                         <div class="mui-card-content-outer">
                             <div class="block" v-for="(item, index) in salesOrderTxList" :key="index">
@@ -121,16 +121,16 @@
                                         <div class="block">
                                             
                                             <div class="mui-input-row sales-type" :data-index="index">
-                                                <label class="mui-pull-left" for="">销售类型</label>
-                                                <input class="mui-pull-right" type="text" placeholder="销售类型" v-model="item.remark" readonly />
+                                                <label class="mui-pull-left" for="">{{$t('sale_type')}}</label>
+                                                <input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remark" readonly />
                                             </div>
                                             <div class="mui-input-row sales-size" :data-index="index">
-                                                <label class="mui-pull-left" for="">销售尺寸</label>
-                                                <input class="mui-pull-right" type="text" placeholder="销售尺寸" v-model="item.argDictName" readonly />
+                                                <label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
+                                                <input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.argDictName" readonly />
                                             </div>
                                             <div class="mui-input-row" :data-index="index">
-                                                <label class="mui-pull-left" for="">数量</label>
-                                                <input class="mui-pull-right" type="text" placeholder="数量" v-model="item.nums" />
+                                                <label class="mui-pull-left" for="">{{$t('count')}}</label>
+                                                <input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.nums" />
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div style="display: flex; justify-content: center;">
-                        <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">添加产品</button>
+                        <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">{{$t('add')}}</button>
                     </div>
                 </div>
 
@@ -204,8 +204,8 @@
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right">
-                                <div class="mui-pull-left personal-list-key">销售人数</div>
-                                <input type="number" class="mui-pull-right" placeholder="请输入销售人数" v-model="salePersonnelNum">
+                                <div class="mui-pull-left personal-list-key">{{$t('sale_number_purchaser')}}</div>
+                                <input type="number" class="mui-pull-right" :placeholder="$t('enter_sale_number_purchaser')" v-model="salePersonnelNum">
                             </div>
                         </li>
                     </ul>
@@ -214,8 +214,8 @@
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="mui-navigate-right">
-                                <div class="mui-pull-left personal-list-key">销售</div>
-                                <input @click="selectSale" readonly class="mui-pull-right" placeholder="请选择销售" v-model="saleName">
+                                <div class="mui-pull-left personal-list-key">{{$t('role.seller')}}</div>
+                                <input @click="selectSale" readonly class="mui-pull-right" :placeholder="$t('select_seller')" v-model="saleName">
                             </div>
                         </li>
                     </ul>
@@ -229,6 +229,7 @@
         <script src="../../assets/js/framework/lf.js"></script>
 		<script src="../../assets/js/framework/common.js"></script>
 		<script src="../../assets/libs/vue.min.js"></script>
-		
+        <script src="../../assets/libs/vue-i18n.js"></script>
+		<script src="../../assets/i18n/language.js"></script>
     </body>
 </html>

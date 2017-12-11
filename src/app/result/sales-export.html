@@ -55,23 +55,23 @@
 </head>
 
 <body>
-	<!--<div class="sale-out">-->
+	<div id="app">
 	<header class="sales-export mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">销售输出</h1>
-		<span class="save-btn">保存</span>
+		<h1 class="mui-title">{{$t('action_btns.sell_output')}}</h1>
+		<span class="save-btn">{{$t('save')}}</span>
 	</header>
-	<div id="app" class="mui-content sales-export">
+	<div class="mui-content sales-export">
 		
 		<div class="sales-number interval mui-input-group">
 			<div class="mui-input-row group-info">
-				<label>预计服务完成时间</label>
-				<input type="text" style="text-align:right;position:relative;left:-10px;" placeholder="请选择时间" v-model="saleDate" class="saleDate" disabled readonly />
+				<label>{{$t('anticipated_service_completion_time')}}</label>
+				<input type="text" style="text-align:right;position:relative;left:-10px;" :placeholder="$t('select_time')" v-model="saleDate" class="saleDate" disabled readonly />
 			</div>
 			
 			<div class="mui-card mui-card-outer">
 				<div class="mui-card-header">
-					销售张数
+					{{$t('number_sold')}}
 				</div>
 				<div class="mui-card-content-outer">
 					<div class="block" v-for="(item, index) in saleOrderXms" :key="index">
@@ -79,16 +79,16 @@
 							<div class="mui-card-content">
 								<div class="block">
 									<div class="mui-input-row sales-type" :data-index="index">
-										<label class="mui-pull-left" for="">销售类型</label>
-										<input class="mui-pull-right" type="text" placeholder="销售类型" v-model="item.remark" readonly />
+										<label class="mui-pull-left" for="">{{$t('sale_type')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remark" readonly />
 									</div>
 									<div class="mui-input-row sales-size" :data-index="index">
-										<label class="mui-pull-left" for="">销售尺寸</label>
-										<input class="mui-pull-right" type="text" placeholder="销售尺寸" v-model="item.picSizeName" readonly />
+										<label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.picSizeName" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
-										<label class="mui-pull-left" for="">数量</label>
-										<input class="mui-pull-right" type="text" placeholder="数量" v-model="item.picNum" />
+										<label class="mui-pull-left" for="">{{$t('count')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.picNum" />
 									</div>
 								</div>
 							</div>
@@ -98,13 +98,13 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-				<button type="button" class="mui-btn  add-salesNum ">添加销售</button>
+				<button type="button" class="mui-btn  add-salesNum ">{{$t('add')}}</button>
 			</div>
 		</div>
 		<div class="give-number mui-input-group" style="padding-top: 1px;">
 			<div class="mui-card mui-card-outer">
 				<div class="mui-card-header">
-					赠送张数
+					{{$t('number_complimentary')}}
 				</div>
 				<div class="mui-card-content-outer">
 					<div class="block" v-for="(item, index) in giveOrderXms" :key="index">
@@ -112,16 +112,16 @@
 							<div class="mui-card-content">
 								<div class="block">
 									<div class="mui-input-row gives-type" :data-index="index">
-										<label class="mui-pull-left" for="">赠送类型</label>
-										<input class="mui-pull-right" type="text" placeholder="赠送类型" v-model="item.remark" :data-item="item" readonly />
+										<label class="mui-pull-left" for="">{{$t('type_complimentary')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('type_complimentary')" v-model="item.remark" :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row gives-size" :data-index="index">
-										<label class="mui-pull-left" for="">赠送尺寸</label>
-										<input class="mui-pull-right" type="text" placeholder="赠送尺寸" v-model="item.picSizeName"  :data-item="item" readonly />
+										<label class="mui-pull-left" for="">{{$t('number_complimentary')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('number_complimentary')" v-model="item.picSizeName"  :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
-										<label class="mui-pull-left" for="">数量</label>
-										<input class="mui-pull-right" type="text" placeholder="数量" v-model="item.picNum" :data-item="item" />
+										<label class="mui-pull-left" for="">{{$t('count')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.picNum" :data-item="item" />
 									</div>
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-				<button type="button" class="mui-btn  add-givesNum">添加赠送</button>
+				<button type="button" class="mui-btn  add-givesNum">{{$t('add')}}</button>
 			</div>
 
 
@@ -151,27 +151,27 @@
 			</div> -->
 			
 			<div class="mui-input-row  group-info">
-				<label>购买人数</label>
-				<input type="number" style="text-align:right" v-model="buyers" placeholder="请填写购买人数" />
+				<label>{{$t('buy_number_purchaser')}}</label>
+				<input type="number" style="text-align:right" v-model="buyers" :placeholder="$t('input_person_count')" />
 			</div>
 			<div class="mui-input-row  group-info">
-				<label>实时收银</label>
-				<input type="number" style="text-align:right" v-model="salesAmt" placeholder="请填写实时收银" disabled/>
+				<label>{{$t('real_time_sales')}}</label>
+				<input type="number" style="text-align:right" v-model="salesAmt" :placeholder="$t('enter_real_time_sales')" disabled/>
 			</div>
 			<div class="mui-input-row  group-info">
-				<label>预付销售额</label>
-				<input type="number" style="text-align:right" @change="computedTotal" v-model="advanceAmount" placeholder="请填写预付销售额" disabled readonly />
+				<label>{{$t('presell_sales')}}</label>
+				<input type="number" style="text-align:right" @change="computedTotal" v-model="advanceAmount" :placeholder="$t('enter_presell_sales')" disabled readonly />
 			</div>
 			<div class="mui-input-row  group-info">
-				<label>应收金额</label>
+				<label>{{$t('amount_receivable')}}</label>
 				<input type="number" style="text-align:right" @change="computedTotal" v-model="payableAmount" disabled />
 			</div>
 			<div class="mui-input-row  group-info">
-				<label>总金额</label>
+				<label>{{$t('total_amount')}}</label>
 				<input type="number" style="text-align:right" v-model="total" disabled/>
 			</div>
 			<div class="mui-input-row  group-info" style="height:auto;">
-				<div>上传附件</div>
+				<div>{{$t('uploading_attachments')}}</div>
 				<div class="uploader-wrap">
 				<div class="finger-uploader">
 					<div class="finger-uploader__bd">
@@ -191,7 +191,7 @@
 			
 		</div>
 	</div>
-	<!--</div>-->
+	</div>
 	<script src="../../assets/js/mui.min.js"></script>
 	<script src="../../assets/js/mui.picker.min.js"></script>
 	<script src="../../assets/js/mui.dtpicker.js"></script>
@@ -202,7 +202,8 @@
 	<script src="../../assets/js/framework/lf.js"></script>
 	<script src="../../assets/js/framework/common.js"></script>
 	<script src="../../assets/libs/vue.min.js"></script>
-	
+    <script src="../../assets/libs/vue-i18n.js"></script>
+    <script src="../../assets/i18n/language.js"></script>
 </body>
 
 </html>

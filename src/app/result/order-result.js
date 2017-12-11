@@ -372,7 +372,7 @@ mui('.order-result').on('tap', '.save-btn', function(){
 		lf.net.getJSON('order/saveShotOutput', params, function(res) {
 			lf.nativeUI.closeWaiting()
 			if(res.code == 200) {
-				lf.nativeUI.toast('保存成功！');
+				lf.nativeUI.toast(vm.$t('save_success'));
 				lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 				lf.window.closeCurrentWebview();
 			} else {

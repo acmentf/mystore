@@ -3,11 +3,11 @@ var vm = new Vue({
 	data: {
 		state:{
 			value: '',
-			text: '请选择'
+			text: ''
 		},
 		stateAction:{
 			value: '',
-			text: '请选择'
+			text: ''
 		},
 		orderTimeBegin:'',
 		orderTimeEnd:'',
@@ -26,40 +26,40 @@ lf.ready(function(){
 	userPicker = new mui.PopPicker();
 	userPicker.setData([{
 		value: '',
-		text: '请选择'
+		text: vm.$t('please_select')
 	},{
 		value: '1',
-		text: '处理中'
+		text: vm.$t('processing')
 	}, {
 		value: '7',
-		text: '已完成'
+		text: vm.$t('completed')
 	}, {
 		value: '3',
-		text: '已取消'
+		text: vm.$t('cancelled')
 	}]);
 
 	actionPicker = new mui.PopPicker();
 	actionPicker.setData([{
 		value: '',
-		text: '请选择'
+		text: vm.$t('please_select')
 	},{
 		value: '0',
-		text: '待计调'
+		text: vm.$t('active_status.operating')
 	}, {
 		value: '11',
-		text: '待分配'
+		text: vm.$t('active_status.assigning')
 	}, {
 		value: '22',
-		text: '待输出'
+		text: vm.$t('active_status.outputting')
 	},{
 		value: '33',
-		text: '待销售'
+		text: vm.$t('active_status.selling')
 	},{
 		value: '44',
-		text: '待完成'
+		text: vm.$t('active_status.completing')
 	},{
 		value: '55',
-		text: '已完成'
+		text: vm.$t('active_status.service_complete')
 	}]);
 })
 
@@ -110,13 +110,13 @@ mui('.mui-content').on('tap', '.team-date-end', function(){
 mui('.mui-content').on('tap', '#reset-btn', function() {
 	vm.searchText = ''
 	vm.state.value = ''
-	vm.state.text = '请选择'
+	vm.state.text = vm.$t('please_select')
 	vm.orderTimeBegin = ''
 	vm.orderTimeEnd = ''
 	vm.startBeginTime = ''
 	vm.startEndTime = ''
 	vm.stateAction.value = ''
-	vm.stateAction.text = '请选择'
+	vm.stateAction.text = vm.$t('please_select')
 })
 
 //点击搜索

@@ -65,6 +65,11 @@
     height: unset !important;
     margin-bottom: unset !important;
     padding: 0 5px 0 0 !important;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 }
 
 .print-size,.print-nums{

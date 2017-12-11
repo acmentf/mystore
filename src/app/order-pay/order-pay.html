@@ -45,16 +45,17 @@
     </style>
 </head>
 <body>
+    <div id="app">
     <header id="order-pay-header" class="mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title">销售订单</h1>
+        <h1 class="mui-title">{{$t('sales_order')}}</h1>
     </header>
-    <div class="mui-content order-pay-content" id="app">
+    <div class="mui-content order-pay-content">
          <div class="order-pay-paying">
             <div class="sales-list">
                 <div class="mui-card mui-card-outer">
                     <div class="mui-card-header">
-                        销售数量
+                        {{$t('sales_conuts')}}
                     </div>
                     <div class="mui-card-content-outer">
                         <div class="block" v-for="(item, index) in salesOrderTxList" :key="index">
@@ -62,16 +63,16 @@
                                 <div class="mui-card-content">
                                     <div class="block">
                                         <div class="mui-input-row sales-type" :data-index="index">
-                                            <label class="mui-pull-left" for="">销售类型</label>
-                                            <input class="mui-pull-right" type="text" placeholder="销售类型" v-model="item.remark" readonly />
+                                            <label class="mui-pull-left" for="">{{$t('sale_type')}}</label>
+                                            <input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remark" readonly />
                                         </div>
                                         <div class="mui-input-row sales-size" :data-index="index">
-                                            <label class="mui-pull-left" for="">销售尺寸</label>
-                                            <input class="mui-pull-right" type="text" placeholder="销售尺寸" v-model="item.argDictName" readonly />
+                                            <label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
+                                            <input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.argDictName" readonly />
                                         </div>
                                         <div class="mui-input-row" :data-index="index">
-                                            <label class="mui-pull-left" for="">数量</label>
-                                            <input class="mui-pull-right" type="text" placeholder="数量" v-model="item.nums" />
+                                            <label class="mui-pull-left" for="">{{$t('count')}}</label>
+                                            <input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.nums" />
                                         </div>
                                     </div>
                                 </div>
@@ -81,30 +82,30 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center;">
-                    <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">添加产品</button>
+                    <button type="button" class="mui-btn  add-salesNum " @tap="addSaleItem">{{$t('add')}}</button>
                 </div>
             </div>
 
              <ul class="mui-table-view" style="margin-top: 20px;">
                 <div class="mui-input-row">
-                    <label class="order-pay-list-key">销售人数</label>
-                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="salePersonnelNum" placeholder="请输入人数">
+                    <label class="order-pay-list-key">{{$t('sale_number_purchaser')}}</label>
+                    <input type="number" class="mui-input-clear order-pay-list-value" v-model="salePersonnelNum" :placeholder="$t('input_person_count')">
                 </div>
                  <div class="mui-input-row">
-                     <label class="order-pay-list-key">金额</label>
-                     <input type="number" class="mui-input-clear order-pay-list-value" v-model="amount" placeholder="请输入销售金额">
+                     <label class="order-pay-list-key">{{$t('cost')}}</label>
+                     <input type="number" class="mui-input-clear order-pay-list-value" v-model="amount" :placeholder="$t('input_sales_amount')">
                  </div>
              </ul>
  
              <ul class="mui-table-view logout">
                  <li class="mui-table-view-cell" @click="handlePay(0)">
-                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_cash.png" alt=""> 现金支付</div>
+                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_cash.png" alt=""> {{$t('cash_payment')}}</div>
                  </li>
                  <li class="mui-table-view-cell" @click="handlePay(1)">
-                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_wechat.png" alt=""> 微信支付</div>
+                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_wechat.png" alt=""> {{$t('wechat_payment')}}</div>
                  </li>
                  <li class="mui-table-view-cell" @click="handlePay(2)">
-                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_alipay.png" alt=""> 支付宝支付</div>
+                     <div class="mui-pull-left order-pay-list-key"><img class="pay-icon" src="../../assets/css/images/sell_alipay.png" alt=""> {{$t('alipay_payment')}}</div>
                  </li>
              </ul>
          </div>
@@ -113,7 +114,7 @@
          <div class="order-pay-dialog hide" id="pay-dialog" v-show="isPaying">
              <div class="order-pay-dialog-header">
                  <h2>{{payName}}</h2>
-                 <p><span>{{amount}}</span>元</p>
+                 <p><span>{{amount}}</span>{{$t('cost_suffix')}}</p>
              </div>
      
              <div class="order-pay-dialog-qrcode">
@@ -124,7 +125,7 @@
          <div class="pay-mask hide" id="pay-mask" v-show="isPaying" style="position: absolute; top:0; bottom:0; left:0; right:0; z-index:2; background: rgba(0,0,0,.5)"></div>
      </div>
 
-    
+    </div>
 
     <script src="../../assets/js/mui.min.js"></script>
     <script src="../../assets/js/mui.picker.min.js"></script>
@@ -135,6 +136,7 @@
     <script src="../../assets/js/framework/lf.js"></script>
     <script src="../../assets/js/framework/qrcode.min.js"></script>
     <script src="../../assets/libs/vue.min.js"></script>
-     
+    <script src="../../assets/libs/vue-i18n.js"></script>
+    <script src="../../assets/i18n/language.js"></script>
 </body>
 </html>

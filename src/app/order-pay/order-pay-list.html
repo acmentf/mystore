@@ -9,29 +9,30 @@
     <link href="../../assets/css/order-pay/order-list.css" rel="stylesheet"/>
 </head>
 <body>
-    <header id="order-pay-header" class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title">销售订单</h1>
-    </header>
+    <div id="app">
+        <header id="order-pay-header" class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">{{$t('sales_order')}}</h1>
+        </header>
 
-    <div class="mui-content order-pay-content order-pay-list mui-scroll-wrapper" id="app">
-        <div class="mui-scroll">
-        
-            <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id">
-                <div class="order-pay-card-header">
-                    <div class="mui-pull-left">订单号：<span>{{item.orderNo}}</span></div>
+        <div class="mui-content order-pay-content order-pay-list mui-scroll-wrapper">
+            <div class="mui-scroll">
+            
+                <div class="order-pay-card mui-content-padded" v-for="item in orderPayList" :data-id="item.id">
+                    <div class="order-pay-card-header">
+                        <div class="mui-pull-left">{{$t('order_no')}}：<span>{{item.orderNo}}</span></div>
+                    </div>
+                    <div class="order-pay-card-content">
+                        <p>{{$t('time_generated')}}：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
+                        <p>{{$t('photo_count')}}：{{item.itemSalesOrderTxListTotalNums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
+                        <p>{{item.province}} {{item.city}}</p>
+                    </div>
                 </div>
-                <div class="order-pay-card-content">
-                    <p>生成时间：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
-                    <p>照片张数：{{item.itemSalesOrderTxListTotalNums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
-                    <p>{{item.province}} {{item.city}}</p>
-                </div>
+
+                <div></div>
             </div>
-
-            <div></div>
         </div>
     </div>
-
     <!-- <div class="order-pay-generate">
         <button type="button" class="mui-btn mui-btn-block">生成销售</button>
     </div> -->
@@ -45,6 +46,8 @@
     <script src="../../assets/js/framework/styles.js"></script>
     <script src="../../assets/js/framework/lf.js"></script>
     <script src="../../assets/libs/vue.min.js"></script>
+    <script src="../../assets/libs/vue-i18n.js"></script>
+    <script src="../../assets/i18n/language.js"></script>
     <script>
          var data = {
             currentId: '',
@@ -156,8 +159,8 @@
                     up : {
                         height:50,//可选.默认50.触发上拉加载拖动距离
                         auto:true,//可选,默认false.自动上拉加载一次
-                        contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-                        contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentrefresh : vm.$t('loading') + "...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                        contentnomore: vm.$t('no_more_data'),//可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback : getOrderPayList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
                     }
                 }

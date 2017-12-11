@@ -140,11 +140,13 @@ var vm = new Vue({
 	   },
 	   // 确认修改
 	   confirmAmend: function () {
+		   var self = this
+
 		   if(!this.amendTime) {
-			   mui.toast('请填写实际服务时间');
+			   mui.toast(self.$t('please_input')+self.$t('service_time'));
 			   return
 			}else if(!this.amendReserverReasons) {
-				mui.toast('请填写修改原因');
+				mui.toast(self.$t('please_input')+self.$t('modify_reason'));
 				return
 			}
 			else if(this.amendTime) {
@@ -166,7 +168,7 @@ var vm = new Vue({
 			lf.net.getJSON('order/timeoutSave', params, function(res) {
 					lf.nativeUI.closeWaiting()
 					if(res.code == 200) {
-						lf.nativeUI.toast('修改成功');
+						lf.nativeUI.toast(self.$t('modify_success'));
 						vm.isAmend = false; 
 						vm.overTime = false;
 						vm.marchInfo.fetchPhotoTime = vm.amendTime
@@ -181,6 +183,8 @@ var vm = new Vue({
 	}
 })
 
+vm.operatorHeader = [vm.$t('group_information'), vm.$t('journey_information'), vm.$t('photographic_information')];
+vm.shootTypeArr = ['跟团', '驻点', '散团'];
 
 //团队性质
 mui('#app').on('tap', '#showUserPicker', function() {
@@ -334,16 +338,16 @@ mui('#app').on('tap', '.pssd', function() {
 		var userPicker = new mui.PopPicker();
 		userPicker.setData([{
 			value: '0',
-			text: '全天'
+			text: vm.$t('all')
 		}, {
 			value: '1',
-			text: '上午'
+			text: vm.$t('morning')
 		}, {
 			value: '2',
-			text: '下午'
+			text: vm.$t('afternoon')
 		}, {
 			value: '3',
-			text: '晚上'
+			text: vm.$t('night')
 		}]);
 		userPicker.show(function(items) {
 			vm.shootInfos[index].periodType = items[0].value
@@ -515,7 +519,7 @@ mui('.mui-bar-nav').on('tap', '.save',function(){
 	lf.net.getJSON('order/saveOrderTrackInfo', params, function(data) {
 		lf.nativeUI.closeWaiting()
 		if(data.code == 200) {
-			lf.nativeUI.toast('保存成功');
+			lf.nativeUI.toast(vm.$t('save_success'));
 			vm.forStatus = 'check'
 			lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
 			lf.window.currentWebview().reload()

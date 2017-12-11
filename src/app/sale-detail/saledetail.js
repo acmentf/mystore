@@ -15,6 +15,8 @@ function initPull() {
 	mui.ready(function() {
         mui("#scroll-wrap").pullToRefresh({
             up : {
+                contentrefresh : vm.$t('loading') + "...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                contentnomore: vm.$t('no_more_data'),//可选，请求完毕若没有更多数据时显示的提醒内容；
                 auto:true,
                 callback: function(){
                     var orderId = lf.window.currentWebview().orderId;

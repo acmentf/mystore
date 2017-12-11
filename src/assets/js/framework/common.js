@@ -18,7 +18,7 @@ var GLOBAL_SHOOT = {
                 console.log("当前应用版本：" + vm.wgtVer);
             })
         } else {
-            vm.wgtVer = '1.5.9'
+            vm.wgtVer = '1.6.1'
         }
     },
     // 检测版本是否更新
@@ -213,6 +213,8 @@ var GLOBAL_SHOOT = {
         }
     },
     androidDownloadApp: (function () {
+        if (!window.lf) return
+
         var browserInfo = lf.net.browser.versions;
         if(!browserInfo.tuyi && browserInfo.android) {
             // 不在途忆客户端内，且访问设备为 Android 设备
