@@ -109,7 +109,7 @@ lf.ready(function() {
 })	
 
 mui('body').on('tap', '#logout', function() {
-	lf.nativeUI.confirm("操作提示", "确定要退出当前用户吗?", ["确定", "取消"], function(e) {
+	lf.nativeUI.confirm(vm.$t('tips'), vm.$t('sign_out_tips'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
 		if(e.index == 0) {
 			window.Role.logout();
 			GLOBAL_SHOOT.restart();
@@ -285,6 +285,8 @@ function initPull() {
 			vm.pullObjects[index] = pullRefreshEl;
 			mui(pullRefreshEl).pullToRefresh({
 				down: {
+					contentrefresh: vm.$t('loading') + "...",
+					contentnomore: vm.$t('no_more_data'),
 					callback: function() {
 						var self = this;
 						vm.pageNos[index] = 1;
@@ -347,6 +349,8 @@ function initPull() {
 					}
 				},
 				up: {
+					contentrefresh: vm.$t('loading') + "...",
+					contentnomore: vm.$t('no_more_data'),
 					auto: true,
 					callback: function() {
 						var self = this;

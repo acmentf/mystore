@@ -82,15 +82,15 @@ lf.ready(function() {
             },
             saveInfo: function () {
                 if(!vm.productName){
-                    lf.nativeUI.toast("请选择产品名称")
+                    lf.nativeUI.toast(this.$t('select_product'))
                     return
                 }
                 if(!vm.orderSaleDate){
-                    lf.nativeUI.toast("请选择销售时间")
+                    lf.nativeUI.toast(this.$t('select_time'))
                     return
                 }
                 if(!vm.tourGuide){
-                    lf.nativeUI.toast("请选择导游")
+                    lf.nativeUI.toast(this.$t('select_tour_guide'))
                     return
                 }
                 // if(!vm.remark){
@@ -106,20 +106,16 @@ lf.ready(function() {
                 for(let i = 0; i < vm.salesOrderTxList.length; i++) {
                     let item = vm.salesOrderTxList[i];
                     if(!item.remark) {
-                        lf.nativeUI.toast("请选择销售类型")
+                        lf.nativeUI.toast(this.$t('select_sale_type'))
                         return;
                     }
                     if(!item.argDictName) {
-                        lf.nativeUI.toast("请选择销售尺寸")
+                        lf.nativeUI.toast(this.$t('select_sale_size'))
                         return;
                     }
                     if(!reg.test(item.nums)) {
-                        if(item.nums == 0) {
-                            
-                        } else {
-                            lf.nativeUI.toast('请输入正确的销售张数');
-                            return;
-                        }
+                        lf.nativeUI.toast(this.$t('select_sale_nums'))
+                        return
                     }
                 }
 
@@ -132,20 +128,20 @@ lf.ready(function() {
                     if(tempSalesOrderTxList.indexOf(salesOrderTxListCopy[i]) == -1) {
                         tempSalesOrderTxList.push(salesOrderTxListCopy[i]);
                     } else {
-                        lf.nativeUI.toast('请勿选择相同的销售类型与销售尺寸');
+                        lf.nativeUI.toast(this.$t('choose_tips_same_type_size'));
                         return;
                     }
                 }
                 if(!vm.salePersonnelNum){
-                    lf.nativeUI.toast("请输入销售人数")
+                    lf.nativeUI.toast(this.$t('enter_sale_number_purchaser'))
                     return
                 }
                 if (!reg.test(vm.salePersonnelNum)){
-                    lf.nativeUI.toast('销售人数不合法')
+                    lf.nativeUI.toast(this.$t('select_person_nums'))
                     return
                 }
                 if(!vm.saleName){
-                    lf.nativeUI.toast("请选择销售")
+                    lf.nativeUI.toast(this.$t('select_seller'))
                     return
                 }
                 console.log(vm.orderId)
@@ -178,7 +174,7 @@ lf.ready(function() {
                 lf.net.getJSON('pay/editOrderInfo', params, function(res) {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
-                        lf.nativeUI.toast('保存成功！');
+                        lf.nativeUI.toast(vm.$t('save_success'));
                         lf.event.fire(lf.window.currentWebview().opener(), 'orderdetails', {})
                         lf.window.closeCurrentWebview();
                     } else {
@@ -244,11 +240,11 @@ lf.ready(function() {
             },
             selectGuide: function() {
                 if(!vm.pNo){
-                    lf.nativeUI.toast("请选择产品名称")
+                    lf.nativeUI.toast(vm.$t('select_product'))
                     return
                 }
                 if(!vm.orderSaleDate){
-                    lf.nativeUI.toast("请选择销售时间")
+                    lf.nativeUI.toast(vm.$t('select_time'))
                     return
                 }
                 blur()

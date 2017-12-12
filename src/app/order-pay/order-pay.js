@@ -275,15 +275,15 @@ lf.ready(function() {
                 for (let i = 0; i < vm.salesOrderTxList.length; i++) {
                     let item = vm.salesOrderTxList[i];
                     if(!item.remark) {
-                        lf.nativeUI.toast('请选择销售类型');
+                        lf.nativeUI.toast(this.$t('select_sale_type'));
                         return;
                     }
                     if(!item.argDictId) {
-                        lf.nativeUI.toast('请选择销售尺寸');
+                        lf.nativeUI.toast(this.$t('select_sale_size'));
                         return;
                     }
                     if(!reg.test(item.nums)){
-                        lf.nativeUI.toast('请输入正确的销售张数');
+                        lf.nativeUI.toast(this.$t('select_sale_nums'));
                         return
                     }
                 }
@@ -300,20 +300,20 @@ lf.ready(function() {
                     if(tempSalesOrderTxList.indexOf(salesOrderTxListCopy[i]) == -1) {
                         tempSalesOrderTxList.push(salesOrderTxListCopy[i]);
                     } else {
-                        lf.nativeUI.toast('请勿选择相同的销售类型与销售尺寸');
+                        lf.nativeUI.toast(this.$t('choose_tips_same_type_size'));
                         return;
                     }
                 }
 
                 if(!reg.test(vm.salePersonnelNum)){
-                    lf.nativeUI.toast('请输入正确的销售人数')
+                    lf.nativeUI.toast(vm.$t('enter_person_nums'))
                     return
                 }
 
                 var amountReg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^(0){1}$)|(^\d\.\d{1,2}?$)/;
                 
                 if (!amountReg.test(vm.amount)){
-                    lf.nativeUI.toast('请输入正确的金额');
+                    lf.nativeUI.toast(this.$t('enter_amount_nums'));
                     return
                 }
 
@@ -343,7 +343,7 @@ lf.ready(function() {
         
                     if(data.code == 200) {
                         lf.nativeUI.closeWaiting();
-                        lf.nativeUI.toast("已取消订单");
+                        lf.nativeUI.toast(vm.$t('success'));
                         dispatchEvent()
                         lf.window.closeCurrentWebview();
                     } else {
@@ -361,13 +361,13 @@ lf.ready(function() {
                 switch (type) {
                     case 0:
                         this.channelCode = 'cash'
-                        return '现金支付'
+                        return vm.$t('cash_payment')
                     case 1:
                         this.channelCode = 'wechat'
-                        return '微信支付'
+                        return vm.$t('wechat_payment')
                     case 2:
                         this.channelCode = 'alipay'
-                        return '支付宝'
+                        return vm.$t('alipay_payment')
                 }
             },
 
@@ -392,7 +392,7 @@ lf.ready(function() {
     })
 
     function cashPay() {
-        lf.nativeUI.confirm("现金支付", vm.amount + "元", ["确定", "取消"], function(e) {
+        lf.nativeUI.confirm(vm.$t('cash_payment'), vm.amount + vm.$t('cost_suffix'), [vm.$t('ok'), vm.$t('cancel')], function(e) {
             if(e.index == 0) {
                 payment()
             }
@@ -504,13 +504,13 @@ lf.ready(function() {
     // 支付回调
     function payCallback(data) {
         if (data == 2) {
-            mui.alert("支付成功")
+            mui.alert(vm.$t('pay_succeeded'))
             // lf.nativeUI.toast("支付成功");
         } else if (data == 3) {
-            mui.alert("支付已取消")
+            mui.alert(vm.$t('pay_cancelled'))
             // lf.nativeUI.toast("支付已取消");
         } else if (data == 4) {
-            mui.alert("支付失败")
+            mui.alert(vm.$t('pay_faild'))
             // lf.nativeUI.toast("支付失败");
         }
         
