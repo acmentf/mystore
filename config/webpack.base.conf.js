@@ -21,6 +21,24 @@ module.exports = {
                 exclude: /(node_modules|dist)/,
                 include: [resolve('src')]
             },
+            { 
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                options: { 
+                    appendTsSuffixTo: [/\.vue$/] 
+                },
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
+            },
+            { 
+                test: /\.tsx$/, 
+                loader: 'babel-loader!ts-loader', 
+                options: { 
+                    appendTsxSuffixTo: [/\.vue$/] 
+                },
+                exclude: /(node_modules|dist)/,
+                include: [resolve('src')]
+            },
             {
                 test: /\.js$/,
                 loaders: 'happypack/loader?id=js',
@@ -60,7 +78,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.ts', '.tsx', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src')

@@ -1,3 +1,4 @@
+import * as helper from "@/js/helper.ts";
 import ExpansionCompletedSummary from "@/component/market-expansion/expansion-completed-summary.vue";
 import userPositionInfoMinix from "@/component/market-expansion/common/userPositionInfo";
 
@@ -273,7 +274,7 @@ lf.ready(function() {
 	vm.username = window.Role.username // 用户昵称
     vm.rolePositionList = window.Role.positions // 岗位列表
 
-    hasShowPlanBtn(vm.rolePositionList)
+    helper.hasShowPlanBtn(vm.rolePositionList, vm)
     
     mui('.mui-scroll-wrapper').scroll({
 		bounce: false,
