@@ -66,7 +66,8 @@ var vm = new Vue({
             planCompletedList: [{}],
             monthAmount: 0,
             monthPlanAmt: 0,
-            monthSelfAmount: 0
+            monthSelfAmount: 0,
+            isShowPlanBtn: true
         }
     },
     computed: {
@@ -241,6 +242,27 @@ function switchRolePostion(val) {
     })
 }
 
+/**
+ * 是否显示填报计划按钮
+ */
+function hasShowPlanBtn(obj) {
+    if (!obj) return
+
+    var roleList = []
+    var roleMap = {
+        manager: 17, // 渠道经理roleId
+        worker: 16 // 渠道专员roleId
+    }
+
+    obj.forEach(function(item) {
+        roleList.push(item.roleId)
+    })
+
+    if (roleList.indexOf(roleMap.manager) > -1 && roleList.indexOf(roleMap.worker) > -1) {
+        vm.isShowPlanBtn = false
+    }
+}
+
 lf.ready(function() {
     // 检查版本更新
     GLOBAL_SHOOT.update()
@@ -250,6 +272,8 @@ lf.ready(function() {
     vm.rolePositionId = window.Role.userroleId // 岗位id
 	vm.username = window.Role.username // 用户昵称
     vm.rolePositionList = window.Role.positions // 岗位列表
+
+    hasShowPlanBtn(vm.rolePositionList)
     
     mui('.mui-scroll-wrapper').scroll({
 		bounce: false,
