@@ -129,10 +129,11 @@
                 clearInterval(vm.timer)
             },
             edit: function() {
-                if (vm.orderStatus === 1) {
-                    mui.toast('待支付的记录，无法编辑')
+                if (vm.orderStatus === 1 || vm.orderStatus === 3) {
+                    mui.toast((vm.orderStatus === 1 ? '待支付' : '已取消') + '的记录，无法编辑')
                     return
                 }
+
                 // mui.back();
                 lf.window.openWindow('../correlate-order/editSaleOrder.html','../correlate-order/editSaleOrder.html',{},{
                     orderId: vm.orderId,

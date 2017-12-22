@@ -11,6 +11,7 @@ launch.json
 *.css.map
 unpackage/
 src/app/test
+.vscode/chrome
 webim-src/sdk/node_modules
 webim-src/chat/node_modules
 webim-src/webrtc/node_modules

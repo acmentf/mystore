@@ -23,19 +23,29 @@ var GLOBAL_SHOOT = {
     },
     // 检测版本是否更新
     update: function () {
-        return
-        if (mui.os.plus) {
+        if (lf.net.browser.versions.tuyi) {
+            var version = "";
+
+            try {
+                version = ANDROID_JSB.getAppVersion()
+            } catch (error) {
+                console.log(error);
+            }
+
+            if (version) return
+
             var params = {
                 "app_id": '123456',
-                "version": '1.5.8',
+                "version": '1.6.0',
                 "imei": '123456',
-                "platform": 'android'
+                "platform": 'Android'
             };
+
             lf.net.getJSON("/app/validationversion", params, function(data) {
                 var update_desc = "发现新的版本，是否需要立即更新";
                 if(data.code == 200) {
                     var btns = null;
-                    console.log(data.data.releaseUrl)
+          
                     if(data.data.isMandatory == 1) {
                         update_desc = "发现新的版本，请立即更新";
                         btns = ["立即更新"];
@@ -45,29 +55,26 @@ var GLOBAL_SHOOT = {
                     if(data.data.upgrade_desc) {
                         update_desc = update_desc + "\n" + data.data.releaseRemark;
                     }
+
                     lf.nativeUI.confirm("", update_desc, btns, function(e) {
                         if(btns.length == 1) {
                             if(0 == e.index) {
                                 try {
-                                    ANDROID_JSB.openBrowser(data.data.releaseUrl)
+                                    lf.window.openWindow('downloadApk', data.data.releaseUrl, {}, {})
                                 } catch (error) {
                                     console.log(error);
                                 }
-                                // plus.runtime.openURL(data.data.releaseUrl);
                                 lf.window.closeCurrentWebview();
-                            } else {
-                                plus.runtime.quit();
                             }
                         } else {
                             if(0 == e.index) {
-                                // plus.runtime.openURL(data.data.releaseUrl);
                                 try {
-                                    ANDROID_JSB.openBrowser(data.data.releaseUrl)
+                                    lf.window.openWindow('downloadApk', data.data.releaseUrl, {}, {})
                                 } catch (error) {
                                     console.log(error);
                                 }
                                 lf.window.closeCurrentWebview();
-                            } else {}
+                            }
                         }
                     });
                 }

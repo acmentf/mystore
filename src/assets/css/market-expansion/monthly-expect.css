@@ -74,10 +74,18 @@
     padding: 0 15px;
     margin-top: 15px;
 }
-.section-2 .section-2-block .name-label {
+
+.section-2 .section-2-block .name-head-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-2 .section-2-block .name-head-bar .name-label {
     height: 0.6rem;
     line-height: 0.6rem;
 }
+
 .section-2 .section-2-block .data-table {
     display: flex;
     border: 1px solid #ddd;

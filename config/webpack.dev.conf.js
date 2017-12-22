@@ -9,7 +9,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const CONFIG = require('./build-config')
 
 let entryHtml = utils.getEntryHtml('./src/app/**/*.html'),
-    entryJs = utils.getEntry('./src/app/**/*.js'),
+    entryJs = Object.assign(utils.getEntry('./src/app/**/*.js'), utils.getEntry('./src/app/**/*.ts')),
     configPlugins = [
         new webpack.DefinePlugin({
 			"process.env": {

@@ -243,7 +243,16 @@ var messages = {
         "search_placeholder": "Please enter",
         "search_result": "Search result",
         "quick_order": "Quick order",
-        "confirm_order": "Confirm submit"
+        "confirm_order": "Confirm submit",
+        "select_sale_type": "Please select sale type",
+        "select_sale_size": "Please select sale size",
+        "select_sale_nums": "Please enter the correct number of sales",
+        "enter_person_nums": "Please enter the correct number of person",
+        "enter_amount_nums": "Please enter the correct number of amount",
+        "choose_tips_same_type_size": "Don't choose the same type of sales and sales size",
+        "pay_succeeded": "Pay succeeded",
+        "pay_cancelled": "Pay cancelled",
+        "pay_faild": "Pay faild",
     },
     "cn": {
         "confirm_del_account": "确定删除账号{account}吗?",
@@ -261,8 +270,8 @@ var messages = {
         "invalid_user": "无效的用户",
         "placeholder_account": "请输入账号",
         "placeholder_password": "请输入密码",
-        "sign_in": "登 陆",
-        "sign_out": "退出登陆",
+        "sign_in": "登 录",
+        "sign_out": "退出登录",
         "ok": "确定",
         "cancel": "取消",
         "sign_out_tips": "确定要退出当前用户吗?",
@@ -489,7 +498,16 @@ var messages = {
         "search_placeholder": "订单号／团号／导游姓名／导游电话",
         "search_result": "搜索结果",
         "quick_order": "快速下单",
-        "confirm_order": "确认下单"
+        "confirm_order": "确认下单",
+        "select_sale_type": "请选择销售类型",
+        "select_sale_size": "请选择销售尺寸",
+        "select_sale_nums": "请输入正确的销售张数",
+        "enter_person_nums": "请输入正确的销售人数",
+        "enter_amount_nums": "请输入正确的金额",
+        "choose_tips_same_type_size": "请勿选择相同的销售类型与销售尺寸",
+        "pay_succeeded": "支付成功",
+        "pay_cancelled": "支付已取消",
+        "pay_faild": "支付失败",
     }
 }
 
