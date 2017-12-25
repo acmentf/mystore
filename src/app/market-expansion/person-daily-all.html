@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>重新分配本月任务</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../assets/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="../../assets/css/market-expansion/person-daily-detail.css" />
+        <link rel="stylesheet" type="text/css" href="../../assets/css/operator/operator.css">
+        <link rel="stylesheet" href="../../assets/css/common/common.css" />
+        <style>
+           .mui-bar .mui-btn-nav.mui-pull-right{
+                margin-right:10px;
+           }
+           .section-1 ul li .order-container .detail-content-wrap.selected{
+             border:1px solid #3eb392;
+           }
+           .amendBtn .mui-btn-primary{
+                padding: 6px 12px !important;
+                width:auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+                <h1 class="mui-title"> <span v-text="userName"></span>日报数据详情</h1>
+                <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+                    <span class="filterAll" @click="all" v-html="isAll? '取消':'全部'"></span>
+                </button>
+            </header>
+            <footer class="mui-bar mui-bar-footer" v-if="purchaserOrderList.length">
+                <button type="button" id="save" class="mui-btn mui-btn-primary genSale" @click="save">确认业绩</button>
+            </footer>
+            <main class="mui-content"  v-cloak>
+                <div id="slider" class="mui-slider">
+                    <section class="section-1 section-container">
+                        <ul  v-if="purchaserOrderList.length">
+                            <li class="section-1-block" v-for="(item,num,key) in purchaserOrderList" :key="key" v-if="show(item,0)">
+                                <div class="travel-agency" v-text="item.purchaser"></div>
+                                <div class="order-container" v-for="(order,index, orderKey) in item.orderList" :key="orderKey"  :class="{'first':index === 0}">
+                                    <div class="detail-content-wrap" v-if="order.orderShow"  @click="_select(event,order)" ref="objectDiv">
+                                        <div class="content-top" :data-orderid="order.orderId">
+                                            <div class="detail-section detail-section-1">
+                                                <div class="part-1">
+                                                    <div class="orderNo">
+                                                        订单号：<span v-text="order.orderNo"></span>
+                                                    </div>
+                                                    <div>
+                                                        {{order.actionStatus | actionStatusFormat}}
+                                                    </div>
+                                                </div>
+                                                <div class="part-2">
+                                                    <div>
+                                                        {{order.productName|lengthTo8(14)}}
+                                                    </div>
+                                                    <div>
+                                                        {{order.isPreTour == "1" ? '前置团' : '非前置团'}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="detail-section detail-section-2">
+                                                <div class="part-1">
+                                                    <div>出团日期：</div>
+                                                    <div>{{order.createTime | dateFormatter}}</div>
+                                                </div>
+                                                <div class="part-2">
+                                                    <div>团人数：</div>
+                                                    <div v-text="order.personCount"> 人</div>
+                                                </div>
+                                                <div class="part-3">
+                                                    <div>导游：</div>
+                                                    <div v-text="order.tourGuide"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content-bottom" :data-orderid="order.orderId">
+                                            <div>
+                                                <div v-show="formatDate(order.fetchPhotoTime) == date">实际服务人数</div>
+                                                <div v-show="formatDate(order.fetchPhotoTime) == date" v-text="order.serverPerNum"></div>
+                                            </div>
+                                            <div>
+                                                <div v-show="formatDate(order.fetchPhotoTime) == date">前置销售金额</div>
+                                                <div v-show="formatDate(order.fetchPhotoTime) == date" v-text="order.payableAmount"></div>
+                                            </div>
+                                            <div>
+                                                <div>实销金额</div>
+                                                <div v-text="order.saleAmt"></div>
+                                            </div>
+                                        </div>                                      
+                                    </div>
+                                    <div class="content-btn" @click="_open(order)" >
+                                            修改      
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </main>
+
+        <!--修改表单-->
+        <div v-if="isOpen" class="amendBox" v-cloak>
+                <div class="amendInfo">
+                    <div class="actualAmend">
+                            <div class="mui-input-row mui-input-group  group-info shoot-number">
+                                <label>发团人数</label>
+                                <input type="text" v-model="updateData.personCount" readonly="readonly" style="text-indent:1em"/>	
+                            </div>
+                            <div class="mui-input-row mui-input-group  group-info shoot-number">
+                                <p>实际服务人数</p>		
+                                <label>修改前</label>
+                                <input type="text" v-model="updateData.serverPerNum" readonly="readonly" style="text-indent:1em"/>
+                            </div>
+                            <div class="mui-input-row mui-input-group  group-info shoot-number">
+                                <label>修改后</label>
+                                <input type="text"  v-model="amendPerNum" class="select-amend" placeholder="请输入实际服务人数"/>
+                            </div>
+                            <div class="shoot-number mui-input-group">
+                                <div class="mui-input-row group-info">
+                                    <label>修改原因</label>
+                                </div>
+                                <div class="mui-input-row group-info remark-box reasonS">
+                                    <textarea v-model="amendReasons" class="remark-text" placeholder="请输入修改原因"></textarea>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="amendBtn">
+                            <button type="button" class="mui-btn btn1" @click="cancelAmend">
+                                取消
+                            </button>
+                            <div class="mui-btn mui-btn-primary btn2" @click="confirmAmend">
+                                确认
+                            </div>
+                    </div>
+                </div>
+            </div>	
+            
+        </div>
+		<script src="../../assets/js/mui.min.js"></script>
+		<script src="../../assets/js/framework/define.js"></script>
+        <script src="../../assets/js/framework/styles.js"></script>
+		<script src="../../assets/js/framework/lf.js"></script>
+		<script src="../../assets/js/framework/common.js"></script>
+		<script src="../../assets/libs/vue.min.js"></script>
+    </body>
+</html>

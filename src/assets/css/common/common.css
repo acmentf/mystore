@@ -111,3 +111,14 @@
 	background-size: 100%;
 	z-index: 999;
 }
+/* 遮罩 */
+.amendBox {
+	position: fixed;
+	left: 0;
+	top: 44px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.5);
+	border-top: 1px solid #a0a0a0;
+	z-index: 11
+}
