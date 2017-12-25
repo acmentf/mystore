@@ -21,6 +21,7 @@ var vm = new Vue({
 		fetchTime: "",  //预计服务时间
 		serveInputDisabled: false,
 		uploaderFiles: [],
+		saleHandleData:'',
 	    printOrderXms: [             //打印张数
 	        {
 	        	fType: '1',
@@ -31,7 +32,8 @@ var vm = new Vue({
 				picSizeName: '',
 				price: ''           //1 打印 2赠送3销售
 	        }
-	    ]
+		],
+		sizesEmun:[]
 	},
 	methods: {
 		// 点击修改
@@ -201,47 +203,67 @@ var vm = new Vue({
 })
 var picker,userPicker,reasonPicker;
 lf.ready(function(){
+	getUpdateData();
 	vm.userId = window.Role.usercode
 	var opts = {"type": "date"};
 	picker = new mui.DtPicker(opts);
-	userPicker = new mui.PopPicker();
-	userPicker.setData([{
-		value: '1',
-		text: '16寸'
-	}, {
-		value: '2',
-		text: '12寸'
-	}, {
-		value: '3',
-		text: '10寸'
-	}, {
-		value: '4',
-		text: '8寸'
-	}, {
-		value: '6',
-		text: '7寸'
-	}, {
-		value: '5',
-		text: '6寸'
-	}]);
+	
 	reasonPicker = new mui.PopPicker();
 	reasonPicker.setData(['天气原因','道路中断','旅行团未到指定地点','其他']);
 	var wv = lf.window.currentWebview()
 	vm.orderId = wv.orderId
 	loadResult()
 	console.log(JSON.stringify(lf.window.currentWebview()))
+	function getSizesEmun(){
+		vm.saleHandleData.forEach(e=>{
+			e.sizeData.forEach(i=>{
+				console.log(i);
+				vm.sizesEmun.push({
+					text:i.size,
+					unitPrice:i.unitPrice,
+					value:i.id,
+					remark:e.id
+				})
+			})
+		})
+		console.log(vm.sizesEmun);
+	}
+	function getUpdateData(){
+        lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0,'type':'相片' }, function (res){
+            if(res.code == 200){
+				let data = res.data.type
+				console.log(res.data);
+                vm.saleHandleData = data;
+				//获取相片尺寸
+				getSizesEmun();
+
+            }else {
+                lf.nativeUI.toast(res.msg);
+            }
+        }, function(res) {
+            lf.nativeUI.closeWaiting()
+            lf.nativeUI.toast(res.msg)
+        })
+    }
+   
 })
 //尺寸选择器S
 mui('.mui-content').on('tap', '.printsSize', function() {
+	userPicker = new mui.PopPicker();
+	userPicker.setData(vm.sizesEmun);
 	var index = this.getAttribute('data-index');
 	userPicker.show(function(items) {
 		Vue.set(vm.printOrderXms,index,{
 			fType:'1',
 			picNum: vm.printOrderXms[index].picNum,
 			picSize: items[0].value,
-			picSizeName: items[0].text
+			picSizeName: items[0].text,
+			unitPrice:items[0].unitPrice,
+			remark:items[0].remark
 		})
+		console.log(vm.printOrderXms);
 	});
+	
 })
 //时间选择器
 mui('.mui-content').on('tap', '.selectDate', function(){
@@ -428,6 +450,8 @@ function loadResult(){
 		lf.nativeUI.toast(res.msg)
 	})
 }
+
+
 
 
 

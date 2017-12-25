@@ -50,7 +50,7 @@
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-title">{{$t('sales_order')}}</h1>
     </header>
-    <div class="mui-content order-pay-content">
+    <div class="mui-content order-pay-content" v-cloak>
          <div class="order-pay-paying">
             <div class="sales-list">
                 <div class="mui-card mui-card-outer">
@@ -64,7 +64,7 @@
                                     <div class="block">
                                         <div class="mui-input-row sales-type" :data-index="index">
                                             <label class="mui-pull-left" for="">{{$t('sale_type')}}</label>
-                                            <input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remark" readonly />
+                                            <input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remarkName" readonly />
                                         </div>
                                         <div class="mui-input-row sales-size" :data-index="index">
                                             <label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="mui-input-row" :data-index="index">
                                             <label class="mui-pull-left" for="">{{$t('count')}}</label>
-                                            <input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.nums" />
+                                            <input class="mui-pull-right" type="text" :placeholder="$t('count')" v-model="item.picNum" />
                                         </div>
                                     </div>
                                 </div>

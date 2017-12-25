@@ -8,9 +8,10 @@ lf.ready(function() {
     let params = lf.window.currentWebview();
     let salesOrderTxListItemDefault = {
         remark: '',
+        remarkName: '',
         argDictId: '',                    
-        argDictName: '',
-        nums: ''
+        picNum: '',
+        fType:3
     };
     var data = {
         orderId: lf.window.currentWebview().orderId,
@@ -49,7 +50,7 @@ lf.ready(function() {
         },
         id: '',
         verificationStatus: '',
-
+        saleHandleData:[],
         isPaying: false,
         payType: 0,
         payTypeUrl: '../../assets/css/images/sell_cash.png',
@@ -59,6 +60,8 @@ lf.ready(function() {
         timer: null,
         price:'',
         isPrice:false,
+        salesTypeEmun:[],
+        salesSizeEmun:[],
         salesOrderTxList: [
             {
                 ...salesOrderTxListItemDefault
@@ -77,62 +80,34 @@ lf.ready(function() {
         mounted: function() {
             document.getElementById("pay-dialog").classList.remove("hide");
             document.getElementById("pay-mask").classList.remove("hide");
-
-            let salesSizeEmun = [
-                {
-                    value: '1',
-                    text: '16寸'
-                },
-                {
-                    value: '2',
-                    text: '12寸'
-                },
-                {
-                    value: '3',
-                    text: '10寸'
-                },
-                {
-                    value: '4',
-                    text: '8寸'
-                },
-                {
-                    value: '6',
-                    text: '7寸'
-                },
-                {
-                    value: '5',
-                    text: '6寸'
-                },
-            ];
-            let salesTypeEmun = [
-                {
-                    value: '相片',
-                    text: '相片'
-                },
-                {
-                    value: '相框',
-                    text: '相框'
-                },
-                {
-                    value: '相片+相框',
-                    text: '相片+相框'
-                },
-                {
-                    value: '电子片',
-                    text: '电子片'
-                }
-            ]
+            let salesTypeEmun = []
             let that = this;
             let picker = new mui.PopPicker();
             // 选择照片尺寸
             mui('.mui-content').on('tap', '.sales-size', function() {
+                vm.salesSizeEmun = [];
                 let index = this.getAttribute('data-index')
                 let currentItem = that.salesOrderTxList[index];
-                picker.setData(salesSizeEmun);
+                vm.saleHandleData.forEach(e=>{
+                    if (e.type === currentItem.remarkName){
+                     console.log('e--',e);
+                         e.sizeData.forEach(i=>{
+                             vm.salesSizeEmun.push({
+                                 value: i.id,
+                                 text: i.size,
+                                 unitPrice: i.unitPrice
+                             })
+                         })
+                    }
+                 })
+                picker.setData(vm.salesSizeEmun);
                 picker.show(function(selectedItem){
-                    currentItem.argDictName = selectedItem[0].text;
+                    console.log('selectedItem',selectedItem)
                     currentItem.argDictId = selectedItem[0].value;
-                    Vue.set(that.salesOrderTxList,index,currentItem)
+                    currentItem.unitPrice = selectedItem[0].unitPrice;
+                    currentItem.argDictName = selectedItem[0].text;
+                    Vue.set(that.salesOrderTxList,index,currentItem);
+                    console.log(that.salesOrderTxList);
                 })
             });
             // 选择产品类型
@@ -140,10 +115,18 @@ lf.ready(function() {
                 console.log(index)
                 let index = this.getAttribute('data-index');
                 let currentItem = that.salesOrderTxList[index];
-                picker.setData(salesTypeEmun);
+                picker.setData(vm.salesTypeEmun);
                 picker.show(function(selectedItem) {
-                    currentItem.remark = selectedItem[0].value;
-                    Vue.set(that.salesOrderTxList,index,currentItem)
+                    vm.salesSizeEmun = [];
+                    console.log('selectedItem',selectedItem)
+                    currentItem.remark = selectedItem[0].id;
+                    currentItem.remarkName = selectedItem[0].value;
+                    currentItem.argDictName = '';
+                   // console.log('currentItem',selectedItem);
+                    //规格联动
+                    console.log(currentItem)
+                    Vue.set(that.salesOrderTxList,index,currentItem);
+                   
                 })
             });
 
@@ -568,4 +551,31 @@ lf.ready(function() {
             lf.nativeUI.toast(erro.msg);
         })
     })
+    //获取销售类型数据
+    function getSalesTypeEmun (){
+        vm.saleHandleData.forEach(e=>{
+            vm.salesTypeEmun.push({
+                value: e.type,
+                text: e.type,
+                id: e.id
+            })
+        })
+    }
+    function getUpdateData(){
+        lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0 }, function (res){
+            if(res.code == 200){
+                let data = res.data.type
+                //获取销售类型
+                vm.saleHandleData = data;
+                getSalesTypeEmun();
+                console.log(vm.saleHandleData)
+            }else {
+                lf.nativeUI.toast(res.msg);
+            }
+        }, function(res) {
+            lf.nativeUI.closeWaiting()
+            lf.nativeUI.toast(res.msg)
+        })
+    }
+    getUpdateData();
 })

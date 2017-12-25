@@ -159,7 +159,7 @@ function getSalesTypeEmun (){
 		vm.salesTypeEmun.push({
 			value: e.type,
 			text: e.type,
-			
+			id: e.id
 		})
 	})
 }
@@ -197,36 +197,32 @@ mui('.mui-content').on('tap', '.gives-type', function() {
 });
 //选择销售尺寸
 mui('.mui-content').on('tap', '.sales-size', function() {
+	vm.sizesEmun = [];
 	var index = this.getAttribute('data-index');
 	let currentItem = {...vm.saleOrderXms[index]};
-	
-	
 	if (!vm.sizesEmun.length) {
 		vm.saleHandleData.forEach(e=>{
-			if (e.type === currentItem.remark) {
+			if (e.type === currentItem.remarkName) {
 				e.sizeData.forEach(i=>{
 					vm.sizesEmun.push({
 						value:i.id,
 						text:i.size,
-						price:i.unitPrice
+						unitPrice:i.unitPrice
 					})
 				})
 			}
 		})
 	}
-	console.log('vm.sizesEmun',vm.sizesEmun);
-	
 	userPicker.setData(vm.sizesEmun);
 	userPicker.show(function(selectedItem) {
-		console.log('selectedItem',selectedItem)
 		currentItem.picSize = selectedItem[0].value;
 		currentItem.picSizeName = selectedItem[0].text;
-		console.log('currentItem--',currentItem);
+		currentItem.unitPrice = selectedItem[0].unitPrice;
 		//对应价格
-
 		Vue.set(vm.saleOrderXms,index,currentItem)
+		
 	});
-	vm.sizesEmun = [];
+	
 });
 // 选择销售类型
 mui('.mui-content').on('tap', '.sales-type', function() {
@@ -234,30 +230,15 @@ mui('.mui-content').on('tap', '.sales-type', function() {
 	let currentItem = {...vm.saleOrderXms[index]};
 	userPicker.setData(vm.salesTypeEmun);
 	userPicker.show(function(selectedItem) {
-		currentItem.remark = selectedItem[0].value;
-		console.log('currentItem',currentItem);
+		console.log(selectedItem);
+		currentItem.remark = selectedItem[0].id;
+		currentItem.remarkName = selectedItem[0].value;
+		currentItem.picSizeName = '';
+		currentItem.picNum = '';
+		Vue.set(vm.saleOrderXms,index,currentItem);
+		console.log('saleOrderXms',vm.saleOrderXms);
 		//currentItem.picSizeName = selectedItem[0].text;
 		vm.sizesEmun = [];
-		vm.saleHandleData.forEach(e=>{
-			console.log(e);
-			if (e.type === currentItem.remark) {
-				//初始化对应的销售尺寸
-				currentItem.picSizeName = e.sizeData[0].size
-				e.sizeData.forEach(i=>{
-					vm.sizesEmun.push({
-						value:i.id,
-						text:i.size,
-						price:i.unitPrice
-					})
-				})
-			}
-			
-		})
-		console.log('vm.sizesEmun1',vm.sizesEmun);
-		Vue.set(vm.saleOrderXms,index,currentItem);
-
-		console.log('saleOrderXms',vm.saleOrderXms);
-		//重置尺寸
 	})
 });
 mui('.sales-export').on('tap','.remove',function (e) {
@@ -313,14 +294,15 @@ mui('.mui-bar').on('tap', '.save-btn', function(){
 		return;
 	}
 	var reg = /^[0-9]\d*$/
+	console.log('vm.saleOrderXms',vm.saleOrderXms);
 	for (let i = 0; i < vm.saleOrderXms.length; i++) {
 		let item = vm.saleOrderXms[i];
 		if(!item.remark) {
-			lf.nativeUI.toast('请选择销售类型');
+			lf.nativeUI.toast('请选择销售物');
 			return;
 		}
 		if(!item.picSize) {
-			lf.nativeUI.toast('请选择销售尺寸');
+			lf.nativeUI.toast('请选择规格');
 			return;
 		}
 		if(!reg.test(item.picNum)){
@@ -423,7 +405,7 @@ function loadResult(){
 		orderId:vm.orderId
 	}
 	lf.net.getJSON('/order/getSalesOutput', params, function (res){
-		console.log('res',res.data.orderX.saleOrderXms)
+		console.log('res1',res.data.orderX.saleOrderXms)
 		if(res.code == 200){
 			if(res.data == null){
 				return
@@ -431,7 +413,21 @@ function loadResult(){
 				if( !res.data.orderX.saleOrderXms ||(res.data.orderX.saleOrderXms&&res.data.orderX.saleOrderXms.length == 0)){
 					vm.saleOrderXms = [{fType: 3,id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 				}else{
-					vm.saleOrderXms = res.data.orderX.saleOrderXms
+					let saleOrderXms = [];
+					res.data.orderX.saleOrderXms.forEach(e=>{
+						saleOrderXms.push({
+							fType: 3,
+							id: e.id,
+							orderId: e.orderId,
+							picNum: e.picNum,
+							picSize: e.picSize,
+							picSizeName: e.sizeName,
+							remark:e.remark,
+							// 产品类型
+							remarkName: e.typeName
+						})
+					})
+					vm.saleOrderXms = saleOrderXms
 				}
 				if(!res.data.orderX.giveOrderXms||(res.data.orderX.giveOrderXms&&res.data.orderX.giveOrderXms.length == 0)){
 					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
@@ -468,10 +464,11 @@ function getUpdateData(){
 	lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0 }, function (res){
 		if(res.code == 200){
 			let data = res.data.type
+			console.log('res',res.data.type)
 			//获取销售类型
 			vm.saleHandleData = data;
 			getSalesTypeEmun();
-			console.log(vm.saleHandleData)
+			
 		}else {
 			lf.nativeUI.toast(res.msg);
 		}
