@@ -489,7 +489,6 @@
 </template>
 <script>
     import utils from '../../js/utils'
-    import eChartCommon from '../../js/eChartCommon'
     import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant,
         EACH_SCREEN_COUNT, DATA_ZOOM_INSIDE, GRID_TOP, GRID_BOTTOM,
         getLineChartOption, getLineLongCategoryChartOption, getBarLongCategoryChartOption} from './daily-paper/commom'
@@ -958,7 +957,7 @@
                     left: 'center',
                     width: '90%',
                     bottom: 0,
-                    data: eChartCommon.legendDataBySeries(options.series)
+                    data: utils.legendDataBySeries(options.series)
                 }
                 options.grid.bottom = 50
                 return options
