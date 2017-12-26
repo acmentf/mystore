@@ -28,6 +28,22 @@ function toFixed(value, num = 2, cutZero) {
     }
     return value
 }
+function encodeHTML (source) {
+    return String(source)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+}
+function _divide (a, b) {
+    let c = (a / b)
+    return !isNaN(c) && Math.abs(c) !== Infinity ? c : 0
+}
+function isValidNumber (v) {
+    v = +v
+    return !!v && !isNaN(v)
+}
 export default {
     //把List强行转换为适用Tree的JSON嵌套格式
     transformTozTreeFormat (sNodes, {idKey = 'id', pIdKey = 'pId', rootPId = null, childrenKey = 'children'} = {}) {
@@ -93,11 +109,22 @@ export default {
         start.setDate(1)
         return [start, end]
     },
-    calcPercent (a, b) {
-        let c = (a / b)
-        c = !isNaN(c) || Math.abs(c) === Infinity ? c : 0
-        c = c !== 0 ? toFixed(c * 100, 2) : 0
-        return c
+    calcPercent (a, b, {retainDecimal = 2, isAddSymbol = true} = {}) {
+        let c = _divide(a, b)
+        c = c !== 0 ? toFixed(c * 100, retainDecimal) : 0
+        return isAddSymbol ? (c === Infinity ? '' : c + '%') : c
+    },
+    divide (a, b, {retainDecimal = 2} = {}) {
+        let c = _divide(a, b)
+        return c !== 0 ? toFixed(c, retainDecimal) : 0
+    },
+    add (a, b, {retainDecimal = 2} = {}) {
+        let c = (isValidNumber(a) ? a : 0) + (isValidNumber(b) ? b : 0)
+        return c !== 0 ? toFixed(c, retainDecimal) : 0
+    },
+    sub (a, b, {retainDecimal = 2} = {}) {
+        let c = (isValidNumber(a) ? a : 0) - (isValidNumber(b) ? b : 0)
+        return c !== 0 ? toFixed(c, retainDecimal) : 0
     },
     randomNumBoth (min,max){
         let range = max - min
@@ -105,13 +132,133 @@ export default {
         return min + Math.round(rand * range); //四舍五入
     },
     //校验数字值
-    isValidNumber (v) {
-        v = +v
-        return !!v && !isNaN(v)
+    isValidNumber,
+    /**
+     * 每三位默认加,格式化
+     * @param {string|number} x
+     * @return {string}
+     */
+    addCommas (x) {
+        if (isNaN(x)) {
+            return '-'
+        }
+        x = (x + '').split('.')
+        return x[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g,'$1,')
+            + (x.length > 1 ? ('.' + x[1]) : '')
     },
     // 截断字符串
     truncationStr(str, count) {
         str = str + ''
         return str.length > count ? str.slice(0, count - 1) + '...' : str
+    },
+    encodeHTML,
+    /* eChart common start*/
+    getStartValue (list, count) {
+        return list.length > count ? list.length - count : 0
+    },
+    legendDataBySeries (series) {
+        return (Array.isArray(series) ? series : [series]).map((v) => v.name)
+    },
+    /**
+     * @param {string} color
+     * @param {string} [extraCssText]
+     * @return {string}
+     */
+    getTooltipMarker (color, extraCssText) {
+        return color
+            ? `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;
+              background-color:${encodeHTML(color)}; ${extraCssText || ''}"></span>`
+            : ''
+    },
+    getTooltipPositionByMore ({loseHeight = false} = {}) {
+        return function (pos, params, dom, rect, {contentSize, viewSize}) {
+            let ret = [pos[0], pos[1]]
+            if (pos[0] + contentSize[0] > viewSize[0] + 5) {
+                ret[0] = viewSize[0] - contentSize[0] - 5
+                if (ret[0] < 0) {
+                    ret[0] = 0
+                }
+            }
+            if (pos[1] + contentSize[1] > viewSize[1] + 5) {
+                ret[1] = viewSize[1] - contentSize[1] - 5
+                if (ret[1] < 0 && !loseHeight) {
+                    ret[1] = 0
+                }
+            }
+            return ret
+        }
+    },
+    /* eChart common end*/
+    // number sort
+    sortListByNumber (list, key, {isCopy = true, isAscending = false} = {}) {
+        return (isCopy ? list.map(v => {
+            return {...v}
+        }) : list).sort((a, b) => {
+            if (isAscending) {
+                return a[key] - b[key]
+            } else {
+                return b[key] - a[key]
+            }
+        })
+    },
+    // string sort
+    sortListByString (list, key, {isCopy = true, isAscending = false} = {}) {
+        return (isCopy ? list.map(v => {
+            return {...v}
+        }) : list).sort((a, b) => {
+            if (isAscending) {
+                return (a[key] + '').localeCompare(b[key] + '')
+            } else {
+                return (b[key] + '').localeCompare(a[key] + '')
+            }
+        })
+    },
+    /**
+     * 获取列表的合计
+     * @param list
+     * @param noCalcValues 非计算值赋值
+     * @returns {*}
+     */
+    getTotalByList (list, noCalcValues = {}) {
+        let total = null
+        if (list.length) {
+            const columns = Object.keys(list[0])
+            total = {}
+            columns.forEach((property, index) => {
+                if (property in noCalcValues) {
+                    total[property] = noCalcValues[property]
+                    return
+                }
+                const values = list.map(item => Number(item[property]))
+                if (!values.every(value => isNaN(value))) {
+                    total[property] = values.reduce((prev, curr) => {
+                        const value = Number(curr)
+                        if (!isNaN(value)) {
+                            return prev + curr
+                        } else {
+                            return prev
+                        }
+                    }, 0)
+                    // sums[index] += ' 元'
+                } else {
+                    // sums[index] = 'N/A'
+                    total[property] = ''
+                }
+            })
+        }
+        return total
+    },
+    /**
+     * element table summary-method 使用
+     * @param total 合计对象
+     * @param columns (element table summary-method 函数 param.columns)
+     * @returns {Array}
+     */
+    getTableSummaryByTotal (total, columns) {
+        let sums = []
+        columns.forEach((column, index) => {
+            sums[index] = total[column.property]
+        })
+        return sums
     }
 }
