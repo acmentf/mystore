@@ -32,9 +32,9 @@ export default {
         keys: {
             type: Object,
             default: {
-                id: 'id',
+                id: 'value',
                 children: 'children',
-                label: 'label'
+                label: 'text'
             }
         },
         title: {
@@ -63,7 +63,12 @@ export default {
             point: 0,
             tips: null,
             items: null,
-            chosen: []
+            chosen: [],
+            keys: {
+                id: 'value',
+                children: 'children',
+                label: 'text'
+            }
         }
     },
     methods: {
@@ -84,7 +89,7 @@ export default {
 
             this.point++
             this.items = this.filterItem(params)
-
+            
             if (!this.items.hasOwnProperty(this.keys.children) || this.items[this.keys.children].length === 0) {
                 this.handleConfirm()
             }
@@ -92,7 +97,7 @@ export default {
         filterItem(params) {
             let that = this
             const id = params.value[this.keys.id]
-            let _items = null
+            let _items = {}
 
             this.items[this.keys.children].forEach((item, index) => {
                 if (item.id === id) {
@@ -118,12 +123,24 @@ export default {
             this.visible = false
             this.point = 0
             this.chosen = []
+            this.items = null
+        },
+        getData() {
+            console.log(this.data);
+            this.items = {
+                id: '',
+                children: JSON.parse(JSON.stringify(this.data))
+            }
+            console.log(this.items);
         }
     },
     watch: {
         visible(val) {
             if (!val) return
             this.chosen.push(this.tips)
+        },
+        data() {
+            this.getData()
         }
     },
     created() {
@@ -131,10 +148,13 @@ export default {
             [this.keys.label]: '请选择'
         }
 
-        this.items = {
-            id: '',
-            children: JSON.parse(JSON.stringify(this.data))
-        }
+        this.getData()
+    },
+    mounted() {
+        document.body.appendChild(this.$el)
+    },
+    beforeDestroy() {
+        document.body.removeChild(this.$el)
     }
 }
 </script>
