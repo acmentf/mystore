@@ -265,7 +265,8 @@ lf.ready(function() {
                         lf.nativeUI.toast(this.$t('select_sale_size'));
                         return;
                     }
-                    if(!reg.test(item.nums)){
+         
+                    if(!reg.test(item.picNum)){
                         lf.nativeUI.toast(this.$t('select_sale_nums'));
                         return
                     }
@@ -274,7 +275,7 @@ lf.ready(function() {
                 // 通过 salesOrderTxListCopy 去重校验 vm.salesOrderTxList 是否选择了相同销售类型与销售尺寸;
                 let nums = 0;
                 let salesOrderTxListCopy = vm.salesOrderTxList.map((item) => {
-                    nums = nums + (item.nums - 0);
+                    nums = nums + (item.picNum - 0);
                     return `remark:${item.remark},argDictId:${item.argDictId},argDictName:${item.argDictName}`;
                 });
                 this.nums = nums;
