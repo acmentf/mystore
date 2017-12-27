@@ -174,8 +174,10 @@ function fetchData(type) {
             lf.nativeUI.closeWaiting();
             if(res.code == 200) {
                 if(res.data.length == 0) {
-                    lf.nativeUI.toast('没有详细数据');
-                    if (type === 1) {vm.isComplate = false};
+                    if (type === 1) {
+                        lf.nativeUI.toast('没有详细数据');
+                        vm.isComplate = false
+                    };
                 } else {
                     var sortArr = [];
                     for(var i = 0; i < res.data.length; i++) {
