@@ -17,8 +17,9 @@
                 <span class="lab">结束日期</span>
                 <span class="value" v-text="searchForm.endDate"></span>
             </div>
-            <div class="item-row range-item">
-                选择范围 <span class="type-name" v-text="typeName" v-tap="{ methods : selectRange }"></span>
+            <div class="item-row range-item" v-tap="{ methods : selectRange }">
+                <span class="lab">选择范围</span>
+                <span class="value type-name" v-text="typeName"></span>
             </div>
             <div class="item-row switch-item">
                 <div class="mui-input-row mui-checkbox mui-left">
@@ -34,11 +35,18 @@
         <div class="section-content">
             <e-charts :style="calcBarChartStyle(chartOption)" ref="chart" :options="chartOption" auto-resize></e-charts>
         </div>
+        <linkage-picker
+                :keys="{key:'value',label: 'text'}"
+                :data="regionMoreList"
+                :visible.sync="regionMorePicker"
+                @change="selectRangeChange"
+        ></linkage-picker>
     </div>
 </template>
 <script>
     import {typeConstant, getAjaxUrl, getTableColumn, dealList} from './costStat'
     import utils from '../../../js/utils'
+    import linkagePicker from '@/component/linkage-picker'
     const typeTitleMap = {
         [typeConstant.area]: '大区',
         [typeConstant.province]: '省份',
@@ -62,7 +70,8 @@
     export default {
         name: 'costStat',
         components: {
-            ECharts: VueECharts
+            ECharts: VueECharts,
+            linkagePicker
         },
         data () {
             return {
@@ -90,6 +99,7 @@
                         date: dateMap.day30
                     }
                 ],
+                regionMorePicker: false,
                 regionMoreList: [],
                 tableHead: [],
                 list: [],
@@ -125,8 +135,11 @@
             ajaxParams () {
                 const {searchForm} = this
                 let typeSel = this.searchForm.typeSel
-                let p = {}
+                let p = {
+                    areaCode: ''
+                }
                 let typeMap = {
+                    '0': 'areaCode',
                     '1': 'areaCode',
                     '2': 'provinceCode'
                 }
@@ -407,7 +420,20 @@
                     searchForm[key] = selectedItem.text
                 });
             },
-            selectRange () {},
+            selectRange () {
+                this.regionMorePicker = true
+            },
+            selectRangeChange (data, done) {
+                if (data && data.length) {
+                    done()
+                    this.searchForm.typeSel = data.map(v => {
+                        return {
+                            value: v.value,
+                            text: v.text
+                        }
+                    })
+                }
+            },
             switchChartType () {
                 let index = this.chartKeyList.indexOf(this.activeChart)
                 index += 1
@@ -437,6 +463,10 @@
                 lf.net.getJSON('/costReport/analysisMobile/queryRegionProvLine', {}, res => {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
+                        let allOpt = {
+                            value: '',
+                            text: '全部'
+                        }
                         this.regionMoreList = (res.data || []).map(item => {
                             return {
                                 value: item.areaCode + '',
@@ -445,7 +475,7 @@
                                     return {
                                         value: item.provinceCode + '',
                                         text: item.provinceName,
-                                        children: (item.list || []).map(text => {
+                                        children: [allOpt].concat(item.list || []).map(text => {
                                             return {
                                                 value: text,
                                                 text: text
@@ -455,6 +485,13 @@
                                 })
                             }
                         })
+                        let temp = this.regionMoreList[0]
+                        this.searchForm.typeSel = [
+                            {
+                                value: temp.value,
+                                text: temp.text
+                            }
+                        ]
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
@@ -515,8 +552,20 @@
 <style lang="scss">
     .statistics-daily-paper-cost-stat{
         padding: 0 14px;
+        font-size: 14px;
         .search-form{
             color: #666;
+            .item-row {
+                .lab{
+                    display: inline-block;
+                    padding-right: 10px;
+                }
+                .value{
+                    border-radius: 3px;
+                    border: 1px solid #d9d9d9;
+                    padding: 2px 8px;
+                }
+            }
             .item-row + .item-row {
                 margin-top: 14px;
             }
@@ -530,14 +579,32 @@
                 }
             }
             .data-item{
+
+            }
+            .range-item{
+                display: flex;
                 .lab{
-                    display: inline-block;
-                    padding-right: 10px;
+                    min-width: 78px;
+                    line-height: 27px;
                 }
+                .type-name{}
             }
             .switch-item{
                 display: flex;
                 justify-content: space-between;
+                .mui-checkbox.mui-left{
+                    label{
+                        padding-left: 38px;
+                    }
+                    input[type=checkbox]:checked{
+                        left: 0;
+                        &:before{
+                            font-size: 22px;
+                            position: relative;
+                            top: 2px;
+                        }
+                    }
+                }
                 .switchover{
                     padding: 1px 4px;
                     height: 24px;
