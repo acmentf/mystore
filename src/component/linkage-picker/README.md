@@ -1,7 +1,7 @@
 # Usage
 
 ```JavaScript
-import linkagePicker from '@/app/component/linkage-picker'
+import linkagePicker from '@/component/linkage-picker'
 ```
 
 ```HTML
