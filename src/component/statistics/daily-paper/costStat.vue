@@ -467,7 +467,7 @@
                             value: '',
                             text: '全部'
                         }
-                        this.regionMoreList = (res.data || []).map(item => {
+                        this.regionMoreList = [allOpt].concat(res.data || []).map(item => {
                             return {
                                 value: item.areaCode + '',
                                 text: item.areaName,
@@ -485,13 +485,13 @@
                                 })
                             }
                         })
-                        let temp = this.regionMoreList[0]
+                        /* let temp = this.regionMoreList[0]
                         this.searchForm.typeSel = [
                             {
                                 value: temp.value,
                                 text: temp.text
                             }
-                        ]
+                        ] */
                     } else {
                         lf.nativeUI.toast(res.msg);
                     }
