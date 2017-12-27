@@ -119,7 +119,7 @@ export default {
         return c !== 0 ? toFixed(c, retainDecimal) : 0
     },
     add (a, b, {retainDecimal = 2} = {}) {
-        let c = (isValidNumber(a) ? a : 0) + (isValidNumber(b) ? b : 0)
+        let c = (isValidNumber(a) ? +a : 0) + (isValidNumber(b) ? +b : 0)
         return c !== 0 ? toFixed(c, retainDecimal) : 0
     },
     sub (a, b, {retainDecimal = 2} = {}) {
