@@ -36,7 +36,6 @@
             <e-charts :style="calcBarChartStyle(chartOption)" ref="chart" :options="chartOption" auto-resize></e-charts>
         </div>
         <linkage-picker
-                :keys="{key:'value',label: 'text'}"
                 :data="regionMoreList"
                 :visible.sync="regionMorePicker"
                 @change="selectRangeChange"
@@ -467,24 +466,24 @@
                             value: '',
                             text: '全部'
                         }
-                        this.regionMoreList = [allOpt].concat(res.data || []).map(item => {
+                        this.regionMoreList = [allOpt].concat((res.data || []).map(item => {
                             return {
                                 value: item.areaCode + '',
                                 text: item.areaName,
-                                children: (item.list || []).map(item => {
+                                children: [allOpt].concat((item.list || []).map(item => {
                                     return {
                                         value: item.provinceCode + '',
                                         text: item.provinceName,
-                                        children: [allOpt].concat(item.list || []).map(text => {
+                                        children: [allOpt].concat((item.list || []).map(text => {
                                             return {
                                                 value: text,
                                                 text: text
                                             }
-                                        })
+                                        }))
                                     }
-                                })
+                                }))
                             }
-                        })
+                        }))
                         /* let temp = this.regionMoreList[0]
                         this.searchForm.typeSel = [
                             {

@@ -1,1 +1,1 @@
-module.exports = require('./picker.vue')
+module.exports = require('./linkage-picker.vue')

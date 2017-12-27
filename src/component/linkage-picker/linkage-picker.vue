@@ -8,14 +8,14 @@
             </div>
             <div class="linkage-picker-chosen">
                 <ul>
-                    <li v-for="(item, index) in chosen" v-tap="{ methods: handleChosen, index: index }" :class="{ current: point === index }">
+                    <li v-for="(item, index) in chosen" v-tap="{ methods: handleChosen, value: item, index: index }" :class="{ current: point === index }">
                         {{item[keys.label]}}
                     </li>
                 </ul>
             </div>
             <div class="linkage-picker-list">
                 <ul>
-                    <li v-for="(item, index) in items[point]" v-tap="{ methods: handleItem, value: item }">
+                    <li v-for="(item, index) in items[keys.children]" v-tap="{ methods: handleItem, value: item }">
                         {{item[keys.label]}}
                     </li>
                 </ul>
@@ -29,14 +29,6 @@
 export default {
     name: 'linkagePicker',
     props: {
-        keys: {
-            type: Object,
-            default: {
-                key: 'id',
-                pkey: 'pid',
-                label: 'label'
-            }
-        },
         title: {
             type: String
         },
@@ -63,7 +55,12 @@ export default {
             point: 0,
             tips: null,
             items: null,
-            chosen: []
+            chosen: [],
+            keys: {
+                id: 'value',
+                children: 'children',
+                label: 'text'
+            }
         }
     },
     methods: {
@@ -76,47 +73,92 @@ export default {
             this.$emit('change', this.chosen, this.handleCancel)
         },
         handleItem(params) {
+            const id = params.value[this.keys.id]
+
             this.chosen[this.point] = params.value
             this.chosen.splice(this.point + 1)
-            
             this.chosen.push(this.tips)
 
-            if (this.items.length - 1 === this.point) {
+            this.point++
+
+            this.items = this.filterItem(params)
+
+            if (this.hasChildren(this.items)) {
                 this.handleConfirm()
-            } else {
-                this.point++
-                this.items[this.point] = this.filterItem(params)
             }
+        },
+        hasChildren(items) {
+            return !(items.hasOwnProperty(this.keys.children) && items[this.keys.children].length)
+        },
+        filterItem(params) {
+            let that = this
+            let _items = {}
+
+            const id = params.value[this.keys.id]
+
+            if (that.hasChildren(this.items)) return _items
+
+            this.items[this.keys.children].forEach((item, index) => {
+                if (item[this.keys.id] === id) {
+                    _items = item
+                }
+            })
+
+            return _items
         },
         handleChosen(params) {
             this.point = params.index
-        },
-        filterItem(params) {
-            const preId = params.value[this.keys.key]
 
-            const filterArr = this.data[this.point].filter((item) => {
-                return item[this.keys.pkey] === preId
-            })
-            
-            return filterArr.length ? filterArr : this.data[this.point]
+            if (params.index === 0) {
+                this.items = {
+                    [this.keys.id]: '',
+                    [this.keys.children]: JSON.parse(JSON.stringify(this.data))
+                }
+            } else {
+                this.items = this.chosen[params.index - 1]
+            }
         },
         clear() {
             this.visible = false
             this.point = 0
             this.chosen = []
+            this.items = {
+                [this.keys.id]: '',
+                [this.keys.children]: []
+            }
+            this.tips = {
+                [this.keys.label]: '请选择'
+            }
+        },
+        getData() {
+            this.items = {
+                [this.keys.id]: '',
+                [this.keys.children]: JSON.parse(JSON.stringify(this.data))
+            }
         }
     },
     watch: {
         visible(val) {
             if (!val) return
             this.chosen.push(this.tips)
+            this.getData()
+        },
+        data() {
+            this.getData()
         }
     },
     created() {
         this.tips = {
             [this.keys.label]: '请选择'
         }
-        this.items = JSON.parse(JSON.stringify(this.data))
+
+        this.getData()
+    },
+    mounted() {
+        document.body.appendChild(this.$el)
+    },
+    beforeDestroy() {
+        document.body.removeChild(this.$el)
     }
 }
 </script>
