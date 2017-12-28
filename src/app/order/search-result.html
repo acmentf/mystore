@@ -37,6 +37,7 @@
 								<span class="dqr colorpink" v-if="item.actionStatus ==33">{{$t('active_status.selling')}}</span>
 								<span class="dqr coloryellow" v-if="item.actionStatus ==44">{{$t('active_status.completing')}}</span>
 								<span class="dqr colorgreen" v-if="item.actionStatus ==55">{{$t('active_status.service_complete')}}</span>
+								<span class="dqr colorgreen" v-if="item.actionStatus ==77">{{$t('active_status.results_confirm')}}</span>
 							</div>
 							<div class="item">
 								{{item.productName}}
@@ -139,7 +140,7 @@
 										</button>
 									</div>
 									<div v-if="currentRoleId == 9">
-										<button v-if="genSale&&(item.actionStatus<=33||item.actionStatus==55)" type="button" class="mui-btn genSale" :data-id="item.id" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
+										<button v-if="genSale&&(item.actionStatus<=33||item.actionStatus==55||item.actionStatus==77)" type="button" class="mui-btn genSale" :data-id="item.id" :data-tourNo="item.tourNo" :data-productName="item.productName" :data-tourGuidePhone="item.tourGuidePhone" :data-areaCode="item.areaCode" :data-tourGuide="item.tourGuide" :data-purchaser="item.purchaser" :data-aliasName="item.aliasName" :data-province="item.province" :data-city="item.city">
 											{{$t('action_btns.sell')}}
 										</button>
 									</div>
