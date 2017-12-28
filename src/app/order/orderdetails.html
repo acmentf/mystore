@@ -385,7 +385,7 @@
 			-->
 		<div v-if="currentOrderStatus!=3" class="buttons">
 			<!--计调主管-->
-			<div v-if="currentRoleId==4">
+			<div v-if="currentRoleId==4 && orderInfo.actionStatus != 77">
 				<div v-if="assignOrder&&orderInfo.actionStatus!=44&&orderInfo.actionStatus!=55">
 					<button class="mui-button colordark assignOrder" :data-no="currentOrderNo">{{$t('action_btns.assign')}}</button>
 					<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">{{$t('action_btns.operate')}}</button>
@@ -395,31 +395,31 @@
 				</div>
 			</div>
 			<!--执行人-->
-			<div v-if="currentRoleId==2">
+			<div v-if="currentRoleId==2  && orderInfo.actionStatus != 77">
 				<div v-if="assignOrder&&orderInfo.actionStatus!=55">
 					<button class="mui-button colorlight jidiao" :data-type="0" :data-no="currentOrderNo">{{$t('action_btns.operate')}}</button>
 				</div>
 			</div>
 			<!--摄影主管-->
-			<div v-if="currentRoleId==5">
+			<div v-if="currentRoleId==5 && orderInfo.actionStatus != 77">
 				<div v-if="allotPhotoOrder&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=55">
 					<button class="mui-button colorlight allotPhotoOrder" :data-no="currentOrderNo">{{$t('action_btns.assign_photographer')}}</button>
 				</div>
 			</div>
 			<!--摄影师-->
-			<div v-if="currentRoleId==3">
+			<div v-if="currentRoleId==3 && orderInfo.actionStatus != 77">
 				<div v-if="summary&&orderInfo.actionStatus!=0&&orderInfo.actionStatus!=11">
 					<button class="mui-button colorlight summary" :data-no="currentOrderNo">{{$t('add_notes')}}</button>
 				</div>
 			</div>
 			<!--输出-->
-			<div v-if="currentRoleId==8">
+			<div v-if="currentRoleId==8 && orderInfo.actionStatus != 77">
 				<div v-if="outOrder&&orderInfo.actionStatus==22||orderInfo.actionStatus==33||orderInfo.actionStatus==44">
 					<button class="mui-button colorlight outOrder" :data-no="currentOrderNo">{{$t('action_btns.output')}}</button>
 				</div>
 			</div>
 			<!--销售-->
-			<div v-if="currentRoleId==9">
+			<div v-if="currentRoleId==9 && orderInfo.actionStatus != 77">
 				<div>
 					<button :data-no="currentOrderNo" v-if="genSale&&orderInfo.actionStatus==33" :data-id="orderInfo.orderId" :data-no="currentOrderNo"
 					 class="mui-button colorlight genSale">{{$t('action_btns.sell')}}</button>
