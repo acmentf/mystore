@@ -148,7 +148,8 @@ var vm = new Vue({
                     serverPerNumBefore: this.updateData.serverPerNum,
                     remark: this.amendReasons,
                     orderId: this.updateData.orderId,
-                    userId: this.userId
+                    userId: this.userId,
+                    flag:1 //业绩确认
              }
             //  var isAmend = this.isAmend
             //  var isDisabled = this.isDisabled

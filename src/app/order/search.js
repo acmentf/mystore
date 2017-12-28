@@ -60,6 +60,9 @@ lf.ready(function(){
 	},{
 		value: '55',
 		text: vm.$t('active_status.service_complete')
+	},{
+		value: '77',
+		text: vm.$t('active_status.results_confirm')
 	}]);
 })
 
