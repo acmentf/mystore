@@ -137,9 +137,9 @@ lf.ready(function() {
             }
 
             lf.nativeUI.showWaiting();
-
+            console.log(params);
             lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-                console.log(JSON.stringify(data));
+              
 
                 if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
@@ -254,8 +254,9 @@ lf.ready(function() {
 
             handlePay: function(payType) {
                 var reg = /^[1-9]\d*$/
-
+                
                 for (let i = 0; i < vm.salesOrderTxList.length; i++) {
+                   
                     let item = vm.salesOrderTxList[i];
                     if(!item.remark) {
                         lf.nativeUI.toast(this.$t('select_sale_type'));
@@ -265,7 +266,8 @@ lf.ready(function() {
                         lf.nativeUI.toast(this.$t('select_sale_size'));
                         return;
                     }
-                    if(!reg.test(item.nums)){
+                    
+                    if(!reg.test(item.picNum)){
                         lf.nativeUI.toast(this.$t('select_sale_nums'));
                         return
                     }
@@ -388,7 +390,7 @@ lf.ready(function() {
             orderId: vm.orderId,
             areaCode: vm.areaCode,
             channelCode: vm.channelCode,
-            nums: vm.nums,
+            nums: vm.picNum,
             amount: vm.amount,
             remark: vm.remark,
             argDictId: vm.argDictId,
@@ -402,10 +404,10 @@ lf.ready(function() {
             salePersonnelNum: vm.salePersonnelNum,
             salesOrderTxList: vm.salesOrderTxList
         }
-        console.log(JSON.stringify(params));
-
+       
         lf.nativeUI.showWaiting();
-
+        console.log('params',JSON.stringify(params));
+        return false;
         lf.net.getJSON('pay/payment', params, function(data) {
             console.log(JSON.stringify(data));
 

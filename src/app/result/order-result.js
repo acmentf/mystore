@@ -226,7 +226,7 @@ lf.ready(function(){
 				})
 			})
 		})
-		console.log(vm.sizesEmun);
+		console.log(vm.salesTypeEmun);
 	}
 	function getUpdateData(){
         lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0,'type':'相片' }, function (res){

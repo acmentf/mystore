@@ -29,7 +29,12 @@ lf.ready(function() {
             printNums: '',
             photographerIdStr: [],
             deptId:'',//部门id
-            lineName: ''
+            lineName: '',
+            saleHandleData:[],
+            sizesEmun:[],
+            unitPrice: '',//价格
+            remark:''
+
         },
         mounted: function () {
             // 初始化数据,针对h5特殊处理
@@ -45,6 +50,7 @@ lf.ready(function() {
                     localStorage.setItem('allocation-staff.html',JSON.stringify(localStorageData))
                 }
             }
+            this.getUpdateData();
         },
         methods: {
             selectJourneyName: function(e){
@@ -65,7 +71,6 @@ lf.ready(function() {
     
                 lf.net.getJSON('/sight/list', params, function(res) {
                     lf.nativeUI.closeWaiting()
-    
                     if (res.code === '200') {
                         document.querySelector('.select-journey-wrapper').style.display = 'block'
                         document.getElementsByTagName("body")[0].setAttribute("style","overflow:hidden")
@@ -112,7 +117,41 @@ lf.ready(function() {
     
                 this.journeyListed = []
                 this.journeyList = []
+            },
+            //获取相片尺寸
+            getSalesTypeEmun(){
+                this.saleHandleData.forEach(e=>{
+                    e.sizeData.forEach(i=>{
+                        console.log(i)
+                        this.sizesEmun.push({
+                            value: i.size,
+                            text: i.size,
+                            unitPrice: i.unitPrice,
+                            picSize: i.id
+                        })
+                    })
+                })
+                console.log( 'this.salesTypeEmun',this.salesTypeEmun)
+            },
+            getUpdateData(){
+                let _this = this;
+                lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0,type:'相片' }, function (res){
+                    if(res.code == 200){
+                        let data = res.data.type
+                        //获取销售类型
+                        _this.saleHandleData = data;
+                        _this.getSalesTypeEmun();
+                        console.log('_this.saleHandleData',_this.saleHandleData)
+                        _this.remark = _this.saleHandleData[0].id;
+                    }else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    lf.nativeUI.toast(res.msg)
+                })
             }
+  
         }
     })
 
@@ -272,18 +311,14 @@ lf.ready(function() {
     mui('#app').on('tap', '.print-size', function() { //选择打印尺寸
         blur()
         var picker = new mui.PopPicker();
-        picker.setData([
-            { value: '5', text: '6寸' },
-            { value: '6', text: '7寸' },
-            { value: '4', text: '8寸' },
-            { value: '3', text: '10寸' },
-            { value: '2', text: '12寸' },
-            { value: '1', text: '16寸' },
-        ]);
+        picker.setData(vm.sizesEmun);
         picker.show(function(select) {
+            console.log('select',select)
             vm.size = select[0].text
-            vm.sizeValue = select[0].value
+            vm.sizeValue = select[0].picSize
+            vm.unitPrice = select[0].unitPrice
         })
+      
     })
 
     mui('#app').on('tap', '.sure', function() { //确认下单
@@ -347,11 +382,12 @@ lf.ready(function() {
             orderXmList: [{
                 picSize: vm.sizeValue,
                 picNum: vm.printNums,
-                fType:'1'
+                fType:'1',
+                unitPrice:vm.unitPrice,
+                remark:vm.remark
             }]
         }
-        console.log('摄影师id',photographerIdStr)
-        lf.nativeUI.showWaiting()
+        lf.nativeUI.showWaiting();
         lf.net.getJSON('order/mobileQuickOrder', data, function(res) {
             lf.nativeUI.closeWaiting()
             if (res.code === '200' && res.data && res.data.orderNo) {
