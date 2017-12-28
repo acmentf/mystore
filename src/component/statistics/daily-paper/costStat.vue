@@ -381,9 +381,6 @@
             activeChart (val) {
                 this.queryData()
             },
-            hasPhotographer (val) {
-                this.queryData()
-            },
             ajaxParams (val) {
                 this.queryData()
             }
