@@ -24,7 +24,7 @@ lf.ready(function() {
             alias: '',
             orderTime: '',
             orderSaleDate: '',
-            remark: '相片',
+            remark: '',
             argDictId: 6,
             argDictName: '7寸',
             salePersonnelNum: '',
@@ -44,22 +44,16 @@ lf.ready(function() {
             pNo:'',
             salesOrderTxList: [
                 {...salesOrderTxListItemDefault}
-            ]
+            ],
+            saleHandleData:[],
+            salesTypeEmun:[],
+            salesSizeEmun:[]
         },
         computed: {
             saleRemoveIconShow() {
                 return this.salesOrderTxList.length > 1;
             }
         },
-        // watch: {
-        //     argDictId: function(val) {
-        //         for(var key in sizeOptions){
-        //             if(key==val){
-        //                 this.argDictName = sizeOptions[key]
-        //             }
-        //         }
-        //     }
-        // },
         methods: {
             removeSaleItem(index) {
                 this.salesOrderTxList.splice(index, 1);
@@ -105,15 +99,15 @@ lf.ready(function() {
                 
                 for(let i = 0; i < vm.salesOrderTxList.length; i++) {
                     let item = vm.salesOrderTxList[i];
-                    if(!item.remark) {
+                    if(!item.remarkName) {
                         lf.nativeUI.toast(this.$t('select_sale_type'))
                         return;
                     }
-                    if(!item.argDictName) {
+                    if(!item.sizeName) {
                         lf.nativeUI.toast(this.$t('select_sale_size'))
                         return;
                     }
-                    if(!reg.test(item.nums)) {
+                    if(!reg.test(item.picNum)) {
                         lf.nativeUI.toast(this.$t('select_sale_nums'))
                         return
                     }
@@ -162,14 +156,13 @@ lf.ready(function() {
                     salePersonnelNum:vm.salePersonnelNum,
                     salePositionId:vm.salePositionId,
                     salesOrderTxList: vm.salesOrderTxList,
-
                     // order-pay-list.html  --- order-pay-detail.html --- editSaleOrder.html  interSource: 1
                     // correlate-order.html --- order-pay-detail.html --- editSaleOrder.html  interSource: 1
                     // correlate-order.html --- editSaleOrder.html interSource: 0
 
                     interSource: lf.window.currentWebview().interSource
                 };
-                console.log(vm.argDictdName)
+                console.log('params',params)
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('pay/editOrderInfo', params, function(res) {
                     lf.nativeUI.closeWaiting()
@@ -316,75 +309,88 @@ lf.ready(function() {
                         mui.alert(res.msg)
                     }
                 })
+            },
+            //获取销售类型数据
+            getSalesTypeEmun (){
+                this.saleHandleData.forEach(e=>{
+                    this.salesTypeEmun.push({
+                        value: e.type,
+                        text: e.type,
+                        id: e.id
+                    })
+                })
+                console.log(this.salesTypeEmun);
+            },
+            //获取销售类型和尺寸
+            getUpdateData(){
+                lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0 }, function (res){
+                    if(res.code == 200){
+                        let data = res.data.type
+                        console.log('res',res.data.type)
+                        //获取销售类型
+                        vm.saleHandleData = data;
+                        vm.getSalesTypeEmun();
+                        
+                    }else {
+                        lf.nativeUI.toast(res.msg);
+                    }
+                }, function(res) {
+                    lf.nativeUI.closeWaiting()
+                    lf.nativeUI.toast(res.msg)
+                })
             }
+
         },
         mounted: function() {
+            console.log('getUpdateData',this.getUpdateData())
             let picker = new mui.PopPicker();
-            let salesSizeEmun = [
-                {
-                    value: '1',
-                    text: '16寸'
-                },
-                {
-                    value: '2',
-                    text: '12寸'
-                },
-                {
-                    value: '3',
-                    text: '10寸'
-                },
-                {
-                    value: '4',
-                    text: '8寸'
-                },
-                {
-                    value: '6',
-                    text: '7寸'
-                },
-                {
-                    value: '5',
-                    text: '6寸'
-                },
-            ];
-            let salesTypeEmun = [
-                {
-                    value: '相片',
-                    text: '相片'
-                },
-                {
-                    value: '相框',
-                    text: '相框'
-                },
-                {
-                    value: '相片+相框',
-                    text: '相片+相框'
-                },
-                {
-                    value: '电子片',
-                    text: '电子片'
-                }
-            ]
+            let salesSizeEmun =[]
+            let salesTypeEmun = this.salesTypeEmun
             let that = this;
             // 订单补全，选择照片尺寸
             mui('.mui-content').on('tap', '.sales-size', function() {
+                vm.salesSizeEmun = [];
                 let index = this.getAttribute('data-index')
                 let currentItem = {...that.salesOrderTxList[index]};
-                picker.setData(salesSizeEmun);
+                vm.saleHandleData.forEach(e=>{
+                    if (e.type === currentItem.remarkName) {
+                        e.sizeData.forEach(i=>{
+                            vm.salesSizeEmun.push({
+                                value:i.id,
+                                text:i.size,
+                                unitPrice:i.unitPrice
+                            })
+                        })
+                    }
+                })
+                picker.setData(vm.salesSizeEmun);
                 picker.show(function(selectedItem){
-                    currentItem.argDictName = selectedItem[0].text;
-                    currentItem.argDictId = selectedItem[0].value;
-                    Vue.set(that.salesOrderTxList,index,currentItem)
+                    // currentItem.argDictName = selectedItem[0].text;
+                    // currentItem.argDictId = selectedItem[0].value;
+                    
+                    currentItem.sizeName = selectedItem[0].text;
+                    currentItem.unitPrice = selectedItem[0].unitPrice;
+                    // currentItem.picSize = selectedItem[0].value;
+                    // currentItem.picSizeName = selectedItem[0].text;
+                    // currentItem.unitPrice = selectedItem[0].unitPrice;
+
+                    Vue.set(that.salesOrderTxList,index,currentItem);
+                    console.log('that.salesOrderTxList',that.salesOrderTxList);
                 })
             });
             // 订单补全，选择销售类型
             mui('.mui-content').on('tap', '.sales-type', function() {
-                console.log(index)
                 let index = this.getAttribute('data-index');
                 let currentItem = {...that.salesOrderTxList[index]};
                 picker.setData(salesTypeEmun);
                 picker.show(function(selectedItem) {
-                    currentItem.remark = selectedItem[0].value;
+                    vm.salesSizeEmun = []
+                    currentItem.remark = selectedItem[0].id;
+                    currentItem.remarkName = selectedItem[0].value;
+                    currentItem.sizeName = '';
+                    currentItem.picNum = '';
                     Vue.set(that.salesOrderTxList,index,currentItem)
+                    console.log('that.salesOrderTxList',that.salesOrderTxList);
                 })
             });
 
@@ -397,7 +403,7 @@ lf.ready(function() {
             lf.nativeUI.showWaiting();
 
             lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-                console.log(JSON.stringify(data));
+                console.log('data*******',data);
 
                 if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
@@ -440,6 +446,9 @@ lf.ready(function() {
                                 }
                             ]
                         } else {
+                            data.data.salesOrderTxList.forEach(e=>{
+                                e.remarkName = e.typeName
+                            })
                             return data.data.salesOrderTxList;
                         }
                     }())
