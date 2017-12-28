@@ -657,5 +657,5 @@ function outLineBreak(str) {
  * 是否可操作
  */
 function hasAciton() {
-	return vm.orderInfo.actionStatus == 77 && vm.currentRoleId != 4
+	return vm.orderInfo.actionStatus == 77 && vm.currentRoleId != 9
 }
