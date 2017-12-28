@@ -90,9 +90,10 @@
 								<div class="gray label">{{$t('number_sold')}}：</div>
 								<div class="list-wrap">
 									<div v-if="orderResult.salesOrderXms.length>0" v-for="item in orderResult.salesOrderXms" :key="item">
-										<span v-text="item.picSizeName" class="size-wrap"></span>
+										
+										<span v-text="item.sizeName" class="size-wrap"></span>
 										<span v-text="item.picNum || 0"></span>张 &nbsp;
-										<span v-text="item.remark"></span>
+										<span v-text="item.typeName"></span>
 									</div>
 								</div>
 							</li>
@@ -100,9 +101,9 @@
 								<div class="gray label">{{$t('number_complimentary')}}：</div>
 								<div class="list-wrap">
 									<div v-if="orderResult.giveOrderXms.length>0" v-for="item in orderResult.giveOrderXms" :key="item">
-										<span v-text="item.picSizeName" class="size-wrap"></span> 
+										<span v-text="item.sizeName" class="size-wrap"></span> 
 										<span v-text="item.picNum || 0"></span>张 &nbsp;
-										<span v-text="item.remark"></span>
+										<span v-text="item.typeName"></span>
 									</div>
 								</div>
 							</li>

@@ -14,6 +14,7 @@ main {
   padding-bottom: 54px; }
 
 .section-1 ul {
+  margin: 0;
   padding: 0 15px;
   list-style: none; }
   .section-1 ul li {

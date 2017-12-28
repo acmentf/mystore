@@ -68,7 +68,7 @@ lf.ready(function() {
             }
         ]
     }
-
+    console.log('data',data)
     var vm = new Vue({
         el: '#app',
         data: data,
@@ -130,17 +130,17 @@ lf.ready(function() {
                 })
             });
 
+           
             if (!this.saleOrderId) return
-
             var params = {
                 id: this.saleOrderId
             }
 
             lf.nativeUI.showWaiting();
-            console.log(params);
+           
             lf.net.getJSON('pay/getOrderDetail', params, function(data) {
               
-
+               
                 if(data.code == 200) {
                     lf.nativeUI.closeWaiting();
                     
@@ -266,7 +266,6 @@ lf.ready(function() {
                         lf.nativeUI.toast(this.$t('select_sale_size'));
                         return;
                     }
-                    
                     if(!reg.test(item.picNum)){
                         lf.nativeUI.toast(this.$t('select_sale_nums'));
                         return
@@ -276,7 +275,7 @@ lf.ready(function() {
                 // 通过 salesOrderTxListCopy 去重校验 vm.salesOrderTxList 是否选择了相同销售类型与销售尺寸;
                 let nums = 0;
                 let salesOrderTxListCopy = vm.salesOrderTxList.map((item) => {
-                    nums = nums + (item.nums - 0);
+                    nums = nums + (item.picNum - 0);
                     return `remark:${item.remark},argDictId:${item.argDictId},argDictName:${item.argDictName}`;
                 });
                 this.nums = nums;
@@ -407,20 +406,17 @@ lf.ready(function() {
        
         lf.nativeUI.showWaiting();
         console.log('params',JSON.stringify(params));
-        return false;
+      
         lf.net.getJSON('pay/payment', params, function(data) {
-            console.log(JSON.stringify(data));
 
             if(data.code == 200) {
                 if(vm.channelCode != 'cash'){
                     lf.nativeUI.closeWaiting();
                 }
-
                 vm.loopOrderId = data.data.saleOrderId
-
                 // dispatchEvent()
-
                 // 轮询支付状态
+                lf.nativeUI.toast("生成销售成功");
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
 
                 generateQrcode(data.data.resultUrl)
@@ -511,11 +507,11 @@ lf.ready(function() {
         var params = {
             id: vm.saleOrderId
         }
-        console.log("2222222")
+      
         lf.nativeUI.showWaiting();
 
         lf.net.getJSON('pay/getOrderDetail', params, function(data) {
-            console.log(JSON.stringify(data));
+            console.log('data',JSON.stringify(data));
 
             if(data.code == 200) {
                 lf.nativeUI.closeWaiting();
@@ -564,13 +560,15 @@ lf.ready(function() {
         })
     }
     function getUpdateData(){
-        lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0 }, function (res){
+        lf.net.getJSON('/price/queryTypeSizePrice', {"flag":0,'isSold':1 }, function (res){
+            console.log(res)
             if(res.code == 200){
                 let data = res.data.type
                 //获取销售类型
                 vm.saleHandleData = data;
+                console.log('vm.saleHandleData',vm.saleHandleData)
                 getSalesTypeEmun();
-                console.log(vm.saleHandleData)
+                
             }else {
                 lf.nativeUI.toast(res.msg);
             }

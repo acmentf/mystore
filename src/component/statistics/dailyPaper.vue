@@ -50,6 +50,9 @@
                                     <a class="mui-control-item" href="#tab-income-travel">
                                         <span class="text">旅行社</span>
                                     </a>
+                                    <a class="mui-control-item" href="#tab-income-cost">
+                                        <span class="text">成本分析</span>
+                                    </a>
                                 </div>
                                 <div id="tab-income-area" class="mui-slider-item mui-control-content mui-active">
                                     <div class="mui-slider info-box-mui-slider">
@@ -239,6 +242,19 @@
                                         <div class="section-content" v-show="collapseState.incomeTravelRegionArriveRateChart">
                                             <e-charts :style="calcBarChartStyle(incomeTravelRegionArriveRateChart)"
                                                       ref="refreshChart_6" class="axis-label-long" :options="incomeTravelRegionArriveRateChart" auto-resize></e-charts>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-income-cost" class="mui-slider-item mui-control-content">
+                                    <div class="section-box">
+                                        <div class="section-title clearfix"
+                                             :class="getCollapseActiveClassName(collapseState.incomeCostChart)"
+                                             v-tap="{ methods : setCollapseState, key: 'incomeCostChart' }">
+                                            <div class="text">投入产出比分析</div>
+                                            <span class="after-icon"></span>
+                                        </div>
+                                        <div class="section-content-wrap" v-show="collapseState.incomeCostChart">
+                                            <cost-stat ref="refreshChart_12"></cost-stat>
                                         </div>
                                     </div>
                                 </div>
@@ -489,12 +505,12 @@
 </template>
 <script>
     import utils from '../../js/utils'
-    import eChartCommon from '../../js/eChartCommon'
     import {pageTypeConstant, chartTypeConstant, totalMoreTypeConstant,
         EACH_SCREEN_COUNT, DATA_ZOOM_INSIDE, GRID_TOP, GRID_BOTTOM,
         getLineChartOption, getLineLongCategoryChartOption, getBarLongCategoryChartOption} from './daily-paper/commom'
     import PhotoStat from "../photo-stat/photo-stat.vue"
     import switchRolePosition from '../public/switchRolePosition.vue'
+    import costStat from './daily-paper/costStat.vue'
     const titleMap = {
         [pageTypeConstant.income]: '收入',
         [pageTypeConstant.flow]: '流量',
@@ -631,9 +647,7 @@
     function formatterPercent(params) {
         let title = params[0] ? params[0].name : ''
         let content = params.map(item => {
-            return `<span style="display:inline-block;margin-right:5px;border-radius:10px;
-                                                 width:9px;height:9px;background-color:${item.color}"></span>
-                                                 ${item.seriesName}:&nbsp;&nbsp;${item.value}%`
+            return `${utils.getTooltipMarker(item.color)} ${item.seriesName} :&nbsp;&nbsp;${item.value}%`
         }).join('<br>')
         return title + '<br>' + content
     }
@@ -643,7 +657,8 @@
         components: {
             ECharts: VueECharts,
             switchRolePosition,
-            PhotoStat
+            PhotoStat,
+            costStat
         },
         data () {
             return {
@@ -653,7 +668,8 @@
                 historyDate: utils.recentDay(90),
                 collapseState: {
                     incomeTravelRegionOrderRateChart: true,
-                    incomeTravelRegionArriveRateChart: true
+                    incomeTravelRegionArriveRateChart: true,
+                    incomeCostChart: true
                 },
                 //大区省份code
                 //regionProvinceActive: '',
@@ -958,7 +974,7 @@
                     left: 'center',
                     width: '90%',
                     bottom: 0,
-                    data: eChartCommon.legendDataBySeries(options.series)
+                    data: utils.legendDataBySeries(options.series)
                 }
                 options.grid.bottom = 50
                 return options
@@ -1112,10 +1128,10 @@
                 let self = this
                 let prefix = 'refreshChart_'
                 let chartMap = {
-                    income: ['1','2','3','4','5','6'],
+                    income: ['1','2','3','4','5','6','12'],
                     flow: ['7','8','9','10'],
                     history: ['11'],
-                    collapseState: ['5','6']
+                    collapseState: ['5','6', '12']
                 }
                 let item = chartMap[key]
                 item && this.$nextTick(function () {

@@ -120,9 +120,10 @@ lf.ready(function() {
             },
             //获取相片尺寸
             getSalesTypeEmun(){
+                this.sizesEmun = [];
                 this.saleHandleData.forEach(e=>{
                     e.sizeData.forEach(i=>{
-                        console.log(i)
+                        
                         this.sizesEmun.push({
                             value: i.size,
                             text: i.size,

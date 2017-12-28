@@ -1,7 +1,7 @@
 #!/bin/sh
 
 readonly now="$(date +'%Y%m%d%H%M%S')"
-readonly devBranch="build"
+readonly devBranch="build_bak"
 readonly releaseBranch="tuyi_publish_branch"
 readonly masterBranch="master"
 
