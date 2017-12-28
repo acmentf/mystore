@@ -251,7 +251,7 @@
                             },
                             series: series
                         }
-                    })(utils.sortListByNumber(this.list.filter(v => utils.isValidNumber(v[inputOutputRatio])), inputOutputRatio, {isAscending: true}))
+                    })(utils.sortListByNumber(this.list, inputOutputRatio, {isAscending: true}))
                 } else if (this.activeChart === 'line') {
                     ret.line = (list => {
                         let series = []
