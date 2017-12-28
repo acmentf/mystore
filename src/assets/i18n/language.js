@@ -296,7 +296,8 @@ var messages = {
             "selling": "待销售",
             "completing": "待完成",
             "servicing": "服务中",
-            "service_complete": "服务完成"
+            "service_complete": "服务完成",
+            "results_confirm": "业绩确认"
         },
         "tuyi_gourp_no": "途忆团号",
         "launch_date": "出团日期",
