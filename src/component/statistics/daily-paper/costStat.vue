@@ -62,9 +62,9 @@
         typeConstant.travel
     ]
     const dateMap = {
-        day7: utils.recentDay(7).map(v => v.format('yyyy-MM-dd')),
-        day15: utils.recentDay(15).map(v => v.format('yyyy-MM-dd')),
-        day30: utils.recentDay(30).map(v => v.format('yyyy-MM-dd'))
+        day7: utils.recentDay(6).map(v => v.format('yyyy-MM-dd')),
+        day15: utils.recentDay(14).map(v => v.format('yyyy-MM-dd')),
+        day30: utils.recentDay(29).map(v => v.format('yyyy-MM-dd'))
     }
     const dtPicker = new mui.DtPicker({
         type: 'date'

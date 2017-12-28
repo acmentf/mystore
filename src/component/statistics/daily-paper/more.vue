@@ -100,7 +100,7 @@
         data () {
             return {
                 pageType: pageTypeConstant.income,
-                queryDate: utils.recentDay(90),
+                queryDate: utils.recentDay(89),
                 watchSelect: false, // 为假时开始 watch *Select
                 areaSelect: {
                     chartType: chartTypeConstant.day,

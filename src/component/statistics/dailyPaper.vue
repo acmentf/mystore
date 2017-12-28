@@ -665,7 +665,7 @@
                 //激活模块
                 pageTypeActive: pageTypeConstant.income,
                 queryDate: new Date(/*new Date() - 1000*60*60*24*/),
-                historyDate: utils.recentDay(90),
+                historyDate: utils.recentDay(89),
                 collapseState: {
                     incomeTravelRegionOrderRateChart: true,
                     incomeTravelRegionArriveRateChart: true,
