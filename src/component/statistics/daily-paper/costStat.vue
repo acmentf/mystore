@@ -10,14 +10,12 @@
                         v-tap="{ methods : shortcutsPickerDate, date: item.date }">
                 </button>
             </div>-->
-            <div class="item-row clearfix">
-                <div class="data-item lf" v-tap="{ methods : pickerDate, key: 'startDate' }">
-                    <span class="lab">开始日期</span>
-                    <span class="value" v-text="searchForm.startDate"></span>
-                </div>
-                <div class="data-item rt" v-tap="{ methods : pickerDate, key: 'endDate' }">
-                    <span class="lab">结束日期</span>
-                    <span class="value" v-text="searchForm.endDate"></span>
+            <div class="item-row data-item">
+                <span class="lab">选择日期</span>
+                <div class="data-wap clearfix">
+                    <span class="value" v-text="searchForm.startDate" v-tap="{ methods : pickerDate, key: 'startDate' }"></span>
+                    <span class="data-sp"> 至 </span>
+                    <span class="value end-date" v-text="searchForm.endDate" v-tap="{ methods : pickerDate, key: 'endDate' }"></span>
                 </div>
             </div>
             <div class="item-row range-item" v-tap="{ methods : selectRange }">
@@ -553,20 +551,15 @@
     .statistics-daily-paper-cost-stat{
         padding: 0 14px;
         font-size: 14px;
-        .lf{
-            float: left;
-        }
-        .rt{
-            float: right;
-        }
         .search-form{
             color: #666;
             .item-row {
                 .lab{
                     display: inline-block;
-                    padding-right: 10px;
+                    padding-right: 4px;
                 }
                 .value{
+                    display: inline-block;
                     border-radius: 3px;
                     border: 1px solid #d9d9d9;
                     padding: 2px 8px;
@@ -585,17 +578,30 @@
                 }
             }
             .data-item{
-                @media screen and (max-width: 364px) {
-                    width: 100%;
-                    &.rt{
-                        margin-top: 14px;
+                display: flex;
+                align-items: center;
+                .lab{
+                    min-width: 64px;
+                    line-height: 27px;
+                }
+                .data-sp{
+                    padding: 0 5px;
+                }
+                .data-wap{
+                    @media screen and (max-width: 300px) {
+                        .data-sp{
+                            margin-right: 56px;
+                        }
+                        .end-date{
+                            margin-top: 10px;
+                        }
                     }
                 }
             }
             .range-item{
                 display: flex;
                 .lab{
-                    min-width: 70px;
+                    min-width: 64px;
                     line-height: 27px;
                 }
                 .type-name{}
