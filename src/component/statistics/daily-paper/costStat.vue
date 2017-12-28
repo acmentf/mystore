@@ -9,13 +9,15 @@
                         v-tap="{ methods : shortcutsPickerDate, date: item.date }">
                 </button>
             </div>
-            <div class="item-row data-item" v-tap="{ methods : pickerDate, key: 'startDate' }">
-                <span class="lab">开始日期</span>
-                <span class="value" v-text="searchForm.startDate"></span>
-            </div>
-            <div class="item-row data-item" v-tap="{ methods : pickerDate, key: 'endDate' }">
-                <span class="lab">结束日期</span>
-                <span class="value" v-text="searchForm.endDate"></span>
+            <div class="item-row clearfix">
+                <div class="data-item lf" v-tap="{ methods : pickerDate, key: 'startDate' }">
+                    <span class="lab">开始日期</span>
+                    <span class="value" v-text="searchForm.startDate"></span>
+                </div>
+                <div class="data-item rt" v-tap="{ methods : pickerDate, key: 'endDate' }">
+                    <span class="lab">结束日期</span>
+                    <span class="value" v-text="searchForm.endDate"></span>
+                </div>
             </div>
             <div class="item-row range-item" v-tap="{ methods : selectRange }">
                 <span class="lab">选择范围</span>
@@ -139,8 +141,9 @@
                 }
                 let typeMap = {
                     '0': 'areaCode',
-                    '1': 'areaCode',
-                    '2': 'provinceCode'
+                    '1': 'provinceCode',
+                    '2': 'name',
+                    '3': 'name'
                 }
                 if (typeSel.length > 0) {
                     typeSel.forEach((v, i) => {
@@ -552,6 +555,12 @@
     .statistics-daily-paper-cost-stat{
         padding: 0 14px;
         font-size: 14px;
+        .lf{
+            float: left;
+        }
+        .rt{
+            float: right;
+        }
         .search-form{
             color: #666;
             .item-row {
@@ -578,12 +587,17 @@
                 }
             }
             .data-item{
-
+                @media screen and (max-width: 364px) {
+                    width: 100%;
+                    &.rt{
+                        margin-top: 14px;
+                    }
+                }
             }
             .range-item{
                 display: flex;
                 .lab{
-                    min-width: 78px;
+                    min-width: 70px;
                     line-height: 27px;
                 }
                 .type-name{}
@@ -595,7 +609,7 @@
                     label{
                         padding-left: 38px;
                     }
-                    input[type=checkbox]:checked{
+                    input[type=checkbox]{
                         left: 0;
                         &:before{
                             font-size: 22px;
@@ -610,6 +624,11 @@
                     position: relative;
                     top: 6px;
                 }
+            }
+        }
+        .section-content{
+            .echarts{
+                overflow-y: hidden;
             }
         }
     }
