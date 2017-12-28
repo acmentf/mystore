@@ -97,7 +97,7 @@ var vm = new Vue({
                 console.log(res)
                 lf.nativeUI.closeWaiting()
                 if(res.code == 200) {
-                    lf.nativeUI.toast('修改成功');
+                    lf.nativeUI.toast('服务完成');
                     setTimeout(()=>{
                         lf.window.openWindow('person-daily-detail','./person-daily-detail.html',{},{
                             userId: vm.userId,
