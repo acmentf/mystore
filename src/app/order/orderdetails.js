@@ -345,7 +345,7 @@ lf.ready(function () {
 })
 
 mui('body').on('tap', '.assignOrder', function () { //点击指派
-	console.log("指派")
+	if (hasAciton()) return
 	if (vm.currentRoleId !== 4) {
 		return
 	} else {
@@ -358,6 +358,7 @@ mui('body').on('tap', '.assignOrder', function () { //点击指派
 
 })
 mui('body').on('tap', '.allotPhotoOrder', function () { //点击分配
+	if (hasAciton()) return
 	if (vm.currentRoleId !== 5) {
 		return
 	}
@@ -372,6 +373,7 @@ mui('body').on('tap', '.allotPhotoOrder', function () { //点击分配
 	}
 })
 mui('body').on('tap', '.jidiao', function () { //点击计调
+	if (hasAciton()) return
 	var type = this.getAttribute('data-type')
 	if (type == 0) {
 		if (!((vm.currentRoleId == 4 || vm.currentRoleId == 2) && vm.orderInfo.actionStatus != 55)) {
@@ -452,6 +454,7 @@ mui('.mind').on('tap', '.summary-item', function () { //点击拍摄信息第一
 })
 
 mui('body').on('tap', '.outOrder', function () { //点击填写输出信息
+	if (hasAciton()) return
 	if (!(((vm.currentRoleId == 5 || vm.currentRoleId == 4) && (vm.orderInfo.actionStatus == 33 || vm.orderInfo.actionStatus == 44)) || (vm.currentRoleId == 8 && (vm.orderInfo.actionStatus == 33 || vm.orderInfo.actionStatus == 44 || vm.orderInfo.actionStatus == 22)))) {
 		return
 	}
@@ -465,6 +468,7 @@ mui('body').on('tap', '.outOrder', function () { //点击填写输出信息
 })
 
 mui('body').on('tap', '.saleOutOrder', function () { //点击销售输出
+	if (hasAciton()) return
 	if (!((vm.currentRoleId == 9 && (vm.orderInfo.actionStatus == 44 || vm.orderInfo.actionStatus == 33)) || (vm.currentRoleId == 4 && vm.orderInfo.actionStatus == 44))) {
 		return
 	}
@@ -479,6 +483,7 @@ mui('body').on('tap', '.saleOutOrder', function () { //点击销售输出
 })
 
 mui('.buttons').on('tap', '.genSale', function () { //点击生成销售
+	if (hasAciton()) return
 	var orderid = this.getAttribute('data-id');
 	console.log('id:' + orderid)
 	if (vm.currentOrderStatus != 3) {
@@ -646,4 +651,11 @@ function renderOrderDetails() {
 
 function outLineBreak(str) {
 	return (str || '').replace(/\n/g, '<br>')
+}
+
+/**
+ * 是否可操作
+ */
+function hasAciton() {
+	return vm.orderInfo.actionStatus == 77
 }
