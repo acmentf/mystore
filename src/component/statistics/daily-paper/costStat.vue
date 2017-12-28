@@ -632,7 +632,6 @@
         }
         .section-content{
             .echarts{
-                overflow-y: hidden;
             }
         }
     }
