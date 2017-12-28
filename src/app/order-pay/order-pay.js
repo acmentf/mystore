@@ -416,7 +416,7 @@ lf.ready(function() {
                 vm.loopOrderId = data.data.saleOrderId
                 // dispatchEvent()
                 // 轮询支付状态
-                lf.nativeUI.toast("生成销售成功");
+                // lf.nativeUI.toast("生成销售成功");
                 vm.timer = setInterval(loopCheckPayStatus, vm.loopTime)
 
                 generateQrcode(data.data.resultUrl)
