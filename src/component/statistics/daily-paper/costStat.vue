@@ -1,14 +1,15 @@
 <template>
     <div class="statistics-daily-paper-cost-stat">
         <div class="search-form">
-            <div class="item-row shortcuts-date-item clearfix">
+            <!--暂时不需要快捷选择时间-->
+            <!--<div class="item-row shortcuts-date-item clearfix">
                 <button type="button" class="item mui-btn"
                         v-for="item in shortcutsDateOptions"
                         :key="item.text"
                         v-text="item.text"
                         v-tap="{ methods : shortcutsPickerDate, date: item.date }">
                 </button>
-            </div>
+            </div>-->
             <div class="item-row clearfix">
                 <div class="data-item lf" v-tap="{ methods : pickerDate, key: 'startDate' }">
                     <span class="lab">开始日期</span>
@@ -25,7 +26,7 @@
             </div>
             <div class="item-row switch-item">
                 <div class="mui-input-row mui-checkbox mui-left">
-                    <label>摄影师成本</label>
+                    <label>包含摄影师成本</label>
                     <input v-model="hasPhotographer" type="checkbox">
                 </div>
                 <button type="button" class="mui-btn switchover"
