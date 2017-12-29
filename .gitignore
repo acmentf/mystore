@@ -18,6 +18,7 @@ webim-src/webrtc/node_modules
 src/js/framework/define.js
 #忽略node_modules下大部分文件
 node_modules
+define.js/
 
 
 

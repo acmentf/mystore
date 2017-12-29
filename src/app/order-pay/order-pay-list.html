@@ -23,8 +23,9 @@
                         <div class="mui-pull-left">{{$t('order_no')}}：<span>{{item.orderNo}}</span></div>
                     </div>
                     <div class="order-pay-card-content">
+                      
                         <p>{{$t('time_generated')}}：{{formatterTime(item.orderTime)}} <span class="mui-pull-right" v-bind:class="payStatusClass(item.status)">{{payStatus(item.status)}}</span></p>
-                        <p>{{$t('photo_count')}}：{{item.nums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
+                        <p>{{$t('photo_count')}}：{{item.itemSalesOrderTxListTotalNums}}张 <span class="mui-pull-right">{{item.totalAmount}}元</span></p>
                         <p>{{item.province}} {{item.city}}</p>
                     </div>
                 </div>
@@ -133,12 +134,13 @@
                                 var itemSalesOrderTxListTotalNums = 0;
                                 // 显示的照片数是 salesOrderTxList 里，每项产品的总和
                                 (item.salesOrderTxList || []).forEach(function(txListItem) {
-                                    itemSalesOrderTxListTotalNums += txListItem.nums;
+                                    itemSalesOrderTxListTotalNums += txListItem.picNum;
                                 })
                                 item.itemSalesOrderTxListTotalNums = itemSalesOrderTxListTotalNums;
                                 vm.orderPayList.push(item)
+                               
                             })
-
+                            console.log(vm.orderPayList);
                             self.endPullupToRefresh(false)
                         } else {
                             vm.isEmpty = true

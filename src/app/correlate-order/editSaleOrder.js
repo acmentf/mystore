@@ -163,6 +163,7 @@ lf.ready(function() {
                     interSource: lf.window.currentWebview().interSource
                 };
                 console.log('params',params)
+                //return false;
                 lf.nativeUI.showWaiting()
                 lf.net.getJSON('pay/editOrderInfo', params, function(res) {
                     lf.nativeUI.closeWaiting()
@@ -370,6 +371,7 @@ lf.ready(function() {
                     
                     currentItem.sizeName = selectedItem[0].text;
                     currentItem.unitPrice = selectedItem[0].unitPrice;
+                    currentItem.argDictId = selectedItem[0].value;
                     // currentItem.picSize = selectedItem[0].value;
                     // currentItem.picSizeName = selectedItem[0].text;
                     // currentItem.unitPrice = selectedItem[0].unitPrice;
