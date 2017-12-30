@@ -177,7 +177,20 @@ lf.ready(function(){
 mui('.mui-content').on('tap', '.gives-size', function() {
 	var index = this.getAttribute('data-index');
 	let currentItem = {...vm.giveOrderXms[index]};
-	userPicker.setData(sizesEmun);
+	if (!vm.sizesEmun.length) {
+		vm.saleHandleData.forEach(e=>{
+			if (e.type === currentItem.remarkName) {
+				e.sizeData.forEach(i=>{
+					vm.sizesEmun.push({
+						value:i.id,
+						text:i.size,
+						unitPrice:i.unitPrice
+					})
+				})
+			}
+		})
+	}
+	userPicker.setData(vm.sizesEmun);
 	userPicker.show(function(selectedItem) {
 		currentItem.picSize = selectedItem[0].value;
 		currentItem.picSizeName = selectedItem[0].text;
@@ -189,10 +202,14 @@ mui('.mui-content').on('tap', '.gives-size', function() {
 mui('.mui-content').on('tap', '.gives-type', function() {
 	let index = this.getAttribute('data-index');
 	let currentItem = {...vm.giveOrderXms[index]};
-	userPicker.setData(salesTypeEmun);
+	userPicker.setData(vm.salesTypeEmun);
 	userPicker.show(function(selectedItem) {
-		currentItem.remark = selectedItem[0].value;
+		currentItem.remark = selectedItem[0].id;
+		currentItem.remarkName = selectedItem[0].value;
+		currentItem.picSizeName = '';
+		currentItem.picNum = '';
 		Vue.set(vm.giveOrderXms,index,currentItem)
+		vm.sizesEmun = [];
 	})
 });
 //选择销售尺寸
@@ -433,7 +450,19 @@ function loadResult(){
 					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 					vm.giveOrderXms = [];
 				}else{
-					vm.giveOrderXms = res.data.orderX.giveOrderXms
+					vm.giveOrderXms = res.data.orderX.giveOrderXms.map(e => {
+						return {
+							fType: 2,
+							id: e.id,
+							orderId: e.orderId,
+							picNum: e.picNum,
+							picSize: e.picSize,
+							picSizeName: e.sizeName,
+							remark:e.remark,
+							// 产品类型
+							remarkName: e.typeName
+						}
+					})
 				}
 				if (res.data.attachmentSaleUrl) {
 					vm.uploaderFiles = JSON.parse(res.data.attachmentSaleUrl)
