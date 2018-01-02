@@ -42,9 +42,18 @@ function dealList (list, tableHead = []) {
                 v[prop] = formatterNumber(v[prop])
             }
         })
+        let inputCostsHasPhotographer = utils.add(v.inputCosts, v.totalPhotogCosts)
+        let grossMargin = utils.sub(v.outputIncome, v.inputCosts)
+        let grossMarginHasPhotographer = utils.sub(v.outputIncome, inputCostsHasPhotographer)
+        let grossMarginRatio = utils.calcPercent(grossMargin, v.outputIncome, {isAddSymbol: false})
+        let grossMarginRatioHasPhotographer = utils.calcPercent(grossMarginHasPhotographer, v.outputIncome, {isAddSymbol: false})
         return {
             ...v,
-            inputCosts_hasPhotographer: utils.add(v.inputCosts, v.totalPhotogCosts)
+            inputCostsHasPhotographer,
+            grossMargin,
+            grossMarginHasPhotographer,
+            grossMarginRatio,
+            grossMarginRatioHasPhotographer
         }
     })
 }
