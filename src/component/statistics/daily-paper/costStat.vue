@@ -485,7 +485,7 @@
                 let height = 0
                 let yAxis = options.yAxis
                 if (yAxis) {
-                    height = yAxis.data.length * 48 + 50
+                    height = yAxis.data.length * 68 + 50
                 }
                 return height
             },
