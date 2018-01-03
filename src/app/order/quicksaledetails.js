@@ -37,7 +37,6 @@ var vm = new Vue({
             }
             lf.net.getJSON('order/orderDetail', params, function(data) {
                 if (data.code == 200) {
-                    console.log(data.data.orderInfo.actionStatus)
                     if(data.data.orderInfo.actionStatus=='44'){
                         vm.isDisable=!vm.isDisable;
                     }
@@ -154,13 +153,11 @@ lf.ready(function() {
     }
     function renderOrderDetails() {
         var orderId = lf.window.currentWebview().orderId;
-        console.log(orderId)
         var params = {
             orderId: orderId
         };
         lf.net.getJSON('order/orderDetail', params, function(data) {
             if (data.code == 200) {
-                console.log(JSON.stringify(data.data));
                 vm.orderInfo = data.data.orderInfo
                 vm.orderTrackInfo = data.data.orderTrackInfo
                 if(data.data.orderResult){

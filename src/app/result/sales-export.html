@@ -80,11 +80,11 @@
 								<div class="block">
 									<div class="mui-input-row sales-type" :data-index="index">
 										<label class="mui-pull-left" for="">{{$t('sale_type')}}</label>
-										<input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.remarkName" readonly />
+										<input class="mui-pull-right" type="text" :placeholder="$t('sale_type')" v-model="item.typeName" readonly />
 									</div>
 									<div class="mui-input-row sales-size" :data-index="index">
 										<label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
-										<input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.picSizeName" readonly />
+										<input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.sizeName" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
 										<label class="mui-pull-left" for="">{{$t('count')}}</label>
@@ -112,12 +112,12 @@
 							<div class="mui-card-content">
 								<div class="block">
 									<div class="mui-input-row gives-type" :data-index="index">
-										<label class="mui-pull-left" for="">{{$t('type_complimentary')}}</label>
-										<input class="mui-pull-right" type="text" :placeholder="$t('type_complimentary')" v-model="item.remark" :data-item="item" readonly />
+										<label class="mui-pull-left" for="">{{$t('number_complimentary')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('number_complimentary')" v-model="item.typeName" :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row gives-size" :data-index="index">
-										<label class="mui-pull-left" for="">{{$t('number_complimentary')}}</label>
-										<input class="mui-pull-right" type="text" :placeholder="$t('number_complimentary')" v-model="item.picSizeName"  :data-item="item" readonly />
+										<label class="mui-pull-left" for="">{{$t('sale_size')}}</label>
+										<input class="mui-pull-right" type="text" :placeholder="$t('sale_size')" v-model="item.sizeName"  :data-item="item" readonly />
 									</div>
 									<div class="mui-input-row" :data-index="index">
 										<label class="mui-pull-left" for="">{{$t('count')}}</label>

@@ -177,10 +177,26 @@ lf.ready(function(){
 mui('.mui-content').on('tap', '.gives-size', function() {
 	var index = this.getAttribute('data-index');
 	let currentItem = {...vm.giveOrderXms[index]};
-	userPicker.setData(sizesEmun);
+	console.log('currentItem',currentItem);
+	vm.sizesEmun = [];
+	vm.saleHandleData.forEach(e=>{
+		if (e.type === currentItem.typeName) {
+			e.sizeData.forEach(i=>{
+				vm.sizesEmun.push({
+					value:i.id,
+					text:i.size,
+					unitPrice:i.unitPrice
+				})
+			})
+		}
+	})
+	userPicker.setData(vm.sizesEmun);
 	userPicker.show(function(selectedItem) {
+		currentItem.picNum = '';
 		currentItem.picSize = selectedItem[0].value;
-		currentItem.picSizeName = selectedItem[0].text;
+		currentItem.sizeName = selectedItem[0].text;
+		currentItem.unitPrice = selectedItem[0].unitPrice;
+		console.log('currentItem',currentItem);
 		Vue.set(vm.giveOrderXms,index,currentItem)
 	});
 })
@@ -189,9 +205,13 @@ mui('.mui-content').on('tap', '.gives-size', function() {
 mui('.mui-content').on('tap', '.gives-type', function() {
 	let index = this.getAttribute('data-index');
 	let currentItem = {...vm.giveOrderXms[index]};
-	userPicker.setData(salesTypeEmun);
+	userPicker.setData(vm.salesTypeEmun);
 	userPicker.show(function(selectedItem) {
-		currentItem.remark = selectedItem[0].value;
+		currentItem.remark = selectedItem[0].id;
+		currentItem.typeName = selectedItem[0].value;
+		currentItem.sizeName = '';
+		currentItem.picNum = '';
+		console.log('currentItem',currentItem);
 		Vue.set(vm.giveOrderXms,index,currentItem)
 	})
 });
@@ -200,9 +220,11 @@ mui('.mui-content').on('tap', '.sales-size', function() {
 	vm.sizesEmun = [];
 	var index = this.getAttribute('data-index');
 	let currentItem = {...vm.saleOrderXms[index]};
+
+
 	if (!vm.sizesEmun.length) {
 		vm.saleHandleData.forEach(e=>{
-			if (e.type === currentItem.remarkName) {
+			if (e.type === currentItem.typeName) {
 				e.sizeData.forEach(i=>{
 					vm.sizesEmun.push({
 						value:i.id,
@@ -213,12 +235,15 @@ mui('.mui-content').on('tap', '.sales-size', function() {
 			}
 		})
 	}
+	console.log('vm.sizesEmun',vm.sizesEmun);
 	userPicker.setData(vm.sizesEmun);
 	userPicker.show(function(selectedItem) {
+		currentItem.picNum = '';
 		currentItem.picSize = selectedItem[0].value;
-		currentItem.picSizeName = selectedItem[0].text;
+		currentItem.sizeName = selectedItem[0].text;
 		currentItem.unitPrice = selectedItem[0].unitPrice;
 		//对应价格
+		console.log('currentItem',currentItem)
 		Vue.set(vm.saleOrderXms,index,currentItem)
 		
 	});
@@ -232,8 +257,8 @@ mui('.mui-content').on('tap', '.sales-type', function() {
 	userPicker.show(function(selectedItem) {
 		console.log(selectedItem);
 		currentItem.remark = selectedItem[0].id;
-		currentItem.remarkName = selectedItem[0].value;
-		currentItem.picSizeName = '';
+		currentItem.typeName = selectedItem[0].value;
+		currentItem.sizeName = '';
 		currentItem.picNum = '';
 		Vue.set(vm.saleOrderXms,index,currentItem);
 		console.log('saleOrderXms',vm.saleOrderXms);
@@ -405,7 +430,7 @@ function loadResult(){
 		orderId:vm.orderId
 	}
 	lf.net.getJSON('/order/getSalesOutput', params, function (res){
-		console.log('res1',res.data.orderX.saleOrderXms)
+		console.log('res1',res.data)
 		if(res.code == 200){
 			if(res.data == null){
 				return
@@ -413,21 +438,7 @@ function loadResult(){
 				if( !res.data.orderX.saleOrderXms ||(res.data.orderX.saleOrderXms&&res.data.orderX.saleOrderXms.length == 0)){
 					vm.saleOrderXms = [{fType: 3,id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 				}else{
-					let saleOrderXms = [];
-					res.data.orderX.saleOrderXms.forEach(e=>{
-						saleOrderXms.push({
-							fType: 3,
-							id: e.id,
-							orderId: e.orderId,
-							picNum: e.picNum,
-							picSize: e.picSize,
-							picSizeName: e.sizeName,
-							remark:e.remark,
-							// 产品类型
-							remarkName: e.typeName
-						})
-					})
-					vm.saleOrderXms = saleOrderXms
+					vm.saleOrderXms =  res.data.orderX.saleOrderXms
 				}
 				if(!res.data.orderX.giveOrderXms||(res.data.orderX.giveOrderXms&&res.data.orderX.giveOrderXms.length == 0)){
 					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
