@@ -213,6 +213,7 @@ mui('.mui-content').on('tap', '.gives-type', function() {
 		currentItem.picNum = '';
 		console.log('currentItem',currentItem);
 		Vue.set(vm.giveOrderXms,index,currentItem)
+		vm.sizesEmun = [];
 	})
 });
 //选择销售尺寸
@@ -444,7 +445,7 @@ function loadResult(){
 					// vm.giveOrderXms = [{fType: '2',id: '',orderId: '',picNum: '',picSize: '',picSizeName: '', remark: ''}]
 					vm.giveOrderXms = [];
 				}else{
-					vm.giveOrderXms = res.data.orderX.giveOrderXms
+					vm.giveOrderXms = res.data.orderX.giveOrderXms;
 				}
 				if (res.data.attachmentSaleUrl) {
 					vm.uploaderFiles = JSON.parse(res.data.attachmentSaleUrl)

@@ -160,8 +160,9 @@
                 }
             },
             charts () {
-                let inputCosts = this.hasPhotographer ? 'inputCosts_hasPhotographer' : 'inputCosts'
-                let inputOutputRatio = this.hasPhotographer ? 'inputOutputRatio' : 'inputOutputRatioWithoutPhotog'
+                let inputCosts = this.hasPhotographer ? 'inputCostsHasPhotographer' : 'inputCosts'
+                let grossMargin = this.hasPhotographer ? 'grossMarginHasPhotographer' : 'grossMargin'
+                let grossMarginRatio = this.hasPhotographer ? 'grossMarginRatioHasPhotographer' : 'grossMarginRatio'
                 let ret = {
                     bar: {series: []},
                     line: {series: []}
@@ -172,11 +173,38 @@
                         let xAxisData = []
                         let seriesOpts = [
                             {
-                                prop: inputOutputRatio,
-                                label: '投入产出比'
+                                prop: inputCosts,
+                                label: '成本',
+                                fmt (value) {
+                                    return `成本:&nbsp;&nbsp;${value}元`
+                                }
+                            },
+                            {
+                                prop: 'outputIncome',
+                                label: '收入',
+                                fmt (value) {
+                                    return `收入:&nbsp;&nbsp;${value}元`
+                                }
+                            },
+                            {
+                                prop: grossMargin,
+                                label: '毛利',
+                                fmt (value) {
+                                    return `毛利:&nbsp;&nbsp;${value}元`
+                                }
+                            },
+                            {
+                                prop: grossMarginRatio,
+                                label: '毛利率',
+                                xAxisIndex: 1,
+                                type: 'line',
+                                unit: '%',
+                                fmt (value) {
+                                    return `毛利率:&nbsp;&nbsp;${value}%`
+                                }
                             }
                         ]
-                        seriesOpts.forEach(({prop, label}, index) => {
+                        seriesOpts.forEach(({prop, label, xAxisIndex = 0, type = 'bar', unit = ''}, index) => {
                             let seriesData = []
                             list.forEach((item) => {
                                 let value = +item[prop]
@@ -188,39 +216,45 @@
                                     value
                                 })
                             })
-                            series.push({
-                                name: label,
-                                type: 'bar',
-                                barMaxWidth: 30,
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        formatter: '{c}%',
-                                        position: 'right'
-                                    }
-                                },
-                                data: seriesData
-                            })
+                            if (type === 'bar') {
+                                series.push({
+                                    xAxisIndex,
+                                    name: label,
+                                    type: 'bar',
+                                    barMaxWidth: 30,
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            formatter: `{c}${unit}`,
+                                            position: 'right'
+                                        }
+                                    },
+                                    data: seriesData
+                                })
+                            } else if (type === 'line') {
+                                series.push({
+                                    xAxisIndex,
+                                    name: label,
+                                    type: 'line',
+                                    label: {
+                                        normal: {
+                                            formatter: `{c}${unit}`,
+                                            show: true
+                                        }
+                                    },
+                                    data: seriesData
+                                })
+                            }
                         })
                         return {
                             tooltip: {
                                 trigger: 'axis',
                                 formatter (params) {
                                     let title = params[0] ? params[0].name : ''
-                                    let other = ''
-                                    let content = params.map(item => {
-                                        if (!other) {
-                                            let span = '<span style="display:inline-block;width:18px;height:9px;"></span>'
-                                            let extData = item.data.extData
-                                            let value = {
-                                                inputCosts: extData[inputCosts] || 0,
-                                                outputIncome: extData.outputIncome || 0
-                                            }
-                                            other = `${span}投入成本 : ${value.inputCosts}元<br>${span}产出收入 : ${value.outputIncome}元`
-                                        }
-                                        return `${utils.getTooltipMarker(item.color)} ${item.seriesName} :&nbsp;&nbsp;${item.value}%`
+                                    let content = params.map((item, index) => {
+                                        return `${utils.getTooltipMarker(item.color)} ${seriesOpts[index].fmt(item.value)}`
                                     }).join('<br>')
-                                    return title + '<br>' + content + '<br>' + other
+                                    return title + '<br>' + content
                                 }
                             },
                             grid: {
@@ -230,11 +264,18 @@
                                 right: 70,
                                 bottom: 20
                             },
-                            xAxis: {
-                                name: '',
-                                show: false,
-                                type: 'value'
-                            },
+                            xAxis: [
+                                {
+                                    name: '',
+                                    show: false,
+                                    type: 'value'
+                                },
+                                {
+                                    name: '',
+                                    show: false,
+                                    type: 'value'
+                                }
+                            ],
                             yAxis: {
                                 type: 'category',
                                 axisTick: {
@@ -250,7 +291,7 @@
                             },
                             series: series
                         }
-                    })(utils.sortListByNumber(this.list, inputOutputRatio, {isAscending: true}))
+                    })(utils.sortListByNumber(this.list, inputCosts, {isAscending: true}))
                 } else if (this.activeChart === 'line') {
                     ret.line = (list => {
                         let series = []
@@ -266,7 +307,7 @@
                         Object.keys(seriesOptsMap).forEach((label, index) => {
                             let seriesData = []
                             utils.sortListByString(seriesOptsMap[label], 'queryDate', {isAscending: true, isCopy: false}).forEach((item) => {
-                                let value = +item[inputOutputRatio]
+                                let value = +item[grossMarginRatio]
                                 if (index === 0) {
                                     xAxisData.push(item.queryDate)
                                 }
@@ -288,7 +329,7 @@
                             })
                         })
                         //
-                        let numeratorKey = inputCosts
+                        let numeratorKey = grossMargin
                         let denominatorKey = 'outputIncome'
                         return {
                             tooltip: {
@@ -444,7 +485,7 @@
                 let height = 0
                 let yAxis = options.yAxis
                 if (yAxis) {
-                    height = yAxis.data.length * 38 + 50
+                    height = yAxis.data.length * 68 + 50
                 }
                 return height
             },
@@ -504,6 +545,7 @@
                 lf.nativeUI.showWaiting()
                 this.tableHead = []
                 this.list = []
+                this.resize()
                 lf.net.getJSON(getAjaxUrl(this.type), this.ajaxParams, (res) => {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
