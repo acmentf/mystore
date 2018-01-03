@@ -545,6 +545,7 @@
                 lf.nativeUI.showWaiting()
                 this.tableHead = []
                 this.list = []
+                this.resize()
                 lf.net.getJSON(getAjaxUrl(this.type), this.ajaxParams, (res) => {
                     lf.nativeUI.closeWaiting()
                     if (res.code === '200') {
