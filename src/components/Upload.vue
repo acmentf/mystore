@@ -30,6 +30,31 @@
 </template>
 <script>
   export default {
+    props:{
+      // 允许上传文件类型
+      fileType: {
+        type: Array,
+        default(){
+          return  ['jpg','jpeg','png']
+        }
+      },
+      // 最大允许上传个数
+      fileCounts: {
+        type: Number,
+        default: 10,
+        validator: function (value) {
+          return value >= 1
+        }
+      },
+      // 上传文件大小最大值(单位kb)
+      fileM: {
+        type: Number,
+        required: true,
+        validator: function (value) {
+          return value > 0
+        }
+      },
+    },
     data() {
       return {
          imgList: [{'file':{"name":'1111',"src":'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}}],
@@ -41,6 +66,9 @@
          deleteArray: [] //批量删除图片下标数组
 
       };
+    },
+    created(){
+      this.init()
     },
     methods: {
       // 还原状态
@@ -60,8 +88,6 @@
               }
             })
         })
-        console.log(this.deleteArray);
-        console.log(this.imgList);
         this.isPreview = true;
         this.toggleTag = false;
         this.backState();
@@ -114,8 +140,38 @@
         this.fileList(el.target.files);
         el.target.value = ''
       },
+      //判断数组中是否存在某个值
+      init(){
+        Array.prototype.in_array = function (element) {  
+      　　for (var i = 0; i < this.length; i++) {  
+        　　if (this[i] == element) {  
+        　　  return true;  
+            }  
+          }
+          return false;  
+        }  
+      },
       fileList(files){
         for (let i = 0; i < files.length; i++) {
+           // 判断文件类型
+           let Index = files[i].type.indexOf('/')
+           console.log(files[i].type.substring(Index+1))
+         　if (!this.fileType.in_array(files[i].type.substring(Index+1))) {
+            this.$message({
+              message: `${files[i].name}格式错误`,
+              type: 'error'
+            });
+            continue
+          }
+          // 验证文件大小
+          console.log(files[i].size)
+          if (files[i].size > parseInt(this.fileM)*1024) {
+           this.$message({
+              message: `${files[i].name}已经大于${this.fileM}kb`,
+              type: 'error'
+            });
+           continue
+          }
           this.fileAdd(files[i]);
         }
       },
@@ -126,6 +182,11 @@
         reader.readAsDataURL(file);
         reader.onload = function () {
           file.src = this.result;
+          console.log(this.vue.imgList.length);
+          console.log('this.fileCounts',this.vue.fileCounts)
+          if ( this.vue.imgList.length >= this.vue.fileCounts) {
+            return false
+          }
           this.vue.imgList.push({
             file
           });
@@ -200,8 +261,8 @@
         position: relative;
         .select-icon{
           position: absolute;
-          left:0;
-          top:0;
+          left:5px;
+          top:5px;
           font-size:20px;
           opacity: 0.8;
           color:#fff;
